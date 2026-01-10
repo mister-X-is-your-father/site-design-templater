@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids & Family LP Components [W01-W10]</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sunny-yellow: #FFD93D;
+            --bright-orange: #FF9F43;
+            --sky-blue: #74B9FF;
+            --mint-green: #55EFC4;
+            --pink-candy: #FD79A8;
+            --purple-grape: #A29BFE;
+            --cream-bg: #FFF9E6;
+            --soft-white: #FFFEF7;
+            --dark-brown: #5D4E37;
+            --warm-gray: #7D6E5B;
+            --shadow-soft: rgba(93, 78, 55, 0.1);
+            --shadow-medium: rgba(93, 78, 55, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream-bg);
+            color: var(--dark-brown);
+            font-family: 'M PLUS Rounded 1c', 'Kosugi Maru', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Decorative Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 217, 61, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(253, 121, 168, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(116, 185, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ===== W08: NAVBAR ===== */
+
+        .w08-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--soft-white);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow-soft);
+            border-bottom: 4px solid var(--sunny-yellow);
+        }
+
+        .w08-nav::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--sunny-yellow) 0px,
+                var(--sunny-yellow) 20px,
+                var(--bright-orange) 20px,
+                var(--bright-orange) 40px,
+                var(--pink-candy) 40px,
+                var(--pink-candy) 60px,
+                var(--sky-blue) 60px,
+                var(--sky-blue) 80px
+            );
+        }
+
+        .w08-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .w08-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(255, 159, 67, 0.3);
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .w08-logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            letter-spacing: -1px;
+        }
+
+        .w08-logo-text span {
+            color: var(--bright-orange);
+        }
+
+        .w08-nav-links {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .w08-nav-links a {
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background: transparent;
+            position: relative;
+        }
+
+        .w08-nav-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            background: var(--sunny-yellow);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .w08-nav-links a:hover {
+            color: var(--dark-brown);
+            transform: scale(1.05);
+        }
+
+        .w08-nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .w08-nav-cta {
+            background: linear-gradient(135deg, var(--pink-candy) 0%, var(--purple-grape) 100%) !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(253, 121, 168, 0.4);
+        }
+
+        .w08-nav-cta:hover {
+            transform: scale(1.08) !important;
+        }
+
+        .w08-nav-cta::before {
+            display: none !important;
+        }
+
+        .w08-mobile-menu {
+            display: none;
+            width: 40px;
+            height: 40px;
+            background: var(--sunny-yellow);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .w08-mobile-menu span {
+            width: 22px;
+            height: 3px;
+            background: var(--dark-brown);
+            border-radius: 3px;
+        }
+
+        /* ===== W01: HERO SECTION ===== */
+
+        .w01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 24px 80px;
+            background: linear-gradient(180deg, var(--soft-white) 0%, var(--cream-bg) 100%);
+        }
+
+        .w01-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 217, 61, 0.3) 0%, transparent 70%);
+            animation: float-slow 8s ease-in-out infinite;
+        }
+
+        .w01-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(116, 185, 255, 0.25) 0%, transparent 70%);
+            animation: float-slow 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        .w01-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .w01-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--mint-green) 0%, var(--sky-blue) 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(85, 239, 196, 0.4);
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .w01-hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: var(--dark-brown);
+        }
+
+        .w01-hero-title span {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .w01-hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: var(--sunny-yellow);
+            opacity: 0.3;
+            border-radius: 6px;
+            z-index: -1;
+        }
+
+        .w01-hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--warm-gray);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .w01-hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .w01-hero-visual {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .w01-hero-characters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 4rem;
+            animation: float-characters 3s ease-in-out infinite;
+        }
+
+        @keyframes float-characters {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .w01-hero-characters span {
+            display: inline-block;
+            animation: bounce-individual 2s ease-in-out infinite;
+        }
+
+        .w01-hero-characters span:nth-child(1) { animation-delay: 0s; }
+        .w01-hero-characters span:nth-child(2) { animation-delay: 0.2s; }
+        .w01-hero-characters span:nth-child(3) { animation-delay: 0.4s; }
+        .w01-hero-characters span:nth-child(4) { animation-delay: 0.6s; }
+        .w01-hero-characters span:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes bounce-individual {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        /* ===== W04: CTA BUTTON ===== */
+
+        .w04-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 40px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            color: var(--dark-brown);
+            box-shadow:
+                0 6px 0 #E8A020,
+                0 8px 20px rgba(255, 159, 67, 0.4);
+            text-decoration: none;
+        }
+
+        .w04-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 9px 0 #E8A020,
+                0 12px 30px rgba(255, 159, 67, 0.5);
+        }
+
+        .w04-btn-primary:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 3px 0 #E8A020,
+                0 5px 15px rgba(255, 159, 67, 0.4);
+        }
+
+        .w04-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .w04-btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .w04-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 40px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 4px solid var(--sky-blue);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--sky-blue);
+            box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+            text-decoration: none;
+        }
+
+        .w04-btn-secondary:hover {
+            background: var(--sky-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.5);
+        }
+
+        .w04-btn-fun {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 40px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--pink-candy) 0%, var(--purple-grape) 100%);
+            color: white;
+            box-shadow:
+                0 6px 0 #C960A0,
+                0 8px 20px rgba(253, 121, 168, 0.4);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .w04-btn-fun::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 10%;
+            width: 80%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 3px;
+        }
+
+        .w04-btn-fun:hover {
+            transform: translateY(-3px) rotate(-2deg);
+            box-shadow:
+                0 9px 0 #C960A0,
+                0 12px 30px rgba(253, 121, 168, 0.5);
+        }
+
+        /* ===== W02: FEATURE CARDS ===== */
+
+        .w02-features {
+            padding: 100px 24px;
+            position: relative;
+        }
+
+        .w02-section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .w02-section-badge {
+            display: inline-block;
+            background: var(--mint-green);
+            color: var(--dark-brown);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .w02-section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            margin-bottom: 16px;
+        }
+
+        .w02-section-subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+        }
+
+        .w02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .w02-feature-card {
+            background: white;
+            border-radius: 24px;
+            padding: 36px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px var(--shadow-soft);
+            border: 3px solid transparent;
+        }
+
+        .w02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--sunny-yellow), var(--bright-orange));
+        }
+
+        .w02-feature-card:nth-child(2)::before {
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint-green));
+        }
+
+        .w02-feature-card:nth-child(3)::before {
+            background: linear-gradient(90deg, var(--pink-candy), var(--purple-grape));
+        }
+
+        .w02-feature-card:nth-child(4)::before {
+            background: linear-gradient(90deg, var(--mint-green), var(--sky-blue));
+        }
+
+        .w02-feature-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 20px 50px var(--shadow-medium);
+            border-color: var(--sunny-yellow);
+        }
+
+        .w02-feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            box-shadow: 0 6px 20px rgba(255, 159, 67, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .w02-feature-card:nth-child(2) .w02-feature-icon {
+            background: linear-gradient(135deg, var(--sky-blue) 0%, var(--mint-green) 100%);
+            box-shadow: 0 6px 20px rgba(116, 185, 255, 0.3);
+        }
+
+        .w02-feature-card:nth-child(3) .w02-feature-icon {
+            background: linear-gradient(135deg, var(--pink-candy) 0%, var(--purple-grape) 100%);
+            box-shadow: 0 6px 20px rgba(253, 121, 168, 0.3);
+        }
+
+        .w02-feature-card:nth-child(4) .w02-feature-icon {
+            background: linear-gradient(135deg, var(--mint-green) 0%, var(--sky-blue) 100%);
+            box-shadow: 0 6px 20px rgba(85, 239, 196, 0.3);
+        }
+
+        .w02-feature-card:hover .w02-feature-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .w02-feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 12px;
+        }
+
+        .w02-feature-description {
+            font-size: 1rem;
+            color: var(--warm-gray);
+            line-height: 1.7;
+        }
+
+        .w02-feature-tag {
+            display: inline-block;
+            background: var(--cream-bg);
+            color: var(--warm-gray);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+
+        /* ===== W03: PRICING TABLE ===== */
+
+        .w03-pricing {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, var(--cream-bg) 0%, var(--soft-white) 50%, var(--cream-bg) 100%);
+            position: relative;
+        }
+
+        .w03-pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .w03-pricing-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            margin-bottom: 16px;
+        }
+
+        .w03-pricing-subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+        }
+
+        .w03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .w03-pricing-card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px 32px;
+            position: relative;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px var(--shadow-soft);
+            border: 4px solid transparent;
+            overflow: hidden;
+        }
+
+        .w03-pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 150px;
+            height: 150px;
+            background: var(--cream-bg);
+            border-radius: 50%;
+        }
+
+        .w03-pricing-card.popular {
+            border-color: var(--sunny-yellow);
+            transform: scale(1.05);
+            background: linear-gradient(180deg, #FFFDF0 0%, white 100%);
+        }
+
+        .w03-pricing-card.popular::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--sunny-yellow), var(--bright-orange), var(--pink-candy));
+        }
+
+        .w03-pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--shadow-medium);
+        }
+
+        .w03-pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .w03-popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            color: var(--dark-brown);
+            padding: 8px 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(255, 159, 67, 0.3);
+        }
+
+        .w03-pricing-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--sky-blue) 0%, var(--mint-green) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+        }
+
+        .w03-pricing-card.popular .w03-pricing-icon {
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            box-shadow: 0 8px 25px rgba(255, 159, 67, 0.4);
+        }
+
+        .w03-pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 8px;
+        }
+
+        .w03-pricing-desc {
+            font-size: 0.95rem;
+            color: var(--warm-gray);
+            margin-bottom: 24px;
+        }
+
+        .w03-pricing-price {
+            margin-bottom: 24px;
+        }
+
+        .w03-pricing-amount {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            line-height: 1;
+        }
+
+        .w03-pricing-currency {
+            font-size: 1.5rem;
+            color: var(--warm-gray);
+            vertical-align: super;
+        }
+
+        .w03-pricing-period {
+            font-size: 1rem;
+            color: var(--warm-gray);
+        }
+
+        .w03-pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .w03-pricing-features li {
+            padding: 12px 0;
+            border-bottom: 2px dashed var(--cream-bg);
+            color: var(--dark-brown);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .w03-pricing-features li::before {
+            content: '(^^)';
+            font-size: 1rem;
+            color: var(--mint-green);
+        }
+
+        .w03-pricing-features li.disabled {
+            color: #ccc;
+        }
+
+        .w03-pricing-features li.disabled::before {
+            content: '(T_T)';
+            color: #ccc;
+        }
+
+        /* ===== W05: TESTIMONIALS ===== */
+
+        .w05-testimonials {
+            padding: 100px 24px;
+            background: var(--soft-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .w05-testimonials::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 217, 61, 0.2) 0%, transparent 70%);
+        }
+
+        .w05-testimonials::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(253, 121, 168, 0.2) 0%, transparent 70%);
+        }
+
+        .w05-testimonials-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .w05-testimonials-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            margin-bottom: 16px;
+        }
+
+        .w05-testimonials-subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+        }
+
+        .w05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .w05-testimonial-card {
+            background: white;
+            border-radius: 28px;
+            padding: 36px;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px var(--shadow-soft);
+        }
+
+        .w05-testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 28px;
+            font-size: 6rem;
+            line-height: 1;
+            font-family: serif;
+            color: var(--sunny-yellow);
+            opacity: 0.3;
+        }
+
+        .w05-testimonial-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 20px 50px var(--shadow-medium);
+        }
+
+        .w05-testimonial-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .w05-testimonial-text {
+            font-size: 1.05rem;
+            color: var(--dark-brown);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .w05-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .w05-author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sky-blue) 0%, var(--mint-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+        }
+
+        .w05-testimonial-card:nth-child(2) .w05-author-avatar {
+            background: linear-gradient(135deg, var(--pink-candy) 0%, var(--purple-grape) 100%);
+            box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3);
+        }
+
+        .w05-testimonial-card:nth-child(3) .w05-author-avatar {
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            box-shadow: 0 4px 15px rgba(255, 159, 67, 0.3);
+        }
+
+        .w05-author-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 4px;
+        }
+
+        .w05-author-info p {
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .w05-testimonial-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--mint-green);
+            color: var(--dark-brown);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* ===== W06: FAQ ===== */
+
+        .w06-faq {
+            padding: 100px 24px;
+            background: var(--cream-bg);
+        }
+
+        .w06-faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .w06-faq-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            margin-bottom: 16px;
+        }
+
+        .w06-faq-subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+        }
+
+        .w06-faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .w06-faq-item {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px var(--shadow-soft);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .w06-faq-item:hover {
+            border-color: var(--sunny-yellow);
+        }
+
+        .w06-faq-item.active {
+            border-color: var(--sunny-yellow);
+            box-shadow: 0 10px 40px var(--shadow-medium);
+        }
+
+        .w06-faq-question {
+            width: 100%;
+            padding: 24px 28px;
+            background: transparent;
+            border: none;
+            color: var(--dark-brown);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .w06-faq-question:hover {
+            color: var(--bright-orange);
+        }
+
+        .w06-faq-question span {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .w06-faq-question span::before {
+            content: '?';
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--dark-brown);
+            flex-shrink: 0;
+        }
+
+        .w06-faq-toggle {
+            width: 40px;
+            height: 40px;
+            background: var(--cream-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--warm-gray);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .w06-faq-item.active .w06-faq-toggle {
+            background: var(--sunny-yellow);
+            color: var(--dark-brown);
+            transform: rotate(180deg);
+        }
+
+        .w06-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: var(--cream-bg);
+        }
+
+        .w06-faq-item.active .w06-faq-answer {
+            max-height: 400px;
+        }
+
+        .w06-faq-answer-content {
+            padding: 24px 28px;
+            color: var(--warm-gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            border-top: 2px dashed var(--sunny-yellow);
+        }
+
+        /* ===== W09: STEP GUIDE ===== */
+
+        .w09-steps {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, var(--soft-white) 0%, var(--cream-bg) 100%);
+        }
+
+        .w09-steps-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .w09-steps-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            margin-bottom: 16px;
+        }
+
+        .w09-steps-subtitle {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+        }
+
+        .w09-steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .w09-steps-line {
+            position: absolute;
+            left: 50px;
+            top: 60px;
+            bottom: 60px;
+            width: 6px;
+            background: repeating-linear-gradient(
+                180deg,
+                var(--sunny-yellow) 0px,
+                var(--sunny-yellow) 15px,
+                transparent 15px,
+                transparent 25px
+            );
+            border-radius: 3px;
+        }
+
+        .w09-step {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 32px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .w09-step-number {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 6px solid var(--sunny-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--sunny-yellow);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 30px rgba(255, 217, 61, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .w09-step:nth-child(2) .w09-step-number {
+            border-color: var(--sky-blue);
+            color: var(--sky-blue);
+            box-shadow: 0 8px 30px rgba(116, 185, 255, 0.3);
+        }
+
+        .w09-step:nth-child(3) .w09-step-number {
+            border-color: var(--pink-candy);
+            color: var(--pink-candy);
+            box-shadow: 0 8px 30px rgba(253, 121, 168, 0.3);
+        }
+
+        .w09-step:nth-child(4) .w09-step-number {
+            border-color: var(--mint-green);
+            color: var(--mint-green);
+            box-shadow: 0 8px 30px rgba(85, 239, 196, 0.3);
+        }
+
+        .w09-step:hover .w09-step-number {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .w09-step-content {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 8px 30px var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .w09-step:hover .w09-step-content {
+            transform: translateX(10px);
+            border-color: var(--sunny-yellow);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .w09-step:nth-child(2):hover .w09-step-content { border-color: var(--sky-blue); }
+        .w09-step:nth-child(3):hover .w09-step-content { border-color: var(--pink-candy); }
+        .w09-step:nth-child(4):hover .w09-step-content { border-color: var(--mint-green); }
+
+        .w09-step-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .w09-step-title span {
+            font-size: 1.5rem;
+        }
+
+        .w09-step-description {
+            font-size: 1rem;
+            color: var(--warm-gray);
+            line-height: 1.7;
+        }
+
+        /* ===== W10: REGISTRATION FORM ===== */
+
+        .w10-form-section {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, var(--cream-bg) 0%, #FFF5D6 50%, var(--cream-bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .w10-form-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 217, 61, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .w10-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .w10-form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .w10-form-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 10px 40px rgba(255, 159, 67, 0.4);
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+
+        .w10-form-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dark-brown);
+            margin-bottom: 12px;
+        }
+
+        .w10-form-subtitle {
+            font-size: 1rem;
+            color: var(--warm-gray);
+        }
+
+        .w10-form-card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 15px 60px var(--shadow-medium);
+            border: 4px solid var(--sunny-yellow);
+        }
+
+        .w10-form-group {
+            margin-bottom: 24px;
+        }
+
+        .w10-form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 10px;
+        }
+
+        .w10-form-label span {
+            background: var(--pink-candy);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+
+        .w10-form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 3px solid var(--cream-bg);
+            border-radius: 16px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1rem;
+            color: var(--dark-brown);
+            background: var(--soft-white);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .w10-form-input::placeholder {
+            color: #bbb;
+        }
+
+        .w10-form-input:focus {
+            border-color: var(--sunny-yellow);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 217, 61, 0.2);
+        }
+
+        .w10-form-select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 3px solid var(--cream-bg);
+            border-radius: 16px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1rem;
+            color: var(--dark-brown);
+            background: var(--soft-white);
+            transition: all 0.3s ease;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235D4E37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .w10-form-select:focus {
+            border-color: var(--sunny-yellow);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(255, 217, 61, 0.2);
+        }
+
+        .w10-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .w10-form-checkbox input {
+            width: 24px;
+            height: 24px;
+            accent-color: var(--sunny-yellow);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .w10-form-checkbox label {
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .w10-form-checkbox label a {
+            color: var(--sky-blue);
+            text-decoration: underline;
+        }
+
+        .w10-form-submit {
+            width: 100%;
+            padding: 20px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            color: var(--dark-brown);
+            box-shadow:
+                0 6px 0 #E8A020,
+                0 8px 25px rgba(255, 159, 67, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .w10-form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 9px 0 #E8A020,
+                0 12px 35px rgba(255, 159, 67, 0.5);
+        }
+
+        .w10-form-submit:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 3px 0 #E8A020,
+                0 5px 15px rgba(255, 159, 67, 0.4);
+        }
+
+        .w10-form-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .w10-form-benefit {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .w10-form-benefit span {
+            font-size: 1.2rem;
+        }
+
+        /* ===== W07: FOOTER ===== */
+
+        .w07-footer {
+            background: var(--dark-brown);
+            color: white;
+            padding: 80px 24px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .w07-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--sunny-yellow) 0px,
+                var(--sunny-yellow) 30px,
+                var(--bright-orange) 30px,
+                var(--bright-orange) 60px,
+                var(--pink-candy) 60px,
+                var(--pink-candy) 90px,
+                var(--sky-blue) 90px,
+                var(--sky-blue) 120px,
+                var(--mint-green) 120px,
+                var(--mint-green) 150px
+            );
+        }
+
+        .w07-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .w07-footer-brand {
+            max-width: 300px;
+        }
+
+        .w07-footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .w07-footer-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--sunny-yellow) 0%, var(--bright-orange) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .w07-footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .w07-footer-logo-text span {
+            color: var(--sunny-yellow);
+        }
+
+        .w07-footer-desc {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .w07-footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .w07-footer-social {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .w07-footer-social:hover {
+            background: var(--sunny-yellow);
+            transform: translateY(-5px) rotate(-5deg);
+        }
+
+        .w07-footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .w07-footer-section h4::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--sunny-yellow);
+            border-radius: 50%;
+        }
+
+        .w07-footer-section ul {
+            list-style: none;
+        }
+
+        .w07-footer-section ul li {
+            margin-bottom: 14px;
+        }
+
+        .w07-footer-section ul a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .w07-footer-section ul a:hover {
+            color: var(--sunny-yellow);
+            transform: translateX(5px);
+        }
+
+        .w07-footer-bottom {
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .w07-footer-copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .w07-footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .w07-footer-legal a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .w07-footer-legal a:hover {
+            color: var(--sunny-yellow);
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 1024px) {
+            .w07-footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .w07-footer-brand {
+                grid-column: span 2;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .w08-nav-links {
+                display: none;
+            }
+
+            .w08-mobile-menu {
+                display: flex;
+            }
+
+            .w01-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .w01-hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .w01-hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .w04-btn-primary,
+            .w04-btn-secondary,
+            .w04-btn-fun {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .w02-section-title,
+            .w03-pricing-title,
+            .w05-testimonials-title,
+            .w06-faq-title,
+            .w09-steps-title,
+            .w10-form-title {
+                font-size: 1.8rem;
+            }
+
+            .w03-pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .w09-step {
+                grid-template-columns: 80px 1fr;
+                gap: 20px;
+            }
+
+            .w09-step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .w09-steps-line {
+                left: 37px;
+            }
+
+            .w07-footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .w07-footer-brand {
+                grid-column: span 1;
+                text-align: center;
+            }
+
+            .w07-footer-socials {
+                justify-content: center;
+            }
+
+            .w07-footer-section {
+                text-align: center;
+            }
+
+            .w07-footer-section h4 {
+                justify-content: center;
+            }
+
+            .w07-footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .w07-footer-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .w01-hero {
+                padding: 100px 16px 60px;
+            }
+
+            .w01-hero-title {
+                font-size: 1.8rem;
+            }
+
+            .w01-hero-characters {
+                font-size: 2.5rem;
+            }
+
+            .w02-features,
+            .w03-pricing,
+            .w05-testimonials,
+            .w06-faq,
+            .w09-steps,
+            .w10-form-section {
+                padding: 60px 16px;
+            }
+
+            .w10-form-card {
+                padding: 28px 20px;
+            }
+
+            .w10-form-benefits {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Component showcase styles */
+        .showcase-section {
+            padding: 40px 24px;
+            border-bottom: 4px dashed var(--sunny-yellow);
+        }
+
+        .showcase-label {
+            display: inline-block;
+            background: var(--dark-brown);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== W08: NAVBAR ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W08] Navigation</span>
+    </div>
+    <nav class="w08-nav">
+        <a href="#" class="w08-logo">
+            <div class="w08-logo-icon">*</div>
+            <span class="w08-logo-text">HAPPY<span>KIDS</span></span>
+        </a>
+        <ul class="w08-nav-links">
+            <li><a href="#features">とくちょう</a></li>
+            <li><a href="#pricing">りょうきん</a></li>
+            <li><a href="#reviews">くちこみ</a></li>
+            <li><a href="#faq">しつもん</a></li>
+            <li><a href="#signup" class="w08-nav-cta">はじめる</a></li>
+        </ul>
+        <button class="w08-mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ===== W01: HERO SECTION ===== -->
+    <div class="showcase-section" style="margin-top: 100px;">
+        <span class="showcase-label">[W01] Hero Section</span>
+    </div>
+    <section class="w01-hero">
+        <div class="w01-hero-content">
+            <div class="w01-hero-badge">
+                <span>*</span> おうちで楽しく学べる！
+            </div>
+            <h1 class="w01-hero-title">
+                子どもの<span>ワクワク</span>を<br>
+                もっと大きく！
+            </h1>
+            <p class="w01-hero-subtitle">
+                遊びながら学べる知育アプリ。<br>
+                お子さまの好奇心と創造力を育てます。
+            </p>
+            <div class="w01-hero-cta">
+                <button class="w04-btn-primary">
+                    <span>*</span> 無料ではじめる
+                </button>
+                <button class="w04-btn-secondary">
+                    <span>*</span> くわしく見る
+                </button>
+            </div>
+            <div class="w01-hero-visual">
+                <div class="w01-hero-characters">
+                    <span>*</span>
+                    <span>*</span>
+                    <span>*</span>
+                    <span>*</span>
+                    <span>*</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== W02: FEATURE CARDS ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W02] Feature Cards</span>
+    </div>
+    <section id="features" class="w02-features">
+        <div class="w02-section-header">
+            <span class="w02-section-badge">FEATURES</span>
+            <h2 class="w02-section-title">たのしい4つのとくちょう</h2>
+            <p class="w02-section-subtitle">お子さまの成長をサポートする機能がいっぱい！</p>
+        </div>
+        <div class="w02-features-grid">
+            <div class="w02-feature-card">
+                <div class="w02-feature-icon">*</div>
+                <h3 class="w02-feature-title">ゲームであそぼう</h3>
+                <p class="w02-feature-description">楽しいミニゲームで遊びながら、数字や文字を自然に覚えられます。</p>
+                <span class="w02-feature-tag">3歳から</span>
+            </div>
+            <div class="w02-feature-card">
+                <div class="w02-feature-icon">*</div>
+                <h3 class="w02-feature-title">えいごも学べる</h3>
+                <p class="w02-feature-description">ネイティブの発音で楽しく英語に触れる。歌やアニメで自然に身につきます。</p>
+                <span class="w02-feature-tag">ABC!</span>
+            </div>
+            <div class="w02-feature-card">
+                <div class="w02-feature-icon">*</div>
+                <h3 class="w02-feature-title">おえかきしよう</h3>
+                <p class="w02-feature-description">自由に絵を描いて創造力を育てます。描いた絵は保存してシェアできます。</p>
+                <span class="w02-feature-tag">クリエイティブ</span>
+            </div>
+            <div class="w02-feature-card">
+                <div class="w02-feature-icon">*</div>
+                <h3 class="w02-feature-title">みんなでチャレンジ</h3>
+                <p class="w02-feature-description">家族や友達と一緒に挑戦！協力プレイで社会性も育ちます。</p>
+                <span class="w02-feature-tag">マルチプレイ</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== W03: PRICING TABLE ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W03] Pricing Table</span>
+    </div>
+    <section id="pricing" class="w03-pricing">
+        <div class="w03-pricing-header">
+            <h2 class="w03-pricing-title">りょうきんプラン</h2>
+            <p class="w03-pricing-subtitle">お子さまにぴったりのプランを選んでね</p>
+        </div>
+        <div class="w03-pricing-grid">
+            <div class="w03-pricing-card">
+                <div class="w03-pricing-icon">*</div>
+                <h3 class="w03-pricing-name">おためしプラン</h3>
+                <p class="w03-pricing-desc">まずは無料でお試し</p>
+                <div class="w03-pricing-price">
+                    <span class="w03-pricing-amount"><span class="w03-pricing-currency"></span>0円</span>
+                    <p class="w03-pricing-period">ずっと無料</p>
+                </div>
+                <ul class="w03-pricing-features">
+                    <li>基本ゲーム5種類</li>
+                    <li>1日3回まで遊べる</li>
+                    <li>おえかき機能</li>
+                    <li class="disabled">英語コンテンツ</li>
+                    <li class="disabled">広告なし</li>
+                </ul>
+                <button class="w04-btn-secondary" style="width: 100%;">無料ではじめる</button>
+            </div>
+            <div class="w03-pricing-card popular">
+                <span class="w03-popular-badge">にんき!</span>
+                <div class="w03-pricing-icon">*</div>
+                <h3 class="w03-pricing-name">ファミリープラン</h3>
+                <p class="w03-pricing-desc">家族みんなで楽しめる</p>
+                <div class="w03-pricing-price">
+                    <span class="w03-pricing-amount"><span class="w03-pricing-currency"></span>980円</span>
+                    <p class="w03-pricing-period">月額</p>
+                </div>
+                <ul class="w03-pricing-features">
+                    <li>すべてのゲーム遊び放題</li>
+                    <li>回数制限なし</li>
+                    <li>英語コンテンツ</li>
+                    <li>広告なし</li>
+                    <li>最大4人まで登録</li>
+                </ul>
+                <button class="w04-btn-primary" style="width: 100%;">このプランを選ぶ</button>
+            </div>
+            <div class="w03-pricing-card">
+                <div class="w03-pricing-icon">*</div>
+                <h3 class="w03-pricing-name">プレミアムプラン</h3>
+                <p class="w03-pricing-desc">充実のサポート付き</p>
+                <div class="w03-pricing-price">
+                    <span class="w03-pricing-amount"><span class="w03-pricing-currency"></span>1,980円</span>
+                    <p class="w03-pricing-period">月額</p>
+                </div>
+                <ul class="w03-pricing-features">
+                    <li>すべての機能</li>
+                    <li>学習レポート機能</li>
+                    <li>専門家への相談</li>
+                    <li>先行コンテンツ</li>
+                    <li>オリジナルグッズ特典</li>
+                </ul>
+                <button class="w04-btn-fun" style="width: 100%;">プレミアムを体験</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== W04: CTA BUTTONS (Showcase) ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W04] CTA Buttons</span>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px;">
+            <button class="w04-btn-primary">
+                <span>*</span> プライマリボタン
+            </button>
+            <button class="w04-btn-secondary">
+                <span>*</span> セカンダリボタン
+            </button>
+            <button class="w04-btn-fun">
+                <span>*</span> ファンボタン
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== W05: TESTIMONIALS ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W05] Testimonials</span>
+    </div>
+    <section id="reviews" class="w05-testimonials">
+        <div class="w05-testimonials-header">
+            <h2 class="w05-testimonials-title">ママ・パパの声</h2>
+            <p class="w05-testimonials-subtitle">実際に使っているご家族からの感想です</p>
+        </div>
+        <div class="w05-testimonials-grid">
+            <div class="w05-testimonial-card">
+                <span class="w05-testimonial-badge">3歳ママ</span>
+                <div class="w05-testimonial-stars">* * * * *</div>
+                <p class="w05-testimonial-text">娘が毎日「あぷりやりたい！」と楽しみにしています。ひらがなを覚えるのがこんなに早いとは思いませんでした。親子で一緒に遊べるのも嬉しいです。</p>
+                <div class="w05-testimonial-author">
+                    <div class="w05-author-avatar">*</div>
+                    <div class="w05-author-info">
+                        <h4>田中さん</h4>
+                        <p>3歳女の子のママ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w05-testimonial-card">
+                <span class="w05-testimonial-badge">5歳パパ</span>
+                <div class="w05-testimonial-stars">* * * * *</div>
+                <p class="w05-testimonial-text">英語の発音がとてもきれいになってびっくり！ゲーム感覚で学べるので、子どもが飽きずに続けられています。コスパも最高です。</p>
+                <div class="w05-testimonial-author">
+                    <div class="w05-author-avatar">*</div>
+                    <div class="w05-author-info">
+                        <h4>鈴木さん</h4>
+                        <p>5歳男の子のパパ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w05-testimonial-card">
+                <span class="w05-testimonial-badge">4歳ママ</span>
+                <div class="w05-testimonial-stars">* * * * *</div>
+                <p class="w05-testimonial-text">お絵かき機能がお気に入りで、毎日いろんな絵を描いています。子どもの想像力が豊かになっているのを実感します。</p>
+                <div class="w05-testimonial-author">
+                    <div class="w05-author-avatar">*</div>
+                    <div class="w05-author-info">
+                        <h4>佐藤さん</h4>
+                        <p>4歳女の子のママ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== W06: FAQ ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W06] FAQ</span>
+    </div>
+    <section id="faq" class="w06-faq">
+        <div class="w06-faq-header">
+            <h2 class="w06-faq-title">よくあるしつもん</h2>
+            <p class="w06-faq-subtitle">わからないことがあったら見てね</p>
+        </div>
+        <div class="w06-faq-container">
+            <div class="w06-faq-item active">
+                <button class="w06-faq-question">
+                    <span>対象年齢は何歳からですか？</span>
+                    <span class="w06-faq-toggle">*</span>
+                </button>
+                <div class="w06-faq-answer">
+                    <div class="w06-faq-answer-content">
+                        3歳から小学校低学年までのお子さまを対象としています。年齢に合わせたコンテンツを自動で表示するので、お子さまの発達段階にぴったりの学習ができます。
+                    </div>
+                </div>
+            </div>
+            <div class="w06-faq-item">
+                <button class="w06-faq-question">
+                    <span>無料プランでも十分に遊べますか？</span>
+                    <span class="w06-faq-toggle">*</span>
+                </button>
+                <div class="w06-faq-answer">
+                    <div class="w06-faq-answer-content">
+                        はい！無料プランでも基本的なゲームやお絵かき機能をお楽しみいただけます。ただし、1日の利用回数に制限があります。お子さまが気に入ったら、有料プランへのアップグレードをおすすめします。
+                    </div>
+                </div>
+            </div>
+            <div class="w06-faq-item">
+                <button class="w06-faq-question">
+                    <span>スマホとタブレット、どちらでも使えますか？</span>
+                    <span class="w06-faq-toggle">*</span>
+                </button>
+                <div class="w06-faq-answer">
+                    <div class="w06-faq-answer-content">
+                        両方でご利用いただけます！iOS・Android対応で、タブレットの大画面ならより快適に遊べます。同じアカウントでログインすれば、データは自動で同期されます。
+                    </div>
+                </div>
+            </div>
+            <div class="w06-faq-item">
+                <button class="w06-faq-question">
+                    <span>解約はいつでもできますか？</span>
+                    <span class="w06-faq-toggle">*</span>
+                </button>
+                <div class="w06-faq-answer">
+                    <div class="w06-faq-answer-content">
+                        もちろんです。いつでも簡単に解約できます。解約手続きはアプリ内の設定画面から行えます。解約後も月末まではご利用いただけます。
+                    </div>
+                </div>
+            </div>
+            <div class="w06-faq-item">
+                <button class="w06-faq-question">
+                    <span>子どもの利用時間を制限できますか？</span>
+                    <span class="w06-faq-toggle">*</span>
+                </button>
+                <div class="w06-faq-answer">
+                    <div class="w06-faq-answer-content">
+                        はい、保護者向けのペアレンタルコントロール機能があります。1日の利用時間や利用できる時間帯を設定できるので、使いすぎを防げます。お子さまの目と健康を守りましょう。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== W09: STEP GUIDE ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W09] Step Guide</span>
+    </div>
+    <section class="w09-steps">
+        <div class="w09-steps-header">
+            <h2 class="w09-steps-title">かんたん4ステップではじめよう</h2>
+            <p class="w09-steps-subtitle">登録から利用開始まで、たったの3分！</p>
+        </div>
+        <div class="w09-steps-container">
+            <div class="w09-steps-line"></div>
+            <div class="w09-step">
+                <div class="w09-step-number">1</div>
+                <div class="w09-step-content">
+                    <h3 class="w09-step-title"><span>*</span> アプリをダウンロード</h3>
+                    <p class="w09-step-description">App StoreまたはGoogle Playから無料でダウンロード。インストールはすぐに完了します。</p>
+                </div>
+            </div>
+            <div class="w09-step">
+                <div class="w09-step-number">2</div>
+                <div class="w09-step-content">
+                    <h3 class="w09-step-title"><span>*</span> アカウントを作成</h3>
+                    <p class="w09-step-description">メールアドレスを入力してアカウントを作成。LINEやGoogleアカウントでも簡単に登録できます。</p>
+                </div>
+            </div>
+            <div class="w09-step">
+                <div class="w09-step-number">3</div>
+                <div class="w09-step-content">
+                    <h3 class="w09-step-title"><span>*</span> お子さまの情報を入力</h3>
+                    <p class="w09-step-description">名前と年齢を入力すると、お子さまにぴったりのコンテンツが表示されるようになります。</p>
+                </div>
+            </div>
+            <div class="w09-step">
+                <div class="w09-step-number">4</div>
+                <div class="w09-step-content">
+                    <h3 class="w09-step-title"><span>*</span> さあ、遊ぼう！</h3>
+                    <p class="w09-step-description">準備完了！お気に入りのゲームを見つけて、楽しく学習をスタートしましょう。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== W10: REGISTRATION FORM ===== -->
+    <div class="showcase-section">
+        <span class="showcase-label">[W10] Registration Form</span>
+    </div>
+    <section id="signup" class="w10-form-section">
+        <div class="w10-form-container">
+            <div class="w10-form-header">
+                <div class="w10-form-icon">*</div>
+                <h2 class="w10-form-title">いますぐ登録しよう！</h2>
+                <p class="w10-form-subtitle">7日間のお試し期間つき</p>
+            </div>
+            <form class="w10-form-card">
+                <div class="w10-form-group">
+                    <label class="w10-form-label">保護者のお名前<span>必須</span></label>
+                    <input type="text" class="w10-form-input" placeholder="例: 山田 太郎">
+                </div>
+                <div class="w10-form-group">
+                    <label class="w10-form-label">メールアドレス<span>必須</span></label>
+                    <input type="email" class="w10-form-input" placeholder="例: example@email.com">
+                </div>
+                <div class="w10-form-group">
+                    <label class="w10-form-label">お子さまの年齢<span>必須</span></label>
+                    <select class="w10-form-select">
+                        <option value="">選んでください</option>
+                        <option value="3">3歳</option>
+                        <option value="4">4歳</option>
+                        <option value="5">5歳</option>
+                        <option value="6">6歳</option>
+                        <option value="7">7歳以上</option>
+                    </select>
+                </div>
+                <div class="w10-form-group">
+                    <label class="w10-form-label">パスワード<span>必須</span></label>
+                    <input type="password" class="w10-form-input" placeholder="8文字以上で設定してください">
+                </div>
+                <div class="w10-form-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms"><a href="#">利用規約</a>と<a href="#">プライバシーポリシー</a>に同意します</label>
+                </div>
+                <button type="submit" class="w10-form-submit">
+                    * 無料で登録する
+                </button>
+                <div class="w10-form-benefits">
+                    <span class="w10-form-benefit"><span>*</span> クレジットカード不要</span>
+                    <span class="w10-form-benefit"><span>*</span> いつでも解約OK</span>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== W07: FOOTER ===== -->
+    <div class="showcase-section" style="background: var(--soft-white);">
+        <span class="showcase-label">[W07] Footer</span>
+    </div>
+    <footer class="w07-footer">
+        <div class="w07-footer-content">
+            <div class="w07-footer-brand">
+                <div class="w07-footer-logo">
+                    <div class="w07-footer-logo-icon">*</div>
+                    <span class="w07-footer-logo-text">HAPPY<span>KIDS</span></span>
+                </div>
+                <p class="w07-footer-desc">子どもたちの笑顔と成長をサポートする知育アプリ。遊びながら学ぶ楽しさを、すべてのご家庭に届けます。</p>
+                <div class="w07-footer-socials">
+                    <a href="#" class="w07-footer-social">*</a>
+                    <a href="#" class="w07-footer-social">*</a>
+                    <a href="#" class="w07-footer-social">*</a>
+                    <a href="#" class="w07-footer-social">*</a>
+                </div>
+            </div>
+            <div class="w07-footer-section">
+                <h4>サービス</h4>
+                <ul>
+                    <li><a href="#">機能紹介</a></li>
+                    <li><a href="#">料金プラン</a></li>
+                    <li><a href="#">対応デバイス</a></li>
+                    <li><a href="#">ダウンロード</a></li>
+                </ul>
+            </div>
+            <div class="w07-footer-section">
+                <h4>サポート</h4>
+                <ul>
+                    <li><a href="#">よくある質問</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                    <li><a href="#">使い方ガイド</a></li>
+                    <li><a href="#">お知らせ</a></li>
+                </ul>
+            </div>
+            <div class="w07-footer-section">
+                <h4>会社情報</h4>
+                <ul>
+                    <li><a href="#">会社概要</a></li>
+                    <li><a href="#">採用情報</a></li>
+                    <li><a href="#">ブログ</a></li>
+                    <li><a href="#">プレスキット</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="w07-footer-bottom">
+            <p class="w07-footer-copyright">(C) 2026 HAPPYKIDS Inc. All rights reserved.</p>
+            <div class="w07-footer-legal">
+                <a href="#">利用規約</a>
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">特定商取引法</a>
+                <a href="#">Cookie設定</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.w06-faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.w06-faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+
+                // Toggle clicked item
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.w08-nav-links a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.w10-form-card')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('ありがとうございます！登録が完了しました。');
+        });
+
+        // Add hover animation to step cards
+        document.querySelectorAll('.w09-step').forEach((step, index) => {
+            step.style.animationDelay = `${index * 0.2}s`;
+        });
+    </script>
+</body>
+</html>

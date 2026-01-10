@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Map Diagram Templates - 概念図レイアウト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .template-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed #eee;
+        }
+
+        .diagram-container {
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================== */
+        /* #concept-1: Central Idea with Branches */
+        /* ==================== */
+        #concept-1 .central-map {
+            position: relative;
+            width: 340px;
+            height: 300px;
+        }
+
+        #concept-1 .center-idea {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: #FF6B9D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+            transition: transform 0.3s;
+        }
+
+        #concept-1 .center-idea:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #concept-1 .branch {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #concept-1 .branch:hover {
+            transform: scale(1.15);
+        }
+
+        #concept-1 .branch-1 { top: 10px; left: 50%; transform: translateX(-50%); background: #4ECDC4; }
+        #concept-1 .branch-1:hover { transform: translateX(-50%) scale(1.15); }
+        #concept-1 .branch-2 { top: 50px; right: 20px; background: #FFE66D; color: #333; }
+        #concept-1 .branch-3 { bottom: 50px; right: 20px; background: #95E1D3; }
+        #concept-1 .branch-4 { bottom: 10px; left: 50%; transform: translateX(-50%); background: #DDA0DD; }
+        #concept-1 .branch-4:hover { transform: translateX(-50%) scale(1.15); }
+        #concept-1 .branch-5 { bottom: 50px; left: 20px; background: #87CEEB; }
+        #concept-1 .branch-6 { top: 50px; left: 20px; background: #FFB347; }
+
+        #concept-1 .connector {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 3px;
+            background: #ddd;
+            transform-origin: left center;
+            z-index: 1;
+        }
+
+        #concept-1 .conn-1 { transform: translateY(-50%) rotate(-90deg); }
+        #concept-1 .conn-2 { transform: translateY(-50%) rotate(-35deg); }
+        #concept-1 .conn-3 { transform: translateY(-50%) rotate(35deg); }
+        #concept-1 .conn-4 { transform: translateY(-50%) rotate(90deg); }
+        #concept-1 .conn-5 { transform: translateY(-50%) rotate(145deg); }
+        #concept-1 .conn-6 { transform: translateY(-50%) rotate(-145deg); }
+
+        /* ==================== */
+        /* #concept-2: Topic Clusters */
+        /* ==================== */
+        #concept-2 .cluster-map {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        #concept-2 .cluster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #concept-2 .cluster-title {
+            background: #FF6B9D;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: transform 0.3s;
+        }
+
+        #concept-2 .cluster:nth-child(2) .cluster-title { background: #4ECDC4; }
+        #concept-2 .cluster:nth-child(3) .cluster-title { background: #FFE66D; color: #333; }
+
+        #concept-2 .cluster-title:hover {
+            transform: scale(1.05);
+        }
+
+        #concept-2 .cluster-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-width: 100px;
+            justify-content: center;
+        }
+
+        #concept-2 .cluster-item {
+            background: #f8f8f8;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            color: #555;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+        }
+
+        #concept-2 .cluster:nth-child(1) .cluster-item:hover { border-color: #FF6B9D; background: #fff0f5; }
+        #concept-2 .cluster:nth-child(2) .cluster-item:hover { border-color: #4ECDC4; background: #f0fffd; }
+        #concept-2 .cluster:nth-child(3) .cluster-item:hover { border-color: #FFE66D; background: #fffef0; }
+
+        /* ==================== */
+        /* #concept-3: Definition Box */
+        /* ==================== */
+        #concept-3 .definition-box {
+            width: 320px;
+            background: white;
+            border: 4px solid #4ECDC4;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #concept-3 .def-term {
+            background: #4ECDC4;
+            color: white;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #concept-3 .def-reading {
+            background: #e8f8f7;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: #4ECDC4;
+        }
+
+        #concept-3 .def-meaning {
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        #concept-3 .def-example {
+            background: #f9f9f9;
+            padding: 15px 20px;
+            font-size: 12px;
+            color: #666;
+            border-top: 2px dashed #ddd;
+        }
+
+        #concept-3 .def-example span {
+            color: #4ECDC4;
+            font-weight: bold;
+        }
+
+        #concept-3 .definition-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+            transition: all 0.3s;
+        }
+
+        /* ==================== */
+        /* #concept-4: Keyword Cloud Layout */
+        /* ==================== */
+        #concept-4 .keyword-cloud {
+            position: relative;
+            width: 340px;
+            height: 280px;
+        }
+
+        #concept-4 .keyword {
+            position: absolute;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            cursor: default;
+        }
+
+        #concept-4 .keyword:hover {
+            transform: scale(1.1);
+        }
+
+        #concept-4 .kw-1 { top: 20px; left: 80px; background: #FF6B9D; color: white; font-size: 20px; padding: 12px 24px; }
+        #concept-4 .kw-2 { top: 80px; left: 20px; background: #FFE66D; color: #333; font-size: 14px; }
+        #concept-4 .kw-3 { top: 60px; right: 30px; background: #4ECDC4; color: white; font-size: 16px; }
+        #concept-4 .kw-4 { top: 130px; left: 60px; background: #DDA0DD; color: white; font-size: 12px; }
+        #concept-4 .kw-5 { top: 140px; right: 50px; background: #87CEEB; color: white; font-size: 18px; padding: 10px 20px; }
+        #concept-4 .kw-6 { bottom: 60px; left: 30px; background: #95E1D3; color: white; font-size: 15px; }
+        #concept-4 .kw-7 { bottom: 40px; left: 150px; background: #FFB347; color: white; font-size: 13px; }
+        #concept-4 .kw-8 { bottom: 80px; right: 20px; background: #F8B4D9; color: white; font-size: 11px; }
+
+        /* ==================== */
+        /* #concept-5: Category Grouping */
+        /* ==================== */
+        #concept-5 .category-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 340px;
+        }
+
+        #concept-5 .category-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #concept-5 .category-label {
+            width: 80px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        #concept-5 .cat-1 .category-label { background: #FF6B9D; }
+        #concept-5 .cat-2 .category-label { background: #4ECDC4; }
+        #concept-5 .cat-3 .category-label { background: #FFE66D; color: #333; }
+        #concept-5 .cat-4 .category-label { background: #DDA0DD; }
+
+        #concept-5 .category-items {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        #concept-5 .cat-item {
+            padding: 8px 14px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #555;
+            transition: all 0.3s;
+        }
+
+        #concept-5 .cat-1 .cat-item:hover { background: #fff0f5; color: #FF6B9D; }
+        #concept-5 .cat-2 .cat-item:hover { background: #f0fffd; color: #4ECDC4; }
+        #concept-5 .cat-3 .cat-item:hover { background: #fffef0; color: #b8a000; }
+        #concept-5 .cat-4 .cat-item:hover { background: #fdf0fd; color: #DDA0DD; }
+
+        /* ==================== */
+        /* #concept-6: Layered Concepts */
+        /* ==================== */
+        #concept-6 .layered-concept {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        #concept-6 .layer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        #concept-6 .layer:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        #concept-6 .layer-1 {
+            width: 120px;
+            height: 50px;
+            background: #FF6B9D;
+            border-radius: 15px 15px 0 0;
+            font-size: 14px;
+        }
+
+        #concept-6 .layer-2 {
+            width: 180px;
+            height: 50px;
+            background: #4ECDC4;
+            font-size: 13px;
+        }
+
+        #concept-6 .layer-3 {
+            width: 240px;
+            height: 50px;
+            background: #FFE66D;
+            color: #333;
+            font-size: 13px;
+        }
+
+        #concept-6 .layer-4 {
+            width: 300px;
+            height: 50px;
+            background: #87CEEB;
+            border-radius: 0 0 15px 15px;
+            font-size: 12px;
+        }
+
+        #concept-6 .layer-arrow {
+            font-size: 20px;
+            color: #ccc;
+            margin: -5px 0;
+        }
+
+        /* ==================== */
+        /* #concept-7: Connected Bubbles */
+        /* ==================== */
+        #concept-7 .bubble-map {
+            position: relative;
+            width: 340px;
+            height: 280px;
+        }
+
+        #concept-7 .bubble {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            font-size: 11px;
+            transition: transform 0.3s;
+            z-index: 5;
+        }
+
+        #concept-7 .bubble:hover {
+            transform: scale(1.15);
+            z-index: 10;
+        }
+
+        #concept-7 .b-1 { width: 90px; height: 90px; top: 20px; left: 30px; background: #FF6B9D; }
+        #concept-7 .b-2 { width: 70px; height: 70px; top: 10px; right: 60px; background: #4ECDC4; }
+        #concept-7 .b-3 { width: 80px; height: 80px; top: 90px; left: 140px; background: #FFE66D; color: #333; }
+        #concept-7 .b-4 { width: 65px; height: 65px; bottom: 70px; left: 40px; background: #DDA0DD; }
+        #concept-7 .b-5 { width: 75px; height: 75px; bottom: 40px; right: 40px; background: #87CEEB; }
+        #concept-7 .b-6 { width: 55px; height: 55px; bottom: 20px; left: 130px; background: #95E1D3; }
+
+        #concept-7 .bubble-line {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        #concept-7 .bl-1 { width: 60px; top: 70px; left: 110px; transform: rotate(20deg); }
+        #concept-7 .bl-2 { width: 50px; top: 55px; left: 180px; transform: rotate(-30deg); }
+        #concept-7 .bl-3 { width: 70px; top: 160px; left: 90px; transform: rotate(45deg); }
+        #concept-7 .bl-4 { width: 60px; bottom: 100px; left: 200px; transform: rotate(-20deg); }
+
+        /* ==================== */
+        /* #concept-8: Labeled Diagram */
+        /* ==================== */
+        #concept-8 .labeled-diagram {
+            position: relative;
+            width: 340px;
+            height: 280px;
+        }
+
+        #concept-8 .main-shape {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            background: #4ECDC4;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #concept-8 .label-item {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #concept-8 .label-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        #concept-8 .label-line {
+            width: 40px;
+            height: 2px;
+            background: #aaa;
+        }
+
+        #concept-8 .label-text {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            transition: transform 0.3s;
+        }
+
+        #concept-8 .label-text:hover {
+            transform: scale(1.1);
+        }
+
+        #concept-8 .lbl-1 { top: 30px; left: 10px; }
+        #concept-8 .lbl-1 .label-dot { background: #FF6B9D; }
+        #concept-8 .lbl-1 .label-text { color: #FF6B9D; }
+
+        #concept-8 .lbl-2 { top: 30px; right: 10px; flex-direction: row-reverse; }
+        #concept-8 .lbl-2 .label-dot { background: #FFE66D; }
+        #concept-8 .lbl-2 .label-text { color: #b8a000; }
+
+        #concept-8 .lbl-3 { bottom: 80px; left: 5px; }
+        #concept-8 .lbl-3 .label-dot { background: #DDA0DD; }
+        #concept-8 .lbl-3 .label-text { color: #DDA0DD; }
+
+        #concept-8 .lbl-4 { bottom: 30px; right: 10px; flex-direction: row-reverse; }
+        #concept-8 .lbl-4 .label-dot { background: #87CEEB; }
+        #concept-8 .lbl-4 .label-text { color: #5cacdb; }
+
+        /* ==================== */
+        /* #concept-9: Explanation Callouts */
+        /* ==================== */
+        #concept-9 .callout-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 340px;
+        }
+
+        #concept-9 .callout {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        #concept-9 .callout-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        #concept-9 .callout-icon:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        #concept-9 .callout:nth-child(1) .callout-icon { background: #FF6B9D; }
+        #concept-9 .callout:nth-child(2) .callout-icon { background: #4ECDC4; }
+        #concept-9 .callout:nth-child(3) .callout-icon { background: #FFE66D; }
+        #concept-9 .callout:nth-child(4) .callout-icon { background: #DDA0DD; }
+
+        #concept-9 .callout-content {
+            flex: 1;
+        }
+
+        #concept-9 .callout-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        #concept-9 .callout-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* ==================== */
+        /* #concept-10: Term + Definition Pairs */
+        /* ==================== */
+        #concept-10 .term-pairs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 340px;
+        }
+
+        #concept-10 .term-pair {
+            display: flex;
+            align-items: stretch;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        #concept-10 .term-pair:hover {
+            transform: translateX(5px);
+        }
+
+        #concept-10 .term {
+            width: 100px;
+            padding: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #concept-10 .definition {
+            flex: 1;
+            padding: 12px 15px;
+            background: #f9f9f9;
+            font-size: 12px;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        #concept-10 .pair-1 .term { background: #FF6B9D; }
+        #concept-10 .pair-2 .term { background: #4ECDC4; }
+        #concept-10 .pair-3 .term { background: #FFE66D; color: #333; }
+        #concept-10 .pair-4 .term { background: #87CEEB; }
+        #concept-10 .pair-5 .term { background: #DDA0DD; }
+
+        /* ==================== */
+        /* #concept-11: Visual Glossary */
+        /* ==================== */
+        #concept-11 .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 340px;
+        }
+
+        #concept-11 .glossary-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        #concept-11 .glossary-item:hover {
+            transform: translateY(-5px);
+        }
+
+        #concept-11 .glossary-item:nth-child(1):hover { border-color: #FF6B9D; }
+        #concept-11 .glossary-item:nth-child(2):hover { border-color: #4ECDC4; }
+        #concept-11 .glossary-item:nth-child(3):hover { border-color: #FFE66D; }
+        #concept-11 .glossary-item:nth-child(4):hover { border-color: #DDA0DD; }
+        #concept-11 .glossary-item:nth-child(5):hover { border-color: #87CEEB; }
+        #concept-11 .glossary-item:nth-child(6):hover { border-color: #95E1D3; }
+
+        #concept-11 .glossary-symbol {
+            width: 45px;
+            height: 45px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        #concept-11 .glossary-item:nth-child(1) .glossary-symbol { background: #fff0f5; }
+        #concept-11 .glossary-item:nth-child(2) .glossary-symbol { background: #f0fffd; }
+        #concept-11 .glossary-item:nth-child(3) .glossary-symbol { background: #fffef0; }
+        #concept-11 .glossary-item:nth-child(4) .glossary-symbol { background: #fdf0fd; }
+        #concept-11 .glossary-item:nth-child(5) .glossary-symbol { background: #f0f8ff; }
+        #concept-11 .glossary-item:nth-child(6) .glossary-symbol { background: #f0fff5; }
+
+        #concept-11 .glossary-word {
+            font-weight: bold;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        #concept-11 .glossary-def {
+            font-size: 10px;
+            color: #888;
+        }
+
+        /* ==================== */
+        /* #concept-12: Concept Hierarchy */
+        /* ==================== */
+        #concept-12 .hierarchy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #concept-12 .hier-level {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #concept-12 .hier-item {
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 12px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #concept-12 .hier-item:hover {
+            transform: scale(1.1);
+        }
+
+        #concept-12 .level-1 .hier-item { background: #FF6B9D; font-size: 15px; padding: 14px 28px; }
+        #concept-12 .level-2 .hier-item { background: #4ECDC4; }
+        #concept-12 .level-3 .hier-item { background: #FFE66D; color: #333; font-size: 11px; }
+        #concept-12 .level-4 .hier-item { background: #87CEEB; font-size: 10px; padding: 8px 12px; }
+
+        #concept-12 .hier-connector {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        #concept-12 .hier-line {
+            width: 2px;
+            height: 15px;
+            background: #ddd;
+        }
+
+        /* ==================== */
+        /* #concept-13: Idea Expansion */
+        /* ==================== */
+        #concept-13 .expansion {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #concept-13 .core-idea {
+            width: 90px;
+            height: 90px;
+            background: #FF6B9D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        #concept-13 .core-idea:hover {
+            transform: scale(1.1);
+        }
+
+        #concept-13 .expand-arrow {
+            font-size: 24px;
+            color: #ccc;
+        }
+
+        #concept-13 .expanded-ideas {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #concept-13 .expanded-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            border-left: 4px solid;
+            transition: all 0.3s;
+        }
+
+        #concept-13 .expanded-item:hover {
+            transform: translateX(5px);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        #concept-13 .exp-1 { border-color: #4ECDC4; }
+        #concept-13 .exp-2 { border-color: #FFE66D; }
+        #concept-13 .exp-3 { border-color: #DDA0DD; }
+        #concept-13 .exp-4 { border-color: #87CEEB; }
+
+        #concept-13 .exp-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        #concept-13 .exp-1 .exp-num { background: #4ECDC4; }
+        #concept-13 .exp-2 .exp-num { background: #FFE66D; color: #333; }
+        #concept-13 .exp-3 .exp-num { background: #DDA0DD; }
+        #concept-13 .exp-4 .exp-num { background: #87CEEB; }
+
+        #concept-13 .exp-text {
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* ==================== */
+        /* #concept-14: Feature Highlights */
+        /* ==================== */
+        #concept-14 .feature-highlights {
+            width: 340px;
+        }
+
+        #concept-14 .feature-title {
+            text-align: center;
+            background: #FF6B9D;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #concept-14 .feature-list {
+            background: white;
+            border: 3px solid #FF6B9D;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #concept-14 .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        #concept-14 .feature-item:hover {
+            background: #fff0f5;
+        }
+
+        #concept-14 .feature-badge {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        #concept-14 .feature-item:nth-child(1) .feature-badge { background: #4ECDC4; }
+        #concept-14 .feature-item:nth-child(2) .feature-badge { background: #FFE66D; }
+        #concept-14 .feature-item:nth-child(3) .feature-badge { background: #DDA0DD; }
+        #concept-14 .feature-item:nth-child(4) .feature-badge { background: #87CEEB; }
+
+        #concept-14 .feature-content h4 {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        #concept-14 .feature-content p {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* ==================== */
+        /* #concept-15: Key Points Layout */
+        /* ==================== */
+        #concept-15 .key-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 340px;
+            justify-content: center;
+        }
+
+        #concept-15 .key-point {
+            width: 100px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #concept-15 .key-point:hover {
+            transform: translateY(-5px);
+        }
+
+        #concept-15 .point-box {
+            width: 100px;
+            height: 80px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        #concept-15 .key-point:nth-child(1) .point-box { background: #FF6B9D; }
+        #concept-15 .key-point:nth-child(2) .point-box { background: #4ECDC4; }
+        #concept-15 .key-point:nth-child(3) .point-box { background: #FFE66D; }
+        #concept-15 .key-point:nth-child(4) .point-box { background: #DDA0DD; }
+        #concept-15 .key-point:nth-child(5) .point-box { background: #87CEEB; }
+        #concept-15 .key-point:nth-child(6) .point-box { background: #95E1D3; }
+
+        #concept-15 .point-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* ==================== */
+        /* #concept-16: Summary Boxes */
+        /* ==================== */
+        #concept-16 .summary-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 340px;
+        }
+
+        #concept-16 .summary-box {
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        #concept-16 .summary-box:hover {
+            transform: scale(1.02);
+        }
+
+        #concept-16 .summary-num {
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        #concept-16 .box-1 .summary-num { background: #FF6B9D; }
+        #concept-16 .box-2 .summary-num { background: #4ECDC4; }
+        #concept-16 .box-3 .summary-num { background: #FFE66D; color: #333; }
+
+        #concept-16 .summary-content {
+            flex: 1;
+            padding: 15px;
+            background: white;
+        }
+
+        #concept-16 .summary-content h4 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        #concept-16 .summary-content p {
+            font-size: 12px;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        /* ==================== */
+        /* #concept-17: Fact Cards */
+        /* ==================== */
+        #concept-17 .fact-cards {
+            display: flex;
+            gap: 12px;
+        }
+
+        #concept-17 .fact-card {
+            width: 100px;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid;
+            transition: all 0.3s;
+        }
+
+        #concept-17 .fact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        #concept-17 .fact-card:nth-child(1) { border-color: #FF6B9D; }
+        #concept-17 .fact-card:nth-child(2) { border-color: #4ECDC4; }
+        #concept-17 .fact-card:nth-child(3) { border-color: #FFE66D; }
+
+        #concept-17 .fact-icon {
+            width: 45px;
+            height: 45px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        #concept-17 .fact-card:nth-child(1) .fact-icon { background: #fff0f5; }
+        #concept-17 .fact-card:nth-child(2) .fact-icon { background: #f0fffd; }
+        #concept-17 .fact-card:nth-child(3) .fact-icon { background: #fffef0; }
+
+        #concept-17 .fact-value {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #concept-17 .fact-card:nth-child(1) .fact-value { color: #FF6B9D; }
+        #concept-17 .fact-card:nth-child(2) .fact-value { color: #4ECDC4; }
+        #concept-17 .fact-card:nth-child(3) .fact-value { color: #b8a000; }
+
+        #concept-17 .fact-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* ==================== */
+        /* #concept-18: Learning Points */
+        /* ==================== */
+        #concept-18 .learning-points {
+            width: 340px;
+        }
+
+        #concept-18 .learning-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        #concept-18 .learning-icon {
+            width: 40px;
+            height: 40px;
+            background: #FF6B9D;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        #concept-18 .learning-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        #concept-18 .point-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #concept-18 .learn-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+
+        #concept-18 .learn-point:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        #concept-18 .point-marker {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        #concept-18 .learn-point:nth-child(1) .point-marker { background: #4ECDC4; }
+        #concept-18 .learn-point:nth-child(2) .point-marker { background: #FFE66D; color: #333; }
+        #concept-18 .learn-point:nth-child(3) .point-marker { background: #DDA0DD; }
+        #concept-18 .learn-point:nth-child(4) .point-marker { background: #87CEEB; }
+
+        #concept-18 .point-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* ==================== */
+        /* #concept-19: Main Idea + Details */
+        /* ==================== */
+        #concept-19 .main-details {
+            width: 340px;
+        }
+
+        #concept-19 .main-idea-box {
+            background: #FF6B9D;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        #concept-19 .main-idea-box:hover {
+            transform: scale(1.02);
+        }
+
+        #concept-19 .main-label {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        #concept-19 .main-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #concept-19 .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        #concept-19 .detail-box {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+
+        #concept-19 .detail-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        #concept-19 .detail-box:nth-child(1) { border-color: #4ECDC4; }
+        #concept-19 .detail-box:nth-child(2) { border-color: #FFE66D; }
+        #concept-19 .detail-box:nth-child(3) { border-color: #DDA0DD; }
+        #concept-19 .detail-box:nth-child(4) { border-color: #87CEEB; }
+
+        #concept-19 .detail-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #concept-19 .detail-box:nth-child(1) .detail-title { color: #4ECDC4; }
+        #concept-19 .detail-box:nth-child(2) .detail-title { color: #b8a000; }
+        #concept-19 .detail-box:nth-child(3) .detail-title { color: #DDA0DD; }
+        #concept-19 .detail-box:nth-child(4) .detail-title { color: #5cacdb; }
+
+        #concept-19 .detail-text {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* ==================== */
+        /* #concept-20: Abstract Concept Visualization */
+        /* ==================== */
+        #concept-20 .abstract-viz {
+            position: relative;
+            width: 340px;
+            height: 280px;
+        }
+
+        #concept-20 .concept-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 4px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #concept-20 .ring-outer {
+            width: 260px;
+            height: 260px;
+            top: 10px;
+            left: 40px;
+            border-color: #FFE66D;
+            border-style: dashed;
+        }
+
+        #concept-20 .ring-middle {
+            width: 180px;
+            height: 180px;
+            top: 50px;
+            left: 80px;
+            border-color: #4ECDC4;
+        }
+
+        #concept-20 .ring-inner {
+            width: 100px;
+            height: 100px;
+            top: 90px;
+            left: 120px;
+            border-color: #FF6B9D;
+            background: #FF6B9D;
+        }
+
+        #concept-20 .core-text {
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #concept-20 .concept-label {
+            position: absolute;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #concept-20 .concept-label:hover {
+            transform: scale(1.1);
+        }
+
+        #concept-20 .label-1 { top: 15px; left: 130px; background: #FFE66D; color: #333; }
+        #concept-20 .label-2 { top: 60px; right: 15px; background: #4ECDC4; }
+        #concept-20 .label-3 { bottom: 60px; right: 20px; background: #DDA0DD; }
+        #concept-20 .label-4 { bottom: 15px; left: 120px; background: #87CEEB; }
+        #concept-20 .label-5 { top: 100px; left: 10px; background: #95E1D3; }
+
+        #concept-20 .connecting-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #FF6B9D;
+        }
+
+        #concept-20 .dot-1 { top: 55px; left: 90px; }
+        #concept-20 .dot-2 { top: 55px; right: 90px; }
+        #concept-20 .dot-3 { bottom: 55px; left: 90px; }
+        #concept-20 .dot-4 { bottom: 55px; right: 90px; }
+    </style>
+</head>
+<body>
+    <h1>Concept Map Diagram Templates - 概念図レイアウト</h1>
+
+    <div class="template-grid">
+        <!-- #concept-1: Central Idea with Branches -->
+        <div class="template-card">
+            <h3>#concept-1: Central Idea with Branches（中心概念と枝）</h3>
+            <div class="diagram-container">
+                <div id="concept-1">
+                    <div class="central-map">
+                        <div class="connector conn-1"></div>
+                        <div class="connector conn-2"></div>
+                        <div class="connector conn-3"></div>
+                        <div class="connector conn-4"></div>
+                        <div class="connector conn-5"></div>
+                        <div class="connector conn-6"></div>
+                        <div class="center-idea">メイン<br>コンセプト</div>
+                        <div class="branch branch-1">要素A</div>
+                        <div class="branch branch-2">要素B</div>
+                        <div class="branch branch-3">要素C</div>
+                        <div class="branch branch-4">要素D</div>
+                        <div class="branch branch-5">要素E</div>
+                        <div class="branch branch-6">要素F</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-2: Topic Clusters -->
+        <div class="template-card">
+            <h3>#concept-2: Topic Clusters（トピッククラスター）</h3>
+            <div class="diagram-container">
+                <div id="concept-2">
+                    <div class="cluster-map">
+                        <div class="cluster">
+                            <div class="cluster-title">カテゴリA</div>
+                            <div class="cluster-items">
+                                <span class="cluster-item">項目1</span>
+                                <span class="cluster-item">項目2</span>
+                                <span class="cluster-item">項目3</span>
+                            </div>
+                        </div>
+                        <div class="cluster">
+                            <div class="cluster-title">カテゴリB</div>
+                            <div class="cluster-items">
+                                <span class="cluster-item">要素1</span>
+                                <span class="cluster-item">要素2</span>
+                                <span class="cluster-item">要素3</span>
+                            </div>
+                        </div>
+                        <div class="cluster">
+                            <div class="cluster-title">カテゴリC</div>
+                            <div class="cluster-items">
+                                <span class="cluster-item">ポイント1</span>
+                                <span class="cluster-item">ポイント2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-3: Definition Box -->
+        <div class="template-card">
+            <h3>#concept-3: Definition Box（定義ボックス）</h3>
+            <div class="diagram-container">
+                <div id="concept-3">
+                    <div class="definition-box">
+                        <div class="def-term">概念用語</div>
+                        <div class="def-reading">がいねんようご</div>
+                        <div class="def-meaning">
+                            ここに用語の意味や定義を記述します。複数の文章で説明することができます。
+                        </div>
+                        <div class="def-example">
+                            例: <span>具体的な使用例</span>をここに記載
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-4: Keyword Cloud Layout -->
+        <div class="template-card">
+            <h3>#concept-4: Keyword Cloud Layout（キーワードクラウド）</h3>
+            <div class="diagram-container">
+                <div id="concept-4">
+                    <div class="keyword-cloud">
+                        <span class="keyword kw-1">重要キーワード</span>
+                        <span class="keyword kw-2">用語A</span>
+                        <span class="keyword kw-3">概念B</span>
+                        <span class="keyword kw-4">単語C</span>
+                        <span class="keyword kw-5">テーマD</span>
+                        <span class="keyword kw-6">ポイントE</span>
+                        <span class="keyword kw-7">要素F</span>
+                        <span class="keyword kw-8">項目G</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-5: Category Grouping -->
+        <div class="template-card">
+            <h3>#concept-5: Category Grouping（カテゴリグループ）</h3>
+            <div class="diagram-container">
+                <div id="concept-5">
+                    <div class="category-group">
+                        <div class="category-row cat-1">
+                            <div class="category-label">分類A</div>
+                            <div class="category-items">
+                                <span class="cat-item">りんご</span>
+                                <span class="cat-item">みかん</span>
+                                <span class="cat-item">ぶどう</span>
+                            </div>
+                        </div>
+                        <div class="category-row cat-2">
+                            <div class="category-label">分類B</div>
+                            <div class="category-items">
+                                <span class="cat-item">トマト</span>
+                                <span class="cat-item">きゅうり</span>
+                            </div>
+                        </div>
+                        <div class="category-row cat-3">
+                            <div class="category-label">分類C</div>
+                            <div class="category-items">
+                                <span class="cat-item">パン</span>
+                                <span class="cat-item">ごはん</span>
+                                <span class="cat-item">麺</span>
+                            </div>
+                        </div>
+                        <div class="category-row cat-4">
+                            <div class="category-label">分類D</div>
+                            <div class="category-items">
+                                <span class="cat-item">牛乳</span>
+                                <span class="cat-item">お茶</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-6: Layered Concepts -->
+        <div class="template-card">
+            <h3>#concept-6: Layered Concepts（階層化された概念）</h3>
+            <div class="diagram-container">
+                <div id="concept-6">
+                    <div class="layered-concept">
+                        <div class="layer layer-1">核心概念</div>
+                        <div class="layer layer-2">中間レイヤー</div>
+                        <div class="layer layer-3">周辺要素</div>
+                        <div class="layer layer-4">外部環境・関連コンテキスト</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-7: Connected Bubbles -->
+        <div class="template-card">
+            <h3>#concept-7: Connected Bubbles（つながるバブル）</h3>
+            <div class="diagram-container">
+                <div id="concept-7">
+                    <div class="bubble-map">
+                        <div class="bubble-line bl-1"></div>
+                        <div class="bubble-line bl-2"></div>
+                        <div class="bubble-line bl-3"></div>
+                        <div class="bubble-line bl-4"></div>
+                        <div class="bubble b-1">コンセプト<br>A</div>
+                        <div class="bubble b-2">概念B</div>
+                        <div class="bubble b-3">アイデア<br>C</div>
+                        <div class="bubble b-4">要素D</div>
+                        <div class="bubble b-5">テーマE</div>
+                        <div class="bubble b-6">項目F</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-8: Labeled Diagram -->
+        <div class="template-card">
+            <h3>#concept-8: Labeled Diagram（ラベル付き図解）</h3>
+            <div class="diagram-container">
+                <div id="concept-8">
+                    <div class="labeled-diagram">
+                        <div class="main-shape">メイン<br>オブジェクト</div>
+                        <div class="label-item lbl-1">
+                            <div class="label-text">特徴A: 説明文</div>
+                            <div class="label-line"></div>
+                            <div class="label-dot"></div>
+                        </div>
+                        <div class="label-item lbl-2">
+                            <div class="label-text">特徴B: 説明</div>
+                            <div class="label-line"></div>
+                            <div class="label-dot"></div>
+                        </div>
+                        <div class="label-item lbl-3">
+                            <div class="label-text">要素C: ポイント</div>
+                            <div class="label-line"></div>
+                            <div class="label-dot"></div>
+                        </div>
+                        <div class="label-item lbl-4">
+                            <div class="label-text">要素D: 内容</div>
+                            <div class="label-line"></div>
+                            <div class="label-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-9: Explanation Callouts -->
+        <div class="template-card">
+            <h3>#concept-9: Explanation Callouts（説明コールアウト）</h3>
+            <div class="diagram-container">
+                <div id="concept-9">
+                    <div class="callout-layout">
+                        <div class="callout">
+                            <div class="callout-icon">💡</div>
+                            <div class="callout-content">
+                                <div class="callout-title">ポイント1</div>
+                                <div class="callout-text">重要な概念についての説明テキスト</div>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <div class="callout-icon">📝</div>
+                            <div class="callout-content">
+                                <div class="callout-title">ポイント2</div>
+                                <div class="callout-text">補足情報や詳細な説明を記載</div>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <div class="callout-icon">⭐</div>
+                            <div class="callout-content">
+                                <div class="callout-title">ポイント3</div>
+                                <div class="callout-text">覚えておくべき重要事項</div>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <div class="callout-icon">🎯</div>
+                            <div class="callout-content">
+                                <div class="callout-title">ポイント4</div>
+                                <div class="callout-text">目標や達成すべきこと</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-10: Term + Definition Pairs -->
+        <div class="template-card">
+            <h3>#concept-10: Term + Definition Pairs（用語と定義ペア）</h3>
+            <div class="diagram-container">
+                <div id="concept-10">
+                    <div class="term-pairs">
+                        <div class="term-pair pair-1">
+                            <div class="term">用語A</div>
+                            <div class="definition">用語Aの意味や説明をここに記載します</div>
+                        </div>
+                        <div class="term-pair pair-2">
+                            <div class="term">用語B</div>
+                            <div class="definition">用語Bの定義と具体例</div>
+                        </div>
+                        <div class="term-pair pair-3">
+                            <div class="term">用語C</div>
+                            <div class="definition">用語Cに関する解説文</div>
+                        </div>
+                        <div class="term-pair pair-4">
+                            <div class="term">用語D</div>
+                            <div class="definition">用語Dの詳細な説明</div>
+                        </div>
+                        <div class="term-pair pair-5">
+                            <div class="term">用語E</div>
+                            <div class="definition">用語Eとは何かを説明</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-11: Visual Glossary -->
+        <div class="template-card">
+            <h3>#concept-11: Visual Glossary（ビジュアル用語集）</h3>
+            <div class="diagram-container">
+                <div id="concept-11">
+                    <div class="glossary-grid">
+                        <div class="glossary-item">
+                            <div class="glossary-symbol">🔵</div>
+                            <div class="glossary-word">用語A</div>
+                            <div class="glossary-def">短い説明</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-symbol">🟢</div>
+                            <div class="glossary-word">用語B</div>
+                            <div class="glossary-def">定義文</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-symbol">🟡</div>
+                            <div class="glossary-word">用語C</div>
+                            <div class="glossary-def">解説</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-symbol">🟣</div>
+                            <div class="glossary-word">用語D</div>
+                            <div class="glossary-def">意味</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-symbol">🔷</div>
+                            <div class="glossary-word">用語E</div>
+                            <div class="glossary-def">概要</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-symbol">💚</div>
+                            <div class="glossary-word">用語F</div>
+                            <div class="glossary-def">説明文</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-12: Concept Hierarchy -->
+        <div class="template-card">
+            <h3>#concept-12: Concept Hierarchy（概念階層）</h3>
+            <div class="diagram-container">
+                <div id="concept-12">
+                    <div class="hierarchy">
+                        <div class="hier-level level-1">
+                            <div class="hier-item">上位概念</div>
+                        </div>
+                        <div class="hier-connector">
+                            <div class="hier-line"></div>
+                        </div>
+                        <div class="hier-level level-2">
+                            <div class="hier-item">中位A</div>
+                            <div class="hier-item">中位B</div>
+                        </div>
+                        <div class="hier-connector">
+                            <div class="hier-line"></div>
+                            <div class="hier-line"></div>
+                        </div>
+                        <div class="hier-level level-3">
+                            <div class="hier-item">下位1</div>
+                            <div class="hier-item">下位2</div>
+                            <div class="hier-item">下位3</div>
+                        </div>
+                        <div class="hier-connector">
+                            <div class="hier-line"></div>
+                            <div class="hier-line"></div>
+                            <div class="hier-line"></div>
+                        </div>
+                        <div class="hier-level level-4">
+                            <div class="hier-item">詳細a</div>
+                            <div class="hier-item">詳細b</div>
+                            <div class="hier-item">詳細c</div>
+                            <div class="hier-item">詳細d</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-13: Idea Expansion -->
+        <div class="template-card">
+            <h3>#concept-13: Idea Expansion（アイデア展開）</h3>
+            <div class="diagram-container">
+                <div id="concept-13">
+                    <div class="expansion">
+                        <div class="core-idea">核となる<br>アイデア</div>
+                        <div class="expand-arrow">→</div>
+                        <div class="expanded-ideas">
+                            <div class="expanded-item exp-1">
+                                <span class="exp-num">1</span>
+                                <span class="exp-text">展開した考え1</span>
+                            </div>
+                            <div class="expanded-item exp-2">
+                                <span class="exp-num">2</span>
+                                <span class="exp-text">展開した考え2</span>
+                            </div>
+                            <div class="expanded-item exp-3">
+                                <span class="exp-num">3</span>
+                                <span class="exp-text">展開した考え3</span>
+                            </div>
+                            <div class="expanded-item exp-4">
+                                <span class="exp-num">4</span>
+                                <span class="exp-text">展開した考え4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-14: Feature Highlights -->
+        <div class="template-card">
+            <h3>#concept-14: Feature Highlights（特徴ハイライト）</h3>
+            <div class="diagram-container">
+                <div id="concept-14">
+                    <div class="feature-highlights">
+                        <div class="feature-title">主要な特徴</div>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-badge">✓</div>
+                                <div class="feature-content">
+                                    <h4>特徴1</h4>
+                                    <p>詳しい説明テキスト</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-badge">★</div>
+                                <div class="feature-content">
+                                    <h4>特徴2</h4>
+                                    <p>補足情報を記載</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-badge">♦</div>
+                                <div class="feature-content">
+                                    <h4>特徴3</h4>
+                                    <p>重要なポイント</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-badge">●</div>
+                                <div class="feature-content">
+                                    <h4>特徴4</h4>
+                                    <p>追加の説明</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-15: Key Points Layout -->
+        <div class="template-card">
+            <h3>#concept-15: Key Points Layout（キーポイントレイアウト）</h3>
+            <div class="diagram-container">
+                <div id="concept-15">
+                    <div class="key-points">
+                        <div class="key-point">
+                            <div class="point-box">📌</div>
+                            <div class="point-label">ポイント1</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="point-box">💎</div>
+                            <div class="point-label">ポイント2</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="point-box">🎯</div>
+                            <div class="point-label">ポイント3</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="point-box">🔑</div>
+                            <div class="point-label">ポイント4</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="point-box">⚡</div>
+                            <div class="point-label">ポイント5</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="point-box">🌟</div>
+                            <div class="point-label">ポイント6</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-16: Summary Boxes -->
+        <div class="template-card">
+            <h3>#concept-16: Summary Boxes（サマリーボックス）</h3>
+            <div class="diagram-container">
+                <div id="concept-16">
+                    <div class="summary-boxes">
+                        <div class="summary-box box-1">
+                            <div class="summary-num">1</div>
+                            <div class="summary-content">
+                                <h4>要点1のタイトル</h4>
+                                <p>この要点についての詳しい説明文をここに記載します。</p>
+                            </div>
+                        </div>
+                        <div class="summary-box box-2">
+                            <div class="summary-num">2</div>
+                            <div class="summary-content">
+                                <h4>要点2のタイトル</h4>
+                                <p>2番目の重要なポイントについての解説です。</p>
+                            </div>
+                        </div>
+                        <div class="summary-box box-3">
+                            <div class="summary-num">3</div>
+                            <div class="summary-content">
+                                <h4>要点3のタイトル</h4>
+                                <p>3番目の要点と補足情報を記載します。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-17: Fact Cards -->
+        <div class="template-card">
+            <h3>#concept-17: Fact Cards（ファクトカード）</h3>
+            <div class="diagram-container">
+                <div id="concept-17">
+                    <div class="fact-cards">
+                        <div class="fact-card">
+                            <div class="fact-icon">📊</div>
+                            <div class="fact-value">85%</div>
+                            <div class="fact-label">達成率</div>
+                        </div>
+                        <div class="fact-card">
+                            <div class="fact-icon">👥</div>
+                            <div class="fact-value">1,234</div>
+                            <div class="fact-label">参加者数</div>
+                        </div>
+                        <div class="fact-card">
+                            <div class="fact-icon">⏱️</div>
+                            <div class="fact-value">3日</div>
+                            <div class="fact-label">所要時間</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-18: Learning Points -->
+        <div class="template-card">
+            <h3>#concept-18: Learning Points（学習ポイント）</h3>
+            <div class="diagram-container">
+                <div id="concept-18">
+                    <div class="learning-points">
+                        <div class="learning-header">
+                            <div class="learning-icon">📚</div>
+                            <div class="learning-title">学習のポイント</div>
+                        </div>
+                        <div class="point-list">
+                            <div class="learn-point">
+                                <div class="point-marker">A</div>
+                                <div class="point-content">最初に覚えるべき重要な概念について説明</div>
+                            </div>
+                            <div class="learn-point">
+                                <div class="point-marker">B</div>
+                                <div class="point-content">次のステップとして理解する内容</div>
+                            </div>
+                            <div class="learn-point">
+                                <div class="point-marker">C</div>
+                                <div class="point-content">応用的な知識とその活用方法</div>
+                            </div>
+                            <div class="learn-point">
+                                <div class="point-marker">D</div>
+                                <div class="point-content">まとめと振り返りのポイント</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-19: Main Idea + Details -->
+        <div class="template-card">
+            <h3>#concept-19: Main Idea + Details（主要アイデアと詳細）</h3>
+            <div class="diagram-container">
+                <div id="concept-19">
+                    <div class="main-details">
+                        <div class="main-idea-box">
+                            <div class="main-label">MAIN IDEA</div>
+                            <div class="main-text">中心となる考え・テーマ</div>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="detail-box">
+                                <div class="detail-title">詳細A</div>
+                                <div class="detail-text">具体的な内容や補足情報を記載</div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="detail-title">詳細B</div>
+                                <div class="detail-text">関連する事項についての説明</div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="detail-title">詳細C</div>
+                                <div class="detail-text">追加の情報やポイント</div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="detail-title">詳細D</div>
+                                <div class="detail-text">最後の補足説明事項</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #concept-20: Abstract Concept Visualization -->
+        <div class="template-card">
+            <h3>#concept-20: Abstract Concept Visualization（抽象概念の視覚化）</h3>
+            <div class="diagram-container">
+                <div id="concept-20">
+                    <div class="abstract-viz">
+                        <div class="concept-ring ring-outer"></div>
+                        <div class="concept-ring ring-middle"></div>
+                        <div class="concept-ring ring-inner">
+                            <span class="core-text">核心<br>概念</span>
+                        </div>
+                        <span class="concept-label label-1">外部要素</span>
+                        <span class="concept-label label-2">関連概念A</span>
+                        <span class="concept-label label-3">関連概念B</span>
+                        <span class="concept-label label-4">影響要因</span>
+                        <span class="concept-label label-5">コンテキスト</span>
+                        <div class="connecting-dot dot-1"></div>
+                        <div class="connecting-dot dot-2"></div>
+                        <div class="connecting-dot dot-3"></div>
+                        <div class="connecting-dot dot-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

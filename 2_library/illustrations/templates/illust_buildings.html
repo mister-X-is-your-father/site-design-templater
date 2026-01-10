@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buildings & Places - CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Base styles for all buildings */
+        .building {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .building:hover {
+            transform: scale(1.1);
+        }
+
+        /* building-01: House */
+        #building-01 .house {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: #FFE4B5;
+            border-radius: 3px;
+        }
+
+        #building-01 .house::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 30px solid #E07A5F;
+        }
+
+        #building-01 .door {
+            position: absolute;
+            bottom: 0;
+            left: 24px;
+            width: 12px;
+            height: 18px;
+            background: #8B4513;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #building-01 .window {
+            position: absolute;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            background: #87CEEB;
+            border: 2px solid #fff;
+        }
+
+        #building-01 .window.left { left: 8px; }
+        #building-01 .window.right { right: 8px; }
+
+        #building-01:hover .house {
+            animation: bounce 0.5s ease;
+        }
+
+        /* building-02: Apartment Building */
+        #building-02 .apartment {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 50px;
+            height: 70px;
+            background: #B8C4CE;
+            border-radius: 3px 3px 0 0;
+        }
+
+        #building-02 .apt-window {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFE66D;
+            border: 1px solid #666;
+        }
+
+        #building-02 .apt-window:nth-child(1) { top: 8px; left: 8px; }
+        #building-02 .apt-window:nth-child(2) { top: 8px; right: 8px; }
+        #building-02 .apt-window:nth-child(3) { top: 22px; left: 8px; }
+        #building-02 .apt-window:nth-child(4) { top: 22px; right: 8px; }
+        #building-02 .apt-window:nth-child(5) { top: 36px; left: 8px; }
+        #building-02 .apt-window:nth-child(6) { top: 36px; right: 8px; }
+
+        #building-02 .apt-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 16px;
+            background: #5D4E37;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #building-02:hover .apartment {
+            animation: sway 0.4s ease-in-out;
+        }
+
+        /* building-03: School */
+        #building-03 .school {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 70px;
+            height: 45px;
+            background: #FFF8DC;
+            border-radius: 3px;
+        }
+
+        #building-03 .school-roof {
+            position: absolute;
+            bottom: 45px;
+            left: 5px;
+            width: 70px;
+            height: 8px;
+            background: #CD853F;
+        }
+
+        #building-03 .clock-tower {
+            position: absolute;
+            bottom: 53px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: #FFF8DC;
+        }
+
+        #building-03 .clock-tower::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #CD853F;
+        }
+
+        #building-03 .clock {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid #333;
+        }
+
+        #building-03 .school-door {
+            position: absolute;
+            bottom: 0;
+            left: 28px;
+            width: 14px;
+            height: 20px;
+            background: #8B4513;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #building-03:hover {
+            animation: ring 0.3s ease infinite;
+        }
+
+        /* building-04: Hospital */
+        #building-04 .hospital {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 55px;
+            background: #fff;
+            border-radius: 3px;
+            border: 2px solid #ddd;
+        }
+
+        #building-04 .cross {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+        }
+
+        #building-04 .cross::before,
+        #building-04 .cross::after {
+            content: '';
+            position: absolute;
+            background: #E53935;
+        }
+
+        #building-04 .cross::before {
+            top: 5px;
+            left: 0;
+            width: 16px;
+            height: 6px;
+        }
+
+        #building-04 .cross::after {
+            top: 0;
+            left: 5px;
+            width: 6px;
+            height: 16px;
+        }
+
+        #building-04 .hosp-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 18px;
+            background: #81D4FA;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #building-04:hover .cross {
+            animation: pulse 0.5s ease infinite;
+        }
+
+        /* building-05: Shop/Store */
+        #building-05 .shop {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 50px;
+            background: #FFCCBC;
+            border-radius: 3px;
+        }
+
+        #building-05 .awning {
+            position: absolute;
+            top: -10px;
+            left: -5px;
+            width: 70px;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                #E53935 0px,
+                #E53935 10px,
+                #fff 10px,
+                #fff 20px
+            );
+            border-radius: 3px 3px 0 0;
+        }
+
+        #building-05 .shop-window {
+            position: absolute;
+            top: 12px;
+            left: 8px;
+            width: 44px;
+            height: 20px;
+            background: #81D4FA;
+            border: 3px solid #fff;
+        }
+
+        #building-05 .shop-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 16px;
+            background: #795548;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #building-05:hover .awning {
+            animation: wave 0.4s ease;
+        }
+
+        /* building-06: Restaurant */
+        #building-06 .restaurant {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 45px;
+            background: #FFECB3;
+            border-radius: 3px;
+        }
+
+        #building-06 .rest-roof {
+            position: absolute;
+            bottom: 45px;
+            left: 5px;
+            width: 70px;
+            height: 10px;
+            background: #8D6E63;
+            border-radius: 3px 3px 0 0;
+        }
+
+        #building-06 .fork-knife {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+        }
+
+        #building-06 .rest-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 18px;
+            background: #5D4037;
+            border-radius: 8px 8px 0 0;
+        }
+
+        #building-06:hover {
+            animation: wobble 0.4s ease;
+        }
+
+        /* building-07: Bank */
+        #building-07 .bank {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 50px;
+            background: #E8E8E8;
+            border-radius: 3px;
+        }
+
+        #building-07 .bank-roof {
+            position: absolute;
+            bottom: 50px;
+            left: 5px;
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 15px solid #78909C;
+        }
+
+        #building-07 .pillar {
+            position: absolute;
+            bottom: 0;
+            width: 6px;
+            height: 35px;
+            background: #BDBDBD;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #building-07 .pillar:nth-child(2) { left: 10px; }
+        #building-07 .pillar:nth-child(3) { left: 27px; }
+        #building-07 .pillar:nth-child(4) { left: 44px; }
+
+        #building-07 .bank-sign {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #FFD700;
+            border-radius: 50%;
+            border: 3px solid #B8860B;
+        }
+
+        #building-07:hover .bank-sign {
+            animation: spin 0.6s ease;
+        }
+
+        /* building-08: Factory */
+        #building-08 .factory {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 50px;
+            height: 40px;
+            background: #90A4AE;
+            border-radius: 3px;
+        }
+
+        #building-08 .chimney {
+            position: absolute;
+            bottom: 40px;
+            width: 10px;
+            height: 25px;
+            background: #607D8B;
+        }
+
+        #building-08 .chimney:nth-child(1) { left: 10px; }
+        #building-08 .chimney:nth-child(2) { left: 30px; }
+
+        #building-08 .smoke {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #B0BEC5;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        #building-08 .smoke:nth-child(3) { bottom: 68px; left: 11px; }
+        #building-08 .smoke:nth-child(4) { bottom: 70px; left: 31px; }
+
+        #building-08 .factory-door {
+            position: absolute;
+            bottom: 0;
+            left: 18px;
+            width: 14px;
+            height: 16px;
+            background: #455A64;
+        }
+
+        #building-08:hover .smoke {
+            animation: float 0.8s ease infinite;
+        }
+
+        /* building-09: Church */
+        #building-09 .church {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 50px;
+            height: 40px;
+            background: #FFFDE7;
+            border-radius: 3px;
+        }
+
+        #building-09 .steeple {
+            position: absolute;
+            bottom: 40px;
+            left: 25px;
+            width: 30px;
+            height: 25px;
+            background: #FFFDE7;
+        }
+
+        #building-09 .steeple::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 5px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 22px solid #8D6E63;
+        }
+
+        #building-09 .church-cross {
+            position: absolute;
+            bottom: 85px;
+            left: 37px;
+            width: 6px;
+            height: 12px;
+            background: #FFD700;
+        }
+
+        #building-09 .church-cross::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: -4px;
+            width: 14px;
+            height: 4px;
+            background: #FFD700;
+        }
+
+        #building-09 .church-door {
+            position: absolute;
+            bottom: 0;
+            left: 17px;
+            width: 16px;
+            height: 22px;
+            background: #5D4037;
+            border-radius: 8px 8px 0 0;
+        }
+
+        #building-09:hover .church-cross {
+            animation: glow 0.5s ease infinite alternate;
+        }
+
+        /* building-10: Castle */
+        #building-10 .castle {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 45px;
+            background: #B0BEC5;
+            border-radius: 3px;
+        }
+
+        #building-10 .tower-left,
+        #building-10 .tower-right {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 60px;
+            background: #90A4AE;
+        }
+
+        #building-10 .tower-left { left: 0; }
+        #building-10 .tower-right { right: 0; }
+
+        #building-10 .battlement {
+            position: absolute;
+            top: -8px;
+            width: 100%;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #78909C 0px,
+                #78909C 4px,
+                transparent 4px,
+                transparent 8px
+            );
+        }
+
+        #building-10 .castle-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 20px;
+            background: #5D4037;
+            border-radius: 7px 7px 0 0;
+        }
+
+        #building-10 .flag {
+            position: absolute;
+            bottom: 65px;
+            left: 6px;
+            width: 12px;
+            height: 8px;
+            background: #E53935;
+        }
+
+        #building-10:hover .flag {
+            animation: wave 0.3s ease infinite;
+        }
+
+        /* building-11: Lighthouse */
+        #building-11 .lighthouse {
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+            width: 30px;
+            height: 55px;
+            background: linear-gradient(
+                180deg,
+                #fff 0%, #fff 20%,
+                #E53935 20%, #E53935 40%,
+                #fff 40%, #fff 60%,
+                #E53935 60%, #E53935 80%,
+                #fff 80%, #fff 100%
+            );
+            border-radius: 3px 3px 0 0;
+            clip-path: polygon(10% 100%, 90% 100%, 80% 0%, 20% 0%);
+        }
+
+        #building-11 .light-room {
+            position: absolute;
+            bottom: 55px;
+            left: 22px;
+            width: 36px;
+            height: 15px;
+            background: #FFD54F;
+            border: 3px solid #333;
+            border-radius: 3px;
+        }
+
+        #building-11 .light-roof {
+            position: absolute;
+            bottom: 70px;
+            left: 25px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 10px solid #333;
+        }
+
+        #building-11:hover .light-room {
+            animation: blink 0.3s ease infinite;
+        }
+
+        /* building-12: Windmill */
+        #building-12 .windmill {
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+            width: 30px;
+            height: 50px;
+            background: #FFCCBC;
+            clip-path: polygon(20% 100%, 80% 100%, 70% 0%, 30% 0%);
+        }
+
+        #building-12 .blades {
+            position: absolute;
+            bottom: 40px;
+            left: 26px;
+            width: 28px;
+            height: 28px;
+        }
+
+        #building-12 .blade {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 22px;
+            background: #8D6E63;
+            transform-origin: center top;
+        }
+
+        #building-12 .blade:nth-child(1) { transform: translate(-50%, 0) rotate(0deg); }
+        #building-12 .blade:nth-child(2) { transform: translate(-50%, 0) rotate(90deg); }
+        #building-12 .blade:nth-child(3) { transform: translate(-50%, 0) rotate(180deg); }
+        #building-12 .blade:nth-child(4) { transform: translate(-50%, 0) rotate(270deg); }
+
+        #building-12 .mill-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #5D4037;
+            border-radius: 50%;
+        }
+
+        #building-12:hover .blades {
+            animation: rotate 1s linear infinite;
+        }
+
+        /* building-13: Bridge */
+        #building-13 .bridge-deck {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 80px;
+            height: 10px;
+            background: #8D6E63;
+            border-radius: 3px;
+        }
+
+        #building-13 .arch {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            height: 25px;
+            border: 6px solid #78909C;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            background: transparent;
+        }
+
+        #building-13 .arch:nth-child(2) { left: 5px; }
+        #building-13 .arch:nth-child(3) { right: 5px; }
+
+        #building-13 .railing {
+            position: absolute;
+            bottom: 35px;
+            left: 5px;
+            width: 70px;
+            height: 3px;
+            background: #5D4037;
+        }
+
+        #building-13:hover {
+            animation: sway 0.4s ease;
+        }
+
+        /* building-14: Tower */
+        #building-14 .tower {
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+            width: 30px;
+            height: 60px;
+            background: #BCAAA4;
+            border-radius: 3px;
+        }
+
+        #building-14 .tower-top {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 18px solid #6D4C41;
+        }
+
+        #building-14 .tower-window {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: #4FC3F7;
+            border-radius: 4px 4px 0 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #building-14 .tower-window:nth-child(2) { top: 10px; }
+        #building-14 .tower-window:nth-child(3) { top: 28px; }
+        #building-14 .tower-window:nth-child(4) { top: 46px; }
+
+        #building-14:hover {
+            animation: stretch 0.4s ease;
+        }
+
+        /* building-15: Tent */
+        #building-15 .tent {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 50px solid #FF7043;
+        }
+
+        #building-15 .tent-door {
+            position: absolute;
+            bottom: 0;
+            left: 32px;
+            width: 16px;
+            height: 25px;
+            background: #BF360C;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        #building-15 .tent-pole {
+            position: absolute;
+            bottom: 50px;
+            left: 38px;
+            width: 4px;
+            height: 15px;
+            background: #5D4037;
+        }
+
+        #building-15 .tent-flag {
+            position: absolute;
+            bottom: 60px;
+            left: 42px;
+            width: 12px;
+            height: 8px;
+            background: #FFEB3B;
+        }
+
+        #building-15:hover .tent-flag {
+            animation: wave 0.3s ease infinite;
+        }
+
+        /* building-16: Igloo */
+        #building-16 .igloo {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: #E3F2FD;
+            border-radius: 30px 30px 0 0;
+            border: 3px solid #B3E5FC;
+        }
+
+        #building-16 .igloo-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 18px;
+            background: #64B5F6;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #building-16 .igloo-tunnel {
+            position: absolute;
+            bottom: 0;
+            left: 55px;
+            width: 20px;
+            height: 15px;
+            background: #E3F2FD;
+            border-radius: 10px 10px 0 0;
+            border: 3px solid #B3E5FC;
+            border-bottom: none;
+        }
+
+        #building-16:hover {
+            animation: wobble 0.4s ease;
+        }
+
+        /* building-17: Barn */
+        #building-17 .barn {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: #D32F2F;
+            border-radius: 3px;
+        }
+
+        #building-17 .barn-roof {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 80px;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #B71C1C;
+        }
+
+        #building-17 .barn-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 28px;
+            background: #fff;
+            border: 3px solid #5D4037;
+        }
+
+        #building-17 .barn-x {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 10px;
+            height: 18px;
+        }
+
+        #building-17 .barn-x::before,
+        #building-17 .barn-x::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #5D4037;
+        }
+
+        #building-17 .barn-x::before {
+            transform: rotate(30deg);
+            left: 2px;
+        }
+
+        #building-17 .barn-x::after {
+            transform: rotate(-30deg);
+            right: 2px;
+        }
+
+        #building-17:hover {
+            animation: bounce 0.4s ease;
+        }
+
+        /* building-18: Pagoda */
+        #building-18 .pagoda-base {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 40px;
+            height: 20px;
+            background: #FFCCBC;
+        }
+
+        #building-18 .pagoda-tier {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #D32F2F;
+        }
+
+        #building-18 .pagoda-tier:nth-child(1) {
+            bottom: 20px;
+            width: 50px;
+            height: 8px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        #building-18 .pagoda-tier:nth-child(2) {
+            bottom: 28px;
+            width: 36px;
+            height: 12px;
+        }
+
+        #building-18 .pagoda-tier:nth-child(3) {
+            bottom: 40px;
+            width: 40px;
+            height: 6px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        #building-18 .pagoda-tier:nth-child(4) {
+            bottom: 46px;
+            width: 26px;
+            height: 10px;
+        }
+
+        #building-18 .pagoda-tier:nth-child(5) {
+            bottom: 56px;
+            width: 30px;
+            height: 5px;
+            border-radius: 0 0 3px 3px;
+        }
+
+        #building-18 .pagoda-top {
+            position: absolute;
+            bottom: 61px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 12px;
+            background: #FFD700;
+        }
+
+        #building-18:hover {
+            animation: sway 0.5s ease;
+        }
+
+        /* building-19: Skyscraper */
+        #building-19 .skyscraper {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 40px;
+            height: 70px;
+            background: #455A64;
+            border-radius: 3px 3px 0 0;
+        }
+
+        #building-19 .sky-window {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #FFE082;
+        }
+
+        #building-19 .sky-window:nth-child(1) { top: 5px; left: 6px; }
+        #building-19 .sky-window:nth-child(2) { top: 5px; right: 6px; }
+        #building-19 .sky-window:nth-child(3) { top: 15px; left: 6px; }
+        #building-19 .sky-window:nth-child(4) { top: 15px; right: 6px; }
+        #building-19 .sky-window:nth-child(5) { top: 25px; left: 6px; }
+        #building-19 .sky-window:nth-child(6) { top: 25px; right: 6px; }
+        #building-19 .sky-window:nth-child(7) { top: 35px; left: 6px; }
+        #building-19 .sky-window:nth-child(8) { top: 35px; right: 6px; }
+        #building-19 .sky-window:nth-child(9) { top: 45px; left: 6px; }
+        #building-19 .sky-window:nth-child(10) { top: 45px; right: 6px; }
+        #building-19 .sky-window:nth-child(11) { top: 55px; left: 6px; }
+        #building-19 .sky-window:nth-child(12) { top: 55px; right: 6px; }
+
+        #building-19 .antenna {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 10px;
+            background: #78909C;
+        }
+
+        #building-19:hover {
+            animation: stretch 0.4s ease;
+        }
+
+        /* building-20: Hut */
+        #building-20 .hut {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 50px;
+            height: 30px;
+            background: #D7CCC8;
+            border-radius: 3px;
+        }
+
+        #building-20 .hut-roof {
+            position: absolute;
+            bottom: 30px;
+            left: 5px;
+            width: 70px;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 25px solid #8D6E63;
+        }
+
+        #building-20 .straw {
+            position: absolute;
+            bottom: 55px;
+            left: 30px;
+            width: 20px;
+            height: 10px;
+            background: #A1887F;
+            border-radius: 5px 5px 0 0;
+        }
+
+        #building-20 .hut-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 18px;
+            background: #5D4037;
+            border-radius: 7px 7px 0 0;
+        }
+
+        #building-20:hover {
+            animation: wobble 0.4s ease;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+
+        @keyframes ring {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: skewX(0deg); }
+            50% { transform: skewX(-5deg); }
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: scale(1.1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-3deg); }
+            75% { transform: scale(1.1) rotate(3deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-10px); opacity: 0.3; }
+        }
+
+        @keyframes glow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.5); }
+        }
+
+        @keyframes blink {
+            0%, 100% { background: #FFD54F; }
+            50% { background: #FFF9C4; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes stretch {
+            0%, 100% { transform: scale(1.1) scaleY(1); }
+            50% { transform: scale(1.1) scaleY(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Buildings & Places - CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- building-01: House -->
+        <div class="item">
+            <div class="building" id="building-01">
+                <div class="house">
+                    <div class="window left"></div>
+                    <div class="window right"></div>
+                    <div class="door"></div>
+                </div>
+            </div>
+            <span class="item-label">building-01</span>
+            <span class="item-name">House</span>
+        </div>
+
+        <!-- building-02: Apartment Building -->
+        <div class="item">
+            <div class="building" id="building-02">
+                <div class="apartment">
+                    <div class="apt-window"></div>
+                    <div class="apt-window"></div>
+                    <div class="apt-window"></div>
+                    <div class="apt-window"></div>
+                    <div class="apt-window"></div>
+                    <div class="apt-window"></div>
+                    <div class="apt-door"></div>
+                </div>
+            </div>
+            <span class="item-label">building-02</span>
+            <span class="item-name">Apartment</span>
+        </div>
+
+        <!-- building-03: School -->
+        <div class="item">
+            <div class="building" id="building-03">
+                <div class="school"></div>
+                <div class="school-roof"></div>
+                <div class="clock-tower">
+                    <div class="clock"></div>
+                </div>
+                <div class="school-door"></div>
+            </div>
+            <span class="item-label">building-03</span>
+            <span class="item-name">School</span>
+        </div>
+
+        <!-- building-04: Hospital -->
+        <div class="item">
+            <div class="building" id="building-04">
+                <div class="hospital">
+                    <div class="cross"></div>
+                    <div class="hosp-door"></div>
+                </div>
+            </div>
+            <span class="item-label">building-04</span>
+            <span class="item-name">Hospital</span>
+        </div>
+
+        <!-- building-05: Shop/Store -->
+        <div class="item">
+            <div class="building" id="building-05">
+                <div class="shop">
+                    <div class="awning"></div>
+                    <div class="shop-window"></div>
+                    <div class="shop-door"></div>
+                </div>
+            </div>
+            <span class="item-label">building-05</span>
+            <span class="item-name">Shop</span>
+        </div>
+
+        <!-- building-06: Restaurant -->
+        <div class="item">
+            <div class="building" id="building-06">
+                <div class="restaurant">
+                    <div class="rest-roof"></div>
+                    <div class="rest-door"></div>
+                </div>
+            </div>
+            <span class="item-label">building-06</span>
+            <span class="item-name">Restaurant</span>
+        </div>
+
+        <!-- building-07: Bank -->
+        <div class="item">
+            <div class="building" id="building-07">
+                <div class="bank">
+                    <div class="bank-roof"></div>
+                    <div class="pillar"></div>
+                    <div class="pillar"></div>
+                    <div class="pillar"></div>
+                    <div class="bank-sign"></div>
+                </div>
+            </div>
+            <span class="item-label">building-07</span>
+            <span class="item-name">Bank</span>
+        </div>
+
+        <!-- building-08: Factory -->
+        <div class="item">
+            <div class="building" id="building-08">
+                <div class="chimney"></div>
+                <div class="chimney"></div>
+                <div class="smoke"></div>
+                <div class="smoke"></div>
+                <div class="factory">
+                    <div class="factory-door"></div>
+                </div>
+            </div>
+            <span class="item-label">building-08</span>
+            <span class="item-name">Factory</span>
+        </div>
+
+        <!-- building-09: Church -->
+        <div class="item">
+            <div class="building" id="building-09">
+                <div class="church"></div>
+                <div class="steeple"></div>
+                <div class="church-cross"></div>
+                <div class="church-door"></div>
+            </div>
+            <span class="item-label">building-09</span>
+            <span class="item-name">Church</span>
+        </div>
+
+        <!-- building-10: Castle -->
+        <div class="item">
+            <div class="building" id="building-10">
+                <div class="tower-left">
+                    <div class="battlement"></div>
+                </div>
+                <div class="tower-right">
+                    <div class="battlement"></div>
+                </div>
+                <div class="castle">
+                    <div class="battlement"></div>
+                    <div class="castle-door"></div>
+                </div>
+                <div class="flag"></div>
+            </div>
+            <span class="item-label">building-10</span>
+            <span class="item-name">Castle</span>
+        </div>
+
+        <!-- building-11: Lighthouse -->
+        <div class="item">
+            <div class="building" id="building-11">
+                <div class="lighthouse"></div>
+                <div class="light-room"></div>
+                <div class="light-roof"></div>
+            </div>
+            <span class="item-label">building-11</span>
+            <span class="item-name">Lighthouse</span>
+        </div>
+
+        <!-- building-12: Windmill -->
+        <div class="item">
+            <div class="building" id="building-12">
+                <div class="windmill"></div>
+                <div class="blades">
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="mill-hub"></div>
+                </div>
+            </div>
+            <span class="item-label">building-12</span>
+            <span class="item-name">Windmill</span>
+        </div>
+
+        <!-- building-13: Bridge -->
+        <div class="item">
+            <div class="building" id="building-13">
+                <div class="bridge-deck"></div>
+                <div class="arch"></div>
+                <div class="arch"></div>
+                <div class="railing"></div>
+            </div>
+            <span class="item-label">building-13</span>
+            <span class="item-name">Bridge</span>
+        </div>
+
+        <!-- building-14: Tower -->
+        <div class="item">
+            <div class="building" id="building-14">
+                <div class="tower">
+                    <div class="tower-window"></div>
+                    <div class="tower-window"></div>
+                    <div class="tower-window"></div>
+                </div>
+                <div class="tower-top"></div>
+            </div>
+            <span class="item-label">building-14</span>
+            <span class="item-name">Tower</span>
+        </div>
+
+        <!-- building-15: Tent -->
+        <div class="item">
+            <div class="building" id="building-15">
+                <div class="tent"></div>
+                <div class="tent-door"></div>
+                <div class="tent-pole"></div>
+                <div class="tent-flag"></div>
+            </div>
+            <span class="item-label">building-15</span>
+            <span class="item-name">Tent</span>
+        </div>
+
+        <!-- building-16: Igloo -->
+        <div class="item">
+            <div class="building" id="building-16">
+                <div class="igloo">
+                    <div class="igloo-door"></div>
+                </div>
+                <div class="igloo-tunnel"></div>
+            </div>
+            <span class="item-label">building-16</span>
+            <span class="item-name">Igloo</span>
+        </div>
+
+        <!-- building-17: Barn -->
+        <div class="item">
+            <div class="building" id="building-17">
+                <div class="barn">
+                    <div class="barn-door">
+                        <div class="barn-x"></div>
+                    </div>
+                </div>
+                <div class="barn-roof"></div>
+            </div>
+            <span class="item-label">building-17</span>
+            <span class="item-name">Barn</span>
+        </div>
+
+        <!-- building-18: Pagoda -->
+        <div class="item">
+            <div class="building" id="building-18">
+                <div class="pagoda-base"></div>
+                <div class="pagoda-tier"></div>
+                <div class="pagoda-tier"></div>
+                <div class="pagoda-tier"></div>
+                <div class="pagoda-tier"></div>
+                <div class="pagoda-tier"></div>
+                <div class="pagoda-top"></div>
+            </div>
+            <span class="item-label">building-18</span>
+            <span class="item-name">Pagoda</span>
+        </div>
+
+        <!-- building-19: Skyscraper -->
+        <div class="item">
+            <div class="building" id="building-19">
+                <div class="skyscraper">
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                    <div class="sky-window"></div>
+                </div>
+                <div class="antenna"></div>
+            </div>
+            <span class="item-label">building-19</span>
+            <span class="item-name">Skyscraper</span>
+        </div>
+
+        <!-- building-20: Hut -->
+        <div class="item">
+            <div class="building" id="building-20">
+                <div class="hut">
+                    <div class="hut-door"></div>
+                </div>
+                <div class="hut-roof"></div>
+                <div class="straw"></div>
+            </div>
+            <span class="item-label">building-20</span>
+            <span class="item-name">Hut</span>
+        </div>
+    </div>
+</body>
+</html>

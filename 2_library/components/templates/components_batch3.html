@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon 80s Components - LP Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        /* ===== GLOBAL THEME ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Audiowide', sans-serif;
+            background: #0a0e27;
+            color: #00ff9f;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(0deg, transparent 24%, rgba(0, 255, 159, .05) 25%, rgba(0, 255, 159, .05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 159, .05) 75%, rgba(0, 255, 159, .05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(0, 255, 159, .05) 25%, rgba(0, 255, 159, .05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 159, .05) 75%, rgba(0, 255, 159, .05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Glow utilities */
+        .glow-cyan {
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #0099ff;
+        }
+
+        .glow-pink {
+            text-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e, 0 0 30px #ff006e, 0 0 40px #ff3366;
+        }
+
+        .glow-lime {
+            text-shadow: 0 0 10px #00ff9f, 0 0 20px #00ff9f, 0 0 30px #00ff9f, 0 0 40px #00ff66;
+        }
+
+        /* ===== [N01] HERO SECTION ===== */
+        .neon-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0033 50%, #0a0e27 100%);
+            border-bottom: 3px solid #00ffff;
+            box-shadow: inset 0 0 40px rgba(0, 255, 159, 0.3);
+        }
+
+        .neon-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 0, 110, 0.3) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .neon-hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 255, 159, 0.2) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #00ffff, #ff006e, #00ff9f, #ffff00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 159, 0.5));
+        }
+
+        .hero-subtitle {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ff006e;
+            text-shadow: 0 0 20px #ff006e;
+            letter-spacing: 2px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== [N02] FEATURE CARDS ===== */
+        .neon-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            position: relative;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.05) 0%, rgba(255, 0, 110, 0.05) 100%);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #00ffff, #ff006e) 1;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.2), inset 0 0 20px rgba(0, 255, 159, 0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 0, 110, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+
+        .feature-card:hover {
+            border-image: linear-gradient(135deg, #ffff00, #00ffff) 1;
+            box-shadow: 0 0 40px rgba(255, 255, 0, 0.4), 0 0 80px rgba(0, 255, 255, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .feature-card:hover::before {
+            animation: shimmer 0.6s ease;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ffff, #ff006e);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.5);
+        }
+
+        .feature-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            text-transform: uppercase;
+        }
+
+        .feature-description {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ===== [N03] PRICING TABLE ===== */
+        .neon-pricing {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .pricing-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ff006e;
+            text-shadow: 0 0 20px #ff006e;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .price-card {
+            position: relative;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 100%);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(0, 255, 159, 0.3), inset 0 0 30px rgba(0, 255, 159, 0.1);
+            overflow: hidden;
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #00ffff, #ff006e, #ffff00);
+            animation: slideBg 3s linear infinite;
+        }
+
+        .price-card.featured {
+            border-color: #ff006e;
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 0, 110, 0.4), inset 0 0 30px rgba(255, 0, 110, 0.1);
+        }
+
+        .price-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 50px rgba(0, 255, 159, 0.5);
+        }
+
+        .price-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .price-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff9f;
+            text-shadow: 0 0 15px #00ff9f;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #ffff00;
+            text-shadow: 0 0 20px #ffff00;
+            margin-bottom: 10px;
+        }
+
+        .price-value span {
+            font-size: 1.2rem;
+            color: #00ffff;
+        }
+
+        .price-features {
+            list-style: none;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .price-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 255, 159, 0.2);
+            color: #cccccc;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .price-features li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #ff006e;
+            text-shadow: 0 0 10px #ff006e;
+        }
+
+        @keyframes slideBg {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* ===== [N04] CTA BUTTON ===== */
+        .neon-button {
+            position: relative;
+            padding: 16px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #00ffff, #00ff9f);
+            color: #0a0e27;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.5), 0 0 40px rgba(0, 255, 159, 0.3);
+            overflow: hidden;
+        }
+
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .neon-button:hover::before {
+            left: 100%;
+        }
+
+        .neon-button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 159, 0.8), 0 0 60px rgba(0, 255, 159, 0.5);
+            transform: scale(1.05);
+        }
+
+        .neon-button:active {
+            transform: scale(0.98);
+        }
+
+        .neon-button.pink {
+            background: linear-gradient(135deg, #ff006e, #ff3366);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 0 40px rgba(255, 0, 110, 0.3);
+            color: #ffffff;
+        }
+
+        .neon-button.pink:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8), 0 0 60px rgba(255, 0, 110, 0.5);
+        }
+
+        /* ===== [N05] TESTIMONIAL CARDS ===== */
+        .neon-testimonials {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonials-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            position: relative;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.05) 0%, rgba(0, 255, 159, 0.05) 100%);
+            border-left: 4px solid #ff006e;
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-left-color: #00ffff;
+            box-shadow: 0 0 40px rgba(0, 255, 159, 0.3);
+            transform: translateX(10px);
+        }
+
+        .quote-mark {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #ffff00;
+            opacity: 0.3;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ffff, #ff006e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0a0e27;
+            box-shadow: 0 0 15px rgba(0, 255, 159, 0.5);
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .author-role {
+            color: #ff006e;
+            font-size: 0.85rem;
+            text-shadow: 0 0 5px #ff006e;
+        }
+
+        .star-rating {
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
+            margin-bottom: 10px;
+        }
+
+        /* ===== [N06] FAQ ACCORDION ===== */
+        .neon-faq {
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #ff006e;
+            text-shadow: 0 0 20px #ff006e;
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            border-color: #ff006e;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+        }
+
+        .faq-question {
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.1) 0%, rgba(255, 0, 110, 0.05) 100%);
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.15) 0%, rgba(255, 0, 110, 0.1) 100%);
+        }
+
+        .faq-question-text {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #ff006e;
+            text-shadow: 0 0 10px #ff006e;
+            transition: transform 0.3s ease;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.02) 0%, rgba(255, 0, 110, 0.02) 100%);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-text {
+            padding: 25px;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* ===== [N07] FOOTER ===== */
+        .neon-footer {
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            border-top: 3px solid #ff006e;
+            padding: 60px 40px 30px;
+            margin-top: 100px;
+            box-shadow: inset 0 20px 40px rgba(255, 0, 110, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-section ul li a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            transform: translateX(5px);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #00ffff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 159, 0.3);
+        }
+
+        .social-icon:hover {
+            background: #00ffff;
+            color: #0a0e27;
+            box-shadow: 0 0 25px rgba(0, 255, 159, 0.6);
+        }
+
+        .footer-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffff, #ff006e, transparent);
+            margin: 30px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            color: #888888;
+            font-size: 0.9rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-legal a {
+            color: #888888;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        /* ===== [N08] NAVIGATION BAR ===== */
+        .neon-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.95);
+            border-bottom: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 0 40px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #00ffff, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: #00ffff;
+            text-decoration: none;
+            font-family: 'Audiowide', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff006e);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border: 2px solid #00ffff;
+            background: transparent;
+            color: #00ffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 159, 0.3);
+        }
+
+        .nav-button:hover {
+            background: #00ffff;
+            color: #0a0e27;
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.6);
+        }
+
+        /* ===== [N09] STEP GUIDE ===== */
+        .neon-steps {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .steps-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00ff9f;
+            text-shadow: 0 0 20px #00ff9f;
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .steps-container {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .step-item {
+            position: relative;
+            text-align: center;
+            animation: slideUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .step-item:nth-child(1) { animation-delay: 0.1s; }
+        .step-item:nth-child(2) { animation-delay: 0.2s; }
+        .step-item:nth-child(3) { animation-delay: 0.3s; }
+        .step-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff006e, #ffff00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #0a0e27;
+            font-weight: 900;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover .step-number {
+            transform: scale(1.15);
+            box-shadow: 0 0 50px rgba(255, 0, 110, 0.8);
+        }
+
+        .step-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .step-description {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Connecting line */
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff006e, transparent, #00ffff);
+            z-index: -1;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .steps-container::before {
+                display: block;
+            }
+        }
+
+        /* ===== [N10] NEWSLETTER FORM ===== */
+        .neon-newsletter {
+            position: relative;
+            padding: 80px 40px;
+            max-width: 800px;
+            margin: 60px auto;
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.1) 0%, rgba(255, 0, 110, 0.1) 100%);
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #00ffff, #ff006e, #ffff00) 1;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0, 255, 159, 0.3), inset 0 0 40px rgba(0, 255, 159, 0.1);
+            overflow: hidden;
+        }
+
+        .neon-newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            animation: topGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes topGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #ffff00;
+            text-shadow: 0 0 20px #ffff00;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .newsletter-subtitle {
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .newsletter-input {
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 5px;
+            color: #ffffff;
+            font-family: 'Audiowide', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(0, 255, 159, 0.2);
+        }
+
+        .newsletter-input::placeholder {
+            color: #888888;
+        }
+
+        .newsletter-input:focus {
+            background: rgba(0, 255, 159, 0.05);
+            border-color: #ff006e;
+            box-shadow: inset 0 0 10px rgba(255, 0, 110, 0.2), 0 0 20px rgba(0, 255, 159, 0.3);
+        }
+
+        .newsletter-submit {
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #ff006e, #ffff00);
+            color: #0a0e27;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .newsletter-submit:hover {
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.8), 0 0 60px rgba(255, 255, 0, 0.4);
+            transform: scale(1.05);
+        }
+
+        .newsletter-submit:active {
+            transform: scale(0.98);
+        }
+
+        .newsletter-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 159, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            font-size: 0.9rem;
+        }
+
+        .feature-badge-icon {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .neon-button {
+                width: 100%;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .newsletter-form {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-submit {
+                width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .steps-container::before {
+                display: none;
+            }
+
+            .pricing-title {
+                font-size: 2rem;
+            }
+
+            .price-card.featured {
+                transform: scale(1.02);
+            }
+        }
+
+        /* ===== UTILITY ANIMATIONS ===== */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- [N08] NAVIGATION BAR -->
+    <nav class="neon-navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Neon 80s</a>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="nav-button">Log In</button>
+                <button class="nav-button">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [N01] HERO SECTION -->
+    <section id="hero" class="neon-hero">
+        <div class="hero-content">
+            <div class="hero-title glow-cyan">RETRO FUTURE</div>
+            <div class="hero-subtitle">Welcome to the Neon Age</div>
+            <p class="hero-description">
+                Experience the electrifying power of 80s aesthetics combined with modern technology. 
+                Let your brand shine with unlimited possibilities.
+            </p>
+            <div class="hero-buttons">
+                <button class="neon-button">Get Started Now</button>
+                <button class="neon-button pink">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [N02] FEATURE CARDS -->
+    <section id="features" class="neon-features">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">Lightning Fast</div>
+            <div class="feature-description">
+                Blazing speed optimized for performance. Your users will feel the difference instantly.
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <div class="feature-title">Design Freedom</div>
+            <div class="feature-description">
+                Customize every pixel. Express your brand's unique identity with total control.
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">Secure & Safe</div>
+            <div class="feature-description">
+                Enterprise-grade security. Your data is protected with military-level encryption.
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌐</div>
+            <div class="feature-title">Global Scale</div>
+            <div class="feature-description">
+                Reach users worldwide. Built to scale from startup to enterprise effortlessly.
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Analytics Pro</div>
+            <div class="feature-description">
+                Real-time insights. Understand your users deeply with advanced metrics.
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-title">Launch Ready</div>
+            <div class="feature-description">
+                Go live in minutes. Pre-built systems to accelerate your time to market.
+            </div>
+        </div>
+    </section>
+
+    <!-- [N03] PRICING TABLE -->
+    <section id="pricing" class="neon-pricing">
+        <div class="pricing-header">
+            <div class="pricing-title">Pricing Plans</div>
+        </div>
+        <div class="pricing-cards">
+            <div class="price-card">
+                <div class="price-label">Starter</div>
+                <div class="price-name">Neon Spark</div>
+                <div class="price-value">$29<span>/month</span></div>
+                <ul class="price-features">
+                    <li>Up to 10 projects</li>
+                    <li>Basic analytics</li>
+                    <li>Community support</li>
+                    <li>1 GB storage</li>
+                    <li>Standard templates</li>
+                </ul>
+                <button class="neon-button">Choose Plan</button>
+            </div>
+            <div class="price-card featured">
+                <div class="price-label">Popular</div>
+                <div class="price-name">Neon Blaze</div>
+                <div class="price-value">$79<span>/month</span></div>
+                <ul class="price-features">
+                    <li>Unlimited projects</li>
+                    <li>Advanced analytics</li>
+                    <li>Priority support</li>
+                    <li>100 GB storage</li>
+                    <li>Premium templates</li>
+                    <li>API access</li>
+                </ul>
+                <button class="neon-button">Choose Plan</button>
+            </div>
+            <div class="price-card">
+                <div class="price-label">Enterprise</div>
+                <div class="price-name">Neon Inferno</div>
+                <div class="price-value">$199<span>/month</span></div>
+                <ul class="price-features">
+                    <li>Unlimited everything</li>
+                    <li>Custom analytics</li>
+                    <li>24/7 dedicated support</li>
+                    <li>Unlimited storage</li>
+                    <li>Custom templates</li>
+                    <li>White-label solution</li>
+                </ul>
+                <button class="neon-button">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [N09] STEP GUIDE -->
+    <section id="steps" class="neon-steps">
+        <div class="steps-title">How It Works</div>
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-title">Sign Up</div>
+                <div class="step-description">Create your account in seconds. No credit card required to get started.</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-title">Customize</div>
+                <div class="step-description">Choose from premium templates or build from scratch with our visual editor.</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-title">Publish</div>
+                <div class="step-description">Deploy instantly with one click. No coding knowledge required.</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-title">Analyze</div>
+                <div class="step-description">Monitor performance with real-time analytics and optimize continuously.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [N05] TESTIMONIAL CARDS -->
+    <section id="testimonials" class="neon-testimonials">
+        <div class="testimonials-title">What Users Say</div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="star-rating">★★★★★</div>
+                <div class="quote-mark">"</div>
+                <div class="testimonial-text">
+                    This platform completely transformed how we present our brand online. The neon aesthetic is absolutely stunning!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AK</div>
+                    <div class="author-info">
+                        <div class="author-name">Alex Kim</div>
+                        <div class="author-role">Creative Director</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="star-rating">★★★★★</div>
+                <div class="quote-mark">"</div>
+                <div class="testimonial-text">
+                    Best investment we made for our startup. The tools are intuitive and the results speak for themselves.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JM</div>
+                    <div class="author-info">
+                        <div class="author-name">Jordan Martinez</div>
+                        <div class="author-role">Startup Founder</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="star-rating">★★★★★</div>
+                <div class="quote-mark">"</div>
+                <div class="testimonial-text">
+                    The customer support team is fantastic. They helped us every step of the way. Highly recommended!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SL</div>
+                    <div class="author-info">
+                        <div class="author-name">Sarah Lee</div>
+                        <div class="author-role">Marketing Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [N06] FAQ ACCORDION -->
+    <section id="faq" class="neon-faq">
+        <div class="faq-title">Frequently Asked Questions</div>
+        <div class="faq-item active">
+            <div class="faq-question">
+                <div class="faq-question-text">What payment methods do you accept?</div>
+                <div class="faq-toggle">▼</div>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-text">
+                    We accept all major credit cards, PayPal, and cryptocurrency. Invoicing is available for enterprise customers.
+                </div>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <div class="faq-question-text">Can I cancel anytime?</div>
+                <div class="faq-toggle">▼</div>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-text">
+                    Yes, you can cancel your subscription at any time without penalty. No long-term contracts required.
+                </div>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <div class="faq-question-text">Is there a free trial?</div>
+                <div class="faq-toggle">▼</div>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-text">
+                    Absolutely! Get 14 days free access to all features. No credit card required to start.
+                </div>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <div class="faq-question-text">Do you offer API access?</div>
+                <div class="faq-toggle">▼</div>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-text">
+                    API access is available on the Neon Blaze plan and above. Full documentation and SDKs are provided.
+                </div>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <div class="faq-question-text">What about data security?</div>
+                <div class="faq-toggle">▼</div>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-text">
+                    Your data is encrypted end-to-end and stored in secure data centers. We comply with GDPR and SOC 2 standards.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [N10] NEWSLETTER FORM -->
+    <section id="newsletter" class="neon-newsletter">
+        <div class="newsletter-content">
+            <div class="newsletter-title">Join the Revolution</div>
+            <div class="newsletter-subtitle">Get exclusive updates, tips, and early access to new features</div>
+            <form class="newsletter-form">
+                <input 
+                    type="email" 
+                    class="newsletter-input" 
+                    placeholder="your@email.com" 
+                    required
+                >
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+            <div class="newsletter-features">
+                <div class="feature-badge">
+                    <div class="feature-badge-icon">✓</div>
+                    No spam
+                </div>
+                <div class="feature-badge">
+                    <div class="feature-badge-icon">✓</div>
+                    Unsubscribe anytime
+                </div>
+                <div class="feature-badge">
+                    <div class="feature-badge-icon">✓</div>
+                    Weekly insights
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [N07] FOOTER -->
+    <footer class="neon-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Roadmap</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                    <li><a href="#">Templates</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p style="color: #888888; margin-bottom: 20px;">Follow us on social media</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">𝕏</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">▶</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <div class="footer-copyright">© 2024 Neon 80s. All rights reserved.</div>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Settings</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Newsletter Form Submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = this.querySelector('.newsletter-input');
+            const button = this.querySelector('.newsletter-submit');
+            const originalText = button.textContent;
+            
+            // Simulate submission
+            button.textContent = 'Subscribed! ✓';
+            button.style.background = 'linear-gradient(135deg, #00ff9f, #00ffff)';
+            input.value = '';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #ff006e, #ffff00)';
+            }, 3000);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.neon-hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+{#
+    いしかわかずやのHP - コンポーネント化バージョン
+
+    This page demonstrates how to use the reusable Ishikawa Design System components.
+    Each section can be customized by setting variables before including the component.
+
+    Components available:
+    - components/ishikawa/header.html
+    - components/ishikawa/hero.html
+    - components/ishikawa/about.html (Products & Collaborations)
+    - components/ishikawa/skills.html (Awards)
+    - components/ishikawa/books.html
+    - components/ishikawa/community.html
+    - components/ishikawa/media.html
+    - components/ishikawa/works.html (SNS)
+    - components/ishikawa/contact.html (Services)
+    - components/ishikawa/footer.html
+
+    Base files (for custom pages):
+    - components/ishikawa/_base.html (extend this for custom layouts)
+    - components/ishikawa/_variables.css (CSS custom properties)
+    - components/ishikawa/_base.css (base styles and utilities)
+    - components/ishikawa/_scripts.js (core JavaScript)
+#}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>いしかわかずやのHP</title>
+    <meta name="description" content="日常の「課題」を「そんな手があったのか!?」という方法で解決するアイデアクリエイター。SNSフォロワー55万人以上。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Mochiy+Pop+One&family=Poppins:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        {# Include CSS Variables #}
+        {% include "components/ishikawa/_variables.css" %}
+        {# Include Base Styles #}
+        {% include "components/ishikawa/_base.css" %}
+    </style>
+</head>
+<body>
+    {# ========================================
+       Header Component
+       ======================================== #}
+    {% set logo_icon = "💡" %}
+    {% set logo_text = "いしかわかずやのHP" %}
+    {% set nav_links = [
+        {"href": "#idea", "text": "IDEA"},
+        {"href": "#content", "text": "CONTENT"},
+        {"href": "#about", "text": "ABOUT"},
+        {"href": "#contact", "text": "CONTACT"}
+    ] %}
+    {% set cta_text = "お問い合わせ" %}
+    {% set cta_href = "#contact" %}
+    {% include "components/ishikawa/header.html" %}
+
+    {# ========================================
+       Hero Component - アイデアクリエイター
+       ======================================== #}
+    {% set hero_label = "Idea Creator" %}
+    {% set hero_label_emoji = "💡" %}
+    {% set hero_title = "<span class='ik-hero__title-accent'>アイデア</span><br>クリエイター" %}
+    {% set hero_subtitle = "日常の「課題」を「そんな手があったのか!?」という方法で解決するアイデアクリエイター。思いついた雑貨アイデアを日々SNSで発信し、フォロワーは50万人以上。発想本2冊出版、商品化実績多数、デザインコンペの受賞率は9割を超える。" %}
+    {% set hero_cta_primary_text = "詳細を見る" %}
+    {% set hero_cta_primary_href = "#content" %}
+    {% set hero_cta_secondary_text = "お仕事のご依頼" %}
+    {% set hero_cta_secondary_href = "#contact" %}
+    {% set hero_image_placeholder = "💡" %}
+    {% set float_cards = [
+        {"icon": "👑", "title": "コンペ受賞率", "subtitle": "90%+"},
+        {"icon": "📚", "title": "著書", "subtitle": "2冊出版"}
+    ] %}
+    {% include "components/ishikawa/hero.html" %}
+
+    {# ========================================
+       About Component - Products
+       ======================================== #}
+    {% set about_label = "PRODUCTS" %}
+    {% set about_title = "いしかわかずや商品" %}
+    {% set about_desc = "企業とのコラボレーションで生まれた商品たち" %}
+    {% set about_heading = "アイデアを形に" %}
+    {% set about_text = "日々SNSで発信しているアイデアの中から、実際に商品化されたものをご紹介します。<br><br>カステラスポンジ、アニマルマグボトル、プチネーム「Animalegg」、優先順位がわかる付箋など、様々な商品が生まれています。" %}
+    {% set about_image_placeholder = "🍰" %}
+    {% set about_stats = [
+        {"number": "55万+", "label": "SNSフォロワー"},
+        {"number": "90%+", "label": "受賞率"},
+        {"number": "2冊", "label": "著書"}
+    ] %}
+    {% include "components/ishikawa/about.html" %}
+
+    {# ========================================
+       Skills Component - Awards
+       ======================================== #}
+    {% set skills_label = "AWARDS" %}
+    {% set skills_title = "デザインコンペ受賞実績" %}
+    {% set skills_desc = "数々のデザインコンペで受賞を重ねてきました。" %}
+    {% set skills = [
+        {"icon": "👑", "title": "サンスター文具 第24回", "desc": "審査員特別賞 - 指に貼り付けるお米の両面テープ"},
+        {"icon": "👑", "title": "サンスター文具 第25回", "desc": "グランプリ受賞 - 梱包テープに挟むしおり紐"},
+        {"icon": "👑", "title": "KOKUYO DESIGN AWARD 2020", "desc": "ファイナリスト - 貼るほど炎上する付箋"},
+        {"icon": "👑", "title": "SHACHIHATA 12th", "desc": "準グランプリ - 手書きサインの印鑑が作れるアイデア"}
+    ] %}
+    {% include "components/ishikawa/skills.html" %}
+
+    {# ========================================
+       Books Component - 著書
+       ======================================== #}
+    {% from "components/ishikawa/books.html" import books_section %}
+    {{ books_section() }}
+
+    {# ========================================
+       Community Component - IDEA CREATORS CLUB
+       ======================================== #}
+    {% from "components/ishikawa/community.html" import community_section %}
+    {{ community_section() }}
+
+    {# ========================================
+       Media Component - メディア出演
+       ======================================== #}
+    {% from "components/ishikawa/media.html" import media_section %}
+    {{ media_section() }}
+
+    {# ========================================
+       Works Component - SNS
+       ======================================== #}
+    {% set works_label = "SNS" %}
+    {% set works_title = "SNSフォロワー55万人" %}
+    {% set works_desc = "日々思いついたアイデアをSNSに投稿していますのでぜひチェックしてみてください！" %}
+    {% set works = [
+        {
+            "image_placeholder": "𝕏",
+            "tags": ["X", "旧Twitter"],
+            "title": "Xフォロワー15万人",
+            "desc": "日々のアイデアを発信中！最新の商品化情報やコラボ情報もこちらから。",
+            "link_text": "フォローする",
+            "link_href": "https://twitter.com/issikazu20"
+        },
+        {
+            "image_placeholder": "📸",
+            "tags": ["Instagram"],
+            "title": "インスタフォロワー3万人",
+            "desc": "ビジュアル重視のアイデア投稿をお楽しみください。",
+            "link_text": "フォローする",
+            "link_href": "#"
+        },
+        {
+            "image_placeholder": "▶️",
+            "tags": ["YouTube"],
+            "title": "YouTube登録者25万人",
+            "desc": "アイデアの作り方や商品化の裏側を動画で公開中。",
+            "link_text": "チャンネル登録",
+            "link_href": "#"
+        }
+    ] %}
+    {% include "components/ishikawa/works.html" %}
+
+    {# ========================================
+       Contact Component - Services
+       ======================================== #}
+    {% set contact_icon = "💼" %}
+    {% set contact_title = "仕事のご依頼" %}
+    {% set contact_text = "商品企画、コラボレーション、SNSでの話題作り、講演/ワークショップなど<br>幅広く対応いたします。お気軽にお問い合わせください。" %}
+    {% set contact_buttons = [
+        {"text": "メールを送る", "href": "mailto:issikazu20design@gmail.com", "icon": "📧", "style": "primary"},
+        {"text": "Xでメッセージ", "href": "https://twitter.com/issikazu20", "icon": "𝕏", "style": "secondary"}
+    ] %}
+    {% include "components/ishikawa/contact.html" %}
+
+    {# ========================================
+       Footer Component
+       ======================================== #}
+    {% set footer_logo_icon = "💡" %}
+    {% set footer_logo_text = "いしかわかずや" %}
+    {% set footer_desc = "アイデアクリエイター。日常の課題を「そんな手があったのか!?」という方法で解決します。" %}
+    {% set footer_columns = [
+        {
+            "title": "Navigation",
+            "links": [
+                {"text": "IDEA", "href": "#idea"},
+                {"text": "CONTENT", "href": "#content"},
+                {"text": "ABOUT", "href": "#about"},
+                {"text": "CONTACT", "href": "#contact"}
+            ]
+        },
+        {
+            "title": "Services",
+            "links": [
+                {"text": "商品企画", "href": "#"},
+                {"text": "コラボレーション", "href": "#"},
+                {"text": "SNS話題作り", "href": "#"},
+                {"text": "講演/WS", "href": "#"}
+            ]
+        },
+        {
+            "title": "SNS",
+            "links": [
+                {"text": "X (Twitter)", "href": "https://twitter.com/issikazu20"},
+                {"text": "Instagram", "href": "#"},
+                {"text": "YouTube", "href": "#"},
+                {"text": "TikTok", "href": "#"}
+            ]
+        }
+    ] %}
+    {% set footer_copyright = "© 2024 いしかわかずや. All rights reserved." %}
+    {% set footer_social = [
+        {"icon": "𝕏", "href": "https://twitter.com/issikazu20", "label": "X"},
+        {"icon": "📸", "href": "#", "label": "Instagram"},
+        {"icon": "▶️", "href": "#", "label": "YouTube"}
+    ] %}
+    {% include "components/ishikawa/footer.html" %}
+
+    <script>
+        {% include "components/ishikawa/_scripts.js" %}
+    </script>
+</body>
+</html>

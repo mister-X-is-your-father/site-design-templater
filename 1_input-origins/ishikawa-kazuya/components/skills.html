@@ -1,0 +1,111 @@
+{#
+    Ishikawa Skills Section Component
+
+    Parameters:
+    - skills_label: str (default: "Skills")
+    - skills_title: str (default: "スキル")
+    - skills_desc: str - Section description
+    - skills: list of dicts with 'icon', 'title', 'desc' keys
+
+    Usage:
+    {% set skills = [
+        {"icon": "🎨", "title": "UI/UX Design", "desc": "Description here"},
+        {"icon": "💻", "title": "Frontend Dev", "desc": "Description here"}
+    ] %}
+    {% include "components/ishikawa/skills.html" %}
+#}
+{% set skills_label = skills_label|default("Skills") %}
+{% set skills_title = skills_title|default("スキル") %}
+{% set skills_desc = skills_desc|default("デザインから開発まで、幅広いスキルセットでプロジェクトをサポートします。") %}
+{% set skills = skills|default([
+    {"icon": "🎨", "title": "UI/UX Design", "desc": "ユーザー中心のデザインで、使いやすいインターフェースを設計します。"},
+    {"icon": "💻", "title": "Frontend Dev", "desc": "React, Vue, TypeScriptなど最新技術でWeb開発を行います。"},
+    {"icon": "📱", "title": "Mobile App", "desc": "React Native, Flutterでクロスプラットフォームアプリを開発します。"},
+    {"icon": "⚡", "title": "Performance", "desc": "高速で最適化されたWebサイト・アプリケーションを構築します。"}
+]) %}
+
+<style>
+.ik-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.ik-skill-card {
+    background: var(--ik-white);
+    padding: 32px;
+    border-radius: var(--ik-radius-lg);
+    box-shadow: var(--ik-shadow-sm);
+    text-align: center;
+    transition: all 0.3s var(--ik-ease);
+    border: 1px solid var(--ik-border-light);
+}
+
+.ik-skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ik-shadow-lg);
+    border-color: var(--ik-primary-light);
+}
+
+.ik-skill-card__icon {
+    width: 64px;
+    height: 64px;
+    background: var(--ik-primary-light);
+    border-radius: var(--ik-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+    transition: all 0.3s var(--ik-ease);
+}
+
+.ik-skill-card:hover .ik-skill-card__icon {
+    background: var(--ik-primary);
+    transform: scale(1.1);
+}
+
+.ik-skill-card__title {
+    font-family: var(--ik-font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.ik-skill-card__desc {
+    font-size: 14px;
+    color: var(--ik-text-muted);
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .ik-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .ik-skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<section class="ik-section" id="skills">
+    <div class="ik-container">
+        <div class="ik-section__header">
+            <span class="ik-section__label">{{ skills_label }}</span>
+            <h2 class="ik-section__title">{{ skills_title }}</h2>
+            <p class="ik-section__desc">{{ skills_desc }}</p>
+        </div>
+        <div class="ik-skills-grid">
+            {% for skill in skills %}
+            <div class="ik-skill-card ik-fade-in ik-delay-{{ loop.index }}">
+                <div class="ik-skill-card__icon">{{ skill.icon }}</div>
+                <h3 class="ik-skill-card__title">{{ skill.title }}</h3>
+                <p class="ik-skill-card__desc">{{ skill.desc }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boho Natural LP Components - Batch 17</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Boho Natural Color Palette */
+            --warm-beige: #f5ebe0;
+            --sand: #e3d5ca;
+            --terracotta: #d5a98e;
+            --dusty-rose: #c8a89d;
+            --sage: #9caf88;
+            --olive: #7a8450;
+            --warm-brown: #8b7355;
+            --deep-earth: #5c4f3a;
+            --cream: #faf8f5;
+            --soft-white: #fffcf7;
+            --charcoal: #3d3d3d;
+            --muted-gold: #c9a227;
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Quicksand', 'Helvetica Neue', sans-serif;
+
+            /* Shadows */
+            --shadow-soft: 0 4px 20px rgba(92, 79, 58, 0.08);
+            --shadow-medium: 0 8px 32px rgba(92, 79, 58, 0.12);
+            --shadow-hover: 0 12px 40px rgba(92, 79, 58, 0.16);
+
+            /* Border radius */
+            --radius-soft: 20px;
+            --radius-pill: 50px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Hand-drawn style decorations */
+        .hand-drawn-line {
+            position: relative;
+        }
+
+        .hand-drawn-line::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 3'%3E%3Cpath d='M0,1.5 Q10,0 20,1.5 T40,1.5 T60,1.5 T80,1.5' stroke='%23c9a227' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat center;
+        }
+
+        /* Leaf decoration SVG */
+        .leaf-decoration {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Natural texture overlay */
+        .natural-texture {
+            position: relative;
+        }
+
+        .natural-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        /* ===== [H01] HERO SECTION ===== */
+        .h01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--warm-beige) 0%, var(--sand) 50%, var(--cream) 100%);
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .h01-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(156, 175, 136, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .h01-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(213, 169, 142, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .h01-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .h01-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--soft-white);
+            border: 1px solid var(--sand);
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .h01-hero-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .h01-hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 500;
+            color: var(--deep-earth);
+            line-height: 1.2;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .h01-hero-title em {
+            font-style: italic;
+            color: var(--terracotta);
+            position: relative;
+        }
+
+        .h01-hero-title em::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--muted-gold), transparent);
+            opacity: 0.3;
+            border-radius: 4px;
+        }
+
+        .h01-hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--warm-brown);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .h01-hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .h01-hero-decoration {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            opacity: 0.1;
+        }
+
+        .h01-hero-decoration--top-left {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+
+        .h01-hero-decoration--bottom-right {
+            bottom: 15%;
+            right: 8%;
+            transform: rotate(25deg);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== [H02] FEATURE CARDS ===== */
+        .h02-features {
+            padding: 100px 20px;
+            background: var(--soft-white);
+            position: relative;
+        }
+
+        .h02-features-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .h02-features-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+
+        .h02-features-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--deep-earth);
+            font-weight: 500;
+        }
+
+        .h02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .h02-feature-card {
+            background: var(--cream);
+            border-radius: var(--radius-soft);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+        }
+
+        .h02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--terracotta), transparent);
+            border-radius: 2px;
+        }
+
+        .h02-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--sand);
+        }
+
+        .h02-feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--warm-beige), var(--sand));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .h02-feature-icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 2px dashed var(--sand);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .h02-feature-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--warm-brown);
+        }
+
+        .h02-feature-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--deep-earth);
+            margin-bottom: 12px;
+        }
+
+        .h02-feature-description {
+            font-size: 0.95rem;
+            color: var(--warm-brown);
+            line-height: 1.7;
+        }
+
+        /* ===== [H03] PRICING TABLE ===== */
+        .h03-pricing {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, var(--warm-beige) 0%, var(--cream) 100%);
+        }
+
+        .h03-pricing-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .h03-pricing-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--olive);
+            margin-bottom: 12px;
+        }
+
+        .h03-pricing-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--deep-earth);
+            font-weight: 500;
+        }
+
+        .h03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .h03-pricing-card {
+            background: var(--soft-white);
+            border-radius: var(--radius-soft);
+            padding: 40px 30px;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 2px solid var(--sand);
+        }
+
+        .h03-pricing-card.h03-featured {
+            border-color: var(--terracotta);
+            transform: scale(1.02);
+        }
+
+        .h03-pricing-card.h03-featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--terracotta);
+            color: var(--soft-white);
+            padding: 6px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .h03-pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .h03-pricing-card.h03-featured:hover {
+            transform: scale(1.02) translateY(-8px);
+        }
+
+        .h03-pricing-name {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--deep-earth);
+            margin-bottom: 8px;
+        }
+
+        .h03-pricing-description {
+            font-size: 0.9rem;
+            color: var(--warm-brown);
+            margin-bottom: 24px;
+        }
+
+        .h03-pricing-amount {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 24px;
+        }
+
+        .h03-pricing-currency {
+            font-size: 1.2rem;
+            color: var(--warm-brown);
+        }
+
+        .h03-pricing-value {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--deep-earth);
+        }
+
+        .h03-pricing-period {
+            font-size: 0.9rem;
+            color: var(--warm-brown);
+        }
+
+        .h03-pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .h03-pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--sand);
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .h03-pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .h03-pricing-features li svg {
+            width: 18px;
+            height: 18px;
+            color: var(--sage);
+            flex-shrink: 0;
+        }
+
+        .h03-pricing-cta {
+            width: 100%;
+        }
+
+        /* ===== [H04] CTA BUTTON ===== */
+        .h04-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 36px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .h04-btn-primary {
+            background: linear-gradient(135deg, var(--terracotta), var(--dusty-rose));
+            color: var(--soft-white);
+            box-shadow: 0 4px 15px rgba(213, 169, 142, 0.4);
+        }
+
+        .h04-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .h04-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(213, 169, 142, 0.5);
+        }
+
+        .h04-btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .h04-btn-secondary {
+            background: transparent;
+            color: var(--deep-earth);
+            border: 2px solid var(--sand);
+        }
+
+        .h04-btn-secondary:hover {
+            background: var(--warm-beige);
+            border-color: var(--terracotta);
+            transform: translateY(-3px);
+        }
+
+        .h04-btn-outline {
+            background: transparent;
+            color: var(--terracotta);
+            border: 2px solid var(--terracotta);
+        }
+
+        .h04-btn-outline:hover {
+            background: var(--terracotta);
+            color: var(--soft-white);
+            transform: translateY(-3px);
+        }
+
+        .h04-btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .h04-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ===== [H05] TESTIMONIALS ===== */
+        .h05-testimonials {
+            padding: 100px 20px;
+            background: var(--soft-white);
+            position: relative;
+        }
+
+        .h05-testimonials-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .h05-testimonials-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--dusty-rose);
+            margin-bottom: 12px;
+        }
+
+        .h05-testimonials-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--deep-earth);
+            font-weight: 500;
+        }
+
+        .h05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .h05-testimonial-card {
+            background: var(--cream);
+            border-radius: var(--radius-soft);
+            padding: 40px 30px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .h05-testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d5a98e' opacity='0.3'%3E%3Cpath d='M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z'/%3E%3C/svg%3E") no-repeat center;
+            opacity: 0.3;
+        }
+
+        .h05-testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .h05-testimonial-rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .h05-testimonial-rating svg {
+            width: 18px;
+            height: 18px;
+            color: var(--muted-gold);
+        }
+
+        .h05-testimonial-quote {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .h05-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .h05-testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sand), var(--terracotta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--soft-white);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .h05-testimonial-avatar::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border: 2px dashed var(--sand);
+            border-radius: 50%;
+        }
+
+        .h05-testimonial-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--deep-earth);
+            margin-bottom: 2px;
+        }
+
+        .h05-testimonial-info p {
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+        }
+
+        /* ===== [H06] FAQ ===== */
+        .h06-faq {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--warm-beige) 100%);
+        }
+
+        .h06-faq-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .h06-faq-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+
+        .h06-faq-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--deep-earth);
+            font-weight: 500;
+        }
+
+        .h06-faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .h06-faq-item {
+            background: var(--soft-white);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            border: 1px solid var(--sand);
+            transition: all 0.3s ease;
+        }
+
+        .h06-faq-item:hover {
+            border-color: var(--terracotta);
+        }
+
+        .h06-faq-question {
+            width: 100%;
+            padding: 24px 30px;
+            background: transparent;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--deep-earth);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .h06-faq-question:hover {
+            color: var(--terracotta);
+        }
+
+        .h06-faq-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--warm-beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .h06-faq-toggle svg {
+            width: 14px;
+            height: 14px;
+            color: var(--warm-brown);
+            transition: transform 0.3s ease;
+        }
+
+        .h06-faq-item.active .h06-faq-toggle {
+            background: var(--terracotta);
+        }
+
+        .h06-faq-item.active .h06-faq-toggle svg {
+            color: var(--soft-white);
+            transform: rotate(180deg);
+        }
+
+        .h06-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .h06-faq-answer-content {
+            padding: 0 30px 24px;
+            font-size: 0.95rem;
+            color: var(--warm-brown);
+            line-height: 1.8;
+        }
+
+        .h06-faq-item.active .h06-faq-answer {
+            max-height: 300px;
+        }
+
+        /* ===== [H07] FOOTER ===== */
+        .h07-footer {
+            background: var(--deep-earth);
+            color: var(--sand);
+            padding: 80px 20px 30px;
+            position: relative;
+        }
+
+        .h07-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--terracotta), var(--sage), var(--muted-gold), var(--dusty-rose));
+        }
+
+        .h07-footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .h07-footer-brand {
+            max-width: 280px;
+        }
+
+        .h07-footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--cream);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .h07-footer-logo svg {
+            width: 32px;
+            height: 32px;
+            color: var(--terracotta);
+        }
+
+        .h07-footer-tagline {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .h07-footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .h07-footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sand);
+            transition: all 0.3s ease;
+        }
+
+        .h07-footer-social a:hover {
+            background: var(--terracotta);
+            color: var(--soft-white);
+            transform: translateY(-3px);
+        }
+
+        .h07-footer-social svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .h07-footer-links h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 20px;
+        }
+
+        .h07-footer-links ul {
+            list-style: none;
+        }
+
+        .h07-footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .h07-footer-links a {
+            color: var(--sand);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .h07-footer-links a::before {
+            content: '';
+            width: 0;
+            height: 1px;
+            background: var(--terracotta);
+            transition: width 0.3s ease;
+        }
+
+        .h07-footer-links a:hover {
+            color: var(--cream);
+            opacity: 1;
+        }
+
+        .h07-footer-links a:hover::before {
+            width: 12px;
+        }
+
+        .h07-footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .h07-footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .h07-footer-legal a {
+            color: var(--sand);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .h07-footer-legal a:hover {
+            color: var(--cream);
+        }
+
+        /* ===== [H08] NAVBAR ===== */
+        .h08-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--sand);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .h08-nav.scrolled {
+            padding: 12px 40px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .h08-nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--deep-earth);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .h08-nav-logo svg {
+            width: 28px;
+            height: 28px;
+            color: var(--terracotta);
+        }
+
+        .h08-nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .h08-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .h08-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--terracotta);
+            transition: width 0.3s ease;
+        }
+
+        .h08-nav-links a:hover {
+            color: var(--terracotta);
+        }
+
+        .h08-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .h08-nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .h08-nav-cta .h04-btn {
+            padding: 10px 24px;
+            font-size: 0.9rem;
+        }
+
+        .h08-nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .h08-nav-mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--deep-earth);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== [H09] STEP GUIDE ===== */
+        .h09-steps {
+            padding: 100px 20px;
+            background: var(--soft-white);
+        }
+
+        .h09-steps-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .h09-steps-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--olive);
+            margin-bottom: 12px;
+        }
+
+        .h09-steps-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--deep-earth);
+            font-weight: 500;
+        }
+
+        .h09-steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .h09-steps-container::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 60px;
+            bottom: 60px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--terracotta), var(--sage), var(--muted-gold));
+            border-radius: 2px;
+        }
+
+        .h09-step {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .h09-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .h09-step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 3px solid var(--terracotta);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .h09-step-number span {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--terracotta);
+        }
+
+        .h09-step-content {
+            background: var(--cream);
+            border-radius: var(--radius-soft);
+            padding: 30px;
+            flex: 1;
+            border: 1px solid var(--sand);
+            transition: all 0.3s ease;
+        }
+
+        .h09-step-content:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--terracotta);
+        }
+
+        .h09-step-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--deep-earth);
+            margin-bottom: 12px;
+        }
+
+        .h09-step-description {
+            font-size: 0.95rem;
+            color: var(--warm-brown);
+            line-height: 1.7;
+        }
+
+        .h09-step-icon {
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+        }
+
+        /* ===== [H10] REGISTRATION FORM ===== */
+        .h10-form-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--warm-beige) 0%, var(--cream) 100%);
+        }
+
+        .h10-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--soft-white);
+            border-radius: var(--radius-soft);
+            padding: 50px 40px;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            border: 1px solid var(--sand);
+        }
+
+        .h10-form-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 40px;
+            right: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--terracotta), var(--sage));
+            border-radius: 2px;
+        }
+
+        .h10-form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .h10-form-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--warm-beige), var(--sand));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .h10-form-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--warm-brown);
+        }
+
+        .h10-form-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--deep-earth);
+            margin-bottom: 8px;
+        }
+
+        .h10-form-subtitle {
+            font-size: 0.95rem;
+            color: var(--warm-brown);
+        }
+
+        .h10-form-group {
+            margin-bottom: 24px;
+        }
+
+        .h10-form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--deep-earth);
+            margin-bottom: 8px;
+        }
+
+        .h10-form-input {
+            width: 100%;
+            padding: 14px 18px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--charcoal);
+            background: var(--cream);
+            border: 2px solid var(--sand);
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .h10-form-input::placeholder {
+            color: var(--warm-brown);
+            opacity: 0.6;
+        }
+
+        .h10-form-input:focus {
+            border-color: var(--terracotta);
+            background: var(--soft-white);
+            box-shadow: 0 0 0 4px rgba(213, 169, 142, 0.15);
+        }
+
+        .h10-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .h10-form-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            accent-color: var(--terracotta);
+            cursor: pointer;
+        }
+
+        .h10-form-checkbox label {
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .h10-form-checkbox a {
+            color: var(--terracotta);
+            text-decoration: none;
+        }
+
+        .h10-form-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        .h10-form-submit {
+            width: 100%;
+        }
+
+        .h10-form-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        .h10-form-divider::before,
+        .h10-form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--sand);
+        }
+
+        .h10-form-divider span {
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+        }
+
+        .h10-form-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .h10-form-social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--cream);
+            border: 2px solid var(--sand);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .h10-form-social-btn:hover {
+            border-color: var(--terracotta);
+            background: var(--warm-beige);
+        }
+
+        .h10-form-social-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .h07-footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .h07-footer-brand {
+                grid-column: span 2;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .h01-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .h01-hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .h08-nav {
+                padding: 12px 20px;
+            }
+
+            .h08-nav-links {
+                display: none;
+            }
+
+            .h08-nav-cta .h04-btn-secondary {
+                display: none;
+            }
+
+            .h08-nav-mobile-toggle {
+                display: flex;
+            }
+
+            .h02-features-title,
+            .h03-pricing-title,
+            .h05-testimonials-title,
+            .h06-faq-title,
+            .h09-steps-title {
+                font-size: 2rem;
+            }
+
+            .h09-steps-container::before {
+                left: 32px;
+            }
+
+            .h09-step {
+                gap: 24px;
+            }
+
+            .h09-step-number {
+                width: 64px;
+                height: 64px;
+            }
+
+            .h09-step-number span {
+                font-size: 1.4rem;
+            }
+
+            .h07-footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .h07-footer-brand {
+                grid-column: span 1;
+            }
+
+            .h10-form-container {
+                padding: 40px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .h01-hero {
+                padding: 80px 16px 60px;
+            }
+
+            .h02-features,
+            .h03-pricing,
+            .h05-testimonials,
+            .h06-faq,
+            .h09-steps,
+            .h10-form-section {
+                padding: 60px 16px;
+            }
+
+            .h03-pricing-card.h03-featured {
+                transform: none;
+            }
+
+            .h03-pricing-card.h03-featured:hover {
+                transform: translateY(-8px);
+            }
+
+            .h09-step {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .h09-steps-container::before {
+                display: none;
+            }
+
+            .h09-step-number {
+                width: 56px;
+                height: 56px;
+            }
+
+            .h09-step-number span {
+                font-size: 1.2rem;
+            }
+
+            .h10-form-social {
+                flex-direction: column;
+            }
+
+            .h07-footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .h07-footer-legal {
+                justify-content: center;
+            }
+        }
+
+        /* Section spacing for navbar */
+        .h01-hero {
+            padding-top: 100px;
+        }
+
+        /* Demo page specific styles */
+        .demo-section {
+            padding: 40px 20px;
+            background: var(--cream);
+            border-bottom: 1px dashed var(--sand);
+        }
+
+        .demo-title {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--warm-brown);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== [H08] NAVBAR ===== -->
+    <nav class="h08-nav">
+        <a href="#" class="h08-nav-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+            Botanica
+        </a>
+        <ul class="h08-nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="h08-nav-cta">
+            <a href="#" class="h04-btn h04-btn-secondary">Log in</a>
+            <a href="#" class="h04-btn h04-btn-primary">Get Started</a>
+        </div>
+        <div class="h08-nav-mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ===== [H01] HERO SECTION ===== -->
+    <section class="h01-hero">
+        <svg class="h01-hero-decoration h01-hero-decoration--top-left" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M50 10 C30 30, 20 50, 50 90 C80 50, 70 30, 50 10" fill="none" stroke="var(--sage)"/>
+            <path d="M50 20 L50 80" stroke="var(--sage)"/>
+            <path d="M35 40 Q50 50, 65 40" stroke="var(--sage)"/>
+            <path d="M30 60 Q50 70, 70 60" stroke="var(--sage)"/>
+        </svg>
+        <svg class="h01-hero-decoration h01-hero-decoration--bottom-right" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="50" cy="50" r="40" stroke="var(--terracotta)"/>
+            <circle cx="50" cy="50" r="30" stroke="var(--terracotta)"/>
+            <circle cx="50" cy="50" r="20" stroke="var(--terracotta)"/>
+        </svg>
+        <div class="h01-hero-content">
+            <div class="h01-hero-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+                Natural Living, Simplified
+            </div>
+            <h1 class="h01-hero-title">
+                Embrace the <em>Beauty</em> of
+                Mindful Living
+            </h1>
+            <p class="h01-hero-subtitle">
+                Discover handcrafted solutions that bring harmony to your everyday life.
+                Simple, sustainable, and designed with nature in mind.
+            </p>
+            <div class="h01-hero-cta">
+                <a href="#" class="h04-btn h04-btn-primary">
+                    Start Your Journey
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#" class="h04-btn h04-btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H02] FEATURE CARDS ===== -->
+    <section id="features" class="h02-features">
+        <div class="h02-features-header">
+            <p class="h02-features-label">Why Choose Us</p>
+            <h2 class="h02-features-title">Crafted with Care & Intention</h2>
+        </div>
+        <div class="h02-features-grid">
+            <div class="h02-feature-card">
+                <div class="h02-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h3 class="h02-feature-title">Sustainable Materials</h3>
+                <p class="h02-feature-description">Every product is thoughtfully sourced from eco-friendly materials that respect our planet.</p>
+            </div>
+            <div class="h02-feature-card">
+                <div class="h02-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <h3 class="h02-feature-title">Handcrafted with Love</h3>
+                <p class="h02-feature-description">Each piece is carefully made by skilled artisans who pour their heart into every detail.</p>
+            </div>
+            <div class="h02-feature-card">
+                <div class="h02-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <h3 class="h02-feature-title">Timeless Design</h3>
+                <p class="h02-feature-description">Classic aesthetics that transcend trends, bringing lasting beauty to your space.</p>
+            </div>
+            <div class="h02-feature-card">
+                <div class="h02-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="h02-feature-title">Local Sourcing</h3>
+                <p class="h02-feature-description">Supporting local communities while reducing our environmental footprint.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H03] PRICING TABLE ===== -->
+    <section id="pricing" class="h03-pricing">
+        <div class="h03-pricing-header">
+            <p class="h03-pricing-label">Simple Pricing</p>
+            <h2 class="h03-pricing-title">Choose Your Path</h2>
+        </div>
+        <div class="h03-pricing-grid">
+            <div class="h03-pricing-card">
+                <h3 class="h03-pricing-name">Seedling</h3>
+                <p class="h03-pricing-description">Perfect for getting started</p>
+                <div class="h03-pricing-amount">
+                    <span class="h03-pricing-currency">$</span>
+                    <span class="h03-pricing-value">19</span>
+                    <span class="h03-pricing-period">/month</span>
+                </div>
+                <ul class="h03-pricing-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        5 Projects
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Basic Templates
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Email Support
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Community Access
+                    </li>
+                </ul>
+                <a href="#" class="h04-btn h04-btn-outline h03-pricing-cta">Get Started</a>
+            </div>
+            <div class="h03-pricing-card h03-featured">
+                <h3 class="h03-pricing-name">Bloom</h3>
+                <p class="h03-pricing-description">For growing businesses</p>
+                <div class="h03-pricing-amount">
+                    <span class="h03-pricing-currency">$</span>
+                    <span class="h03-pricing-value">49</span>
+                    <span class="h03-pricing-period">/month</span>
+                </div>
+                <ul class="h03-pricing-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Unlimited Projects
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Premium Templates
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Priority Support
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Analytics Dashboard
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Custom Branding
+                    </li>
+                </ul>
+                <a href="#" class="h04-btn h04-btn-primary h03-pricing-cta">Get Started</a>
+            </div>
+            <div class="h03-pricing-card">
+                <h3 class="h03-pricing-name">Forest</h3>
+                <p class="h03-pricing-description">For established teams</p>
+                <div class="h03-pricing-amount">
+                    <span class="h03-pricing-currency">$</span>
+                    <span class="h03-pricing-value">99</span>
+                    <span class="h03-pricing-period">/month</span>
+                </div>
+                <ul class="h03-pricing-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Everything in Bloom
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Dedicated Manager
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        API Access
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        White-label Option
+                    </li>
+                </ul>
+                <a href="#" class="h04-btn h04-btn-outline h03-pricing-cta">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H04] CTA BUTTON DEMO ===== -->
+    <div class="demo-section">
+        <p class="demo-title">[H04] Button Variations</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="#" class="h04-btn h04-btn-primary">
+                Primary Button
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="#" class="h04-btn h04-btn-secondary">Secondary Button</a>
+            <a href="#" class="h04-btn h04-btn-outline">Outline Button</a>
+        </div>
+    </div>
+
+    <!-- ===== [H05] TESTIMONIALS ===== -->
+    <section id="testimonials" class="h05-testimonials">
+        <div class="h05-testimonials-header">
+            <p class="h05-testimonials-label">Kind Words</p>
+            <h2 class="h05-testimonials-title">What Our Community Says</h2>
+        </div>
+        <div class="h05-testimonials-grid">
+            <div class="h05-testimonial-card">
+                <div class="h05-testimonial-rating">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="h05-testimonial-quote">
+                    This has completely transformed how I approach my daily routines. The attention to detail and natural aesthetics bring such peace to my home.
+                </p>
+                <div class="h05-testimonial-author">
+                    <div class="h05-testimonial-avatar">EM</div>
+                    <div class="h05-testimonial-info">
+                        <h4>Emma Mitchell</h4>
+                        <p>Interior Designer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h05-testimonial-card">
+                <div class="h05-testimonial-rating">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="h05-testimonial-quote">
+                    I love how sustainable everything is. Finally, a brand that truly cares about the environment without compromising on quality or style.
+                </p>
+                <div class="h05-testimonial-author">
+                    <div class="h05-testimonial-avatar">JK</div>
+                    <div class="h05-testimonial-info">
+                        <h4>James Kim</h4>
+                        <p>Sustainability Consultant</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h05-testimonial-card">
+                <div class="h05-testimonial-rating">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="h05-testimonial-quote">
+                    The customer service is exceptional. They truly take the time to understand what you need and guide you to the perfect solution.
+                </p>
+                <div class="h05-testimonial-author">
+                    <div class="h05-testimonial-avatar">SO</div>
+                    <div class="h05-testimonial-info">
+                        <h4>Sofia Ortiz</h4>
+                        <p>Small Business Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H09] STEP GUIDE ===== -->
+    <section class="h09-steps">
+        <div class="h09-steps-header">
+            <p class="h09-steps-label">How It Works</p>
+            <h2 class="h09-steps-title">Your Journey Begins Here</h2>
+        </div>
+        <div class="h09-steps-container">
+            <div class="h09-step">
+                <div class="h09-step-number"><span>1</span></div>
+                <div class="h09-step-content">
+                    <h3 class="h09-step-title">Create Your Account</h3>
+                    <p class="h09-step-description">Sign up in just a few moments. No credit card required to start your free trial and explore all our features.</p>
+                </div>
+            </div>
+            <div class="h09-step">
+                <div class="h09-step-number"><span>2</span></div>
+                <div class="h09-step-content">
+                    <h3 class="h09-step-title">Choose Your Style</h3>
+                    <p class="h09-step-description">Browse our curated collection of templates and designs. Find the perfect aesthetic that resonates with your vision.</p>
+                </div>
+            </div>
+            <div class="h09-step">
+                <div class="h09-step-number"><span>3</span></div>
+                <div class="h09-step-content">
+                    <h3 class="h09-step-title">Customize & Create</h3>
+                    <p class="h09-step-description">Make it yours with our intuitive editor. Add your content, adjust colors, and bring your unique vision to life.</p>
+                </div>
+            </div>
+            <div class="h09-step">
+                <div class="h09-step-number"><span>4</span></div>
+                <div class="h09-step-content">
+                    <h3 class="h09-step-title">Share & Grow</h3>
+                    <p class="h09-step-description">Launch your creation to the world. Connect with your audience and watch your community flourish.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H06] FAQ ===== -->
+    <section id="faq" class="h06-faq">
+        <div class="h06-faq-header">
+            <p class="h06-faq-label">Questions & Answers</p>
+            <h2 class="h06-faq-title">Frequently Asked</h2>
+        </div>
+        <div class="h06-faq-container">
+            <div class="h06-faq-item active">
+                <button class="h06-faq-question">
+                    What materials do you use in your products?
+                    <span class="h06-faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </button>
+                <div class="h06-faq-answer">
+                    <div class="h06-faq-answer-content">
+                        We prioritize sustainable, natural materials including organic cotton, bamboo, recycled fibers, and responsibly sourced wood. Each material is carefully selected for its environmental impact and durability.
+                    </div>
+                </div>
+            </div>
+            <div class="h06-faq-item">
+                <button class="h06-faq-question">
+                    How long does shipping take?
+                    <span class="h06-faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </button>
+                <div class="h06-faq-answer">
+                    <div class="h06-faq-answer-content">
+                        Standard shipping typically takes 5-7 business days within the continental US. Express options are available for 2-3 day delivery. International shipping varies by location but usually arrives within 10-14 business days.
+                    </div>
+                </div>
+            </div>
+            <div class="h06-faq-item">
+                <button class="h06-faq-question">
+                    Do you offer a satisfaction guarantee?
+                    <span class="h06-faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </button>
+                <div class="h06-faq-answer">
+                    <div class="h06-faq-answer-content">
+                        Absolutely! We offer a 30-day satisfaction guarantee on all purchases. If you're not completely happy with your order, we'll work with you to find the perfect solution or provide a full refund.
+                    </div>
+                </div>
+            </div>
+            <div class="h06-faq-item">
+                <button class="h06-faq-question">
+                    Can I customize my order?
+                    <span class="h06-faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </button>
+                <div class="h06-faq-answer">
+                    <div class="h06-faq-answer-content">
+                        Yes! Many of our products offer customization options. From color choices to personalized engravings, we love helping you create something uniquely yours. Contact our team for custom requests.
+                    </div>
+                </div>
+            </div>
+            <div class="h06-faq-item">
+                <button class="h06-faq-question">
+                    How do I care for my products?
+                    <span class="h06-faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </button>
+                <div class="h06-faq-answer">
+                    <div class="h06-faq-answer-content">
+                        Each product comes with detailed care instructions. Generally, we recommend gentle cleaning with natural products and proper storage. Our customer care team is always available to answer specific questions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H10] REGISTRATION FORM ===== -->
+    <section class="h10-form-section">
+        <div class="h10-form-container">
+            <div class="h10-form-header">
+                <div class="h10-form-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                <h2 class="h10-form-title">Join Our Community</h2>
+                <p class="h10-form-subtitle">Start your journey towards mindful living</p>
+            </div>
+            <form>
+                <div class="h10-form-group">
+                    <label class="h10-form-label" for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="h10-form-input" placeholder="Your name">
+                </div>
+                <div class="h10-form-group">
+                    <label class="h10-form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="h10-form-input" placeholder="hello@example.com">
+                </div>
+                <div class="h10-form-group">
+                    <label class="h10-form-label" for="password">Password</label>
+                    <input type="password" id="password" class="h10-form-input" placeholder="Create a password">
+                </div>
+                <div class="h10-form-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="h04-btn h04-btn-primary h10-form-submit">Create Account</button>
+            </form>
+            <div class="h10-form-divider">
+                <span>or continue with</span>
+            </div>
+            <div class="h10-form-social">
+                <button type="button" class="h10-form-social-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Google
+                </button>
+                <button type="button" class="h10-form-social-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/>
+                    </svg>
+                    GitHub
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [H07] FOOTER ===== -->
+    <footer class="h07-footer">
+        <div class="h07-footer-content">
+            <div class="h07-footer-brand">
+                <div class="h07-footer-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    Botanica
+                </div>
+                <p class="h07-footer-tagline">
+                    Bringing nature's beauty into everyday living. Sustainable, handcrafted, and designed with intention.
+                </p>
+                <div class="h07-footer-social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0"/>
+                            <path d="M12 2v2"/>
+                            <path d="M12 20v2"/>
+                            <path d="M20 12h2"/>
+                            <path d="M2 12h2"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="h07-footer-links">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="h07-footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="h07-footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="h07-footer-bottom">
+            <p>&copy; 2026 Botanica. Crafted with love for nature.</p>
+            <div class="h07-footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Settings</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.h06-faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.h06-faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.h08-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.h08-nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.h10-form-section form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Account created successfully! Welcome to Botanica.');
+        });
+    </script>
+</body>
+</html>

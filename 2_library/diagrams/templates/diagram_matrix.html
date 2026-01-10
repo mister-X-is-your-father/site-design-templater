@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Diagram Templates - マトリクス・2x2レイアウト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e8f4ff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .template-id {
+            background: #ff6b9d;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .template-title {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .diagram-container {
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           #matrix-1: Simple 2x2 Matrix
+           ============================================ */
+        #matrix-1 .simple-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 120px);
+            grid-template-rows: repeat(2, 100px);
+            gap: 8px;
+        }
+
+        #matrix-1 .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-1 .cell:hover {
+            transform: scale(1.05);
+        }
+
+        #matrix-1 .cell-a { background: #ff6b9d; }
+        #matrix-1 .cell-b { background: #4ecdc4; }
+        #matrix-1 .cell-c { background: #ffd93d; color: #333; }
+        #matrix-1 .cell-d { background: #6c5ce7; }
+
+        /* ============================================
+           #matrix-2: Eisenhower Matrix
+           ============================================ */
+        #matrix-2 .eisenhower {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        #matrix-2 .axis-label {
+            position: absolute;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        #matrix-2 .axis-label.top { top: -20px; left: 50%; transform: translateX(-50%); }
+        #matrix-2 .axis-label.bottom { bottom: -20px; left: 50%; transform: translateX(-50%); }
+        #matrix-2 .axis-label.left { left: -25px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+        #matrix-2 .axis-label.right { right: -25px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+        #matrix-2 .quadrants {
+            display: grid;
+            grid-template-columns: repeat(2, 130px);
+            grid-template-rows: repeat(2, 130px);
+            gap: 6px;
+        }
+
+        #matrix-2 .quadrant {
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-2 .quadrant:hover { transform: scale(1.03); }
+
+        #matrix-2 .q1 { background: #ff6b6b; }
+        #matrix-2 .q2 { background: #ffd93d; }
+        #matrix-2 .q3 { background: #74b9ff; }
+        #matrix-2 .q4 { background: #a8e6cf; }
+
+        #matrix-2 .quadrant-icon { font-size: 1.8rem; margin-bottom: 5px; }
+        #matrix-2 .quadrant-title { font-size: 0.7rem; font-weight: bold; color: #333; }
+        #matrix-2 .quadrant-desc { font-size: 0.6rem; color: #555; margin-top: 3px; }
+
+        /* ============================================
+           #matrix-3: 3x3 Grid
+           ============================================ */
+        #matrix-3 .grid-3x3 {
+            display: grid;
+            grid-template-columns: repeat(3, 85px);
+            grid-template-rows: repeat(3, 75px);
+            gap: 6px;
+        }
+
+        #matrix-3 .grid-cell {
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-3 .grid-cell:hover {
+            transform: scale(1.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        #matrix-3 .g1 { background: #ffb3ba; }
+        #matrix-3 .g2 { background: #ffdfba; }
+        #matrix-3 .g3 { background: #ffffba; }
+        #matrix-3 .g4 { background: #baffc9; }
+        #matrix-3 .g5 { background: #bae1ff; }
+        #matrix-3 .g6 { background: #e8baff; }
+        #matrix-3 .g7 { background: #ffb3e6; }
+        #matrix-3 .g8 { background: #c9ffba; }
+        #matrix-3 .g9 { background: #baffff; }
+
+        /* ============================================
+           #matrix-4: SWOT Analysis
+           ============================================ */
+        #matrix-4 .swot {
+            display: grid;
+            grid-template-columns: repeat(2, 140px);
+            grid-template-rows: repeat(2, 110px);
+            gap: 8px;
+        }
+
+        #matrix-4 .swot-cell {
+            border-radius: 12px;
+            padding: 12px;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-4 .swot-cell:hover { transform: scale(1.03); }
+
+        #matrix-4 .swot-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        #matrix-4 .swot-icon { font-size: 1.2rem; }
+        #matrix-4 .swot-title { font-weight: bold; font-size: 0.9rem; }
+        #matrix-4 .swot-content { font-size: 0.7rem; color: #555; line-height: 1.4; }
+
+        #matrix-4 .strength { background: #a8e6cf; }
+        #matrix-4 .weakness { background: #ffb3ba; }
+        #matrix-4 .opportunity { background: #87ceeb; }
+        #matrix-4 .threat { background: #ffd93d; }
+
+        /* ============================================
+           #matrix-5: Risk Matrix
+           ============================================ */
+        #matrix-5 .risk-matrix {
+            position: relative;
+        }
+
+        #matrix-5 .risk-grid {
+            display: grid;
+            grid-template-columns: 40px repeat(3, 70px);
+            grid-template-rows: repeat(3, 55px) 30px;
+            gap: 3px;
+        }
+
+        #matrix-5 .risk-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        #matrix-5 .risk-cell {
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-5 .risk-cell:hover { transform: scale(1.08); }
+
+        #matrix-5 .risk-low { background: #4ecdc4; }
+        #matrix-5 .risk-med { background: #ffd93d; color: #333; }
+        #matrix-5 .risk-high { background: #ff6b6b; }
+
+        #matrix-5 .axis-title {
+            position: absolute;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #888;
+        }
+
+        #matrix-5 .axis-title.y { left: -60px; top: 50%; transform: rotate(-90deg); }
+        #matrix-5 .axis-title.x { bottom: -25px; left: 50%; transform: translateX(-50%); }
+
+        /* ============================================
+           #matrix-6: Priority Matrix
+           ============================================ */
+        #matrix-6 .priority-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 130px);
+            grid-template-rows: 30px repeat(2, 100px);
+            gap: 6px;
+        }
+
+        #matrix-6 .priority-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #666;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+
+        #matrix-6 .priority-cell {
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-6 .priority-cell:hover { transform: scale(1.03); }
+
+        #matrix-6 .priority-num { font-size: 1.8rem; font-weight: bold; }
+        #matrix-6 .priority-label { font-size: 0.7rem; font-weight: bold; margin-top: 5px; }
+
+        #matrix-6 .p1 { background: #ff6b9d; color: white; }
+        #matrix-6 .p2 { background: #ffd93d; color: #333; }
+        #matrix-6 .p3 { background: #74b9ff; color: white; }
+        #matrix-6 .p4 { background: #a8e6cf; color: #333; }
+
+        /* ============================================
+           #matrix-7: Skill Matrix
+           ============================================ */
+        #matrix-7 .skill-matrix {
+            display: grid;
+            grid-template-columns: 80px repeat(4, 50px);
+            grid-template-rows: 35px repeat(4, 40px);
+            gap: 4px;
+        }
+
+        #matrix-7 .skill-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.7rem;
+            background: #e8e8e8;
+            border-radius: 6px;
+            color: #333;
+        }
+
+        #matrix-7 .skill-name {
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background: #f5f5f5;
+            border-radius: 6px;
+            color: #555;
+        }
+
+        #matrix-7 .skill-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-7 .skill-cell:hover { transform: scale(1.15); }
+
+        #matrix-7 .skill-1 { background: #ffb3ba; }
+        #matrix-7 .skill-2 { background: #ffd93d; }
+        #matrix-7 .skill-3 { background: #baffc9; }
+        #matrix-7 .skill-4 { background: #4ecdc4; }
+
+        /* ============================================
+           #matrix-8: Decision Matrix
+           ============================================ */
+        #matrix-8 .decision-matrix {
+            display: grid;
+            grid-template-columns: 70px repeat(3, 65px) 50px;
+            grid-template-rows: 35px repeat(3, 45px);
+            gap: 4px;
+        }
+
+        #matrix-8 .dm-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.65rem;
+            background: #6c5ce7;
+            color: white;
+            border-radius: 6px;
+        }
+
+        #matrix-8 .dm-option {
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            background: #a29bfe;
+            color: white;
+            border-radius: 6px;
+        }
+
+        #matrix-8 .dm-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            background: #f0f0f0;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-8 .dm-cell:hover { transform: scale(1.08); }
+
+        #matrix-8 .dm-total {
+            background: #ffd93d;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           #matrix-9: Comparison Grid
+           ============================================ */
+        #matrix-9 .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 95px);
+            grid-template-rows: 50px repeat(4, 40px);
+            gap: 4px;
+        }
+
+        #matrix-9 .cg-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 10px 10px 0 0;
+            color: white;
+        }
+
+        #matrix-9 .cg-header.h1 { background: #ff6b9d; }
+        #matrix-9 .cg-header.h2 { background: #4ecdc4; }
+        #matrix-9 .cg-header.h3 { background: #ffd93d; color: #333; }
+
+        #matrix-9 .cg-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            background: #f8f8f8;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-9 .cg-cell:hover { background: #e8e8e8; }
+
+        #matrix-9 .cg-check { color: #4ecdc4; font-size: 1.2rem; }
+        #matrix-9 .cg-cross { color: #ff6b6b; font-size: 1.2rem; }
+
+        /* ============================================
+           #matrix-10: Feature Matrix
+           ============================================ */
+        #matrix-10 .feature-matrix {
+            display: grid;
+            grid-template-columns: 100px repeat(3, 55px);
+            grid-template-rows: 40px repeat(5, 35px);
+            gap: 3px;
+        }
+
+        #matrix-10 .fm-corner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #888;
+            background: #f5f5f5;
+            border-radius: 8px 0 0 0;
+        }
+
+        #matrix-10 .fm-plan {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.7rem;
+            color: white;
+            border-radius: 6px;
+        }
+
+        #matrix-10 .plan-free { background: #a8e6cf; color: #333; }
+        #matrix-10 .plan-basic { background: #74b9ff; }
+        #matrix-10 .plan-pro { background: #ff6b9d; }
+
+        #matrix-10 .fm-feature {
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.7rem;
+            background: #f8f8f8;
+            border-radius: 4px;
+        }
+
+        #matrix-10 .fm-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            background: #fafafa;
+            border-radius: 4px;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-10 .fm-cell:hover { transform: scale(1.15); }
+
+        /* ============================================
+           #matrix-11: Checkbox Grid
+           ============================================ */
+        #matrix-11 .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 65px);
+            grid-template-rows: repeat(4, 55px);
+            gap: 8px;
+        }
+
+        #matrix-11 .cb-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8f8f8;
+            border-radius: 10px;
+            border: 3px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-11 .cb-cell:hover {
+            border-color: #ff6b9d;
+        }
+
+        #matrix-11 .cb-cell.checked {
+            background: #a8e6cf;
+            border-color: #4ecdc4;
+        }
+
+        #matrix-11 .cb-icon {
+            font-size: 1.3rem;
+            margin-bottom: 3px;
+        }
+
+        #matrix-11 .cb-label {
+            font-size: 0.65rem;
+            color: #666;
+        }
+
+        #matrix-11 .cb-check {
+            display: none;
+            color: #4ecdc4;
+            font-size: 0.9rem;
+        }
+
+        #matrix-11 .cb-cell.checked .cb-check { display: block; }
+
+        /* ============================================
+           #matrix-12: Color-coded Matrix
+           ============================================ */
+        #matrix-12 .color-matrix {
+            display: grid;
+            grid-template-columns: 50px repeat(4, 55px);
+            grid-template-rows: 30px repeat(4, 50px);
+            gap: 4px;
+        }
+
+        #matrix-12 .cm-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.7rem;
+            background: #e0e0e0;
+            border-radius: 6px;
+        }
+
+        #matrix-12 .cm-row-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.7rem;
+            background: #e0e0e0;
+            border-radius: 6px;
+        }
+
+        #matrix-12 .cm-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-12 .cm-cell:hover { transform: scale(1.08); }
+
+        #matrix-12 .color-red { background: #ff6b6b; }
+        #matrix-12 .color-orange { background: #ffa502; }
+        #matrix-12 .color-yellow { background: #ffd93d; color: #333; }
+        #matrix-12 .color-green { background: #4ecdc4; }
+
+        /* ============================================
+           #matrix-13: Labeled Quadrants
+           ============================================ */
+        #matrix-13 .labeled-quadrants {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        #matrix-13 .lq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 135px);
+            grid-template-rows: repeat(2, 135px);
+            gap: 6px;
+        }
+
+        #matrix-13 .lq-cell {
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-13 .lq-cell:hover { transform: scale(1.02); }
+
+        #matrix-13 .lq-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        #matrix-13 .lq-items {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        #matrix-13 .lq-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        #matrix-13 .lq-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        #matrix-13 .q-a { background: #ff6b9d; }
+        #matrix-13 .q-b { background: #6c5ce7; }
+        #matrix-13 .q-c { background: #00b894; }
+        #matrix-13 .q-d { background: #fdcb6e; }
+
+        /* ============================================
+           #matrix-14: Scatter Plot Style
+           ============================================ */
+        #matrix-14 .scatter-plot {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            border-left: 3px solid #666;
+            border-bottom: 3px solid #666;
+        }
+
+        #matrix-14 .sp-point {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-14 .sp-point:hover { transform: scale(1.2); }
+
+        #matrix-14 .point-a { background: #ff6b9d; top: 30px; left: 180px; }
+        #matrix-14 .point-b { background: #4ecdc4; top: 80px; left: 50px; }
+        #matrix-14 .point-c { background: #ffd93d; top: 150px; left: 120px; color: #333; }
+        #matrix-14 .point-d { background: #6c5ce7; top: 60px; left: 130px; }
+        #matrix-14 .point-e { background: #ff9f43; top: 180px; left: 200px; }
+
+        #matrix-14 .sp-axis-label {
+            position: absolute;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #888;
+        }
+
+        #matrix-14 .sp-axis-label.x { bottom: -25px; left: 50%; transform: translateX(-50%); }
+        #matrix-14 .sp-axis-label.y { left: -30px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+
+        /* ============================================
+           #matrix-15: Heat Map Grid
+           ============================================ */
+        #matrix-15 .heatmap {
+            display: grid;
+            grid-template-columns: 45px repeat(5, 45px);
+            grid-template-rows: 30px repeat(5, 40px);
+            gap: 3px;
+        }
+
+        #matrix-15 .hm-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.65rem;
+            background: #e8e8e8;
+            border-radius: 4px;
+        }
+
+        #matrix-15 .hm-row-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.65rem;
+            background: #e8e8e8;
+            border-radius: 4px;
+        }
+
+        #matrix-15 .hm-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-15 .hm-cell:hover { transform: scale(1.1); }
+
+        #matrix-15 .heat-1 { background: #e8f5e9; color: #333; }
+        #matrix-15 .heat-2 { background: #c8e6c9; color: #333; }
+        #matrix-15 .heat-3 { background: #a5d6a7; color: #333; }
+        #matrix-15 .heat-4 { background: #81c784; color: white; }
+        #matrix-15 .heat-5 { background: #66bb6a; color: white; }
+        #matrix-15 .heat-6 { background: #4caf50; color: white; }
+        #matrix-15 .heat-7 { background: #43a047; color: white; }
+        #matrix-15 .heat-8 { background: #388e3c; color: white; }
+        #matrix-15 .heat-9 { background: #2e7d32; color: white; }
+
+        /* ============================================
+           #matrix-16: Score Matrix
+           ============================================ */
+        #matrix-16 .score-matrix {
+            display: grid;
+            grid-template-columns: 80px repeat(3, 60px);
+            grid-template-rows: 40px repeat(4, 50px);
+            gap: 5px;
+        }
+
+        #matrix-16 .sm-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            background: #ff6b9d;
+            color: white;
+            border-radius: 8px;
+        }
+
+        #matrix-16 .sm-row-label {
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background: #ffe0e8;
+            border-radius: 8px;
+            color: #ff6b9d;
+        }
+
+        #matrix-16 .sm-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            background: #f5f5f5;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-16 .sm-cell:hover { transform: scale(1.1); }
+
+        #matrix-16 .score-high { background: #4ecdc4; color: white; }
+        #matrix-16 .score-mid { background: #ffd93d; color: #333; }
+        #matrix-16 .score-low { background: #ff6b6b; color: white; }
+
+        /* ============================================
+           #matrix-17: Status Matrix
+           ============================================ */
+        #matrix-17 .status-matrix {
+            display: grid;
+            grid-template-columns: 90px repeat(3, 55px);
+            grid-template-rows: 35px repeat(4, 45px);
+            gap: 4px;
+        }
+
+        #matrix-17 .stm-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.7rem;
+            background: #6c5ce7;
+            color: white;
+            border-radius: 6px;
+        }
+
+        #matrix-17 .stm-task {
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.7rem;
+            background: #e8e8e8;
+            border-radius: 6px;
+            color: #333;
+        }
+
+        #matrix-17 .stm-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            background: #f8f8f8;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-17 .stm-cell:hover { transform: scale(1.12); }
+
+        #matrix-17 .status-done { background: #a8e6cf; }
+        #matrix-17 .status-progress { background: #ffd93d; }
+        #matrix-17 .status-pending { background: #f8f8f8; }
+        #matrix-17 .status-blocked { background: #ffb3ba; }
+
+        /* ============================================
+           #matrix-18: Responsibility Matrix (RACI)
+           ============================================ */
+        #matrix-18 .raci-matrix {
+            display: grid;
+            grid-template-columns: 70px repeat(4, 50px);
+            grid-template-rows: 35px repeat(4, 40px);
+            gap: 4px;
+        }
+
+        #matrix-18 .raci-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            color: white;
+        }
+
+        #matrix-18 .raci-r { background: #ff6b9d; }
+        #matrix-18 .raci-a { background: #6c5ce7; }
+        #matrix-18 .raci-c { background: #4ecdc4; }
+        #matrix-18 .raci-i { background: #ffd93d; color: #333; }
+
+        #matrix-18 .raci-task {
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.7rem;
+            background: #f0f0f0;
+            border-radius: 6px;
+        }
+
+        #matrix-18 .raci-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            background: #fafafa;
+            transition: transform 0.2s ease, background 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-18 .raci-cell:hover { transform: scale(1.1); }
+
+        #matrix-18 .raci-cell.has-r { background: #ffe0e8; color: #ff6b9d; }
+        #matrix-18 .raci-cell.has-a { background: #e8e0ff; color: #6c5ce7; }
+        #matrix-18 .raci-cell.has-c { background: #d0f5f0; color: #00b894; }
+        #matrix-18 .raci-cell.has-i { background: #fff5d0; color: #e17055; }
+
+        /* ============================================
+           #matrix-19: BCG Matrix Style
+           ============================================ */
+        #matrix-19 .bcg-matrix {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        #matrix-19 .bcg-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 135px);
+            grid-template-rows: repeat(2, 135px);
+            gap: 6px;
+        }
+
+        #matrix-19 .bcg-cell {
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-19 .bcg-cell:hover { transform: scale(1.03); }
+
+        #matrix-19 .bcg-icon { font-size: 2.5rem; margin-bottom: 8px; }
+        #matrix-19 .bcg-title { font-weight: bold; font-size: 0.9rem; color: #333; }
+        #matrix-19 .bcg-desc { font-size: 0.7rem; color: #666; margin-top: 5px; }
+
+        #matrix-19 .stars { background: #fff3cd; }
+        #matrix-19 .question { background: #cce5ff; }
+        #matrix-19 .cash-cow { background: #d4edda; }
+        #matrix-19 .dogs { background: #f8d7da; }
+
+        #matrix-19 .bcg-axis {
+            position: absolute;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #888;
+        }
+
+        #matrix-19 .bcg-axis.top { top: -20px; left: 50%; transform: translateX(-50%); }
+        #matrix-19 .bcg-axis.left { left: -30px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+
+        /* ============================================
+           #matrix-20: Positioning Map
+           ============================================ */
+        #matrix-20 .positioning-map {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            background: #fafafa;
+            border-radius: 15px;
+        }
+
+        #matrix-20 .pm-axis-x {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            height: 3px;
+            background: #ddd;
+        }
+
+        #matrix-20 .pm-axis-y {
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            bottom: 10px;
+            width: 3px;
+            background: #ddd;
+        }
+
+        #matrix-20 .pm-label {
+            position: absolute;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #888;
+        }
+
+        #matrix-20 .pm-label.top { top: 5px; left: 50%; transform: translateX(-50%); }
+        #matrix-20 .pm-label.bottom { bottom: 5px; left: 50%; transform: translateX(-50%); }
+        #matrix-20 .pm-label.left { left: 5px; top: 50%; transform: translateY(-50%); }
+        #matrix-20 .pm-label.right { right: 5px; top: 50%; transform: translateY(-50%); }
+
+        #matrix-20 .pm-brand {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        #matrix-20 .pm-brand:hover { transform: scale(1.15); }
+
+        #matrix-20 .pm-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        #matrix-20 .pm-name {
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        #matrix-20 .brand-a { top: 40px; left: 180px; }
+        #matrix-20 .brand-a .pm-circle { background: #ff6b9d; }
+        #matrix-20 .brand-b { top: 80px; left: 40px; }
+        #matrix-20 .brand-b .pm-circle { background: #4ecdc4; }
+        #matrix-20 .brand-c { top: 170px; left: 100px; }
+        #matrix-20 .brand-c .pm-circle { background: #ffd93d; color: #333; }
+        #matrix-20 .brand-d { top: 160px; left: 200px; }
+        #matrix-20 .brand-d .pm-circle { background: #6c5ce7; }
+    </style>
+</head>
+<body>
+    <h1>Matrix Diagram Templates</h1>
+    <p class="subtitle">マトリクス・2x2レイアウト - 20種類のテンプレート</p>
+
+    <div class="templates-grid">
+
+        <!-- #matrix-1: Simple 2x2 Matrix -->
+        <div class="template-card" id="matrix-1">
+            <div class="template-header">
+                <span class="template-id">#matrix-1</span>
+                <span class="template-title">Simple 2x2 Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="simple-2x2">
+                    <div class="cell cell-a">セルA</div>
+                    <div class="cell cell-b">セルB</div>
+                    <div class="cell cell-c">セルC</div>
+                    <div class="cell cell-d">セルD</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-2: Eisenhower Matrix -->
+        <div class="template-card" id="matrix-2">
+            <div class="template-header">
+                <span class="template-id">#matrix-2</span>
+                <span class="template-title">Eisenhower Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="eisenhower">
+                    <span class="axis-label top">緊急</span>
+                    <span class="axis-label bottom">緊急でない</span>
+                    <span class="axis-label left">重要</span>
+                    <span class="axis-label right">重要でない</span>
+                    <div class="quadrants">
+                        <div class="quadrant q1">
+                            <span class="quadrant-icon">🔥</span>
+                            <span class="quadrant-title">今すぐやる</span>
+                            <span class="quadrant-desc">緊急かつ重要</span>
+                        </div>
+                        <div class="quadrant q2">
+                            <span class="quadrant-icon">📅</span>
+                            <span class="quadrant-title">予定する</span>
+                            <span class="quadrant-desc">重要だが緊急でない</span>
+                        </div>
+                        <div class="quadrant q3">
+                            <span class="quadrant-icon">👥</span>
+                            <span class="quadrant-title">任せる</span>
+                            <span class="quadrant-desc">緊急だが重要でない</span>
+                        </div>
+                        <div class="quadrant q4">
+                            <span class="quadrant-icon">🗑️</span>
+                            <span class="quadrant-title">やめる</span>
+                            <span class="quadrant-desc">緊急でも重要でもない</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-3: 3x3 Grid -->
+        <div class="template-card" id="matrix-3">
+            <div class="template-header">
+                <span class="template-id">#matrix-3</span>
+                <span class="template-title">3x3 Grid</span>
+            </div>
+            <div class="diagram-container">
+                <div class="grid-3x3">
+                    <div class="grid-cell g1">1</div>
+                    <div class="grid-cell g2">2</div>
+                    <div class="grid-cell g3">3</div>
+                    <div class="grid-cell g4">4</div>
+                    <div class="grid-cell g5">5</div>
+                    <div class="grid-cell g6">6</div>
+                    <div class="grid-cell g7">7</div>
+                    <div class="grid-cell g8">8</div>
+                    <div class="grid-cell g9">9</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-4: SWOT Analysis -->
+        <div class="template-card" id="matrix-4">
+            <div class="template-header">
+                <span class="template-id">#matrix-4</span>
+                <span class="template-title">SWOT Analysis</span>
+            </div>
+            <div class="diagram-container">
+                <div class="swot">
+                    <div class="swot-cell strength">
+                        <div class="swot-header">
+                            <span class="swot-icon">💪</span>
+                            <span class="swot-title">強み</span>
+                        </div>
+                        <div class="swot-content">・独自技術<br>・ブランド力</div>
+                    </div>
+                    <div class="swot-cell weakness">
+                        <div class="swot-header">
+                            <span class="swot-icon">😰</span>
+                            <span class="swot-title">弱み</span>
+                        </div>
+                        <div class="swot-content">・人材不足<br>・コスト高</div>
+                    </div>
+                    <div class="swot-cell opportunity">
+                        <div class="swot-header">
+                            <span class="swot-icon">🌟</span>
+                            <span class="swot-title">機会</span>
+                        </div>
+                        <div class="swot-content">・新市場<br>・技術革新</div>
+                    </div>
+                    <div class="swot-cell threat">
+                        <div class="swot-header">
+                            <span class="swot-icon">⚠️</span>
+                            <span class="swot-title">脅威</span>
+                        </div>
+                        <div class="swot-content">・競合参入<br>・規制強化</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-5: Risk Matrix -->
+        <div class="template-card" id="matrix-5">
+            <div class="template-header">
+                <span class="template-id">#matrix-5</span>
+                <span class="template-title">Risk Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="risk-matrix">
+                    <span class="axis-title y">発生確率</span>
+                    <span class="axis-title x">影響度</span>
+                    <div class="risk-grid">
+                        <div class="risk-label"></div>
+                        <div class="risk-label">低</div>
+                        <div class="risk-label">中</div>
+                        <div class="risk-label">高</div>
+
+                        <div class="risk-label">高</div>
+                        <div class="risk-cell risk-med">中</div>
+                        <div class="risk-cell risk-high">高</div>
+                        <div class="risk-cell risk-high">高</div>
+
+                        <div class="risk-label">中</div>
+                        <div class="risk-cell risk-low">低</div>
+                        <div class="risk-cell risk-med">中</div>
+                        <div class="risk-cell risk-high">高</div>
+
+                        <div class="risk-label">低</div>
+                        <div class="risk-cell risk-low">低</div>
+                        <div class="risk-cell risk-low">低</div>
+                        <div class="risk-cell risk-med">中</div>
+
+                        <div class="risk-label"></div>
+                        <div class="risk-label"></div>
+                        <div class="risk-label"></div>
+                        <div class="risk-label"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-6: Priority Matrix -->
+        <div class="template-card" id="matrix-6">
+            <div class="template-header">
+                <span class="template-id">#matrix-6</span>
+                <span class="template-title">Priority Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="priority-matrix">
+                    <div class="priority-header">高効果</div>
+                    <div class="priority-header">低効果</div>
+                    <div class="priority-cell p1">
+                        <span class="priority-num">1</span>
+                        <span class="priority-label">最優先</span>
+                    </div>
+                    <div class="priority-cell p2">
+                        <span class="priority-num">2</span>
+                        <span class="priority-label">検討</span>
+                    </div>
+                    <div class="priority-cell p3">
+                        <span class="priority-num">3</span>
+                        <span class="priority-label">余裕時</span>
+                    </div>
+                    <div class="priority-cell p4">
+                        <span class="priority-num">4</span>
+                        <span class="priority-label">見送り</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-7: Skill Matrix -->
+        <div class="template-card" id="matrix-7">
+            <div class="template-header">
+                <span class="template-id">#matrix-7</span>
+                <span class="template-title">Skill Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="skill-matrix">
+                    <div class="skill-header">スキル</div>
+                    <div class="skill-header">田中</div>
+                    <div class="skill-header">鈴木</div>
+                    <div class="skill-header">佐藤</div>
+                    <div class="skill-header">山田</div>
+
+                    <div class="skill-name">Python</div>
+                    <div class="skill-cell skill-4">★</div>
+                    <div class="skill-cell skill-3">◎</div>
+                    <div class="skill-cell skill-2">○</div>
+                    <div class="skill-cell skill-1">△</div>
+
+                    <div class="skill-name">AWS</div>
+                    <div class="skill-cell skill-3">◎</div>
+                    <div class="skill-cell skill-4">★</div>
+                    <div class="skill-cell skill-1">△</div>
+                    <div class="skill-cell skill-2">○</div>
+
+                    <div class="skill-name">React</div>
+                    <div class="skill-cell skill-1">△</div>
+                    <div class="skill-cell skill-2">○</div>
+                    <div class="skill-cell skill-4">★</div>
+                    <div class="skill-cell skill-3">◎</div>
+
+                    <div class="skill-name">SQL</div>
+                    <div class="skill-cell skill-2">○</div>
+                    <div class="skill-cell skill-3">◎</div>
+                    <div class="skill-cell skill-3">◎</div>
+                    <div class="skill-cell skill-4">★</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-8: Decision Matrix -->
+        <div class="template-card" id="matrix-8">
+            <div class="template-header">
+                <span class="template-id">#matrix-8</span>
+                <span class="template-title">Decision Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="decision-matrix">
+                    <div class="dm-header">選択肢</div>
+                    <div class="dm-header">コスト</div>
+                    <div class="dm-header">品質</div>
+                    <div class="dm-header">速度</div>
+                    <div class="dm-header">合計</div>
+
+                    <div class="dm-option">案A</div>
+                    <div class="dm-cell">3</div>
+                    <div class="dm-cell">5</div>
+                    <div class="dm-cell">4</div>
+                    <div class="dm-cell dm-total">12</div>
+
+                    <div class="dm-option">案B</div>
+                    <div class="dm-cell">5</div>
+                    <div class="dm-cell">3</div>
+                    <div class="dm-cell">5</div>
+                    <div class="dm-cell dm-total">13</div>
+
+                    <div class="dm-option">案C</div>
+                    <div class="dm-cell">4</div>
+                    <div class="dm-cell">4</div>
+                    <div class="dm-cell">3</div>
+                    <div class="dm-cell dm-total">11</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-9: Comparison Grid -->
+        <div class="template-card" id="matrix-9">
+            <div class="template-header">
+                <span class="template-id">#matrix-9</span>
+                <span class="template-title">Comparison Grid</span>
+            </div>
+            <div class="diagram-container">
+                <div class="comparison-grid">
+                    <div class="cg-header h1">製品A</div>
+                    <div class="cg-header h2">製品B</div>
+                    <div class="cg-header h3">製品C</div>
+
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                    <div class="cg-cell"><span class="cg-cross">✗</span></div>
+
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                    <div class="cg-cell"><span class="cg-cross">✗</span></div>
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+
+                    <div class="cg-cell"><span class="cg-cross">✗</span></div>
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                    <div class="cg-cell"><span class="cg-check">✓</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-10: Feature Matrix -->
+        <div class="template-card" id="matrix-10">
+            <div class="template-header">
+                <span class="template-id">#matrix-10</span>
+                <span class="template-title">Feature Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="feature-matrix">
+                    <div class="fm-corner">機能</div>
+                    <div class="fm-plan plan-free">Free</div>
+                    <div class="fm-plan plan-basic">Basic</div>
+                    <div class="fm-plan plan-pro">Pro</div>
+
+                    <div class="fm-feature">基本機能</div>
+                    <div class="fm-cell">✓</div>
+                    <div class="fm-cell">✓</div>
+                    <div class="fm-cell">✓</div>
+
+                    <div class="fm-feature">API連携</div>
+                    <div class="fm-cell">-</div>
+                    <div class="fm-cell">✓</div>
+                    <div class="fm-cell">✓</div>
+
+                    <div class="fm-feature">分析機能</div>
+                    <div class="fm-cell">-</div>
+                    <div class="fm-cell">-</div>
+                    <div class="fm-cell">✓</div>
+
+                    <div class="fm-feature">サポート</div>
+                    <div class="fm-cell">-</div>
+                    <div class="fm-cell">○</div>
+                    <div class="fm-cell">◎</div>
+
+                    <div class="fm-feature">容量</div>
+                    <div class="fm-cell">1GB</div>
+                    <div class="fm-cell">10GB</div>
+                    <div class="fm-cell">∞</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-11: Checkbox Grid -->
+        <div class="template-card" id="matrix-11">
+            <div class="template-header">
+                <span class="template-id">#matrix-11</span>
+                <span class="template-title">Checkbox Grid</span>
+            </div>
+            <div class="diagram-container">
+                <div class="checkbox-grid">
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">📱</span>
+                        <span class="cb-label">スマホ</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">💻</span>
+                        <span class="cb-label">PC</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">📺</span>
+                        <span class="cb-label">TV</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">🎮</span>
+                        <span class="cb-label">ゲーム</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">📷</span>
+                        <span class="cb-label">カメラ</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">🎧</span>
+                        <span class="cb-label">音楽</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">📚</span>
+                        <span class="cb-label">読書</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">✈️</span>
+                        <span class="cb-label">旅行</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">🍳</span>
+                        <span class="cb-label">料理</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">🏃</span>
+                        <span class="cb-label">運動</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">🎨</span>
+                        <span class="cb-label">アート</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">🌱</span>
+                        <span class="cb-label">植物</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">🐱</span>
+                        <span class="cb-label">ペット</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">☕</span>
+                        <span class="cb-label">カフェ</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell">
+                        <span class="cb-icon">🎬</span>
+                        <span class="cb-label">映画</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                    <div class="cb-cell checked">
+                        <span class="cb-icon">💡</span>
+                        <span class="cb-label">学習</span>
+                        <span class="cb-check">✓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-12: Color-coded Matrix -->
+        <div class="template-card" id="matrix-12">
+            <div class="template-header">
+                <span class="template-id">#matrix-12</span>
+                <span class="template-title">Color-coded Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="color-matrix">
+                    <div class="cm-header"></div>
+                    <div class="cm-header">Q1</div>
+                    <div class="cm-header">Q2</div>
+                    <div class="cm-header">Q3</div>
+                    <div class="cm-header">Q4</div>
+
+                    <div class="cm-row-header">売上</div>
+                    <div class="cm-cell color-red">↓</div>
+                    <div class="cm-cell color-yellow">→</div>
+                    <div class="cm-cell color-green">↑</div>
+                    <div class="cm-cell color-green">↑</div>
+
+                    <div class="cm-row-header">利益</div>
+                    <div class="cm-cell color-orange">↓</div>
+                    <div class="cm-cell color-red">↓</div>
+                    <div class="cm-cell color-yellow">→</div>
+                    <div class="cm-cell color-green">↑</div>
+
+                    <div class="cm-row-header">顧客</div>
+                    <div class="cm-cell color-green">↑</div>
+                    <div class="cm-cell color-green">↑</div>
+                    <div class="cm-cell color-green">↑</div>
+                    <div class="cm-cell color-green">↑</div>
+
+                    <div class="cm-row-header">NPS</div>
+                    <div class="cm-cell color-yellow">→</div>
+                    <div class="cm-cell color-orange">↓</div>
+                    <div class="cm-cell color-orange">↓</div>
+                    <div class="cm-cell color-yellow">→</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-13: Labeled Quadrants -->
+        <div class="template-card" id="matrix-13">
+            <div class="template-header">
+                <span class="template-id">#matrix-13</span>
+                <span class="template-title">Labeled Quadrants</span>
+            </div>
+            <div class="diagram-container">
+                <div class="labeled-quadrants">
+                    <div class="lq-grid">
+                        <div class="lq-cell q-a">
+                            <span class="lq-title">チャレンジャー</span>
+                            <div class="lq-items">
+                                <div class="lq-item"><span class="lq-dot"></span>積極投資</div>
+                                <div class="lq-item"><span class="lq-dot"></span>市場拡大</div>
+                            </div>
+                        </div>
+                        <div class="lq-cell q-b">
+                            <span class="lq-title">リーダー</span>
+                            <div class="lq-items">
+                                <div class="lq-item"><span class="lq-dot"></span>シェア維持</div>
+                                <div class="lq-item"><span class="lq-dot"></span>防衛戦略</div>
+                            </div>
+                        </div>
+                        <div class="lq-cell q-c">
+                            <span class="lq-title">ニッチャー</span>
+                            <div class="lq-items">
+                                <div class="lq-item"><span class="lq-dot"></span>専門化</div>
+                                <div class="lq-item"><span class="lq-dot"></span>差別化</div>
+                            </div>
+                        </div>
+                        <div class="lq-cell q-d">
+                            <span class="lq-title">フォロワー</span>
+                            <div class="lq-items">
+                                <div class="lq-item"><span class="lq-dot"></span>模倣戦略</div>
+                                <div class="lq-item"><span class="lq-dot"></span>低コスト</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-14: Scatter Plot Style -->
+        <div class="template-card" id="matrix-14">
+            <div class="template-header">
+                <span class="template-id">#matrix-14</span>
+                <span class="template-title">Scatter Plot Style</span>
+            </div>
+            <div class="diagram-container">
+                <div class="scatter-plot">
+                    <span class="sp-axis-label x">価格 →</span>
+                    <span class="sp-axis-label y">品質 →</span>
+                    <div class="sp-point point-a">A</div>
+                    <div class="sp-point point-b">B</div>
+                    <div class="sp-point point-c">C</div>
+                    <div class="sp-point point-d">D</div>
+                    <div class="sp-point point-e">E</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-15: Heat Map Grid -->
+        <div class="template-card" id="matrix-15">
+            <div class="template-header">
+                <span class="template-id">#matrix-15</span>
+                <span class="template-title">Heat Map Grid</span>
+            </div>
+            <div class="diagram-container">
+                <div class="heatmap">
+                    <div class="hm-header"></div>
+                    <div class="hm-header">月</div>
+                    <div class="hm-header">火</div>
+                    <div class="hm-header">水</div>
+                    <div class="hm-header">木</div>
+                    <div class="hm-header">金</div>
+
+                    <div class="hm-row-label">9時</div>
+                    <div class="hm-cell heat-2">2</div>
+                    <div class="hm-cell heat-3">3</div>
+                    <div class="hm-cell heat-5">5</div>
+                    <div class="hm-cell heat-4">4</div>
+                    <div class="hm-cell heat-3">3</div>
+
+                    <div class="hm-row-label">12時</div>
+                    <div class="hm-cell heat-8">8</div>
+                    <div class="hm-cell heat-9">9</div>
+                    <div class="hm-cell heat-7">7</div>
+                    <div class="hm-cell heat-8">8</div>
+                    <div class="hm-cell heat-9">9</div>
+
+                    <div class="hm-row-label">15時</div>
+                    <div class="hm-cell heat-4">4</div>
+                    <div class="hm-cell heat-5">5</div>
+                    <div class="hm-cell heat-6">6</div>
+                    <div class="hm-cell heat-5">5</div>
+                    <div class="hm-cell heat-4">4</div>
+
+                    <div class="hm-row-label">18時</div>
+                    <div class="hm-cell heat-7">7</div>
+                    <div class="hm-cell heat-6">6</div>
+                    <div class="hm-cell heat-5">5</div>
+                    <div class="hm-cell heat-7">7</div>
+                    <div class="hm-cell heat-8">8</div>
+
+                    <div class="hm-row-label">21時</div>
+                    <div class="hm-cell heat-3">3</div>
+                    <div class="hm-cell heat-2">2</div>
+                    <div class="hm-cell heat-1">1</div>
+                    <div class="hm-cell heat-2">2</div>
+                    <div class="hm-cell heat-4">4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-16: Score Matrix -->
+        <div class="template-card" id="matrix-16">
+            <div class="template-header">
+                <span class="template-id">#matrix-16</span>
+                <span class="template-title">Score Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="score-matrix">
+                    <div class="sm-header">項目</div>
+                    <div class="sm-header">自己</div>
+                    <div class="sm-header">上司</div>
+                    <div class="sm-header">同僚</div>
+
+                    <div class="sm-row-label">企画力</div>
+                    <div class="sm-cell score-high">A</div>
+                    <div class="sm-cell score-high">A</div>
+                    <div class="sm-cell score-mid">B</div>
+
+                    <div class="sm-row-label">実行力</div>
+                    <div class="sm-cell score-mid">B</div>
+                    <div class="sm-cell score-high">A</div>
+                    <div class="sm-cell score-high">A</div>
+
+                    <div class="sm-row-label">協調性</div>
+                    <div class="sm-cell score-high">A</div>
+                    <div class="sm-cell score-mid">B</div>
+                    <div class="sm-cell score-high">A</div>
+
+                    <div class="sm-row-label">専門性</div>
+                    <div class="sm-cell score-mid">B</div>
+                    <div class="sm-cell score-low">C</div>
+                    <div class="sm-cell score-mid">B</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-17: Status Matrix -->
+        <div class="template-card" id="matrix-17">
+            <div class="template-header">
+                <span class="template-id">#matrix-17</span>
+                <span class="template-title">Status Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="status-matrix">
+                    <div class="stm-header">タスク</div>
+                    <div class="stm-header">設計</div>
+                    <div class="stm-header">実装</div>
+                    <div class="stm-header">テスト</div>
+
+                    <div class="stm-task">機能A</div>
+                    <div class="stm-cell status-done">✓</div>
+                    <div class="stm-cell status-done">✓</div>
+                    <div class="stm-cell status-progress">🔄</div>
+
+                    <div class="stm-task">機能B</div>
+                    <div class="stm-cell status-done">✓</div>
+                    <div class="stm-cell status-progress">🔄</div>
+                    <div class="stm-cell status-pending">-</div>
+
+                    <div class="stm-task">機能C</div>
+                    <div class="stm-cell status-progress">🔄</div>
+                    <div class="stm-cell status-pending">-</div>
+                    <div class="stm-cell status-pending">-</div>
+
+                    <div class="stm-task">機能D</div>
+                    <div class="stm-cell status-blocked">🚫</div>
+                    <div class="stm-cell status-pending">-</div>
+                    <div class="stm-cell status-pending">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-18: Responsibility Matrix (RACI) -->
+        <div class="template-card" id="matrix-18">
+            <div class="template-header">
+                <span class="template-id">#matrix-18</span>
+                <span class="template-title">RACI Matrix</span>
+            </div>
+            <div class="diagram-container">
+                <div class="raci-matrix">
+                    <div class="raci-header" style="background: #e0e0e0; color: #333;">役割</div>
+                    <div class="raci-header raci-r">R</div>
+                    <div class="raci-header raci-a">A</div>
+                    <div class="raci-header raci-c">C</div>
+                    <div class="raci-header raci-i">I</div>
+
+                    <div class="raci-task">企画</div>
+                    <div class="raci-cell has-r">R</div>
+                    <div class="raci-cell has-a">A</div>
+                    <div class="raci-cell has-c">C</div>
+                    <div class="raci-cell">-</div>
+
+                    <div class="raci-task">設計</div>
+                    <div class="raci-cell has-r">R</div>
+                    <div class="raci-cell">-</div>
+                    <div class="raci-cell has-a">A</div>
+                    <div class="raci-cell has-i">I</div>
+
+                    <div class="raci-task">実装</div>
+                    <div class="raci-cell">-</div>
+                    <div class="raci-cell has-r">R</div>
+                    <div class="raci-cell has-c">C</div>
+                    <div class="raci-cell has-a">A</div>
+
+                    <div class="raci-task">レビュー</div>
+                    <div class="raci-cell has-c">C</div>
+                    <div class="raci-cell has-r">R</div>
+                    <div class="raci-cell has-a">A</div>
+                    <div class="raci-cell has-i">I</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-19: BCG Matrix Style -->
+        <div class="template-card" id="matrix-19">
+            <div class="template-header">
+                <span class="template-id">#matrix-19</span>
+                <span class="template-title">BCG Matrix Style</span>
+            </div>
+            <div class="diagram-container">
+                <div class="bcg-matrix">
+                    <span class="bcg-axis top">市場成長率 高</span>
+                    <span class="bcg-axis left">市場シェア</span>
+                    <div class="bcg-grid">
+                        <div class="bcg-cell question">
+                            <span class="bcg-icon">❓</span>
+                            <span class="bcg-title">問題児</span>
+                            <span class="bcg-desc">投資判断</span>
+                        </div>
+                        <div class="bcg-cell stars">
+                            <span class="bcg-icon">⭐</span>
+                            <span class="bcg-title">花形</span>
+                            <span class="bcg-desc">積極投資</span>
+                        </div>
+                        <div class="bcg-cell dogs">
+                            <span class="bcg-icon">🐕</span>
+                            <span class="bcg-title">負け犬</span>
+                            <span class="bcg-desc">撤退検討</span>
+                        </div>
+                        <div class="bcg-cell cash-cow">
+                            <span class="bcg-icon">🐄</span>
+                            <span class="bcg-title">金のなる木</span>
+                            <span class="bcg-desc">収穫</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #matrix-20: Positioning Map -->
+        <div class="template-card" id="matrix-20">
+            <div class="template-header">
+                <span class="template-id">#matrix-20</span>
+                <span class="template-title">Positioning Map</span>
+            </div>
+            <div class="diagram-container">
+                <div class="positioning-map">
+                    <div class="pm-axis-x"></div>
+                    <div class="pm-axis-y"></div>
+                    <span class="pm-label top">高品質</span>
+                    <span class="pm-label bottom">低品質</span>
+                    <span class="pm-label left">低価格</span>
+                    <span class="pm-label right">高価格</span>
+
+                    <div class="pm-brand brand-a">
+                        <div class="pm-circle">A社</div>
+                        <span class="pm-name">プレミアム</span>
+                    </div>
+                    <div class="pm-brand brand-b">
+                        <div class="pm-circle">B社</div>
+                        <span class="pm-name">バリュー</span>
+                    </div>
+                    <div class="pm-brand brand-c">
+                        <div class="pm-circle">C社</div>
+                        <span class="pm-name">スタンダード</span>
+                    </div>
+                    <div class="pm-brand brand-d">
+                        <div class="pm-circle">D社</div>
+                        <span class="pm-name">ラグジュアリー</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Toggle checkbox cells on click
+        document.querySelectorAll('#matrix-11 .cb-cell').forEach(cell => {
+            cell.addEventListener('click', () => {
+                cell.classList.toggle('checked');
+            });
+        });
+    </script>
+</body>
+</html>

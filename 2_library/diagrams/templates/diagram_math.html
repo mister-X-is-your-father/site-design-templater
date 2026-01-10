@@ -1,0 +1,2802 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math & Calculation Diagram Layouts - 数学・計算図解テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b9d;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .template-id {
+            display: inline-block;
+            background: #fff0f5;
+            color: #ff6b9d;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .template-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .diagram-container {
+            background: #fafbfc;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===================================
+           #math-1: Addition Visual
+           =================================== */
+        .addition-visual {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .object-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .math-object {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .math-object:hover {
+            transform: scale(1.2);
+        }
+
+        .obj-pink { background: #ff6b9d; }
+        .obj-sky { background: #87ceeb; }
+        .obj-mint { background: #98d8c8; }
+        .obj-yellow { background: #ffe66d; }
+        .obj-orange { background: #ffb347; }
+        .obj-purple { background: #dda0dd; }
+
+        .math-operator {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .math-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .result-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ===================================
+           #math-2: Subtraction Visual
+           =================================== */
+        .subtraction-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .subtraction-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .crossed-object {
+            position: relative;
+        }
+
+        .crossed-object::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5px;
+            right: -5px;
+            height: 3px;
+            background: #f44336;
+            transform: rotate(-45deg);
+        }
+
+        .subtraction-equation {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* ===================================
+           #math-3: Multiplication Array
+           =================================== */
+        .multiplication-array {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .array-grid {
+            display: grid;
+            gap: 8px;
+        }
+
+        .grid-3x4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .array-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .array-dot:hover {
+            transform: scale(1.3);
+        }
+
+        .array-equation {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .array-row-label {
+            position: absolute;
+            left: -30px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ===================================
+           #math-4: Division Sharing
+           =================================== */
+        .division-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .division-groups {
+            display: flex;
+            gap: 20px;
+        }
+
+        .share-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            background: white;
+            border: 2px dashed #87ceeb;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .share-group:hover {
+            transform: scale(1.05);
+            border-color: #ff6b9d;
+        }
+
+        .share-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            max-width: 80px;
+        }
+
+        .share-item {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        .share-label {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .division-equation {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ===================================
+           #math-5: Fraction Pie
+           =================================== */
+        .fraction-pies {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .fraction-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fraction-pie {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .fraction-pie:hover {
+            transform: scale(1.1);
+        }
+
+        .pie-half {
+            background: conic-gradient(#ff6b9d 0deg 180deg, #f0f0f0 180deg 360deg);
+        }
+
+        .pie-quarter {
+            background: conic-gradient(#87ceeb 0deg 90deg, #f0f0f0 90deg 360deg);
+        }
+
+        .pie-three-quarter {
+            background: conic-gradient(#98d8c8 0deg 270deg, #f0f0f0 270deg 360deg);
+        }
+
+        .pie-third {
+            background: conic-gradient(#ffe66d 0deg 120deg, #f0f0f0 120deg 360deg);
+        }
+
+        .fraction-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .fraction-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .fraction-num {
+            border-bottom: 2px solid #333;
+            padding-bottom: 2px;
+        }
+
+        .fraction-den {
+            padding-top: 2px;
+        }
+
+        /* ===================================
+           #math-6: Percentage Bar
+           =================================== */
+        .percentage-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .pct-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .pct-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .pct-bar-bg {
+            height: 25px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pct-bar-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+        }
+
+        .pct-bar-fill:hover {
+            filter: brightness(1.1);
+        }
+
+        .pct-25 { width: 25%; background: #ff6b9d; }
+        .pct-50 { width: 50%; background: #87ceeb; }
+        .pct-75 { width: 75%; background: #98d8c8; }
+        .pct-100 { width: 100%; background: #ffe66d; }
+
+        .pct-value {
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* ===================================
+           #math-7: Number Line
+           =================================== */
+        .number-line-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .number-line {
+            width: 100%;
+            height: 4px;
+            background: #ddd;
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .number-tick {
+            position: absolute;
+            top: -8px;
+            width: 2px;
+            height: 20px;
+            background: #333;
+        }
+
+        .number-label {
+            position: absolute;
+            top: 18px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #333;
+            transform: translateX(-50%);
+        }
+
+        .number-marker {
+            position: absolute;
+            top: -18px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .number-marker:hover {
+            transform: translateX(-50%) scale(1.3);
+        }
+
+        /* ===================================
+           #math-8: Place Value Chart
+           =================================== */
+        .place-value-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .place-value-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .place-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .place-header {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #666;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .header-hundreds { background: #ff6b9d; color: white; }
+        .header-tens { background: #87ceeb; color: white; }
+        .header-ones { background: #98d8c8; color: white; }
+
+        .place-value {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .place-value:hover {
+            transform: scale(1.1);
+        }
+
+        .place-result {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ===================================
+           #math-9: Greater/Less Than
+           =================================== */
+        .comparison-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .compare-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .compare-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .compare-number:hover {
+            transform: scale(1.1);
+        }
+
+        .compare-symbol {
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .compare-symbol:hover {
+            transform: scale(1.3);
+        }
+
+        .symbol-greater { color: #4caf50; }
+        .symbol-less { color: #f44336; }
+        .symbol-equal { color: #ff9800; }
+
+        /* ===================================
+           #math-10: Equal/Not Equal
+           =================================== */
+        .equality-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .equality-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+
+        .equality-row:hover {
+            transform: scale(1.02);
+        }
+
+        .equality-side {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .equality-symbol {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+
+        .equal-true {
+            background: #e8f5e9;
+            color: #4caf50;
+        }
+
+        .equal-false {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        /* ===================================
+           #math-11: Odd/Even Sorting
+           =================================== */
+        .odd-even-sort {
+            display: flex;
+            gap: 30px;
+        }
+
+        .sort-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sort-header {
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .header-odd { background: #ff6b9d; }
+        .header-even { background: #87ceeb; }
+
+        .sort-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            max-width: 120px;
+        }
+
+        .sort-num {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .sort-num:hover {
+            transform: scale(1.15);
+        }
+
+        /* ===================================
+           #math-12: Skip Counting
+           =================================== */
+        .skip-counting {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .skip-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        .skip-sequence {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .skip-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .skip-number:hover {
+            transform: scale(1.2);
+        }
+
+        .skip-number:not(:last-child)::after {
+            content: '+';
+            position: absolute;
+            right: -18px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .skip-arrow {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ===================================
+           #math-13: Doubles Visualization
+           =================================== */
+        .doubles-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .doubles-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .doubles-group {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px dashed;
+        }
+
+        .double-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .double-dot:hover {
+            transform: scale(1.2);
+        }
+
+        .doubles-equals {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .doubles-result {
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* ===================================
+           #math-14: Half Visualization
+           =================================== */
+        .half-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .half-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .half-whole {
+            display: flex;
+            gap: 3px;
+        }
+
+        .half-piece {
+            width: 30px;
+            height: 50px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .half-piece:hover {
+            transform: scale(1.1);
+        }
+
+        .half-arrow {
+            font-size: 1.5rem;
+            color: #888;
+        }
+
+        .half-parts {
+            display: flex;
+            gap: 20px;
+        }
+
+        .half-part-group {
+            display: flex;
+            gap: 3px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px dashed #98d8c8;
+        }
+
+        .half-equation {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ===================================
+           #math-15: Money Counting
+           =================================== */
+        .money-counting {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .coins-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .coin {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            border: 3px solid;
+            transition: transform 0.2s;
+        }
+
+        .coin:hover {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .coin-100 { background: #ff6b9d; border-color: #e75480; }
+        .coin-50 { background: #87ceeb; border-color: #5fb3d4; }
+        .coin-10 { background: #98d8c8; border-color: #6bc4ae; }
+        .coin-5 { background: #ffe66d; border-color: #e6c84d; }
+        .coin-1 { background: #ffb347; border-color: #e69422; }
+
+        .money-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            padding: 10px 25px;
+            background: #fff9e6;
+            border-radius: 25px;
+            border: 2px solid #ffe66d;
+        }
+
+        /* ===================================
+           #math-16: Time Telling
+           =================================== */
+        .clock-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .clock-face {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid #333;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .clock-face:hover {
+            transform: scale(1.05);
+        }
+
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .clock-hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 3px;
+        }
+
+        .hour-hand {
+            width: 4px;
+            height: 35px;
+            background: #333;
+            transform: translateX(-50%) rotate(90deg);
+        }
+
+        .minute-hand {
+            width: 3px;
+            height: 50px;
+            background: #ff6b9d;
+            transform: translateX(-50%) rotate(0deg);
+        }
+
+        .clock-number {
+            position: absolute;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .clock-12 { top: 8px; left: 50%; transform: translateX(-50%); }
+        .clock-3 { top: 50%; right: 8px; transform: translateY(-50%); }
+        .clock-6 { bottom: 8px; left: 50%; transform: translateX(-50%); }
+        .clock-9 { top: 50%; left: 8px; transform: translateY(-50%); }
+
+        .time-display {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ===================================
+           #math-17: Measurement Ruler
+           =================================== */
+        .measurement-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .ruler {
+            width: 100%;
+            height: 40px;
+            background: #ffe66d;
+            border-radius: 5px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .ruler-mark {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+            background: #333;
+        }
+
+        .mark-major {
+            height: 20px;
+        }
+
+        .mark-minor {
+            height: 10px;
+        }
+
+        .ruler-number {
+            position: absolute;
+            bottom: 22px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transform: translateX(-50%);
+        }
+
+        .measured-item {
+            height: 25px;
+            border-radius: 5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* ===================================
+           #math-18: Weight Comparison
+           =================================== */
+        .scale-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scale-base {
+            width: 20px;
+            height: 60px;
+            background: #333;
+            border-radius: 5px;
+        }
+
+        .scale-beam {
+            width: 200px;
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            position: relative;
+            transition: transform 0.5s;
+        }
+
+        .scale-beam.tilt-left {
+            transform: rotate(-10deg);
+        }
+
+        .scale-beam.tilt-right {
+            transform: rotate(10deg);
+        }
+
+        .scale-pan {
+            position: absolute;
+            bottom: -60px;
+            width: 70px;
+            height: 15px;
+            background: #87ceeb;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .pan-left {
+            left: -20px;
+        }
+
+        .pan-right {
+            right: -20px;
+        }
+
+        .scale-item {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: -35px;
+        }
+
+        .scale-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        /* ===================================
+           #math-19: Thermometer
+           =================================== */
+        .thermometer-visual {
+            display: flex;
+            gap: 30px;
+            align-items: flex-end;
+        }
+
+        .thermometer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .thermo-tube {
+            width: 25px;
+            height: 120px;
+            background: #f0f0f0;
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ddd;
+        }
+
+        .thermo-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 0 0 10px 10px;
+            transition: height 0.5s;
+        }
+
+        .thermo-bulb {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            margin-top: -5px;
+        }
+
+        .thermo-scale {
+            position: absolute;
+            right: -25px;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            color: #888;
+        }
+
+        .thermo-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .fill-hot { background: #ff6b9d; }
+        .fill-warm { background: #ffb347; }
+        .fill-cool { background: #87ceeb; }
+        .bulb-hot { background: #ff6b9d; }
+        .bulb-warm { background: #ffb347; }
+        .bulb-cool { background: #87ceeb; }
+
+        /* ===================================
+           #math-20: Shape Properties
+           =================================== */
+        .shape-properties {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .shape-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+
+        .shape-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .shape-figure {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 52px solid #ff6b9d;
+        }
+
+        .shape-square {
+            width: 50px;
+            height: 50px;
+            background: #87ceeb;
+        }
+
+        .shape-pentagon {
+            width: 50px;
+            height: 50px;
+            background: #98d8c8;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+        }
+
+        .shape-hexagon {
+            width: 50px;
+            height: 50px;
+            background: #ffe66d;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+
+        .shape-info {
+            text-align: center;
+        }
+
+        .shape-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .shape-detail {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* ===================================
+           #math-21: Symmetry Line
+           =================================== */
+        .symmetry-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .symmetry-shape {
+            display: flex;
+            position: relative;
+        }
+
+        .symmetry-half {
+            width: 60px;
+            height: 80px;
+            transition: transform 0.3s;
+        }
+
+        .symmetry-half:hover {
+            transform: scaleX(1.1);
+        }
+
+        .half-left {
+            background: #ff6b9d;
+            border-radius: 60px 0 0 60px;
+        }
+
+        .half-right {
+            background: #87ceeb;
+            border-radius: 0 60px 60px 0;
+        }
+
+        .symmetry-line {
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            bottom: -10px;
+            width: 3px;
+            background: #333;
+            transform: translateX(-50%);
+        }
+
+        .symmetry-line::before,
+        .symmetry-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .symmetry-line::before { top: -5px; }
+        .symmetry-line::after { bottom: -5px; }
+
+        .symmetry-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ===================================
+           #math-22: Pattern Recognition
+           =================================== */
+        .pattern-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .pattern-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pattern-item {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .pattern-item:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .pattern-a { background: #ff6b9d; }
+        .pattern-b { background: #87ceeb; }
+        .pattern-c { background: #98d8c8; }
+
+        .pattern-question {
+            width: 40px;
+            height: 40px;
+            border: 3px dashed #dda0dd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #dda0dd;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .pattern-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* ===================================
+           #math-23: Sorting by Attribute
+           =================================== */
+        .sorting-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .sort-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .sort-categories {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .sort-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid;
+            min-width: 100px;
+        }
+
+        .cat-small {
+            border-color: #ff6b9d;
+            background: #fff0f5;
+        }
+
+        .cat-medium {
+            border-color: #87ceeb;
+            background: #f0f8ff;
+        }
+
+        .cat-large {
+            border-color: #98d8c8;
+            background: #f0fff0;
+        }
+
+        .cat-label {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .cat-items {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cat-item {
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .cat-item:hover {
+            transform: scale(1.2);
+        }
+
+        .item-small { width: 20px; height: 20px; }
+        .item-medium { width: 30px; height: 30px; }
+        .item-large { width: 40px; height: 40px; }
+
+        /* ===================================
+           #math-24: Grouping Sets
+           =================================== */
+        .sets-visual {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .set-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 15px;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .set-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .set-a { border-color: #ff6b9d; background: rgba(255,107,157,0.1); }
+        .set-b { border-color: #87ceeb; background: rgba(135,206,235,0.1); }
+
+        .set-item {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        .set-label {
+            position: absolute;
+            top: -25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .set-count {
+            position: absolute;
+            bottom: -25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .sets-operator {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #888;
+        }
+
+        /* ===================================
+           #math-25: Graph Reading
+           =================================== */
+        .graph-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .graph-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .bar-graph-simple {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 140px;
+            padding: 0 10px;
+            border-left: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+
+        .graph-bar {
+            width: 40px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .graph-bar:hover {
+            transform: scaleY(1.05);
+            transform-origin: bottom;
+        }
+
+        .bar-value-top {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+            margin-top: 5px;
+        }
+
+        .graph-labels {
+            display: flex;
+            justify-content: space-around;
+            padding: 5px 10px 0;
+        }
+
+        .graph-label {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* ===================================
+           #math-26: Tally Marks
+           =================================== */
+        .tally-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .tally-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tally-label {
+            width: 60px;
+            font-size: 0.85rem;
+            color: #333;
+        }
+
+        .tally-marks {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tally-group {
+            display: flex;
+            position: relative;
+            width: 35px;
+            height: 40px;
+        }
+
+        .tally-mark {
+            width: 4px;
+            height: 35px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+        }
+
+        .mark-1 { left: 0; }
+        .mark-2 { left: 8px; }
+        .mark-3 { left: 16px; }
+        .mark-4 { left: 24px; }
+        .mark-5 {
+            width: 40px;
+            height: 4px;
+            left: -3px;
+            top: 50%;
+            transform: rotate(-20deg);
+        }
+
+        .tally-count {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .count-pink { background: #ff6b9d; color: white; }
+        .count-sky { background: #87ceeb; color: white; }
+        .count-mint { background: #98d8c8; color: white; }
+
+        /* ===================================
+           #math-27: Roman Numerals
+           =================================== */
+        .roman-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .roman-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .roman-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            width: 70px;
+            text-align: center;
+        }
+
+        .roman-equals {
+            font-size: 1.5rem;
+            color: #888;
+        }
+
+        .arabic-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .arabic-number:hover {
+            transform: scale(1.15);
+        }
+
+        /* ===================================
+           #math-28: Ordinal Numbers
+           =================================== */
+        .ordinal-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .ordinal-podium {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .podium-place {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s;
+        }
+
+        .podium-place:hover {
+            transform: translateY(-5px);
+        }
+
+        .place-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .podium-block {
+            width: 60px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .block-1st { height: 80px; background: #ffe66d; color: #333; }
+        .block-2nd { height: 60px; background: #c0c0c0; }
+        .block-3rd { height: 40px; background: #cd7f32; }
+
+        .ordinal-label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ===================================
+           #math-29: Prime Numbers
+           =================================== */
+        .prime-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .prime-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        .prime-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .prime-cell {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .prime-cell:hover {
+            transform: scale(1.15);
+        }
+
+        .is-prime {
+            background: #ff6b9d;
+            color: white;
+        }
+
+        .not-prime {
+            background: #f0f0f0;
+            color: #999;
+        }
+
+        .prime-legend {
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+        }
+
+        .legend-prime {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-dot-prime {
+            width: 15px;
+            height: 15px;
+            border-radius: 4px;
+            background: #ff6b9d;
+        }
+
+        .legend-dot-not {
+            width: 15px;
+            height: 15px;
+            border-radius: 4px;
+            background: #f0f0f0;
+        }
+
+        /* ===================================
+           #math-30: Multiplication Table Mini
+           =================================== */
+        .mult-table-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .mult-table {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 3px;
+        }
+
+        .mult-cell {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .mult-cell:hover {
+            transform: scale(1.15);
+            z-index: 10;
+        }
+
+        .mult-header {
+            background: #333;
+            color: white;
+            font-weight: bold;
+        }
+
+        .mult-corner {
+            background: #ff6b9d;
+            color: white;
+            font-weight: bold;
+        }
+
+        .mult-row-header {
+            background: #87ceeb;
+            color: white;
+        }
+
+        .mult-col-header {
+            background: #98d8c8;
+            color: white;
+        }
+
+        .mult-value {
+            background: #fff9e6;
+            color: #333;
+        }
+
+        .mult-value:hover {
+            background: #ffe66d;
+        }
+
+        /* ===================================
+           Responsive Adjustments
+           =================================== */
+        @media (max-width: 768px) {
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fraction-pies {
+                flex-direction: column;
+            }
+
+            .comparison-visual,
+            .doubles-visual {
+                transform: scale(0.9);
+            }
+
+            .division-groups {
+                flex-direction: column;
+            }
+
+            .shape-properties {
+                flex-direction: column;
+            }
+
+            .thermometer-visual {
+                flex-direction: column;
+            }
+
+            .sort-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">Math & Calculation Diagram Layouts</h1>
+    <p class="page-subtitle">数学・計算図解テンプレート - 30 Patterns</p>
+
+    <div class="template-grid">
+
+        <!-- #math-1: Addition Visual -->
+        <div class="template-card" id="math-1">
+            <span class="template-id">#math-1</span>
+            <h3 class="template-name">Addition Visual / たし算ビジュアル</h3>
+            <div class="diagram-container">
+                <div class="addition-visual">
+                    <div class="object-group">
+                        <div class="math-object obj-pink"></div>
+                        <div class="math-object obj-pink"></div>
+                        <div class="math-object obj-pink"></div>
+                    </div>
+                    <span class="math-operator">+</span>
+                    <div class="object-group">
+                        <div class="math-object obj-sky"></div>
+                        <div class="math-object obj-sky"></div>
+                    </div>
+                    <span class="math-operator">=</span>
+                    <div class="math-result">
+                        <span class="result-number">5</span>
+                        <span class="result-label">3 + 2 = 5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-2: Subtraction Visual -->
+        <div class="template-card" id="math-2">
+            <span class="template-id">#math-2</span>
+            <h3 class="template-name">Subtraction Visual / ひき算ビジュアル</h3>
+            <div class="diagram-container">
+                <div class="subtraction-visual">
+                    <div class="subtraction-row">
+                        <div class="math-object obj-mint"></div>
+                        <div class="math-object obj-mint"></div>
+                        <div class="math-object obj-mint"></div>
+                        <div class="crossed-object">
+                            <div class="math-object obj-mint" style="opacity: 0.4;"></div>
+                        </div>
+                        <div class="crossed-object">
+                            <div class="math-object obj-mint" style="opacity: 0.4;"></div>
+                        </div>
+                    </div>
+                    <div class="subtraction-equation">5 - 2 = 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-3: Multiplication Array -->
+        <div class="template-card" id="math-3">
+            <span class="template-id">#math-3</span>
+            <h3 class="template-name">Multiplication Array / かけ算の配列</h3>
+            <div class="diagram-container">
+                <div class="multiplication-array">
+                    <div class="array-grid grid-3x4">
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                        <div class="array-dot obj-yellow"></div>
+                    </div>
+                    <div class="array-equation">3 x 4 = 12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-4: Division Sharing -->
+        <div class="template-card" id="math-4">
+            <span class="template-id">#math-4</span>
+            <h3 class="template-name">Division Sharing / わり算（分ける）</h3>
+            <div class="diagram-container">
+                <div class="division-visual">
+                    <div class="division-groups">
+                        <div class="share-group">
+                            <span class="share-label">Group 1</span>
+                            <div class="share-items">
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                            </div>
+                        </div>
+                        <div class="share-group">
+                            <span class="share-label">Group 2</span>
+                            <div class="share-items">
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                            </div>
+                        </div>
+                        <div class="share-group">
+                            <span class="share-label">Group 3</span>
+                            <div class="share-items">
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                                <div class="share-item obj-orange"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="division-equation">12 / 3 = 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-5: Fraction Pie -->
+        <div class="template-card" id="math-5">
+            <span class="template-id">#math-5</span>
+            <h3 class="template-name">Fraction Pie / 分数パイ</h3>
+            <div class="diagram-container">
+                <div class="fraction-pies">
+                    <div class="fraction-item">
+                        <div class="fraction-pie pie-half"></div>
+                        <div class="fraction-display">
+                            <span class="fraction-num">1</span>
+                            <span class="fraction-den">2</span>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <div class="fraction-pie pie-quarter"></div>
+                        <div class="fraction-display">
+                            <span class="fraction-num">1</span>
+                            <span class="fraction-den">4</span>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <div class="fraction-pie pie-three-quarter"></div>
+                        <div class="fraction-display">
+                            <span class="fraction-num">3</span>
+                            <span class="fraction-den">4</span>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <div class="fraction-pie pie-third"></div>
+                        <div class="fraction-display">
+                            <span class="fraction-num">1</span>
+                            <span class="fraction-den">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-6: Percentage Bar -->
+        <div class="template-card" id="math-6">
+            <span class="template-id">#math-6</span>
+            <h3 class="template-name">Percentage Bar / パーセントバー</h3>
+            <div class="diagram-container">
+                <div class="percentage-bars">
+                    <div class="pct-item">
+                        <div class="pct-label-row">
+                            <span>25%</span>
+                            <span style="color: #ff6b9d; font-weight: bold;">1/4</span>
+                        </div>
+                        <div class="pct-bar-bg">
+                            <div class="pct-bar-fill pct-25"></div>
+                        </div>
+                    </div>
+                    <div class="pct-item">
+                        <div class="pct-label-row">
+                            <span>50%</span>
+                            <span style="color: #87ceeb; font-weight: bold;">1/2</span>
+                        </div>
+                        <div class="pct-bar-bg">
+                            <div class="pct-bar-fill pct-50"></div>
+                        </div>
+                    </div>
+                    <div class="pct-item">
+                        <div class="pct-label-row">
+                            <span>75%</span>
+                            <span style="color: #98d8c8; font-weight: bold;">3/4</span>
+                        </div>
+                        <div class="pct-bar-bg">
+                            <div class="pct-bar-fill pct-75"></div>
+                        </div>
+                    </div>
+                    <div class="pct-item">
+                        <div class="pct-label-row">
+                            <span>100%</span>
+                            <span style="color: #e6c84d; font-weight: bold;">1</span>
+                        </div>
+                        <div class="pct-bar-bg">
+                            <div class="pct-bar-fill pct-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-7: Number Line -->
+        <div class="template-card" id="math-7">
+            <span class="template-id">#math-7</span>
+            <h3 class="template-name">Number Line / 数直線</h3>
+            <div class="diagram-container">
+                <div class="number-line-container">
+                    <div class="number-line">
+                        <div class="number-tick" style="left: 0%;"></div>
+                        <div class="number-label" style="left: 0%;">0</div>
+                        <div class="number-tick" style="left: 20%;"></div>
+                        <div class="number-label" style="left: 20%;">2</div>
+                        <div class="number-tick" style="left: 40%;"></div>
+                        <div class="number-label" style="left: 40%;">4</div>
+                        <div class="number-tick" style="left: 60%;"></div>
+                        <div class="number-label" style="left: 60%;">6</div>
+                        <div class="number-tick" style="left: 80%;"></div>
+                        <div class="number-label" style="left: 80%;">8</div>
+                        <div class="number-tick" style="left: 100%;"></div>
+                        <div class="number-label" style="left: 100%;">10</div>
+                        <div class="number-marker obj-pink" style="left: 30%;">3</div>
+                        <div class="number-marker obj-sky" style="left: 70%;">7</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-8: Place Value Chart -->
+        <div class="template-card" id="math-8">
+            <span class="template-id">#math-8</span>
+            <h3 class="template-name">Place Value Chart / 位取り表</h3>
+            <div class="diagram-container">
+                <div class="place-value-chart">
+                    <div class="place-value-row">
+                        <div class="place-column">
+                            <span class="place-header header-hundreds">100s</span>
+                            <div class="place-value obj-pink">3</div>
+                        </div>
+                        <div class="place-column">
+                            <span class="place-header header-tens">10s</span>
+                            <div class="place-value obj-sky">4</div>
+                        </div>
+                        <div class="place-column">
+                            <span class="place-header header-ones">1s</span>
+                            <div class="place-value obj-mint">7</div>
+                        </div>
+                    </div>
+                    <div class="place-result">= 347</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-9: Greater/Less Than -->
+        <div class="template-card" id="math-9">
+            <span class="template-id">#math-9</span>
+            <h3 class="template-name">Greater/Less Than / 大小比較</h3>
+            <div class="diagram-container">
+                <div class="comparison-visual">
+                    <div class="compare-row">
+                        <div class="compare-number obj-pink">7</div>
+                        <span class="compare-symbol symbol-greater">></span>
+                        <div class="compare-number obj-sky">3</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-number obj-mint">2</div>
+                        <span class="compare-symbol symbol-less"><</span>
+                        <div class="compare-number obj-yellow">9</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-number obj-orange">5</div>
+                        <span class="compare-symbol symbol-equal">=</span>
+                        <div class="compare-number obj-purple">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-10: Equal/Not Equal -->
+        <div class="template-card" id="math-10">
+            <span class="template-id">#math-10</span>
+            <h3 class="template-name">Equal/Not Equal / 等号・不等号</h3>
+            <div class="diagram-container">
+                <div class="equality-visual">
+                    <div class="equality-row">
+                        <div class="equality-side">3 + 2</div>
+                        <span class="equality-symbol equal-true">=</span>
+                        <div class="equality-side">5</div>
+                    </div>
+                    <div class="equality-row">
+                        <div class="equality-side">4 + 3</div>
+                        <span class="equality-symbol equal-false">!=</span>
+                        <div class="equality-side">6</div>
+                    </div>
+                    <div class="equality-row">
+                        <div class="equality-side">2 x 4</div>
+                        <span class="equality-symbol equal-true">=</span>
+                        <div class="equality-side">8</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-11: Odd/Even Sorting -->
+        <div class="template-card" id="math-11">
+            <span class="template-id">#math-11</span>
+            <h3 class="template-name">Odd/Even Sorting / 奇数・偶数分け</h3>
+            <div class="diagram-container">
+                <div class="odd-even-sort">
+                    <div class="sort-column">
+                        <span class="sort-header header-odd">Odd</span>
+                        <div class="sort-numbers">
+                            <div class="sort-num obj-pink">1</div>
+                            <div class="sort-num obj-pink">3</div>
+                            <div class="sort-num obj-pink">5</div>
+                            <div class="sort-num obj-pink">7</div>
+                            <div class="sort-num obj-pink">9</div>
+                        </div>
+                    </div>
+                    <div class="sort-column">
+                        <span class="sort-header header-even">Even</span>
+                        <div class="sort-numbers">
+                            <div class="sort-num obj-sky">2</div>
+                            <div class="sort-num obj-sky">4</div>
+                            <div class="sort-num obj-sky">6</div>
+                            <div class="sort-num obj-sky">8</div>
+                            <div class="sort-num obj-sky">10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-12: Skip Counting -->
+        <div class="template-card" id="math-12">
+            <span class="template-id">#math-12</span>
+            <h3 class="template-name">Skip Counting / とび数え</h3>
+            <div class="diagram-container">
+                <div class="skip-counting">
+                    <div class="skip-title">Count by 5s</div>
+                    <div class="skip-sequence">
+                        <div class="skip-number obj-mint">5</div>
+                        <div class="skip-number obj-mint">10</div>
+                        <div class="skip-number obj-mint">15</div>
+                        <div class="skip-number obj-mint">20</div>
+                        <div class="skip-number obj-mint">25</div>
+                    </div>
+                    <div class="skip-arrow">+5 each step</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-13: Doubles Visualization -->
+        <div class="template-card" id="math-13">
+            <span class="template-id">#math-13</span>
+            <h3 class="template-name">Doubles Visualization / 2倍のビジュアル</h3>
+            <div class="diagram-container">
+                <div class="doubles-visual">
+                    <div class="doubles-row">
+                        <div class="doubles-group" style="border-color: #ff6b9d;">
+                            <div class="double-dot obj-pink"></div>
+                            <div class="double-dot obj-pink"></div>
+                            <div class="double-dot obj-pink"></div>
+                        </div>
+                        <span class="doubles-equals">+</span>
+                        <div class="doubles-group" style="border-color: #ff6b9d;">
+                            <div class="double-dot obj-pink"></div>
+                            <div class="double-dot obj-pink"></div>
+                            <div class="double-dot obj-pink"></div>
+                        </div>
+                        <span class="doubles-equals">=</span>
+                        <div class="doubles-result obj-pink">6</div>
+                    </div>
+                    <div style="font-size: 1rem; font-weight: bold; color: #333;">3 + 3 = 6 (Double 3)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-14: Half Visualization -->
+        <div class="template-card" id="math-14">
+            <span class="template-id">#math-14</span>
+            <h3 class="template-name">Half Visualization / 半分のビジュアル</h3>
+            <div class="diagram-container">
+                <div class="half-visual">
+                    <div class="half-item">
+                        <div class="half-whole">
+                            <div class="half-piece obj-sky"></div>
+                            <div class="half-piece obj-sky"></div>
+                            <div class="half-piece obj-sky"></div>
+                            <div class="half-piece obj-sky"></div>
+                            <div class="half-piece obj-sky"></div>
+                            <div class="half-piece obj-sky"></div>
+                        </div>
+                        <span class="half-arrow">-></span>
+                        <div class="half-parts">
+                            <div class="half-part-group">
+                                <div class="half-piece obj-sky"></div>
+                                <div class="half-piece obj-sky"></div>
+                                <div class="half-piece obj-sky"></div>
+                            </div>
+                            <div class="half-part-group">
+                                <div class="half-piece obj-sky"></div>
+                                <div class="half-piece obj-sky"></div>
+                                <div class="half-piece obj-sky"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="half-equation">6 / 2 = 3 (Half of 6)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-15: Money Counting -->
+        <div class="template-card" id="math-15">
+            <span class="template-id">#math-15</span>
+            <h3 class="template-name">Money Counting / お金の計算</h3>
+            <div class="diagram-container">
+                <div class="money-counting">
+                    <div class="coins-row">
+                        <div class="coin coin-100">100</div>
+                        <div class="coin coin-50">50</div>
+                        <div class="coin coin-10">10</div>
+                        <div class="coin coin-10">10</div>
+                        <div class="coin coin-5">5</div>
+                        <div class="coin coin-1">1</div>
+                        <div class="coin coin-1">1</div>
+                    </div>
+                    <div class="money-total">177</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-16: Time Telling -->
+        <div class="template-card" id="math-16">
+            <span class="template-id">#math-16</span>
+            <h3 class="template-name">Time Telling / 時計の読み方</h3>
+            <div class="diagram-container">
+                <div class="clock-visual">
+                    <div class="clock-face">
+                        <span class="clock-number clock-12">12</span>
+                        <span class="clock-number clock-3">3</span>
+                        <span class="clock-number clock-6">6</span>
+                        <span class="clock-number clock-9">9</span>
+                        <div class="clock-hand hour-hand"></div>
+                        <div class="clock-hand minute-hand"></div>
+                        <div class="clock-center"></div>
+                    </div>
+                    <div class="time-display">3:00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-17: Measurement Ruler -->
+        <div class="template-card" id="math-17">
+            <span class="template-id">#math-17</span>
+            <h3 class="template-name">Measurement Comparison / 長さ比較</h3>
+            <div class="diagram-container">
+                <div class="measurement-visual">
+                    <div class="measured-item" style="width: 60%; background: #ff6b9d;">6 cm</div>
+                    <div class="measured-item" style="width: 40%; background: #87ceeb;">4 cm</div>
+                    <div class="measured-item" style="width: 80%; background: #98d8c8;">8 cm</div>
+                    <div class="ruler">
+                        <div class="ruler-mark mark-major" style="left: 0%;"></div>
+                        <div class="ruler-number" style="left: 0%;">0</div>
+                        <div class="ruler-mark mark-minor" style="left: 10%;"></div>
+                        <div class="ruler-mark mark-major" style="left: 20%;"></div>
+                        <div class="ruler-number" style="left: 20%;">2</div>
+                        <div class="ruler-mark mark-minor" style="left: 30%;"></div>
+                        <div class="ruler-mark mark-major" style="left: 40%;"></div>
+                        <div class="ruler-number" style="left: 40%;">4</div>
+                        <div class="ruler-mark mark-minor" style="left: 50%;"></div>
+                        <div class="ruler-mark mark-major" style="left: 60%;"></div>
+                        <div class="ruler-number" style="left: 60%;">6</div>
+                        <div class="ruler-mark mark-minor" style="left: 70%;"></div>
+                        <div class="ruler-mark mark-major" style="left: 80%;"></div>
+                        <div class="ruler-number" style="left: 80%;">8</div>
+                        <div class="ruler-mark mark-minor" style="left: 90%;"></div>
+                        <div class="ruler-mark mark-major" style="left: 100%;"></div>
+                        <div class="ruler-number" style="left: 100%;">10</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-18: Weight Comparison -->
+        <div class="template-card" id="math-18">
+            <span class="template-id">#math-18</span>
+            <h3 class="template-name">Weight Comparison / 重さ比較</h3>
+            <div class="diagram-container">
+                <div class="scale-visual">
+                    <div class="scale-beam tilt-left">
+                        <div class="scale-pan pan-left">
+                            <div class="scale-item obj-pink">5</div>
+                        </div>
+                        <div class="scale-pan pan-right">
+                            <div class="scale-item obj-sky">3</div>
+                        </div>
+                    </div>
+                    <div class="scale-base"></div>
+                    <div class="scale-label">5 kg > 3 kg</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-19: Temperature Reading -->
+        <div class="template-card" id="math-19">
+            <span class="template-id">#math-19</span>
+            <h3 class="template-name">Temperature Reading / 温度の読み方</h3>
+            <div class="diagram-container">
+                <div class="thermometer-visual">
+                    <div class="thermometer">
+                        <div class="thermo-tube">
+                            <div class="thermo-fill fill-hot" style="height: 80%;"></div>
+                        </div>
+                        <div class="thermo-bulb bulb-hot"></div>
+                        <div class="thermo-label">Hot 35C</div>
+                    </div>
+                    <div class="thermometer">
+                        <div class="thermo-tube">
+                            <div class="thermo-fill fill-warm" style="height: 50%;"></div>
+                        </div>
+                        <div class="thermo-bulb bulb-warm"></div>
+                        <div class="thermo-label">Warm 20C</div>
+                    </div>
+                    <div class="thermometer">
+                        <div class="thermo-tube">
+                            <div class="thermo-fill fill-cool" style="height: 25%;"></div>
+                        </div>
+                        <div class="thermo-bulb bulb-cool"></div>
+                        <div class="thermo-label">Cool 5C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-20: Shape Properties -->
+        <div class="template-card" id="math-20">
+            <span class="template-id">#math-20</span>
+            <h3 class="template-name">Shape Properties / 図形の性質</h3>
+            <div class="diagram-container">
+                <div class="shape-properties">
+                    <div class="shape-card">
+                        <div class="shape-figure">
+                            <div class="shape-triangle"></div>
+                        </div>
+                        <div class="shape-info">
+                            <div class="shape-name">Triangle</div>
+                            <div class="shape-detail">3 sides, 3 corners</div>
+                        </div>
+                    </div>
+                    <div class="shape-card">
+                        <div class="shape-figure">
+                            <div class="shape-square"></div>
+                        </div>
+                        <div class="shape-info">
+                            <div class="shape-name">Square</div>
+                            <div class="shape-detail">4 sides, 4 corners</div>
+                        </div>
+                    </div>
+                    <div class="shape-card">
+                        <div class="shape-figure">
+                            <div class="shape-pentagon"></div>
+                        </div>
+                        <div class="shape-info">
+                            <div class="shape-name">Pentagon</div>
+                            <div class="shape-detail">5 sides, 5 corners</div>
+                        </div>
+                    </div>
+                    <div class="shape-card">
+                        <div class="shape-figure">
+                            <div class="shape-hexagon"></div>
+                        </div>
+                        <div class="shape-info">
+                            <div class="shape-name">Hexagon</div>
+                            <div class="shape-detail">6 sides, 6 corners</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-21: Symmetry Line -->
+        <div class="template-card" id="math-21">
+            <span class="template-id">#math-21</span>
+            <h3 class="template-name">Symmetry Line / 対称線</h3>
+            <div class="diagram-container">
+                <div class="symmetry-visual">
+                    <div class="symmetry-shape">
+                        <div class="symmetry-half half-left"></div>
+                        <div class="symmetry-half half-right"></div>
+                        <div class="symmetry-line"></div>
+                    </div>
+                    <div class="symmetry-label">Line of Symmetry</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-22: Pattern Recognition -->
+        <div class="template-card" id="math-22">
+            <span class="template-id">#math-22</span>
+            <h3 class="template-name">Pattern Recognition / パターン認識</h3>
+            <div class="diagram-container">
+                <div class="pattern-visual">
+                    <div class="pattern-label">A-B-A-B Pattern</div>
+                    <div class="pattern-row">
+                        <div class="pattern-item pattern-a"></div>
+                        <div class="pattern-item pattern-b"></div>
+                        <div class="pattern-item pattern-a"></div>
+                        <div class="pattern-item pattern-b"></div>
+                        <div class="pattern-item pattern-a"></div>
+                        <div class="pattern-question">?</div>
+                    </div>
+                    <div class="pattern-label" style="color: #ff6b9d;">Answer: B</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-23: Sorting by Attribute -->
+        <div class="template-card" id="math-23">
+            <span class="template-id">#math-23</span>
+            <h3 class="template-name">Sorting by Attribute / 属性で分類</h3>
+            <div class="diagram-container">
+                <div class="sorting-visual">
+                    <div class="sort-title">Sort by Size</div>
+                    <div class="sort-categories">
+                        <div class="sort-category cat-small">
+                            <span class="cat-label" style="color: #ff6b9d;">Small</span>
+                            <div class="cat-items">
+                                <div class="cat-item item-small obj-pink"></div>
+                                <div class="cat-item item-small obj-pink"></div>
+                                <div class="cat-item item-small obj-pink"></div>
+                            </div>
+                        </div>
+                        <div class="sort-category cat-medium">
+                            <span class="cat-label" style="color: #87ceeb;">Medium</span>
+                            <div class="cat-items">
+                                <div class="cat-item item-medium obj-sky"></div>
+                                <div class="cat-item item-medium obj-sky"></div>
+                            </div>
+                        </div>
+                        <div class="sort-category cat-large">
+                            <span class="cat-label" style="color: #98d8c8;">Large</span>
+                            <div class="cat-items">
+                                <div class="cat-item item-large obj-mint"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-24: Grouping Sets -->
+        <div class="template-card" id="math-24">
+            <span class="template-id">#math-24</span>
+            <h3 class="template-name">Grouping/Sets Visualization / 集合</h3>
+            <div class="diagram-container">
+                <div class="sets-visual">
+                    <div class="set-circle set-a">
+                        <span class="set-label" style="color: #ff6b9d;">Set A</span>
+                        <div class="set-item obj-pink"></div>
+                        <div class="set-item obj-pink"></div>
+                        <div class="set-item obj-pink"></div>
+                        <div class="set-item obj-pink"></div>
+                        <div class="set-item obj-pink"></div>
+                        <span class="set-count">n = 5</span>
+                    </div>
+                    <span class="sets-operator">U</span>
+                    <div class="set-circle set-b">
+                        <span class="set-label" style="color: #87ceeb;">Set B</span>
+                        <div class="set-item obj-sky"></div>
+                        <div class="set-item obj-sky"></div>
+                        <div class="set-item obj-sky"></div>
+                        <span class="set-count">n = 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-25: Graph Reading -->
+        <div class="template-card" id="math-25">
+            <span class="template-id">#math-25</span>
+            <h3 class="template-name">Graph Reading / グラフの読み方</h3>
+            <div class="diagram-container">
+                <div class="graph-visual">
+                    <div class="graph-title">Favorite Fruits</div>
+                    <div class="bar-graph-simple">
+                        <div class="graph-bar obj-pink" style="height: 70%;">
+                            <span class="bar-value-top">7</span>
+                        </div>
+                        <div class="graph-bar obj-sky" style="height: 50%;">
+                            <span class="bar-value-top">5</span>
+                        </div>
+                        <div class="graph-bar obj-mint" style="height: 90%;">
+                            <span class="bar-value-top">9</span>
+                        </div>
+                        <div class="graph-bar obj-yellow" style="height: 40%;">
+                            <span class="bar-value-top">4</span>
+                        </div>
+                    </div>
+                    <div class="graph-labels">
+                        <span class="graph-label">Apple</span>
+                        <span class="graph-label">Banana</span>
+                        <span class="graph-label">Orange</span>
+                        <span class="graph-label">Grape</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-26: Tally Marks -->
+        <div class="template-card" id="math-26">
+            <span class="template-id">#math-26</span>
+            <h3 class="template-name">Tally Marks Counting / 正の字</h3>
+            <div class="diagram-container">
+                <div class="tally-visual">
+                    <div class="tally-row">
+                        <span class="tally-label">Dogs</span>
+                        <div class="tally-marks">
+                            <div class="tally-group">
+                                <div class="tally-mark mark-1"></div>
+                                <div class="tally-mark mark-2"></div>
+                                <div class="tally-mark mark-3"></div>
+                                <div class="tally-mark mark-4"></div>
+                                <div class="tally-mark mark-5"></div>
+                            </div>
+                            <div class="tally-group">
+                                <div class="tally-mark mark-1"></div>
+                                <div class="tally-mark mark-2"></div>
+                            </div>
+                        </div>
+                        <span class="tally-count count-pink">7</span>
+                    </div>
+                    <div class="tally-row">
+                        <span class="tally-label">Cats</span>
+                        <div class="tally-marks">
+                            <div class="tally-group">
+                                <div class="tally-mark mark-1"></div>
+                                <div class="tally-mark mark-2"></div>
+                                <div class="tally-mark mark-3"></div>
+                                <div class="tally-mark mark-4"></div>
+                                <div class="tally-mark mark-5"></div>
+                            </div>
+                        </div>
+                        <span class="tally-count count-sky">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-27: Roman Numerals -->
+        <div class="template-card" id="math-27">
+            <span class="template-id">#math-27</span>
+            <h3 class="template-name">Roman Numerals / ローマ数字</h3>
+            <div class="diagram-container">
+                <div class="roman-visual">
+                    <div class="roman-row">
+                        <span class="roman-number">I</span>
+                        <span class="roman-equals">=</span>
+                        <div class="arabic-number obj-pink">1</div>
+                    </div>
+                    <div class="roman-row">
+                        <span class="roman-number">V</span>
+                        <span class="roman-equals">=</span>
+                        <div class="arabic-number obj-sky">5</div>
+                    </div>
+                    <div class="roman-row">
+                        <span class="roman-number">X</span>
+                        <span class="roman-equals">=</span>
+                        <div class="arabic-number obj-mint">10</div>
+                    </div>
+                    <div class="roman-row">
+                        <span class="roman-number">IV</span>
+                        <span class="roman-equals">=</span>
+                        <div class="arabic-number obj-yellow">4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-28: Ordinal Numbers -->
+        <div class="template-card" id="math-28">
+            <span class="template-id">#math-28</span>
+            <h3 class="template-name">Ordinal Numbers / 序数</h3>
+            <div class="diagram-container">
+                <div class="ordinal-visual">
+                    <div class="ordinal-podium">
+                        <div class="podium-place">
+                            <div class="place-icon obj-sky">2</div>
+                            <div class="podium-block block-2nd">2nd</div>
+                        </div>
+                        <div class="podium-place">
+                            <div class="place-icon obj-yellow">1</div>
+                            <div class="podium-block block-1st">1st</div>
+                        </div>
+                        <div class="podium-place">
+                            <div class="place-icon obj-orange">3</div>
+                            <div class="podium-block block-3rd">3rd</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-29: Prime Numbers -->
+        <div class="template-card" id="math-29">
+            <span class="template-id">#math-29</span>
+            <h3 class="template-name">Prime Numbers Highlight / 素数</h3>
+            <div class="diagram-container">
+                <div class="prime-visual">
+                    <div class="prime-title">Prime Numbers (1-20)</div>
+                    <div class="prime-grid">
+                        <div class="prime-cell not-prime">1</div>
+                        <div class="prime-cell is-prime">2</div>
+                        <div class="prime-cell is-prime">3</div>
+                        <div class="prime-cell not-prime">4</div>
+                        <div class="prime-cell is-prime">5</div>
+                        <div class="prime-cell not-prime">6</div>
+                        <div class="prime-cell is-prime">7</div>
+                        <div class="prime-cell not-prime">8</div>
+                        <div class="prime-cell not-prime">9</div>
+                        <div class="prime-cell not-prime">10</div>
+                        <div class="prime-cell is-prime">11</div>
+                        <div class="prime-cell not-prime">12</div>
+                        <div class="prime-cell is-prime">13</div>
+                        <div class="prime-cell not-prime">14</div>
+                        <div class="prime-cell not-prime">15</div>
+                        <div class="prime-cell not-prime">16</div>
+                        <div class="prime-cell is-prime">17</div>
+                        <div class="prime-cell not-prime">18</div>
+                        <div class="prime-cell is-prime">19</div>
+                        <div class="prime-cell not-prime">20</div>
+                    </div>
+                    <div class="prime-legend">
+                        <div class="legend-prime">
+                            <div class="legend-dot-prime"></div>
+                            <span>Prime</span>
+                        </div>
+                        <div class="legend-prime">
+                            <div class="legend-dot-not"></div>
+                            <span>Not Prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #math-30: Multiplication Table Mini -->
+        <div class="template-card" id="math-30">
+            <span class="template-id">#math-30</span>
+            <h3 class="template-name">Multiplication Table Mini / 九九表ミニ</h3>
+            <div class="diagram-container">
+                <div class="mult-table-visual">
+                    <div class="mult-table">
+                        <div class="mult-cell mult-corner">x</div>
+                        <div class="mult-cell mult-col-header">1</div>
+                        <div class="mult-cell mult-col-header">2</div>
+                        <div class="mult-cell mult-col-header">3</div>
+                        <div class="mult-cell mult-col-header">4</div>
+                        <div class="mult-cell mult-col-header">5</div>
+
+                        <div class="mult-cell mult-row-header">1</div>
+                        <div class="mult-cell mult-value">1</div>
+                        <div class="mult-cell mult-value">2</div>
+                        <div class="mult-cell mult-value">3</div>
+                        <div class="mult-cell mult-value">4</div>
+                        <div class="mult-cell mult-value">5</div>
+
+                        <div class="mult-cell mult-row-header">2</div>
+                        <div class="mult-cell mult-value">2</div>
+                        <div class="mult-cell mult-value">4</div>
+                        <div class="mult-cell mult-value">6</div>
+                        <div class="mult-cell mult-value">8</div>
+                        <div class="mult-cell mult-value">10</div>
+
+                        <div class="mult-cell mult-row-header">3</div>
+                        <div class="mult-cell mult-value">3</div>
+                        <div class="mult-cell mult-value">6</div>
+                        <div class="mult-cell mult-value">9</div>
+                        <div class="mult-cell mult-value">12</div>
+                        <div class="mult-cell mult-value">15</div>
+
+                        <div class="mult-cell mult-row-header">4</div>
+                        <div class="mult-cell mult-value">4</div>
+                        <div class="mult-cell mult-value">8</div>
+                        <div class="mult-cell mult-value">12</div>
+                        <div class="mult-cell mult-value">16</div>
+                        <div class="mult-cell mult-value">20</div>
+
+                        <div class="mult-cell mult-row-header">5</div>
+                        <div class="mult-cell mult-value">5</div>
+                        <div class="mult-cell mult-value">10</div>
+                        <div class="mult-cell mult-value">15</div>
+                        <div class="mult-cell mult-value">20</div>
+                        <div class="mult-cell mult-value">25</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hierarchy Diagram Templates - 階層図テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* ============================================
+           #hierarchy-1: Simple Org Chart (3 levels)
+           ============================================ */
+        #hierarchy-1 .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #hierarchy-1 .level {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        #hierarchy-1 .node {
+            background: #ff6b9d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-1 .node:hover {
+            transform: scale(1.1);
+        }
+
+        #hierarchy-1 .level-2 .node { background: #4ecdc4; }
+        #hierarchy-1 .level-3 .node { background: #ffe66d; color: #333; }
+
+        #hierarchy-1 .connector-v {
+            width: 3px;
+            height: 20px;
+            background: #ccc;
+        }
+
+        #hierarchy-1 .connector-h {
+            height: 3px;
+            background: #ccc;
+            position: absolute;
+            top: -11px;
+        }
+
+        #hierarchy-1 .level-2 .connector-h { width: 100px; }
+        #hierarchy-1 .level-3 .connector-h { width: 180px; }
+
+        /* ============================================
+           #hierarchy-2: Org Chart with Photos
+           ============================================ */
+        #hierarchy-2 .photo-org {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        #hierarchy-2 .photo-level {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        #hierarchy-2 .photo-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-2 .photo-node:hover {
+            transform: translateY(-5px);
+        }
+
+        #hierarchy-2 .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            border: 4px solid white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        #hierarchy-2 .avatar.ceo { background: #ff6b9d; }
+        #hierarchy-2 .avatar.manager { background: #87ceeb; }
+        #hierarchy-2 .avatar.staff { background: #98d8aa; }
+
+        #hierarchy-2 .name {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        #hierarchy-2 .title {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        #hierarchy-2 .line-down {
+            width: 3px;
+            height: 15px;
+            background: #ddd;
+            margin: 0 auto;
+        }
+
+        #hierarchy-2 .line-across {
+            height: 3px;
+            background: #ddd;
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           #hierarchy-3: Tree Structure
+           ============================================ */
+        #hierarchy-3 .tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #hierarchy-3 .tree-node {
+            background: #b8e986;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-3 .tree-node:hover {
+            background: #9ed36a;
+            transform: scale(1.05);
+        }
+
+        #hierarchy-3 .tree-node::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            width: 3px;
+            height: 15px;
+            background: #ccc;
+        }
+
+        #hierarchy-3 .tree-children {
+            display: flex;
+            gap: 15px;
+            position: relative;
+        }
+
+        #hierarchy-3 .tree-children::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 25%;
+            right: 25%;
+            height: 3px;
+            background: #ccc;
+        }
+
+        #hierarchy-3 .tree-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #hierarchy-3 .tree-branch::before {
+            content: '';
+            width: 3px;
+            height: 15px;
+            background: #ccc;
+        }
+
+        #hierarchy-3 .branch-node {
+            background: #ffb347;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-3 .branch-node:hover {
+            background: #ffa020;
+        }
+
+        #hierarchy-3 .leaf {
+            background: #ff6b9d;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            margin: 3px 0;
+            transition: all 0.3s;
+        }
+
+        #hierarchy-3 .leaf:hover {
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           #hierarchy-4: Inverted Tree
+           ============================================ */
+        #hierarchy-4 .inverted-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #hierarchy-4 .bottom-level {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        #hierarchy-4 .bottom-node {
+            background: #87ceeb;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-4 .bottom-node:hover {
+            transform: translateY(-3px);
+            background: #6bb8d9;
+        }
+
+        #hierarchy-4 .converge-lines {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            height: 30px;
+            width: 200px;
+        }
+
+        #hierarchy-4 .converge-lines::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            height: 30px;
+            background: #ccc;
+        }
+
+        #hierarchy-4 .converge-lines::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #ccc;
+        }
+
+        #hierarchy-4 .mid-node {
+            background: #dda0dd;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin: 15px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-4 .mid-node:hover {
+            background: #cc8fcc;
+        }
+
+        #hierarchy-4 .top-node {
+            background: #ff6b9d;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-4 .top-node:hover {
+            transform: scale(1.1);
+        }
+
+        /* ============================================
+           #hierarchy-5: Horizontal Hierarchy
+           ============================================ */
+        #hierarchy-5 .h-hierarchy {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        #hierarchy-5 .h-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #hierarchy-5 .h-node {
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        #hierarchy-5 .h-node:hover {
+            transform: scale(1.08);
+        }
+
+        #hierarchy-5 .h-level:nth-child(1) .h-node { background: #ff6b9d; color: white; }
+        #hierarchy-5 .h-level:nth-child(2) .h-node { background: #ffb347; }
+        #hierarchy-5 .h-level:nth-child(3) .h-node { background: #98d8aa; }
+        #hierarchy-5 .h-level:nth-child(4) .h-node { background: #87ceeb; }
+
+        #hierarchy-5 .h-arrow {
+            font-size: 1.5rem;
+            color: #ccc;
+        }
+
+        /* ============================================
+           #hierarchy-6: Nested Boxes
+           ============================================ */
+        #hierarchy-6 .nested-boxes {
+            padding: 15px;
+            border-radius: 15px;
+            background: #ff6b9d;
+        }
+
+        #hierarchy-6 .nested-boxes .box-label {
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        #hierarchy-6 .nested-inner-1 {
+            padding: 15px;
+            border-radius: 12px;
+            background: #ffb347;
+        }
+
+        #hierarchy-6 .nested-inner-1 .box-label {
+            color: #333;
+        }
+
+        #hierarchy-6 .nested-inner-2 {
+            padding: 12px;
+            border-radius: 10px;
+            background: #ffe66d;
+        }
+
+        #hierarchy-6 .nested-inner-3 {
+            padding: 10px;
+            border-radius: 8px;
+            background: #98d8aa;
+        }
+
+        #hierarchy-6 .nested-inner-4 {
+            padding: 10px;
+            border-radius: 6px;
+            background: #87ceeb;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        #hierarchy-6 .nested-boxes:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s;
+        }
+
+        /* ============================================
+           #hierarchy-7: Indented List Hierarchy
+           ============================================ */
+        #hierarchy-7 .indent-list {
+            padding-left: 0;
+        }
+
+        #hierarchy-7 .indent-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 4px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-7 .indent-item:hover {
+            transform: translateX(5px);
+        }
+
+        #hierarchy-7 .indent-item .bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        #hierarchy-7 .level-0 { margin-left: 0; background: #ffe6ee; }
+        #hierarchy-7 .level-0 .bullet { background: #ff6b9d; }
+
+        #hierarchy-7 .level-1 { margin-left: 20px; background: #fff3e0; font-size: 0.9rem; }
+        #hierarchy-7 .level-1 .bullet { background: #ffb347; }
+
+        #hierarchy-7 .level-2 { margin-left: 40px; background: #e8f5e9; font-size: 0.85rem; }
+        #hierarchy-7 .level-2 .bullet { background: #98d8aa; }
+
+        #hierarchy-7 .level-3 { margin-left: 60px; background: #e3f2fd; font-size: 0.8rem; }
+        #hierarchy-7 .level-3 .bullet { background: #87ceeb; }
+
+        /* ============================================
+           #hierarchy-8: Bracket Hierarchy
+           ============================================ */
+        #hierarchy-8 .bracket-hierarchy {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #hierarchy-8 .bracket-group {
+            display: flex;
+            align-items: center;
+        }
+
+        #hierarchy-8 .bracket {
+            font-size: 3rem;
+            color: #ddd;
+            font-weight: 100;
+        }
+
+        #hierarchy-8 .bracket-items {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #hierarchy-8 .bracket-item {
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-8 .bracket-item:hover {
+            transform: scale(1.05);
+        }
+
+        #hierarchy-8 .bracket-main {
+            background: #ff6b9d;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        #hierarchy-8 .sub-1 { background: #ffe6ee; }
+        #hierarchy-8 .sub-2 { background: #e3f2fd; }
+        #hierarchy-8 .sub-3 { background: #e8f5e9; }
+
+        /* ============================================
+           #hierarchy-9: Pyramid Hierarchy
+           ============================================ */
+        #hierarchy-9 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #hierarchy-9 .pyramid-level {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        #hierarchy-9 .pyramid-level:hover {
+            transform: scale(1.02);
+        }
+
+        #hierarchy-9 .pyramid-block {
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #hierarchy-9 .pyramid-level:nth-child(1) .pyramid-block {
+            background: #ff6b9d;
+            color: white;
+            min-width: 80px;
+        }
+
+        #hierarchy-9 .pyramid-level:nth-child(2) .pyramid-block {
+            background: #ffb347;
+            min-width: 70px;
+        }
+
+        #hierarchy-9 .pyramid-level:nth-child(3) .pyramid-block {
+            background: #ffe66d;
+            min-width: 60px;
+        }
+
+        #hierarchy-9 .pyramid-level:nth-child(4) .pyramid-block {
+            background: #98d8aa;
+            min-width: 50px;
+        }
+
+        /* ============================================
+           #hierarchy-10: Layered Circles
+           ============================================ */
+        #hierarchy-10 .layered-circles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 200px;
+        }
+
+        #hierarchy-10 .circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-10 .circle:hover {
+            transform: scale(1.05);
+        }
+
+        #hierarchy-10 .circle-1 {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 107, 157, 0.3);
+            border: 4px solid #ff6b9d;
+        }
+
+        #hierarchy-10 .circle-2 {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 179, 71, 0.3);
+            border: 4px solid #ffb347;
+        }
+
+        #hierarchy-10 .circle-3 {
+            width: 80px;
+            height: 80px;
+            background: rgba(152, 216, 170, 0.3);
+            border: 4px solid #98d8aa;
+        }
+
+        #hierarchy-10 .circle-4 {
+            width: 40px;
+            height: 40px;
+            background: #87ceeb;
+            font-weight: bold;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        #hierarchy-10 .circle-label {
+            position: absolute;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        #hierarchy-10 .label-1 { top: 5px; }
+        #hierarchy-10 .label-2 { top: 30px; }
+        #hierarchy-10 .label-3 { top: 55px; }
+
+        /* ============================================
+           #hierarchy-11: Russian Doll (Nested)
+           ============================================ */
+        #hierarchy-11 .russian-doll {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            align-items: flex-end;
+        }
+
+        #hierarchy-11 .doll {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-11 .doll:hover {
+            transform: translateY(-5px);
+        }
+
+        #hierarchy-11 .doll-body {
+            border-radius: 50% 50% 45% 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        #hierarchy-11 .doll-1 .doll-body {
+            width: 80px;
+            height: 100px;
+            background: #ff6b9d;
+            font-size: 0.9rem;
+        }
+
+        #hierarchy-11 .doll-2 .doll-body {
+            width: 65px;
+            height: 82px;
+            background: #ffb347;
+            font-size: 0.85rem;
+        }
+
+        #hierarchy-11 .doll-3 .doll-body {
+            width: 50px;
+            height: 64px;
+            background: #98d8aa;
+            font-size: 0.75rem;
+        }
+
+        #hierarchy-11 .doll-4 .doll-body {
+            width: 35px;
+            height: 46px;
+            background: #87ceeb;
+            font-size: 0.65rem;
+        }
+
+        #hierarchy-11 .doll-label {
+            font-size: 0.7rem;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* ============================================
+           #hierarchy-12: File Folder Hierarchy
+           ============================================ */
+        #hierarchy-12 .folder-tree {
+            font-family: monospace;
+        }
+
+        #hierarchy-12 .folder, #hierarchy-12 .file {
+            display: flex;
+            align-items: center;
+            padding: 6px 10px;
+            margin: 3px 0;
+            border-radius: 6px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-12 .folder:hover, #hierarchy-12 .file:hover {
+            transform: translateX(5px);
+        }
+
+        #hierarchy-12 .folder {
+            background: #fff3e0;
+            font-weight: bold;
+        }
+
+        #hierarchy-12 .folder::before {
+            content: '📁';
+            margin-right: 8px;
+        }
+
+        #hierarchy-12 .file {
+            background: #f5f5f5;
+            margin-left: 25px;
+        }
+
+        #hierarchy-12 .file::before {
+            content: '📄';
+            margin-right: 8px;
+        }
+
+        #hierarchy-12 .file.pink { background: #ffe6ee; }
+        #hierarchy-12 .file.blue { background: #e3f2fd; }
+        #hierarchy-12 .file.green { background: #e8f5e9; }
+
+        #hierarchy-12 .subfolder {
+            margin-left: 25px;
+        }
+
+        /* ============================================
+           #hierarchy-13: Menu/Submenu Hierarchy
+           ============================================ */
+        #hierarchy-13 .menu-hierarchy {
+            display: flex;
+            gap: 10px;
+        }
+
+        #hierarchy-13 .menu-item {
+            position: relative;
+        }
+
+        #hierarchy-13 .menu-btn {
+            background: #ff6b9d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #hierarchy-13 .menu-btn:hover {
+            background: #e55a8a;
+        }
+
+        #hierarchy-13 .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 8px;
+            margin-top: 5px;
+            min-width: 120px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        #hierarchy-13 .menu-item:hover .submenu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        #hierarchy-13 .submenu-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        #hierarchy-13 .submenu-item:hover {
+            background: #ffe6ee;
+        }
+
+        #hierarchy-13 .submenu-item.active {
+            background: #98d8aa;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           #hierarchy-14: Cascading Cards
+           ============================================ */
+        #hierarchy-14 .cascade-cards {
+            position: relative;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #hierarchy-14 .cascade-card {
+            position: absolute;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-14 .cascade-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        #hierarchy-14 .card-1 {
+            background: #ff6b9d;
+            color: white;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+        }
+
+        #hierarchy-14 .card-2 {
+            background: #ffb347;
+            top: 40px;
+            left: calc(50% - 40px);
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        #hierarchy-14 .card-3 {
+            background: #ffe66d;
+            top: 80px;
+            left: calc(50% - 20px);
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        #hierarchy-14 .card-4 {
+            background: #98d8aa;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        /* ============================================
+           #hierarchy-15: Tier System
+           ============================================ */
+        #hierarchy-15 .tier-system {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #hierarchy-15 .tier {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-15 .tier:hover {
+            transform: translateX(10px);
+        }
+
+        #hierarchy-15 .tier-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        #hierarchy-15 .tier-info {
+            flex: 1;
+        }
+
+        #hierarchy-15 .tier-name {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        #hierarchy-15 .tier-desc {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        #hierarchy-15 .tier-1 { background: linear-gradient(90deg, #ffe6ee 0%, white 100%); }
+        #hierarchy-15 .tier-1 .tier-badge { background: #ff6b9d; }
+
+        #hierarchy-15 .tier-2 { background: linear-gradient(90deg, #fff3e0 0%, white 100%); }
+        #hierarchy-15 .tier-2 .tier-badge { background: #ffb347; }
+
+        #hierarchy-15 .tier-3 { background: linear-gradient(90deg, #e8f5e9 0%, white 100%); }
+        #hierarchy-15 .tier-3 .tier-badge { background: #98d8aa; }
+
+        #hierarchy-15 .tier-4 { background: linear-gradient(90deg, #e3f2fd 0%, white 100%); }
+        #hierarchy-15 .tier-4 .tier-badge { background: #87ceeb; }
+
+        /* ============================================
+           #hierarchy-16: Level Badges
+           ============================================ */
+        #hierarchy-16 .level-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        #hierarchy-16 .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-16 .badge:hover {
+            transform: translateY(-5px);
+        }
+
+        #hierarchy-16 .badge-icon {
+            width: 50px;
+            height: 60px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        #hierarchy-16 .badge-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        #hierarchy-16 .badge-icon span {
+            position: relative;
+            z-index: 1;
+        }
+
+        #hierarchy-16 .badge-1 .badge-icon { color: #ff6b9d; }
+        #hierarchy-16 .badge-2 .badge-icon { color: #ffb347; }
+        #hierarchy-16 .badge-3 .badge-icon { color: #98d8aa; }
+        #hierarchy-16 .badge-4 .badge-icon { color: #87ceeb; }
+        #hierarchy-16 .badge-5 .badge-icon { color: #dda0dd; }
+
+        #hierarchy-16 .badge-label {
+            margin-top: 5px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           #hierarchy-17: Stacked Layers
+           ============================================ */
+        #hierarchy-17 .stacked-layers {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 500px;
+        }
+
+        #hierarchy-17 .layer {
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: -5px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            transform: rotateX(10deg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #hierarchy-17 .layer:hover {
+            transform: rotateX(0) scale(1.05);
+            z-index: 10;
+        }
+
+        #hierarchy-17 .layer-1 {
+            background: #ff6b9d;
+            color: white;
+            width: 200px;
+            z-index: 4;
+        }
+
+        #hierarchy-17 .layer-2 {
+            background: #ffb347;
+            width: 240px;
+            z-index: 3;
+        }
+
+        #hierarchy-17 .layer-3 {
+            background: #ffe66d;
+            width: 280px;
+            z-index: 2;
+        }
+
+        #hierarchy-17 .layer-4 {
+            background: #98d8aa;
+            width: 320px;
+            z-index: 1;
+        }
+
+        /* ============================================
+           #hierarchy-18: Expanding Tree
+           ============================================ */
+        #hierarchy-18 .expand-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #hierarchy-18 .expand-node {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #hierarchy-18 .expand-node:hover {
+            background: #f5f5f5;
+        }
+
+        #hierarchy-18 .expand-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #hierarchy-18 .expand-node.open .expand-icon {
+            transform: rotate(90deg);
+        }
+
+        #hierarchy-18 .node-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #hierarchy-18 .root .expand-icon { background: #ff6b9d; }
+        #hierarchy-18 .branch .expand-icon { background: #ffb347; }
+        #hierarchy-18 .leaf-node .expand-icon { background: #98d8aa; }
+
+        #hierarchy-18 .children {
+            margin-left: 28px;
+            border-left: 2px dashed #ddd;
+            padding-left: 10px;
+        }
+
+        #hierarchy-18 .leaf-item {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        #hierarchy-18 .leaf-item:hover {
+            color: #ff6b9d;
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           #hierarchy-19: Compact Hierarchy
+           ============================================ */
+        #hierarchy-19 .compact-hierarchy {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        #hierarchy-19 .compact-main {
+            background: #ff6b9d;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 80px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-19 .compact-main:hover {
+            transform: scale(1.05);
+        }
+
+        #hierarchy-19 .compact-branches {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #hierarchy-19 .compact-branch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #hierarchy-19 .branch-line {
+            width: 20px;
+            height: 2px;
+            background: #ddd;
+        }
+
+        #hierarchy-19 .branch-node {
+            background: #ffb347;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-19 .branch-node:hover {
+            transform: translateX(5px);
+        }
+
+        #hierarchy-19 .compact-subs {
+            display: flex;
+            gap: 5px;
+        }
+
+        #hierarchy-19 .sub-node {
+            background: #98d8aa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-19 .sub-node:hover {
+            background: #7bc98f;
+        }
+
+        /* ============================================
+           #hierarchy-20: Visual Depth Hierarchy
+           ============================================ */
+        #hierarchy-20 .depth-hierarchy {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #hierarchy-20 .depth-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #hierarchy-20 .depth-indicator {
+            display: flex;
+            gap: 3px;
+        }
+
+        #hierarchy-20 .depth-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        #hierarchy-20 .depth-dot.active { background: #ff6b9d; }
+
+        #hierarchy-20 .depth-node {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #hierarchy-20 .depth-node:hover {
+            transform: translateX(5px);
+        }
+
+        #hierarchy-20 .depth-1 .depth-node {
+            background: #ff6b9d;
+            color: white;
+            font-size: 1rem;
+        }
+
+        #hierarchy-20 .depth-2 .depth-node {
+            background: #ffb347;
+            margin-left: 20px;
+        }
+
+        #hierarchy-20 .depth-3 .depth-node {
+            background: #ffe66d;
+            margin-left: 40px;
+            font-size: 0.85rem;
+        }
+
+        #hierarchy-20 .depth-4 .depth-node {
+            background: #98d8aa;
+            margin-left: 60px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hierarchy Diagram Templates - 階層図テンプレート</h1>
+
+    <div class="template-grid">
+
+        <!-- #hierarchy-1: Simple Org Chart -->
+        <div class="template-card" id="hierarchy-1">
+            <h2>#1 Simple Org Chart (組織図)</h2>
+            <div class="org-chart">
+                <div class="level level-1">
+                    <div class="node">社長</div>
+                </div>
+                <div class="connector-v"></div>
+                <div class="level level-2">
+                    <div class="connector-h"></div>
+                    <div class="node">部長A</div>
+                    <div class="node">部長B</div>
+                </div>
+                <div class="connector-v"></div>
+                <div class="level level-3">
+                    <div class="connector-h"></div>
+                    <div class="node">課長1</div>
+                    <div class="node">課長2</div>
+                    <div class="node">課長3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-2: Org Chart with Photos -->
+        <div class="template-card" id="hierarchy-2">
+            <h2>#2 Photo Org Chart (写真付き組織図)</h2>
+            <div class="photo-org">
+                <div class="photo-level">
+                    <div class="photo-node">
+                        <div class="avatar ceo">👑</div>
+                        <div class="name">田中 太郎</div>
+                        <div class="title">CEO</div>
+                    </div>
+                </div>
+                <div class="line-down"></div>
+                <div class="line-across"></div>
+                <div class="photo-level">
+                    <div class="photo-node">
+                        <div class="avatar manager">👔</div>
+                        <div class="name">山田 花子</div>
+                        <div class="title">Manager</div>
+                    </div>
+                    <div class="photo-node">
+                        <div class="avatar manager">👔</div>
+                        <div class="name">佐藤 次郎</div>
+                        <div class="title">Manager</div>
+                    </div>
+                </div>
+                <div class="photo-level">
+                    <div class="photo-node">
+                        <div class="avatar staff">😊</div>
+                        <div class="name">Staff</div>
+                        <div class="title">Member</div>
+                    </div>
+                    <div class="photo-node">
+                        <div class="avatar staff">😊</div>
+                        <div class="name">Staff</div>
+                        <div class="title">Member</div>
+                    </div>
+                    <div class="photo-node">
+                        <div class="avatar staff">😊</div>
+                        <div class="name">Staff</div>
+                        <div class="title">Member</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-3: Tree Structure -->
+        <div class="template-card" id="hierarchy-3">
+            <h2>#3 Tree Structure (ツリー構造)</h2>
+            <div class="tree">
+                <div class="tree-node">Root</div>
+                <div class="tree-children">
+                    <div class="tree-branch">
+                        <div class="branch-node">Branch A</div>
+                        <div class="leaf">Leaf 1</div>
+                        <div class="leaf">Leaf 2</div>
+                    </div>
+                    <div class="tree-branch">
+                        <div class="branch-node">Branch B</div>
+                        <div class="leaf">Leaf 3</div>
+                        <div class="leaf">Leaf 4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-4: Inverted Tree -->
+        <div class="template-card" id="hierarchy-4">
+            <h2>#4 Inverted Tree (逆ツリー)</h2>
+            <div class="inverted-tree">
+                <div class="bottom-level">
+                    <div class="bottom-node">要素1</div>
+                    <div class="bottom-node">要素2</div>
+                    <div class="bottom-node">要素3</div>
+                    <div class="bottom-node">要素4</div>
+                </div>
+                <div class="converge-lines"></div>
+                <div class="mid-node">中間層</div>
+                <div class="converge-lines" style="height:20px;"></div>
+                <div class="top-node">結論</div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-5: Horizontal Hierarchy -->
+        <div class="template-card" id="hierarchy-5">
+            <h2>#5 Horizontal Hierarchy (横型階層)</h2>
+            <div class="h-hierarchy">
+                <div class="h-level">
+                    <div class="h-node">Level 1</div>
+                </div>
+                <div class="h-arrow">→</div>
+                <div class="h-level">
+                    <div class="h-node">2-A</div>
+                    <div class="h-node">2-B</div>
+                </div>
+                <div class="h-arrow">→</div>
+                <div class="h-level">
+                    <div class="h-node">3-A</div>
+                    <div class="h-node">3-B</div>
+                    <div class="h-node">3-C</div>
+                </div>
+                <div class="h-arrow">→</div>
+                <div class="h-level">
+                    <div class="h-node">End</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-6: Nested Boxes -->
+        <div class="template-card" id="hierarchy-6">
+            <h2>#6 Nested Boxes (入れ子ボックス)</h2>
+            <div class="nested-boxes">
+                <div class="box-label">Layer 1 - 最外層</div>
+                <div class="nested-inner-1">
+                    <div class="box-label">Layer 2</div>
+                    <div class="nested-inner-2">
+                        <div class="box-label">Layer 3</div>
+                        <div class="nested-inner-3">
+                            <div class="box-label">Layer 4</div>
+                            <div class="nested-inner-4">Core - 中心</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-7: Indented List Hierarchy -->
+        <div class="template-card" id="hierarchy-7">
+            <h2>#7 Indented List (インデントリスト)</h2>
+            <div class="indent-list">
+                <div class="indent-item level-0"><span class="bullet"></span>親カテゴリ</div>
+                <div class="indent-item level-1"><span class="bullet"></span>サブカテゴリA</div>
+                <div class="indent-item level-2"><span class="bullet"></span>詳細項目1</div>
+                <div class="indent-item level-2"><span class="bullet"></span>詳細項目2</div>
+                <div class="indent-item level-1"><span class="bullet"></span>サブカテゴリB</div>
+                <div class="indent-item level-2"><span class="bullet"></span>詳細項目3</div>
+                <div class="indent-item level-3"><span class="bullet"></span>末端項目</div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-8: Bracket Hierarchy -->
+        <div class="template-card" id="hierarchy-8">
+            <h2>#8 Bracket Hierarchy (括弧階層)</h2>
+            <div class="bracket-hierarchy">
+                <div class="bracket-main">メイン</div>
+                <div class="bracket-group">
+                    <span class="bracket">{</span>
+                    <div class="bracket-items">
+                        <div class="bracket-item sub-1">項目A</div>
+                        <div class="bracket-item sub-2">項目B</div>
+                        <div class="bracket-item sub-3">項目C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-9: Pyramid Hierarchy -->
+        <div class="template-card" id="hierarchy-9">
+            <h2>#9 Pyramid Hierarchy (ピラミッド)</h2>
+            <div class="pyramid">
+                <div class="pyramid-level">
+                    <div class="pyramid-block">Top</div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">Mid</div>
+                    <div class="pyramid-block">Mid</div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">L3</div>
+                    <div class="pyramid-block">L3</div>
+                    <div class="pyramid-block">L3</div>
+                </div>
+                <div class="pyramid-level">
+                    <div class="pyramid-block">B</div>
+                    <div class="pyramid-block">B</div>
+                    <div class="pyramid-block">B</div>
+                    <div class="pyramid-block">B</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-10: Layered Circles -->
+        <div class="template-card" id="hierarchy-10">
+            <h2>#10 Layered Circles (同心円)</h2>
+            <div class="layered-circles">
+                <div class="circle circle-1">
+                    <span class="circle-label label-1">外層</span>
+                </div>
+                <div class="circle circle-2">
+                    <span class="circle-label label-2">中層</span>
+                </div>
+                <div class="circle circle-3">
+                    <span class="circle-label label-3">内層</span>
+                </div>
+                <div class="circle circle-4">Core</div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-11: Russian Doll -->
+        <div class="template-card" id="hierarchy-11">
+            <h2>#11 Russian Doll (マトリョーシカ)</h2>
+            <div class="russian-doll">
+                <div class="doll doll-1">
+                    <div class="doll-body">大</div>
+                    <div class="doll-label">Parent</div>
+                </div>
+                <div class="doll doll-2">
+                    <div class="doll-body">中</div>
+                    <div class="doll-label">Child</div>
+                </div>
+                <div class="doll doll-3">
+                    <div class="doll-body">小</div>
+                    <div class="doll-label">Grand</div>
+                </div>
+                <div class="doll doll-4">
+                    <div class="doll-body">極</div>
+                    <div class="doll-label">Core</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-12: File Folder Hierarchy -->
+        <div class="template-card" id="hierarchy-12">
+            <h2>#12 File Folder (フォルダ構造)</h2>
+            <div class="folder-tree">
+                <div class="folder">Root Folder</div>
+                <div class="subfolder">
+                    <div class="folder">Documents</div>
+                    <div class="file pink">report.pdf</div>
+                    <div class="file blue">memo.txt</div>
+                </div>
+                <div class="subfolder">
+                    <div class="folder">Images</div>
+                    <div class="file green">photo.jpg</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-13: Menu/Submenu Hierarchy -->
+        <div class="template-card" id="hierarchy-13">
+            <h2>#13 Menu/Submenu (メニュー)</h2>
+            <div class="menu-hierarchy">
+                <div class="menu-item">
+                    <div class="menu-btn">Menu A</div>
+                    <div class="submenu">
+                        <div class="submenu-item">Item 1</div>
+                        <div class="submenu-item active">Item 2</div>
+                        <div class="submenu-item">Item 3</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-btn">Menu B</div>
+                    <div class="submenu">
+                        <div class="submenu-item">Item A</div>
+                        <div class="submenu-item">Item B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-14: Cascading Cards -->
+        <div class="template-card" id="hierarchy-14">
+            <h2>#14 Cascading Cards (カスケード)</h2>
+            <div class="cascade-cards">
+                <div class="cascade-card card-1">Level 1</div>
+                <div class="cascade-card card-2">Level 2</div>
+                <div class="cascade-card card-3">Level 3</div>
+                <div class="cascade-card card-4">Level 4</div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-15: Tier System -->
+        <div class="template-card" id="hierarchy-15">
+            <h2>#15 Tier System (階層システム)</h2>
+            <div class="tier-system">
+                <div class="tier tier-1">
+                    <div class="tier-badge">1</div>
+                    <div class="tier-info">
+                        <div class="tier-name">Premium</div>
+                        <div class="tier-desc">最上位ランク</div>
+                    </div>
+                </div>
+                <div class="tier tier-2">
+                    <div class="tier-badge">2</div>
+                    <div class="tier-info">
+                        <div class="tier-name">Gold</div>
+                        <div class="tier-desc">上位ランク</div>
+                    </div>
+                </div>
+                <div class="tier tier-3">
+                    <div class="tier-badge">3</div>
+                    <div class="tier-info">
+                        <div class="tier-name">Silver</div>
+                        <div class="tier-desc">中間ランク</div>
+                    </div>
+                </div>
+                <div class="tier tier-4">
+                    <div class="tier-badge">4</div>
+                    <div class="tier-info">
+                        <div class="tier-name">Bronze</div>
+                        <div class="tier-desc">標準ランク</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-16: Level Badges -->
+        <div class="template-card" id="hierarchy-16">
+            <h2>#16 Level Badges (レベルバッジ)</h2>
+            <div class="level-badges">
+                <div class="badge badge-1">
+                    <div class="badge-icon"><span>1</span></div>
+                    <div class="badge-label">Master</div>
+                </div>
+                <div class="badge badge-2">
+                    <div class="badge-icon"><span>2</span></div>
+                    <div class="badge-label">Expert</div>
+                </div>
+                <div class="badge badge-3">
+                    <div class="badge-icon"><span>3</span></div>
+                    <div class="badge-label">Pro</div>
+                </div>
+                <div class="badge badge-4">
+                    <div class="badge-icon"><span>4</span></div>
+                    <div class="badge-label">Inter</div>
+                </div>
+                <div class="badge badge-5">
+                    <div class="badge-icon"><span>5</span></div>
+                    <div class="badge-label">Beginner</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-17: Stacked Layers -->
+        <div class="template-card" id="hierarchy-17">
+            <h2>#17 Stacked Layers (積層レイヤー)</h2>
+            <div class="stacked-layers">
+                <div class="layer layer-1">Top Layer</div>
+                <div class="layer layer-2">Second Layer</div>
+                <div class="layer layer-3">Third Layer</div>
+                <div class="layer layer-4">Base Layer</div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-18: Expanding Tree -->
+        <div class="template-card" id="hierarchy-18">
+            <h2>#18 Expanding Tree (展開ツリー)</h2>
+            <div class="expand-tree">
+                <div class="expand-node root open">
+                    <div class="expand-icon">▶</div>
+                    <div class="node-label">Root</div>
+                </div>
+                <div class="children">
+                    <div class="expand-node branch open">
+                        <div class="expand-icon">▶</div>
+                        <div class="node-label">Branch A</div>
+                    </div>
+                    <div class="children">
+                        <div class="leaf-item">• Leaf 1</div>
+                        <div class="leaf-item">• Leaf 2</div>
+                    </div>
+                    <div class="expand-node branch">
+                        <div class="expand-icon">▶</div>
+                        <div class="node-label">Branch B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-19: Compact Hierarchy -->
+        <div class="template-card" id="hierarchy-19">
+            <h2>#19 Compact Hierarchy (コンパクト)</h2>
+            <div class="compact-hierarchy">
+                <div class="compact-main">Main</div>
+                <div class="compact-branches">
+                    <div class="compact-branch">
+                        <div class="branch-line"></div>
+                        <div class="branch-node">Sub A</div>
+                        <div class="compact-subs">
+                            <div class="sub-node">1</div>
+                            <div class="sub-node">2</div>
+                        </div>
+                    </div>
+                    <div class="compact-branch">
+                        <div class="branch-line"></div>
+                        <div class="branch-node">Sub B</div>
+                        <div class="compact-subs">
+                            <div class="sub-node">3</div>
+                        </div>
+                    </div>
+                    <div class="compact-branch">
+                        <div class="branch-line"></div>
+                        <div class="branch-node">Sub C</div>
+                        <div class="compact-subs">
+                            <div class="sub-node">4</div>
+                            <div class="sub-node">5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #hierarchy-20: Visual Depth Hierarchy -->
+        <div class="template-card" id="hierarchy-20">
+            <h2>#20 Visual Depth (深度表示)</h2>
+            <div class="depth-hierarchy">
+                <div class="depth-row depth-1">
+                    <div class="depth-indicator">
+                        <div class="depth-dot active"></div>
+                    </div>
+                    <div class="depth-node">Root Level</div>
+                </div>
+                <div class="depth-row depth-2">
+                    <div class="depth-indicator">
+                        <div class="depth-dot active"></div>
+                        <div class="depth-dot active"></div>
+                    </div>
+                    <div class="depth-node">Child A</div>
+                </div>
+                <div class="depth-row depth-3">
+                    <div class="depth-indicator">
+                        <div class="depth-dot active"></div>
+                        <div class="depth-dot active"></div>
+                        <div class="depth-dot active"></div>
+                    </div>
+                    <div class="depth-node">Grandchild</div>
+                </div>
+                <div class="depth-row depth-4">
+                    <div class="depth-indicator">
+                        <div class="depth-dot active"></div>
+                        <div class="depth-dot active"></div>
+                        <div class="depth-dot active"></div>
+                        <div class="depth-dot active"></div>
+                    </div>
+                    <div class="depth-node">Leaf Item</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

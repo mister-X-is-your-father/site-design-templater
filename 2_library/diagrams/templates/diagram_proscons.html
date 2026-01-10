@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pros/Cons Diagram Layouts - 20 Patterns</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h2 {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .diagram-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .diagram-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .diagram-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .diagram-desc {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        /* ============================================
+           COMMON PROS/CONS STYLES
+           ============================================ */
+
+        .proscons {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        /* Color palette - Cute & Vibrant */
+        .color-pro { background: #7ED6A5; color: #fff; }
+        .color-con { background: #FF7675; color: #fff; }
+        .color-pro-light { background: #E8F8F0; color: #2D8A5F; }
+        .color-con-light { background: #FFE8E8; color: #C74B4B; }
+        .color-mint { background: #4ECDC4; color: #fff; }
+        .color-coral { background: #FF6B9D; color: #fff; }
+        .color-neutral { background: #FFD93D; color: #333; }
+
+        /* Common item styles */
+        .pc-item {
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pc-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ============================================
+           #proscons-1: Simple Two-Column
+           ============================================ */
+        #proscons-1 .proscons {
+            gap: 40px;
+        }
+
+        #proscons-1 .column {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        #proscons-1 .column-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding: 12px 20px;
+            border-radius: 12px;
+        }
+
+        #proscons-1 .column-header.pro {
+            background: #7ED6A5;
+            color: #fff;
+        }
+
+        #proscons-1 .column-header.con {
+            background: #FF7675;
+            color: #fff;
+        }
+
+        #proscons-1 .column-header .icon {
+            font-size: 24px;
+        }
+
+        #proscons-1 .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #proscons-1 .item {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-1 .item.pro {
+            background: #E8F8F0;
+            color: #2D8A5F;
+            border-left: 4px solid #7ED6A5;
+        }
+
+        #proscons-1 .item.con {
+            background: #FFE8E8;
+            color: #C74B4B;
+            border-left: 4px solid #FF7675;
+        }
+
+        #proscons-1 .item:hover {
+            transform: translateX(8px);
+        }
+
+        /* ============================================
+           #proscons-2: Green/Red Split
+           ============================================ */
+        #proscons-2 .proscons {
+            gap: 0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #proscons-2 .split {
+            flex: 1;
+            padding: 30px;
+            min-height: 250px;
+        }
+
+        #proscons-2 .split.pro {
+            background: #7ED6A5;
+        }
+
+        #proscons-2 .split.con {
+            background: #FF7675;
+        }
+
+        #proscons-2 .split-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #proscons-2 .split-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-2 .split-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-2 .split.pro .split-item {
+            color: #2D8A5F;
+        }
+
+        #proscons-2 .split.con .split-item {
+            color: #C74B4B;
+        }
+
+        #proscons-2 .split-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============================================
+           #proscons-3: Thumbs Up/Down Layout
+           ============================================ */
+        #proscons-3 .proscons {
+            gap: 30px;
+        }
+
+        #proscons-3 .thumb-section {
+            flex: 1;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        #proscons-3 .thumb-icon {
+            font-size: 60px;
+            margin-bottom: 16px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        #proscons-3 .thumb-section:hover .thumb-icon {
+            transform: scale(1.2);
+        }
+
+        #proscons-3 .thumb-icon.up {
+            color: #7ED6A5;
+        }
+
+        #proscons-3 .thumb-icon.down {
+            color: #FF7675;
+        }
+
+        #proscons-3 .thumb-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        #proscons-3 .thumb-title.pro { color: #2D8A5F; }
+        #proscons-3 .thumb-title.con { color: #C74B4B; }
+
+        #proscons-3 .thumb-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #proscons-3 .thumb-item {
+            padding: 12px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-3 .thumb-item.pro {
+            background: #E8F8F0;
+            color: #2D8A5F;
+        }
+
+        #proscons-3 .thumb-item.con {
+            background: #FFE8E8;
+            color: #C74B4B;
+        }
+
+        #proscons-3 .thumb-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============================================
+           #proscons-4: Plus/Minus Table
+           ============================================ */
+        #proscons-4 .proscons {
+            justify-content: center;
+        }
+
+        #proscons-4 .pm-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        #proscons-4 .pm-table th {
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        #proscons-4 .pm-table th.pro { background: #7ED6A5; }
+        #proscons-4 .pm-table th.con { background: #FF7675; }
+
+        #proscons-4 .pm-table td {
+            padding: 14px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        #proscons-4 .pm-table td.pro {
+            background: #F5FFF9;
+            color: #2D8A5F;
+        }
+
+        #proscons-4 .pm-table td.con {
+            background: #FFF5F5;
+            color: #C74B4B;
+        }
+
+        #proscons-4 .pm-table tr:hover td {
+            background: #fff;
+        }
+
+        #proscons-4 .pm-symbol {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            line-height: 24px;
+            text-align: center;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        #proscons-4 .pm-symbol.plus {
+            background: #7ED6A5;
+            color: #fff;
+        }
+
+        #proscons-4 .pm-symbol.minus {
+            background: #FF7675;
+            color: #fff;
+        }
+
+        /* ============================================
+           #proscons-5: Weighted Pros/Cons
+           ============================================ */
+        #proscons-5 .proscons {
+            gap: 40px;
+        }
+
+        #proscons-5 .weighted-section {
+            flex: 1;
+            max-width: 350px;
+        }
+
+        #proscons-5 .weighted-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding: 10px 16px;
+            border-radius: 10px;
+        }
+
+        #proscons-5 .weighted-header.pro {
+            background: #7ED6A5;
+            color: #fff;
+        }
+
+        #proscons-5 .weighted-header.con {
+            background: #FF7675;
+            color: #fff;
+        }
+
+        #proscons-5 .weighted-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-5 .weighted-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-5 .weighted-item.pro {
+            background: #E8F8F0;
+        }
+
+        #proscons-5 .weighted-item.con {
+            background: #FFE8E8;
+        }
+
+        #proscons-5 .weighted-item:hover {
+            transform: translateX(5px);
+        }
+
+        #proscons-5 .weight-bar {
+            width: 60px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        #proscons-5 .weight-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        #proscons-5 .weight-fill.pro { background: #7ED6A5; }
+        #proscons-5 .weight-fill.con { background: #FF7675; }
+
+        #proscons-5 .weighted-text {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        #proscons-5 .weighted-text.pro { color: #2D8A5F; }
+        #proscons-5 .weighted-text.con { color: #C74B4B; }
+
+        /* ============================================
+           #proscons-6: Card Flip Pros/Cons
+           ============================================ */
+        #proscons-6 .proscons {
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #proscons-6 .flip-card {
+            width: 140px;
+            height: 140px;
+            perspective: 1000px;
+        }
+
+        #proscons-6 .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        #proscons-6 .flip-card:hover .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        #proscons-6 .flip-front, #proscons-6 .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 16px;
+            text-align: center;
+        }
+
+        #proscons-6 .flip-front {
+            font-size: 40px;
+        }
+
+        #proscons-6 .flip-front.pro { background: #7ED6A5; }
+        #proscons-6 .flip-front.con { background: #FF7675; }
+
+        #proscons-6 .flip-back {
+            transform: rotateY(180deg);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        #proscons-6 .flip-back.pro {
+            background: #E8F8F0;
+            color: #2D8A5F;
+        }
+
+        #proscons-6 .flip-back.con {
+            background: #FFE8E8;
+            color: #C74B4B;
+        }
+
+        /* ============================================
+           #proscons-7: Balance Scale Layout
+           ============================================ */
+        #proscons-7 .proscons {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #proscons-7 .scale-topic {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            padding: 12px 30px;
+            background: #FFD93D;
+            border-radius: 30px;
+        }
+
+        #proscons-7 .scale-beam {
+            display: flex;
+            align-items: flex-end;
+            gap: 30px;
+            position: relative;
+        }
+
+        #proscons-7 .scale-beam::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #666;
+            border-radius: 50%;
+        }
+
+        #proscons-7 .scale-beam::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 4px;
+            height: 80px;
+            background: #666;
+        }
+
+        #proscons-7 .scale-pan {
+            width: 200px;
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+        }
+
+        #proscons-7 .scale-pan::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: #666;
+        }
+
+        #proscons-7 .scale-pan.pro {
+            background: #7ED6A5;
+            margin-top: 20px;
+        }
+
+        #proscons-7 .scale-pan.con {
+            background: #FF7675;
+            margin-top: 40px;
+        }
+
+        #proscons-7 .scale-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #proscons-7 .scale-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* ============================================
+           #proscons-8: Stacked List Comparison
+           ============================================ */
+        #proscons-8 .proscons {
+            flex-direction: column;
+            gap: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #proscons-8 .stacked-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        #proscons-8 .stacked-label {
+            width: 80px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            color: #fff;
+        }
+
+        #proscons-8 .stacked-label.pro { background: #7ED6A5; }
+        #proscons-8 .stacked-label.con { background: #FF7675; }
+
+        #proscons-8 .stacked-content {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-8 .stacked-content.pro {
+            background: #E8F8F0;
+            color: #2D8A5F;
+        }
+
+        #proscons-8 .stacked-content.con {
+            background: #FFE8E8;
+            color: #C74B4B;
+        }
+
+        #proscons-8 .stacked-row:hover .stacked-content {
+            transform: translateX(8px);
+        }
+
+        /* ============================================
+           #proscons-9: Icon-Based Pros/Cons
+           ============================================ */
+        #proscons-9 .proscons {
+            gap: 40px;
+        }
+
+        #proscons-9 .icon-section {
+            flex: 1;
+            max-width: 320px;
+        }
+
+        #proscons-9 .icon-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        #proscons-9 .icon-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        #proscons-9 .icon-badge.pro { background: #7ED6A5; }
+        #proscons-9 .icon-badge.con { background: #FF7675; }
+
+        #proscons-9 .icon-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        #proscons-9 .icon-title.pro { color: #2D8A5F; }
+        #proscons-9 .icon-title.con { color: #C74B4B; }
+
+        #proscons-9 .icon-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-9 .icon-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-9 .icon-item.pro { background: #E8F8F0; }
+        #proscons-9 .icon-item.con { background: #FFE8E8; }
+
+        #proscons-9 .icon-item:hover {
+            transform: scale(1.02);
+        }
+
+        #proscons-9 .item-icon {
+            font-size: 20px;
+        }
+
+        #proscons-9 .item-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #proscons-9 .item-text.pro { color: #2D8A5F; }
+        #proscons-9 .item-text.con { color: #C74B4B; }
+
+        /* ============================================
+           #proscons-10: Numbered Pros/Cons
+           ============================================ */
+        #proscons-10 .proscons {
+            gap: 40px;
+        }
+
+        #proscons-10 .num-section {
+            flex: 1;
+            max-width: 320px;
+        }
+
+        #proscons-10 .num-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+        }
+
+        #proscons-10 .num-header.pro {
+            color: #2D8A5F;
+            border-color: #7ED6A5;
+        }
+
+        #proscons-10 .num-header.con {
+            color: #C74B4B;
+            border-color: #FF7675;
+        }
+
+        #proscons-10 .num-items {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        #proscons-10 .num-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-10 .num-item:hover {
+            transform: translateX(5px);
+        }
+
+        #proscons-10 .num-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        #proscons-10 .num-badge.pro { background: #7ED6A5; }
+        #proscons-10 .num-badge.con { background: #FF7675; }
+
+        #proscons-10 .num-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+            padding-top: 4px;
+        }
+
+        #proscons-10 .num-text.pro { color: #2D8A5F; }
+        #proscons-10 .num-text.con { color: #C74B4B; }
+
+        /* ============================================
+           #proscons-11: Speech Bubble Debate
+           ============================================ */
+        #proscons-11 .proscons {
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #proscons-11 .bubble-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        #proscons-11 .bubble-row.con {
+            flex-direction: row-reverse;
+        }
+
+        #proscons-11 .bubble-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        #proscons-11 .bubble-avatar.pro { background: #7ED6A5; }
+        #proscons-11 .bubble-avatar.con { background: #FF7675; }
+
+        #proscons-11 .bubble {
+            max-width: 350px;
+            padding: 14px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-11 .bubble.pro {
+            background: #E8F8F0;
+            color: #2D8A5F;
+            border-bottom-left-radius: 6px;
+        }
+
+        #proscons-11 .bubble.con {
+            background: #FFE8E8;
+            color: #C74B4B;
+            border-bottom-right-radius: 6px;
+        }
+
+        #proscons-11 .bubble:hover {
+            transform: scale(1.02);
+        }
+
+        /* ============================================
+           #proscons-12: Checkbox Comparison
+           ============================================ */
+        #proscons-12 .proscons {
+            gap: 40px;
+        }
+
+        #proscons-12 .check-section {
+            flex: 1;
+            max-width: 320px;
+        }
+
+        #proscons-12 .check-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        #proscons-12 .check-header.pro { color: #2D8A5F; }
+        #proscons-12 .check-header.con { color: #C74B4B; }
+
+        #proscons-12 .check-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-12 .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #proscons-12 .check-item.pro { background: #E8F8F0; }
+        #proscons-12 .check-item.con { background: #FFE8E8; }
+
+        #proscons-12 .check-item:hover {
+            transform: translateX(5px);
+        }
+
+        #proscons-12 .check-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        #proscons-12 .check-box.pro { background: #7ED6A5; }
+        #proscons-12 .check-box.con { background: #FF7675; }
+
+        #proscons-12 .check-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #proscons-12 .check-text.pro { color: #2D8A5F; }
+        #proscons-12 .check-text.con { color: #C74B4B; }
+
+        /* ============================================
+           #proscons-13: Traffic Light (Good/Neutral/Bad)
+           ============================================ */
+        #proscons-13 .proscons {
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #proscons-13 .traffic-topic {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #proscons-13 .traffic-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        #proscons-13 .traffic-column {
+            width: 180px;
+        }
+
+        #proscons-13 .traffic-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 700;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        #proscons-13 .traffic-header.good { background: #7ED6A5; }
+        #proscons-13 .traffic-header.neutral { background: #FFD93D; color: #333; }
+        #proscons-13 .traffic-header.bad { background: #FF7675; }
+
+        #proscons-13 .traffic-light {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #proscons-13 .traffic-items {
+            padding: 16px;
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #proscons-13 .traffic-items.good { background: #E8F8F0; }
+        #proscons-13 .traffic-items.neutral { background: #FFF8E0; }
+        #proscons-13 .traffic-items.bad { background: #FFE8E8; }
+
+        #proscons-13 .traffic-item {
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-13 .traffic-item.good { color: #2D8A5F; }
+        #proscons-13 .traffic-item.neutral { color: #9A7B00; }
+        #proscons-13 .traffic-item.bad { color: #C74B4B; }
+
+        #proscons-13 .traffic-item:hover {
+            transform: scale(1.03);
+        }
+
+        /* ============================================
+           #proscons-14: Star Rating Breakdown
+           ============================================ */
+        #proscons-14 .proscons {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #proscons-14 .star-topic {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        #proscons-14 .star-rows {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-14 .star-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-14 .star-row:hover {
+            transform: translateX(5px);
+        }
+
+        #proscons-14 .star-row.pro { background: #E8F8F0; }
+        #proscons-14 .star-row.con { background: #FFE8E8; }
+
+        #proscons-14 .star-label {
+            width: 100px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        #proscons-14 .star-label.pro { color: #2D8A5F; }
+        #proscons-14 .star-label.con { color: #C74B4B; }
+
+        #proscons-14 .star-icons {
+            display: flex;
+            gap: 4px;
+        }
+
+        #proscons-14 .star {
+            font-size: 18px;
+        }
+
+        #proscons-14 .star.filled.pro { color: #7ED6A5; }
+        #proscons-14 .star.filled.con { color: #FF7675; }
+        #proscons-14 .star.empty { color: #ddd; }
+
+        #proscons-14 .star-text {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* ============================================
+           #proscons-15: Emoji Reaction Pros/Cons
+           ============================================ */
+        #proscons-15 .proscons {
+            gap: 30px;
+        }
+
+        #proscons-15 .emoji-section {
+            flex: 1;
+            max-width: 320px;
+        }
+
+        #proscons-15 .emoji-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        #proscons-15 .emoji-header.pro { color: #2D8A5F; }
+        #proscons-15 .emoji-header.con { color: #C74B4B; }
+
+        #proscons-15 .emoji-header .emoji {
+            font-size: 30px;
+        }
+
+        #proscons-15 .emoji-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-15 .emoji-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-15 .emoji-item.pro { background: #E8F8F0; }
+        #proscons-15 .emoji-item.con { background: #FFE8E8; }
+
+        #proscons-15 .emoji-item:hover {
+            transform: scale(1.03);
+        }
+
+        #proscons-15 .emoji-item .emoji {
+            font-size: 24px;
+        }
+
+        #proscons-15 .emoji-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #proscons-15 .emoji-text.pro { color: #2D8A5F; }
+        #proscons-15 .emoji-text.con { color: #C74B4B; }
+
+        /* ============================================
+           #proscons-16: Horizontal Bar Comparison
+           ============================================ */
+        #proscons-16 .proscons {
+            flex-direction: column;
+            gap: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #proscons-16 .bar-topic {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #proscons-16 .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #proscons-16 .bar-label {
+            width: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            text-align: right;
+        }
+
+        #proscons-16 .bar-container {
+            flex: 1;
+            display: flex;
+            height: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        #proscons-16 .bar-pro {
+            background: #7ED6A5;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            transition: width 0.5s ease;
+        }
+
+        #proscons-16 .bar-con {
+            background: #FF7675;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            transition: width 0.5s ease;
+        }
+
+        #proscons-16 .bar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        #proscons-16 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        #proscons-16 .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        #proscons-16 .legend-dot.pro { background: #7ED6A5; }
+        #proscons-16 .legend-dot.con { background: #FF7675; }
+
+        /* ============================================
+           #proscons-17: Pie Chart Split
+           ============================================ */
+        #proscons-17 .proscons {
+            gap: 40px;
+            align-items: center;
+        }
+
+        #proscons-17 .pie-chart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        #proscons-17 .pie {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #7ED6A5 0deg 216deg,
+                #FF7675 216deg 360deg
+            );
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        #proscons-17 .pie:hover {
+            transform: scale(1.05);
+        }
+
+        #proscons-17 .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #proscons-17 .pie-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        #proscons-17 .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        #proscons-17 .pie-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #proscons-17 .pie-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        #proscons-17 .pie-dot.pro { background: #7ED6A5; }
+        #proscons-17 .pie-dot.con { background: #FF7675; }
+
+        #proscons-17 .pie-legend-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        #proscons-17 .pie-legend-text.pro { color: #2D8A5F; }
+        #proscons-17 .pie-legend-text.con { color: #C74B4B; }
+
+        #proscons-17 .pie-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-left: 32px;
+        }
+
+        #proscons-17 .pie-item {
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-17 .pie-item.pro {
+            background: #E8F8F0;
+            color: #2D8A5F;
+        }
+
+        #proscons-17 .pie-item.con {
+            background: #FFE8E8;
+            color: #C74B4B;
+        }
+
+        #proscons-17 .pie-item:hover {
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           #proscons-18: Accordion Pros/Cons
+           ============================================ */
+        #proscons-18 .proscons {
+            flex-direction: column;
+            gap: 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #proscons-18 .accordion-item {
+            border-bottom: 1px solid #eee;
+        }
+
+        #proscons-18 .accordion-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #proscons-18 .accordion-header:hover {
+            background: #f8f8f8;
+        }
+
+        #proscons-18 .accordion-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        #proscons-18 .accordion-icon.pro { background: #7ED6A5; }
+        #proscons-18 .accordion-icon.con { background: #FF7675; }
+
+        #proscons-18 .accordion-title {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        #proscons-18 .accordion-title.pro { color: #2D8A5F; }
+        #proscons-18 .accordion-title.con { color: #C74B4B; }
+
+        #proscons-18 .accordion-arrow {
+            font-size: 20px;
+            color: #999;
+            transition: transform 0.3s ease;
+        }
+
+        #proscons-18 .accordion-item:hover .accordion-arrow {
+            transform: rotate(90deg);
+        }
+
+        #proscons-18 .accordion-content {
+            padding: 0 20px 16px 64px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           #proscons-19: Side-by-Side Cards
+           ============================================ */
+        #proscons-19 .proscons {
+            gap: 24px;
+        }
+
+        #proscons-19 .side-card {
+            flex: 1;
+            max-width: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        #proscons-19 .side-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        #proscons-19 .card-header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        #proscons-19 .card-header.pro { background: #7ED6A5; }
+        #proscons-19 .card-header.con { background: #FF7675; }
+
+        #proscons-19 .card-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        #proscons-19 .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        #proscons-19 .card-body {
+            padding: 20px;
+            background: #fff;
+        }
+
+        #proscons-19 .card-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #proscons-19 .card-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #proscons-19 .card-item.pro { color: #2D8A5F; }
+        #proscons-19 .card-item.con { color: #C74B4B; }
+
+        #proscons-19 .card-bullet {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           #proscons-20: T-Chart Layout
+           ============================================ */
+        #proscons-20 .proscons {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        #proscons-20 .tchart-topic {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            padding: 16px 50px;
+            background: #54A0FF;
+            border-radius: 12px 12px 0 0;
+        }
+
+        #proscons-20 .tchart {
+            display: flex;
+            border: 3px solid #54A0FF;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+        }
+
+        #proscons-20 .tchart-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        #proscons-20 .tchart-column.pro {
+            border-right: 2px solid #54A0FF;
+        }
+
+        #proscons-20 .tchart-header {
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        #proscons-20 .tchart-header.pro { background: #7ED6A5; }
+        #proscons-20 .tchart-header.con { background: #FF7675; }
+
+        #proscons-20 .tchart-items {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 200px;
+        }
+
+        #proscons-20 .tchart-items.pro { background: #F5FFF9; }
+        #proscons-20 .tchart-items.con { background: #FFF5F5; }
+
+        #proscons-20 .tchart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        #proscons-20 .tchart-item:hover {
+            transform: translateX(5px);
+        }
+
+        #proscons-20 .tchart-item.pro { color: #2D8A5F; }
+        #proscons-20 .tchart-item.con { color: #C74B4B; }
+
+        #proscons-20 .tchart-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        #proscons-20 .tchart-dot.pro { background: #7ED6A5; }
+        #proscons-20 .tchart-dot.con { background: #FF7675; }
+    </style>
+</head>
+<body>
+    <h1>Pros/Cons Diagram Layouts</h1>
+    <h2>20 Creative Patterns for Comparison & Decision Making</h2>
+
+    <div class="diagram-grid">
+
+        <!-- #proscons-1: Simple Two-Column -->
+        <div class="diagram-section" id="proscons-1">
+            <div class="diagram-title">#1 Simple Two-Column</div>
+            <div class="diagram-desc">Classic check/cross layout with colored headers</div>
+            <div class="proscons">
+                <div class="column">
+                    <div class="column-header pro">
+                        <span class="icon">&#10003;</span>
+                        <span>Pros</span>
+                    </div>
+                    <div class="item-list">
+                        <div class="item pro">Easy to understand</div>
+                        <div class="item pro">Cost effective solution</div>
+                        <div class="item pro">Quick implementation</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="column-header con">
+                        <span class="icon">&#10007;</span>
+                        <span>Cons</span>
+                    </div>
+                    <div class="item-list">
+                        <div class="item con">Limited features</div>
+                        <div class="item con">Requires training</div>
+                        <div class="item con">Not scalable</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-2: Green/Red Split -->
+        <div class="diagram-section" id="proscons-2">
+            <div class="diagram-title">#2 Green/Red Split</div>
+            <div class="diagram-desc">Full-width color blocks with contrasting items</div>
+            <div class="proscons">
+                <div class="split pro">
+                    <div class="split-title">Advantages</div>
+                    <div class="split-items">
+                        <div class="split-item">User-friendly interface</div>
+                        <div class="split-item">Great customer support</div>
+                        <div class="split-item">Regular updates</div>
+                    </div>
+                </div>
+                <div class="split con">
+                    <div class="split-title">Disadvantages</div>
+                    <div class="split-items">
+                        <div class="split-item">Higher price point</div>
+                        <div class="split-item">Steep learning curve</div>
+                        <div class="split-item">Limited integrations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-3: Thumbs Up/Down Layout -->
+        <div class="diagram-section" id="proscons-3">
+            <div class="diagram-title">#3 Thumbs Up/Down Layout</div>
+            <div class="diagram-desc">Visual thumbs icons with pill-shaped items</div>
+            <div class="proscons">
+                <div class="thumb-section">
+                    <span class="thumb-icon up">&#128077;</span>
+                    <div class="thumb-title pro">What We Love</div>
+                    <div class="thumb-items">
+                        <div class="thumb-item pro">Fast performance</div>
+                        <div class="thumb-item pro">Beautiful design</div>
+                        <div class="thumb-item pro">Reliable service</div>
+                    </div>
+                </div>
+                <div class="thumb-section">
+                    <span class="thumb-icon down">&#128078;</span>
+                    <div class="thumb-title con">Could Be Better</div>
+                    <div class="thumb-items">
+                        <div class="thumb-item con">No offline mode</div>
+                        <div class="thumb-item con">Limited storage</div>
+                        <div class="thumb-item con">No dark theme</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-4: Plus/Minus Table -->
+        <div class="diagram-section" id="proscons-4">
+            <div class="diagram-title">#4 Plus/Minus Table</div>
+            <div class="diagram-desc">Table format with +/- symbols</div>
+            <div class="proscons">
+                <table class="pm-table">
+                    <thead>
+                        <tr>
+                            <th class="pro">+ Pros</th>
+                            <th class="con">- Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pro"><span class="pm-symbol plus">+</span>Affordable pricing</td>
+                            <td class="con"><span class="pm-symbol minus">-</span>Slow support</td>
+                        </tr>
+                        <tr>
+                            <td class="pro"><span class="pm-symbol plus">+</span>Easy setup</td>
+                            <td class="con"><span class="pm-symbol minus">-</span>Basic features</td>
+                        </tr>
+                        <tr>
+                            <td class="pro"><span class="pm-symbol plus">+</span>Good documentation</td>
+                            <td class="con"><span class="pm-symbol minus">-</span>No API access</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- #proscons-5: Weighted Pros/Cons -->
+        <div class="diagram-section" id="proscons-5">
+            <div class="diagram-title">#5 Weighted Pros/Cons</div>
+            <div class="diagram-desc">Each item has an importance bar indicator</div>
+            <div class="proscons">
+                <div class="weighted-section">
+                    <div class="weighted-header pro">Benefits</div>
+                    <div class="weighted-items">
+                        <div class="weighted-item pro">
+                            <div class="weight-bar">
+                                <div class="weight-fill pro" style="width: 90%;"></div>
+                            </div>
+                            <span class="weighted-text pro">Time savings</span>
+                        </div>
+                        <div class="weighted-item pro">
+                            <div class="weight-bar">
+                                <div class="weight-fill pro" style="width: 70%;"></div>
+                            </div>
+                            <span class="weighted-text pro">Cost reduction</span>
+                        </div>
+                        <div class="weighted-item pro">
+                            <div class="weight-bar">
+                                <div class="weight-fill pro" style="width: 50%;"></div>
+                            </div>
+                            <span class="weighted-text pro">Team collaboration</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="weighted-section">
+                    <div class="weighted-header con">Drawbacks</div>
+                    <div class="weighted-items">
+                        <div class="weighted-item con">
+                            <div class="weight-bar">
+                                <div class="weight-fill con" style="width: 80%;"></div>
+                            </div>
+                            <span class="weighted-text con">Initial investment</span>
+                        </div>
+                        <div class="weighted-item con">
+                            <div class="weight-bar">
+                                <div class="weight-fill con" style="width: 40%;"></div>
+                            </div>
+                            <span class="weighted-text con">Migration effort</span>
+                        </div>
+                        <div class="weighted-item con">
+                            <div class="weight-bar">
+                                <div class="weight-fill con" style="width: 30%;"></div>
+                            </div>
+                            <span class="weighted-text con">Vendor lock-in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-6: Card Flip Pros/Cons -->
+        <div class="diagram-section" id="proscons-6">
+            <div class="diagram-title">#6 Card Flip Pros/Cons</div>
+            <div class="diagram-desc">Hover to flip cards and reveal content</div>
+            <div class="proscons">
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front pro">&#10003;</div>
+                        <div class="flip-back pro">Fast loading speed</div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front pro">&#10003;</div>
+                        <div class="flip-back pro">Mobile friendly</div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front pro">&#10003;</div>
+                        <div class="flip-back pro">24/7 support</div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front con">&#10007;</div>
+                        <div class="flip-back con">No free trial</div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front con">&#10007;</div>
+                        <div class="flip-back con">Limited export</div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front con">&#10007;</div>
+                        <div class="flip-back con">Complex pricing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-7: Balance Scale Layout -->
+        <div class="diagram-section" id="proscons-7">
+            <div class="diagram-title">#7 Balance Scale Layout</div>
+            <div class="diagram-desc">Visual scale showing weighted comparison</div>
+            <div class="proscons">
+                <div class="scale-topic">Decision: New Software</div>
+                <div class="scale-beam">
+                    <div class="scale-pan pro">
+                        <div class="scale-items">
+                            <div class="scale-item">Saves time</div>
+                            <div class="scale-item">Better quality</div>
+                            <div class="scale-item">Team morale</div>
+                            <div class="scale-item">Automation</div>
+                        </div>
+                    </div>
+                    <div class="scale-pan con">
+                        <div class="scale-items">
+                            <div class="scale-item">High cost</div>
+                            <div class="scale-item">Training needed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-8: Stacked List Comparison -->
+        <div class="diagram-section" id="proscons-8">
+            <div class="diagram-title">#8 Stacked List Comparison</div>
+            <div class="diagram-desc">Alternating pro/con rows with labels</div>
+            <div class="proscons">
+                <div class="stacked-row">
+                    <div class="stacked-label pro">PRO</div>
+                    <div class="stacked-content pro">Intuitive user experience</div>
+                </div>
+                <div class="stacked-row">
+                    <div class="stacked-label con">CON</div>
+                    <div class="stacked-content con">Requires internet connection</div>
+                </div>
+                <div class="stacked-row">
+                    <div class="stacked-label pro">PRO</div>
+                    <div class="stacked-content pro">Automatic backups</div>
+                </div>
+                <div class="stacked-row">
+                    <div class="stacked-label con">CON</div>
+                    <div class="stacked-content con">Storage limitations</div>
+                </div>
+                <div class="stacked-row">
+                    <div class="stacked-label pro">PRO</div>
+                    <div class="stacked-content pro">Cross-platform sync</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-9: Icon-Based Pros/Cons -->
+        <div class="diagram-section" id="proscons-9">
+            <div class="diagram-title">#9 Icon-Based Pros/Cons</div>
+            <div class="diagram-desc">Each item has a relevant icon</div>
+            <div class="proscons">
+                <div class="icon-section">
+                    <div class="icon-header">
+                        <div class="icon-badge pro">&#128994;</div>
+                        <span class="icon-title pro">Positives</span>
+                    </div>
+                    <div class="icon-items">
+                        <div class="icon-item pro">
+                            <span class="item-icon">&#128640;</span>
+                            <span class="item-text pro">Fast deployment</span>
+                        </div>
+                        <div class="icon-item pro">
+                            <span class="item-icon">&#128176;</span>
+                            <span class="item-text pro">Cost efficient</span>
+                        </div>
+                        <div class="icon-item pro">
+                            <span class="item-icon">&#128274;</span>
+                            <span class="item-text pro">Secure & reliable</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-section">
+                    <div class="icon-header">
+                        <div class="icon-badge con">&#128308;</div>
+                        <span class="icon-title con">Negatives</span>
+                    </div>
+                    <div class="icon-items">
+                        <div class="icon-item con">
+                            <span class="item-icon">&#128218;</span>
+                            <span class="item-text con">Steep learning curve</span>
+                        </div>
+                        <div class="icon-item con">
+                            <span class="item-icon">&#128268;</span>
+                            <span class="item-text con">Plugin limitations</span>
+                        </div>
+                        <div class="icon-item con">
+                            <span class="item-icon">&#128336;</span>
+                            <span class="item-text con">Slow updates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-10: Numbered Pros/Cons -->
+        <div class="diagram-section" id="proscons-10">
+            <div class="diagram-title">#10 Numbered Pros/Cons</div>
+            <div class="diagram-desc">Numbered list format for easy reference</div>
+            <div class="proscons">
+                <div class="num-section">
+                    <div class="num-header pro">Advantages</div>
+                    <div class="num-items">
+                        <div class="num-item">
+                            <span class="num-badge pro">1</span>
+                            <span class="num-text pro">Reduces manual work by 80%</span>
+                        </div>
+                        <div class="num-item">
+                            <span class="num-badge pro">2</span>
+                            <span class="num-text pro">Improves team productivity</span>
+                        </div>
+                        <div class="num-item">
+                            <span class="num-badge pro">3</span>
+                            <span class="num-text pro">Real-time collaboration</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="num-section">
+                    <div class="num-header con">Disadvantages</div>
+                    <div class="num-items">
+                        <div class="num-item">
+                            <span class="num-badge con">1</span>
+                            <span class="num-text con">Monthly subscription cost</span>
+                        </div>
+                        <div class="num-item">
+                            <span class="num-badge con">2</span>
+                            <span class="num-text con">Data migration challenges</span>
+                        </div>
+                        <div class="num-item">
+                            <span class="num-badge con">3</span>
+                            <span class="num-text con">Limited customization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-11: Speech Bubble Debate -->
+        <div class="diagram-section" id="proscons-11">
+            <div class="diagram-title">#11 Speech Bubble Debate</div>
+            <div class="diagram-desc">Chat-style debate between two perspectives</div>
+            <div class="proscons">
+                <div class="bubble-row pro">
+                    <div class="bubble-avatar pro">&#128522;</div>
+                    <div class="bubble pro">It's really easy to get started and the onboarding is smooth!</div>
+                </div>
+                <div class="bubble-row con">
+                    <div class="bubble-avatar con">&#128533;</div>
+                    <div class="bubble con">But the pricing is confusing and there are hidden fees...</div>
+                </div>
+                <div class="bubble-row pro">
+                    <div class="bubble-avatar pro">&#128522;</div>
+                    <div class="bubble pro">The customer support team responds within hours!</div>
+                </div>
+                <div class="bubble-row con">
+                    <div class="bubble-avatar con">&#128533;</div>
+                    <div class="bubble con">Documentation could be much better though.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-12: Checkbox Comparison -->
+        <div class="diagram-section" id="proscons-12">
+            <div class="diagram-title">#12 Checkbox Comparison</div>
+            <div class="diagram-desc">Checklist style with check/cross marks</div>
+            <div class="proscons">
+                <div class="check-section">
+                    <div class="check-header pro">What Works Well</div>
+                    <div class="check-items">
+                        <div class="check-item pro">
+                            <span class="check-box pro">&#10003;</span>
+                            <span class="check-text pro">Clean user interface</span>
+                        </div>
+                        <div class="check-item pro">
+                            <span class="check-box pro">&#10003;</span>
+                            <span class="check-text pro">Fast performance</span>
+                        </div>
+                        <div class="check-item pro">
+                            <span class="check-box pro">&#10003;</span>
+                            <span class="check-text pro">Regular updates</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="check-section">
+                    <div class="check-header con">What Needs Work</div>
+                    <div class="check-items">
+                        <div class="check-item con">
+                            <span class="check-box con">&#10007;</span>
+                            <span class="check-text con">Mobile app issues</span>
+                        </div>
+                        <div class="check-item con">
+                            <span class="check-box con">&#10007;</span>
+                            <span class="check-text con">Export limitations</span>
+                        </div>
+                        <div class="check-item con">
+                            <span class="check-box con">&#10007;</span>
+                            <span class="check-text con">No offline access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-13: Traffic Light (Good/Neutral/Bad) -->
+        <div class="diagram-section" id="proscons-13">
+            <div class="diagram-title">#13 Traffic Light (Good/Neutral/Bad)</div>
+            <div class="diagram-desc">Three-way comparison with traffic light colors</div>
+            <div class="proscons">
+                <div class="traffic-topic">Product Feature Review</div>
+                <div class="traffic-container">
+                    <div class="traffic-column">
+                        <div class="traffic-header good">
+                            <span class="traffic-light"></span>
+                            Great
+                        </div>
+                        <div class="traffic-items good">
+                            <div class="traffic-item good">Speed</div>
+                            <div class="traffic-item good">Design</div>
+                        </div>
+                    </div>
+                    <div class="traffic-column">
+                        <div class="traffic-header neutral">
+                            <span class="traffic-light"></span>
+                            Okay
+                        </div>
+                        <div class="traffic-items neutral">
+                            <div class="traffic-item neutral">Price</div>
+                            <div class="traffic-item neutral">Support</div>
+                        </div>
+                    </div>
+                    <div class="traffic-column">
+                        <div class="traffic-header bad">
+                            <span class="traffic-light"></span>
+                            Needs Work
+                        </div>
+                        <div class="traffic-items bad">
+                            <div class="traffic-item bad">Docs</div>
+                            <div class="traffic-item bad">Mobile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-14: Star Rating Breakdown -->
+        <div class="diagram-section" id="proscons-14">
+            <div class="diagram-title">#14 Star Rating Breakdown</div>
+            <div class="diagram-desc">Star ratings for each pro/con aspect</div>
+            <div class="proscons">
+                <div class="star-topic">Feature Assessment</div>
+                <div class="star-rows">
+                    <div class="star-row pro">
+                        <span class="star-label pro">Usability</span>
+                        <div class="star-icons">
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                        </div>
+                        <span class="star-text">Excellent!</span>
+                    </div>
+                    <div class="star-row pro">
+                        <span class="star-label pro">Performance</span>
+                        <div class="star-icons">
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star filled pro">&#9733;</span>
+                            <span class="star empty">&#9733;</span>
+                        </div>
+                        <span class="star-text">Very Good</span>
+                    </div>
+                    <div class="star-row con">
+                        <span class="star-label con">Value</span>
+                        <div class="star-icons">
+                            <span class="star filled con">&#9733;</span>
+                            <span class="star filled con">&#9733;</span>
+                            <span class="star empty">&#9733;</span>
+                            <span class="star empty">&#9733;</span>
+                            <span class="star empty">&#9733;</span>
+                        </div>
+                        <span class="star-text">Overpriced</span>
+                    </div>
+                    <div class="star-row con">
+                        <span class="star-label con">Support</span>
+                        <div class="star-icons">
+                            <span class="star filled con">&#9733;</span>
+                            <span class="star filled con">&#9733;</span>
+                            <span class="star filled con">&#9733;</span>
+                            <span class="star empty">&#9733;</span>
+                            <span class="star empty">&#9733;</span>
+                        </div>
+                        <span class="star-text">Average</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-15: Emoji Reaction Pros/Cons -->
+        <div class="diagram-section" id="proscons-15">
+            <div class="diagram-title">#15 Emoji Reaction Pros/Cons</div>
+            <div class="diagram-desc">Fun emoji-based reactions for each point</div>
+            <div class="proscons">
+                <div class="emoji-section">
+                    <div class="emoji-header pro">
+                        <span class="emoji">&#128513;</span>
+                        <span>Love It!</span>
+                    </div>
+                    <div class="emoji-items">
+                        <div class="emoji-item pro">
+                            <span class="emoji">&#128077;</span>
+                            <span class="emoji-text pro">Super easy setup</span>
+                        </div>
+                        <div class="emoji-item pro">
+                            <span class="emoji">&#127775;</span>
+                            <span class="emoji-text pro">Amazing features</span>
+                        </div>
+                        <div class="emoji-item pro">
+                            <span class="emoji">&#128150;</span>
+                            <span class="emoji-text pro">Great community</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="emoji-section">
+                    <div class="emoji-header con">
+                        <span class="emoji">&#128532;</span>
+                        <span>Not Great...</span>
+                    </div>
+                    <div class="emoji-items">
+                        <div class="emoji-item con">
+                            <span class="emoji">&#128078;</span>
+                            <span class="emoji-text con">Buggy mobile app</span>
+                        </div>
+                        <div class="emoji-item con">
+                            <span class="emoji">&#128148;</span>
+                            <span class="emoji-text con">Slow response time</span>
+                        </div>
+                        <div class="emoji-item con">
+                            <span class="emoji">&#128557;</span>
+                            <span class="emoji-text con">Expensive plans</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-16: Horizontal Bar Comparison -->
+        <div class="diagram-section" id="proscons-16">
+            <div class="diagram-title">#16 Horizontal Bar Comparison</div>
+            <div class="diagram-desc">Side-by-side bars showing relative strength</div>
+            <div class="proscons">
+                <div class="bar-topic">Feature Comparison</div>
+                <div class="bar-row">
+                    <span class="bar-label">Speed</span>
+                    <div class="bar-container">
+                        <div class="bar-pro" style="width: 70%;">70%</div>
+                        <div class="bar-con" style="width: 30%;">30%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Design</span>
+                    <div class="bar-container">
+                        <div class="bar-pro" style="width: 85%;">85%</div>
+                        <div class="bar-con" style="width: 15%;">15%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Value</span>
+                    <div class="bar-container">
+                        <div class="bar-pro" style="width: 40%;">40%</div>
+                        <div class="bar-con" style="width: 60%;">60%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Support</span>
+                    <div class="bar-container">
+                        <div class="bar-pro" style="width: 55%;">55%</div>
+                        <div class="bar-con" style="width: 45%;">45%</div>
+                    </div>
+                </div>
+                <div class="bar-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot pro"></span>
+                        <span>Positive</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot con"></span>
+                        <span>Negative</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-17: Pie Chart Split -->
+        <div class="diagram-section" id="proscons-17">
+            <div class="diagram-title">#17 Pie Chart Split</div>
+            <div class="diagram-desc">Visual pie chart with detailed legend</div>
+            <div class="proscons">
+                <div class="pie-chart">
+                    <div class="pie">
+                        <div class="pie-center">
+                            <span class="pie-title">60/40</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie-legend">
+                    <div class="pie-legend-item">
+                        <span class="pie-dot pro"></span>
+                        <div>
+                            <span class="pie-legend-text pro">Pros (60%)</span>
+                            <div class="pie-items">
+                                <div class="pie-item pro">Excellent UX</div>
+                                <div class="pie-item pro">Fast loading</div>
+                                <div class="pie-item pro">Good value</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pie-legend-item">
+                        <span class="pie-dot con"></span>
+                        <div>
+                            <span class="pie-legend-text con">Cons (40%)</span>
+                            <div class="pie-items">
+                                <div class="pie-item con">Limited features</div>
+                                <div class="pie-item con">No API</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-18: Accordion Pros/Cons -->
+        <div class="diagram-section" id="proscons-18">
+            <div class="diagram-title">#18 Accordion Pros/Cons</div>
+            <div class="diagram-desc">Expandable sections with details</div>
+            <div class="proscons">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon pro">&#10003;</span>
+                        <span class="accordion-title pro">Easy Integration</span>
+                        <span class="accordion-arrow">&#10095;</span>
+                    </div>
+                    <div class="accordion-content">Seamlessly connects with your existing tools and workflows. Supports over 100+ integrations out of the box.</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon pro">&#10003;</span>
+                        <span class="accordion-title pro">Great Documentation</span>
+                        <span class="accordion-arrow">&#10095;</span>
+                    </div>
+                    <div class="accordion-content">Comprehensive guides, tutorials, and API reference. Active community forum for support.</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon con">&#10007;</span>
+                        <span class="accordion-title con">Premium Features Locked</span>
+                        <span class="accordion-arrow">&#10095;</span>
+                    </div>
+                    <div class="accordion-content">Most useful features require paid subscription. Free tier is very limited.</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon con">&#10007;</span>
+                        <span class="accordion-title con">Steep Learning Curve</span>
+                        <span class="accordion-arrow">&#10095;</span>
+                    </div>
+                    <div class="accordion-content">Takes time to master all features. Initial setup can be overwhelming for beginners.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-19: Side-by-Side Cards -->
+        <div class="diagram-section" id="proscons-19">
+            <div class="diagram-title">#19 Side-by-Side Cards</div>
+            <div class="diagram-desc">Distinct cards with headers and bullet points</div>
+            <div class="proscons">
+                <div class="side-card">
+                    <div class="card-header pro">
+                        <div class="card-icon">&#128077;</div>
+                        <div class="card-title">Pros</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-items">
+                            <div class="card-item pro">
+                                <span class="card-bullet">&#9679;</span>
+                                Clean and modern interface
+                            </div>
+                            <div class="card-item pro">
+                                <span class="card-bullet">&#9679;</span>
+                                Excellent mobile experience
+                            </div>
+                            <div class="card-item pro">
+                                <span class="card-bullet">&#9679;</span>
+                                Regular feature updates
+                            </div>
+                            <div class="card-item pro">
+                                <span class="card-bullet">&#9679;</span>
+                                Strong security measures
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="side-card">
+                    <div class="card-header con">
+                        <div class="card-icon">&#128078;</div>
+                        <div class="card-title">Cons</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-items">
+                            <div class="card-item con">
+                                <span class="card-bullet">&#9679;</span>
+                                No free tier available
+                            </div>
+                            <div class="card-item con">
+                                <span class="card-bullet">&#9679;</span>
+                                Limited third-party plugins
+                            </div>
+                            <div class="card-item con">
+                                <span class="card-bullet">&#9679;</span>
+                                Slow customer support
+                            </div>
+                            <div class="card-item con">
+                                <span class="card-bullet">&#9679;</span>
+                                No offline mode
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #proscons-20: T-Chart Layout -->
+        <div class="diagram-section" id="proscons-20">
+            <div class="diagram-title">#20 T-Chart Layout</div>
+            <div class="diagram-desc">Classic T-chart for comparison</div>
+            <div class="proscons">
+                <div class="tchart-topic">Topic: Remote Work</div>
+                <div class="tchart">
+                    <div class="tchart-column pro">
+                        <div class="tchart-header pro">Pros</div>
+                        <div class="tchart-items pro">
+                            <div class="tchart-item pro">
+                                <span class="tchart-dot pro"></span>
+                                Flexible schedule
+                            </div>
+                            <div class="tchart-item pro">
+                                <span class="tchart-dot pro"></span>
+                                No commute time
+                            </div>
+                            <div class="tchart-item pro">
+                                <span class="tchart-dot pro"></span>
+                                Better work-life balance
+                            </div>
+                            <div class="tchart-item pro">
+                                <span class="tchart-dot pro"></span>
+                                Increased productivity
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tchart-column con">
+                        <div class="tchart-header con">Cons</div>
+                        <div class="tchart-items con">
+                            <div class="tchart-item con">
+                                <span class="tchart-dot con"></span>
+                                Isolation from team
+                            </div>
+                            <div class="tchart-item con">
+                                <span class="tchart-dot con"></span>
+                                Communication gaps
+                            </div>
+                            <div class="tchart-item con">
+                                <span class="tchart-dot con"></span>
+                                Home distractions
+                            </div>
+                            <div class="tchart-item con">
+                                <span class="tchart-dot con"></span>
+                                Harder to disconnect
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

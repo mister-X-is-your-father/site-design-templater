@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home & Furniture Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f0eb;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #5d4e42;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #8b7d6b;
+            font-weight: 500;
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(93, 78, 66, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .icon-wrapper:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(93, 78, 66, 0.15);
+        }
+
+        /* home-01: Sofa */
+        .sofa {
+            width: 70px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .sofa:hover {
+            transform: scale(1.1);
+        }
+
+        .sofa-base {
+            width: 70px;
+            height: 28px;
+            background: #e8a87c;
+            border-radius: 6px 6px 4px 4px;
+            position: absolute;
+            bottom: 6px;
+        }
+
+        .sofa-back {
+            width: 70px;
+            height: 20px;
+            background: #d4896a;
+            border-radius: 6px 6px 0 0;
+            position: absolute;
+            top: 0;
+        }
+
+        .sofa-arm-left {
+            width: 8px;
+            height: 24px;
+            background: #d4896a;
+            border-radius: 4px 0 0 4px;
+            position: absolute;
+            left: 0;
+            bottom: 6px;
+        }
+
+        .sofa-arm-right {
+            width: 8px;
+            height: 24px;
+            background: #d4896a;
+            border-radius: 0 4px 4px 0;
+            position: absolute;
+            right: 0;
+            bottom: 6px;
+        }
+
+        .sofa-leg {
+            width: 6px;
+            height: 6px;
+            background: #8b6f4e;
+            border-radius: 0 0 2px 2px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .sofa-leg-left { left: 8px; }
+        .sofa-leg-right { right: 8px; }
+
+        /* home-02: Bed */
+        .bed {
+            width: 70px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bed:hover {
+            transform: scale(1.1);
+        }
+
+        .bed-frame {
+            width: 70px;
+            height: 30px;
+            background: #c9b896;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 6px;
+        }
+
+        .bed-headboard {
+            width: 70px;
+            height: 22px;
+            background: #a69272;
+            border-radius: 6px 6px 0 0;
+            position: absolute;
+            top: 0;
+        }
+
+        .bed-pillow {
+            width: 24px;
+            height: 10px;
+            background: #fff;
+            border-radius: 4px;
+            position: absolute;
+            top: 24px;
+            left: 6px;
+        }
+
+        .bed-blanket {
+            width: 58px;
+            height: 18px;
+            background: #7eb5a6;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+        }
+
+        .bed-leg {
+            width: 6px;
+            height: 6px;
+            background: #8b6f4e;
+            border-radius: 0 0 2px 2px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .bed-leg-left { left: 4px; }
+        .bed-leg-right { right: 4px; }
+
+        /* home-03: Table */
+        .table {
+            width: 60px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .table:hover {
+            transform: scale(1.1);
+        }
+
+        .table-top {
+            width: 60px;
+            height: 8px;
+            background: #c9a86c;
+            border-radius: 4px;
+            position: absolute;
+            top: 10px;
+        }
+
+        .table-leg {
+            width: 6px;
+            height: 28px;
+            background: #a68b5b;
+            border-radius: 0 0 2px 2px;
+            position: absolute;
+            top: 17px;
+        }
+
+        .table-leg-1 { left: 8px; }
+        .table-leg-2 { right: 8px; }
+
+        /* home-04: Chair */
+        .chair {
+            width: 40px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .chair:hover {
+            transform: rotate(-5deg);
+        }
+
+        .chair-back {
+            width: 32px;
+            height: 24px;
+            background: #e07b54;
+            border-radius: 6px 6px 0 0;
+            position: absolute;
+            top: 0;
+            left: 4px;
+        }
+
+        .chair-seat {
+            width: 36px;
+            height: 8px;
+            background: #c96a45;
+            border-radius: 4px;
+            position: absolute;
+            top: 24px;
+            left: 2px;
+        }
+
+        .chair-leg {
+            width: 5px;
+            height: 22px;
+            background: #8b6f4e;
+            border-radius: 0 0 2px 2px;
+            position: absolute;
+            top: 32px;
+        }
+
+        .chair-leg-1 { left: 6px; }
+        .chair-leg-2 { right: 6px; }
+
+        /* home-05: Lamp */
+        .lamp {
+            width: 40px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .lamp:hover {
+            transform: scale(1.1);
+        }
+
+        .lamp:hover .lamp-shade {
+            background: #ffe066;
+        }
+
+        .lamp-shade {
+            width: 40px;
+            height: 28px;
+            background: #ffd54f;
+            border-radius: 4px 4px 20px 20px;
+            position: absolute;
+            top: 0;
+            transition: background 0.3s ease;
+        }
+
+        .lamp-neck {
+            width: 6px;
+            height: 20px;
+            background: #8b8b8b;
+            position: absolute;
+            top: 26px;
+            left: 17px;
+        }
+
+        .lamp-base {
+            width: 24px;
+            height: 8px;
+            background: #6b6b6b;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 8px;
+        }
+
+        /* home-06: TV Stand */
+        .tv-stand {
+            width: 70px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .tv-stand:hover {
+            transform: scale(1.1);
+        }
+
+        .tv-screen {
+            width: 50px;
+            height: 30px;
+            background: #4a4a4a;
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+
+        .tv-screen-inner {
+            width: 44px;
+            height: 24px;
+            background: #7ec8e3;
+            border-radius: 2px;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .tv-stand-base {
+            width: 70px;
+            height: 16px;
+            background: #b8a082;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        /* home-07: Bookshelf */
+        .bookshelf {
+            width: 50px;
+            height: 65px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bookshelf:hover {
+            transform: scale(1.1);
+        }
+
+        .bookshelf-frame {
+            width: 50px;
+            height: 65px;
+            background: #c9a86c;
+            border-radius: 4px;
+            position: absolute;
+        }
+
+        .bookshelf-shelf {
+            width: 44px;
+            height: 4px;
+            background: #a68b5b;
+            position: absolute;
+            left: 3px;
+        }
+
+        .shelf-1 { top: 20px; }
+        .shelf-2 { top: 42px; }
+
+        .book {
+            width: 8px;
+            border-radius: 1px;
+            position: absolute;
+        }
+
+        .book-1 { height: 14px; background: #e07b54; top: 5px; left: 6px; }
+        .book-2 { height: 12px; background: #7eb5a6; top: 7px; left: 16px; }
+        .book-3 { height: 14px; background: #d4896a; top: 5px; left: 26px; }
+        .book-4 { height: 11px; background: #5b8a72; top: 27px; left: 6px; }
+        .book-5 { height: 13px; background: #e8a87c; top: 25px; left: 16px; }
+        .book-6 { height: 12px; background: #7ec8e3; top: 48px; left: 6px; }
+        .book-7 { height: 14px; background: #c96a45; top: 46px; left: 18px; }
+        .book-8 { height: 11px; background: #a69272; top: 49px; left: 30px; }
+
+        /* home-08: Wardrobe */
+        .wardrobe {
+            width: 50px;
+            height: 65px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .wardrobe:hover {
+            transform: scale(1.1);
+        }
+
+        .wardrobe-body {
+            width: 50px;
+            height: 60px;
+            background: #d4c4a8;
+            border-radius: 4px 4px 2px 2px;
+            position: absolute;
+            top: 0;
+        }
+
+        .wardrobe-door-left {
+            width: 22px;
+            height: 54px;
+            background: #c9b896;
+            border-radius: 2px;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .wardrobe-door-right {
+            width: 22px;
+            height: 54px;
+            background: #c9b896;
+            border-radius: 2px;
+            position: absolute;
+            top: 3px;
+            right: 3px;
+        }
+
+        .wardrobe-handle {
+            width: 3px;
+            height: 10px;
+            background: #8b6f4e;
+            border-radius: 2px;
+            position: absolute;
+            top: 25px;
+        }
+
+        .handle-left { right: 2px; }
+        .handle-right { left: 2px; }
+
+        .wardrobe-leg {
+            width: 8px;
+            height: 5px;
+            background: #8b6f4e;
+            border-radius: 0 0 2px 2px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .wleg-left { left: 6px; }
+        .wleg-right { right: 6px; }
+
+        /* home-09: Bathtub */
+        .bathtub {
+            width: 70px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bathtub:hover {
+            transform: scale(1.1);
+        }
+
+        .bathtub-body {
+            width: 70px;
+            height: 35px;
+            background: #fff;
+            border-radius: 4px 4px 20px 20px;
+            position: absolute;
+            top: 4px;
+            border: 3px solid #e0e0e0;
+        }
+
+        .bathtub-water {
+            width: 58px;
+            height: 20px;
+            background: #a8d8ea;
+            border-radius: 0 0 14px 14px;
+            position: absolute;
+            top: 16px;
+            left: 6px;
+        }
+
+        .bathtub-faucet {
+            width: 12px;
+            height: 10px;
+            background: #c0c0c0;
+            border-radius: 4px 4px 0 0;
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+
+        .bathtub-leg {
+            width: 10px;
+            height: 6px;
+            background: #c0c0c0;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .btleg-left { left: 8px; }
+        .btleg-right { right: 8px; }
+
+        /* home-10: Toilet */
+        .toilet {
+            width: 40px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .toilet:hover {
+            transform: scale(1.1);
+        }
+
+        .toilet-tank {
+            width: 30px;
+            height: 22px;
+            background: #fff;
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 5px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .toilet-bowl {
+            width: 36px;
+            height: 28px;
+            background: #fff;
+            border-radius: 4px 4px 18px 18px;
+            position: absolute;
+            bottom: 0;
+            left: 2px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .toilet-seat {
+            width: 28px;
+            height: 6px;
+            background: #e8e8e8;
+            border-radius: 4px;
+            position: absolute;
+            top: 22px;
+            left: 6px;
+        }
+
+        .toilet-button {
+            width: 8px;
+            height: 4px;
+            background: #c0c0c0;
+            border-radius: 2px;
+            position: absolute;
+            top: 4px;
+            left: 16px;
+        }
+
+        /* home-11: Sink */
+        .sink {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .sink:hover {
+            transform: scale(1.1);
+        }
+
+        .sink-basin {
+            width: 50px;
+            height: 20px;
+            background: #fff;
+            border-radius: 4px 4px 12px 12px;
+            position: absolute;
+            top: 14px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .sink-faucet-base {
+            width: 16px;
+            height: 8px;
+            background: #c0c0c0;
+            border-radius: 4px 4px 0 0;
+            position: absolute;
+            top: 0;
+            left: 17px;
+        }
+
+        .sink-faucet-spout {
+            width: 8px;
+            height: 14px;
+            background: #a8a8a8;
+            border-radius: 4px;
+            position: absolute;
+            top: 4px;
+            left: 21px;
+        }
+
+        .sink-pedestal {
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            position: absolute;
+            bottom: 0;
+            left: 17px;
+        }
+
+        /* home-12: Refrigerator */
+        .refrigerator {
+            width: 40px;
+            height: 65px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .refrigerator:hover {
+            transform: scale(1.1);
+        }
+
+        .fridge-body {
+            width: 40px;
+            height: 65px;
+            background: #e8e8e8;
+            border-radius: 4px;
+            position: absolute;
+        }
+
+        .fridge-top {
+            width: 36px;
+            height: 20px;
+            background: #d0d0d0;
+            border-radius: 2px;
+            position: absolute;
+            top: 3px;
+            left: 2px;
+        }
+
+        .fridge-bottom {
+            width: 36px;
+            height: 36px;
+            background: #d0d0d0;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 3px;
+            left: 2px;
+        }
+
+        .fridge-handle {
+            width: 3px;
+            height: 12px;
+            background: #a0a0a0;
+            border-radius: 2px;
+            position: absolute;
+            right: 5px;
+        }
+
+        .fh-top { top: 8px; }
+        .fh-bottom { bottom: 18px; }
+
+        /* home-13: Stove */
+        .stove {
+            width: 55px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .stove:hover {
+            transform: scale(1.1);
+        }
+
+        .stove-body {
+            width: 55px;
+            height: 50px;
+            background: #4a4a4a;
+            border-radius: 4px;
+            position: absolute;
+        }
+
+        .stove-top {
+            width: 50px;
+            height: 20px;
+            background: #3a3a3a;
+            border-radius: 2px;
+            position: absolute;
+            top: 4px;
+            left: 2.5px;
+        }
+
+        .burner {
+            width: 14px;
+            height: 14px;
+            background: #2a2a2a;
+            border-radius: 50%;
+            position: absolute;
+            top: 7px;
+        }
+
+        .burner-1 { left: 6px; }
+        .burner-2 { right: 6px; }
+
+        .stove-door {
+            width: 46px;
+            height: 20px;
+            background: #5a5a5a;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 4px;
+            left: 4.5px;
+        }
+
+        .stove-window {
+            width: 36px;
+            height: 12px;
+            background: #3a3a3a;
+            border-radius: 2px;
+            position: absolute;
+            top: 4px;
+            left: 5px;
+        }
+
+        .stove-handle {
+            width: 20px;
+            height: 3px;
+            background: #a0a0a0;
+            border-radius: 2px;
+            position: absolute;
+            top: 28px;
+            left: 17.5px;
+        }
+
+        /* home-14: Washing Machine */
+        .washing-machine {
+            width: 50px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .washing-machine:hover {
+            transform: scale(1.1);
+        }
+
+        .washing-machine:hover .wm-drum {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .wm-body {
+            width: 50px;
+            height: 55px;
+            background: #e8e8e8;
+            border-radius: 6px;
+            position: absolute;
+        }
+
+        .wm-panel {
+            width: 44px;
+            height: 10px;
+            background: #d0d0d0;
+            border-radius: 2px;
+            position: absolute;
+            top: 4px;
+            left: 3px;
+        }
+
+        .wm-door {
+            width: 32px;
+            height: 32px;
+            background: #c0c0c0;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 8px;
+            left: 9px;
+        }
+
+        .wm-drum {
+            width: 24px;
+            height: 24px;
+            background: #a8d8ea;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wm-drum-inner {
+            width: 8px;
+            height: 8px;
+            background: #7ec8e3;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+        }
+
+        /* home-15: Window */
+        .window {
+            width: 50px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .window:hover {
+            transform: scale(1.1);
+        }
+
+        .window-frame {
+            width: 50px;
+            height: 55px;
+            background: #c9a86c;
+            border-radius: 4px;
+            position: absolute;
+        }
+
+        .window-glass {
+            width: 20px;
+            height: 23px;
+            background: #a8d8ea;
+            border-radius: 2px;
+            position: absolute;
+        }
+
+        .wg-1 { top: 4px; left: 4px; }
+        .wg-2 { top: 4px; right: 4px; }
+        .wg-3 { bottom: 4px; left: 4px; }
+        .wg-4 { bottom: 4px; right: 4px; }
+
+        .window-cross-h {
+            width: 42px;
+            height: 5px;
+            background: #a68b5b;
+            position: absolute;
+            top: 25px;
+            left: 4px;
+        }
+
+        .window-cross-v {
+            width: 5px;
+            height: 47px;
+            background: #a68b5b;
+            position: absolute;
+            top: 4px;
+            left: 22.5px;
+        }
+
+        /* home-16: Door */
+        .door {
+            width: 40px;
+            height: 65px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .door:hover {
+            transform: perspective(100px) rotateY(-10deg);
+        }
+
+        .door-frame {
+            width: 40px;
+            height: 65px;
+            background: #a68b5b;
+            border-radius: 4px 4px 0 0;
+            position: absolute;
+        }
+
+        .door-panel {
+            width: 34px;
+            height: 59px;
+            background: #c9a86c;
+            border-radius: 2px 2px 0 0;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .door-top-panel {
+            width: 26px;
+            height: 20px;
+            background: #b8956a;
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 4px;
+        }
+
+        .door-bottom-panel {
+            width: 26px;
+            height: 24px;
+            background: #b8956a;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 6px;
+            left: 4px;
+        }
+
+        .door-handle {
+            width: 6px;
+            height: 6px;
+            background: #d4af37;
+            border-radius: 50%;
+            position: absolute;
+            top: 32px;
+            right: 6px;
+        }
+
+        /* home-17: Key */
+        .key {
+            width: 50px;
+            height: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .key:hover {
+            transform: rotate(15deg);
+        }
+
+        .key-head {
+            width: 18px;
+            height: 18px;
+            background: #d4af37;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 0;
+        }
+
+        .key-head-hole {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+
+        .key-shaft {
+            width: 28px;
+            height: 6px;
+            background: #d4af37;
+            border-radius: 0 2px 2px 0;
+            position: absolute;
+            top: 9px;
+            left: 16px;
+        }
+
+        .key-tooth {
+            width: 4px;
+            height: 8px;
+            background: #d4af37;
+            position: absolute;
+            top: 9px;
+        }
+
+        .kt-1 { right: 6px; border-radius: 0 0 2px 2px; }
+        .kt-2 { right: 14px; height: 6px; border-radius: 0 0 2px 2px; }
+
+        /* home-18: Plant Pot */
+        .plant-pot {
+            width: 40px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .plant-pot:hover {
+            transform: scale(1.1);
+        }
+
+        .plant-pot:hover .plant-leaf {
+            animation: sway 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes sway {
+            from { transform: rotate(-3deg); }
+            to { transform: rotate(3deg); }
+        }
+
+        .pot {
+            width: 30px;
+            height: 22px;
+            background: #d4896a;
+            border-radius: 2px 2px 6px 6px;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+        }
+
+        .pot-rim {
+            width: 34px;
+            height: 6px;
+            background: #c96a45;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 20px;
+            left: 3px;
+        }
+
+        .plant-stem {
+            width: 4px;
+            height: 20px;
+            background: #5b8a72;
+            position: absolute;
+            bottom: 24px;
+            left: 18px;
+        }
+
+        .plant-leaf {
+            width: 14px;
+            height: 10px;
+            background: #7eb5a6;
+            border-radius: 50% 0 50% 0;
+            position: absolute;
+            transform-origin: bottom center;
+        }
+
+        .pl-1 { bottom: 36px; left: 6px; transform: rotate(-30deg); }
+        .pl-2 { bottom: 40px; right: 6px; transform: rotate(30deg) scaleX(-1); }
+        .pl-3 { bottom: 44px; left: 12px; transform: rotate(-15deg); }
+
+        /* home-19: Rug */
+        .rug {
+            width: 70px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .rug:hover {
+            transform: scale(1.1);
+        }
+
+        .rug-body {
+            width: 70px;
+            height: 40px;
+            background: #e8a87c;
+            border-radius: 4px;
+            position: absolute;
+            top: 2px;
+        }
+
+        .rug-pattern {
+            width: 50px;
+            height: 24px;
+            background: #d4896a;
+            border-radius: 2px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .rug-inner {
+            width: 30px;
+            height: 12px;
+            background: #c96a45;
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 10px;
+        }
+
+        .rug-fringe {
+            width: 4px;
+            height: 5px;
+            background: #e8a87c;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .rf-1 { left: 8px; }
+        .rf-2 { left: 18px; }
+        .rf-3 { left: 28px; }
+        .rf-4 { left: 38px; }
+        .rf-5 { left: 48px; }
+        .rf-6 { left: 58px; }
+
+        /* home-20: Picture */
+        .picture {
+            width: 50px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .picture:hover {
+            transform: rotate(-5deg);
+        }
+
+        .picture-frame {
+            width: 50px;
+            height: 40px;
+            background: #c9a86c;
+            border-radius: 2px;
+            position: absolute;
+            top: 5px;
+        }
+
+        .picture-inner {
+            width: 42px;
+            height: 32px;
+            background: #a8d8ea;
+            border-radius: 1px;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+        }
+
+        .picture-mountain {
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-bottom: 16px solid #7eb5a6;
+            position: absolute;
+            bottom: 0;
+            left: 7px;
+        }
+
+        .picture-sun {
+            width: 10px;
+            height: 10px;
+            background: #ffd54f;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            right: 8px;
+        }
+
+        .picture-hook {
+            width: 8px;
+            height: 5px;
+            background: #8b6f4e;
+            border-radius: 4px 4px 0 0;
+            position: absolute;
+            top: 0;
+            left: 21px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Home & Furniture Illustrations</h1>
+
+    <div class="grid">
+        <!-- home-01: Sofa -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="sofa">
+                    <div class="sofa-back"></div>
+                    <div class="sofa-base"></div>
+                    <div class="sofa-arm-left"></div>
+                    <div class="sofa-arm-right"></div>
+                    <div class="sofa-leg sofa-leg-left"></div>
+                    <div class="sofa-leg sofa-leg-right"></div>
+                </div>
+            </div>
+            <span class="item-label">home-01</span>
+        </div>
+
+        <!-- home-02: Bed -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="bed">
+                    <div class="bed-headboard"></div>
+                    <div class="bed-frame"></div>
+                    <div class="bed-pillow"></div>
+                    <div class="bed-blanket"></div>
+                    <div class="bed-leg bed-leg-left"></div>
+                    <div class="bed-leg bed-leg-right"></div>
+                </div>
+            </div>
+            <span class="item-label">home-02</span>
+        </div>
+
+        <!-- home-03: Table -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="table">
+                    <div class="table-top"></div>
+                    <div class="table-leg table-leg-1"></div>
+                    <div class="table-leg table-leg-2"></div>
+                </div>
+            </div>
+            <span class="item-label">home-03</span>
+        </div>
+
+        <!-- home-04: Chair -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="chair">
+                    <div class="chair-back"></div>
+                    <div class="chair-seat"></div>
+                    <div class="chair-leg chair-leg-1"></div>
+                    <div class="chair-leg chair-leg-2"></div>
+                </div>
+            </div>
+            <span class="item-label">home-04</span>
+        </div>
+
+        <!-- home-05: Lamp -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="lamp">
+                    <div class="lamp-shade"></div>
+                    <div class="lamp-neck"></div>
+                    <div class="lamp-base"></div>
+                </div>
+            </div>
+            <span class="item-label">home-05</span>
+        </div>
+
+        <!-- home-06: TV Stand -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="tv-stand">
+                    <div class="tv-screen">
+                        <div class="tv-screen-inner"></div>
+                    </div>
+                    <div class="tv-stand-base"></div>
+                </div>
+            </div>
+            <span class="item-label">home-06</span>
+        </div>
+
+        <!-- home-07: Bookshelf -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="bookshelf">
+                    <div class="bookshelf-frame"></div>
+                    <div class="bookshelf-shelf shelf-1"></div>
+                    <div class="bookshelf-shelf shelf-2"></div>
+                    <div class="book book-1"></div>
+                    <div class="book book-2"></div>
+                    <div class="book book-3"></div>
+                    <div class="book book-4"></div>
+                    <div class="book book-5"></div>
+                    <div class="book book-6"></div>
+                    <div class="book book-7"></div>
+                    <div class="book book-8"></div>
+                </div>
+            </div>
+            <span class="item-label">home-07</span>
+        </div>
+
+        <!-- home-08: Wardrobe -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="wardrobe">
+                    <div class="wardrobe-body"></div>
+                    <div class="wardrobe-door-left">
+                        <div class="wardrobe-handle handle-left"></div>
+                    </div>
+                    <div class="wardrobe-door-right">
+                        <div class="wardrobe-handle handle-right"></div>
+                    </div>
+                    <div class="wardrobe-leg wleg-left"></div>
+                    <div class="wardrobe-leg wleg-right"></div>
+                </div>
+            </div>
+            <span class="item-label">home-08</span>
+        </div>
+
+        <!-- home-09: Bathtub -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="bathtub">
+                    <div class="bathtub-faucet"></div>
+                    <div class="bathtub-body"></div>
+                    <div class="bathtub-water"></div>
+                    <div class="bathtub-leg btleg-left"></div>
+                    <div class="bathtub-leg btleg-right"></div>
+                </div>
+            </div>
+            <span class="item-label">home-09</span>
+        </div>
+
+        <!-- home-10: Toilet -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="toilet">
+                    <div class="toilet-tank">
+                        <div class="toilet-button"></div>
+                    </div>
+                    <div class="toilet-seat"></div>
+                    <div class="toilet-bowl"></div>
+                </div>
+            </div>
+            <span class="item-label">home-10</span>
+        </div>
+
+        <!-- home-11: Sink -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="sink">
+                    <div class="sink-faucet-base"></div>
+                    <div class="sink-faucet-spout"></div>
+                    <div class="sink-basin"></div>
+                    <div class="sink-pedestal"></div>
+                </div>
+            </div>
+            <span class="item-label">home-11</span>
+        </div>
+
+        <!-- home-12: Refrigerator -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="refrigerator">
+                    <div class="fridge-body"></div>
+                    <div class="fridge-top"></div>
+                    <div class="fridge-bottom"></div>
+                    <div class="fridge-handle fh-top"></div>
+                    <div class="fridge-handle fh-bottom"></div>
+                </div>
+            </div>
+            <span class="item-label">home-12</span>
+        </div>
+
+        <!-- home-13: Stove -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="stove">
+                    <div class="stove-body"></div>
+                    <div class="stove-top">
+                        <div class="burner burner-1"></div>
+                        <div class="burner burner-2"></div>
+                    </div>
+                    <div class="stove-handle"></div>
+                    <div class="stove-door">
+                        <div class="stove-window"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">home-13</span>
+        </div>
+
+        <!-- home-14: Washing Machine -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="washing-machine">
+                    <div class="wm-body"></div>
+                    <div class="wm-panel"></div>
+                    <div class="wm-door">
+                        <div class="wm-drum">
+                            <div class="wm-drum-inner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">home-14</span>
+        </div>
+
+        <!-- home-15: Window -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="window">
+                    <div class="window-frame"></div>
+                    <div class="window-glass wg-1"></div>
+                    <div class="window-glass wg-2"></div>
+                    <div class="window-glass wg-3"></div>
+                    <div class="window-glass wg-4"></div>
+                    <div class="window-cross-h"></div>
+                    <div class="window-cross-v"></div>
+                </div>
+            </div>
+            <span class="item-label">home-15</span>
+        </div>
+
+        <!-- home-16: Door -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="door">
+                    <div class="door-frame"></div>
+                    <div class="door-panel">
+                        <div class="door-top-panel"></div>
+                        <div class="door-bottom-panel"></div>
+                        <div class="door-handle"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">home-16</span>
+        </div>
+
+        <!-- home-17: Key -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="key">
+                    <div class="key-head">
+                        <div class="key-head-hole"></div>
+                    </div>
+                    <div class="key-shaft"></div>
+                    <div class="key-tooth kt-1"></div>
+                    <div class="key-tooth kt-2"></div>
+                </div>
+            </div>
+            <span class="item-label">home-17</span>
+        </div>
+
+        <!-- home-18: Plant Pot -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="plant-pot">
+                    <div class="plant-leaf pl-1"></div>
+                    <div class="plant-leaf pl-2"></div>
+                    <div class="plant-leaf pl-3"></div>
+                    <div class="plant-stem"></div>
+                    <div class="pot-rim"></div>
+                    <div class="pot"></div>
+                </div>
+            </div>
+            <span class="item-label">home-18</span>
+        </div>
+
+        <!-- home-19: Rug -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="rug">
+                    <div class="rug-body"></div>
+                    <div class="rug-pattern">
+                        <div class="rug-inner"></div>
+                    </div>
+                    <div class="rug-fringe rf-1"></div>
+                    <div class="rug-fringe rf-2"></div>
+                    <div class="rug-fringe rf-3"></div>
+                    <div class="rug-fringe rf-4"></div>
+                    <div class="rug-fringe rf-5"></div>
+                    <div class="rug-fringe rf-6"></div>
+                </div>
+            </div>
+            <span class="item-label">home-19</span>
+        </div>
+
+        <!-- home-20: Picture -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="picture">
+                    <div class="picture-hook"></div>
+                    <div class="picture-frame">
+                        <div class="picture-inner">
+                            <div class="picture-sun"></div>
+                            <div class="picture-mountain"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">home-20</span>
+        </div>
+    </div>
+</body>
+</html>

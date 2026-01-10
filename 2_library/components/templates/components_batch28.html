@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music & Entertainment LP Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0d0b14;
+            --bg-card: #16131f;
+            --bg-hover: #1e1a2a;
+            --purple-dark: #6b21a8;
+            --purple: #9333ea;
+            --purple-light: #c084fc;
+            --pink: #ec4899;
+            --pink-light: #f472b6;
+            --magenta: #d946ef;
+            --white: #ffffff;
+            --gray-light: #e2e0eb;
+            --gray: #9b97a8;
+            --gray-dark: #6b6779;
+            --gradient-primary: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            --gradient-secondary: linear-gradient(135deg, #6b21a8 0%, #d946ef 100%);
+            --gradient-glow: linear-gradient(135deg, rgba(147, 51, 234, 0.4) 0%, rgba(236, 72, 153, 0.4) 100%);
+            --border: rgba(155, 151, 168, 0.15);
+            --shadow-glow: 0 0 40px rgba(147, 51, 234, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--gray-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           [AB01] Hero Section - Music & Entertainment
+           ============================================ */
+        .hero-music {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(217, 70, 239, 0.15) 0%, transparent 60%),
+                var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-music::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 100px,
+                    rgba(147, 51, 234, 0.03) 100px,
+                    rgba(147, 51, 234, 0.03) 102px
+                );
+            pointer-events: none;
+        }
+
+        .hero-music-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .hero-music-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(147, 51, 234, 0.2);
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--purple-light);
+            margin-bottom: 2rem;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(147, 51, 234, 0.5); }
+        }
+
+        .hero-music h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-music h1 .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-music-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-music-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-music-visual {
+            position: absolute;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float-visual 6s ease-in-out infinite;
+        }
+
+        @keyframes float-visual {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.1); }
+        }
+
+        /* ============================================
+           [AB02] Feature Cards - Music & Entertainment
+           ============================================ */
+        .features-music {
+            padding: 6rem 0;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .features-music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card-music {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card-music::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card-music::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-glow);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card-music:hover {
+            transform: translateY(-8px);
+            border-color: var(--purple);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-card-music:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card-music:hover::after {
+            opacity: 0.1;
+        }
+
+        .feature-card-music-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.4);
+        }
+
+        .feature-card-music h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card-music p {
+            color: var(--gray);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           [AB03] Pricing Table - Music & Entertainment
+           ============================================ */
+        .pricing-music {
+            padding: 6rem 0;
+            background:
+                radial-gradient(ellipse at 30% 100%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 0%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                var(--bg-dark);
+        }
+
+        .pricing-music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: stretch;
+        }
+
+        .pricing-card-music {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card-music.featured {
+            border-color: var(--purple);
+            background: linear-gradient(180deg, rgba(147, 51, 234, 0.1) 0%, var(--bg-card) 100%);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .pricing-card-music:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card-music.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .pricing-music-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.5);
+        }
+
+        .pricing-card-music-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card-music h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card-music .price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .pricing-card-music .price-period {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .pricing-card-music-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex: 1;
+        }
+
+        .pricing-card-music-features li {
+            padding: 0.875rem 0;
+            color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-card-music-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card-music-features li::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .pricing-card-music-features li::after {
+            content: '✓';
+            position: absolute;
+            left: calc(2.5rem + 4px);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           [AB04] CTA Button - Music & Entertainment
+           ============================================ */
+        .cta-btn-music {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.4);
+        }
+
+        .cta-btn-music::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cta-btn-music::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-btn-music:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(147, 51, 234, 0.6);
+        }
+
+        .cta-btn-music:hover::before {
+            opacity: 1;
+        }
+
+        .cta-btn-music:hover::after {
+            left: 100%;
+        }
+
+        .cta-btn-music-outline {
+            background: transparent;
+            border: 2px solid var(--purple);
+            color: var(--purple-light);
+            box-shadow: none;
+        }
+
+        .cta-btn-music-outline:hover {
+            background: rgba(147, 51, 234, 0.1);
+            border-color: var(--purple-light);
+            color: var(--white);
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .cta-btn-music-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.25rem;
+        }
+
+        /* ============================================
+           [AB05] Testimonial - Music & Entertainment
+           ============================================ */
+        .testimonials-music {
+            padding: 6rem 0;
+            background: var(--bg-dark);
+        }
+
+        .testimonials-music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card-music {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card-music::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 30px;
+            right: 30px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .testimonial-card-music:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .testimonial-music-quote {
+            font-size: 4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .testimonial-music-text {
+            font-size: 1.125rem;
+            color: var(--gray-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-music-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-music-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .testimonial-music-info h4 {
+            color: var(--white);
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-music-info p {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .testimonial-music-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-music-rating span {
+            color: var(--pink);
+            font-size: 1.25rem;
+        }
+
+        /* ============================================
+           [AB06] FAQ Accordion - Music & Entertainment
+           ============================================ */
+        .faq-music {
+            padding: 6rem 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                var(--bg-dark);
+        }
+
+        .faq-music-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-music-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .faq-music-item:hover {
+            border-color: var(--purple);
+        }
+
+        .faq-music-item.active {
+            border-color: var(--purple);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .faq-music-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 2rem;
+            text-align: left;
+            color: var(--white);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-music-question:hover {
+            color: var(--purple-light);
+        }
+
+        .faq-music-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--white);
+            flex-shrink: 0;
+            transition: transform 0.4s ease;
+        }
+
+        .faq-music-item.active .faq-music-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-music-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-music-item.active .faq-music-answer {
+            max-height: 500px;
+        }
+
+        .faq-music-answer-content {
+            padding: 0 2rem 1.5rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           [AB07] Footer - Music & Entertainment
+           ============================================ */
+        .footer-music {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-music::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+        }
+
+        .footer-music-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-music-brand h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-music-brand p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-music-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .footer-music-social-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-light);
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-music-social-icon:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .footer-music-section h4 {
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-music-links {
+            list-style: none;
+        }
+
+        .footer-music-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-music-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-music-links a:hover {
+            color: var(--purple-light);
+            transform: translateX(5px);
+        }
+
+        .footer-music-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-music-copyright {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .footer-music-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-music-legal a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-music-legal a:hover {
+            color: var(--purple-light);
+        }
+
+        /* ============================================
+           [AB08] Navigation Bar - Music & Entertainment
+           ============================================ */
+        .navbar-music {
+            background: rgba(13, 11, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-music-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-music-logo {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-music-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .navbar-music-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .navbar-music-menu a {
+            color: var(--gray-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-music-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-music-menu a:hover {
+            color: var(--white);
+        }
+
+        .navbar-music-menu a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-music-cta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-music-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* ============================================
+           [AB09] Step Guide - Music & Entertainment
+           ============================================ */
+        .steps-music {
+            padding: 6rem 0;
+            background: var(--bg-dark);
+        }
+
+        .steps-music-container {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .step-music-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .step-music-item::before {
+            content: '';
+            position: absolute;
+            left: 34px;
+            top: 70px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(180deg, var(--purple) 0%, var(--pink) 50%, transparent 100%);
+        }
+
+        .step-music-item:last-child::before {
+            display: none;
+        }
+
+        .step-music-number {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--white);
+            flex-shrink: 0;
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-music-number::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 2px solid var(--purple);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: step-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes step-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+        }
+
+        .step-music-content {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .step-music-content:hover {
+            border-color: var(--purple);
+            transform: translateX(10px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .step-music-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .step-music-content h3 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .step-music-content p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           [AB10] Registration Form - Music & Entertainment
+           ============================================ */
+        .register-music {
+            padding: 6rem 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                var(--bg-dark);
+        }
+
+        .register-music-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-music-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .register-music-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .register-music-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .register-music-header p {
+            color: var(--gray);
+        }
+
+        .register-music-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .register-music-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .register-music-field label {
+            color: var(--gray-light);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .register-music-input {
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .register-music-input:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2);
+        }
+
+        .register-music-input::placeholder {
+            color: var(--gray-dark);
+        }
+
+        .register-music-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .register-music-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--purple);
+            margin-top: 2px;
+        }
+
+        .register-music-checkbox label {
+            color: var(--gray);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .register-music-checkbox a {
+            color: var(--purple-light);
+            text-decoration: none;
+        }
+
+        .register-music-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        .register-music-submit {
+            margin-top: 1rem;
+        }
+
+        .register-music-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .register-music-divider::before,
+        .register-music-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .register-music-divider span {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .register-music-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .register-music-social-btn {
+            flex: 1;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.875rem;
+            color: var(--gray-light);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-music-social-btn:hover {
+            border-color: var(--purple);
+            background: rgba(147, 51, 234, 0.1);
+        }
+
+        /* Section Title */
+        .section-title-music {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title-music h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .section-title-music h2 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title-music p {
+            font-size: 1.125rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-music-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-music-brand {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-music-menu {
+                display: none;
+            }
+
+            .navbar-music-toggle {
+                display: block;
+            }
+
+            .navbar-music-cta {
+                display: none;
+            }
+
+            .hero-music-visual {
+                display: none;
+            }
+
+            .pricing-card-music.featured {
+                transform: none;
+            }
+
+            .pricing-card-music.featured:hover {
+                transform: translateY(-5px);
+            }
+
+            .step-music-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .step-music-item::before {
+                display: none;
+            }
+
+            .footer-music-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-music-brand {
+                grid-column: span 1;
+            }
+
+            .footer-music-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-music-legal {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [AB08] Navigation Bar -->
+    <nav class="navbar-music">
+        <div class="container">
+            <div class="navbar-music-content">
+                <div class="navbar-music-logo">
+                    <div class="navbar-music-logo-icon">&#9835;</div>
+                    SOUNDWAVE
+                </div>
+                <ul class="navbar-music-menu">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <div class="navbar-music-cta">
+                    <a href="#" class="cta-btn-music cta-btn-music-outline" style="padding: 0.625rem 1.25rem; font-size: 0.9375rem;">Log in</a>
+                    <a href="#" class="cta-btn-music" style="padding: 0.625rem 1.25rem; font-size: 0.9375rem;">Start Free</a>
+                </div>
+                <button class="navbar-music-toggle">&#9776;</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [AB01] Hero Section -->
+    <section class="hero-music">
+        <div class="container">
+            <div class="hero-music-content">
+                <div class="hero-music-badge">
+                    &#9733; NEW RELEASE
+                </div>
+                <h1>
+                    Feel the <span class="gradient-text">Beat</span><br>
+                    Live the <span class="gradient-text">Music</span>
+                </h1>
+                <p class="hero-music-subtitle">
+                    Unlock unlimited music streaming with crystal-clear audio.
+                    Discover millions of tracks and create your perfect playlist.
+                </p>
+                <div class="hero-music-cta">
+                    <button class="cta-btn-music cta-btn-music-large">
+                        &#9654; Start Listening
+                    </button>
+                    <button class="cta-btn-music cta-btn-music-outline cta-btn-music-large">
+                        Explore Plans
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-music-visual"></div>
+    </section>
+
+    <!-- [AB02] Feature Cards -->
+    <section class="features-music" id="features">
+        <div class="container">
+            <div class="section-title-music">
+                <h2>Why <span>SOUNDWAVE</span>?</h2>
+                <p>Experience music like never before with our cutting-edge features</p>
+            </div>
+            <div class="features-music-grid">
+                <div class="feature-card-music">
+                    <div class="feature-card-music-icon">&#127911;</div>
+                    <h3>Hi-Fi Audio Quality</h3>
+                    <p>Studio-quality lossless audio up to 24-bit/192kHz. Hear every detail exactly as the artist intended.</p>
+                </div>
+                <div class="feature-card-music">
+                    <div class="feature-card-music-icon">&#127760;</div>
+                    <h3>Offline Mode</h3>
+                    <p>Download your favorite tracks and playlists. Listen anywhere, anytime, without internet connection.</p>
+                </div>
+                <div class="feature-card-music">
+                    <div class="feature-card-music-icon">&#10024;</div>
+                    <h3>AI-Powered Discovery</h3>
+                    <p>Smart recommendations that learn your taste. Discover new artists and genres tailored just for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB03] Pricing Table -->
+    <section class="pricing-music" id="pricing">
+        <div class="container">
+            <div class="section-title-music">
+                <h2>Choose Your <span>Plan</span></h2>
+                <p>Flexible pricing for every music lover</p>
+            </div>
+            <div class="pricing-music-grid">
+                <div class="pricing-card-music">
+                    <div class="pricing-card-music-header">
+                        <h3>Free</h3>
+                        <div class="price">$0<span class="price-period">/month</span></div>
+                    </div>
+                    <ul class="pricing-card-music-features">
+                        <li>Ad-supported streaming</li>
+                        <li>Standard audio quality</li>
+                        <li>Basic playlists</li>
+                        <li>Mobile app access</li>
+                    </ul>
+                    <button class="cta-btn-music cta-btn-music-outline" style="width: 100%;">Get Started</button>
+                </div>
+                <div class="pricing-card-music featured">
+                    <div class="pricing-music-badge">Most Popular</div>
+                    <div class="pricing-card-music-header">
+                        <h3>Premium</h3>
+                        <div class="price">$9.99<span class="price-period">/month</span></div>
+                    </div>
+                    <ul class="pricing-card-music-features">
+                        <li>Ad-free listening</li>
+                        <li>Hi-Fi audio quality</li>
+                        <li>Unlimited skips</li>
+                        <li>Offline downloads</li>
+                        <li>Cross-device sync</li>
+                    </ul>
+                    <button class="cta-btn-music" style="width: 100%;">Start Free Trial</button>
+                </div>
+                <div class="pricing-card-music">
+                    <div class="pricing-card-music-header">
+                        <h3>Family</h3>
+                        <div class="price">$14.99<span class="price-period">/month</span></div>
+                    </div>
+                    <ul class="pricing-card-music-features">
+                        <li>6 Premium accounts</li>
+                        <li>Family Mix playlist</li>
+                        <li>Parental controls</li>
+                        <li>Shared playlists</li>
+                        <li>All Premium features</li>
+                    </ul>
+                    <button class="cta-btn-music cta-btn-music-outline" style="width: 100%;">Choose Family</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB04] CTA Section Demo -->
+    <section style="padding: 6rem 0; background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.2) 0%, var(--bg-dark) 70%);">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: 2.5rem; color: var(--white); font-weight: 800; margin-bottom: 1rem;">
+                Ready to <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Amplify</span> Your Music?
+            </h2>
+            <p style="color: var(--gray); font-size: 1.125rem; margin-bottom: 2rem;">
+                Join millions of listeners worldwide. Start your free trial today.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="cta-btn-music cta-btn-music-large">&#9654; Start Free Trial</button>
+                <button class="cta-btn-music cta-btn-music-outline cta-btn-music-large">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB05] Testimonials -->
+    <section class="testimonials-music" id="testimonials">
+        <div class="container">
+            <div class="section-title-music">
+                <h2>What <span>Listeners</span> Say</h2>
+                <p>Join thousands of satisfied users who made the switch</p>
+            </div>
+            <div class="testimonials-music-grid">
+                <div class="testimonial-card-music">
+                    <div class="testimonial-music-quote">"</div>
+                    <p class="testimonial-music-text">
+                        The audio quality is absolutely incredible. I can hear instruments I never noticed before in my favorite songs.
+                    </p>
+                    <div class="testimonial-music-author">
+                        <div class="testimonial-music-avatar">M</div>
+                        <div class="testimonial-music-info">
+                            <h4>Mike Chen</h4>
+                            <p>Music Producer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-music-rating">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                    </div>
+                </div>
+                <div class="testimonial-card-music">
+                    <div class="testimonial-music-quote">"</div>
+                    <p class="testimonial-music-text">
+                        The AI recommendations are spot-on! I've discovered so many new artists that perfectly match my taste.
+                    </p>
+                    <div class="testimonial-music-author">
+                        <div class="testimonial-music-avatar">S</div>
+                        <div class="testimonial-music-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>DJ & Content Creator</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-music-rating">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                    </div>
+                </div>
+                <div class="testimonial-card-music">
+                    <div class="testimonial-music-quote">"</div>
+                    <p class="testimonial-music-text">
+                        Best family plan value! My whole family enjoys their own personalized experience under one subscription.
+                    </p>
+                    <div class="testimonial-music-author">
+                        <div class="testimonial-music-avatar">D</div>
+                        <div class="testimonial-music-info">
+                            <h4>David Park</h4>
+                            <p>Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-music-rating">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB06] FAQ Accordion -->
+    <section class="faq-music" id="faq">
+        <div class="container">
+            <div class="section-title-music">
+                <h2>Got <span>Questions</span>?</h2>
+                <p>Find answers to commonly asked questions below</p>
+            </div>
+            <div class="faq-music-container">
+                <div class="faq-music-item">
+                    <button class="faq-music-question">
+                        <span>How does the free trial work?</span>
+                        <span class="faq-music-icon">+</span>
+                    </button>
+                    <div class="faq-music-answer">
+                        <div class="faq-music-answer-content">
+                            Start with a 30-day free trial of Premium. No credit card required. After the trial, you can choose to continue with a paid plan or switch to our free tier.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-music-item">
+                    <button class="faq-music-question">
+                        <span>Can I download music for offline listening?</span>
+                        <span class="faq-music-icon">+</span>
+                    </button>
+                    <div class="faq-music-answer">
+                        <div class="faq-music-answer-content">
+                            Yes! Premium and Family plan users can download unlimited tracks and playlists. Downloads are available on up to 5 devices.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-music-item">
+                    <button class="faq-music-question">
+                        <span>What audio quality do you offer?</span>
+                        <span class="faq-music-icon">+</span>
+                    </button>
+                    <div class="faq-music-answer">
+                        <div class="faq-music-answer-content">
+                            Free users get standard quality (128kbps). Premium subscribers enjoy Hi-Fi lossless audio up to 24-bit/192kHz, plus Spatial Audio with Dolby Atmos support.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-music-item">
+                    <button class="faq-music-question">
+                        <span>How do I cancel my subscription?</span>
+                        <span class="faq-music-icon">+</span>
+                    </button>
+                    <div class="faq-music-answer">
+                        <div class="faq-music-answer-content">
+                            You can cancel anytime from your account settings. No cancellation fees. Your premium features will remain active until the end of your billing period.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-music-item">
+                    <button class="faq-music-question">
+                        <span>Is there a student discount?</span>
+                        <span class="faq-music-icon">+</span>
+                    </button>
+                    <div class="faq-music-answer">
+                        <div class="faq-music-answer-content">
+                            Absolutely! Students get Premium at 50% off with valid student verification. The discount applies for up to 4 years while enrolled.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB09] Step Guide -->
+    <section class="steps-music">
+        <div class="container">
+            <div class="section-title-music">
+                <h2>Get Started in <span>3 Steps</span></h2>
+                <p>Begin your musical journey in minutes</p>
+            </div>
+            <div class="steps-music-container">
+                <div class="step-music-item">
+                    <div class="step-music-number">1</div>
+                    <div class="step-music-content">
+                        <h3>&#128100; <span>Create Account</span></h3>
+                        <p>Sign up with your email or connect via social accounts. It takes less than a minute to get started.</p>
+                    </div>
+                </div>
+                <div class="step-music-item">
+                    <div class="step-music-number">2</div>
+                    <div class="step-music-content">
+                        <h3>&#127925; <span>Set Your Taste</span></h3>
+                        <p>Tell us your favorite genres and artists. Our AI will curate personalized playlists just for you.</p>
+                    </div>
+                </div>
+                <div class="step-music-item">
+                    <div class="step-music-number">3</div>
+                    <div class="step-music-content">
+                        <h3>&#127911; <span>Start Listening</span></h3>
+                        <p>Dive into millions of tracks, create playlists, and discover new music. Your perfect sound awaits!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB10] Registration Form -->
+    <section class="register-music">
+        <div class="container">
+            <div class="register-music-container">
+                <div class="register-music-header">
+                    <h2>Join the Beat</h2>
+                    <p>Start your free trial today</p>
+                </div>
+                <form class="register-music-form">
+                    <div class="register-music-field">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="register-music-input" placeholder="Enter your name">
+                    </div>
+                    <div class="register-music-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="register-music-input" placeholder="your@email.com">
+                    </div>
+                    <div class="register-music-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="register-music-input" placeholder="Create a password">
+                    </div>
+                    <div class="register-music-checkbox">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" class="cta-btn-music register-music-submit" style="width: 100%;">
+                        Create Free Account
+                    </button>
+                </form>
+                <div class="register-music-divider">
+                    <span>or continue with</span>
+                </div>
+                <div class="register-music-social">
+                    <button class="register-music-social-btn">G</button>
+                    <button class="register-music-social-btn">f</button>
+                    <button class="register-music-social-btn">&#127826;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AB07] Footer -->
+    <footer class="footer-music">
+        <div class="container">
+            <div class="footer-music-grid">
+                <div class="footer-music-brand">
+                    <h3>&#9835; SOUNDWAVE</h3>
+                    <p>Your gateway to unlimited music. Stream, discover, and enjoy millions of tracks with crystal-clear audio quality.</p>
+                    <div class="footer-music-social">
+                        <a href="#" class="footer-music-social-icon">&#120143;</a>
+                        <a href="#" class="footer-music-social-icon">f</a>
+                        <a href="#" class="footer-music-social-icon">&#128247;</a>
+                        <a href="#" class="footer-music-social-icon">&#9654;</a>
+                    </div>
+                </div>
+                <div class="footer-music-section">
+                    <h4>Product</h4>
+                    <ul class="footer-music-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Download App</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-music-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-music-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Artists</a></li>
+                    </ul>
+                </div>
+                <div class="footer-music-section">
+                    <h4>Company</h4>
+                    <ul class="footer-music-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-music-bottom">
+                <p class="footer-music-copyright">&copy; 2026 SOUNDWAVE. All rights reserved.</p>
+                <div class="footer-music-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-music-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-music-item').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.register-music-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Account created successfully! Check your email for confirmation.');
+            e.target.reset();
+        });
+    </script>
+
+</body>
+</html>

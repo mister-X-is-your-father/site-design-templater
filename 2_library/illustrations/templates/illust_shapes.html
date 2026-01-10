@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shapes &amp; Numbers - Flat Illustration Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .shape-container {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* shape-01: Circle */
+        .circle {
+            width: 80px;
+            height: 80px;
+            background-color: #4ECDC4;
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .circle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* shape-02: Square */
+        .square {
+            width: 70px;
+            height: 70px;
+            background-color: #FF6B6B;
+            transition: transform 0.3s ease, border-radius 0.3s ease;
+        }
+        .square:hover {
+            transform: rotate(45deg) scale(1.1);
+            border-radius: 8px;
+        }
+
+        /* shape-03: Triangle */
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 45px solid transparent;
+            border-right: 45px solid transparent;
+            border-bottom: 80px solid #FFE66D;
+            transition: transform 0.3s ease;
+        }
+        .triangle:hover {
+            transform: translateY(-10px);
+        }
+
+        /* shape-04: Hexagon */
+        .hexagon {
+            width: 70px;
+            height: 40px;
+            background-color: #95E1D3;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .hexagon::before,
+        .hexagon::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            left: 0;
+        }
+        .hexagon::before {
+            bottom: 100%;
+            border-bottom: 20px solid #95E1D3;
+        }
+        .hexagon::after {
+            top: 100%;
+            border-top: 20px solid #95E1D3;
+        }
+        .hexagon:hover {
+            transform: rotate(30deg) scale(1.1);
+        }
+
+        /* shape-05: Pentagon */
+        .pentagon {
+            width: 72px;
+            height: 68px;
+            background-color: #A8E6CF;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            transition: transform 0.3s ease;
+        }
+        .pentagon:hover {
+            transform: rotate(-15deg) scale(1.15);
+        }
+
+        /* shape-06: Star */
+        .star {
+            width: 80px;
+            height: 80px;
+            background-color: #FFEAA7;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: transform 0.3s ease;
+        }
+        .star:hover {
+            transform: rotate(72deg) scale(1.2);
+        }
+
+        /* shape-07: Heart */
+        .heart {
+            width: 80px;
+            height: 72px;
+            background-color: #FF7675;
+            clip-path: path('M40 70 C40 70 5 45 5 25 C5 10 20 0 40 15 C60 0 75 10 75 25 C75 45 40 70 40 70 Z');
+            transition: transform 0.3s ease;
+        }
+        .heart:hover {
+            transform: scale(1.2);
+            animation: heartbeat 0.6s ease-in-out;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1.2); }
+            50% { transform: scale(1.35); }
+        }
+
+        /* shape-08: Diamond */
+        .diamond {
+            width: 60px;
+            height: 80px;
+            background-color: #74B9FF;
+            clip-path: polygon(50% 0%, 100% 40%, 50% 100%, 0% 40%);
+            transition: transform 0.3s ease;
+        }
+        .diamond:hover {
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        /* shape-09: Oval */
+        .oval {
+            width: 90px;
+            height: 60px;
+            background-color: #DDA0DD;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .oval:hover {
+            transform: scaleX(1.2) scaleY(0.9);
+        }
+
+        /* shape-10: Cross */
+        .cross {
+            width: 70px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .cross::before,
+        .cross::after {
+            content: '';
+            position: absolute;
+            background-color: #00B894;
+        }
+        .cross::before {
+            width: 20px;
+            height: 70px;
+            left: 25px;
+            top: 0;
+        }
+        .cross::after {
+            width: 70px;
+            height: 20px;
+            left: 0;
+            top: 25px;
+        }
+        .cross:hover {
+            transform: rotate(90deg);
+        }
+
+        /* shape-11: Plus Sign */
+        .plus {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .plus::before,
+        .plus::after {
+            content: '';
+            position: absolute;
+            background-color: #E17055;
+            border-radius: 8px;
+        }
+        .plus::before {
+            width: 16px;
+            height: 60px;
+            left: 22px;
+            top: 0;
+        }
+        .plus::after {
+            width: 60px;
+            height: 16px;
+            left: 0;
+            top: 22px;
+        }
+        .plus:hover {
+            transform: rotate(180deg) scale(1.2);
+        }
+
+        /* shape-12: Number 1 */
+        .number-1 {
+            width: 60px;
+            height: 80px;
+            background-color: #FF9FF3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            transition: transform 0.3s ease;
+        }
+        .number-1:hover {
+            transform: translateY(-8px) rotate(-5deg);
+        }
+
+        /* shape-13: Number 2 */
+        .number-2 {
+            width: 60px;
+            height: 80px;
+            background-color: #54A0FF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            transition: transform 0.3s ease;
+        }
+        .number-2:hover {
+            transform: translateY(-8px) rotate(5deg);
+        }
+
+        /* shape-14: Number 3 */
+        .number-3 {
+            width: 60px;
+            height: 80px;
+            background-color: #5F27CD;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            transition: transform 0.3s ease;
+        }
+        .number-3:hover {
+            transform: translateY(-8px) rotate(-5deg);
+        }
+
+        /* shape-15: Number 4 */
+        .number-4 {
+            width: 60px;
+            height: 80px;
+            background-color: #00D2D3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            transition: transform 0.3s ease;
+        }
+        .number-4:hover {
+            transform: translateY(-8px) rotate(5deg);
+        }
+
+        /* shape-16: Number 5 */
+        .number-5 {
+            width: 60px;
+            height: 80px;
+            background-color: #FF6B6B;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            transition: transform 0.3s ease;
+        }
+        .number-5:hover {
+            transform: translateY(-8px) rotate(-5deg);
+        }
+
+        /* shape-17: Checkmark */
+        .checkmark {
+            width: 70px;
+            height: 70px;
+            background-color: #2ECC71;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 18px;
+            width: 18px;
+            height: 32px;
+            border: solid #fff;
+            border-width: 0 6px 6px 0;
+            transform: rotate(45deg);
+        }
+        .checkmark:hover {
+            transform: scale(1.2);
+        }
+
+        /* shape-18: X Mark */
+        .x-mark {
+            width: 70px;
+            height: 70px;
+            background-color: #E74C3C;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .x-mark::before,
+        .x-mark::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 36px;
+            background-color: #fff;
+            left: 32px;
+            top: 17px;
+            border-radius: 3px;
+        }
+        .x-mark::before {
+            transform: rotate(45deg);
+        }
+        .x-mark::after {
+            transform: rotate(-45deg);
+        }
+        .x-mark:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* shape-19: Question Mark */
+        .question-mark {
+            width: 60px;
+            height: 80px;
+            background-color: #9B59B6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Georgia', serif;
+            transition: transform 0.3s ease;
+        }
+        .question-mark:hover {
+            transform: rotate(-10deg) scale(1.1);
+            animation: wobble 0.5s ease;
+        }
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-10deg) scale(1.1); }
+            25% { transform: rotate(-15deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.1); }
+        }
+
+        /* shape-20: Exclamation Mark */
+        .exclamation-mark {
+            width: 60px;
+            height: 80px;
+            background-color: #F39C12;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Georgia', serif;
+            transition: transform 0.3s ease;
+        }
+        .exclamation-mark:hover {
+            transform: scale(1.2);
+            animation: shake 0.4s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: scale(1.2) translateX(0); }
+            25% { transform: scale(1.2) translateX(-5px); }
+            75% { transform: scale(1.2) translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Shapes &amp; Numbers - Flat Illustration Components</h1>
+
+    <div class="grid">
+        <!-- shape-01: Circle -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-01" class="circle"></div>
+            </div>
+            <span class="item-label">shape-01: Circle</span>
+        </div>
+
+        <!-- shape-02: Square -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-02" class="square"></div>
+            </div>
+            <span class="item-label">shape-02: Square</span>
+        </div>
+
+        <!-- shape-03: Triangle -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-03" class="triangle"></div>
+            </div>
+            <span class="item-label">shape-03: Triangle</span>
+        </div>
+
+        <!-- shape-04: Hexagon -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-04" class="hexagon"></div>
+            </div>
+            <span class="item-label">shape-04: Hexagon</span>
+        </div>
+
+        <!-- shape-05: Pentagon -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-05" class="pentagon"></div>
+            </div>
+            <span class="item-label">shape-05: Pentagon</span>
+        </div>
+
+        <!-- shape-06: Star -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-06" class="star"></div>
+            </div>
+            <span class="item-label">shape-06: Star</span>
+        </div>
+
+        <!-- shape-07: Heart -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-07" class="heart"></div>
+            </div>
+            <span class="item-label">shape-07: Heart</span>
+        </div>
+
+        <!-- shape-08: Diamond -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-08" class="diamond"></div>
+            </div>
+            <span class="item-label">shape-08: Diamond</span>
+        </div>
+
+        <!-- shape-09: Oval -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-09" class="oval"></div>
+            </div>
+            <span class="item-label">shape-09: Oval</span>
+        </div>
+
+        <!-- shape-10: Cross -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-10" class="cross"></div>
+            </div>
+            <span class="item-label">shape-10: Cross</span>
+        </div>
+
+        <!-- shape-11: Plus Sign -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-11" class="plus"></div>
+            </div>
+            <span class="item-label">shape-11: Plus Sign</span>
+        </div>
+
+        <!-- shape-12: Number 1 -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-12" class="number-1">1</div>
+            </div>
+            <span class="item-label">shape-12: Number 1</span>
+        </div>
+
+        <!-- shape-13: Number 2 -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-13" class="number-2">2</div>
+            </div>
+            <span class="item-label">shape-13: Number 2</span>
+        </div>
+
+        <!-- shape-14: Number 3 -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-14" class="number-3">3</div>
+            </div>
+            <span class="item-label">shape-14: Number 3</span>
+        </div>
+
+        <!-- shape-15: Number 4 -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-15" class="number-4">4</div>
+            </div>
+            <span class="item-label">shape-15: Number 4</span>
+        </div>
+
+        <!-- shape-16: Number 5 -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-16" class="number-5">5</div>
+            </div>
+            <span class="item-label">shape-16: Number 5</span>
+        </div>
+
+        <!-- shape-17: Checkmark -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-17" class="checkmark"></div>
+            </div>
+            <span class="item-label">shape-17: Checkmark</span>
+        </div>
+
+        <!-- shape-18: X Mark -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-18" class="x-mark"></div>
+            </div>
+            <span class="item-label">shape-18: X Mark</span>
+        </div>
+
+        <!-- shape-19: Question Mark -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-19" class="question-mark">?</div>
+            </div>
+            <span class="item-label">shape-19: Question Mark</span>
+        </div>
+
+        <!-- shape-20: Exclamation Mark -->
+        <div class="item">
+            <div class="shape-container">
+                <div id="shape-20" class="exclamation-mark">!</div>
+            </div>
+            <span class="item-label">shape-20: Exclamation Mark</span>
+        </div>
+    </div>
+</body>
+</html>

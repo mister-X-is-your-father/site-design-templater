@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Diagram Templates - 分類・グループ図テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* ============================================
+           #classify-1: Color Sorting Boxes
+           ============================================ */
+        #classify-1 .color-sort {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #classify-1 .color-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #classify-1 .color-label {
+            width: 60px;
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
+            color: white;
+        }
+
+        #classify-1 .color-label.red { background: #ff6b9d; }
+        #classify-1 .color-label.blue { background: #87ceeb; }
+        #classify-1 .color-label.green { background: #98d8aa; }
+
+        #classify-1 .color-items {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        #classify-1 .color-item {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-1 .color-item:hover {
+            transform: scale(1.2);
+        }
+
+        #classify-1 .color-item.red { background: #ffe6ee; }
+        #classify-1 .color-item.blue { background: #e3f2fd; }
+        #classify-1 .color-item.green { background: #e8f5e9; }
+
+        /* ============================================
+           #classify-2: Size Sorting (S/M/L/XL)
+           ============================================ */
+        #classify-2 .size-sort {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+            padding-top: 20px;
+        }
+
+        #classify-2 .size-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #classify-2 .size-box {
+            background: #ffb347;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-2 .size-box:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-2 .size-s { width: 40px; height: 50px; font-size: 0.8rem; background: #87ceeb; }
+        #classify-2 .size-m { width: 55px; height: 70px; font-size: 0.9rem; background: #98d8aa; }
+        #classify-2 .size-l { width: 70px; height: 90px; font-size: 1rem; background: #ffb347; }
+        #classify-2 .size-xl { width: 85px; height: 110px; font-size: 1.1rem; background: #ff6b9d; }
+
+        #classify-2 .size-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* ============================================
+           #classify-3: Shape Categorization
+           ============================================ */
+        #classify-3 .shape-sort {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #classify-3 .shape-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #classify-3 .shape-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        #classify-3 .shape-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            min-width: 80px;
+        }
+
+        #classify-3 .circle {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #ff6b9d;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-3 .square {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            background: #87ceeb;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-3 .triangle {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 25px solid #98d8aa;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-3 .circle:hover,
+        #classify-3 .square:hover,
+        #classify-3 .triangle:hover {
+            transform: scale(1.3);
+        }
+
+        /* ============================================
+           #classify-4: Animal Kingdom Tree
+           ============================================ */
+        #classify-4 .animal-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #classify-4 .animal-root {
+            background: #ff6b9d;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        #classify-4 .animal-branches {
+            display: flex;
+            gap: 10px;
+        }
+
+        #classify-4 .animal-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #classify-4 .branch-label {
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-4 .branch-label:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-4 .mammals { background: #ffb347; }
+        #classify-4 .birds { background: #87ceeb; }
+        #classify-4 .fish { background: #98d8aa; }
+
+        #classify-4 .animal-icons {
+            display: flex;
+            gap: 5px;
+            font-size: 1.2rem;
+        }
+
+        #classify-4 .animal-icon {
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-4 .animal-icon:hover {
+            transform: scale(1.3);
+        }
+
+        /* ============================================
+           #classify-5: Food Groups
+           ============================================ */
+        #classify-5 .food-groups {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        #classify-5 .food-group {
+            padding: 12px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-5 .food-group:hover {
+            transform: scale(1.03);
+        }
+
+        #classify-5 .food-group.fruits { background: #ffe6ee; }
+        #classify-5 .food-group.vegetables { background: #e8f5e9; }
+        #classify-5 .food-group.grains { background: #fff8e1; }
+        #classify-5 .food-group.protein { background: #e3f2fd; }
+
+        #classify-5 .food-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #classify-5 .food-items {
+            font-size: 1.3rem;
+            display: flex;
+            gap: 5px;
+        }
+
+        /* ============================================
+           #classify-6: Emotion Categories
+           ============================================ */
+        #classify-6 .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        #classify-6 .emotion-box {
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-6 .emotion-box:hover {
+            transform: translateY(-5px);
+        }
+
+        #classify-6 .emotion-box.happy { background: #ffe66d; }
+        #classify-6 .emotion-box.sad { background: #87ceeb; }
+        #classify-6 .emotion-box.angry { background: #ff6b9d; }
+        #classify-6 .emotion-box.scared { background: #dda0dd; }
+
+        #classify-6 .emotion-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        #classify-6 .emotion-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           #classify-7: Weather Types
+           ============================================ */
+        #classify-7 .weather-types {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #classify-7 .weather-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 15px;
+            min-width: 70px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-7 .weather-card:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-7 .weather-card.sunny { background: #ffe66d; }
+        #classify-7 .weather-card.rainy { background: #87ceeb; }
+        #classify-7 .weather-card.cloudy { background: #e0e0e0; }
+        #classify-7 .weather-card.snowy { background: #e3f2fd; }
+
+        #classify-7 .weather-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        #classify-7 .weather-label {
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        /* ============================================
+           #classify-8: Vehicle Types
+           ============================================ */
+        #classify-8 .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        #classify-8 .vehicle-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 8px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-8 .vehicle-box:hover {
+            transform: translateY(-5px);
+        }
+
+        #classify-8 .vehicle-box.car { background: #ff6b9d; }
+        #classify-8 .vehicle-box.bus { background: #ffb347; }
+        #classify-8 .vehicle-box.train { background: #87ceeb; }
+        #classify-8 .vehicle-box.plane { background: #98d8aa; }
+
+        #classify-8 .vehicle-icon {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        #classify-8 .vehicle-label {
+            font-weight: bold;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        #classify-8 .vehicle-box.car .vehicle-label,
+        #classify-8 .vehicle-box.bus .vehicle-label { color: white; }
+        #classify-8 .vehicle-box.train .vehicle-label,
+        #classify-8 .vehicle-box.plane .vehicle-label { color: #333; }
+
+        /* ============================================
+           #classify-9: Music Genres
+           ============================================ */
+        #classify-9 .music-genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #classify-9 .genre-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-9 .genre-tag:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-9 .genre-tag.pop { background: #ff6b9d; color: white; }
+        #classify-9 .genre-tag.rock { background: #333; color: white; }
+        #classify-9 .genre-tag.jazz { background: #dda0dd; }
+        #classify-9 .genre-tag.classical { background: #ffe66d; }
+
+        /* ============================================
+           #classify-10: Book Genres
+           ============================================ */
+        #classify-10 .book-shelf {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #classify-10 .shelf-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            padding: 8px;
+            background: #8b5a2b;
+            border-radius: 5px;
+        }
+
+        #classify-10 .book {
+            padding: 8px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.6rem;
+            writing-mode: vertical-rl;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-10 .book:hover {
+            transform: translateY(-8px);
+        }
+
+        #classify-10 .book.fiction { background: #ff6b9d; color: white; height: 60px; }
+        #classify-10 .book.nonfiction { background: #87ceeb; height: 55px; }
+        #classify-10 .book.mystery { background: #333; color: white; height: 65px; }
+        #classify-10 .book.fantasy { background: #dda0dd; height: 58px; }
+
+        #classify-10 .genre-labels {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        #classify-10 .genre-dot {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+        }
+
+        #classify-10 .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* ============================================
+           #classify-11: Sport Types
+           ============================================ */
+        #classify-11 .sport-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        #classify-11 .sport-cat {
+            padding: 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-11 .sport-cat:hover {
+            transform: scale(1.03);
+        }
+
+        #classify-11 .sport-cat.ball { background: #ffe6ee; }
+        #classify-11 .sport-cat.water { background: #e3f2fd; }
+        #classify-11 .sport-cat.winter { background: #f5f5f5; }
+        #classify-11 .sport-cat.combat { background: #fff3e0; }
+
+        #classify-11 .sport-title {
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        #classify-11 .sport-icons {
+            font-size: 1.3rem;
+            display: flex;
+            gap: 5px;
+        }
+
+        /* ============================================
+           #classify-12: Job Categories
+           ============================================ */
+        #classify-12 .job-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        #classify-12 .job-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-12 .job-category:hover {
+            transform: translateY(-3px);
+        }
+
+        #classify-12 .job-category.office { background: #87ceeb; }
+        #classify-12 .job-category.outdoor { background: #98d8aa; }
+        #classify-12 .job-category.creative { background: #dda0dd; }
+        #classify-12 .job-category.service { background: #ffb347; }
+
+        #classify-12 .job-icons {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        #classify-12 .job-label {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* ============================================
+           #classify-13: Hobby Types
+           ============================================ */
+        #classify-13 .hobby-wheel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #classify-13 .hobby-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-13 .hobby-segment:hover {
+            transform: scale(1.15);
+        }
+
+        #classify-13 .hobby-segment.indoor { background: #ff6b9d; color: white; }
+        #classify-13 .hobby-segment.outdoor { background: #98d8aa; }
+        #classify-13 .hobby-segment.creative { background: #dda0dd; }
+        #classify-13 .hobby-segment.social { background: #87ceeb; }
+
+        #classify-13 .hobby-icon {
+            font-size: 1.5rem;
+        }
+
+        #classify-13 .hobby-label {
+            font-weight: bold;
+            font-size: 0.65rem;
+            margin-top: 3px;
+        }
+
+        /* ============================================
+           #classify-14: Skill Levels
+           ============================================ */
+        #classify-14 .skill-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #classify-14 .skill-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-14 .skill-bar:hover {
+            transform: translateX(5px);
+        }
+
+        #classify-14 .skill-label {
+            width: 80px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        #classify-14 .skill-fill {
+            height: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        #classify-14 .beginner .skill-fill { width: 60px; background: #98d8aa; }
+        #classify-14 .intermediate .skill-fill { width: 120px; background: #87ceeb; }
+        #classify-14 .advanced .skill-fill { width: 180px; background: #ffb347; }
+        #classify-14 .expert .skill-fill { width: 240px; background: #ff6b9d; }
+
+        /* ============================================
+           #classify-15: Age Groups
+           ============================================ */
+        #classify-15 .age-groups {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        #classify-15 .age-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-15 .age-group:hover {
+            transform: translateY(-5px);
+        }
+
+        #classify-15 .age-icon {
+            font-size: 2rem;
+            padding: 10px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        #classify-15 .age-group.kids .age-icon { background: #ffe66d; font-size: 1.5rem; }
+        #classify-15 .age-group.teens .age-icon { background: #ff6b9d; font-size: 1.8rem; }
+        #classify-15 .age-group.adults .age-icon { background: #87ceeb; font-size: 2rem; }
+        #classify-15 .age-group.seniors .age-icon { background: #dda0dd; font-size: 1.8rem; }
+
+        #classify-15 .age-label {
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        #classify-15 .age-range {
+            font-size: 0.65rem;
+            color: #888;
+        }
+
+        /* ============================================
+           #classify-16: Gender/Group Icons
+           ============================================ */
+        #classify-16 .group-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #classify-16 .icon-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 25px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-16 .icon-group:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-16 .icon-group.group-a { background: #ff6b9d; }
+        #classify-16 .icon-group.group-b { background: #87ceeb; }
+        #classify-16 .icon-group.group-c { background: #98d8aa; }
+
+        #classify-16 .group-symbol {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        #classify-16 .group-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        #classify-16 .group-count {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ============================================
+           #classify-17: Team Sorting
+           ============================================ */
+        #classify-17 .team-sort {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #classify-17 .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #classify-17 .team-banner {
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-17 .team-banner:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-17 .team-a .team-banner { background: #ff6b9d; }
+        #classify-17 .team-b .team-banner { background: #87ceeb; }
+        #classify-17 .team-c .team-banner { background: #98d8aa; }
+
+        #classify-17 .team-members {
+            display: flex;
+            gap: 5px;
+        }
+
+        #classify-17 .member {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-17 .member:hover {
+            transform: scale(1.2);
+        }
+
+        /* ============================================
+           #classify-18: Priority Sorting
+           ============================================ */
+        #classify-18 .priority-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #classify-18 .priority-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-18 .priority-item:hover {
+            transform: translateX(5px);
+        }
+
+        #classify-18 .priority-item.urgent { background: #ff6b9d; color: white; }
+        #classify-18 .priority-item.important { background: #ffb347; }
+        #classify-18 .priority-item.normal { background: #87ceeb; }
+        #classify-18 .priority-item.low { background: #e0e0e0; }
+
+        #classify-18 .priority-flag {
+            font-size: 1.2rem;
+        }
+
+        #classify-18 .priority-text {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           #classify-19: Status Groups
+           ============================================ */
+        #classify-19 .status-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        #classify-19 .status-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #classify-19 .status-header {
+            padding: 8px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-align: center;
+            color: white;
+        }
+
+        #classify-19 .status-header.new { background: #98d8aa; }
+        #classify-19 .status-header.progress { background: #87ceeb; }
+        #classify-19 .status-header.done { background: #ff6b9d; }
+        #classify-19 .status-header.archived { background: #999; }
+
+        #classify-19 .status-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background: #f5f5f5;
+            padding: 5px;
+            border-radius: 0 0 8px 8px;
+            min-height: 80px;
+        }
+
+        #classify-19 .status-card {
+            background: white;
+            padding: 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-19 .status-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* ============================================
+           #classify-20: Quality Grades
+           ============================================ */
+        #classify-20 .grade-cards {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #classify-20 .grade-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 12px;
+            min-width: 50px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-20 .grade-card:hover {
+            transform: translateY(-8px);
+        }
+
+        #classify-20 .grade-card.grade-a { background: #ff6b9d; }
+        #classify-20 .grade-card.grade-b { background: #87ceeb; }
+        #classify-20 .grade-card.grade-c { background: #98d8aa; }
+        #classify-20 .grade-card.grade-d { background: #ffb347; }
+        #classify-20 .grade-card.grade-f { background: #e0e0e0; }
+
+        #classify-20 .grade-letter {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        #classify-20 .grade-card.grade-f .grade-letter { color: #666; }
+
+        #classify-20 .grade-label {
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: rgba(255,255,255,0.9);
+            margin-top: 3px;
+        }
+
+        /* ============================================
+           #classify-21: Risk Levels
+           ============================================ */
+        #classify-21 .risk-meter {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #classify-21 .risk-level {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-21 .risk-level:hover {
+            transform: translateX(5px);
+        }
+
+        #classify-21 .risk-level.critical { background: #ff6b9d; color: white; }
+        #classify-21 .risk-level.high { background: #ffb347; }
+        #classify-21 .risk-level.medium { background: #ffe66d; }
+        #classify-21 .risk-level.low { background: #98d8aa; }
+
+        #classify-21 .risk-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 1.5s infinite;
+        }
+
+        #classify-21 .risk-level.critical .risk-indicator { background: white; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        #classify-21 .risk-text {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           #classify-22: Difficulty Tiers
+           ============================================ */
+        #classify-22 .difficulty-tiers {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        #classify-22 .diff-tier {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-22 .diff-tier:hover {
+            transform: scale(1.1);
+        }
+
+        #classify-22 .diff-stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+
+        #classify-22 .star {
+            font-size: 0.9rem;
+        }
+
+        #classify-22 .star.filled { color: #ffe66d; }
+        #classify-22 .star.empty { color: #ddd; }
+
+        #classify-22 .diff-label {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        #classify-22 .diff-tier.easy .diff-label { background: #98d8aa; }
+        #classify-22 .diff-tier.medium .diff-label { background: #87ceeb; }
+        #classify-22 .diff-tier.hard .diff-label { background: #ffb347; }
+        #classify-22 .diff-tier.extreme .diff-label { background: #ff6b9d; color: white; }
+
+        /* ============================================
+           #classify-23: Price Ranges
+           ============================================ */
+        #classify-23 .price-tiers {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #classify-23 .price-tier {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-23 .price-tier:hover {
+            transform: translateX(8px);
+        }
+
+        #classify-23 .price-tier.budget { background: #e8f5e9; }
+        #classify-23 .price-tier.standard { background: #e3f2fd; }
+        #classify-23 .price-tier.premium { background: #fff3e0; }
+        #classify-23 .price-tier.luxury { background: #ffe6ee; }
+
+        #classify-23 .price-symbol {
+            font-size: 1.2rem;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        #classify-23 .budget .price-symbol { color: #98d8aa; }
+        #classify-23 .standard .price-symbol { color: #87ceeb; }
+        #classify-23 .premium .price-symbol { color: #ffb347; }
+        #classify-23 .luxury .price-symbol { color: #ff6b9d; }
+
+        #classify-23 .price-info {
+            flex: 1;
+        }
+
+        #classify-23 .price-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #classify-23 .price-range {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* ============================================
+           #classify-24: Time Zones Grouping
+           ============================================ */
+        #classify-24 .timezone-map {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #classify-24 .timezone-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #classify-24 .tz-time {
+            width: 50px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        #classify-24 .tz-bar {
+            flex: 1;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-24 .tz-bar:hover {
+            transform: scaleX(1.02);
+        }
+
+        #classify-24 .tz-bar.asia { background: #ff6b9d; color: white; }
+        #classify-24 .tz-bar.europe { background: #87ceeb; }
+        #classify-24 .tz-bar.americas { background: #98d8aa; }
+        #classify-24 .tz-bar.pacific { background: #dda0dd; }
+
+        /* ============================================
+           #classify-25: Language Families
+           ============================================ */
+        #classify-25 .lang-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #classify-25 .lang-root {
+            background: #ff6b9d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        #classify-25 .lang-families {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #classify-25 .lang-family {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-25 .lang-family:hover {
+            transform: translateY(-5px);
+        }
+
+        #classify-25 .family-name {
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        #classify-25 .family-name.romance { background: #ffb347; }
+        #classify-25 .family-name.germanic { background: #87ceeb; }
+        #classify-25 .family-name.slavic { background: #dda0dd; }
+        #classify-25 .family-name.sino { background: #98d8aa; }
+
+        #classify-25 .lang-examples {
+            display: flex;
+            gap: 3px;
+            font-size: 0.7rem;
+        }
+
+        #classify-25 .lang-tag {
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+
+        /* ============================================
+           #classify-26: Country Regions
+           ============================================ */
+        #classify-26 .region-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        #classify-26 .region-box {
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-26 .region-box:hover {
+            transform: scale(1.05);
+        }
+
+        #classify-26 .region-box.asia { background: #ff6b9d; }
+        #classify-26 .region-box.europe { background: #87ceeb; }
+        #classify-26 .region-box.americas { background: #98d8aa; }
+        #classify-26 .region-box.africa { background: #ffb347; }
+
+        #classify-26 .region-icon {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        #classify-26 .region-name {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        #classify-26 .region-box.europe .region-name,
+        #classify-26 .region-box.americas .region-name { color: #333; }
+
+        /* ============================================
+           #classify-27: Element Types (States)
+           ============================================ */
+        #classify-27 .matter-states {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        #classify-27 .state-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-27 .state-box:hover {
+            transform: translateY(-5px);
+        }
+
+        #classify-27 .state-visual {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        #classify-27 .state-box.solid .state-visual {
+            background: #87ceeb;
+        }
+
+        #classify-27 .state-box.solid .state-visual::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background: #4a9cc7;
+            border-radius: 5px;
+        }
+
+        #classify-27 .state-box.liquid .state-visual {
+            background: #e3f2fd;
+            border-radius: 10px 10px 30px 30px;
+            overflow: hidden;
+        }
+
+        #classify-27 .state-box.liquid .state-visual::before {
+            content: '';
+            width: 100%;
+            height: 70%;
+            background: #87ceeb;
+            position: absolute;
+            bottom: 0;
+            border-radius: 0 0 30px 30px;
+        }
+
+        #classify-27 .state-box.gas .state-visual {
+            background: transparent;
+        }
+
+        #classify-27 .state-box.gas .bubble {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(135, 206, 235, 0.5);
+            position: absolute;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        #classify-27 .state-box.gas .bubble:nth-child(2) { animation-delay: 0.5s; left: 10px; }
+        #classify-27 .state-box.gas .bubble:nth-child(3) { animation-delay: 1s; left: 35px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        #classify-27 .state-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        #classify-27 .state-example {
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        /* ============================================
+           #classify-28: Number Types
+           ============================================ */
+        #classify-28 .number-sort {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #classify-28 .number-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #classify-28 .number-label {
+            width: 50px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        #classify-28 .number-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        #classify-28 .num {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-28 .num:hover {
+            transform: scale(1.2);
+        }
+
+        #classify-28 .num.odd { background: #ff6b9d; color: white; }
+        #classify-28 .num.even { background: #87ceeb; }
+        #classify-28 .num.positive { background: #98d8aa; }
+        #classify-28 .num.negative { background: #dda0dd; }
+
+        /* ============================================
+           #classify-29: Letter Categories
+           ============================================ */
+        #classify-29 .letter-sort {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #classify-29 .letter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #classify-29 .group-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+            width: 80px;
+        }
+
+        #classify-29 .letters {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        #classify-29 .letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-29 .letter:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        #classify-29 .letter.vowel { background: #ff6b9d; color: white; }
+        #classify-29 .letter.consonant { background: #87ceeb; }
+
+        /* ============================================
+           #classify-30: Taste Categories
+           ============================================ */
+        #classify-30 .taste-wheel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #classify-30 .taste-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            border-radius: 15px;
+            min-width: 55px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #classify-30 .taste-card:hover {
+            transform: scale(1.15);
+        }
+
+        #classify-30 .taste-card.sweet { background: #ff6b9d; }
+        #classify-30 .taste-card.sour { background: #ffe66d; }
+        #classify-30 .taste-card.salty { background: #87ceeb; }
+        #classify-30 .taste-card.bitter { background: #98d8aa; }
+        #classify-30 .taste-card.umami { background: #dda0dd; }
+
+        #classify-30 .taste-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        #classify-30 .taste-label {
+            font-weight: bold;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        #classify-30 .taste-card.sour .taste-label { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Classification Diagram Templates - 分類・グループ図テンプレート</h1>
+
+    <div class="template-grid">
+
+        <!-- #classify-1: Color Sorting Boxes -->
+        <div class="template-card" id="classify-1">
+            <h2>#1 Color Sorting (色分け)</h2>
+            <div class="color-sort">
+                <div class="color-group">
+                    <div class="color-label red">赤</div>
+                    <div class="color-items">
+                        <div class="color-item red">🍎</div>
+                        <div class="color-item red">🍓</div>
+                        <div class="color-item red">🌹</div>
+                    </div>
+                </div>
+                <div class="color-group">
+                    <div class="color-label blue">青</div>
+                    <div class="color-items">
+                        <div class="color-item blue">🫐</div>
+                        <div class="color-item blue">🐟</div>
+                        <div class="color-item blue">💎</div>
+                    </div>
+                </div>
+                <div class="color-group">
+                    <div class="color-label green">緑</div>
+                    <div class="color-items">
+                        <div class="color-item green">🥒</div>
+                        <div class="color-item green">🥦</div>
+                        <div class="color-item green">🌿</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-2: Size Sorting -->
+        <div class="template-card" id="classify-2">
+            <h2>#2 Size Sorting (サイズ分け)</h2>
+            <div class="size-sort">
+                <div class="size-group">
+                    <div class="size-box size-s">S</div>
+                    <div class="size-label">Small</div>
+                </div>
+                <div class="size-group">
+                    <div class="size-box size-m">M</div>
+                    <div class="size-label">Medium</div>
+                </div>
+                <div class="size-group">
+                    <div class="size-box size-l">L</div>
+                    <div class="size-label">Large</div>
+                </div>
+                <div class="size-group">
+                    <div class="size-box size-xl">XL</div>
+                    <div class="size-label">X-Large</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-3: Shape Categorization -->
+        <div class="template-card" id="classify-3">
+            <h2>#3 Shape Categories (形分類)</h2>
+            <div class="shape-sort">
+                <div class="shape-category">
+                    <div class="shape-title">Circle</div>
+                    <div class="shape-container">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="shape-category">
+                    <div class="shape-title">Square</div>
+                    <div class="shape-container">
+                        <div class="square"></div>
+                        <div class="square"></div>
+                        <div class="square"></div>
+                    </div>
+                </div>
+                <div class="shape-category">
+                    <div class="shape-title">Triangle</div>
+                    <div class="shape-container">
+                        <div class="triangle"></div>
+                        <div class="triangle"></div>
+                        <div class="triangle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-4: Animal Kingdom Tree -->
+        <div class="template-card" id="classify-4">
+            <h2>#4 Animal Kingdom (動物分類)</h2>
+            <div class="animal-tree">
+                <div class="animal-root">動物界</div>
+                <div class="animal-branches">
+                    <div class="animal-branch">
+                        <div class="branch-label mammals">哺乳類</div>
+                        <div class="animal-icons">
+                            <span class="animal-icon">🐕</span>
+                            <span class="animal-icon">🐈</span>
+                            <span class="animal-icon">🐘</span>
+                        </div>
+                    </div>
+                    <div class="animal-branch">
+                        <div class="branch-label birds">鳥類</div>
+                        <div class="animal-icons">
+                            <span class="animal-icon">🦅</span>
+                            <span class="animal-icon">🐧</span>
+                            <span class="animal-icon">🦜</span>
+                        </div>
+                    </div>
+                    <div class="animal-branch">
+                        <div class="branch-label fish">魚類</div>
+                        <div class="animal-icons">
+                            <span class="animal-icon">🐟</span>
+                            <span class="animal-icon">🦈</span>
+                            <span class="animal-icon">🐠</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-5: Food Groups -->
+        <div class="template-card" id="classify-5">
+            <h2>#5 Food Groups (食品グループ)</h2>
+            <div class="food-groups">
+                <div class="food-group fruits">
+                    <div class="food-title">🍎 果物</div>
+                    <div class="food-items">🍊🍋🍇🍓</div>
+                </div>
+                <div class="food-group vegetables">
+                    <div class="food-title">🥬 野菜</div>
+                    <div class="food-items">🥕🥦🌽🍅</div>
+                </div>
+                <div class="food-group grains">
+                    <div class="food-title">🌾 穀物</div>
+                    <div class="food-items">🍞🍚🥐🍝</div>
+                </div>
+                <div class="food-group protein">
+                    <div class="food-title">🥩 タンパク質</div>
+                    <div class="food-items">🍗🥚🐟🥜</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-6: Emotion Categories -->
+        <div class="template-card" id="classify-6">
+            <h2>#6 Emotion Categories (感情分類)</h2>
+            <div class="emotion-grid">
+                <div class="emotion-box happy">
+                    <div class="emotion-icon">😊</div>
+                    <div class="emotion-label">Happy</div>
+                </div>
+                <div class="emotion-box sad">
+                    <div class="emotion-icon">😢</div>
+                    <div class="emotion-label">Sad</div>
+                </div>
+                <div class="emotion-box angry">
+                    <div class="emotion-icon">😠</div>
+                    <div class="emotion-label">Angry</div>
+                </div>
+                <div class="emotion-box scared">
+                    <div class="emotion-icon">😨</div>
+                    <div class="emotion-label">Scared</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-7: Weather Types -->
+        <div class="template-card" id="classify-7">
+            <h2>#7 Weather Types (天気タイプ)</h2>
+            <div class="weather-types">
+                <div class="weather-card sunny">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-label">Sunny</div>
+                </div>
+                <div class="weather-card rainy">
+                    <div class="weather-icon">🌧️</div>
+                    <div class="weather-label">Rainy</div>
+                </div>
+                <div class="weather-card cloudy">
+                    <div class="weather-icon">☁️</div>
+                    <div class="weather-label">Cloudy</div>
+                </div>
+                <div class="weather-card snowy">
+                    <div class="weather-icon">❄️</div>
+                    <div class="weather-label">Snowy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-8: Vehicle Types -->
+        <div class="template-card" id="classify-8">
+            <h2>#8 Vehicle Types (乗り物タイプ)</h2>
+            <div class="vehicle-grid">
+                <div class="vehicle-box car">
+                    <div class="vehicle-icon">🚗</div>
+                    <div class="vehicle-label">Car</div>
+                </div>
+                <div class="vehicle-box bus">
+                    <div class="vehicle-icon">🚌</div>
+                    <div class="vehicle-label">Bus</div>
+                </div>
+                <div class="vehicle-box train">
+                    <div class="vehicle-icon">🚂</div>
+                    <div class="vehicle-label">Train</div>
+                </div>
+                <div class="vehicle-box plane">
+                    <div class="vehicle-icon">✈️</div>
+                    <div class="vehicle-label">Plane</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-9: Music Genres -->
+        <div class="template-card" id="classify-9">
+            <h2>#9 Music Genres (音楽ジャンル)</h2>
+            <div class="music-genres">
+                <div class="genre-tag pop">🎤 Pop</div>
+                <div class="genre-tag rock">🎸 Rock</div>
+                <div class="genre-tag jazz">🎷 Jazz</div>
+                <div class="genre-tag classical">🎻 Classical</div>
+            </div>
+        </div>
+
+        <!-- #classify-10: Book Genres -->
+        <div class="template-card" id="classify-10">
+            <h2>#10 Book Genres (本のジャンル)</h2>
+            <div class="book-shelf">
+                <div class="shelf-row">
+                    <div class="book fiction">小説</div>
+                    <div class="book nonfiction">実用</div>
+                    <div class="book mystery">推理</div>
+                    <div class="book fantasy">幻想</div>
+                    <div class="book fiction">小説</div>
+                    <div class="book mystery">推理</div>
+                </div>
+                <div class="shelf-row">
+                    <div class="book fantasy">幻想</div>
+                    <div class="book nonfiction">実用</div>
+                    <div class="book fiction">小説</div>
+                    <div class="book mystery">推理</div>
+                    <div class="book nonfiction">実用</div>
+                </div>
+            </div>
+            <div class="genre-labels">
+                <div class="genre-dot"><div class="dot" style="background:#ff6b9d"></div>Fiction</div>
+                <div class="genre-dot"><div class="dot" style="background:#87ceeb"></div>Non-fiction</div>
+                <div class="genre-dot"><div class="dot" style="background:#333"></div>Mystery</div>
+                <div class="genre-dot"><div class="dot" style="background:#dda0dd"></div>Fantasy</div>
+            </div>
+        </div>
+
+        <!-- #classify-11: Sport Types -->
+        <div class="template-card" id="classify-11">
+            <h2>#11 Sport Types (スポーツ分類)</h2>
+            <div class="sport-categories">
+                <div class="sport-cat ball">
+                    <div class="sport-title">Ball Sports</div>
+                    <div class="sport-icons">⚽🏀🎾🏐</div>
+                </div>
+                <div class="sport-cat water">
+                    <div class="sport-title">Water Sports</div>
+                    <div class="sport-icons">🏊🚣🏄🤿</div>
+                </div>
+                <div class="sport-cat winter">
+                    <div class="sport-title">Winter Sports</div>
+                    <div class="sport-icons">⛷️🏂🛷🎿</div>
+                </div>
+                <div class="sport-cat combat">
+                    <div class="sport-title">Combat Sports</div>
+                    <div class="sport-icons">🥊🥋🤼🤺</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-12: Job Categories -->
+        <div class="template-card" id="classify-12">
+            <h2>#12 Job Categories (職種分類)</h2>
+            <div class="job-grid">
+                <div class="job-category office">
+                    <div class="job-icons">💼👔📊</div>
+                    <div class="job-label">Office</div>
+                </div>
+                <div class="job-category outdoor">
+                    <div class="job-icons">🌾🔧🏗️</div>
+                    <div class="job-label">Outdoor</div>
+                </div>
+                <div class="job-category creative">
+                    <div class="job-icons">🎨✏️📷</div>
+                    <div class="job-label">Creative</div>
+                </div>
+                <div class="job-category service">
+                    <div class="job-icons">🍳💇🏥</div>
+                    <div class="job-label">Service</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-13: Hobby Types -->
+        <div class="template-card" id="classify-13">
+            <h2>#13 Hobby Types (趣味分類)</h2>
+            <div class="hobby-wheel">
+                <div class="hobby-segment indoor">
+                    <div class="hobby-icon">🎮</div>
+                    <div class="hobby-label">Indoor</div>
+                </div>
+                <div class="hobby-segment outdoor">
+                    <div class="hobby-icon">🏕️</div>
+                    <div class="hobby-label">Outdoor</div>
+                </div>
+                <div class="hobby-segment creative">
+                    <div class="hobby-icon">🎨</div>
+                    <div class="hobby-label">Creative</div>
+                </div>
+                <div class="hobby-segment social">
+                    <div class="hobby-icon">🎉</div>
+                    <div class="hobby-label">Social</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-14: Skill Levels -->
+        <div class="template-card" id="classify-14">
+            <h2>#14 Skill Levels (スキルレベル)</h2>
+            <div class="skill-levels">
+                <div class="skill-bar beginner">
+                    <div class="skill-label">Beginner</div>
+                    <div class="skill-fill">★</div>
+                </div>
+                <div class="skill-bar intermediate">
+                    <div class="skill-label">Intermediate</div>
+                    <div class="skill-fill">★★</div>
+                </div>
+                <div class="skill-bar advanced">
+                    <div class="skill-label">Advanced</div>
+                    <div class="skill-fill">★★★</div>
+                </div>
+                <div class="skill-bar expert">
+                    <div class="skill-label">Expert</div>
+                    <div class="skill-fill">★★★★</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-15: Age Groups -->
+        <div class="template-card" id="classify-15">
+            <h2>#15 Age Groups (年齢グループ)</h2>
+            <div class="age-groups">
+                <div class="age-group kids">
+                    <div class="age-icon">👶</div>
+                    <div class="age-label">Kids</div>
+                    <div class="age-range">0-12</div>
+                </div>
+                <div class="age-group teens">
+                    <div class="age-icon">🧒</div>
+                    <div class="age-label">Teens</div>
+                    <div class="age-range">13-19</div>
+                </div>
+                <div class="age-group adults">
+                    <div class="age-icon">👨</div>
+                    <div class="age-label">Adults</div>
+                    <div class="age-range">20-59</div>
+                </div>
+                <div class="age-group seniors">
+                    <div class="age-icon">👴</div>
+                    <div class="age-label">Seniors</div>
+                    <div class="age-range">60+</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-16: Gender/Group Icons -->
+        <div class="template-card" id="classify-16">
+            <h2>#16 Group Icons (グループアイコン)</h2>
+            <div class="group-icons">
+                <div class="icon-group group-a">
+                    <div class="group-symbol">👥</div>
+                    <div class="group-label">Group A</div>
+                    <div class="group-count">12 members</div>
+                </div>
+                <div class="icon-group group-b">
+                    <div class="group-symbol">👥</div>
+                    <div class="group-label">Group B</div>
+                    <div class="group-count">8 members</div>
+                </div>
+                <div class="icon-group group-c">
+                    <div class="group-symbol">👥</div>
+                    <div class="group-label">Group C</div>
+                    <div class="group-count">15 members</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-17: Team Sorting -->
+        <div class="template-card" id="classify-17">
+            <h2>#17 Team Sorting (チーム分け)</h2>
+            <div class="team-sort">
+                <div class="team team-a">
+                    <div class="team-banner">Team A</div>
+                    <div class="team-members">
+                        <div class="member">😊</div>
+                        <div class="member">😄</div>
+                        <div class="member">🙂</div>
+                    </div>
+                </div>
+                <div class="team team-b">
+                    <div class="team-banner">Team B</div>
+                    <div class="team-members">
+                        <div class="member">😎</div>
+                        <div class="member">🤓</div>
+                        <div class="member">😃</div>
+                    </div>
+                </div>
+                <div class="team team-c">
+                    <div class="team-banner">Team C</div>
+                    <div class="team-members">
+                        <div class="member">🙃</div>
+                        <div class="member">😁</div>
+                        <div class="member">😆</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-18: Priority Sorting -->
+        <div class="template-card" id="classify-18">
+            <h2>#18 Priority Sorting (優先度分類)</h2>
+            <div class="priority-list">
+                <div class="priority-item urgent">
+                    <div class="priority-flag">🔴</div>
+                    <div class="priority-text">Urgent - 緊急</div>
+                </div>
+                <div class="priority-item important">
+                    <div class="priority-flag">🟠</div>
+                    <div class="priority-text">Important - 重要</div>
+                </div>
+                <div class="priority-item normal">
+                    <div class="priority-flag">🔵</div>
+                    <div class="priority-text">Normal - 通常</div>
+                </div>
+                <div class="priority-item low">
+                    <div class="priority-flag">⚪</div>
+                    <div class="priority-text">Low - 低</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-19: Status Groups -->
+        <div class="template-card" id="classify-19">
+            <h2>#19 Status Groups (ステータス分類)</h2>
+            <div class="status-board">
+                <div class="status-column">
+                    <div class="status-header new">New</div>
+                    <div class="status-cards">
+                        <div class="status-card">Task 1</div>
+                        <div class="status-card">Task 2</div>
+                    </div>
+                </div>
+                <div class="status-column">
+                    <div class="status-header progress">Progress</div>
+                    <div class="status-cards">
+                        <div class="status-card">Task 3</div>
+                    </div>
+                </div>
+                <div class="status-column">
+                    <div class="status-header done">Done</div>
+                    <div class="status-cards">
+                        <div class="status-card">Task 4</div>
+                        <div class="status-card">Task 5</div>
+                    </div>
+                </div>
+                <div class="status-column">
+                    <div class="status-header archived">Archive</div>
+                    <div class="status-cards">
+                        <div class="status-card">Task 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-20: Quality Grades -->
+        <div class="template-card" id="classify-20">
+            <h2>#20 Quality Grades (品質グレード)</h2>
+            <div class="grade-cards">
+                <div class="grade-card grade-a">
+                    <div class="grade-letter">A</div>
+                    <div class="grade-label">Excellent</div>
+                </div>
+                <div class="grade-card grade-b">
+                    <div class="grade-letter">B</div>
+                    <div class="grade-label">Good</div>
+                </div>
+                <div class="grade-card grade-c">
+                    <div class="grade-letter">C</div>
+                    <div class="grade-label">Average</div>
+                </div>
+                <div class="grade-card grade-d">
+                    <div class="grade-letter">D</div>
+                    <div class="grade-label">Poor</div>
+                </div>
+                <div class="grade-card grade-f">
+                    <div class="grade-letter">F</div>
+                    <div class="grade-label">Fail</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-21: Risk Levels -->
+        <div class="template-card" id="classify-21">
+            <h2>#21 Risk Levels (リスクレベル)</h2>
+            <div class="risk-meter">
+                <div class="risk-level critical">
+                    <div class="risk-indicator"></div>
+                    <div class="risk-text">Critical - 致命的</div>
+                </div>
+                <div class="risk-level high">
+                    <div class="risk-indicator"></div>
+                    <div class="risk-text">High - 高</div>
+                </div>
+                <div class="risk-level medium">
+                    <div class="risk-indicator"></div>
+                    <div class="risk-text">Medium - 中</div>
+                </div>
+                <div class="risk-level low">
+                    <div class="risk-indicator"></div>
+                    <div class="risk-text">Low - 低</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-22: Difficulty Tiers -->
+        <div class="template-card" id="classify-22">
+            <h2>#22 Difficulty Tiers (難易度)</h2>
+            <div class="difficulty-tiers">
+                <div class="diff-tier easy">
+                    <div class="diff-stars">
+                        <span class="star filled">★</span>
+                        <span class="star empty">★</span>
+                        <span class="star empty">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                    <div class="diff-label">Easy</div>
+                </div>
+                <div class="diff-tier medium">
+                    <div class="diff-stars">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star empty">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                    <div class="diff-label">Medium</div>
+                </div>
+                <div class="diff-tier hard">
+                    <div class="diff-stars">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                    <div class="diff-label">Hard</div>
+                </div>
+                <div class="diff-tier extreme">
+                    <div class="diff-stars">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                    </div>
+                    <div class="diff-label">Extreme</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-23: Price Ranges -->
+        <div class="template-card" id="classify-23">
+            <h2>#23 Price Ranges (価格帯)</h2>
+            <div class="price-tiers">
+                <div class="price-tier budget">
+                    <div class="price-symbol">$</div>
+                    <div class="price-info">
+                        <div class="price-name">Budget</div>
+                        <div class="price-range">~1,000円</div>
+                    </div>
+                </div>
+                <div class="price-tier standard">
+                    <div class="price-symbol">$$</div>
+                    <div class="price-info">
+                        <div class="price-name">Standard</div>
+                        <div class="price-range">1,000~5,000円</div>
+                    </div>
+                </div>
+                <div class="price-tier premium">
+                    <div class="price-symbol">$$$</div>
+                    <div class="price-info">
+                        <div class="price-name">Premium</div>
+                        <div class="price-range">5,000~10,000円</div>
+                    </div>
+                </div>
+                <div class="price-tier luxury">
+                    <div class="price-symbol">$$$$</div>
+                    <div class="price-info">
+                        <div class="price-name">Luxury</div>
+                        <div class="price-range">10,000円~</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-24: Time Zones Grouping -->
+        <div class="template-card" id="classify-24">
+            <h2>#24 Time Zones (タイムゾーン)</h2>
+            <div class="timezone-map">
+                <div class="timezone-row">
+                    <div class="tz-time">+9:00</div>
+                    <div class="tz-bar asia">Asia/Tokyo</div>
+                </div>
+                <div class="timezone-row">
+                    <div class="tz-time">+1:00</div>
+                    <div class="tz-bar europe">Europe/Paris</div>
+                </div>
+                <div class="timezone-row">
+                    <div class="tz-time">-5:00</div>
+                    <div class="tz-bar americas">America/NYC</div>
+                </div>
+                <div class="timezone-row">
+                    <div class="tz-time">+10:00</div>
+                    <div class="tz-bar pacific">Pacific/Sydney</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-25: Language Families -->
+        <div class="template-card" id="classify-25">
+            <h2>#25 Language Families (言語族)</h2>
+            <div class="lang-tree">
+                <div class="lang-root">世界の言語</div>
+                <div class="lang-families">
+                    <div class="lang-family">
+                        <div class="family-name romance">ロマンス語派</div>
+                        <div class="lang-examples">
+                            <span class="lang-tag">ES</span>
+                            <span class="lang-tag">FR</span>
+                            <span class="lang-tag">IT</span>
+                        </div>
+                    </div>
+                    <div class="lang-family">
+                        <div class="family-name germanic">ゲルマン語派</div>
+                        <div class="lang-examples">
+                            <span class="lang-tag">EN</span>
+                            <span class="lang-tag">DE</span>
+                        </div>
+                    </div>
+                    <div class="lang-family">
+                        <div class="family-name slavic">スラブ語派</div>
+                        <div class="lang-examples">
+                            <span class="lang-tag">RU</span>
+                            <span class="lang-tag">PL</span>
+                        </div>
+                    </div>
+                    <div class="lang-family">
+                        <div class="family-name sino">漢字文化圏</div>
+                        <div class="lang-examples">
+                            <span class="lang-tag">ZH</span>
+                            <span class="lang-tag">JA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-26: Country Regions -->
+        <div class="template-card" id="classify-26">
+            <h2>#26 Country Regions (地域分類)</h2>
+            <div class="region-grid">
+                <div class="region-box asia">
+                    <div class="region-icon">🌏</div>
+                    <div class="region-name">Asia</div>
+                </div>
+                <div class="region-box europe">
+                    <div class="region-icon">🌍</div>
+                    <div class="region-name">Europe</div>
+                </div>
+                <div class="region-box americas">
+                    <div class="region-icon">🌎</div>
+                    <div class="region-name">Americas</div>
+                </div>
+                <div class="region-box africa">
+                    <div class="region-icon">🌍</div>
+                    <div class="region-name">Africa</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-27: Element Types (States of Matter) -->
+        <div class="template-card" id="classify-27">
+            <h2>#27 States of Matter (物質の状態)</h2>
+            <div class="matter-states">
+                <div class="state-box solid">
+                    <div class="state-visual"></div>
+                    <div class="state-label">Solid</div>
+                    <div class="state-example">固体</div>
+                </div>
+                <div class="state-box liquid">
+                    <div class="state-visual" style="position:relative;"></div>
+                    <div class="state-label">Liquid</div>
+                    <div class="state-example">液体</div>
+                </div>
+                <div class="state-box gas">
+                    <div class="state-visual" style="position:relative;">
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                    </div>
+                    <div class="state-label">Gas</div>
+                    <div class="state-example">気体</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-28: Number Types -->
+        <div class="template-card" id="classify-28">
+            <h2>#28 Number Types (数の分類)</h2>
+            <div class="number-sort">
+                <div class="number-row">
+                    <div class="number-label">Odd</div>
+                    <div class="number-group">
+                        <div class="num odd">1</div>
+                        <div class="num odd">3</div>
+                        <div class="num odd">5</div>
+                        <div class="num odd">7</div>
+                        <div class="num odd">9</div>
+                    </div>
+                </div>
+                <div class="number-row">
+                    <div class="number-label">Even</div>
+                    <div class="number-group">
+                        <div class="num even">2</div>
+                        <div class="num even">4</div>
+                        <div class="num even">6</div>
+                        <div class="num even">8</div>
+                        <div class="num even">10</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-29: Letter Categories -->
+        <div class="template-card" id="classify-29">
+            <h2>#29 Letter Categories (文字分類)</h2>
+            <div class="letter-sort">
+                <div class="letter-group">
+                    <div class="group-title">Vowels</div>
+                    <div class="letters">
+                        <div class="letter vowel">A</div>
+                        <div class="letter vowel">E</div>
+                        <div class="letter vowel">I</div>
+                        <div class="letter vowel">O</div>
+                        <div class="letter vowel">U</div>
+                    </div>
+                </div>
+                <div class="letter-group">
+                    <div class="group-title">Consonants</div>
+                    <div class="letters">
+                        <div class="letter consonant">B</div>
+                        <div class="letter consonant">C</div>
+                        <div class="letter consonant">D</div>
+                        <div class="letter consonant">F</div>
+                        <div class="letter consonant">G</div>
+                        <div class="letter consonant">H</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #classify-30: Taste Categories -->
+        <div class="template-card" id="classify-30">
+            <h2>#30 Taste Categories (味覚分類)</h2>
+            <div class="taste-wheel">
+                <div class="taste-card sweet">
+                    <div class="taste-icon">🍬</div>
+                    <div class="taste-label">Sweet</div>
+                </div>
+                <div class="taste-card sour">
+                    <div class="taste-icon">🍋</div>
+                    <div class="taste-label">Sour</div>
+                </div>
+                <div class="taste-card salty">
+                    <div class="taste-icon">🧂</div>
+                    <div class="taste-label">Salty</div>
+                </div>
+                <div class="taste-card bitter">
+                    <div class="taste-icon">🍵</div>
+                    <div class="taste-label">Bitter</div>
+                </div>
+                <div class="taste-card umami">
+                    <div class="taste-icon">🍖</div>
+                    <div class="taste-label">Umami</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

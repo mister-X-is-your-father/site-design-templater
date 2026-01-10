@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business & Work - Flat Illustration Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #2C3E50;
+            --blue: #3498DB;
+            --blue-light: #5DADE2;
+            --green: #27AE60;
+            --green-light: #58D68D;
+            --orange: #E67E22;
+            --orange-light: #F5B041;
+            --red: #E74C3C;
+            --gray: #7F8C8D;
+            --gray-light: #BDC3C7;
+            --cream: #FAF0E6;
+            --white: #FFFFFF;
+            --brown: #8B4513;
+            --brown-light: #D2691E;
+            --gold: #F1C40F;
+            --pink: #FFCCCB;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: var(--gray);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .illust {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .illust:hover {
+            transform: scale(1.1);
+        }
+
+        /* ============================================
+           business-01: Briefcase
+           ============================================ */
+        .briefcase {
+            position: relative;
+        }
+        .briefcase .body {
+            position: absolute;
+            bottom: 8px;
+            left: 5px;
+            width: 70px;
+            height: 45px;
+            background: var(--brown);
+            border-radius: 4px;
+        }
+        .briefcase .handle-base {
+            position: absolute;
+            top: 5px;
+            left: 28px;
+            width: 24px;
+            height: 8px;
+            background: var(--navy);
+            border-radius: 2px;
+        }
+        .briefcase .handle {
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 20px;
+            height: 12px;
+            border: 4px solid var(--brown-light);
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+        }
+        .briefcase .lock {
+            position: absolute;
+            bottom: 22px;
+            left: 35px;
+            width: 10px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .briefcase .stripe {
+            position: absolute;
+            bottom: 18px;
+            left: 5px;
+            width: 70px;
+            height: 4px;
+            background: var(--brown-light);
+        }
+        .briefcase:hover .body {
+            animation: briefcase-bounce 0.5s ease;
+        }
+        @keyframes briefcase-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ============================================
+           business-02: Tie
+           ============================================ */
+        .tie {
+            position: relative;
+        }
+        .tie .knot {
+            position: absolute;
+            top: 10px;
+            left: 32px;
+            width: 16px;
+            height: 12px;
+            background: var(--red);
+            border-radius: 3px;
+        }
+        .tie .upper {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 20px;
+            height: 25px;
+            background: var(--red);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+        .tie .lower {
+            position: absolute;
+            top: 42px;
+            left: 28px;
+            width: 24px;
+            height: 30px;
+            background: var(--red);
+            clip-path: polygon(15% 0%, 85% 0%, 50% 100%);
+        }
+        .tie .stripe1 {
+            position: absolute;
+            top: 50px;
+            left: 34px;
+            width: 12px;
+            height: 3px;
+            background: var(--navy);
+            transform: rotate(-30deg);
+        }
+        .tie .stripe2 {
+            position: absolute;
+            top: 58px;
+            left: 36px;
+            width: 8px;
+            height: 3px;
+            background: var(--navy);
+            transform: rotate(-30deg);
+        }
+        .tie:hover .lower {
+            animation: tie-swing 0.4s ease;
+        }
+        @keyframes tie-swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* ============================================
+           business-03: Chart/Graph (Bar)
+           ============================================ */
+        .chart {
+            position: relative;
+        }
+        .chart .board {
+            position: absolute;
+            bottom: 5px;
+            left: 8px;
+            width: 65px;
+            height: 55px;
+            background: var(--white);
+            border: 3px solid var(--navy);
+            border-radius: 4px;
+        }
+        .chart .bar1 {
+            position: absolute;
+            bottom: 10px;
+            left: 18px;
+            width: 10px;
+            height: 20px;
+            background: var(--blue);
+            border-radius: 2px 2px 0 0;
+        }
+        .chart .bar2 {
+            position: absolute;
+            bottom: 10px;
+            left: 32px;
+            width: 10px;
+            height: 35px;
+            background: var(--green);
+            border-radius: 2px 2px 0 0;
+        }
+        .chart .bar3 {
+            position: absolute;
+            bottom: 10px;
+            left: 46px;
+            width: 10px;
+            height: 28px;
+            background: var(--orange);
+            border-radius: 2px 2px 0 0;
+        }
+        .chart:hover .bar1 { animation: bar-grow 0.4s ease; }
+        .chart:hover .bar2 { animation: bar-grow 0.4s ease 0.1s; }
+        .chart:hover .bar3 { animation: bar-grow 0.4s ease 0.2s; }
+        @keyframes bar-grow {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.2); transform-origin: bottom; }
+        }
+
+        /* ============================================
+           business-04: Money/Coins
+           ============================================ */
+        .money {
+            position: relative;
+        }
+        .money .coin1 {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid #D4AC0D;
+        }
+        .money .coin1-inner {
+            position: absolute;
+            bottom: 18px;
+            left: 25px;
+            width: 10px;
+            height: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #D4AC0D;
+        }
+        .money .coin2 {
+            position: absolute;
+            bottom: 20px;
+            left: 35px;
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid #D4AC0D;
+        }
+        .money .coin3 {
+            position: absolute;
+            bottom: 30px;
+            left: 25px;
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid #D4AC0D;
+        }
+        .money:hover .coin1 { animation: coin-bounce 0.3s ease; }
+        .money:hover .coin2 { animation: coin-bounce 0.3s ease 0.1s; }
+        .money:hover .coin3 { animation: coin-bounce 0.3s ease 0.2s; }
+        @keyframes coin-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ============================================
+           business-05: Credit Card
+           ============================================ */
+        .credit-card {
+            position: relative;
+        }
+        .credit-card .card {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+            border-radius: 5px;
+        }
+        .credit-card .chip {
+            position: absolute;
+            top: 25px;
+            left: 18px;
+            width: 12px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .credit-card .stripe {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            width: 60px;
+            height: 6px;
+            background: var(--gray);
+        }
+        .credit-card .line1 {
+            position: absolute;
+            top: 48px;
+            left: 15px;
+            width: 30px;
+            height: 3px;
+            background: var(--gray-light);
+            border-radius: 1px;
+        }
+        .credit-card .line2 {
+            position: absolute;
+            top: 48px;
+            left: 50px;
+            width: 15px;
+            height: 3px;
+            background: var(--gray-light);
+            border-radius: 1px;
+        }
+        .credit-card:hover .card {
+            animation: card-flip 0.5s ease;
+        }
+        @keyframes card-flip {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(15deg); }
+        }
+
+        /* ============================================
+           business-06: Handshake
+           ============================================ */
+        .handshake {
+            position: relative;
+        }
+        .handshake .hand-left {
+            position: absolute;
+            top: 25px;
+            left: 8px;
+            width: 30px;
+            height: 20px;
+            background: var(--pink);
+            border-radius: 5px 15px 5px 5px;
+            transform: rotate(-10deg);
+        }
+        .handshake .hand-right {
+            position: absolute;
+            top: 25px;
+            right: 8px;
+            width: 30px;
+            height: 20px;
+            background: var(--cream);
+            border-radius: 15px 5px 5px 5px;
+            transform: rotate(10deg);
+        }
+        .handshake .sleeve-left {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            width: 25px;
+            height: 25px;
+            background: var(--navy);
+            border-radius: 3px;
+        }
+        .handshake .sleeve-right {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            width: 25px;
+            height: 25px;
+            background: var(--gray);
+            border-radius: 3px;
+        }
+        .handshake .thumb-left {
+            position: absolute;
+            top: 22px;
+            left: 32px;
+            width: 10px;
+            height: 8px;
+            background: var(--pink);
+            border-radius: 3px;
+        }
+        .handshake .thumb-right {
+            position: absolute;
+            top: 38px;
+            right: 32px;
+            width: 10px;
+            height: 8px;
+            background: var(--cream);
+            border-radius: 3px;
+        }
+        .handshake:hover .hand-left,
+        .handshake:hover .hand-right {
+            animation: shake-hands 0.3s ease;
+        }
+        @keyframes shake-hands {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* ============================================
+           business-07: Presentation Screen
+           ============================================ */
+        .presentation {
+            position: relative;
+        }
+        .presentation .screen {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 60px;
+            height: 45px;
+            background: var(--white);
+            border: 3px solid var(--navy);
+            border-radius: 3px;
+        }
+        .presentation .stand {
+            position: absolute;
+            bottom: 5px;
+            left: 37px;
+            width: 6px;
+            height: 20px;
+            background: var(--gray);
+        }
+        .presentation .base {
+            position: absolute;
+            bottom: 2px;
+            left: 25px;
+            width: 30px;
+            height: 5px;
+            background: var(--gray);
+            border-radius: 2px;
+        }
+        .presentation .line-chart {
+            position: absolute;
+            top: 20px;
+            left: 18px;
+            width: 44px;
+            height: 20px;
+            border-left: 2px solid var(--navy);
+            border-bottom: 2px solid var(--navy);
+        }
+        .presentation .line {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            width: 40px;
+            height: 15px;
+            border-bottom: 3px solid var(--green);
+            border-radius: 0 0 20px 0;
+            transform: rotate(-5deg);
+        }
+        .presentation:hover .screen {
+            animation: present-pop 0.4s ease;
+        }
+        @keyframes present-pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ============================================
+           business-08: Desk
+           ============================================ */
+        .desk {
+            position: relative;
+        }
+        .desk .top {
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            width: 70px;
+            height: 8px;
+            background: var(--brown);
+            border-radius: 2px;
+        }
+        .desk .leg-left {
+            position: absolute;
+            top: 33px;
+            left: 10px;
+            width: 8px;
+            height: 35px;
+            background: var(--brown-light);
+        }
+        .desk .leg-right {
+            position: absolute;
+            top: 33px;
+            right: 10px;
+            width: 8px;
+            height: 35px;
+            background: var(--brown-light);
+        }
+        .desk .drawer {
+            position: absolute;
+            top: 33px;
+            left: 20px;
+            width: 40px;
+            height: 20px;
+            background: var(--brown);
+            border: 2px solid var(--brown-light);
+        }
+        .desk .handle {
+            position: absolute;
+            top: 40px;
+            left: 35px;
+            width: 10px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .desk:hover .drawer {
+            animation: drawer-open 0.4s ease;
+        }
+        @keyframes drawer-open {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* ============================================
+           business-09: Office Chair
+           ============================================ */
+        .office-chair {
+            position: relative;
+        }
+        .office-chair .back {
+            position: absolute;
+            top: 5px;
+            left: 22px;
+            width: 36px;
+            height: 30px;
+            background: var(--navy);
+            border-radius: 5px 5px 0 0;
+        }
+        .office-chair .seat {
+            position: absolute;
+            top: 35px;
+            left: 18px;
+            width: 44px;
+            height: 12px;
+            background: var(--navy);
+            border-radius: 3px;
+        }
+        .office-chair .pole {
+            position: absolute;
+            top: 47px;
+            left: 36px;
+            width: 8px;
+            height: 15px;
+            background: var(--gray);
+        }
+        .office-chair .base {
+            position: absolute;
+            bottom: 8px;
+            left: 20px;
+            width: 40px;
+            height: 6px;
+            background: var(--gray);
+            border-radius: 3px;
+        }
+        .office-chair .wheel1 {
+            position: absolute;
+            bottom: 5px;
+            left: 22px;
+            width: 8px;
+            height: 8px;
+            background: var(--gray-light);
+            border-radius: 50%;
+        }
+        .office-chair .wheel2 {
+            position: absolute;
+            bottom: 5px;
+            right: 22px;
+            width: 8px;
+            height: 8px;
+            background: var(--gray-light);
+            border-radius: 50%;
+        }
+        .office-chair:hover {
+            animation: chair-spin 0.5s ease;
+        }
+        @keyframes chair-spin {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* ============================================
+           business-10: Clipboard
+           ============================================ */
+        .clipboard {
+            position: relative;
+        }
+        .clipboard .board {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            width: 50px;
+            height: 60px;
+            background: var(--brown-light);
+            border-radius: 3px;
+        }
+        .clipboard .paper {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 44px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 2px;
+        }
+        .clipboard .clip {
+            position: absolute;
+            top: 8px;
+            left: 28px;
+            width: 24px;
+            height: 10px;
+            background: var(--gray);
+            border-radius: 3px 3px 0 0;
+        }
+        .clipboard .line1 {
+            position: absolute;
+            top: 28px;
+            left: 23px;
+            width: 34px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .clipboard .line2 {
+            position: absolute;
+            top: 36px;
+            left: 23px;
+            width: 34px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .clipboard .line3 {
+            position: absolute;
+            top: 44px;
+            left: 23px;
+            width: 20px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .clipboard:hover .paper {
+            animation: paper-flip 0.4s ease;
+        }
+        @keyframes paper-flip {
+            0%, 100% { transform: rotateX(0deg); }
+            50% { transform: rotateX(10deg); }
+        }
+
+        /* ============================================
+           business-11: Stamp
+           ============================================ */
+        .stamp {
+            position: relative;
+        }
+        .stamp .handle {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            width: 30px;
+            height: 20px;
+            background: var(--brown);
+            border-radius: 5px 5px 0 0;
+        }
+        .stamp .body {
+            position: absolute;
+            top: 28px;
+            left: 20px;
+            width: 40px;
+            height: 25px;
+            background: var(--navy);
+            border-radius: 2px;
+        }
+        .stamp .rubber {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            width: 40px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 0 0 2px 2px;
+        }
+        .stamp .ink {
+            position: absolute;
+            bottom: 5px;
+            left: 25px;
+            width: 30px;
+            height: 4px;
+            background: var(--red);
+            opacity: 0;
+            border-radius: 2px;
+        }
+        .stamp:hover .body,
+        .stamp:hover .rubber {
+            animation: stamp-press 0.3s ease;
+        }
+        .stamp:hover .ink {
+            animation: ink-appear 0.3s ease forwards;
+        }
+        @keyframes stamp-press {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        @keyframes ink-appear {
+            0% { opacity: 0; }
+            100% { opacity: 0.6; }
+        }
+
+        /* ============================================
+           business-12: Folder
+           ============================================ */
+        .folder {
+            position: relative;
+        }
+        .folder .back {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            width: 60px;
+            height: 50px;
+            background: var(--orange);
+            border-radius: 0 5px 5px 5px;
+        }
+        .folder .tab {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 25px;
+            height: 10px;
+            background: var(--orange);
+            border-radius: 3px 3px 0 0;
+        }
+        .folder .front {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: var(--orange-light);
+            border-radius: 0 0 5px 5px;
+        }
+        .folder .paper {
+            position: absolute;
+            top: 18px;
+            left: 15px;
+            width: 50px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 2px;
+        }
+        .folder:hover .front {
+            animation: folder-open 0.4s ease;
+        }
+        @keyframes folder-open {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ============================================
+           business-13: Stapler
+           ============================================ */
+        .stapler {
+            position: relative;
+        }
+        .stapler .top {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            width: 55px;
+            height: 15px;
+            background: var(--red);
+            border-radius: 3px 10px 3px 3px;
+        }
+        .stapler .bottom {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            width: 60px;
+            height: 12px;
+            background: var(--gray);
+            border-radius: 3px;
+        }
+        .stapler .hinge {
+            position: absolute;
+            top: 30px;
+            left: 55px;
+            width: 10px;
+            height: 15px;
+            background: var(--gray);
+            border-radius: 2px;
+        }
+        .stapler .front {
+            position: absolute;
+            top: 32px;
+            left: 8px;
+            width: 8px;
+            height: 12px;
+            background: var(--gray);
+            border-radius: 2px;
+        }
+        .stapler:hover .top {
+            animation: stapler-press 0.3s ease;
+            transform-origin: right center;
+        }
+        @keyframes stapler-press {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-10deg); }
+        }
+
+        /* ============================================
+           business-14: Coffee Mug
+           ============================================ */
+        .coffee-mug {
+            position: relative;
+        }
+        .coffee-mug .mug {
+            position: absolute;
+            top: 20px;
+            left: 18px;
+            width: 35px;
+            height: 40px;
+            background: var(--white);
+            border: 3px solid var(--gray-light);
+            border-radius: 0 0 8px 8px;
+        }
+        .coffee-mug .coffee {
+            position: absolute;
+            top: 25px;
+            left: 21px;
+            width: 29px;
+            height: 20px;
+            background: var(--brown);
+            border-radius: 0 0 5px 5px;
+        }
+        .coffee-mug .handle {
+            position: absolute;
+            top: 28px;
+            left: 50px;
+            width: 15px;
+            height: 20px;
+            border: 4px solid var(--gray-light);
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+        }
+        .coffee-mug .steam1 {
+            position: absolute;
+            top: 8px;
+            left: 28px;
+            width: 4px;
+            height: 12px;
+            background: var(--gray-light);
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        .coffee-mug .steam2 {
+            position: absolute;
+            top: 5px;
+            left: 38px;
+            width: 4px;
+            height: 15px;
+            background: var(--gray-light);
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        .coffee-mug:hover .steam1,
+        .coffee-mug:hover .steam2 {
+            animation: steam-rise 0.5s ease infinite;
+        }
+        @keyframes steam-rise {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-5px); opacity: 0.3; }
+        }
+
+        /* ============================================
+           business-15: ID Badge
+           ============================================ */
+        .id-badge {
+            position: relative;
+        }
+        .id-badge .lanyard {
+            position: absolute;
+            top: 0;
+            left: 38px;
+            width: 4px;
+            height: 20px;
+            background: var(--blue);
+        }
+        .id-badge .card {
+            position: absolute;
+            top: 18px;
+            left: 15px;
+            width: 50px;
+            height: 55px;
+            background: var(--white);
+            border: 3px solid var(--navy);
+            border-radius: 5px;
+        }
+        .id-badge .photo {
+            position: absolute;
+            top: 28px;
+            left: 23px;
+            width: 20px;
+            height: 22px;
+            background: var(--gray-light);
+            border-radius: 3px;
+        }
+        .id-badge .head {
+            position: absolute;
+            top: 30px;
+            left: 28px;
+            width: 10px;
+            height: 10px;
+            background: var(--cream);
+            border-radius: 50%;
+        }
+        .id-badge .line1 {
+            position: absolute;
+            top: 55px;
+            left: 23px;
+            width: 34px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .id-badge .line2 {
+            position: absolute;
+            top: 62px;
+            left: 23px;
+            width: 25px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .id-badge:hover .card {
+            animation: badge-swing 0.4s ease;
+        }
+        @keyframes badge-swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* ============================================
+           business-16: Piggy Bank
+           ============================================ */
+        .piggy-bank {
+            position: relative;
+        }
+        .piggy-bank .body {
+            position: absolute;
+            top: 20px;
+            left: 12px;
+            width: 50px;
+            height: 40px;
+            background: var(--pink);
+            border-radius: 25px;
+        }
+        .piggy-bank .snout {
+            position: absolute;
+            top: 32px;
+            left: 55px;
+            width: 15px;
+            height: 12px;
+            background: #FFB0B0;
+            border-radius: 50%;
+        }
+        .piggy-bank .ear {
+            position: absolute;
+            top: 14px;
+            left: 40px;
+            width: 12px;
+            height: 14px;
+            background: var(--pink);
+            border-radius: 50% 50% 0 0;
+            transform: rotate(15deg);
+        }
+        .piggy-bank .eye {
+            position: absolute;
+            top: 28px;
+            left: 48px;
+            width: 6px;
+            height: 6px;
+            background: var(--navy);
+            border-radius: 50%;
+        }
+        .piggy-bank .slot {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 14px;
+            height: 4px;
+            background: var(--navy);
+            border-radius: 2px;
+        }
+        .piggy-bank .leg1 {
+            position: absolute;
+            bottom: 10px;
+            left: 18px;
+            width: 8px;
+            height: 12px;
+            background: #FFB0B0;
+            border-radius: 0 0 3px 3px;
+        }
+        .piggy-bank .leg2 {
+            position: absolute;
+            bottom: 10px;
+            left: 48px;
+            width: 8px;
+            height: 12px;
+            background: #FFB0B0;
+            border-radius: 0 0 3px 3px;
+        }
+        .piggy-bank:hover .body {
+            animation: piggy-jiggle 0.3s ease;
+        }
+        @keyframes piggy-jiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        /* ============================================
+           business-17: Target Goal
+           ============================================ */
+        .target {
+            position: relative;
+        }
+        .target .ring-outer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            background: var(--red);
+            border-radius: 50%;
+        }
+        .target .ring-middle {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border-radius: 50%;
+        }
+        .target .ring-inner {
+            position: absolute;
+            top: 26px;
+            left: 26px;
+            width: 28px;
+            height: 28px;
+            background: var(--red);
+            border-radius: 50%;
+        }
+        .target .bullseye {
+            position: absolute;
+            top: 34px;
+            left: 34px;
+            width: 12px;
+            height: 12px;
+            background: var(--white);
+            border-radius: 50%;
+        }
+        .target .arrow {
+            position: absolute;
+            top: 36px;
+            left: 5px;
+            width: 35px;
+            height: 4px;
+            background: var(--brown);
+            transform: rotate(-5deg);
+        }
+        .target .arrow-head {
+            position: absolute;
+            top: 33px;
+            left: 36px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid var(--gray);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            transform: rotate(-5deg);
+        }
+        .target:hover .ring-outer {
+            animation: target-pulse 0.5s ease;
+        }
+        @keyframes target-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ============================================
+           business-18: Checklist
+           ============================================ */
+        .checklist {
+            position: relative;
+        }
+        .checklist .paper {
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            width: 50px;
+            height: 65px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: 3px;
+        }
+        .checklist .check1 {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--green);
+            border-radius: 2px;
+        }
+        .checklist .checkmark1 {
+            position: absolute;
+            top: 20px;
+            left: 23px;
+            width: 6px;
+            height: 10px;
+            border-bottom: 3px solid var(--green);
+            border-right: 3px solid var(--green);
+            transform: rotate(45deg);
+        }
+        .checklist .line1 {
+            position: absolute;
+            top: 22px;
+            left: 35px;
+            width: 25px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .checklist .check2 {
+            position: absolute;
+            top: 36px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--green);
+            border-radius: 2px;
+        }
+        .checklist .checkmark2 {
+            position: absolute;
+            top: 38px;
+            left: 23px;
+            width: 6px;
+            height: 10px;
+            border-bottom: 3px solid var(--green);
+            border-right: 3px solid var(--green);
+            transform: rotate(45deg);
+        }
+        .checklist .line2 {
+            position: absolute;
+            top: 40px;
+            left: 35px;
+            width: 25px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .checklist .check3 {
+            position: absolute;
+            top: 54px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--gray-light);
+            border-radius: 2px;
+        }
+        .checklist .line3 {
+            position: absolute;
+            top: 58px;
+            left: 35px;
+            width: 25px;
+            height: 3px;
+            background: var(--gray-light);
+        }
+        .checklist:hover .checkmark1,
+        .checklist:hover .checkmark2 {
+            animation: check-pop 0.3s ease;
+        }
+        @keyframes check-pop {
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.3); }
+        }
+
+        /* ============================================
+           business-19: Meeting Table
+           ============================================ */
+        .meeting-table {
+            position: relative;
+        }
+        .meeting-table .table-top {
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            width: 70px;
+            height: 35px;
+            background: var(--brown);
+            border-radius: 20px;
+        }
+        .meeting-table .chair1 {
+            position: absolute;
+            top: 15px;
+            left: 8px;
+            width: 14px;
+            height: 10px;
+            background: var(--navy);
+            border-radius: 3px 3px 0 0;
+        }
+        .meeting-table .chair2 {
+            position: absolute;
+            top: 15px;
+            left: 33px;
+            width: 14px;
+            height: 10px;
+            background: var(--navy);
+            border-radius: 3px 3px 0 0;
+        }
+        .meeting-table .chair3 {
+            position: absolute;
+            top: 15px;
+            right: 8px;
+            width: 14px;
+            height: 10px;
+            background: var(--navy);
+            border-radius: 3px 3px 0 0;
+        }
+        .meeting-table .chair4 {
+            position: absolute;
+            bottom: 12px;
+            left: 8px;
+            width: 14px;
+            height: 10px;
+            background: var(--gray);
+            border-radius: 0 0 3px 3px;
+        }
+        .meeting-table .chair5 {
+            position: absolute;
+            bottom: 12px;
+            left: 33px;
+            width: 14px;
+            height: 10px;
+            background: var(--gray);
+            border-radius: 0 0 3px 3px;
+        }
+        .meeting-table .chair6 {
+            position: absolute;
+            bottom: 12px;
+            right: 8px;
+            width: 14px;
+            height: 10px;
+            background: var(--gray);
+            border-radius: 0 0 3px 3px;
+        }
+        .meeting-table:hover .chair1,
+        .meeting-table:hover .chair2,
+        .meeting-table:hover .chair3 {
+            animation: chair-scoot 0.3s ease;
+        }
+        @keyframes chair-scoot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* ============================================
+           business-20: Laptop with Graph
+           ============================================ */
+        .laptop {
+            position: relative;
+        }
+        .laptop .screen {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 40px;
+            background: var(--navy);
+            border-radius: 4px 4px 0 0;
+            border: 3px solid var(--gray);
+        }
+        .laptop .display {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 50px;
+            height: 30px;
+            background: var(--white);
+            border-radius: 2px;
+        }
+        .laptop .graph-line {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            width: 40px;
+            height: 2px;
+            background: var(--green);
+            transform: rotate(-20deg);
+            transform-origin: left center;
+        }
+        .laptop .graph-dot1 {
+            position: absolute;
+            top: 35px;
+            left: 22px;
+            width: 5px;
+            height: 5px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+        .laptop .graph-dot2 {
+            position: absolute;
+            top: 28px;
+            left: 38px;
+            width: 5px;
+            height: 5px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+        .laptop .graph-dot3 {
+            position: absolute;
+            top: 22px;
+            left: 54px;
+            width: 5px;
+            height: 5px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+        .laptop .keyboard {
+            position: absolute;
+            top: 50px;
+            left: 5px;
+            width: 70px;
+            height: 25px;
+            background: var(--gray-light);
+            border-radius: 0 0 4px 4px;
+            border: 3px solid var(--gray);
+            border-top: none;
+        }
+        .laptop .trackpad {
+            position: absolute;
+            top: 58px;
+            left: 28px;
+            width: 24px;
+            height: 12px;
+            background: var(--gray);
+            border-radius: 2px;
+        }
+        .laptop:hover .graph-line {
+            animation: graph-grow 0.5s ease;
+        }
+        .laptop:hover .graph-dot1,
+        .laptop:hover .graph-dot2,
+        .laptop:hover .graph-dot3 {
+            animation: dot-pulse 0.5s ease;
+        }
+        @keyframes graph-grow {
+            0%, 100% { transform: rotate(-20deg) scaleX(1); }
+            50% { transform: rotate(-25deg) scaleX(1.1); }
+        }
+        @keyframes dot-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Business & Work</h1>
+            <p>Flat Illustration CSS Components</p>
+        </div>
+
+        <div class="grid">
+            <!-- business-01: Briefcase -->
+            <div class="item">
+                <div class="illust briefcase" id="business-01">
+                    <div class="handle"></div>
+                    <div class="handle-base"></div>
+                    <div class="body"></div>
+                    <div class="stripe"></div>
+                    <div class="lock"></div>
+                </div>
+                <span class="item-label">business-01</span>
+            </div>
+
+            <!-- business-02: Tie -->
+            <div class="item">
+                <div class="illust tie" id="business-02">
+                    <div class="knot"></div>
+                    <div class="upper"></div>
+                    <div class="lower"></div>
+                    <div class="stripe1"></div>
+                    <div class="stripe2"></div>
+                </div>
+                <span class="item-label">business-02</span>
+            </div>
+
+            <!-- business-03: Chart/Graph -->
+            <div class="item">
+                <div class="illust chart" id="business-03">
+                    <div class="board"></div>
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                <span class="item-label">business-03</span>
+            </div>
+
+            <!-- business-04: Money/Coins -->
+            <div class="item">
+                <div class="illust money" id="business-04">
+                    <div class="coin1"></div>
+                    <div class="coin2"></div>
+                    <div class="coin3"></div>
+                </div>
+                <span class="item-label">business-04</span>
+            </div>
+
+            <!-- business-05: Credit Card -->
+            <div class="item">
+                <div class="illust credit-card" id="business-05">
+                    <div class="card"></div>
+                    <div class="chip"></div>
+                    <div class="stripe"></div>
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                </div>
+                <span class="item-label">business-05</span>
+            </div>
+
+            <!-- business-06: Handshake -->
+            <div class="item">
+                <div class="illust handshake" id="business-06">
+                    <div class="sleeve-left"></div>
+                    <div class="sleeve-right"></div>
+                    <div class="hand-left"></div>
+                    <div class="hand-right"></div>
+                    <div class="thumb-left"></div>
+                    <div class="thumb-right"></div>
+                </div>
+                <span class="item-label">business-06</span>
+            </div>
+
+            <!-- business-07: Presentation Screen -->
+            <div class="item">
+                <div class="illust presentation" id="business-07">
+                    <div class="screen"></div>
+                    <div class="line-chart"></div>
+                    <div class="line"></div>
+                    <div class="stand"></div>
+                    <div class="base"></div>
+                </div>
+                <span class="item-label">business-07</span>
+            </div>
+
+            <!-- business-08: Desk -->
+            <div class="item">
+                <div class="illust desk" id="business-08">
+                    <div class="top"></div>
+                    <div class="leg-left"></div>
+                    <div class="leg-right"></div>
+                    <div class="drawer"></div>
+                    <div class="handle"></div>
+                </div>
+                <span class="item-label">business-08</span>
+            </div>
+
+            <!-- business-09: Office Chair -->
+            <div class="item">
+                <div class="illust office-chair" id="business-09">
+                    <div class="back"></div>
+                    <div class="seat"></div>
+                    <div class="pole"></div>
+                    <div class="base"></div>
+                    <div class="wheel1"></div>
+                    <div class="wheel2"></div>
+                </div>
+                <span class="item-label">business-09</span>
+            </div>
+
+            <!-- business-10: Clipboard -->
+            <div class="item">
+                <div class="illust clipboard" id="business-10">
+                    <div class="board"></div>
+                    <div class="clip"></div>
+                    <div class="paper"></div>
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+                <span class="item-label">business-10</span>
+            </div>
+
+            <!-- business-11: Stamp -->
+            <div class="item">
+                <div class="illust stamp" id="business-11">
+                    <div class="handle"></div>
+                    <div class="body"></div>
+                    <div class="rubber"></div>
+                    <div class="ink"></div>
+                </div>
+                <span class="item-label">business-11</span>
+            </div>
+
+            <!-- business-12: Folder -->
+            <div class="item">
+                <div class="illust folder" id="business-12">
+                    <div class="back"></div>
+                    <div class="tab"></div>
+                    <div class="paper"></div>
+                    <div class="front"></div>
+                </div>
+                <span class="item-label">business-12</span>
+            </div>
+
+            <!-- business-13: Stapler -->
+            <div class="item">
+                <div class="illust stapler" id="business-13">
+                    <div class="bottom"></div>
+                    <div class="hinge"></div>
+                    <div class="top"></div>
+                    <div class="front"></div>
+                </div>
+                <span class="item-label">business-13</span>
+            </div>
+
+            <!-- business-14: Coffee Mug -->
+            <div class="item">
+                <div class="illust coffee-mug" id="business-14">
+                    <div class="steam1"></div>
+                    <div class="steam2"></div>
+                    <div class="mug"></div>
+                    <div class="coffee"></div>
+                    <div class="handle"></div>
+                </div>
+                <span class="item-label">business-14</span>
+            </div>
+
+            <!-- business-15: ID Badge -->
+            <div class="item">
+                <div class="illust id-badge" id="business-15">
+                    <div class="lanyard"></div>
+                    <div class="card"></div>
+                    <div class="photo"></div>
+                    <div class="head"></div>
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                </div>
+                <span class="item-label">business-15</span>
+            </div>
+
+            <!-- business-16: Piggy Bank -->
+            <div class="item">
+                <div class="illust piggy-bank" id="business-16">
+                    <div class="ear"></div>
+                    <div class="body"></div>
+                    <div class="snout"></div>
+                    <div class="eye"></div>
+                    <div class="slot"></div>
+                    <div class="leg1"></div>
+                    <div class="leg2"></div>
+                </div>
+                <span class="item-label">business-16</span>
+            </div>
+
+            <!-- business-17: Target Goal -->
+            <div class="item">
+                <div class="illust target" id="business-17">
+                    <div class="ring-outer"></div>
+                    <div class="ring-middle"></div>
+                    <div class="ring-inner"></div>
+                    <div class="bullseye"></div>
+                    <div class="arrow"></div>
+                    <div class="arrow-head"></div>
+                </div>
+                <span class="item-label">business-17</span>
+            </div>
+
+            <!-- business-18: Checklist -->
+            <div class="item">
+                <div class="illust checklist" id="business-18">
+                    <div class="paper"></div>
+                    <div class="check1"></div>
+                    <div class="checkmark1"></div>
+                    <div class="line1"></div>
+                    <div class="check2"></div>
+                    <div class="checkmark2"></div>
+                    <div class="line2"></div>
+                    <div class="check3"></div>
+                    <div class="line3"></div>
+                </div>
+                <span class="item-label">business-18</span>
+            </div>
+
+            <!-- business-19: Meeting Table -->
+            <div class="item">
+                <div class="illust meeting-table" id="business-19">
+                    <div class="chair1"></div>
+                    <div class="chair2"></div>
+                    <div class="chair3"></div>
+                    <div class="table-top"></div>
+                    <div class="chair4"></div>
+                    <div class="chair5"></div>
+                    <div class="chair6"></div>
+                </div>
+                <span class="item-label">business-19</span>
+            </div>
+
+            <!-- business-20: Laptop with Graph -->
+            <div class="item">
+                <div class="illust laptop" id="business-20">
+                    <div class="screen"></div>
+                    <div class="display"></div>
+                    <div class="graph-line"></div>
+                    <div class="graph-dot1"></div>
+                    <div class="graph-dot2"></div>
+                    <div class="graph-dot3"></div>
+                    <div class="keyboard"></div>
+                    <div class="trackpad"></div>
+                </div>
+                <span class="item-label">business-20</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

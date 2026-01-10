@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感情・状態ダイアグラムテンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .diagram-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .diagram-title {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* ===== 1-10: Face Expressions ===== */
+
+        /* #emotion-1: Happy Face */
+        #emotion-1 {
+            width: 100px;
+            height: 100px;
+            background: #FFD700;
+            border-radius: 50%;
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+
+        #emotion-1::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #333;
+            border-radius: 50%;
+            top: 35px;
+            left: 30px;
+        }
+
+        #emotion-1::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #333;
+            border-radius: 50%;
+            top: 35px;
+            right: 30px;
+        }
+
+        #emotion-1 .mouth {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            border: 3px solid #333;
+            border-top: none;
+            border-radius: 0 0 40px 40px;
+            bottom: 20px;
+            left: 30px;
+        }
+
+        /* #emotion-2: Sad Face */
+        #emotion-2 {
+            width: 100px;
+            height: 100px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-2::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            top: 35px;
+            left: 28px;
+        }
+
+        #emotion-2::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            top: 35px;
+            right: 28px;
+        }
+
+        #emotion-2 .mouth {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            border: 3px solid #333;
+            border-bottom: none;
+            border-radius: 40px 40px 0 0;
+            bottom: 20px;
+            left: 30px;
+        }
+
+        /* #emotion-3: Angry Face */
+        #emotion-3 {
+            width: 100px;
+            height: 100px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-3::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background: #333;
+            top: 30px;
+            left: 25px;
+            transform: rotate(-20deg);
+            border-radius: 2px;
+        }
+
+        #emotion-3::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background: #333;
+            top: 30px;
+            right: 25px;
+            transform: rotate(20deg);
+            border-radius: 2px;
+        }
+
+        #emotion-3 .mouth {
+            position: absolute;
+            width: 35px;
+            height: 5px;
+            background: #333;
+            bottom: 25px;
+            left: 32px;
+            border-radius: 2px;
+        }
+
+        /* #emotion-4: Scared Face */
+        #emotion-4 {
+            width: 100px;
+            height: 100px;
+            background: #9B59B6;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-4::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            top: 32px;
+            left: 24px;
+            box-shadow: inset 0 0 0 6px #333;
+        }
+
+        #emotion-4::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            top: 32px;
+            right: 24px;
+            box-shadow: inset 0 0 0 6px #333;
+        }
+
+        #emotion-4 .mouth {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            bottom: 18px;
+            left: 37px;
+        }
+
+        /* #emotion-5: Surprised Face */
+        #emotion-5 {
+            width: 100px;
+            height: 100px;
+            background: #FFB347;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-5::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #333;
+            border-radius: 50%;
+            top: 33px;
+            left: 26px;
+        }
+
+        #emotion-5::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #333;
+            border-radius: 50%;
+            top: 33px;
+            right: 26px;
+        }
+
+        #emotion-5 .mouth {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            bottom: 15px;
+            left: 40px;
+        }
+
+        /* #emotion-6: Tired Face */
+        #emotion-6 {
+            width: 100px;
+            height: 100px;
+            background: #A9A9A9;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-6::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 5px;
+            background: #333;
+            top: 35px;
+            left: 26px;
+            border-radius: 2px;
+            transform: rotate(-30deg);
+        }
+
+        #emotion-6::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 5px;
+            background: #333;
+            top: 35px;
+            right: 26px;
+            border-radius: 2px;
+            transform: rotate(30deg);
+        }
+
+        #emotion-6 .mouth {
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: #333;
+            bottom: 25px;
+            left: 35px;
+            border-radius: 2px;
+        }
+
+        /* #emotion-7: Confused Face */
+        #emotion-7 {
+            width: 100px;
+            height: 100px;
+            background: #98D8C8;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-7::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            top: 35px;
+            left: 28px;
+        }
+
+        #emotion-7::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            top: 35px;
+            right: 28px;
+        }
+
+        #emotion-7 .mouth {
+            position: absolute;
+            width: 35px;
+            height: 8px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            bottom: 22px;
+            left: 32px;
+        }
+
+        /* #emotion-8: Excited Face */
+        #emotion-8 {
+            width: 100px;
+            height: 100px;
+            background: #FF69B4;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 1.5s infinite;
+        }
+
+        #emotion-8::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+            top: 33px;
+            left: 26px;
+        }
+
+        #emotion-8::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+            top: 33px;
+            right: 26px;
+        }
+
+        #emotion-8 .mouth {
+            position: absolute;
+            width: 45px;
+            height: 22px;
+            border: 3px solid #333;
+            border-top: none;
+            border-radius: 0 0 45px 45px;
+            bottom: 18px;
+            left: 27px;
+        }
+
+        /* #emotion-9: Calm Face */
+        #emotion-9 {
+            width: 100px;
+            height: 100px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-9::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 3px;
+            background: #333;
+            top: 36px;
+            left: 28px;
+            border-radius: 2px;
+        }
+
+        #emotion-9::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 3px;
+            background: #333;
+            top: 36px;
+            right: 28px;
+            border-radius: 2px;
+        }
+
+        #emotion-9 .mouth {
+            position: absolute;
+            width: 30px;
+            height: 8px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            bottom: 24px;
+            left: 35px;
+        }
+
+        /* #emotion-10: Love Face */
+        #emotion-10 {
+            width: 100px;
+            height: 100px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-10::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 32px;
+            left: 24px;
+            background: linear-gradient(135deg, transparent 50%, #FF1493 50%);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+        }
+
+        #emotion-10::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 32px;
+            right: 24px;
+            background: linear-gradient(135deg, transparent 50%, #FF1493 50%);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+        }
+
+        #emotion-10 .mouth {
+            position: absolute;
+            width: 35px;
+            height: 18px;
+            border: 3px solid #FF1493;
+            border-top: none;
+            border-radius: 0 0 35px 35px;
+            bottom: 20px;
+            left: 32px;
+        }
+
+        /* ===== 11-20: Meters/Gauges ===== */
+
+        /* #emotion-11: Energy Meter */
+        #emotion-11 {
+            width: 120px;
+            height: 40px;
+            background: #E0E0E0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #emotion-11::before {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 100%;
+            background: #FFD700;
+            border-radius: 20px;
+            animation: energize 2s infinite;
+        }
+
+        /* #emotion-12: Stress Level */
+        #emotion-12 {
+            width: 40px;
+            height: 120px;
+            background: #E0E0E0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #emotion-12::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 45%;
+            background: #FF6B6B;
+            border-radius: 20px;
+            animation: stress 2.5s infinite;
+        }
+
+        /* #emotion-13: Confidence Gauge */
+        #emotion-13 {
+            width: 100px;
+            height: 50px;
+            position: relative;
+        }
+
+        #emotion-13::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            border: 4px solid #87CEEB;
+            border-top: none;
+            border-radius: 0 0 100px 100px;
+        }
+
+        #emotion-13::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 30px;
+            background: #FFD700;
+            bottom: 4px;
+            left: 60%;
+            transform: rotate(-30deg);
+            transform-origin: bottom center;
+            animation: gauge 3s infinite;
+        }
+
+        /* #emotion-14: Motivation Fuel */
+        #emotion-14 {
+            width: 50px;
+            height: 80px;
+            border: 3px solid #98D8C8;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #emotion-14::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(180deg, #98D8C8 0%, #7BC5B0 100%);
+            animation: fuel 2s infinite;
+        }
+
+        /* #emotion-15: Satisfaction Scale */
+        #emotion-15 {
+            display: flex;
+            gap: 4px;
+        }
+
+        #emotion-15::before {
+            content: '★★★★☆';
+            font-size: 28px;
+            color: #FFD700;
+        }
+
+        /* #emotion-16: Health Meter */
+        #emotion-16 {
+            width: 120px;
+            height: 30px;
+            background: #E0E0E0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #emotion-16::before {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 100%;
+            background: #FF69B4;
+            border-radius: 15px;
+        }
+
+        /* #emotion-17: Focus Level */
+        #emotion-17 {
+            width: 80px;
+            height: 80px;
+            border: 4px dashed #9B59B6;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #emotion-17::before {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background: #9B59B6;
+            border-radius: 50%;
+            top: 25%;
+            left: 25%;
+        }
+
+        /* #emotion-18: Mood Scale */
+        #emotion-18 {
+            display: flex;
+            gap: 3px;
+        }
+
+        #emotion-18::before {
+            content: '';
+            display: flex;
+            gap: 3px;
+        }
+
+        /* #emotion-19: Happiness Meter */
+        #emotion-19 {
+            width: 100px;
+            height: 100px;
+            background: #FFD700;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+            position: relative;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        /* #emotion-20: Anxiety Level */
+        #emotion-20 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #emotion-20::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #FF6B6B;
+            border-radius: 50%;
+            left: 25px;
+            top: 25px;
+            animation: anxiety 1s infinite;
+        }
+
+        /* ===== 21-30: Visual Metaphors ===== */
+
+        /* #emotion-21: Sunny/Cloudy Mood */
+        #emotion-21 {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        #emotion-21::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #FFD700;
+            border-radius: 50%;
+            top: 20px;
+            left: 20px;
+            box-shadow: 70px 10px 0 -20px #FFF, 80px 30px 0 -15px rgba(255,255,255,0.7);
+        }
+
+        /* #emotion-22: Battery Level Emotions */
+        #emotion-22 {
+            width: 60px;
+            height: 100px;
+            border: 3px solid #FF6B6B;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #emotion-22::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70%;
+            background: #FF6B6B;
+            animation: battery 3s infinite;
+        }
+
+        #emotion-22::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 6px;
+            background: #666;
+            top: -8px;
+            left: 0;
+            border-radius: 4px;
+        }
+
+        /* #emotion-23: Heart States */
+        #emotion-23 {
+            width: 80px;
+            height: 80px;
+            background: #FF1493;
+            clip-path: polygon(50% 100%, 0% 50%, 0% 0%, 50% 35%, 100% 0%, 100% 50%);
+            position: relative;
+            animation: heartpulse 1s infinite;
+        }
+
+        /* #emotion-24: Weather Emotions */
+        #emotion-24 {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        #emotion-24::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #87CEEB;
+            border-radius: 50%;
+            top: 10px;
+            left: 30px;
+            box-shadow: 50px 5px 0 #FFF, 60px 20px 0 #87CEEB;
+        }
+
+        #emotion-24::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 15px;
+            background: #87CEEB;
+            bottom: 15px;
+            left: 20px;
+            border-radius: 4px;
+            box-shadow: 15px 0 0 #87CEEB, 30px 0 0 #87CEEB, 45px 0 0 #87CEEB;
+        }
+
+        /* #emotion-25: Color Emotions */
+        #emotion-25 {
+            width: 100px;
+            height: 100px;
+            background: conic-gradient(from 0deg, #FFD700, #FF69B4, #87CEEB, #98D8C8, #FFD700);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        /* #emotion-26: Emoji Reactions */
+        #emotion-26 {
+            font-size: 60px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+        }
+
+        #emotion-26::before {
+            content: '😊👍💯';
+        }
+
+        /* #emotion-27: Feeling Bubbles */
+        #emotion-27 {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        #emotion-27::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            box-shadow: 35px 30px 0 10px #FFD700, 20px 50px 0 5px #87CEEB;
+        }
+
+        /* #emotion-28: Mood Tracker */
+        #emotion-28 {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        #emotion-28::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid #98D8C8;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #FF6B6B 0deg 90deg, #FFD700 90deg 180deg, #87CEEB 180deg 270deg, #98D8C8 270deg 360deg);
+        }
+
+        #emotion-28::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 40px;
+            background: #333;
+            bottom: 30px;
+            left: 46px;
+            border-radius: 4px;
+            transform: rotate(-45deg);
+            transform-origin: bottom center;
+            animation: tracker 4s infinite;
+        }
+
+        /* #emotion-29: Emotion Wheel */
+        #emotion-29 {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            position: relative;
+            background: conic-gradient(#FF69B4 0deg, #FFD700 60deg, #98D8C8 120deg, #87CEEB 180deg, #FF6B6B 240deg, #9B59B6 300deg);
+        }
+
+        #emotion-29::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            border: 2px solid #333;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* #emotion-30: Sentiment Indicators */
+        #emotion-30 {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #emotion-30::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes energize {
+            0%, 100% { width: 50%; }
+            50% { width: 90%; }
+        }
+
+        @keyframes stress {
+            0%, 100% { height: 35%; }
+            50% { height: 65%; }
+        }
+
+        @keyframes gauge {
+            0% { transform: rotate(-60deg); }
+            50% { transform: rotate(0deg); }
+            100% { transform: rotate(-60deg); }
+        }
+
+        @keyframes fuel {
+            0%, 100% { height: 40%; }
+            50% { height: 80%; }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        @keyframes anxiety {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes battery {
+            0%, 100% { height: 50%; }
+            50% { height: 90%; }
+        }
+
+        @keyframes heartpulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes tracker {
+            0% { transform: rotate(-45deg); }
+            25% { transform: rotate(45deg); }
+            50% { transform: rotate(135deg); }
+            75% { transform: rotate(225deg); }
+            100% { transform: rotate(-45deg); }
+        }
+
+        /* Sentiment Indicators - Special styling */
+        .sentiment-item {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .sentiment-item:hover {
+            transform: scale(1.2);
+        }
+
+        .sentiment-positive {
+            background: #98D8C8;
+            color: white;
+        }
+
+        .sentiment-neutral {
+            background: #FFD700;
+            color: white;
+        }
+
+        .sentiment-negative {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        /* Category Section */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>感情・状態ダイアグラムテンプレート</h1>
+
+        <!-- Section 1: Face Expressions -->
+        <div class="section">
+            <h2 class="section-title">1-10: 顔表情</h2>
+            <div class="grid">
+                <div class="diagram-card">
+                    <div id="emotion-1">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">幸せ</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-2">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">悲しい</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-3">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">怒り</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-4">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">怖い</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-5">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">驚き</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-6">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">疲れ</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-7">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">困惑</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-8">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">興奮</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-9">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">落ち着き</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-10">
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="diagram-title">愛</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Meters/Gauges -->
+        <div class="section">
+            <h2 class="section-title">11-20: メーター・ゲージ</h2>
+            <div class="grid">
+                <div class="diagram-card">
+                    <div id="emotion-11"></div>
+                    <div class="diagram-title">エネルギーレベル</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-12"></div>
+                    <div class="diagram-title">ストレス度</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-13"></div>
+                    <div class="diagram-title">自信度ゲージ</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-14"></div>
+                    <div class="diagram-title">モチベーション燃料</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-15"></div>
+                    <div class="diagram-title">満足度スケール</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-16"></div>
+                    <div class="diagram-title">健康度メーター</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-17"></div>
+                    <div class="diagram-title">集中力レベル</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-18">
+                        <span class="sentiment-item sentiment-negative">−</span>
+                        <span class="sentiment-item sentiment-neutral">0</span>
+                        <span class="sentiment-item sentiment-positive">+</span>
+                    </div>
+                    <div class="diagram-title">気分スケール</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-19"></div>
+                    <div class="diagram-title">幸福度メーター</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-20"></div>
+                    <div class="diagram-title">不安レベル</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Visual Metaphors -->
+        <div class="section">
+            <h2 class="section-title">21-30: ビジュアルメタファー</h2>
+            <div class="grid">
+                <div class="diagram-card">
+                    <div id="emotion-21"></div>
+                    <div class="diagram-title">晴れ/曇り気分</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-22"></div>
+                    <div class="diagram-title">バッテリー感情</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-23"></div>
+                    <div class="diagram-title">ハート状態</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-24"></div>
+                    <div class="diagram-title">天気感情</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-25"></div>
+                    <div class="diagram-title">色感情</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-26"></div>
+                    <div class="diagram-title">絵文字リアクション</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-27"></div>
+                    <div class="diagram-title">フィーリングバブル</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-28"></div>
+                    <div class="diagram-title">気分トラッカー</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div id="emotion-29"></div>
+                    <div class="diagram-title">感情ホイール</div>
+                </div>
+
+                <div class="diagram-card">
+                    <div style="display: flex; gap: 8px;">
+                        <span class="sentiment-item sentiment-positive">👍</span>
+                        <span class="sentiment-item sentiment-neutral">😐</span>
+                        <span class="sentiment-item sentiment-negative">👎</span>
+                    </div>
+                    <div class="diagram-title">センチメント指標</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

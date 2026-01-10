@@ -1,0 +1,105 @@
+<!-- ========================================
+     Component: Books Section
+     Ishikawa Design System
+     ======================================== -->
+{% macro books_section(books=None) %}
+{% set default_books = [
+    {
+        'icon': '📘',
+        'title': '「ありそうでなかった」<br>アイデアのつくりかた',
+        'desc': '日常の不便を解決するアイデア発想術を体系化した一冊。コンペ受賞の秘訣を公開。',
+        'amazon_url': 'https://www.amazon.co.jp/dp/4046060689'
+    },
+    {
+        'icon': '📙',
+        'title': 'なんとかするアイデア',
+        'desc': 'どんな課題も「なんとかする」思考法で解決するための実践的メソッド集。',
+        'amazon_url': 'https://www.amazon.co.jp'
+    }
+] %}
+{% set items = books or default_books %}
+
+<style>
+.ik-books-slider {
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.ik-books-slider__wrapper {
+    display: flex;
+    gap: 32px;
+    min-width: min-content;
+}
+
+.ik-book-card {
+    flex: 0 0 400px;
+    background: var(--ik-white);
+    border-radius: var(--ik-radius-lg);
+    padding: 32px;
+    box-shadow: var(--ik-shadow-md);
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.ik-book-card__cover {
+    font-size: 80px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.ik-book-card__title {
+    font-family: var(--ik-font-display);
+    font-size: 18px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.ik-book-card__desc {
+    font-size: 14px;
+    color: var(--ik-text-light);
+    margin-bottom: 16px;
+}
+
+.ik-books-slider__hint {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--ik-text-muted);
+}
+
+@media (max-width: 640px) {
+    .ik-book-card {
+        flex: 0 0 300px;
+        padding: 24px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+</style>
+
+<section class="ik-section">
+    <div class="ik-container">
+        <div class="ik-section__header">
+            <div class="ik-section__label">BOOKS</div>
+            <h2 class="ik-section__title">アイデア発想本著書</h2>
+        </div>
+        <div class="ik-books-slider">
+            <div class="ik-books-slider__wrapper">
+                {% for book in items %}
+                <div class="ik-book-card ik-fade-in">
+                    <div class="ik-book-card__cover">{{ book.icon }}</div>
+                    <div class="ik-book-card__content">
+                        <h3 class="ik-book-card__title">{{ book.title|safe }}</h3>
+                        <p class="ik-book-card__desc">{{ book.desc }}</p>
+                        <a href="{{ book.amazon_url }}" target="_blank" class="ik-btn ik-btn--outline">Amazonページ</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="ik-books-slider__hint">← スライドしてチラ見する →</div>
+        </div>
+    </div>
+</section>
+{% endmacro %}

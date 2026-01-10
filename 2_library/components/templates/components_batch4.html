@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Components - Landing Page Kit</title>
+    <style>
+        /* ============================================
+           ROOT VARIABLES - ORGANIC EARTH PALETTE
+           ============================================ */
+        :root {
+            --primary-terracotta: #C17960;
+            --primary-sage: #8B9E7E;
+            --primary-cream: #F5EFE0;
+            --primary-warm-brown: #6B4423;
+            --accent-ochre: #D4A574;
+            --accent-olive: #5D6B50;
+            --neutral-light: #FAF8F3;
+            --neutral-dark: #2C2C2C;
+            --success-green: #7BA583;
+            --border-subtle: #E8DFD3;
+            --shadow-soft: 0 4px 20px rgba(107, 68, 35, 0.08);
+            --shadow-medium: 0 8px 32px rgba(107, 68, 35, 0.12);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--neutral-light);
+            color: var(--neutral-dark);
+            line-height: 1.6;
+        }
+
+        /* Organic texture overlay */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
+           [O08] NAVIGATION BAR - ORGANIC
+           ============================================ */
+        .o08-navbar {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, rgba(245, 239, 224, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .o08-navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .o08-navbar-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-warm-brown);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .o08-navbar-logo::before {
+            content: "🌿";
+            font-size: 1.8rem;
+        }
+
+        .o08-navbar-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .o08-navbar-link {
+            color: var(--neutral-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .o08-navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-terracotta), var(--accent-ochre));
+            transition: width 0.3s ease;
+        }
+
+        .o08-navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .o08-navbar-cta {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            font-size: 0.9rem;
+        }
+
+        .o08-navbar-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(193, 121, 96, 0.3);
+        }
+
+        /* ============================================
+           [O01] HERO SECTION - ORGANIC
+           ============================================ */
+        .o01-hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--neutral-light) 0%, #FAF6ED 50%, rgba(212, 165, 116, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        .o01-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(193, 121, 96, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .o01-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: 5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 158, 126, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .o01-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .o01-hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .o01-hero-text p {
+            font-size: 1.2rem;
+            color: var(--neutral-dark);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.1s backwards;
+        }
+
+        .o01-hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .o01-hero-cta {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .o01-hero-primary {
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            color: white;
+        }
+
+        .o01-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(193, 121, 96, 0.35);
+        }
+
+        .o01-hero-secondary {
+            background: transparent;
+            color: var(--primary-terracotta);
+            border: 2px solid var(--primary-terracotta);
+        }
+
+        .o01-hero-secondary:hover {
+            background: var(--primary-terracotta);
+            color: white;
+        }
+
+        .o01-hero-visual {
+            position: relative;
+            animation: slideInRight 0.8s ease-out 0.3s backwards;
+        }
+
+        .o01-hero-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.3), rgba(139, 158, 126, 0.2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            border: 2px solid var(--border-subtle);
+        }
+
+        @media (max-width: 768px) {
+            .o01-hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .o01-hero-text h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* ============================================
+           [O02] FEATURE CARDS - ORGANIC
+           ============================================ */
+        .o02-features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .o02-features-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .o02-features-title {
+            font-size: 2.5rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1rem;
+        }
+
+        .o02-features-subtitle {
+            font-size: 1.1rem;
+            color: var(--neutral-dark);
+            opacity: 0.8;
+        }
+
+        .o02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .o02-feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .o02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-terracotta), var(--accent-ochre));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .o02-feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .o02-feature-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-4px);
+        }
+
+        .o02-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .o02-feature-title {
+            font-size: 1.3rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .o02-feature-text {
+            color: var(--neutral-dark);
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           [O04] CTA BUTTON - ORGANIC
+           ============================================ */
+        .o04-button-showcase {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--neutral-light), #FEF9F0);
+            text-align: center;
+        }
+
+        .o04-button-showcase h2 {
+            font-size: 2rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 3rem;
+        }
+
+        .o04-button-group {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Primary Button */
+        .o04-btn {
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .o04-btn-primary {
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            color: white;
+        }
+
+        .o04-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s ease;
+        }
+
+        .o04-btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .o04-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(193, 121, 96, 0.35);
+        }
+
+        /* Secondary Button */
+        .o04-btn-secondary {
+            background: white;
+            color: var(--primary-terracotta);
+            border: 2px solid var(--primary-terracotta);
+        }
+
+        .o04-btn-secondary:hover {
+            background: var(--primary-terracotta);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Tertiary Button */
+        .o04-btn-tertiary {
+            background: transparent;
+            color: var(--primary-sage);
+            border: 2px solid var(--primary-sage);
+        }
+
+        .o04-btn-tertiary:hover {
+            background: var(--primary-sage);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           [O03] PRICING TABLE - ORGANIC
+           ============================================ */
+        .o03-pricing {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, var(--neutral-light) 0%, rgba(212, 165, 116, 0.05) 100%);
+        }
+
+        .o03-pricing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .o03-pricing-title {
+            font-size: 2.5rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1rem;
+        }
+
+        .o03-pricing-subtitle {
+            font-size: 1.1rem;
+            color: var(--neutral-dark);
+            opacity: 0.8;
+        }
+
+        .o03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .o03-plan-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .o03-plan-card.featured {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-terracotta);
+        }
+
+        .o03-plan-card:hover:not(.featured) {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-4px);
+        }
+
+        .o03-plan-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .o03-plan-name {
+            font-size: 1.5rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .o03-plan-price {
+            font-size: 2.8rem;
+            color: var(--primary-terracotta);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .o03-plan-period {
+            color: var(--neutral-dark);
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .o03-plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 2rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .o03-plan-feature {
+            padding: 0.7rem 0;
+            color: var(--neutral-dark);
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .o03-plan-feature::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: bold;
+            margin-right: 0.8rem;
+        }
+
+        .o03-plan-cta {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: 1.5rem;
+        }
+
+        .o03-plan-cta.primary {
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            color: white;
+        }
+
+        .o03-plan-cta.primary:hover {
+            box-shadow: 0 6px 20px rgba(193, 121, 96, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .o03-plan-cta.secondary {
+            background: white;
+            color: var(--primary-terracotta);
+            border: 2px solid var(--primary-terracotta);
+        }
+
+        .o03-plan-cta.secondary:hover {
+            background: var(--primary-terracotta);
+            color: white;
+        }
+
+        /* ============================================
+           [O05] TESTIMONIALS - ORGANIC
+           ============================================ */
+        .o05-testimonials {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .o05-testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .o05-testimonials-title {
+            font-size: 2.5rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1rem;
+        }
+
+        .o05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .o05-testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+        }
+
+        .o05-testimonial-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-4px);
+        }
+
+        .o05-stars {
+            font-size: 1.2rem;
+            color: var(--accent-ochre);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .o05-testimonial-text {
+            color: var(--neutral-dark);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .o05-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .o05-author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .o05-author-info h4 {
+            color: var(--primary-warm-brown);
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .o05-author-info p {
+            color: var(--neutral-dark);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           [O06] FAQ ACCORDION - ORGANIC
+           ============================================ */
+        .o06-faq {
+            padding: 5rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(212, 165, 116, 0.05) 0%, var(--neutral-light) 100%);
+        }
+
+        .o06-faq-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .o06-faq-title {
+            font-size: 2.5rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1rem;
+        }
+
+        .o06-accordion {
+            list-style: none;
+        }
+
+        .o06-accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            transition: var(--transition-smooth);
+        }
+
+        .o06-accordion-item:hover {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .o06-accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border: none;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-warm-brown);
+            transition: var(--transition-smooth);
+        }
+
+        .o06-accordion-header:hover {
+            background: rgba(212, 165, 116, 0.05);
+        }
+
+        .o06-accordion-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-terracotta);
+            transition: transform 0.3s ease;
+        }
+
+        .o06-accordion-item.active .o06-accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .o06-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .o06-accordion-item.active .o06-accordion-content {
+            max-height: 300px;
+        }
+
+        .o06-accordion-body {
+            padding: 1.5rem;
+            color: var(--neutral-dark);
+            opacity: 0.85;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           [O09] STEP GUIDE - ORGANIC
+           ============================================ */
+        .o09-steps {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--neutral-light) 0%, #FEF9F0 100%);
+        }
+
+        .o09-steps-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .o09-steps-title {
+            font-size: 2.5rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 1rem;
+        }
+
+        .o09-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            position: relative;
+        }
+
+        .o09-steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-terracotta), transparent, var(--accent-ochre));
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .o09-steps-grid::before {
+                display: none;
+            }
+        }
+
+        .o09-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .o09-step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-terracotta), var(--accent-ochre));
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .o09-step-title {
+            font-size: 1.3rem;
+            color: var(--primary-warm-brown);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .o09-step-description {
+            color: var(--neutral-dark);
+            opacity: 0.8;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           [O10] NEWSLETTER FORM - ORGANIC
+           ============================================ */
+        .o10-newsletter {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-warm-brown) 0%, rgba(107, 68, 35, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .o10-newsletter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .o10-newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .o10-newsletter-title {
+            font-size: 2rem;
+            color: var(--neutral-light);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .o10-newsletter-subtitle {
+            font-size: 1.05rem;
+            color: rgba(245, 239, 224, 0.9);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .o10-newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .o10-newsletter-input {
+            flex: 1;
+            padding: 0.95rem 1.5rem;
+            border: 2px solid rgba(245, 239, 224, 0.3);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .o10-newsletter-input::placeholder {
+            color: rgba(44, 44, 44, 0.5);
+        }
+
+        .o10-newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-ochre);
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+        }
+
+        .o10-newsletter-btn {
+            padding: 0.95rem 2rem;
+            background: linear-gradient(135deg, var(--accent-ochre), #E5B88C);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .o10-newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .o10-newsletter-notice {
+            font-size: 0.85rem;
+            color: rgba(245, 239, 224, 0.8);
+        }
+
+        /* ============================================
+           [O07] FOOTER - ORGANIC
+           ============================================ */
+        .o07-footer {
+            background: linear-gradient(135deg, var(--primary-warm-brown) 0%, rgba(107, 68, 35, 0.98) 100%);
+            color: var(--neutral-light);
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .o07-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .o07-footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(245, 239, 224, 0.2);
+        }
+
+        .o07-footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent-ochre);
+        }
+
+        .o07-footer-column ul {
+            list-style: none;
+        }
+
+        .o07-footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .o07-footer-link {
+            color: rgba(245, 239, 224, 0.8);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            font-size: 0.95rem;
+        }
+
+        .o07-footer-link:hover {
+            color: var(--accent-ochre);
+        }
+
+        .o07-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .o07-footer-copyright {
+            color: rgba(245, 239, 224, 0.7);
+        }
+
+        .o07-footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .o07-footer-social a {
+            color: var(--accent-ochre);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            font-size: 1.2rem;
+        }
+
+        .o07-footer-social a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           RESPONSIVE ADJUSTMENTS
+           ============================================ */
+        @media (max-width: 768px) {
+            .o08-navbar-menu {
+                display: none;
+            }
+
+            .o01-hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .o02-features-title,
+            .o03-pricing-title,
+            .o05-testimonials-title,
+            .o06-faq-title,
+            .o09-steps-title {
+                font-size: 1.8rem;
+            }
+
+            .o03-plan-card.featured {
+                transform: scale(1);
+            }
+
+            .o10-newsletter-form {
+                flex-direction: column;
+            }
+
+            .o10-newsletter-input,
+            .o10-newsletter-btn {
+                width: 100%;
+            }
+
+            .o07-footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- [O08] NAVIGATION BAR - ORGANIC -->
+    <nav class="o08-navbar">
+        <div class="o08-navbar-container">
+            <a href="#" class="o08-navbar-logo">NaturalLiving</a>
+            <ul class="o08-navbar-menu">
+                <li><a href="#features" class="o08-navbar-link">特徴</a></li>
+                <li><a href="#pricing" class="o08-navbar-link">料金</a></li>
+                <li><a href="#faq" class="o08-navbar-link">FAQ</a></li>
+                <li><a href="#contact" class="o08-navbar-link">お問い合わせ</a></li>
+            </ul>
+            <button class="o08-navbar-cta">今すぐ始める</button>
+        </div>
+    </nav>
+
+    <!-- [O01] HERO SECTION - ORGANIC -->
+    <section class="o01-hero">
+        <div class="o01-hero-content">
+            <div class="o01-hero-text">
+                <h1>自然と調和する生活を、今から</h1>
+                <p>オーガニックなライフスタイルで、心も体も満たされる毎日を実現。環境にも優しい選択を、ご一緒に。</p>
+                <div class="o01-hero-cta-group">
+                    <button class="o01-hero-cta o01-hero-primary">始める</button>
+                    <button class="o01-hero-cta o01-hero-secondary">詳しく見る</button>
+                </div>
+            </div>
+            <div class="o01-hero-visual">
+                <div class="o01-hero-image">🌱</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [O02] FEATURE CARDS - ORGANIC -->
+    <section id="features" class="o02-features">
+        <div class="o02-features-header">
+            <h2 class="o02-features-title">オーガニック生活の利点</h2>
+            <p class="o02-features-subtitle">自然素材と環境配慮から生まれる、質の高い日々</p>
+        </div>
+        <div class="o02-features-grid">
+            <div class="o02-feature-card">
+                <div class="o02-feature-icon">🌿</div>
+                <h3 class="o02-feature-title">100% 天然素材</h3>
+                <p class="o02-feature-text">化学薬品不使用。自然界が与える恵みのみを使用した、純粋な製品。</p>
+            </div>
+            <div class="o02-feature-card">
+                <div class="o02-feature-icon">♻️</div>
+                <h3 class="o02-feature-title">環境配慮型</h3>
+                <p class="o02-feature-text">サステナブルなパッケージング。地球を思いやる選択をご提案。</p>
+            </div>
+            <div class="o02-feature-card">
+                <div class="o02-feature-icon">❤️</div>
+                <h3 class="o02-feature-title">健康促進</h3>
+                <p class="o02-feature-text">心身の健康を優先。添加物なしで、本来の自分を取り戻そう。</p>
+            </div>
+            <div class="o02-feature-card">
+                <div class="o02-feature-icon">🌍</div>
+                <h3 class="o02-feature-title">グローバル視点</h3>
+                <p class="o02-feature-text">世界の農家とパートナーシップ。フェアトレード推進。</p>
+            </div>
+            <div class="o02-feature-card">
+                <div class="o02-feature-icon">✨</div>
+                <h3 class="o02-feature-title">品質保証</h3>
+                <p class="o02-feature-text">厳格な検査基準をクリア。最高品質の製品のみご提供。</p>
+            </div>
+            <div class="o02-feature-card">
+                <div class="o02-feature-icon">🎯</div>
+                <h3 class="o02-feature-title">カスタマイズ</h3>
+                <p class="o02-feature-text">あなたのライフスタイルに合わせた、パーソナル提案。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- [O04] CTA BUTTON SHOWCASE - ORGANIC -->
+    <section class="o04-button-showcase">
+        <h2>アクションボタン集</h2>
+        <div class="o04-button-group">
+            <button class="o04-btn o04-btn-primary">プライマリボタン</button>
+            <button class="o04-btn o04-btn-secondary">セカンダリボタン</button>
+            <button class="o04-btn o04-btn-tertiary">ターシャリボタン</button>
+        </div>
+    </section>
+
+    <!-- [O03] PRICING TABLE - ORGANIC -->
+    <section id="pricing" class="o03-pricing">
+        <div class="o03-pricing-header">
+            <h2 class="o03-pricing-title">シンプルで透明な料金体系</h2>
+            <p class="o03-pricing-subtitle">あなたにぴったりのプランをお選びください</p>
+        </div>
+        <div class="o03-pricing-grid">
+            <div class="o03-plan-card">
+                <div class="o03-plan-name">スターター</div>
+                <div class="o03-plan-price">¥990</div>
+                <div class="o03-plan-period">/ 月</div>
+                <ul class="o03-plan-features">
+                    <li class="o03-plan-feature">基本ガイダンス</li>
+                    <li class="o03-plan-feature">メールサポート</li>
+                    <li class="o03-plan-feature">コミュニティアクセス</li>
+                </ul>
+                <button class="o03-plan-cta secondary">選択する</button>
+            </div>
+            <div class="o03-plan-card featured">
+                <div class="o03-plan-badge">最も人気</div>
+                <div class="o03-plan-name">プロフェッショナル</div>
+                <div class="o03-plan-price">¥2,990</div>
+                <div class="o03-plan-period">/ 月</div>
+                <ul class="o03-plan-features">
+                    <li class="o03-plan-feature">パーソナルコーチング</li>
+                    <li class="o03-plan-feature">優先サポート</li>
+                    <li class="o03-plan-feature">限定コンテンツ</li>
+                    <li class="o03-plan-feature">カスタムプラン</li>
+                </ul>
+                <button class="o03-plan-cta primary">今すぐ始める</button>
+            </div>
+            <div class="o03-plan-card">
+                <div class="o03-plan-name">エンタープライズ</div>
+                <div class="o03-plan-price">カスタム</div>
+                <div class="o03-plan-period">お問い合わせ</div>
+                <ul class="o03-plan-features">
+                    <li class="o03-plan-feature">専任アカウント管理</li>
+                    <li class="o03-plan-feature">チームトレーニング</li>
+                    <li class="o03-plan-feature">カスタムインテグレーション</li>
+                </ul>
+                <button class="o03-plan-cta secondary">相談する</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [O05] TESTIMONIALS - ORGANIC -->
+    <section class="o05-testimonials">
+        <div class="o05-testimonials-header">
+            <h2 class="o05-testimonials-title">ご利用者の声</h2>
+        </div>
+        <div class="o05-testimonials-grid">
+            <div class="o05-testimonial-card">
+                <div class="o05-stars">★★★★★</div>
+                <p class="o05-testimonial-text">「このサービスを使ってから、生活がガラッと変わりました。自然と調和する毎日が、こんなに心地よいなんて。おすすめです！」</p>
+                <div class="o05-author">
+                    <div class="o05-author-avatar">田</div>
+                    <div class="o05-author-info">
+                        <h4>田中 美咲</h4>
+                        <p>東京都 / 会社員</p>
+                    </div>
+                </div>
+            </div>
+            <div class="o05-testimonial-card">
+                <div class="o05-stars">★★★★★</div>
+                <p class="o05-testimonial-text">「環境に配慮しながら、自分も健康になれる。そんなウィンウィンなプロダクト。友人たちにも勧めています。」</p>
+                <div class="o05-author">
+                    <div class="o05-author-avatar">鈴</div>
+                    <div class="o05-author-info">
+                        <h4>鈴木 健太</h4>
+                        <p>京都府 / 自営業</p>
+                    </div>
+                </div>
+            </div>
+            <div class="o05-testimonial-card">
+                <div class="o05-stars">★★★★★</div>
+                <p class="o05-testimonial-text">「品質とコストのバランスが最高。家族全員で使っています。サポート体制も丁寧で、安心して続けられます。」</p>
+                <div class="o05-author">
+                    <div class="o05-author-avatar">佐</div>
+                    <div class="o05-author-info">
+                        <h4>佐藤 由美子</h4>
+                        <p>大阪府 / 主婦</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [O06] FAQ ACCORDION - ORGANIC -->
+    <section id="faq" class="o06-faq">
+        <div class="o06-faq-header">
+            <h2 class="o06-faq-title">よくあるご質問</h2>
+        </div>
+        <ul class="o06-accordion">
+            <li class="o06-accordion-item active">
+                <button class="o06-accordion-header">
+                    本当に100%天然素材ですか？
+                    <span class="o06-accordion-icon">▼</span>
+                </button>
+                <div class="o06-accordion-content">
+                    <div class="o06-accordion-body">はい、すべての製品は100%天然素材で構成されています。化学薬品や合成添加物は一切使用していません。各製品は厳格な検査基準をクリアしており、安心してご使用いただけます。</div>
+                </div>
+            </li>
+            <li class="o06-accordion-item">
+                <button class="o06-accordion-header">
+                    返品はできますか？
+                    <span class="o06-accordion-icon">▼</span>
+                </button>
+                <div class="o06-accordion-content">
+                    <div class="o06-accordion-body">30日間の返金保証があります。ご満足いただけない場合は、返品理由をお知らせいただくことで、返金対応させていただきます。詳細はカスタマーサポートまでお問い合わせください。</div>
+                </div>
+            </li>
+            <li class="o06-accordion-item">
+                <button class="o06-accordion-header">
+                    配送にはどのくらいかかりますか？
+                    <span class="o06-accordion-icon">▼</span>
+                </button>
+                <div class="o06-accordion-content">
+                    <div class="o06-accordion-body">通常、ご注文から2～3営業日以内に出荷させていただきます。配送は宅配便で、全国対応しており、離島を除いて送料無料です。配送状況はメールでお知らせします。</div>
+                </div>
+            </li>
+            <li class="o06-accordion-item">
+                <button class="o06-accordion-header">
+                    アレルギーが心配です。どうすれば？
+                    <span class="o06-accordion-icon">▼</span>
+                </button>
+                <div class="o06-accordion-content">
+                    <div class="o06-accordion-body">全製品に詳細な成分表示を記載しています。特定のアレルギーがある場合は、カスタマーサポートへご相談いただければ、個別対応させていただきます。パッチテストのご実施もお勧めします。</div>
+                </div>
+            </li>
+            <li class="o06-accordion-item">
+                <button class="o06-accordion-header">
+                    サブスクリプションをキャンセルできますか？
+                    <span class="o06-accordion-icon">▼</span>
+                </button>
+                <div class="o06-accordion-content">
+                    <div class="o06-accordion-body">いつでもキャンセル可能です。次回配送の7日前までにご連絡いただければ、追加の料金は発生しません。アカウント設定からも簡単にキャンセルできます。</div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- [O09] STEP GUIDE - ORGANIC -->
+    <section id="steps" class="o09-steps">
+        <div class="o09-steps-header">
+            <h2 class="o09-steps-title">3ステップで始める</h2>
+        </div>
+        <div class="o09-steps-grid">
+            <div class="o09-step">
+                <div class="o09-step-number">1</div>
+                <h3 class="o09-step-title">アカウント作成</h3>
+                <p class="o09-step-description">メールアドレスとパスワードだけで簡単にアカウントを作成。わずか2分で完了です。</p>
+            </div>
+            <div class="o09-step">
+                <div class="o09-step-number">2</div>
+                <h3 class="o09-step-title">プラン選択</h3>
+                <p class="o09-step-description">あなたのニーズに合わせて、ぴったりのプランをお選びください。いつでも変更可能。</p>
+            </div>
+            <div class="o09-step">
+                <div class="o09-step-number">3</div>
+                <h3 class="o09-step-title">オーガニック生活開始</h3>
+                <p class="o09-step-description">すぐに自然と調和する生活が始まります。サポートがあるから安心です。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- [O10] NEWSLETTER SIGNUP - ORGANIC -->
+    <section id="newsletter" class="o10-newsletter">
+        <div class="o10-newsletter-container">
+            <h2 class="o10-newsletter-title">オーガニック情報を受け取ろう</h2>
+            <p class="o10-newsletter-subtitle">最新のナチュラルライフスタイルのヒントと限定オファーをお届けします</p>
+            <form class="o10-newsletter-form">
+                <input 
+                    type="email" 
+                    class="o10-newsletter-input" 
+                    placeholder="メールアドレスを入力" 
+                    required
+                >
+                <button type="submit" class="o10-newsletter-btn">購読する</button>
+            </form>
+            <p class="o10-newsletter-notice">💚 スパムは送りません。いつでも配信停止できます。</p>
+        </div>
+    </section>
+
+    <!-- [O07] FOOTER - ORGANIC -->
+    <footer class="o07-footer">
+        <div class="o07-footer-container">
+            <div class="o07-footer-content">
+                <div class="o07-footer-column">
+                    <h3>🌿 NaturalLiving</h3>
+                    <p style="opacity: 0.8; font-size: 0.9rem; line-height: 1.6;">
+                        自然と調和する生活を支援するプラットフォーム。心身の健康と地球環境を大切にする皆様をサポートしています。
+                    </p>
+                </div>
+                <div class="o07-footer-column">
+                    <h3>メニュー</h3>
+                    <ul>
+                        <li><a href="#features" class="o07-footer-link">特徴</a></li>
+                        <li><a href="#pricing" class="o07-footer-link">料金</a></li>
+                        <li><a href="#faq" class="o07-footer-link">FAQ</a></li>
+                        <li><a href="#" class="o07-footer-link">ブログ</a></li>
+                    </ul>
+                </div>
+                <div class="o07-footer-column">
+                    <h3>サポート</h3>
+                    <ul>
+                        <li><a href="#" class="o07-footer-link">お問い合わせ</a></li>
+                        <li><a href="#" class="o07-footer-link">プライバシーポリシー</a></li>
+                        <li><a href="#" class="o07-footer-link">利用規約</a></li>
+                        <li><a href="#" class="o07-footer-link">返品・返金</a></li>
+                    </ul>
+                </div>
+                <div class="o07-footer-column">
+                    <h3>フォローする</h3>
+                    <ul>
+                        <li><a href="#" class="o07-footer-link">Instagram</a></li>
+                        <li><a href="#" class="o07-footer-link">Twitter</a></li>
+                        <li><a href="#" class="o07-footer-link">Facebook</a></li>
+                        <li><a href="#" class="o07-footer-link">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="o07-footer-bottom">
+                <div class="o07-footer-copyright">
+                    &copy; 2024 NaturalLiving. All rights reserved.
+                </div>
+                <div class="o07-footer-social">
+                    <a href="#" title="Instagram">📱</a>
+                    <a href="#" title="Twitter">𝕏</a>
+                    <a href="#" title="Facebook">f</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Accordion functionality for FAQ
+        const accordionItems = document.querySelectorAll('.o06-accordion-item');
+        
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.o06-accordion-header');
+            
+            header.addEventListener('click', () => {
+                // Close other items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.o10-newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('.o10-newsletter-input').value;
+            alert(`ありがとうございます！\n${email} に確認メールを送信しました。`);
+            newsletterForm.reset();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

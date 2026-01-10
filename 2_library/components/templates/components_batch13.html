@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニューモーフィズム LP コンポーネント集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           ニューモーフィズム デザインシステム
+           ======================================== */
+
+        :root {
+            /* ニューモーフィズム基本カラー */
+            --nm-bg: #e0e5ec;
+            --nm-bg-dark: #d1d9e6;
+            --nm-bg-light: #f0f5fc;
+
+            /* シャドウカラー */
+            --nm-shadow-dark: #a3b1c6;
+            --nm-shadow-light: #ffffff;
+
+            /* アクセントカラー */
+            --nm-primary: #6c5ce7;
+            --nm-primary-light: #a29bfe;
+            --nm-secondary: #00cec9;
+            --nm-accent: #fd79a8;
+
+            /* テキストカラー */
+            --nm-text: #2d3436;
+            --nm-text-light: #636e72;
+            --nm-text-muted: #b2bec3;
+
+            /* ニューモーフィズムシャドウ */
+            --nm-shadow-outer: 8px 8px 16px var(--nm-shadow-dark),
+                               -8px -8px 16px var(--nm-shadow-light);
+            --nm-shadow-outer-sm: 4px 4px 8px var(--nm-shadow-dark),
+                                  -4px -4px 8px var(--nm-shadow-light);
+            --nm-shadow-inner: inset 4px 4px 8px var(--nm-shadow-dark),
+                               inset -4px -4px 8px var(--nm-shadow-light);
+            --nm-shadow-inner-sm: inset 2px 2px 4px var(--nm-shadow-dark),
+                                  inset -2px -2px 4px var(--nm-shadow-light);
+
+            /* スペーシング */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+
+            /* ボーダー半径 */
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-full: 50px;
+
+            /* トランジション */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--nm-bg);
+            color: var(--nm-text);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .section-spacing {
+            padding: var(--space-2xl) 0;
+        }
+
+        /* ========================================
+           [M01] ヒーローセクション
+           ======================================== */
+
+        /* [M01] ヒーローセクション - ニューモーフィズム */
+        .nm-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl) var(--space-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nm-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--nm-primary-light) 0%, transparent 60%);
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(60px);
+        }
+
+        .nm-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--nm-secondary) 0%, transparent 60%);
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(40px);
+        }
+
+        .nm-hero__content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nm-hero__badge {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-md);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer-sm);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--nm-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .nm-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--nm-text) 0%, var(--nm-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nm-hero__subtitle {
+            font-size: 1.25rem;
+            color: var(--nm-text-light);
+            margin-bottom: var(--space-xl);
+            font-weight: 300;
+        }
+
+        .nm-hero__actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nm-hero__image {
+            margin-top: var(--space-2xl);
+            padding: var(--space-md);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-lg);
+        }
+
+        .nm-hero__image img {
+            max-width: 100%;
+            border-radius: var(--radius-md);
+        }
+
+        /* ========================================
+           [M02] 特徴カード
+           ======================================== */
+
+        /* [M02] 特徴カード - ニューモーフィズム */
+        .nm-features {
+            padding: var(--space-2xl) 0;
+        }
+
+        .nm-features__header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .nm-features__label {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-md);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--nm-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-features__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-features__desc {
+            color: var(--nm-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nm-features__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .nm-feature-card {
+            padding: var(--space-xl);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+        }
+
+        .nm-feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .nm-feature-card__icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-md);
+            font-size: 1.75rem;
+        }
+
+        .nm-feature-card__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-feature-card__text {
+            color: var(--nm-text-light);
+            font-size: 0.9375rem;
+        }
+
+        /* ========================================
+           [M03] 料金表
+           ======================================== */
+
+        /* [M03] 料金表 - ニューモーフィズム */
+        .nm-pricing {
+            padding: var(--space-2xl) 0;
+        }
+
+        .nm-pricing__header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .nm-pricing__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nm-pricing-card {
+            padding: var(--space-xl);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-md);
+            position: relative;
+            transition: var(--transition-normal);
+        }
+
+        .nm-pricing-card--popular {
+            transform: scale(1.05);
+        }
+
+        .nm-pricing-card--popular::before {
+            content: '人気';
+            position: absolute;
+            top: -12px;
+            right: var(--space-md);
+            padding: var(--space-xs) var(--space-md);
+            background: linear-gradient(135deg, var(--nm-primary) 0%, var(--nm-primary-light) 100%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
+        }
+
+        .nm-pricing-card__name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--nm-text-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-pricing-card__price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: var(--space-md);
+        }
+
+        .nm-pricing-card__currency {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .nm-pricing-card__amount {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .nm-pricing-card__period {
+            font-size: 0.875rem;
+            color: var(--nm-text-muted);
+        }
+
+        .nm-pricing-card__desc {
+            color: var(--nm-text-light);
+            font-size: 0.9375rem;
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--nm-bg-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        .nm-pricing-card__features {
+            list-style: none;
+            margin-bottom: var(--space-lg);
+        }
+
+        .nm-pricing-card__features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) 0;
+            font-size: 0.9375rem;
+            color: var(--nm-text-light);
+        }
+
+        .nm-pricing-card__features li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            color: var(--nm-primary);
+        }
+
+        /* ========================================
+           [M04] CTA ボタン
+           ======================================== */
+
+        /* [M04] CTA ボタン - ニューモーフィズム */
+        .nm-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            color: var(--nm-text);
+        }
+
+        .nm-btn:hover {
+            box-shadow: var(--nm-shadow-outer-sm);
+        }
+
+        .nm-btn:active {
+            box-shadow: var(--nm-shadow-inner);
+        }
+
+        .nm-btn--primary {
+            background: linear-gradient(135deg, var(--nm-primary) 0%, var(--nm-primary-light) 100%);
+            color: white;
+            box-shadow: 8px 8px 16px var(--nm-shadow-dark),
+                        -8px -8px 16px var(--nm-shadow-light),
+                        inset 0 0 0 transparent;
+        }
+
+        .nm-btn--primary:hover {
+            box-shadow: 4px 4px 8px var(--nm-shadow-dark),
+                        -4px -4px 8px var(--nm-shadow-light),
+                        inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .nm-btn--primary:active {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2),
+                        inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .nm-btn--secondary {
+            background: var(--nm-bg);
+            color: var(--nm-primary);
+            border: 2px solid transparent;
+        }
+
+        .nm-btn--secondary:hover {
+            border-color: var(--nm-primary-light);
+        }
+
+        .nm-btn--lg {
+            padding: var(--space-md) var(--space-2xl);
+            font-size: 1.125rem;
+        }
+
+        .nm-btn--sm {
+            padding: var(--space-xs) var(--space-md);
+            font-size: 0.875rem;
+        }
+
+        .nm-btn--block {
+            width: 100%;
+        }
+
+        .nm-btn__icon {
+            font-size: 1.25em;
+        }
+
+        /* ========================================
+           [M05] テスティモニアル
+           ======================================== */
+
+        /* [M05] テスティモニアル - ニューモーフィズム */
+        .nm-testimonials {
+            padding: var(--space-2xl) 0;
+        }
+
+        .nm-testimonials__header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .nm-testimonials__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-testimonials__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .nm-testimonial-card {
+            padding: var(--space-xl);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-md);
+        }
+
+        .nm-testimonial-card__rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: var(--space-md);
+        }
+
+        .nm-testimonial-card__star {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            color: #f1c40f;
+        }
+
+        .nm-testimonial-card__text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--nm-text-light);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            padding-left: var(--space-md);
+        }
+
+        .nm-testimonial-card__text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -8px;
+            font-size: 2rem;
+            color: var(--nm-primary-light);
+            font-weight: 700;
+        }
+
+        .nm-testimonial-card__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .nm-testimonial-card__avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer-sm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            overflow: hidden;
+        }
+
+        .nm-testimonial-card__avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nm-testimonial-card__info {
+            flex: 1;
+        }
+
+        .nm-testimonial-card__name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .nm-testimonial-card__role {
+            font-size: 0.875rem;
+            color: var(--nm-text-muted);
+        }
+
+        /* ========================================
+           [M06] FAQ アコーディオン
+           ======================================== */
+
+        /* [M06] FAQ アコーディオン - ニューモーフィズム */
+        .nm-faq {
+            padding: var(--space-2xl) 0;
+        }
+
+        .nm-faq__header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .nm-faq__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-faq__list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .nm-faq-item {
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .nm-faq-item__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-lg);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .nm-faq-item__header:hover {
+            background: var(--nm-bg-light);
+        }
+
+        .nm-faq-item__question {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            padding-right: var(--space-md);
+        }
+
+        .nm-faq-item__icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            border-radius: 50%;
+            font-size: 1.25rem;
+            color: var(--nm-primary);
+            flex-shrink: 0;
+            transition: var(--transition-normal);
+        }
+
+        .nm-faq-item.active .nm-faq-item__icon {
+            transform: rotate(45deg);
+            box-shadow: var(--nm-shadow-outer-sm);
+        }
+
+        .nm-faq-item__content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nm-faq-item.active .nm-faq-item__content {
+            max-height: 500px;
+        }
+
+        .nm-faq-item__answer {
+            padding: 0 var(--space-lg) var(--space-lg);
+            color: var(--nm-text-light);
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           [M07] フッター
+           ======================================== */
+
+        /* [M07] フッター - ニューモーフィズム */
+        .nm-footer {
+            padding: var(--space-2xl) 0 var(--space-lg);
+            background: var(--nm-bg);
+        }
+
+        .nm-footer__main {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: var(--space-xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--nm-bg-dark);
+            margin-bottom: var(--space-lg);
+        }
+
+        @media (max-width: 768px) {
+            .nm-footer__main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nm-footer__main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .nm-footer__brand {
+        }
+
+        .nm-footer__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .nm-footer__logo-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer-sm);
+            border-radius: var(--radius-sm);
+            font-size: 1.5rem;
+        }
+
+        .nm-footer__logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .nm-footer__tagline {
+            color: var(--nm-text-light);
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .nm-footer__social {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .nm-footer__social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer-sm);
+            border-radius: 50%;
+            color: var(--nm-text-light);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        .nm-footer__social-link:hover {
+            box-shadow: var(--nm-shadow-inner-sm);
+            color: var(--nm-primary);
+        }
+
+        .nm-footer__column-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .nm-footer__links {
+            list-style: none;
+        }
+
+        .nm-footer__links li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .nm-footer__links a {
+            color: var(--nm-text-light);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: var(--transition-fast);
+        }
+
+        .nm-footer__links a:hover {
+            color: var(--nm-primary);
+        }
+
+        .nm-footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .nm-footer__copyright {
+            color: var(--nm-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .nm-footer__legal {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .nm-footer__legal a {
+            color: var(--nm-text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: var(--transition-fast);
+        }
+
+        .nm-footer__legal a:hover {
+            color: var(--nm-primary);
+        }
+
+        /* ========================================
+           [M08] ナビゲーションバー
+           ======================================== */
+
+        /* [M08] ナビゲーションバー - ニューモーフィズム */
+        .nm-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-sm) 0;
+            background: var(--nm-bg);
+            box-shadow: 0 4px 16px rgba(163, 177, 198, 0.3);
+        }
+
+        .nm-navbar__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .nm-navbar__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            color: var(--nm-text);
+        }
+
+        .nm-navbar__logo-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer-sm);
+            border-radius: var(--radius-sm);
+            font-size: 1.25rem;
+        }
+
+        .nm-navbar__logo-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .nm-navbar__menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            list-style: none;
+        }
+
+        .nm-navbar__link {
+            display: block;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--nm-text-light);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-normal);
+        }
+
+        .nm-navbar__link:hover {
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            color: var(--nm-primary);
+        }
+
+        .nm-navbar__link.active {
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            color: var(--nm-primary);
+        }
+
+        .nm-navbar__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .nm-navbar__toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer-sm);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nm-navbar__toggle span {
+            width: 20px;
+            height: 2px;
+            background: var(--nm-text);
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        @media (max-width: 768px) {
+            .nm-navbar__menu {
+                display: none;
+            }
+
+            .nm-navbar__toggle {
+                display: flex;
+            }
+        }
+
+        /* ========================================
+           [M09] ステップガイド
+           ======================================== */
+
+        /* [M09] ステップガイド - ニューモーフィズム */
+        .nm-steps {
+            padding: var(--space-2xl) 0;
+        }
+
+        .nm-steps__header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .nm-steps__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-steps__subtitle {
+            color: var(--nm-text-light);
+        }
+
+        .nm-steps__list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .nm-steps__list::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 80px;
+            bottom: 80px;
+            width: 4px;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner-sm);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .nm-steps__list::before {
+                left: 28px;
+            }
+        }
+
+        .nm-step {
+            display: flex;
+            gap: var(--space-lg);
+            position: relative;
+        }
+
+        .nm-step__number {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: 50%;
+            flex-shrink: 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--nm-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            .nm-step__number {
+                width: 56px;
+                height: 56px;
+                font-size: 1.25rem;
+            }
+        }
+
+        .nm-step__content {
+            flex: 1;
+            padding: var(--space-lg);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-md);
+        }
+
+        .nm-step__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .nm-step__icon {
+            font-size: 1.5rem;
+        }
+
+        .nm-step__text {
+            color: var(--nm-text-light);
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           [M10] ニュースレター登録フォーム
+           ======================================== */
+
+        /* [M10] ニュースレター登録フォーム - ニューモーフィズム */
+        .nm-newsletter {
+            padding: var(--space-2xl) 0;
+        }
+
+        .nm-newsletter__card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-outer);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .nm-newsletter__icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner);
+            border-radius: 50%;
+            margin: 0 auto var(--space-lg);
+            font-size: 2rem;
+        }
+
+        .nm-newsletter__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .nm-newsletter__desc {
+            color: var(--nm-text-light);
+            margin-bottom: var(--space-lg);
+        }
+
+        .nm-newsletter__form {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .nm-newsletter__input-wrapper {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .nm-newsletter__input {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--nm-bg);
+            box-shadow: var(--nm-shadow-inner);
+            border: none;
+            border-radius: var(--radius-full);
+            color: var(--nm-text);
+            outline: none;
+            transition: var(--transition-normal);
+        }
+
+        .nm-newsletter__input::placeholder {
+            color: var(--nm-text-muted);
+        }
+
+        .nm-newsletter__input:focus {
+            box-shadow: var(--nm-shadow-inner),
+                        0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .nm-newsletter__submit {
+            padding: var(--space-md) var(--space-xl);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--nm-primary) 0%, var(--nm-primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            box-shadow: var(--nm-shadow-outer);
+            transition: var(--transition-normal);
+        }
+
+        .nm-newsletter__submit:hover {
+            box-shadow: var(--nm-shadow-outer-sm);
+            transform: translateY(-2px);
+        }
+
+        .nm-newsletter__submit:active {
+            box-shadow: var(--nm-shadow-inner);
+            transform: translateY(0);
+        }
+
+        .nm-newsletter__note {
+            margin-top: var(--space-md);
+            font-size: 0.8125rem;
+            color: var(--nm-text-muted);
+        }
+
+        /* ========================================
+           ユーティリティ
+           ======================================== */
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 { margin-top: var(--space-sm); }
+        .mt-2 { margin-top: var(--space-md); }
+        .mt-3 { margin-top: var(--space-lg); }
+        .mt-4 { margin-top: var(--space-xl); }
+
+        .mb-1 { margin-bottom: var(--space-sm); }
+        .mb-2 { margin-bottom: var(--space-md); }
+        .mb-3 { margin-bottom: var(--space-lg); }
+        .mb-4 { margin-bottom: var(--space-xl); }
+    </style>
+</head>
+<body>
+    <!-- [M08] ナビゲーションバー - ニューモーフィズム -->
+    <nav class="nm-navbar">
+        <div class="nm-navbar__container">
+            <a href="#" class="nm-navbar__logo">
+                <span class="nm-navbar__logo-icon">🍌</span>
+                <span class="nm-navbar__logo-text">イケメンバナナ</span>
+            </a>
+            <ul class="nm-navbar__menu">
+                <li><a href="#features" class="nm-navbar__link active">特徴</a></li>
+                <li><a href="#pricing" class="nm-navbar__link">料金</a></li>
+                <li><a href="#how-it-works" class="nm-navbar__link">使い方</a></li>
+                <li><a href="#testimonials" class="nm-navbar__link">口コミ</a></li>
+                <li><a href="#faq" class="nm-navbar__link">FAQ</a></li>
+            </ul>
+            <div class="nm-navbar__actions">
+                <a href="#" class="nm-btn nm-btn--primary nm-btn--sm">無料で始める</a>
+            </div>
+            <button class="nm-navbar__toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- [M01] ヒーローセクション - ニューモーフィズム -->
+    <section class="nm-hero">
+        <div class="nm-hero__content">
+            <span class="nm-hero__badge">✨ AI画像変換サービス</span>
+            <h1 class="nm-hero__title">あなたの写真を<br>イケメンに変換</h1>
+            <p class="nm-hero__subtitle">
+                最新のAI技術で、どんな写真も魅力的なイケメン画像に変換。<br>
+                LINEで簡単に利用できます。
+            </p>
+            <div class="nm-hero__actions">
+                <!-- [M04] CTA ボタン - ニューモーフィズム -->
+                <a href="#" class="nm-btn nm-btn--primary nm-btn--lg">
+                    <span class="nm-btn__icon">📱</span>
+                    LINEで友達追加
+                </a>
+                <a href="#how-it-works" class="nm-btn nm-btn--secondary nm-btn--lg">
+                    使い方を見る
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M02] 特徴カード - ニューモーフィズム -->
+    <section id="features" class="nm-features section-spacing">
+        <div class="container">
+            <div class="nm-features__header">
+                <span class="nm-features__label">FEATURES</span>
+                <h2 class="nm-features__title">選ばれる3つの理由</h2>
+                <p class="nm-features__desc">
+                    シンプルな操作で、驚くほど高品質な画像変換を実現します。
+                </p>
+            </div>
+            <div class="nm-features__grid">
+                <div class="nm-feature-card">
+                    <div class="nm-feature-card__icon">⚡</div>
+                    <h3 class="nm-feature-card__title">超高速処理</h3>
+                    <p class="nm-feature-card__text">
+                        最新のAIモデルにより、わずか数秒で高品質な画像変換を実現。待ち時間を最小限に。
+                    </p>
+                </div>
+                <div class="nm-feature-card">
+                    <div class="nm-feature-card__icon">🎨</div>
+                    <h3 class="nm-feature-card__title">自然な仕上がり</h3>
+                    <p class="nm-feature-card__text">
+                        顔の特徴を活かしながら、自然で魅力的なイケメン画像に変換。違和感のない仕上がり。
+                    </p>
+                </div>
+                <div class="nm-feature-card">
+                    <div class="nm-feature-card__icon">💬</div>
+                    <h3 class="nm-feature-card__title">LINE完結</h3>
+                    <p class="nm-feature-card__text">
+                        専用アプリ不要。いつものLINEで画像を送るだけ。誰でも簡単に使えます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M09] ステップガイド - ニューモーフィズム -->
+    <section id="how-it-works" class="nm-steps section-spacing">
+        <div class="container">
+            <div class="nm-steps__header">
+                <h2 class="nm-steps__title">使い方はとても簡単</h2>
+                <p class="nm-steps__subtitle">3ステップで完了します</p>
+            </div>
+            <div class="nm-steps__list">
+                <div class="nm-step">
+                    <div class="nm-step__number">1</div>
+                    <div class="nm-step__content">
+                        <h3 class="nm-step__title">
+                            <span class="nm-step__icon">➕</span>
+                            友達追加
+                        </h3>
+                        <p class="nm-step__text">
+                            まずはLINEで「イケメンバナナ」を友達追加してください。QRコードからも追加できます。
+                        </p>
+                    </div>
+                </div>
+                <div class="nm-step">
+                    <div class="nm-step__number">2</div>
+                    <div class="nm-step__content">
+                        <h3 class="nm-step__title">
+                            <span class="nm-step__icon">📷</span>
+                            写真を送信
+                        </h3>
+                        <p class="nm-step__text">
+                            変換したい写真をLINEのトーク画面から送信します。顔がはっきり写っている写真がおすすめです。
+                        </p>
+                    </div>
+                </div>
+                <div class="nm-step">
+                    <div class="nm-step__number">3</div>
+                    <div class="nm-step__content">
+                        <h3 class="nm-step__title">
+                            <span class="nm-step__icon">✨</span>
+                            結果を受け取る
+                        </h3>
+                        <p class="nm-step__text">
+                            数秒後、AIが変換したイケメン画像が届きます。気に入ったらSNSでシェアしましょう！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M03] 料金表 - ニューモーフィズム -->
+    <section id="pricing" class="nm-pricing section-spacing">
+        <div class="container">
+            <div class="nm-pricing__header">
+                <h2 class="nm-pricing__title">シンプルな料金プラン</h2>
+                <p class="nm-pricing__desc">あなたのニーズに合わせて選べます</p>
+            </div>
+            <div class="nm-pricing__grid">
+                <div class="nm-pricing-card">
+                    <h3 class="nm-pricing-card__name">お試しプラン</h3>
+                    <div class="nm-pricing-card__price">
+                        <span class="nm-pricing-card__currency">¥</span>
+                        <span class="nm-pricing-card__amount">0</span>
+                    </div>
+                    <p class="nm-pricing-card__desc">まずは無料で体験してみましょう</p>
+                    <ul class="nm-pricing-card__features">
+                        <li>3回まで無料変換</li>
+                        <li>標準画質</li>
+                        <li>基本サポート</li>
+                    </ul>
+                    <!-- [M04] CTA ボタン - ニューモーフィズム -->
+                    <a href="#" class="nm-btn nm-btn--secondary nm-btn--block">無料で試す</a>
+                </div>
+                <div class="nm-pricing-card nm-pricing-card--popular">
+                    <h3 class="nm-pricing-card__name">スタンダード</h3>
+                    <div class="nm-pricing-card__price">
+                        <span class="nm-pricing-card__currency">¥</span>
+                        <span class="nm-pricing-card__amount">980</span>
+                        <span class="nm-pricing-card__period">/月</span>
+                    </div>
+                    <p class="nm-pricing-card__desc">一番人気のプランです</p>
+                    <ul class="nm-pricing-card__features">
+                        <li>月50回まで変換</li>
+                        <li>高画質出力</li>
+                        <li>優先サポート</li>
+                        <li>複数スタイル選択</li>
+                    </ul>
+                    <!-- [M04] CTA ボタン - ニューモーフィズム -->
+                    <a href="#" class="nm-btn nm-btn--primary nm-btn--block">今すぐ始める</a>
+                </div>
+                <div class="nm-pricing-card">
+                    <h3 class="nm-pricing-card__name">プレミアム</h3>
+                    <div class="nm-pricing-card__price">
+                        <span class="nm-pricing-card__currency">¥</span>
+                        <span class="nm-pricing-card__amount">2,980</span>
+                        <span class="nm-pricing-card__period">/月</span>
+                    </div>
+                    <p class="nm-pricing-card__desc">ヘビーユーザー向け</p>
+                    <ul class="nm-pricing-card__features">
+                        <li>無制限変換</li>
+                        <li>最高画質出力</li>
+                        <li>24時間サポート</li>
+                        <li>全スタイル利用可能</li>
+                        <li>API連携</li>
+                    </ul>
+                    <!-- [M04] CTA ボタン - ニューモーフィズム -->
+                    <a href="#" class="nm-btn nm-btn--secondary nm-btn--block">プレミアムを選択</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M05] テスティモニアル - ニューモーフィズム -->
+    <section id="testimonials" class="nm-testimonials section-spacing">
+        <div class="container">
+            <div class="nm-testimonials__header">
+                <h2 class="nm-testimonials__title">ユーザーの声</h2>
+                <p class="nm-testimonials__desc">実際に利用されているお客様からの声をご紹介</p>
+            </div>
+            <div class="nm-testimonials__grid">
+                <div class="nm-testimonial-card">
+                    <div class="nm-testimonial-card__rating">
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                    </div>
+                    <p class="nm-testimonial-card__text">
+                        友達に送ったらめっちゃウケました！自分のイケメンバージョン見るの楽しいです。
+                    </p>
+                    <div class="nm-testimonial-card__author">
+                        <div class="nm-testimonial-card__avatar">👨</div>
+                        <div class="nm-testimonial-card__info">
+                            <p class="nm-testimonial-card__name">田中さん</p>
+                            <p class="nm-testimonial-card__role">20代・会社員</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nm-testimonial-card">
+                    <div class="nm-testimonial-card__rating">
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                    </div>
+                    <p class="nm-testimonial-card__text">
+                        SNSのアイコンに使ってます。自分じゃないけど自分っぽい、絶妙な仕上がりが気に入ってます。
+                    </p>
+                    <div class="nm-testimonial-card__author">
+                        <div class="nm-testimonial-card__avatar">👩</div>
+                        <div class="nm-testimonial-card__info">
+                            <p class="nm-testimonial-card__name">鈴木さん</p>
+                            <p class="nm-testimonial-card__role">30代・フリーランス</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nm-testimonial-card">
+                    <div class="nm-testimonial-card__rating">
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                        <span class="nm-testimonial-card__star">★</span>
+                    </div>
+                    <p class="nm-testimonial-card__text">
+                        処理速度が速くて驚きました。LINEだけで完結するのも手軽でいいですね。
+                    </p>
+                    <div class="nm-testimonial-card__author">
+                        <div class="nm-testimonial-card__avatar">👨</div>
+                        <div class="nm-testimonial-card__info">
+                            <p class="nm-testimonial-card__name">佐藤さん</p>
+                            <p class="nm-testimonial-card__role">40代・エンジニア</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M06] FAQ アコーディオン - ニューモーフィズム -->
+    <section id="faq" class="nm-faq section-spacing">
+        <div class="container">
+            <div class="nm-faq__header">
+                <h2 class="nm-faq__title">よくある質問</h2>
+                <p class="nm-faq__desc">お問い合わせの多い質問をまとめました</p>
+            </div>
+            <div class="nm-faq__list">
+                <div class="nm-faq-item active">
+                    <div class="nm-faq-item__header">
+                        <h3 class="nm-faq-item__question">どんな写真でも変換できますか？</h3>
+                        <span class="nm-faq-item__icon">+</span>
+                    </div>
+                    <div class="nm-faq-item__content">
+                        <p class="nm-faq-item__answer">
+                            顔がはっきり写っている写真であれば、ほとんどの写真を変換できます。ただし、顔が小さすぎる写真や、極端に暗い写真は変換精度が下がる場合があります。正面から撮影された、明るい場所での写真がおすすめです。
+                        </p>
+                    </div>
+                </div>
+                <div class="nm-faq-item">
+                    <div class="nm-faq-item__header">
+                        <h3 class="nm-faq-item__question">変換した画像の著作権はどうなりますか？</h3>
+                        <span class="nm-faq-item__icon">+</span>
+                    </div>
+                    <div class="nm-faq-item__content">
+                        <p class="nm-faq-item__answer">
+                            変換した画像の著作権はお客様に帰属します。SNSへの投稿や個人利用は自由に行っていただけます。ただし、商用利用をご希望の場合は、プレミアムプランへのご加入が必要です。
+                        </p>
+                    </div>
+                </div>
+                <div class="nm-faq-item">
+                    <div class="nm-faq-item__header">
+                        <h3 class="nm-faq-item__question">解約はいつでもできますか？</h3>
+                        <span class="nm-faq-item__icon">+</span>
+                    </div>
+                    <div class="nm-faq-item__content">
+                        <p class="nm-faq-item__answer">
+                            はい、いつでも解約可能です。解約手続きはLINEのトーク画面から「解約」と送信するだけ。解約後も契約期間中は引き続きサービスをご利用いただけます。
+                        </p>
+                    </div>
+                </div>
+                <div class="nm-faq-item">
+                    <div class="nm-faq-item__header">
+                        <h3 class="nm-faq-item__question">送信した写真はどのように管理されますか？</h3>
+                        <span class="nm-faq-item__icon">+</span>
+                    </div>
+                    <div class="nm-faq-item__content">
+                        <p class="nm-faq-item__answer">
+                            お客様のプライバシーを最優先に考えています。送信された写真は変換処理後、24時間以内にサーバーから自動削除されます。第三者への提供や、AIの学習データとして使用することは一切ありません。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M10] ニュースレター登録フォーム - ニューモーフィズム -->
+    <section class="nm-newsletter section-spacing">
+        <div class="container">
+            <div class="nm-newsletter__card">
+                <div class="nm-newsletter__icon">📬</div>
+                <h2 class="nm-newsletter__title">最新情報をお届け</h2>
+                <p class="nm-newsletter__desc">
+                    新機能やお得なキャンペーン情報をメールでお届けします。
+                </p>
+                <form class="nm-newsletter__form">
+                    <div class="nm-newsletter__input-wrapper">
+                        <input type="email" class="nm-newsletter__input" placeholder="メールアドレスを入力">
+                    </div>
+                    <button type="submit" class="nm-newsletter__submit">登録する</button>
+                </form>
+                <p class="nm-newsletter__note">
+                    ※ スパムメールは送りません。いつでも解除できます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- [M07] フッター - ニューモーフィズム -->
+    <footer class="nm-footer">
+        <div class="container">
+            <div class="nm-footer__main">
+                <div class="nm-footer__brand">
+                    <div class="nm-footer__logo">
+                        <span class="nm-footer__logo-icon">🍌</span>
+                        <span class="nm-footer__logo-text">イケメンバナナ</span>
+                    </div>
+                    <p class="nm-footer__tagline">
+                        AIの力で、あなたの魅力を引き出します。
+                    </p>
+                    <div class="nm-footer__social">
+                        <a href="#" class="nm-footer__social-link">𝕏</a>
+                        <a href="#" class="nm-footer__social-link">📷</a>
+                        <a href="#" class="nm-footer__social-link">📘</a>
+                    </div>
+                </div>
+                <div class="nm-footer__column">
+                    <h4 class="nm-footer__column-title">サービス</h4>
+                    <ul class="nm-footer__links">
+                        <li><a href="#">特徴</a></li>
+                        <li><a href="#">料金プラン</a></li>
+                        <li><a href="#">使い方</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="nm-footer__column">
+                    <h4 class="nm-footer__column-title">会社情報</h4>
+                    <ul class="nm-footer__links">
+                        <li><a href="#">運営会社</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">採用情報</a></li>
+                        <li><a href="#">ブログ</a></li>
+                    </ul>
+                </div>
+                <div class="nm-footer__column">
+                    <h4 class="nm-footer__column-title">サポート</h4>
+                    <ul class="nm-footer__links">
+                        <li><a href="#">ヘルプセンター</a></li>
+                        <li><a href="#">利用ガイド</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">ステータス</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nm-footer__bottom">
+                <p class="nm-footer__copyright">
+                    &copy; 2024 イケメンバナナ All rights reserved.
+                </p>
+                <div class="nm-footer__legal">
+                    <a href="#">利用規約</a>
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">特定商取引法に基づく表記</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQアコーディオン機能
+        document.querySelectorAll('.nm-faq-item__header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                // 全てのアイテムを閉じる
+                document.querySelectorAll('.nm-faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // クリックしたアイテムが閉じていた場合は開く
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // ナビゲーションのスムーズスクロール
+        document.querySelectorAll('.nm-navbar__link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // スクロール時のナビゲーションアクティブ状態
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nm-navbar__link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // モバイルメニュートグル
+        const toggle = document.querySelector('.nm-navbar__toggle');
+        const menu = document.querySelector('.nm-navbar__menu');
+
+        if (toggle && menu) {
+            toggle.addEventListener('click', () => {
+                menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
+</body>
+</html>

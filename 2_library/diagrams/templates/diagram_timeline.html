@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Diagram Templates - タイムライン図解テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .template-title {
+            font-size: 1.2rem;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ffe0eb;
+        }
+
+        .template-id {
+            font-size: 0.8rem;
+            color: #aaa;
+            font-weight: normal;
+        }
+
+        /* ============================================
+           #timeline-1: Simple Horizontal Timeline
+           ============================================ */
+        #timeline-1 .timeline-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        #timeline-1 .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 4px;
+            background: #ffb6c1;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        #timeline-1 .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        #timeline-1 .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(255,107,157,0.4);
+            transition: transform 0.3s;
+        }
+
+        #timeline-1 .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+        }
+
+        #timeline-1 .timeline-date {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        #timeline-1 .timeline-label {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* ============================================
+           #timeline-2: Simple Vertical Timeline
+           ============================================ */
+        #timeline-2 .timeline-container {
+            position: relative;
+            padding: 20px 0 20px 40px;
+        }
+
+        #timeline-2 .timeline-line {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #87ceeb;
+        }
+
+        #timeline-2 .timeline-item {
+            position: relative;
+            padding: 15px 0;
+            padding-left: 30px;
+        }
+
+        #timeline-2 .timeline-dot {
+            position: absolute;
+            left: -32px;
+            top: 18px;
+            width: 20px;
+            height: 20px;
+            background: #4fc3f7;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(79,195,247,0.4);
+            transition: transform 0.3s;
+        }
+
+        #timeline-2 .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+        }
+
+        #timeline-2 .timeline-date {
+            font-size: 0.8rem;
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+
+        #timeline-2 .timeline-content {
+            font-size: 0.9rem;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           #timeline-3: Zigzag Timeline
+           ============================================ */
+        #timeline-3 .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        #timeline-3 .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #98fb98;
+            transform: translateX(-50%);
+        }
+
+        #timeline-3 .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        #timeline-3 .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+            padding-right: 55%;
+        }
+
+        #timeline-3 .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+            padding-left: 55%;
+        }
+
+        #timeline-3 .timeline-card {
+            background: #e8f5e9;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4caf50;
+            transition: transform 0.3s;
+        }
+
+        #timeline-3 .timeline-item:hover .timeline-card {
+            transform: scale(1.05);
+        }
+
+        #timeline-3 .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #4caf50;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        #timeline-3 .timeline-date {
+            font-size: 0.75rem;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        #timeline-3 .timeline-text {
+            font-size: 0.85rem;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           #timeline-4: Curved Path Timeline
+           ============================================ */
+        #timeline-4 .timeline-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #timeline-4 .timeline-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            position: relative;
+        }
+
+        #timeline-4 .timeline-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        #timeline-4 .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        #timeline-4 .timeline-node {
+            width: 50px;
+            height: 50px;
+            background: #ffd54f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 10px rgba(255,213,79,0.4);
+            transition: transform 0.3s;
+        }
+
+        #timeline-4 .timeline-item:hover .timeline-node {
+            transform: scale(1.15);
+        }
+
+        #timeline-4 .timeline-connector {
+            width: 60px;
+            height: 4px;
+            background: #ffe082;
+            align-self: center;
+        }
+
+        #timeline-4 .curve-down {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ffe082;
+            border-radius: 0 0 40px 0;
+            border-top: none;
+            border-left: none;
+            margin: 0 auto;
+        }
+
+        #timeline-4 .timeline-label {
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #f57f17;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           #timeline-5: Milestone Dots Timeline
+           ============================================ */
+        #timeline-5 .timeline-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 60px 20px 20px;
+            position: relative;
+        }
+
+        #timeline-5 .timeline-line {
+            position: absolute;
+            bottom: 45px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef, #fecfef, #a18cd1);
+        }
+
+        #timeline-5 .milestone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        #timeline-5 .milestone-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        #timeline-5 .milestone:hover .milestone-dot {
+            transform: scale(1.2);
+        }
+
+        #timeline-5 .milestone:nth-child(1) .milestone-dot { background: #ff9a9e; }
+        #timeline-5 .milestone:nth-child(2) .milestone-dot { background: #fecfef; width: 40px; height: 40px; }
+        #timeline-5 .milestone:nth-child(3) .milestone-dot { background: #a18cd1; }
+        #timeline-5 .milestone:nth-child(4) .milestone-dot { background: #667eea; width: 50px; height: 50px; }
+
+        #timeline-5 .milestone-label {
+            position: absolute;
+            bottom: 100%;
+            margin-bottom: 10px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+
+        #timeline-5 .milestone-date {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        /* ============================================
+           #timeline-6: Card-based Timeline
+           ============================================ */
+        #timeline-6 .timeline-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 20px 10px;
+        }
+
+        #timeline-6 .timeline-card {
+            min-width: 140px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        #timeline-6 .timeline-card:hover {
+            transform: translateY(-5px);
+        }
+
+        #timeline-6 .card-header {
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        #timeline-6 .timeline-card:nth-child(1) .card-header { background: #ff6b9d; }
+        #timeline-6 .timeline-card:nth-child(2) .card-header { background: #4fc3f7; }
+        #timeline-6 .timeline-card:nth-child(3) .card-header { background: #81c784; }
+        #timeline-6 .timeline-card:nth-child(4) .card-header { background: #ffb74d; }
+
+        #timeline-6 .card-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #timeline-6 .card-year {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        #timeline-6 .card-body {
+            padding: 15px;
+        }
+
+        #timeline-6 .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        #timeline-6 .card-desc {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        #timeline-6 .card-arrow {
+            display: flex;
+            align-items: center;
+            color: #ddd;
+            font-size: 1.5rem;
+        }
+
+        /* ============================================
+           #timeline-7: Icon Timeline
+           ============================================ */
+        #timeline-7 .timeline-container {
+            position: relative;
+            padding: 20px 0 20px 60px;
+        }
+
+        #timeline-7 .timeline-line {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #e0e0e0;
+        }
+
+        #timeline-7 .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        #timeline-7 .timeline-icon {
+            position: absolute;
+            left: -45px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #timeline-7 .timeline-item:hover .timeline-icon {
+            transform: scale(1.15);
+        }
+
+        #timeline-7 .timeline-item:nth-child(1) .timeline-icon { background: #ff6b9d; }
+        #timeline-7 .timeline-item:nth-child(2) .timeline-icon { background: #4fc3f7; }
+        #timeline-7 .timeline-item:nth-child(3) .timeline-icon { background: #81c784; }
+        #timeline-7 .timeline-item:nth-child(4) .timeline-icon { background: #ba68c8; }
+
+        #timeline-7 .timeline-content {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        #timeline-7 .timeline-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #timeline-7 .timeline-desc {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           #timeline-8: Photo Timeline
+           ============================================ */
+        #timeline-8 .timeline-container {
+            display: flex;
+            gap: 15px;
+            padding: 20px 10px;
+            overflow-x: auto;
+        }
+
+        #timeline-8 .photo-item {
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        #timeline-8 .photo-item:hover {
+            transform: scale(1.05);
+        }
+
+        #timeline-8 .photo-frame {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            font-size: 2rem;
+        }
+
+        #timeline-8 .photo-item:nth-child(1) .photo-frame { border-color: #ff6b9d; }
+        #timeline-8 .photo-item:nth-child(2) .photo-frame { border-color: #4fc3f7; }
+        #timeline-8 .photo-item:nth-child(3) .photo-frame { border-color: #81c784; }
+        #timeline-8 .photo-item:nth-child(4) .photo-frame { border-color: #ffb74d; }
+
+        #timeline-8 .photo-connector {
+            width: 30px;
+            height: 3px;
+            background: #e0e0e0;
+            align-self: center;
+        }
+
+        #timeline-8 .photo-date {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        #timeline-8 .photo-label {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           #timeline-9: Year/Date Timeline
+           ============================================ */
+        #timeline-9 .timeline-container {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            padding: 30px 10px;
+        }
+
+        #timeline-9 .year-block {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding-top: 60px;
+        }
+
+        #timeline-9 .year-block::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e0e0e0;
+        }
+
+        #timeline-9 .year-block:first-child::before {
+            left: 50%;
+        }
+
+        #timeline-9 .year-block:last-child::before {
+            right: 50%;
+        }
+
+        #timeline-9 .year-dot {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        #timeline-9 .year-block:hover .year-dot {
+            transform: translateX(-50%) scale(1.2);
+        }
+
+        #timeline-9 .year-block:nth-child(1) .year-dot { background: #ff6b9d; }
+        #timeline-9 .year-block:nth-child(2) .year-dot { background: #4fc3f7; }
+        #timeline-9 .year-block:nth-child(3) .year-dot { background: #81c784; }
+        #timeline-9 .year-block:nth-child(4) .year-dot { background: #ba68c8; }
+        #timeline-9 .year-block:nth-child(5) .year-dot { background: #ffb74d; }
+
+        #timeline-9 .year-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #timeline-9 .year-event {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* ============================================
+           #timeline-10: Process Timeline
+           ============================================ */
+        #timeline-10 .timeline-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 10px;
+        }
+
+        #timeline-10 .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        #timeline-10 .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 60%;
+            right: -40%;
+            height: 4px;
+            background: #e0e0e0;
+        }
+
+        #timeline-10 .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s;
+        }
+
+        #timeline-10 .process-step:hover .step-circle {
+            transform: scale(1.1);
+        }
+
+        #timeline-10 .process-step:nth-child(1) .step-circle { background: #ff6b9d; }
+        #timeline-10 .process-step:nth-child(2) .step-circle { background: #4fc3f7; }
+        #timeline-10 .process-step:nth-child(3) .step-circle { background: #81c784; }
+        #timeline-10 .process-step:nth-child(4) .step-circle { background: #ffb74d; }
+
+        #timeline-10 .step-label {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #timeline-10 .step-desc {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        /* ============================================
+           #timeline-11: Journey Map Timeline
+           ============================================ */
+        #timeline-11 .timeline-container {
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        #timeline-11 .journey-path {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        #timeline-11 .journey-path::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 6px;
+            background: repeating-linear-gradient(
+                90deg,
+                #ff6b9d 0,
+                #ff6b9d 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            transform: translateY(-50%);
+        }
+
+        #timeline-11 .journey-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        #timeline-11 .journey-marker {
+            width: 40px;
+            height: 50px;
+            background: #ff6b9d;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        #timeline-11 .journey-point:hover .journey-marker {
+            transform: rotate(-45deg) scale(1.1);
+        }
+
+        #timeline-11 .journey-point:nth-child(1) .journey-marker { background: #ff6b9d; }
+        #timeline-11 .journey-point:nth-child(2) .journey-marker { background: #4fc3f7; }
+        #timeline-11 .journey-point:nth-child(3) .journey-marker { background: #81c784; }
+        #timeline-11 .journey-point:nth-child(4) .journey-marker { background: #ba68c8; }
+
+        #timeline-11 .marker-icon {
+            transform: rotate(45deg);
+            font-size: 1rem;
+        }
+
+        #timeline-11 .journey-label {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #timeline-11 .journey-emotion {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        /* ============================================
+           #timeline-12: Roadmap Timeline
+           ============================================ */
+        #timeline-12 .timeline-container {
+            padding: 20px 10px;
+        }
+
+        #timeline-12 .roadmap-row {
+            display: flex;
+            align-items: stretch;
+            margin: 10px 0;
+        }
+
+        #timeline-12 .roadmap-quarter {
+            flex: 1;
+            padding: 10px;
+            position: relative;
+        }
+
+        #timeline-12 .quarter-header {
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #timeline-12 .roadmap-quarter:nth-child(1) .quarter-header { background: #ff6b9d; }
+        #timeline-12 .roadmap-quarter:nth-child(2) .quarter-header { background: #4fc3f7; }
+        #timeline-12 .roadmap-quarter:nth-child(3) .quarter-header { background: #81c784; }
+        #timeline-12 .roadmap-quarter:nth-child(4) .quarter-header { background: #ffb74d; }
+
+        #timeline-12 .roadmap-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            margin: 5px 0;
+            border-left: 3px solid;
+            transition: transform 0.3s;
+        }
+
+        #timeline-12 .roadmap-item:hover {
+            transform: translateX(5px);
+        }
+
+        #timeline-12 .roadmap-quarter:nth-child(1) .roadmap-item { border-color: #ff6b9d; }
+        #timeline-12 .roadmap-quarter:nth-child(2) .roadmap-item { border-color: #4fc3f7; }
+        #timeline-12 .roadmap-quarter:nth-child(3) .roadmap-item { border-color: #81c784; }
+        #timeline-12 .roadmap-quarter:nth-child(4) .roadmap-item { border-color: #ffb74d; }
+
+        /* ============================================
+           #timeline-13: Alternating Sides Timeline
+           ============================================ */
+        #timeline-13 .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        #timeline-13 .center-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #ba68c8;
+            transform: translateX(-50%);
+        }
+
+        #timeline-13 .alt-item {
+            display: flex;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        #timeline-13 .alt-item:nth-child(odd) {
+            justify-content: flex-start;
+        }
+
+        #timeline-13 .alt-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        #timeline-13 .alt-content {
+            width: 42%;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        #timeline-13 .alt-item:hover .alt-content {
+            transform: scale(1.02);
+        }
+
+        #timeline-13 .alt-item:nth-child(odd) .alt-content {
+            border-right: 4px solid #ba68c8;
+        }
+
+        #timeline-13 .alt-item:nth-child(even) .alt-content {
+            border-left: 4px solid #ba68c8;
+        }
+
+        #timeline-13 .alt-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: #ba68c8;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #ba68c8;
+        }
+
+        #timeline-13 .alt-date {
+            font-size: 0.75rem;
+            color: #ba68c8;
+            font-weight: bold;
+        }
+
+        #timeline-13 .alt-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        #timeline-13 .alt-desc {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           #timeline-14: Bubble Timeline
+           ============================================ */
+        #timeline-14 .timeline-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 20px 10px;
+            min-height: 200px;
+        }
+
+        #timeline-14 .bubble-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #timeline-14 .bubble {
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #timeline-14 .bubble:hover {
+            transform: scale(1.1);
+        }
+
+        #timeline-14 .bubble-item:nth-child(1) .bubble {
+            width: 70px;
+            height: 70px;
+            background: #ff6b9d;
+        }
+
+        #timeline-14 .bubble-item:nth-child(2) .bubble {
+            width: 90px;
+            height: 90px;
+            background: #4fc3f7;
+        }
+
+        #timeline-14 .bubble-item:nth-child(3) .bubble {
+            width: 60px;
+            height: 60px;
+            background: #81c784;
+        }
+
+        #timeline-14 .bubble-item:nth-child(4) .bubble {
+            width: 100px;
+            height: 100px;
+            background: #ffb74d;
+        }
+
+        #timeline-14 .bubble-year {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        #timeline-14 .bubble-label {
+            font-size: 0.6rem;
+            margin-top: 2px;
+            text-align: center;
+            padding: 0 5px;
+        }
+
+        #timeline-14 .bubble-connector {
+            width: 2px;
+            height: 30px;
+            background: #e0e0e0;
+        }
+
+        #timeline-14 .bubble-base {
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+        }
+
+        /* ============================================
+           #timeline-15: Flag/Banner Timeline
+           ============================================ */
+        #timeline-15 .timeline-container {
+            position: relative;
+            padding: 30px 0 30px 20px;
+        }
+
+        #timeline-15 .flag-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #333;
+        }
+
+        #timeline-15 .flag-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        #timeline-15 .flag-pole {
+            width: 30px;
+            height: 3px;
+            background: #333;
+        }
+
+        #timeline-15 .flag-banner {
+            padding: 10px 20px 10px 15px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            position: relative;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+            transition: transform 0.3s;
+        }
+
+        #timeline-15 .flag-item:hover .flag-banner {
+            transform: translateX(5px);
+        }
+
+        #timeline-15 .flag-item:nth-child(1) .flag-banner { background: #ff6b9d; }
+        #timeline-15 .flag-item:nth-child(2) .flag-banner { background: #4fc3f7; }
+        #timeline-15 .flag-item:nth-child(3) .flag-banner { background: #81c784; }
+        #timeline-15 .flag-item:nth-child(4) .flag-banner { background: #ffb74d; }
+
+        #timeline-15 .flag-date {
+            margin-left: 15px;
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* ============================================
+           #timeline-16: Numbered Timeline
+           ============================================ */
+        #timeline-16 .timeline-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 10px 20px;
+            position: relative;
+        }
+
+        #timeline-16 .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 55px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: #e0e0e0;
+        }
+
+        #timeline-16 .numbered-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        #timeline-16 .number-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #timeline-16 .numbered-item:hover .number-circle {
+            transform: scale(1.15);
+        }
+
+        #timeline-16 .numbered-item:nth-child(1) .number-circle { background: #ff6b9d; }
+        #timeline-16 .numbered-item:nth-child(2) .number-circle { background: #4fc3f7; }
+        #timeline-16 .numbered-item:nth-child(3) .number-circle { background: #81c784; }
+        #timeline-16 .numbered-item:nth-child(4) .number-circle { background: #ba68c8; }
+        #timeline-16 .numbered-item:nth-child(5) .number-circle { background: #ffb74d; }
+
+        #timeline-16 .numbered-label {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        #timeline-16 .numbered-date {
+            font-size: 0.65rem;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           #timeline-17: Color-coded Timeline
+           ============================================ */
+        #timeline-17 .timeline-container {
+            padding: 20px 10px;
+        }
+
+        #timeline-17 .color-row {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 15px;
+        }
+
+        #timeline-17 .color-segment {
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        #timeline-17 .color-segment:hover {
+            transform: scaleY(1.2);
+        }
+
+        #timeline-17 .segment-pink { background: #ff6b9d; flex: 2; }
+        #timeline-17 .segment-blue { background: #4fc3f7; flex: 3; }
+        #timeline-17 .segment-green { background: #81c784; flex: 2; }
+        #timeline-17 .segment-purple { background: #ba68c8; flex: 1; }
+        #timeline-17 .segment-orange { background: #ffb74d; flex: 2; }
+
+        #timeline-17 .color-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        #timeline-17 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        #timeline-17 .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        /* ============================================
+           #timeline-18: Compact Mini Timeline
+           ============================================ */
+        #timeline-18 .timeline-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 20px 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #timeline-18 .mini-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #timeline-18 .mini-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        #timeline-18 .mini-item:hover .mini-dot {
+            transform: scale(1.5);
+        }
+
+        #timeline-18 .mini-item:nth-child(1) .mini-dot { background: #ff6b9d; }
+        #timeline-18 .mini-item:nth-child(3) .mini-dot { background: #4fc3f7; }
+        #timeline-18 .mini-item:nth-child(5) .mini-dot { background: #81c784; }
+        #timeline-18 .mini-item:nth-child(7) .mini-dot { background: #ba68c8; }
+        #timeline-18 .mini-item:nth-child(9) .mini-dot { background: #ffb74d; }
+
+        #timeline-18 .mini-label {
+            font-size: 0.75rem;
+            color: #333;
+        }
+
+        #timeline-18 .mini-arrow {
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+
+        /* ============================================
+           #timeline-19: Expanded Detail Timeline
+           ============================================ */
+        #timeline-19 .timeline-container {
+            padding: 10px;
+        }
+
+        #timeline-19 .detail-item {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #timeline-19 .detail-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        #timeline-19 .detail-item:nth-child(1) { border-color: #ff6b9d; }
+        #timeline-19 .detail-item:nth-child(2) { border-color: #4fc3f7; }
+        #timeline-19 .detail-item:nth-child(3) { border-color: #81c784; }
+
+        #timeline-19 .detail-date {
+            min-width: 60px;
+            text-align: center;
+        }
+
+        #timeline-19 .date-day {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #timeline-19 .date-month {
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        #timeline-19 .detail-divider {
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        #timeline-19 .detail-content {
+            flex: 1;
+        }
+
+        #timeline-19 .detail-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #timeline-19 .detail-desc {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        #timeline-19 .detail-tags {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        #timeline-19 .detail-tag {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        /* ============================================
+           #timeline-20: Circular/Clock Timeline
+           ============================================ */
+        #timeline-20 .timeline-container {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        #timeline-20 .clock-face {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            border: 6px solid #e0e0e0;
+            position: relative;
+        }
+
+        #timeline-20 .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        #timeline-20 .clock-point {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s;
+        }
+
+        #timeline-20 .clock-point:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #timeline-20 .clock-point:nth-child(2) { top: 5%; left: 50%; }
+        #timeline-20 .clock-point:nth-child(3) { top: 25%; left: 93%; }
+        #timeline-20 .clock-point:nth-child(4) { top: 75%; left: 93%; }
+        #timeline-20 .clock-point:nth-child(5) { top: 95%; left: 50%; }
+        #timeline-20 .clock-point:nth-child(6) { top: 75%; left: 7%; }
+        #timeline-20 .clock-point:nth-child(7) { top: 25%; left: 7%; }
+
+        #timeline-20 .clock-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        #timeline-20 .clock-point:nth-child(2) .clock-dot { background: #ff6b9d; }
+        #timeline-20 .clock-point:nth-child(3) .clock-dot { background: #ffb74d; }
+        #timeline-20 .clock-point:nth-child(4) .clock-dot { background: #81c784; }
+        #timeline-20 .clock-point:nth-child(5) .clock-dot { background: #4fc3f7; }
+        #timeline-20 .clock-point:nth-child(6) .clock-dot { background: #ba68c8; }
+        #timeline-20 .clock-point:nth-child(7) .clock-dot { background: #ff6b9d; }
+
+        #timeline-20 .clock-label {
+            font-size: 0.6rem;
+            color: #666;
+            white-space: nowrap;
+            margin-top: 2px;
+        }
+
+        #timeline-20 .clock-hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 3px;
+            background: #333;
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+
+        #timeline-20 .clock-hand.hour {
+            height: 50px;
+            transform: translateX(-50%) rotate(60deg);
+        }
+
+        #timeline-20 .clock-hand.minute {
+            height: 70px;
+            transform: translateX(-50%) rotate(180deg);
+            background: #ff6b9d;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #timeline-3 .timeline-item:nth-child(odd),
+            #timeline-3 .timeline-item:nth-child(even) {
+                padding: 0 0 0 20px;
+                justify-content: flex-start;
+            }
+
+            #timeline-3 .timeline-dot {
+                left: 0;
+            }
+
+            #timeline-13 .alt-content {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Timeline Diagram Templates</h1>
+    <p class="subtitle">タイムライン図解テンプレート - 20種類のレイアウトパターン</p>
+
+    <div class="template-grid">
+
+        <!-- Template 1: Simple Horizontal Timeline -->
+        <div class="template-card" id="timeline-1">
+            <h3 class="template-title">
+                1. Simple Horizontal Timeline
+                <span class="template-id">#timeline-1</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-label">スタート</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-label">成長期</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-label">拡大</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-label">飛躍</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 2: Simple Vertical Timeline -->
+        <div class="template-card" id="timeline-2">
+            <h3 class="template-title">
+                2. Simple Vertical Timeline
+                <span class="template-id">#timeline-2</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">4月</div>
+                    <div class="timeline-content">入学式・オリエンテーション</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">7月</div>
+                    <div class="timeline-content">夏休みスタート</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">10月</div>
+                    <div class="timeline-content">文化祭・体育祭</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">3月</div>
+                    <div class="timeline-content">卒業式</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 3: Zigzag Timeline -->
+        <div class="template-card" id="timeline-3">
+            <h3 class="template-title">
+                3. Zigzag Timeline
+                <span class="template-id">#timeline-3</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date">STEP 1</div>
+                        <div class="timeline-text">アイデア出し</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date">STEP 2</div>
+                        <div class="timeline-text">プロトタイプ作成</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date">STEP 3</div>
+                        <div class="timeline-text">テスト実施</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date">STEP 4</div>
+                        <div class="timeline-text">リリース</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 4: Curved Path Timeline -->
+        <div class="template-card" id="timeline-4">
+            <h3 class="template-title">
+                4. Curved Path Timeline
+                <span class="template-id">#timeline-4</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-row">
+                    <div class="timeline-item">
+                        <div class="timeline-node">1</div>
+                        <div class="timeline-label">企画</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-node">2</div>
+                        <div class="timeline-label">設計</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-node">3</div>
+                        <div class="timeline-label">開発</div>
+                    </div>
+                </div>
+                <div class="curve-down"></div>
+                <div class="timeline-row">
+                    <div class="timeline-item">
+                        <div class="timeline-node">6</div>
+                        <div class="timeline-label">運用</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-node">5</div>
+                        <div class="timeline-label">公開</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-node">4</div>
+                        <div class="timeline-label">テスト</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 5: Milestone Dots Timeline -->
+        <div class="template-card" id="timeline-5">
+            <h3 class="template-title">
+                5. Milestone Dots Timeline
+                <span class="template-id">#timeline-5</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="milestone">
+                    <div class="milestone-label">種をまく</div>
+                    <div class="milestone-dot">1</div>
+                    <div class="milestone-date">Week 1</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-label">芽が出る</div>
+                    <div class="milestone-dot">2</div>
+                    <div class="milestone-date">Week 3</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-label">葉が育つ</div>
+                    <div class="milestone-dot">3</div>
+                    <div class="milestone-date">Week 6</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-label">花が咲く</div>
+                    <div class="milestone-dot">4</div>
+                    <div class="milestone-date">Week 10</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 6: Card-based Timeline -->
+        <div class="template-card" id="timeline-6">
+            <h3 class="template-title">
+                6. Card-based Timeline
+                <span class="template-id">#timeline-6</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-card">
+                    <div class="card-header">
+                        <div class="card-date">1/15</div>
+                        <div class="card-year">2024</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">キックオフ</div>
+                        <div class="card-desc">プロジェクト開始</div>
+                    </div>
+                </div>
+                <div class="card-arrow">→</div>
+                <div class="timeline-card">
+                    <div class="card-header">
+                        <div class="card-date">3/1</div>
+                        <div class="card-year">2024</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">中間発表</div>
+                        <div class="card-desc">進捗確認</div>
+                    </div>
+                </div>
+                <div class="card-arrow">→</div>
+                <div class="timeline-card">
+                    <div class="card-header">
+                        <div class="card-date">5/20</div>
+                        <div class="card-year">2024</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">最終発表</div>
+                        <div class="card-desc">成果報告</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 7: Icon Timeline -->
+        <div class="template-card" id="timeline-7">
+            <h3 class="template-title">
+                7. Icon Timeline
+                <span class="template-id">#timeline-7</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">💡</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">アイデア発想</div>
+                        <div class="timeline-desc">ブレインストーミングで案出し</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">📝</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">計画作成</div>
+                        <div class="timeline-desc">スケジュールと役割分担</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">🔨</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">実行・制作</div>
+                        <div class="timeline-desc">チームで協力して作業</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">🎉</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">完成・発表</div>
+                        <div class="timeline-desc">成果を共有して祝う</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 8: Photo Timeline -->
+        <div class="template-card" id="timeline-8">
+            <h3 class="template-title">
+                8. Photo Timeline
+                <span class="template-id">#timeline-8</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="photo-item">
+                    <div class="photo-frame">🐣</div>
+                    <div class="photo-date">0歳</div>
+                    <div class="photo-label">誕生</div>
+                </div>
+                <div class="photo-connector"></div>
+                <div class="photo-item">
+                    <div class="photo-frame">👶</div>
+                    <div class="photo-date">1歳</div>
+                    <div class="photo-label">はじめの一歩</div>
+                </div>
+                <div class="photo-connector"></div>
+                <div class="photo-item">
+                    <div class="photo-frame">🧒</div>
+                    <div class="photo-date">3歳</div>
+                    <div class="photo-label">幼稚園</div>
+                </div>
+                <div class="photo-connector"></div>
+                <div class="photo-item">
+                    <div class="photo-frame">👦</div>
+                    <div class="photo-date">6歳</div>
+                    <div class="photo-label">小学校</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 9: Year/Date Timeline -->
+        <div class="template-card" id="timeline-9">
+            <h3 class="template-title">
+                9. Year/Date Timeline
+                <span class="template-id">#timeline-9</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="year-block">
+                    <div class="year-dot"></div>
+                    <div class="year-number">2019</div>
+                    <div class="year-event">創業</div>
+                </div>
+                <div class="year-block">
+                    <div class="year-dot"></div>
+                    <div class="year-number">2020</div>
+                    <div class="year-event">10名</div>
+                </div>
+                <div class="year-block">
+                    <div class="year-dot"></div>
+                    <div class="year-number">2021</div>
+                    <div class="year-event">50名</div>
+                </div>
+                <div class="year-block">
+                    <div class="year-dot"></div>
+                    <div class="year-number">2022</div>
+                    <div class="year-event">100名</div>
+                </div>
+                <div class="year-block">
+                    <div class="year-dot"></div>
+                    <div class="year-number">2023</div>
+                    <div class="year-event">200名</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 10: Process Timeline -->
+        <div class="template-card" id="timeline-10">
+            <h3 class="template-title">
+                10. Process Timeline
+                <span class="template-id">#timeline-10</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="process-step">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">準備</div>
+                    <div class="step-desc">材料を揃える</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">混ぜる</div>
+                    <div class="step-desc">よくかき混ぜる</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">焼く</div>
+                    <div class="step-desc">180度で20分</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">完成</div>
+                    <div class="step-desc">できあがり!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 11: Journey Map Timeline -->
+        <div class="template-card" id="timeline-11">
+            <h3 class="template-title">
+                11. Journey Map Timeline
+                <span class="template-id">#timeline-11</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="journey-path">
+                    <div class="journey-point">
+                        <div class="journey-marker">
+                            <span class="marker-icon">🏠</span>
+                        </div>
+                        <div class="journey-label">出発</div>
+                        <div class="journey-emotion">😊</div>
+                    </div>
+                    <div class="journey-point">
+                        <div class="journey-marker">
+                            <span class="marker-icon">🚂</span>
+                        </div>
+                        <div class="journey-label">移動</div>
+                        <div class="journey-emotion">😴</div>
+                    </div>
+                    <div class="journey-point">
+                        <div class="journey-marker">
+                            <span class="marker-icon">🏔️</span>
+                        </div>
+                        <div class="journey-label">冒険</div>
+                        <div class="journey-emotion">😆</div>
+                    </div>
+                    <div class="journey-point">
+                        <div class="journey-marker">
+                            <span class="marker-icon">🎯</span>
+                        </div>
+                        <div class="journey-label">到着</div>
+                        <div class="journey-emotion">🥳</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 12: Roadmap Timeline -->
+        <div class="template-card" id="timeline-12">
+            <h3 class="template-title">
+                12. Roadmap Timeline
+                <span class="template-id">#timeline-12</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="roadmap-row">
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">Q1</div>
+                        <div class="roadmap-item">基盤整備</div>
+                        <div class="roadmap-item">チーム編成</div>
+                    </div>
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">Q2</div>
+                        <div class="roadmap-item">機能開発</div>
+                        <div class="roadmap-item">テスト</div>
+                    </div>
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">Q3</div>
+                        <div class="roadmap-item">ベータ版公開</div>
+                        <div class="roadmap-item">改善</div>
+                    </div>
+                    <div class="roadmap-quarter">
+                        <div class="quarter-header">Q4</div>
+                        <div class="roadmap-item">正式リリース</div>
+                        <div class="roadmap-item">マーケティング</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 13: Alternating Sides Timeline -->
+        <div class="template-card" id="timeline-13">
+            <h3 class="template-title">
+                13. Alternating Sides Timeline
+                <span class="template-id">#timeline-13</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="center-line"></div>
+                <div class="alt-item">
+                    <div class="alt-content">
+                        <div class="alt-date">2024年1月</div>
+                        <div class="alt-title">新年スタート</div>
+                        <div class="alt-desc">目標を立てる</div>
+                    </div>
+                    <div class="alt-dot"></div>
+                </div>
+                <div class="alt-item">
+                    <div class="alt-content">
+                        <div class="alt-date">2024年4月</div>
+                        <div class="alt-title">新学期</div>
+                        <div class="alt-desc">新しい仲間と出会う</div>
+                    </div>
+                    <div class="alt-dot"></div>
+                </div>
+                <div class="alt-item">
+                    <div class="alt-content">
+                        <div class="alt-date">2024年8月</div>
+                        <div class="alt-title">夏休み</div>
+                        <div class="alt-desc">思い出作り</div>
+                    </div>
+                    <div class="alt-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 14: Bubble Timeline -->
+        <div class="template-card" id="timeline-14">
+            <h3 class="template-title">
+                14. Bubble Timeline
+                <span class="template-id">#timeline-14</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="bubble-item">
+                    <div class="bubble">
+                        <div class="bubble-year">2020</div>
+                        <div class="bubble-label">10件</div>
+                    </div>
+                    <div class="bubble-connector"></div>
+                    <div class="bubble-base"></div>
+                </div>
+                <div class="bubble-item">
+                    <div class="bubble">
+                        <div class="bubble-year">2021</div>
+                        <div class="bubble-label">30件</div>
+                    </div>
+                    <div class="bubble-connector"></div>
+                    <div class="bubble-base"></div>
+                </div>
+                <div class="bubble-item">
+                    <div class="bubble">
+                        <div class="bubble-year">2022</div>
+                        <div class="bubble-label">20件</div>
+                    </div>
+                    <div class="bubble-connector"></div>
+                    <div class="bubble-base"></div>
+                </div>
+                <div class="bubble-item">
+                    <div class="bubble">
+                        <div class="bubble-year">2023</div>
+                        <div class="bubble-label">50件</div>
+                    </div>
+                    <div class="bubble-connector"></div>
+                    <div class="bubble-base"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 15: Flag/Banner Timeline -->
+        <div class="template-card" id="timeline-15">
+            <h3 class="template-title">
+                15. Flag/Banner Timeline
+                <span class="template-id">#timeline-15</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="flag-line"></div>
+                <div class="flag-item">
+                    <div class="flag-pole"></div>
+                    <div class="flag-banner">第1章 はじまり</div>
+                    <div class="flag-date">Chapter 1</div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-pole"></div>
+                    <div class="flag-banner">第2章 成長</div>
+                    <div class="flag-date">Chapter 2</div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-pole"></div>
+                    <div class="flag-banner">第3章 試練</div>
+                    <div class="flag-date">Chapter 3</div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-pole"></div>
+                    <div class="flag-banner">第4章 達成</div>
+                    <div class="flag-date">Chapter 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 16: Numbered Timeline -->
+        <div class="template-card" id="timeline-16">
+            <h3 class="template-title">
+                16. Numbered Timeline
+                <span class="template-id">#timeline-16</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="numbered-item">
+                    <div class="number-circle">1</div>
+                    <div class="numbered-label">登録</div>
+                    <div class="numbered-date">5分</div>
+                </div>
+                <div class="numbered-item">
+                    <div class="number-circle">2</div>
+                    <div class="numbered-label">設定</div>
+                    <div class="numbered-date">10分</div>
+                </div>
+                <div class="numbered-item">
+                    <div class="number-circle">3</div>
+                    <div class="numbered-label">確認</div>
+                    <div class="numbered-date">5分</div>
+                </div>
+                <div class="numbered-item">
+                    <div class="number-circle">4</div>
+                    <div class="numbered-label">開始</div>
+                    <div class="numbered-date">即時</div>
+                </div>
+                <div class="numbered-item">
+                    <div class="number-circle">5</div>
+                    <div class="numbered-label">完了</div>
+                    <div class="numbered-date">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 17: Color-coded Timeline -->
+        <div class="template-card" id="timeline-17">
+            <h3 class="template-title">
+                17. Color-coded Timeline
+                <span class="template-id">#timeline-17</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="color-row">
+                    <div class="color-segment segment-pink">企画</div>
+                    <div class="color-segment segment-blue">開発</div>
+                    <div class="color-segment segment-green">テスト</div>
+                    <div class="color-segment segment-purple">修正</div>
+                    <div class="color-segment segment-orange">公開</div>
+                </div>
+                <div class="color-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#ff6b9d"></div>
+                        <span>企画フェーズ</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#4fc3f7"></div>
+                        <span>開発フェーズ</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#81c784"></div>
+                        <span>テストフェーズ</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#ba68c8"></div>
+                        <span>修正フェーズ</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#ffb74d"></div>
+                        <span>公開フェーズ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 18: Compact Mini Timeline -->
+        <div class="template-card" id="timeline-18">
+            <h3 class="template-title">
+                18. Compact Mini Timeline
+                <span class="template-id">#timeline-18</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="mini-item">
+                    <div class="mini-dot"></div>
+                    <div class="mini-label">朝ごはん</div>
+                </div>
+                <div class="mini-arrow">→</div>
+                <div class="mini-item">
+                    <div class="mini-dot"></div>
+                    <div class="mini-label">学校</div>
+                </div>
+                <div class="mini-arrow">→</div>
+                <div class="mini-item">
+                    <div class="mini-dot"></div>
+                    <div class="mini-label">お昼</div>
+                </div>
+                <div class="mini-arrow">→</div>
+                <div class="mini-item">
+                    <div class="mini-dot"></div>
+                    <div class="mini-label">部活</div>
+                </div>
+                <div class="mini-arrow">→</div>
+                <div class="mini-item">
+                    <div class="mini-dot"></div>
+                    <div class="mini-label">帰宅</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 19: Expanded Detail Timeline -->
+        <div class="template-card" id="timeline-19">
+            <h3 class="template-title">
+                19. Expanded Detail Timeline
+                <span class="template-id">#timeline-19</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="detail-item">
+                    <div class="detail-date">
+                        <div class="date-day">15</div>
+                        <div class="date-month">JAN</div>
+                    </div>
+                    <div class="detail-divider"></div>
+                    <div class="detail-content">
+                        <div class="detail-title">プロジェクト開始</div>
+                        <div class="detail-desc">チームメンバーと初回ミーティング</div>
+                        <div class="detail-tags">
+                            <span class="detail-tag">会議</span>
+                            <span class="detail-tag">チーム</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-date">
+                        <div class="date-day">28</div>
+                        <div class="date-month">FEB</div>
+                    </div>
+                    <div class="detail-divider"></div>
+                    <div class="detail-content">
+                        <div class="detail-title">中間レビュー</div>
+                        <div class="detail-desc">進捗確認と方向性の調整</div>
+                        <div class="detail-tags">
+                            <span class="detail-tag">レビュー</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-date">
+                        <div class="date-day">31</div>
+                        <div class="date-month">MAR</div>
+                    </div>
+                    <div class="detail-divider"></div>
+                    <div class="detail-content">
+                        <div class="detail-title">完了・納品</div>
+                        <div class="detail-desc">最終成果物の提出</div>
+                        <div class="detail-tags">
+                            <span class="detail-tag">完了</span>
+                            <span class="detail-tag">納品</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 20: Circular/Clock Timeline -->
+        <div class="template-card" id="timeline-20">
+            <h3 class="template-title">
+                20. Circular/Clock Timeline
+                <span class="template-id">#timeline-20</span>
+            </h3>
+            <div class="timeline-container">
+                <div class="clock-face">
+                    <div class="clock-center"></div>
+                    <div class="clock-hand hour"></div>
+                    <div class="clock-hand minute"></div>
+                    <div class="clock-point">
+                        <div class="clock-dot">12</div>
+                        <div class="clock-label">起床</div>
+                    </div>
+                    <div class="clock-point">
+                        <div class="clock-dot">2</div>
+                        <div class="clock-label">朝食</div>
+                    </div>
+                    <div class="clock-point">
+                        <div class="clock-dot">4</div>
+                        <div class="clock-label">勉強</div>
+                    </div>
+                    <div class="clock-point">
+                        <div class="clock-dot">6</div>
+                        <div class="clock-label">昼食</div>
+                    </div>
+                    <div class="clock-point">
+                        <div class="clock-dot">8</div>
+                        <div class="clock-label">遊び</div>
+                    </div>
+                    <div class="clock-point">
+                        <div class="clock-dot">10</div>
+                        <div class="clock-label">夕食</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

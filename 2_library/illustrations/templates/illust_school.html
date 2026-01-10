@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School & Education CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #888;
+            font-weight: 600;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .illust-container {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* school-01: Book */
+        .book {
+            width: 70px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .book:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            background: #4ECDC4;
+            border-radius: 3px 8px 8px 3px;
+            position: relative;
+        }
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 8px;
+            height: 100%;
+            background: #3DBDB5;
+            border-radius: 3px 0 0 3px;
+        }
+        .book-pages {
+            position: absolute;
+            right: 3px;
+            top: 5px;
+            width: 55px;
+            height: 45px;
+            background: #FFF8E7;
+            border-radius: 0 5px 5px 0;
+        }
+        .book-line {
+            position: absolute;
+            right: 10px;
+            width: 40px;
+            height: 3px;
+            background: #E8DCC8;
+            border-radius: 2px;
+        }
+        .book-line:nth-child(1) { top: 12px; }
+        .book-line:nth-child(2) { top: 20px; width: 35px; }
+        .book-line:nth-child(3) { top: 28px; width: 38px; }
+
+        /* school-02: Pencil */
+        .pencil {
+            width: 12px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .pencil:hover {
+            transform: rotate(15deg) translateY(-5px);
+        }
+        .pencil-body {
+            width: 100%;
+            height: 55px;
+            background: #FFD93D;
+            position: absolute;
+            top: 12px;
+        }
+        .pencil-tip {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 15px solid #FFBE0B;
+            position: absolute;
+            bottom: 0;
+        }
+        .pencil-tip::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-top: 8px solid #2D3436;
+            top: -15px;
+            left: -3px;
+        }
+        .pencil-eraser {
+            width: 12px;
+            height: 12px;
+            background: #FF6B9D;
+            border-radius: 2px 2px 0 0;
+            position: absolute;
+            top: 0;
+        }
+        .pencil-band {
+            width: 12px;
+            height: 5px;
+            background: #95A5A6;
+            position: absolute;
+            top: 10px;
+        }
+
+        /* school-03: Pen */
+        .pen {
+            width: 10px;
+            height: 75px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .pen:hover {
+            transform: rotate(-10deg) translateY(-5px);
+        }
+        .pen-body {
+            width: 100%;
+            height: 50px;
+            background: #3498DB;
+            position: absolute;
+            top: 10px;
+            border-radius: 2px;
+        }
+        .pen-cap {
+            width: 10px;
+            height: 15px;
+            background: #2980B9;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            top: 0;
+        }
+        .pen-clip {
+            width: 3px;
+            height: 20px;
+            background: #F1C40F;
+            position: absolute;
+            top: 2px;
+            right: -2px;
+            border-radius: 2px;
+        }
+        .pen-tip {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 12px solid #2C3E50;
+            position: absolute;
+            bottom: 0;
+        }
+
+        /* school-04: Eraser */
+        .eraser {
+            width: 60px;
+            height: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .eraser:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+        .eraser-body {
+            width: 100%;
+            height: 100%;
+            background: #FF8FAB;
+            border-radius: 4px;
+            position: relative;
+        }
+        .eraser-band {
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 12px;
+            height: 100%;
+            background: #1A5F7A;
+        }
+        .eraser-label {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* school-05: Ruler */
+        .ruler {
+            width: 80px;
+            height: 20px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .ruler:hover {
+            transform: rotate(-3deg) scale(1.1);
+        }
+        .ruler-body {
+            width: 100%;
+            height: 100%;
+            background: #FFF3B0;
+            border-radius: 2px;
+            position: relative;
+            border: 2px solid #F9C846;
+        }
+        .ruler-marks {
+            position: absolute;
+            top: 2px;
+            left: 5px;
+            display: flex;
+            gap: 6px;
+        }
+        .ruler-mark {
+            width: 2px;
+            height: 8px;
+            background: #2D3436;
+        }
+        .ruler-mark.short {
+            height: 5px;
+        }
+
+        /* school-06: Scissors */
+        .scissors {
+            width: 60px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .scissors:hover {
+            transform: scale(1.15);
+        }
+        .scissors:hover .scissors-blade-top {
+            transform: rotate(10deg);
+        }
+        .scissors:hover .scissors-blade-bottom {
+            transform: rotate(-10deg);
+        }
+        .scissors-blade-top {
+            position: absolute;
+            width: 35px;
+            height: 12px;
+            background: #BDC3C7;
+            top: 15px;
+            left: 20px;
+            border-radius: 0 6px 6px 0;
+            transform-origin: left center;
+            transition: transform 0.3s ease;
+        }
+        .scissors-blade-bottom {
+            position: absolute;
+            width: 35px;
+            height: 12px;
+            background: #95A5A6;
+            top: 35px;
+            left: 20px;
+            border-radius: 0 6px 6px 0;
+            transform-origin: left center;
+            transition: transform 0.3s ease;
+        }
+        .scissors-handle-top {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 5px solid #E74C3C;
+            border-radius: 50%;
+            top: 5px;
+            left: 0;
+        }
+        .scissors-handle-bottom {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 5px solid #E74C3C;
+            border-radius: 50%;
+            top: 38px;
+            left: 0;
+        }
+        .scissors-pivot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #7F8C8D;
+            border-radius: 50%;
+            top: 26px;
+            left: 18px;
+        }
+
+        /* school-07: Glue */
+        .glue {
+            width: 30px;
+            height: 65px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .glue:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+        .glue-body {
+            width: 100%;
+            height: 45px;
+            background: #FFF;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            border: 2px solid #E0E0E0;
+        }
+        .glue-cap {
+            width: 20px;
+            height: 20px;
+            background: #FF6B35;
+            border-radius: 3px 3px 0 0;
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+        .glue-tip {
+            width: 10px;
+            height: 8px;
+            background: #FF6B35;
+            position: absolute;
+            top: 18px;
+            left: 10px;
+            border-radius: 0 0 3px 3px;
+        }
+        .glue-label {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 7px;
+            color: #FF6B35;
+            font-weight: bold;
+        }
+
+        /* school-08: Backpack */
+        .backpack {
+            width: 55px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .backpack:hover {
+            transform: translateY(-8px);
+        }
+        .backpack-body {
+            width: 100%;
+            height: 55px;
+            background: #E74C3C;
+            border-radius: 8px 8px 12px 12px;
+            position: absolute;
+            bottom: 0;
+        }
+        .backpack-top {
+            width: 35px;
+            height: 20px;
+            background: #C0392B;
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+        .backpack-pocket {
+            width: 40px;
+            height: 25px;
+            background: #C0392B;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 8px;
+            left: 7.5px;
+        }
+        .backpack-strap-left {
+            width: 6px;
+            height: 35px;
+            background: #922B21;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 5px;
+            left: -4px;
+        }
+        .backpack-strap-right {
+            width: 6px;
+            height: 35px;
+            background: #922B21;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 5px;
+            right: -4px;
+        }
+        .backpack-buckle {
+            width: 8px;
+            height: 5px;
+            background: #F1C40F;
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* school-09: Notebook */
+        .notebook {
+            width: 55px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .notebook:hover {
+            transform: rotate(5deg) scale(1.08);
+        }
+        .notebook-cover {
+            width: 100%;
+            height: 100%;
+            background: #9B59B6;
+            border-radius: 3px 6px 6px 3px;
+        }
+        .notebook-binding {
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .notebook-ring {
+            width: 8px;
+            height: 8px;
+            border: 3px solid #7F8C8D;
+            border-radius: 50%;
+            background: transparent;
+        }
+        .notebook-label {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 20px;
+            background: #FFF;
+            border-radius: 2px;
+        }
+
+        /* school-10: Blackboard */
+        .blackboard {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .blackboard:hover {
+            transform: scale(1.1);
+        }
+        .blackboard-frame {
+            width: 100%;
+            height: 100%;
+            background: #8B4513;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .blackboard-surface {
+            width: 100%;
+            height: 100%;
+            background: #2C5530;
+            border-radius: 2px;
+            position: relative;
+        }
+        .blackboard-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFF;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .blackboard-tray {
+            position: absolute;
+            bottom: -8px;
+            left: 5px;
+            width: 70px;
+            height: 6px;
+            background: #A0522D;
+            border-radius: 2px;
+        }
+        .blackboard-chalk {
+            position: absolute;
+            bottom: 0;
+            right: 10px;
+            width: 15px;
+            height: 5px;
+            background: #FFF;
+            border-radius: 2px;
+        }
+
+        /* school-11: Globe */
+        .globe {
+            width: 60px;
+            height: 75px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .globe:hover {
+            transform: scale(1.1);
+        }
+        .globe:hover .globe-sphere {
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .globe-sphere {
+            width: 50px;
+            height: 50px;
+            background: #3498DB;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 5px;
+            overflow: hidden;
+        }
+        .globe-land1 {
+            position: absolute;
+            width: 20px;
+            height: 15px;
+            background: #27AE60;
+            border-radius: 50%;
+            top: 10px;
+            left: 8px;
+        }
+        .globe-land2 {
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #27AE60;
+            border-radius: 50%;
+            top: 20px;
+            right: 5px;
+        }
+        .globe-stand {
+            width: 6px;
+            height: 15px;
+            background: #7F8C8D;
+            position: absolute;
+            bottom: 10px;
+            left: 27px;
+        }
+        .globe-base {
+            width: 30px;
+            height: 8px;
+            background: #95A5A6;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+        }
+        .globe-ring {
+            width: 54px;
+            height: 54px;
+            border: 3px solid #BDC3C7;
+            border-radius: 50%;
+            position: absolute;
+            top: -2px;
+            left: 3px;
+        }
+
+        /* school-12: Graduation Cap */
+        .graduation-cap {
+            width: 70px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .graduation-cap:hover {
+            transform: translateY(-10px) rotate(-5deg);
+        }
+        .cap-top {
+            width: 60px;
+            height: 60px;
+            background: #2C3E50;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+        .cap-base {
+            width: 50px;
+            height: 20px;
+            background: #34495E;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+        }
+        .cap-button {
+            width: 10px;
+            height: 10px;
+            background: #F1C40F;
+            border-radius: 50%;
+            position: absolute;
+            top: 18px;
+            left: 30px;
+            z-index: 10;
+        }
+        .cap-tassel {
+            width: 3px;
+            height: 30px;
+            background: #F1C40F;
+            position: absolute;
+            top: 25px;
+            left: 50px;
+            z-index: 10;
+            border-radius: 2px;
+        }
+        .cap-tassel-end {
+            width: 8px;
+            height: 12px;
+            background: #F1C40F;
+            position: absolute;
+            top: 50px;
+            left: 47px;
+            z-index: 10;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* school-13: Apple */
+        .apple {
+            width: 50px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .apple:hover {
+            transform: scale(1.15) rotate(-5deg);
+        }
+        .apple-body {
+            width: 45px;
+            height: 45px;
+            background: #E74C3C;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            bottom: 0;
+            left: 2.5px;
+        }
+        .apple-indent {
+            width: 10px;
+            height: 8px;
+            background: #C0392B;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            left: 20px;
+        }
+        .apple-stem {
+            width: 4px;
+            height: 12px;
+            background: #8B4513;
+            position: absolute;
+            top: 0;
+            left: 23px;
+            border-radius: 2px;
+        }
+        .apple-leaf {
+            width: 15px;
+            height: 10px;
+            background: #27AE60;
+            border-radius: 0 50% 50% 50%;
+            position: absolute;
+            top: 3px;
+            left: 26px;
+            transform: rotate(30deg);
+        }
+
+        /* school-14: ABC Letters */
+        .abc-letters {
+            width: 75px;
+            height: 35px;
+            position: relative;
+            display: flex;
+            gap: 3px;
+            transition: transform 0.3s ease;
+        }
+        .abc-letters:hover {
+            transform: scale(1.1);
+        }
+        .abc-letters:hover .letter-a {
+            animation: bounce 0.5s ease;
+        }
+        .abc-letters:hover .letter-b {
+            animation: bounce 0.5s ease 0.1s;
+        }
+        .abc-letters:hover .letter-c {
+            animation: bounce 0.5s ease 0.2s;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .letter {
+            width: 22px;
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #FFF;
+        }
+        .letter-a {
+            background: #E74C3C;
+        }
+        .letter-b {
+            background: #3498DB;
+        }
+        .letter-c {
+            background: #F1C40F;
+            color: #2C3E50;
+        }
+
+        /* school-15: Calculator */
+        .calculator {
+            width: 45px;
+            height: 65px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .calculator:hover {
+            transform: scale(1.1);
+        }
+        .calculator-body {
+            width: 100%;
+            height: 100%;
+            background: #34495E;
+            border-radius: 6px;
+        }
+        .calculator-screen {
+            width: 35px;
+            height: 12px;
+            background: #A8E6CF;
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            border-radius: 2px;
+        }
+        .calculator-buttons {
+            position: absolute;
+            top: 24px;
+            left: 5px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+        }
+        .calc-btn {
+            width: 7px;
+            height: 7px;
+            background: #7F8C8D;
+            border-radius: 2px;
+        }
+        .calc-btn.orange {
+            background: #E67E22;
+        }
+
+        /* school-16: Paintbrush */
+        .paintbrush {
+            width: 15px;
+            height: 75px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .paintbrush:hover {
+            transform: rotate(15deg) translateY(-5px);
+        }
+        .paintbrush-handle {
+            width: 10px;
+            height: 45px;
+            background: #DEB887;
+            position: absolute;
+            top: 0;
+            left: 2.5px;
+            border-radius: 3px 3px 0 0;
+        }
+        .paintbrush-ferrule {
+            width: 12px;
+            height: 8px;
+            background: #95A5A6;
+            position: absolute;
+            top: 43px;
+            left: 1.5px;
+        }
+        .paintbrush-bristles {
+            width: 15px;
+            height: 22px;
+            background: #FF6B35;
+            position: absolute;
+            bottom: 0;
+            border-radius: 0 0 5px 5px;
+        }
+        .paintbrush-bristle-tip {
+            width: 10px;
+            height: 8px;
+            background: #E55A2B;
+            position: absolute;
+            bottom: 0;
+            left: 2.5px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* school-17: Crayon */
+        .crayon {
+            width: 18px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .crayon:hover {
+            transform: rotate(-10deg) scale(1.1);
+        }
+        .crayon-body {
+            width: 100%;
+            height: 50px;
+            background: #9B59B6;
+            position: absolute;
+            top: 8px;
+            border-radius: 2px;
+        }
+        .crayon-wrapper {
+            position: absolute;
+            top: 12px;
+            left: 2px;
+            width: 14px;
+            height: 42px;
+            border: 1px solid #8E44AD;
+        }
+        .crayon-tip {
+            width: 0;
+            height: 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 14px solid #8E44AD;
+            position: absolute;
+            bottom: 0;
+        }
+        .crayon-label {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 25px;
+            background: #2C3E50;
+            border-radius: 2px;
+        }
+
+        /* school-18: Paper */
+        .paper {
+            width: 55px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .paper:hover {
+            transform: rotate(-3deg) scale(1.08);
+        }
+        .paper-sheet {
+            width: 100%;
+            height: 100%;
+            background: #FFF;
+            border-radius: 2px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .paper-line {
+            position: absolute;
+            left: 10px;
+            width: 35px;
+            height: 2px;
+            background: #E0E0E0;
+        }
+        .paper-line:nth-child(1) { top: 15px; }
+        .paper-line:nth-child(2) { top: 25px; width: 30px; }
+        .paper-line:nth-child(3) { top: 35px; width: 32px; }
+        .paper-line:nth-child(4) { top: 45px; width: 28px; }
+        .paper-corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-top: 12px solid #E0E0E0;
+        }
+
+        /* school-19: Desk */
+        .desk {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .desk:hover {
+            transform: scale(1.08);
+        }
+        .desk-top {
+            width: 100%;
+            height: 10px;
+            background: #DEB887;
+            position: absolute;
+            top: 15px;
+            border-radius: 3px;
+        }
+        .desk-front {
+            width: 70px;
+            height: 25px;
+            background: #D2B48C;
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            border-radius: 0 0 3px 3px;
+        }
+        .desk-drawer {
+            width: 25px;
+            height: 15px;
+            background: #C4A67C;
+            position: absolute;
+            top: 30px;
+            left: 27.5px;
+            border-radius: 2px;
+        }
+        .desk-handle {
+            width: 10px;
+            height: 3px;
+            background: #8B7355;
+            position: absolute;
+            top: 36px;
+            left: 35px;
+            border-radius: 2px;
+        }
+        .desk-leg-left {
+            width: 8px;
+            height: 15px;
+            background: #A0826D;
+            position: absolute;
+            bottom: 0;
+            left: 8px;
+        }
+        .desk-leg-right {
+            width: 8px;
+            height: 15px;
+            background: #A0826D;
+            position: absolute;
+            bottom: 0;
+            right: 8px;
+        }
+        .desk-book {
+            width: 20px;
+            height: 5px;
+            background: #3498DB;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 1px;
+        }
+        .desk-pencil {
+            width: 3px;
+            height: 15px;
+            background: #F1C40F;
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            transform: rotate(-30deg);
+        }
+
+        /* school-20: School Building */
+        .school-building {
+            width: 80px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .school-building:hover {
+            transform: scale(1.08);
+        }
+        .building-main {
+            width: 70px;
+            height: 45px;
+            background: #E8D5B7;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+        }
+        .building-roof {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 20px solid #C0392B;
+            position: absolute;
+            top: 5px;
+            left: 0;
+        }
+        .building-door {
+            width: 14px;
+            height: 22px;
+            background: #8B4513;
+            position: absolute;
+            bottom: 0;
+            left: 33px;
+            border-radius: 7px 7px 0 0;
+        }
+        .building-window {
+            width: 12px;
+            height: 12px;
+            background: #AED6F1;
+            border: 2px solid #85C1E9;
+            position: absolute;
+        }
+        .building-window:nth-of-type(1) {
+            bottom: 25px;
+            left: 13px;
+        }
+        .building-window:nth-of-type(2) {
+            bottom: 25px;
+            right: 13px;
+        }
+        .building-flag {
+            width: 3px;
+            height: 25px;
+            background: #7F8C8D;
+            position: absolute;
+            top: -15px;
+            left: 38.5px;
+        }
+        .building-flag-cloth {
+            width: 15px;
+            height: 10px;
+            background: #E74C3C;
+            position: absolute;
+            top: -15px;
+            left: 41px;
+        }
+        .building-clock {
+            width: 10px;
+            height: 10px;
+            background: #FFF;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            left: 35px;
+            border: 2px solid #F1C40F;
+        }
+    </style>
+</head>
+<body>
+    <h1>School & Education CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- school-01: Book -->
+        <div class="item">
+            <span class="item-label">school-01</span>
+            <div class="illust-container">
+                <div class="book">
+                    <div class="book-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-pages">
+                            <div class="book-line"></div>
+                            <div class="book-line"></div>
+                            <div class="book-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Book</span>
+        </div>
+
+        <!-- school-02: Pencil -->
+        <div class="item">
+            <span class="item-label">school-02</span>
+            <div class="illust-container">
+                <div class="pencil">
+                    <div class="pencil-eraser"></div>
+                    <div class="pencil-band"></div>
+                    <div class="pencil-body"></div>
+                    <div class="pencil-tip"></div>
+                </div>
+            </div>
+            <span class="item-name">Pencil</span>
+        </div>
+
+        <!-- school-03: Pen -->
+        <div class="item">
+            <span class="item-label">school-03</span>
+            <div class="illust-container">
+                <div class="pen">
+                    <div class="pen-cap"></div>
+                    <div class="pen-clip"></div>
+                    <div class="pen-body"></div>
+                    <div class="pen-tip"></div>
+                </div>
+            </div>
+            <span class="item-name">Pen</span>
+        </div>
+
+        <!-- school-04: Eraser -->
+        <div class="item">
+            <span class="item-label">school-04</span>
+            <div class="illust-container">
+                <div class="eraser">
+                    <div class="eraser-body">
+                        <div class="eraser-band"></div>
+                        <span class="eraser-label">MONO</span>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Eraser</span>
+        </div>
+
+        <!-- school-05: Ruler -->
+        <div class="item">
+            <span class="item-label">school-05</span>
+            <div class="illust-container">
+                <div class="ruler">
+                    <div class="ruler-body">
+                        <div class="ruler-marks">
+                            <div class="ruler-mark"></div>
+                            <div class="ruler-mark short"></div>
+                            <div class="ruler-mark"></div>
+                            <div class="ruler-mark short"></div>
+                            <div class="ruler-mark"></div>
+                            <div class="ruler-mark short"></div>
+                            <div class="ruler-mark"></div>
+                            <div class="ruler-mark short"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Ruler</span>
+        </div>
+
+        <!-- school-06: Scissors -->
+        <div class="item">
+            <span class="item-label">school-06</span>
+            <div class="illust-container">
+                <div class="scissors">
+                    <div class="scissors-handle-top"></div>
+                    <div class="scissors-handle-bottom"></div>
+                    <div class="scissors-blade-top"></div>
+                    <div class="scissors-blade-bottom"></div>
+                    <div class="scissors-pivot"></div>
+                </div>
+            </div>
+            <span class="item-name">Scissors</span>
+        </div>
+
+        <!-- school-07: Glue -->
+        <div class="item">
+            <span class="item-label">school-07</span>
+            <div class="illust-container">
+                <div class="glue">
+                    <div class="glue-cap"></div>
+                    <div class="glue-tip"></div>
+                    <div class="glue-body">
+                        <span class="glue-label">GLUE</span>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Glue</span>
+        </div>
+
+        <!-- school-08: Backpack -->
+        <div class="item">
+            <span class="item-label">school-08</span>
+            <div class="illust-container">
+                <div class="backpack">
+                    <div class="backpack-top"></div>
+                    <div class="backpack-body">
+                        <div class="backpack-pocket"></div>
+                        <div class="backpack-buckle"></div>
+                    </div>
+                    <div class="backpack-strap-left"></div>
+                    <div class="backpack-strap-right"></div>
+                </div>
+            </div>
+            <span class="item-name">Backpack</span>
+        </div>
+
+        <!-- school-09: Notebook -->
+        <div class="item">
+            <span class="item-label">school-09</span>
+            <div class="illust-container">
+                <div class="notebook">
+                    <div class="notebook-cover">
+                        <div class="notebook-binding">
+                            <div class="notebook-ring"></div>
+                            <div class="notebook-ring"></div>
+                            <div class="notebook-ring"></div>
+                            <div class="notebook-ring"></div>
+                            <div class="notebook-ring"></div>
+                        </div>
+                        <div class="notebook-label"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Notebook</span>
+        </div>
+
+        <!-- school-10: Blackboard -->
+        <div class="item">
+            <span class="item-label">school-10</span>
+            <div class="illust-container">
+                <div class="blackboard">
+                    <div class="blackboard-frame">
+                        <div class="blackboard-surface">
+                            <span class="blackboard-text">ABC</span>
+                        </div>
+                    </div>
+                    <div class="blackboard-tray">
+                        <div class="blackboard-chalk"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Blackboard</span>
+        </div>
+
+        <!-- school-11: Globe -->
+        <div class="item">
+            <span class="item-label">school-11</span>
+            <div class="illust-container">
+                <div class="globe">
+                    <div class="globe-ring"></div>
+                    <div class="globe-sphere">
+                        <div class="globe-land1"></div>
+                        <div class="globe-land2"></div>
+                    </div>
+                    <div class="globe-stand"></div>
+                    <div class="globe-base"></div>
+                </div>
+            </div>
+            <span class="item-name">Globe</span>
+        </div>
+
+        <!-- school-12: Graduation Cap -->
+        <div class="item">
+            <span class="item-label">school-12</span>
+            <div class="illust-container">
+                <div class="graduation-cap">
+                    <div class="cap-top"></div>
+                    <div class="cap-base"></div>
+                    <div class="cap-button"></div>
+                    <div class="cap-tassel"></div>
+                    <div class="cap-tassel-end"></div>
+                </div>
+            </div>
+            <span class="item-name">Graduation Cap</span>
+        </div>
+
+        <!-- school-13: Apple -->
+        <div class="item">
+            <span class="item-label">school-13</span>
+            <div class="illust-container">
+                <div class="apple">
+                    <div class="apple-stem"></div>
+                    <div class="apple-leaf"></div>
+                    <div class="apple-body">
+                        <div class="apple-indent"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Apple for Teacher</span>
+        </div>
+
+        <!-- school-14: ABC Letters -->
+        <div class="item">
+            <span class="item-label">school-14</span>
+            <div class="illust-container">
+                <div class="abc-letters">
+                    <div class="letter letter-a">A</div>
+                    <div class="letter letter-b">B</div>
+                    <div class="letter letter-c">C</div>
+                </div>
+            </div>
+            <span class="item-name">ABC Letters</span>
+        </div>
+
+        <!-- school-15: Calculator -->
+        <div class="item">
+            <span class="item-label">school-15</span>
+            <div class="illust-container">
+                <div class="calculator">
+                    <div class="calculator-body">
+                        <div class="calculator-screen"></div>
+                        <div class="calculator-buttons">
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn orange"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn orange"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn orange"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn"></div>
+                            <div class="calc-btn orange"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Calculator</span>
+        </div>
+
+        <!-- school-16: Paintbrush -->
+        <div class="item">
+            <span class="item-label">school-16</span>
+            <div class="illust-container">
+                <div class="paintbrush">
+                    <div class="paintbrush-handle"></div>
+                    <div class="paintbrush-ferrule"></div>
+                    <div class="paintbrush-bristles">
+                        <div class="paintbrush-bristle-tip"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Paintbrush</span>
+        </div>
+
+        <!-- school-17: Crayon -->
+        <div class="item">
+            <span class="item-label">school-17</span>
+            <div class="illust-container">
+                <div class="crayon">
+                    <div class="crayon-body">
+                        <div class="crayon-wrapper"></div>
+                        <div class="crayon-label"></div>
+                    </div>
+                    <div class="crayon-tip"></div>
+                </div>
+            </div>
+            <span class="item-name">Crayon</span>
+        </div>
+
+        <!-- school-18: Paper -->
+        <div class="item">
+            <span class="item-label">school-18</span>
+            <div class="illust-container">
+                <div class="paper">
+                    <div class="paper-sheet">
+                        <div class="paper-line"></div>
+                        <div class="paper-line"></div>
+                        <div class="paper-line"></div>
+                        <div class="paper-line"></div>
+                        <div class="paper-corner"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Paper</span>
+        </div>
+
+        <!-- school-19: Desk -->
+        <div class="item">
+            <span class="item-label">school-19</span>
+            <div class="illust-container">
+                <div class="desk">
+                    <div class="desk-book"></div>
+                    <div class="desk-pencil"></div>
+                    <div class="desk-top"></div>
+                    <div class="desk-front">
+                        <div class="desk-drawer"></div>
+                        <div class="desk-handle"></div>
+                    </div>
+                    <div class="desk-leg-left"></div>
+                    <div class="desk-leg-right"></div>
+                </div>
+            </div>
+            <span class="item-name">Desk</span>
+        </div>
+
+        <!-- school-20: School Building -->
+        <div class="item">
+            <span class="item-label">school-20</span>
+            <div class="illust-container">
+                <div class="school-building">
+                    <div class="building-roof"></div>
+                    <div class="building-flag"></div>
+                    <div class="building-flag-cloth"></div>
+                    <div class="building-main">
+                        <div class="building-clock"></div>
+                        <div class="building-window"></div>
+                        <div class="building-window"></div>
+                        <div class="building-door"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">School Building</span>
+        </div>
+    </div>
+</body>
+</html>

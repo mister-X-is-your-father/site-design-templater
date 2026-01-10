@@ -1,0 +1,3391 @@
+<!--
+  Diagram Templates: 場所・環境 (Places & Environment)
+  30 unique CSS-only patterns for location/scene representation
+  Style: Simple, pop, colorful, flat design with hover effects
+  Colors: pink, sky blue, mint green, yellow, orange, purple
+-->
+
+<style>
+/* ===== Places & Environment Base Styles ===== */
+.place-diagram {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.place-diagram:hover {
+  transform: scale(1.08);
+}
+
+/* ===== #places-1: Home Sweet Home ===== */
+#places-1 {
+  background: #E8F5E9;
+}
+
+#places-1 .house-body {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  width: 70px;
+  height: 50px;
+  background: #FFB6C1;
+  border-radius: 4px;
+}
+
+#places-1 .house-roof {
+  position: absolute;
+  bottom: 65px;
+  left: 15px;
+  width: 0;
+  height: 0;
+  border-left: 45px solid transparent;
+  border-right: 45px solid transparent;
+  border-bottom: 35px solid #FF69B4;
+}
+
+#places-1 .house-door {
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+  width: 20px;
+  height: 30px;
+  background: #8B4513;
+  border-radius: 2px 2px 0 0;
+}
+
+#places-1 .house-window {
+  position: absolute;
+  bottom: 45px;
+  width: 15px;
+  height: 15px;
+  background: #87CEEB;
+  border: 2px solid #fff;
+}
+
+#places-1 .house-window.left { left: 32px; }
+#places-1 .house-window.right { left: 73px; }
+
+#places-1 .heart {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 18px;
+  background: #FF69B4;
+  transform: translateX(-50%) rotate(-45deg);
+  animation: heartbeat 1s infinite;
+}
+
+#places-1 .heart::before,
+#places-1 .heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 18px;
+  background: #FF69B4;
+  border-radius: 50%;
+}
+
+#places-1 .heart::before { top: -9px; left: 0; }
+#places-1 .heart::after { top: 0; left: 9px; }
+
+@keyframes heartbeat {
+  0%, 100% { transform: translateX(-50%) rotate(-45deg) scale(1); }
+  50% { transform: translateX(-50%) rotate(-45deg) scale(1.1); }
+}
+
+#places-1:hover .house-body { background: #FFC0CB; }
+
+/* ===== #places-2: School Building ===== */
+#places-2 {
+  background: #E3F2FD;
+}
+
+#places-2 .school-main {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  width: 80px;
+  height: 55px;
+  background: #87CEEB;
+  border-radius: 4px 4px 0 0;
+}
+
+#places-2 .school-tower {
+  position: absolute;
+  bottom: 70px;
+  left: 45px;
+  width: 30px;
+  height: 30px;
+  background: #5DADE2;
+}
+
+#places-2 .school-clock {
+  position: absolute;
+  bottom: 80px;
+  left: 50px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+#places-2 .clock-hand {
+  position: absolute;
+  bottom: 88px;
+  left: 59px;
+  width: 2px;
+  height: 8px;
+  background: #333;
+  transform-origin: bottom;
+}
+
+#places-2 .clock-hand.minute { transform: rotate(90deg); height: 6px; }
+
+#places-2 .school-door {
+  position: absolute;
+  bottom: 15px;
+  left: 48px;
+  width: 24px;
+  height: 35px;
+  background: #8B4513;
+  border-radius: 12px 12px 0 0;
+}
+
+#places-2 .school-window {
+  position: absolute;
+  width: 12px;
+  height: 15px;
+  background: #FFE4B5;
+  border: 2px solid #fff;
+}
+
+#places-2 .school-window.w1 { bottom: 40px; left: 28px; }
+#places-2 .school-window.w2 { bottom: 40px; left: 78px; }
+
+#places-2 .flag {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  width: 2px;
+  height: 25px;
+  background: #333;
+}
+
+#places-2 .flag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 15px;
+  height: 10px;
+  background: #FF6B6B;
+}
+
+#places-2:hover .school-main { background: #5DADE2; }
+
+/* ===== #places-3: Office/Workplace ===== */
+#places-3 {
+  background: #F3E5F5;
+}
+
+#places-3 .office-building {
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
+  width: 60px;
+  height: 90px;
+  background: #9B59B6;
+  border-radius: 4px 4px 0 0;
+}
+
+#places-3 .office-window {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  background: #FFD93D;
+}
+
+#places-3 .office-window.r1c1 { bottom: 70px; left: 38px; }
+#places-3 .office-window.r1c2 { bottom: 70px; left: 52px; }
+#places-3 .office-window.r1c3 { bottom: 70px; left: 66px; }
+#places-3 .office-window.r2c1 { bottom: 52px; left: 38px; }
+#places-3 .office-window.r2c2 { bottom: 52px; left: 52px; }
+#places-3 .office-window.r2c3 { bottom: 52px; left: 66px; }
+#places-3 .office-window.r3c1 { bottom: 34px; left: 38px; }
+#places-3 .office-window.r3c2 { bottom: 34px; left: 52px; }
+#places-3 .office-window.r3c3 { bottom: 34px; left: 66px; }
+
+#places-3 .office-door {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  width: 20px;
+  height: 18px;
+  background: #87CEEB;
+  border-radius: 2px;
+}
+
+#places-3 .briefcase {
+  position: absolute;
+  bottom: 2px;
+  right: 20px;
+  width: 18px;
+  height: 14px;
+  background: #8B4513;
+  border-radius: 2px;
+}
+
+#places-3 .briefcase::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 5px;
+  width: 8px;
+  height: 4px;
+  border: 2px solid #8B4513;
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+}
+
+#places-3:hover .office-window { background: #fff; }
+
+/* ===== #places-4: Hospital ===== */
+#places-4 {
+  background: #FFEBEE;
+}
+
+#places-4 .hospital-body {
+  position: absolute;
+  bottom: 15px;
+  left: 25px;
+  width: 70px;
+  height: 60px;
+  background: #fff;
+  border: 3px solid #FF69B4;
+  border-radius: 4px;
+}
+
+#places-4 .hospital-cross {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+}
+
+#places-4 .hospital-cross::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 30px;
+  height: 10px;
+  background: #FF69B4;
+}
+
+#places-4 .hospital-cross::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 10px;
+  height: 30px;
+  background: #FF69B4;
+}
+
+#places-4 .hospital-entrance {
+  position: absolute;
+  bottom: 15px;
+  left: 45px;
+  width: 30px;
+  height: 25px;
+  background: #87CEEB;
+  border-radius: 15px 15px 0 0;
+}
+
+#places-4 .ambulance {
+  position: absolute;
+  bottom: 3px;
+  right: 10px;
+  width: 25px;
+  height: 15px;
+  background: #fff;
+  border: 2px solid #FF69B4;
+  border-radius: 3px;
+}
+
+#places-4 .ambulance::after {
+  content: '+';
+  position: absolute;
+  top: 0;
+  left: 8px;
+  color: #FF69B4;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+#places-4:hover .hospital-cross::before,
+#places-4:hover .hospital-cross::after {
+  background: #FF1493;
+}
+
+/* ===== #places-5: Shopping Mall ===== */
+#places-5 {
+  background: #FFF3E0;
+}
+
+#places-5 .mall-building {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 90px;
+  height: 70px;
+  background: #FFB347;
+  border-radius: 8px 8px 0 0;
+}
+
+#places-5 .mall-sign {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  width: 70px;
+  height: 20px;
+  background: #FF69B4;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#places-5 .mall-sign::after {
+  content: 'MALL';
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#places-5 .mall-door {
+  position: absolute;
+  bottom: 10px;
+  left: 40px;
+  width: 40px;
+  height: 40px;
+  background: #87CEEB;
+  border-radius: 4px;
+}
+
+#places-5 .mall-door::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 19px;
+  width: 2px;
+  height: 40px;
+  background: #fff;
+}
+
+#places-5 .shopping-bag {
+  position: absolute;
+  bottom: 2px;
+  right: 8px;
+  width: 16px;
+  height: 18px;
+  background: #FF69B4;
+  border-radius: 0 0 4px 4px;
+}
+
+#places-5 .shopping-bag::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 3px;
+  width: 10px;
+  height: 6px;
+  border: 2px solid #FF69B4;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+}
+
+#places-5:hover .mall-building { background: #FFA500; }
+
+/* ===== #places-6: Park/Playground ===== */
+#places-6 {
+  background: #E8F5E9;
+}
+
+#places-6 .grass {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: #98D8AA;
+  border-radius: 0 0 4px 4px;
+}
+
+#places-6 .tree {
+  position: absolute;
+  bottom: 25px;
+  left: 15px;
+}
+
+#places-6 .tree-trunk {
+  width: 12px;
+  height: 30px;
+  background: #8B4513;
+  margin: 0 auto;
+}
+
+#places-6 .tree-leaves {
+  width: 40px;
+  height: 40px;
+  background: #4CAF50;
+  border-radius: 50%;
+  position: relative;
+  top: -5px;
+  left: -14px;
+}
+
+#places-6 .swing {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+}
+
+#places-6 .swing-frame {
+  width: 40px;
+  height: 50px;
+  border: 4px solid #9B59B6;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+#places-6 .swing-seat {
+  position: absolute;
+  top: 35px;
+  left: 12px;
+  width: 20px;
+  height: 4px;
+  background: #8B4513;
+}
+
+#places-6 .swing-rope {
+  position: absolute;
+  top: 4px;
+  width: 2px;
+  height: 32px;
+  background: #666;
+}
+
+#places-6 .swing-rope.left { left: 12px; }
+#places-6 .swing-rope.right { left: 30px; }
+
+#places-6 .sun {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-6:hover .swing-seat {
+  animation: swing 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes swing {
+  from { transform: rotate(-10deg); }
+  to { transform: rotate(10deg); }
+}
+
+/* ===== #places-7: Beach Scene ===== */
+#places-7 {
+  background: linear-gradient(to bottom, #87CEEB 60%, #FFE4B5 60%);
+}
+
+#places-7 .sun {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-7 .wave {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: #5DADE2;
+  border-radius: 0 0 100% 100%;
+}
+
+#places-7 .wave.w2 {
+  bottom: 50px;
+  opacity: 0.7;
+}
+
+#places-7 .umbrella-pole {
+  position: absolute;
+  bottom: 10px;
+  left: 35px;
+  width: 4px;
+  height: 40px;
+  background: #8B4513;
+}
+
+#places-7 .umbrella-top {
+  position: absolute;
+  bottom: 45px;
+  left: 15px;
+  width: 50px;
+  height: 25px;
+  background: #FF69B4;
+  border-radius: 50px 50px 0 0;
+}
+
+#places-7 .umbrella-stripe {
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 25px;
+  background: #fff;
+  border-radius: 5px 5px 0 0;
+}
+
+#places-7 .umbrella-stripe:nth-child(2) { left: 20px; }
+#places-7 .umbrella-stripe:nth-child(3) { left: 40px; }
+
+#places-7 .shell {
+  position: absolute;
+  bottom: 8px;
+  right: 25px;
+  width: 15px;
+  height: 12px;
+  background: #FFB6C1;
+  border-radius: 50% 50% 0 0;
+}
+
+#places-7:hover .wave {
+  animation: waveMove 1s ease-in-out infinite;
+}
+
+@keyframes waveMove {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* ===== #places-8: Mountain Landscape ===== */
+#places-8 {
+  background: #E3F2FD;
+}
+
+#places-8 .mountain {
+  position: absolute;
+  bottom: 20px;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+}
+
+#places-8 .mountain.m1 {
+  left: 10px;
+  border-bottom: 60px solid #9B59B6;
+}
+
+#places-8 .mountain.m2 {
+  left: 40px;
+  border-bottom: 80px solid #8E44AD;
+}
+
+#places-8 .snow-cap {
+  position: absolute;
+  bottom: 80px;
+  left: 65px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid #fff;
+}
+
+#places-8 .cloud {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 15px;
+  background: #fff;
+  border-radius: 15px;
+}
+
+#places-8 .cloud::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+#places-8 .ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: #98D8AA;
+}
+
+#places-8 .pine-tree {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+#places-8 .pine-tree::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  width: 6px;
+  height: 15px;
+  background: #8B4513;
+}
+
+#places-8 .pine-tree::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 25px solid #2E7D32;
+}
+
+#places-8:hover .cloud {
+  animation: cloudFloat 2s ease-in-out infinite;
+}
+
+@keyframes cloudFloat {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+/* ===== #places-9: Forest/Woods ===== */
+#places-9 {
+  background: #E8F5E9;
+}
+
+#places-9 .tree {
+  position: absolute;
+  bottom: 10px;
+}
+
+#places-9 .tree .trunk {
+  width: 10px;
+  height: 25px;
+  background: #8B4513;
+  margin: 0 auto;
+}
+
+#places-9 .tree .foliage {
+  width: 35px;
+  height: 50px;
+  background: #4CAF50;
+  border-radius: 50% 50% 5% 5%;
+  position: relative;
+  top: -10px;
+}
+
+#places-9 .tree.t1 { left: 10px; }
+#places-9 .tree.t1 .foliage { background: #2E7D32; height: 55px; }
+
+#places-9 .tree.t2 { left: 42px; }
+#places-9 .tree.t2 .foliage { background: #4CAF50; height: 60px; }
+
+#places-9 .tree.t3 { left: 75px; }
+#places-9 .tree.t3 .foliage { background: #66BB6A; height: 50px; }
+
+#places-9 .ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: #795548;
+}
+
+#places-9 .mushroom {
+  position: absolute;
+  bottom: 12px;
+  left: 55px;
+  width: 12px;
+  height: 8px;
+  background: #FF69B4;
+  border-radius: 50% 50% 0 0;
+}
+
+#places-9 .mushroom::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 4px;
+  width: 4px;
+  height: 5px;
+  background: #fff;
+}
+
+#places-9 .butterfly {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  width: 8px;
+  height: 4px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-9 .butterfly::before,
+#places-9 .butterfly::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 10px;
+  background: #FF69B4;
+  border-radius: 50%;
+}
+
+#places-9 .butterfly::before { top: -8px; left: -4px; transform: rotate(-20deg); }
+#places-9 .butterfly::after { top: -8px; right: -4px; transform: rotate(20deg); }
+
+#places-9:hover .butterfly {
+  animation: flutter 0.3s ease-in-out infinite;
+}
+
+@keyframes flutter {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ===== #places-10: City Skyline ===== */
+#places-10 {
+  background: #1A237E;
+}
+
+#places-10 .building {
+  position: absolute;
+  bottom: 10px;
+  background: #37474F;
+}
+
+#places-10 .building.b1 { left: 5px; width: 20px; height: 50px; }
+#places-10 .building.b2 { left: 28px; width: 25px; height: 70px; background: #455A64; }
+#places-10 .building.b3 { left: 56px; width: 18px; height: 55px; }
+#places-10 .building.b4 { left: 77px; width: 22px; height: 65px; background: #546E7A; }
+#places-10 .building.b5 { left: 102px; width: 15px; height: 45px; }
+
+#places-10 .window {
+  position: absolute;
+  width: 4px;
+  height: 5px;
+  background: #FFD93D;
+}
+
+#places-10 .b2 .window.w1 { top: 10px; left: 5px; }
+#places-10 .b2 .window.w2 { top: 10px; left: 15px; }
+#places-10 .b2 .window.w3 { top: 25px; left: 5px; }
+#places-10 .b2 .window.w4 { top: 25px; left: 15px; }
+#places-10 .b2 .window.w5 { top: 40px; left: 5px; }
+#places-10 .b2 .window.w6 { top: 40px; left: 15px; }
+
+#places-10 .b4 .window.w1 { top: 8px; left: 4px; }
+#places-10 .b4 .window.w2 { top: 8px; left: 13px; }
+#places-10 .b4 .window.w3 { top: 22px; left: 4px; }
+#places-10 .b4 .window.w4 { top: 22px; left: 13px; }
+
+#places-10 .moon {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background: #FFF9C4;
+  border-radius: 50%;
+}
+
+#places-10 .star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+#places-10 .star.s1 { top: 20px; left: 20px; }
+#places-10 .star.s2 { top: 35px; left: 70px; }
+#places-10 .star.s3 { top: 15px; left: 45px; }
+
+#places-10:hover .window { animation: twinkle 0.5s ease-in-out infinite alternate; }
+
+@keyframes twinkle {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* ===== #places-11: Countryside ===== */
+#places-11 {
+  background: #87CEEB;
+}
+
+#places-11 .hill {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 0 0;
+}
+
+#places-11 .hill.h1 {
+  left: -20px;
+  width: 80px;
+  height: 40px;
+  background: #98D8AA;
+}
+
+#places-11 .hill.h2 {
+  right: -10px;
+  width: 70px;
+  height: 35px;
+  background: #7CB342;
+}
+
+#places-11 .cottage {
+  position: absolute;
+  bottom: 30px;
+  left: 45px;
+  width: 35px;
+  height: 25px;
+  background: #FFB6C1;
+}
+
+#places-11 .cottage-roof {
+  position: absolute;
+  bottom: 50px;
+  left: 35px;
+  width: 0;
+  height: 0;
+  border-left: 27px solid transparent;
+  border-right: 27px solid transparent;
+  border-bottom: 20px solid #8B4513;
+}
+
+#places-11 .cottage-door {
+  position: absolute;
+  bottom: 30px;
+  left: 56px;
+  width: 12px;
+  height: 18px;
+  background: #8B4513;
+  border-radius: 6px 6px 0 0;
+}
+
+#places-11 .fence {
+  position: absolute;
+  bottom: 25px;
+  display: flex;
+  gap: 4px;
+}
+
+#places-11 .fence.left { left: 10px; }
+#places-11 .fence.right { right: 10px; }
+
+#places-11 .fence-post {
+  width: 4px;
+  height: 15px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+#places-11 .sun {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  width: 25px;
+  height: 25px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-11 .cloud {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 25px;
+  height: 12px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+#places-11:hover .sun { animation: sunGlow 1s ease-in-out infinite; }
+
+@keyframes sunGlow {
+  0%, 100% { box-shadow: 0 0 10px #FFD93D; }
+  50% { box-shadow: 0 0 20px #FFD93D; }
+}
+
+/* ===== #places-12: Farm Scene ===== */
+#places-12 {
+  background: #E8F5E9;
+}
+
+#places-12 .barn {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  width: 50px;
+  height: 40px;
+  background: #E74C3C;
+  border-radius: 2px;
+}
+
+#places-12 .barn-roof {
+  position: absolute;
+  bottom: 55px;
+  left: 5px;
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 25px solid #C0392B;
+}
+
+#places-12 .barn-door {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  width: 20px;
+  height: 30px;
+  background: #8B4513;
+  border-radius: 10px 10px 0 0;
+}
+
+#places-12 .barn-x {
+  position: absolute;
+  bottom: 25px;
+  left: 33px;
+  width: 14px;
+  height: 20px;
+}
+
+#places-12 .barn-x::before,
+#places-12 .barn-x::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  top: 9px;
+}
+
+#places-12 .barn-x::before { transform: rotate(45deg); }
+#places-12 .barn-x::after { transform: rotate(-45deg); }
+
+#places-12 .silo {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 20px;
+  height: 50px;
+  background: #95A5A6;
+  border-radius: 10px 10px 0 0;
+}
+
+#places-12 .silo-top {
+  position: absolute;
+  bottom: 65px;
+  right: 17px;
+  width: 26px;
+  height: 15px;
+  background: #7F8C8D;
+  border-radius: 50%;
+}
+
+#places-12 .hay {
+  position: absolute;
+  bottom: 8px;
+  left: 75px;
+  width: 20px;
+  height: 15px;
+  background: #F4D03F;
+  border-radius: 3px;
+}
+
+#places-12 .ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: #8B4513;
+}
+
+#places-12:hover .barn { background: #FF6B6B; }
+
+/* ===== #places-13: Airport ===== */
+#places-13 {
+  background: #E3F2FD;
+}
+
+#places-13 .terminal {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  width: 100px;
+  height: 35px;
+  background: #90CAF9;
+  border-radius: 4px;
+}
+
+#places-13 .control-tower {
+  position: absolute;
+  bottom: 55px;
+  left: 45px;
+  width: 25px;
+  height: 40px;
+  background: #64B5F6;
+}
+
+#places-13 .tower-top {
+  position: absolute;
+  bottom: 90px;
+  left: 40px;
+  width: 35px;
+  height: 15px;
+  background: #42A5F5;
+  border-radius: 4px;
+}
+
+#places-13 .tower-window {
+  position: absolute;
+  bottom: 92px;
+  left: 45px;
+  width: 25px;
+  height: 8px;
+  background: #1E88E5;
+  border-radius: 2px;
+}
+
+#places-13 .plane {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  width: 35px;
+  height: 8px;
+  background: #fff;
+  border-radius: 4px 20px 20px 4px;
+}
+
+#places-13 .plane::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 5px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid #fff;
+}
+
+#places-13 .plane::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-right: 10px solid #fff;
+}
+
+#places-13 .plane-wing {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  width: 20px;
+  height: 4px;
+  background: #90CAF9;
+  border-radius: 2px;
+}
+
+#places-13 .runway {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  width: 100px;
+  height: 12px;
+  background: #37474F;
+  border-radius: 2px;
+}
+
+#places-13 .runway-line {
+  position: absolute;
+  bottom: 9px;
+  left: 20px;
+  width: 70px;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #fff 0px, #fff 8px, transparent 8px, transparent 16px);
+}
+
+#places-13:hover .plane {
+  animation: fly 2s ease-in-out infinite;
+}
+
+@keyframes fly {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-10px) translateY(-5px); }
+}
+
+/* ===== #places-14: Train Station ===== */
+#places-14 {
+  background: #FFF3E0;
+}
+
+#places-14 .station-building {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  width: 80px;
+  height: 45px;
+  background: #FFB347;
+  border-radius: 4px 4px 0 0;
+}
+
+#places-14 .station-roof {
+  position: absolute;
+  bottom: 65px;
+  left: 15px;
+  width: 90px;
+  height: 15px;
+  background: #8B4513;
+  border-radius: 4px;
+}
+
+#places-14 .clock {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+#places-14 .station-entrance {
+  position: absolute;
+  bottom: 25px;
+  left: 45px;
+  width: 28px;
+  height: 35px;
+  background: #8B4513;
+  border-radius: 14px 14px 0 0;
+}
+
+#places-14 .platform {
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+  width: 110px;
+  height: 15px;
+  background: #9E9E9E;
+  border-radius: 2px;
+}
+
+#places-14 .track {
+  position: absolute;
+  bottom: 3px;
+  left: 5px;
+  width: 110px;
+  height: 5px;
+  background: #5D4037;
+}
+
+#places-14 .track::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 100px;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, #8D6E63 0px, #8D6E63 6px, transparent 6px, transparent 12px);
+}
+
+#places-14 .sign {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  padding: 3px 8px;
+  background: #FF69B4;
+  border-radius: 3px;
+  font-size: 8px;
+  color: #fff;
+  font-weight: bold;
+}
+
+#places-14:hover .station-building { background: #FFA500; }
+
+/* ===== #places-15: Restaurant/Cafe ===== */
+#places-15 {
+  background: #FCE4EC;
+}
+
+#places-15 .cafe-building {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  width: 80px;
+  height: 50px;
+  background: #FF69B4;
+  border-radius: 4px;
+}
+
+#places-15 .awning {
+  position: absolute;
+  bottom: 60px;
+  left: 15px;
+  width: 90px;
+  height: 15px;
+  background: repeating-linear-gradient(90deg, #fff 0px, #fff 10px, #FF69B4 10px, #FF69B4 20px);
+  border-radius: 0 0 8px 8px;
+}
+
+#places-15 .cafe-window {
+  position: absolute;
+  bottom: 35px;
+  width: 20px;
+  height: 18px;
+  background: #87CEEB;
+  border: 2px solid #fff;
+  border-radius: 2px;
+}
+
+#places-15 .cafe-window.left { left: 28px; }
+#places-15 .cafe-window.right { left: 70px; }
+
+#places-15 .cafe-door {
+  position: absolute;
+  bottom: 15px;
+  left: 50px;
+  width: 20px;
+  height: 32px;
+  background: #8B4513;
+  border-radius: 2px;
+}
+
+#places-15 .coffee-cup {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 18px;
+  height: 14px;
+  background: #fff;
+  border-radius: 0 0 4px 4px;
+  border: 2px solid #8B4513;
+}
+
+#places-15 .coffee-cup::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: -8px;
+  width: 6px;
+  height: 8px;
+  border: 2px solid #8B4513;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+}
+
+#places-15 .steam {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  width: 3px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 2px;
+  animation: steamRise 1s infinite;
+}
+
+@keyframes steamRise {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+#places-15 .table {
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+  width: 20px;
+  height: 12px;
+  background: #8B4513;
+  border-radius: 2px;
+}
+
+#places-15:hover .awning {
+  background: repeating-linear-gradient(90deg, #FFE4B5 0px, #FFE4B5 10px, #FF69B4 10px, #FF69B4 20px);
+}
+
+/* ===== #places-16: Library ===== */
+#places-16 {
+  background: #EFEBE9;
+}
+
+#places-16 .library-building {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 90px;
+  height: 60px;
+  background: #9B59B6;
+  border-radius: 4px;
+}
+
+#places-16 .columns {
+  position: absolute;
+  bottom: 10px;
+  left: 25px;
+  display: flex;
+  gap: 15px;
+}
+
+#places-16 .column {
+  width: 8px;
+  height: 45px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+#places-16 .pediment {
+  position: absolute;
+  bottom: 65px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 20px solid #8E44AD;
+}
+
+#places-16 .library-door {
+  position: absolute;
+  bottom: 10px;
+  left: 48px;
+  width: 22px;
+  height: 30px;
+  background: #5D4037;
+  border-radius: 11px 11px 0 0;
+}
+
+#places-16 .book-stack {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+}
+
+#places-16 .book {
+  width: 12px;
+  height: 4px;
+  margin-bottom: 1px;
+  border-radius: 1px;
+}
+
+#places-16 .book.b1 { background: #FF69B4; }
+#places-16 .book.b2 { background: #87CEEB; }
+#places-16 .book.b3 { background: #98D8AA; }
+#places-16 .book.b4 { background: #FFD93D; }
+
+#places-16:hover .book {
+  animation: bookShake 0.3s ease-in-out;
+}
+
+@keyframes bookShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* ===== #places-17: Museum ===== */
+#places-17 {
+  background: #E8EAF6;
+}
+
+#places-17 .museum-building {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 100px;
+  height: 55px;
+  background: #E0E0E0;
+  border-radius: 4px;
+}
+
+#places-17 .museum-roof {
+  position: absolute;
+  bottom: 60px;
+  left: 5px;
+  width: 110px;
+  height: 12px;
+  background: #BDBDBD;
+  border-radius: 4px;
+}
+
+#places-17 .dome {
+  position: absolute;
+  bottom: 68px;
+  left: 40px;
+  width: 40px;
+  height: 25px;
+  background: #9E9E9E;
+  border-radius: 40px 40px 0 0;
+}
+
+#places-17 .museum-columns {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+#places-17 .museum-column {
+  width: 10px;
+  height: 40px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+#places-17 .painting {
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  width: 20px;
+  height: 16px;
+  background: #FFD93D;
+  border: 3px solid #8B4513;
+}
+
+#places-17 .statue {
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  width: 10px;
+  height: 20px;
+  background: #9E9E9E;
+  border-radius: 5px 5px 0 0;
+}
+
+#places-17 .statue::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 10px;
+  height: 5px;
+  background: #757575;
+}
+
+#places-17:hover .painting { background: #FF69B4; }
+
+/* ===== #places-18: Zoo ===== */
+#places-18 {
+  background: #E8F5E9;
+}
+
+#places-18 .entrance-gate {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+  width: 60px;
+  height: 50px;
+}
+
+#places-18 .gate-pillar {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 50px;
+  background: #8B4513;
+  border-radius: 3px;
+}
+
+#places-18 .gate-pillar.left { left: 0; }
+#places-18 .gate-pillar.right { right: 0; }
+
+#places-18 .gate-arch {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 50px;
+  height: 20px;
+  background: #A1887F;
+  border-radius: 25px 25px 0 0;
+}
+
+#places-18 .zoo-sign {
+  position: absolute;
+  top: 3px;
+  left: 15px;
+  font-size: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#places-18 .elephant {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  width: 25px;
+  height: 20px;
+  background: #9E9E9E;
+  border-radius: 10px 10px 5px 5px;
+}
+
+#places-18 .elephant::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: #9E9E9E;
+  border-radius: 50%;
+}
+
+#places-18 .elephant::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -8px;
+  width: 10px;
+  height: 4px;
+  background: #9E9E9E;
+  border-radius: 4px;
+}
+
+#places-18 .giraffe {
+  position: absolute;
+  bottom: 8px;
+  right: 15px;
+  width: 8px;
+  height: 35px;
+  background: #FFB347;
+}
+
+#places-18 .giraffe::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -2px;
+  width: 12px;
+  height: 12px;
+  background: #FFB347;
+  border-radius: 50%;
+}
+
+#places-18 .giraffe-spots {
+  position: absolute;
+  bottom: 12px;
+  right: 17px;
+}
+
+#places-18 .giraffe-spot {
+  width: 3px;
+  height: 3px;
+  background: #8B4513;
+  border-radius: 50%;
+  margin: 3px 0;
+}
+
+#places-18 .ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: #8D6E63;
+}
+
+#places-18:hover .elephant { animation: elephantWalk 0.5s ease-in-out infinite; }
+
+@keyframes elephantWalk {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+/* ===== #places-19: Aquarium ===== */
+#places-19 {
+  background: #E3F2FD;
+}
+
+#places-19 .tank {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 90px;
+  height: 70px;
+  background: #4FC3F7;
+  border: 4px solid #0288D1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#places-19 .fish {
+  position: absolute;
+  width: 20px;
+  height: 12px;
+  border-radius: 50% 20% 20% 50%;
+}
+
+#places-19 .fish::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 2px;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+#places-19 .fish.f1 {
+  top: 15px;
+  left: 10px;
+  background: #FF69B4;
+}
+#places-19 .fish.f1::after { border-left: 10px solid #FF69B4; }
+
+#places-19 .fish.f2 {
+  top: 35px;
+  left: 50px;
+  background: #FFD93D;
+  transform: scaleX(-1);
+}
+#places-19 .fish.f2::after { border-left: 10px solid #FFD93D; }
+
+#places-19 .fish.f3 {
+  top: 50px;
+  left: 25px;
+  background: #98D8AA;
+}
+#places-19 .fish.f3::after { border-left: 10px solid #98D8AA; }
+
+#places-19 .seaweed {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 25px;
+  background: #4CAF50;
+  border-radius: 3px;
+}
+
+#places-19 .seaweed.s1 { left: 15px; height: 20px; }
+#places-19 .seaweed.s2 { left: 30px; height: 28px; }
+#places-19 .seaweed.s3 { right: 20px; height: 22px; }
+
+#places-19 .bubble {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  animation: bubbleRise 2s infinite;
+}
+
+#places-19 .bubble.b1 { bottom: 10px; left: 40px; animation-delay: 0s; }
+#places-19 .bubble.b2 { bottom: 10px; left: 60px; animation-delay: 0.5s; }
+#places-19 .bubble.b3 { bottom: 10px; left: 75px; animation-delay: 1s; }
+
+@keyframes bubbleRise {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-50px); opacity: 0; }
+}
+
+#places-19:hover .fish { animation: fishSwim 1s ease-in-out infinite; }
+
+@keyframes fishSwim {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+/* ===== #places-20: Theme Park ===== */
+#places-20 {
+  background: #FFF9C4;
+}
+
+#places-20 .ferris-wheel {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #9B59B6;
+  border-radius: 50%;
+}
+
+#places-20 .ferris-stand {
+  position: absolute;
+  bottom: 10px;
+  left: 28px;
+  width: 24px;
+  height: 15px;
+  background: #8E44AD;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
+#places-20 .cabin {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #FF69B4;
+  border-radius: 2px;
+}
+
+#places-20 .cabin.c1 { top: -5px; left: 20px; }
+#places-20 .cabin.c2 { top: 20px; left: -5px; }
+#places-20 .cabin.c3 { top: 20px; right: -5px; }
+#places-20 .cabin.c4 { bottom: -5px; left: 20px; }
+
+#places-20 .roller-coaster {
+  position: absolute;
+  bottom: 25px;
+  right: 10px;
+  width: 45px;
+  height: 40px;
+}
+
+#places-20 .track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 45px;
+  height: 30px;
+  border: 3px solid #FF6B6B;
+  border-radius: 0 30px 0 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+#places-20 .cart {
+  position: absolute;
+  bottom: 25px;
+  right: 5px;
+  width: 12px;
+  height: 8px;
+  background: #FFD93D;
+  border-radius: 2px;
+}
+
+#places-20 .balloon {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  width: 15px;
+  height: 18px;
+  background: #87CEEB;
+  border-radius: 50%;
+}
+
+#places-20 .balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 7px;
+  width: 1px;
+  height: 10px;
+  background: #666;
+}
+
+#places-20:hover .ferris-wheel { animation: ferrisRotate 4s linear infinite; }
+
+@keyframes ferrisRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== #places-21: Sports Stadium ===== */
+#places-21 {
+  background: #C8E6C9;
+}
+
+#places-21 .stadium {
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 100px;
+  height: 50px;
+  background: #E0E0E0;
+  border-radius: 50px 50px 10px 10px;
+  overflow: hidden;
+}
+
+#places-21 .field {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  width: 80px;
+  height: 25px;
+  background: #4CAF50;
+  border-radius: 4px;
+}
+
+#places-21 .field-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+#places-21 .stands {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  height: 20px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FF69B4 0px, #FF69B4 10px,
+    #87CEEB 10px, #87CEEB 20px,
+    #FFD93D 20px, #FFD93D 30px,
+    #98D8AA 30px, #98D8AA 40px
+  );
+}
+
+#places-21 .floodlight {
+  position: absolute;
+  bottom: 60px;
+  width: 4px;
+  height: 30px;
+  background: #757575;
+}
+
+#places-21 .floodlight.left { left: 20px; }
+#places-21 .floodlight.right { right: 20px; }
+
+#places-21 .floodlight::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  width: 12px;
+  height: 8px;
+  background: #FFD93D;
+  border-radius: 2px;
+}
+
+#places-21:hover .floodlight::after {
+  box-shadow: 0 0 15px #FFD93D;
+}
+
+/* ===== #places-22: Swimming Pool ===== */
+#places-22 {
+  background: #E1F5FE;
+}
+
+#places-22 .pool {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  width: 90px;
+  height: 50px;
+  background: #4FC3F7;
+  border: 4px solid #0288D1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#places-22 .lane-line {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #fff;
+}
+
+#places-22 .lane-line.l1 { left: 30px; }
+#places-22 .lane-line.l2 { left: 60px; }
+
+#places-22 .water-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #29B6F6 0px, #29B6F6 10px,
+    #4FC3F7 10px, #4FC3F7 20px
+  );
+  animation: wavePool 1s linear infinite;
+}
+
+@keyframes wavePool {
+  from { transform: translateX(0); }
+  to { transform: translateX(-20px); }
+}
+
+#places-22 .diving-board {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 4px;
+  background: #8D6E63;
+  border-radius: 2px;
+}
+
+#places-22 .diving-board::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 4px;
+  height: 12px;
+  background: #8D6E63;
+}
+
+#places-22 .swimmer {
+  position: absolute;
+  bottom: 30px;
+  left: 35px;
+  width: 15px;
+  height: 8px;
+  background: #FFB6C1;
+  border-radius: 50%;
+}
+
+#places-22 .swimmer::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background: #FFB6C1;
+  border-radius: 50%;
+}
+
+#places-22:hover .swimmer {
+  animation: swim 0.5s ease-in-out infinite;
+}
+
+@keyframes swim {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* ===== #places-23: Gym/Fitness Center ===== */
+#places-23 {
+  background: #FFF3E0;
+}
+
+#places-23 .gym-building {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  width: 80px;
+  height: 50px;
+  background: #FF8A65;
+  border-radius: 4px;
+}
+
+#places-23 .gym-sign {
+  position: absolute;
+  bottom: 55px;
+  left: 35px;
+  padding: 4px 12px;
+  background: #E64A19;
+  border-radius: 4px;
+  font-size: 8px;
+  color: #fff;
+  font-weight: bold;
+}
+
+#places-23 .gym-window {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+  width: 60px;
+  height: 25px;
+  background: #87CEEB;
+  border: 2px solid #fff;
+  border-radius: 2px;
+}
+
+#places-23 .dumbbell {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+#places-23 .dumbbell-bar {
+  width: 25px;
+  height: 4px;
+  background: #757575;
+  margin: 0 auto;
+}
+
+#places-23 .dumbbell-weight {
+  position: absolute;
+  top: -4px;
+  width: 6px;
+  height: 12px;
+  background: #424242;
+  border-radius: 2px;
+}
+
+#places-23 .dumbbell-weight.left { left: 0; }
+#places-23 .dumbbell-weight.right { right: 0; }
+
+#places-23 .treadmill {
+  position: absolute;
+  top: 35px;
+  left: 10px;
+  width: 20px;
+  height: 15px;
+  background: #9E9E9E;
+  border-radius: 2px;
+}
+
+#places-23 .treadmill::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 8px;
+  width: 4px;
+  height: 10px;
+  background: #757575;
+}
+
+#places-23:hover .dumbbell {
+  animation: lift 0.5s ease-in-out infinite;
+}
+
+@keyframes lift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ===== #places-24: Movie Theater ===== */
+#places-24 {
+  background: #212121;
+}
+
+#places-24 .theater-building {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  width: 90px;
+  height: 55px;
+  background: #424242;
+  border-radius: 4px;
+}
+
+#places-24 .marquee {
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  width: 100px;
+  height: 20px;
+  background: #FF69B4;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#places-24 .marquee-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFD93D 0px, #FFD93D 8px,
+    #FF69B4 8px, #FF69B4 16px
+  );
+  animation: marqueeMove 1s linear infinite;
+}
+
+@keyframes marqueeMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-16px); }
+}
+
+#places-24 .screen {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 60px;
+  height: 30px;
+  background: #E0E0E0;
+  border: 2px solid #9E9E9E;
+  border-radius: 2px;
+}
+
+#places-24 .seats {
+  position: absolute;
+  bottom: 18px;
+  left: 25px;
+  display: flex;
+  gap: 4px;
+}
+
+#places-24 .seat {
+  width: 8px;
+  height: 6px;
+  background: #E74C3C;
+  border-radius: 2px 2px 0 0;
+}
+
+#places-24 .popcorn {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: 14px;
+  height: 18px;
+  background: #E74C3C;
+  border-radius: 0 0 3px 3px;
+}
+
+#places-24 .popcorn::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background: #FFF9C4;
+  border-radius: 50%;
+}
+
+#places-24:hover .marquee-lights { animation-duration: 0.3s; }
+
+/* ===== #places-25: Concert Hall ===== */
+#places-25 {
+  background: #311B92;
+}
+
+#places-25 .stage {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  width: 90px;
+  height: 30px;
+  background: #5E35B1;
+  border-radius: 4px;
+}
+
+#places-25 .spotlight {
+  position: absolute;
+  width: 20px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+  clip-path: polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%);
+}
+
+#places-25 .spotlight.s1 { top: 10px; left: 25px; }
+#places-25 .spotlight.s2 { top: 10px; left: 50px; }
+#places-25 .spotlight.s3 { top: 10px; left: 75px; }
+
+#places-25 .microphone {
+  position: absolute;
+  bottom: 45px;
+  left: 55px;
+  width: 4px;
+  height: 25px;
+  background: #9E9E9E;
+}
+
+#places-25 .microphone::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  background: #424242;
+  border-radius: 50%;
+}
+
+#places-25 .speaker {
+  position: absolute;
+  bottom: 50px;
+  width: 15px;
+  height: 20px;
+  background: #1A1A1A;
+  border-radius: 2px;
+}
+
+#places-25 .speaker.left { left: 20px; }
+#places-25 .speaker.right { right: 20px; }
+
+#places-25 .music-note {
+  position: absolute;
+  top: 15px;
+  font-size: 16px;
+  color: #FFD93D;
+  animation: noteFloat 1s ease-in-out infinite;
+}
+
+#places-25 .music-note.n1 { left: 15px; }
+#places-25 .music-note.n2 { right: 15px; animation-delay: 0.5s; }
+
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-10px); opacity: 0.5; }
+}
+
+#places-25:hover .spotlight { animation: spotlightPulse 0.5s ease-in-out infinite; }
+
+@keyframes spotlightPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* ===== #places-26: Garden ===== */
+#places-26 {
+  background: #E8F5E9;
+}
+
+#places-26 .ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: #795548;
+  border-radius: 0 0 4px 4px;
+}
+
+#places-26 .grass {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: #4CAF50;
+}
+
+#places-26 .flower {
+  position: absolute;
+  bottom: 30px;
+}
+
+#places-26 .flower .stem {
+  width: 3px;
+  height: 25px;
+  background: #2E7D32;
+  margin: 0 auto;
+}
+
+#places-26 .flower .petals {
+  position: relative;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+}
+
+#places-26 .flower .petal {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+#places-26 .flower.f1 { left: 20px; }
+#places-26 .flower.f1 .petal { background: #FF69B4; }
+#places-26 .flower.f1 .petal:nth-child(1) { top: 0; left: 6px; }
+#places-26 .flower.f1 .petal:nth-child(2) { top: 6px; left: 0; }
+#places-26 .flower.f1 .petal:nth-child(3) { top: 6px; left: 12px; }
+#places-26 .flower.f1 .petal:nth-child(4) { top: 12px; left: 6px; }
+#places-26 .flower.f1 .center { position: absolute; top: 6px; left: 6px; width: 8px; height: 8px; background: #FFD93D; border-radius: 50%; }
+
+#places-26 .flower.f2 { left: 50px; }
+#places-26 .flower.f2 .petal { background: #9B59B6; }
+#places-26 .flower.f2 .petal:nth-child(1) { top: 0; left: 6px; }
+#places-26 .flower.f2 .petal:nth-child(2) { top: 6px; left: 0; }
+#places-26 .flower.f2 .petal:nth-child(3) { top: 6px; left: 12px; }
+#places-26 .flower.f2 .petal:nth-child(4) { top: 12px; left: 6px; }
+#places-26 .flower.f2 .center { position: absolute; top: 6px; left: 6px; width: 8px; height: 8px; background: #FFD93D; border-radius: 50%; }
+
+#places-26 .flower.f3 { left: 80px; }
+#places-26 .flower.f3 .petal { background: #87CEEB; }
+#places-26 .flower.f3 .petal:nth-child(1) { top: 0; left: 6px; }
+#places-26 .flower.f3 .petal:nth-child(2) { top: 6px; left: 0; }
+#places-26 .flower.f3 .petal:nth-child(3) { top: 6px; left: 12px; }
+#places-26 .flower.f3 .petal:nth-child(4) { top: 12px; left: 6px; }
+#places-26 .flower.f3 .center { position: absolute; top: 6px; left: 6px; width: 8px; height: 8px; background: #FFD93D; border-radius: 50%; }
+
+#places-26 .butterfly {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  width: 6px;
+  height: 4px;
+  background: #333;
+}
+
+#places-26 .butterfly::before,
+#places-26 .butterfly::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 8px;
+  background: #FFB6C1;
+  border-radius: 50%;
+}
+
+#places-26 .butterfly::before { top: -4px; left: -8px; }
+#places-26 .butterfly::after { top: -4px; right: -8px; }
+
+#places-26 .sun {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-26:hover .flower { animation: sway 1s ease-in-out infinite; }
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* ===== #places-27: Kitchen Scene ===== */
+#places-27 {
+  background: #FFF8E1;
+}
+
+#places-27 .counter {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  width: 100px;
+  height: 40px;
+  background: #8D6E63;
+  border-radius: 4px;
+}
+
+#places-27 .cabinet {
+  position: absolute;
+  bottom: 60px;
+  left: 15px;
+  width: 90px;
+  height: 30px;
+  background: #A1887F;
+  border-radius: 4px;
+}
+
+#places-27 .cabinet-door {
+  position: absolute;
+  top: 5px;
+  width: 35px;
+  height: 20px;
+  background: #8D6E63;
+  border-radius: 2px;
+}
+
+#places-27 .cabinet-door.left { left: 8px; }
+#places-27 .cabinet-door.right { right: 8px; }
+
+#places-27 .stove {
+  position: absolute;
+  bottom: 25px;
+  left: 35px;
+  width: 50px;
+  height: 30px;
+  background: #E0E0E0;
+  border-radius: 4px;
+}
+
+#places-27 .burner {
+  position: absolute;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #424242;
+  border-radius: 50%;
+}
+
+#places-27 .burner.left { left: 8px; }
+#places-27 .burner.right { right: 8px; }
+
+#places-27 .pot {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  width: 18px;
+  height: 12px;
+  background: #757575;
+  border-radius: 0 0 4px 4px;
+}
+
+#places-27 .pot::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -2px;
+  width: 22px;
+  height: 4px;
+  background: #616161;
+  border-radius: 2px;
+}
+
+#places-27 .steam {
+  position: absolute;
+  bottom: 55px;
+  left: 45px;
+  width: 3px;
+  height: 8px;
+  background: #E0E0E0;
+  border-radius: 2px;
+  animation: steamRise 0.8s infinite;
+}
+
+#places-27 .fridge {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  width: 25px;
+  height: 55px;
+  background: #90CAF9;
+  border-radius: 4px;
+}
+
+#places-27 .fridge-handle {
+  position: absolute;
+  top: 20px;
+  left: 3px;
+  width: 3px;
+  height: 15px;
+  background: #64B5F6;
+  border-radius: 2px;
+}
+
+#places-27:hover .burner { background: #FF5722; }
+
+/* ===== #places-28: Bedroom Scene ===== */
+#places-28 {
+  background: #E8EAF6;
+}
+
+#places-28 .bed {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  width: 70px;
+  height: 35px;
+  background: #7986CB;
+  border-radius: 4px;
+}
+
+#places-28 .pillow {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 12px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+#places-28 .blanket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70px;
+  height: 20px;
+  background: #FF69B4;
+  border-radius: 0 0 4px 4px;
+}
+
+#places-28 .headboard {
+  position: absolute;
+  bottom: 45px;
+  left: 15px;
+  width: 70px;
+  height: 25px;
+  background: #5C6BC0;
+  border-radius: 4px 4px 0 0;
+}
+
+#places-28 .nightstand {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 25px;
+  height: 30px;
+  background: #8D6E63;
+  border-radius: 4px;
+}
+
+#places-28 .lamp {
+  position: absolute;
+  bottom: 45px;
+  right: 20px;
+}
+
+#places-28 .lamp-shade {
+  width: 18px;
+  height: 15px;
+  background: #FFD93D;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+
+#places-28 .lamp-base {
+  width: 4px;
+  height: 10px;
+  background: #795548;
+  margin: 0 auto;
+}
+
+#places-28 .window {
+  position: absolute;
+  top: 10px;
+  left: 45px;
+  width: 30px;
+  height: 30px;
+  background: #87CEEB;
+  border: 3px solid #fff;
+  border-radius: 2px;
+}
+
+#places-28 .window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+#places-28 .moon {
+  position: absolute;
+  top: 15px;
+  left: 50px;
+  width: 12px;
+  height: 12px;
+  background: #FFF9C4;
+  border-radius: 50%;
+}
+
+#places-28 .zzz {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  font-size: 10px;
+  color: #9575CD;
+  animation: zzz 1s ease-in-out infinite;
+}
+
+@keyframes zzz {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+}
+
+#places-28:hover .lamp-shade { background: #FFEB3B; box-shadow: 0 0 15px #FFD93D; }
+
+/* ===== #places-29: Bathroom ===== */
+#places-29 {
+  background: #E0F7FA;
+}
+
+#places-29 .bathtub {
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 55px;
+  height: 30px;
+  background: #fff;
+  border: 3px solid #B0BEC5;
+  border-radius: 4px 4px 15px 15px;
+}
+
+#places-29 .water {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  width: 46px;
+  height: 18px;
+  background: #4FC3F7;
+  border-radius: 0 0 12px 12px;
+}
+
+#places-29 .bubbles {
+  position: absolute;
+  bottom: 18px;
+  left: 10px;
+  display: flex;
+  gap: 3px;
+}
+
+#places-29 .bubble {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+}
+
+#places-29 .faucet {
+  position: absolute;
+  bottom: 40px;
+  left: 50px;
+  width: 15px;
+  height: 10px;
+  background: #9E9E9E;
+  border-radius: 2px;
+}
+
+#places-29 .faucet::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: -5px;
+  width: 8px;
+  height: 8px;
+  background: #9E9E9E;
+  border-radius: 50%;
+}
+
+#places-29 .toilet {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  width: 25px;
+  height: 30px;
+  background: #fff;
+  border: 2px solid #B0BEC5;
+  border-radius: 4px 4px 10px 10px;
+}
+
+#places-29 .toilet-lid {
+  position: absolute;
+  top: -8px;
+  left: -2px;
+  width: 29px;
+  height: 12px;
+  background: #fff;
+  border: 2px solid #B0BEC5;
+  border-radius: 4px;
+}
+
+#places-29 .sink {
+  position: absolute;
+  top: 25px;
+  right: 10px;
+  width: 28px;
+  height: 15px;
+  background: #fff;
+  border: 2px solid #B0BEC5;
+  border-radius: 0 0 14px 14px;
+}
+
+#places-29 .mirror {
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  width: 24px;
+  height: 18px;
+  background: #B3E5FC;
+  border: 2px solid #9E9E9E;
+  border-radius: 2px;
+}
+
+#places-29 .duck {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+  width: 12px;
+  height: 10px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-29 .duck::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#places-29 .duck::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 4px;
+  height: 3px;
+  background: #FF9800;
+  border-radius: 2px;
+}
+
+#places-29:hover .duck { animation: duckBob 0.5s ease-in-out infinite; }
+
+@keyframes duckBob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(5deg); }
+}
+
+/* ===== #places-30: Living Room ===== */
+#places-30 {
+  background: #FBE9E7;
+}
+
+#places-30 .sofa {
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 60px;
+  height: 30px;
+  background: #FF8A65;
+  border-radius: 8px 8px 4px 4px;
+}
+
+#places-30 .sofa-arm {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 35px;
+  background: #FF7043;
+  border-radius: 6px 6px 4px 4px;
+}
+
+#places-30 .sofa-arm.left { left: -5px; }
+#places-30 .sofa-arm.right { right: -5px; }
+
+#places-30 .cushion {
+  position: absolute;
+  top: 5px;
+  width: 18px;
+  height: 15px;
+  background: #FFAB91;
+  border-radius: 4px;
+}
+
+#places-30 .cushion.c1 { left: 8px; }
+#places-30 .cushion.c2 { right: 8px; }
+
+#places-30 .tv {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 25px;
+  background: #424242;
+  border-radius: 4px;
+}
+
+#places-30 .tv-screen {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 29px;
+  height: 19px;
+  background: #87CEEB;
+  border-radius: 2px;
+}
+
+#places-30 .tv-stand {
+  position: absolute;
+  bottom: -8px;
+  left: 12px;
+  width: 12px;
+  height: 8px;
+  background: #616161;
+}
+
+#places-30 .coffee-table {
+  position: absolute;
+  bottom: 10px;
+  left: 75px;
+  width: 30px;
+  height: 15px;
+  background: #8D6E63;
+  border-radius: 4px;
+}
+
+#places-30 .plant {
+  position: absolute;
+  bottom: 20px;
+  right: 8px;
+}
+
+#places-30 .pot {
+  width: 15px;
+  height: 12px;
+  background: #FFAB91;
+  border-radius: 0 0 4px 4px;
+}
+
+#places-30 .leaves {
+  position: relative;
+  top: -15px;
+  left: 3px;
+  width: 10px;
+  height: 15px;
+  background: #4CAF50;
+  border-radius: 50% 50% 50% 50%;
+}
+
+#places-30 .rug {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 80px;
+  height: 12px;
+  background: #9B59B6;
+  border-radius: 4px;
+}
+
+#places-30 .lamp {
+  position: absolute;
+  bottom: 50px;
+  left: 5px;
+  width: 4px;
+  height: 30px;
+  background: #795548;
+}
+
+#places-30 .lamp::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -8px;
+  width: 20px;
+  height: 15px;
+  background: #FFD93D;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+#places-30:hover .tv-screen {
+  animation: tvFlicker 0.3s ease-in-out infinite;
+}
+
+@keyframes tvFlicker {
+  0%, 100% { background: #87CEEB; }
+  50% { background: #4FC3F7; }
+}
+</style>
+
+<!-- ===== Place Diagram Templates ===== -->
+
+<!-- #places-1: Home Sweet Home -->
+<div class="place-diagram" id="places-1">
+  <div class="heart"></div>
+  <div class="house-roof"></div>
+  <div class="house-body"></div>
+  <div class="house-window left"></div>
+  <div class="house-window right"></div>
+  <div class="house-door"></div>
+</div>
+
+<!-- #places-2: School Building -->
+<div class="place-diagram" id="places-2">
+  <div class="flag"></div>
+  <div class="school-clock"></div>
+  <div class="clock-hand"></div>
+  <div class="clock-hand minute"></div>
+  <div class="school-tower"></div>
+  <div class="school-main"></div>
+  <div class="school-window w1"></div>
+  <div class="school-window w2"></div>
+  <div class="school-door"></div>
+</div>
+
+<!-- #places-3: Office/Workplace -->
+<div class="place-diagram" id="places-3">
+  <div class="office-building">
+    <div class="office-window r1c1"></div>
+    <div class="office-window r1c2"></div>
+    <div class="office-window r1c3"></div>
+    <div class="office-window r2c1"></div>
+    <div class="office-window r2c2"></div>
+    <div class="office-window r2c3"></div>
+    <div class="office-window r3c1"></div>
+    <div class="office-window r3c2"></div>
+    <div class="office-window r3c3"></div>
+    <div class="office-door"></div>
+  </div>
+  <div class="briefcase"></div>
+</div>
+
+<!-- #places-4: Hospital -->
+<div class="place-diagram" id="places-4">
+  <div class="hospital-cross"></div>
+  <div class="hospital-body"></div>
+  <div class="hospital-entrance"></div>
+  <div class="ambulance"></div>
+</div>
+
+<!-- #places-5: Shopping Mall -->
+<div class="place-diagram" id="places-5">
+  <div class="mall-building">
+    <div class="mall-sign"></div>
+    <div class="mall-door"></div>
+  </div>
+  <div class="shopping-bag"></div>
+</div>
+
+<!-- #places-6: Park/Playground -->
+<div class="place-diagram" id="places-6">
+  <div class="sun"></div>
+  <div class="tree">
+    <div class="tree-leaves"></div>
+    <div class="tree-trunk"></div>
+  </div>
+  <div class="swing">
+    <div class="swing-frame"></div>
+    <div class="swing-rope left"></div>
+    <div class="swing-rope right"></div>
+    <div class="swing-seat"></div>
+  </div>
+  <div class="grass"></div>
+</div>
+
+<!-- #places-7: Beach Scene -->
+<div class="place-diagram" id="places-7">
+  <div class="sun"></div>
+  <div class="wave w2"></div>
+  <div class="wave"></div>
+  <div class="umbrella-top">
+    <div class="umbrella-stripe"></div>
+    <div class="umbrella-stripe"></div>
+    <div class="umbrella-stripe"></div>
+  </div>
+  <div class="umbrella-pole"></div>
+  <div class="shell"></div>
+</div>
+
+<!-- #places-8: Mountain Landscape -->
+<div class="place-diagram" id="places-8">
+  <div class="cloud"></div>
+  <div class="snow-cap"></div>
+  <div class="mountain m2"></div>
+  <div class="mountain m1"></div>
+  <div class="pine-tree"></div>
+  <div class="ground"></div>
+</div>
+
+<!-- #places-9: Forest/Woods -->
+<div class="place-diagram" id="places-9">
+  <div class="butterfly"></div>
+  <div class="tree t1">
+    <div class="foliage"></div>
+    <div class="trunk"></div>
+  </div>
+  <div class="tree t2">
+    <div class="foliage"></div>
+    <div class="trunk"></div>
+  </div>
+  <div class="tree t3">
+    <div class="foliage"></div>
+    <div class="trunk"></div>
+  </div>
+  <div class="mushroom"></div>
+  <div class="ground"></div>
+</div>
+
+<!-- #places-10: City Skyline -->
+<div class="place-diagram" id="places-10">
+  <div class="moon"></div>
+  <div class="star s1"></div>
+  <div class="star s2"></div>
+  <div class="star s3"></div>
+  <div class="building b1"></div>
+  <div class="building b2">
+    <div class="window w1"></div>
+    <div class="window w2"></div>
+    <div class="window w3"></div>
+    <div class="window w4"></div>
+    <div class="window w5"></div>
+    <div class="window w6"></div>
+  </div>
+  <div class="building b3"></div>
+  <div class="building b4">
+    <div class="window w1"></div>
+    <div class="window w2"></div>
+    <div class="window w3"></div>
+    <div class="window w4"></div>
+  </div>
+  <div class="building b5"></div>
+</div>
+
+<!-- #places-11: Countryside -->
+<div class="place-diagram" id="places-11">
+  <div class="sun"></div>
+  <div class="cloud"></div>
+  <div class="cottage-roof"></div>
+  <div class="cottage"></div>
+  <div class="cottage-door"></div>
+  <div class="fence left">
+    <div class="fence-post"></div>
+    <div class="fence-post"></div>
+    <div class="fence-post"></div>
+  </div>
+  <div class="fence right">
+    <div class="fence-post"></div>
+    <div class="fence-post"></div>
+    <div class="fence-post"></div>
+  </div>
+  <div class="hill h1"></div>
+  <div class="hill h2"></div>
+</div>
+
+<!-- #places-12: Farm Scene -->
+<div class="place-diagram" id="places-12">
+  <div class="barn-roof"></div>
+  <div class="barn">
+    <div class="barn-door">
+      <div class="barn-x"></div>
+    </div>
+  </div>
+  <div class="silo-top"></div>
+  <div class="silo"></div>
+  <div class="hay"></div>
+  <div class="ground"></div>
+</div>
+
+<!-- #places-13: Airport -->
+<div class="place-diagram" id="places-13">
+  <div class="plane"></div>
+  <div class="plane-wing"></div>
+  <div class="tower-window"></div>
+  <div class="tower-top"></div>
+  <div class="control-tower"></div>
+  <div class="terminal"></div>
+  <div class="runway">
+    <div class="runway-line"></div>
+  </div>
+</div>
+
+<!-- #places-14: Train Station -->
+<div class="place-diagram" id="places-14">
+  <div class="sign">STATION</div>
+  <div class="station-roof"></div>
+  <div class="station-building">
+    <div class="clock"></div>
+    <div class="station-entrance"></div>
+  </div>
+  <div class="platform"></div>
+  <div class="track"></div>
+</div>
+
+<!-- #places-15: Restaurant/Cafe -->
+<div class="place-diagram" id="places-15">
+  <div class="coffee-cup"></div>
+  <div class="steam"></div>
+  <div class="awning"></div>
+  <div class="cafe-building">
+    <div class="cafe-window left"></div>
+    <div class="cafe-window right"></div>
+    <div class="cafe-door"></div>
+  </div>
+  <div class="table"></div>
+</div>
+
+<!-- #places-16: Library -->
+<div class="place-diagram" id="places-16">
+  <div class="book-stack">
+    <div class="book b1"></div>
+    <div class="book b2"></div>
+    <div class="book b3"></div>
+    <div class="book b4"></div>
+  </div>
+  <div class="pediment"></div>
+  <div class="library-building">
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+    </div>
+    <div class="library-door"></div>
+  </div>
+</div>
+
+<!-- #places-17: Museum -->
+<div class="place-diagram" id="places-17">
+  <div class="painting"></div>
+  <div class="statue"></div>
+  <div class="dome"></div>
+  <div class="museum-roof"></div>
+  <div class="museum-building">
+    <div class="museum-columns">
+      <div class="museum-column"></div>
+      <div class="museum-column"></div>
+      <div class="museum-column"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #places-18: Zoo -->
+<div class="place-diagram" id="places-18">
+  <div class="entrance-gate">
+    <div class="gate-pillar left"></div>
+    <div class="gate-pillar right"></div>
+    <div class="gate-arch">
+      <div class="zoo-sign">ZOO</div>
+    </div>
+  </div>
+  <div class="elephant"></div>
+  <div class="giraffe"></div>
+  <div class="giraffe-spots">
+    <div class="giraffe-spot"></div>
+    <div class="giraffe-spot"></div>
+    <div class="giraffe-spot"></div>
+  </div>
+  <div class="ground"></div>
+</div>
+
+<!-- #places-19: Aquarium -->
+<div class="place-diagram" id="places-19">
+  <div class="tank">
+    <div class="fish f1"></div>
+    <div class="fish f2"></div>
+    <div class="fish f3"></div>
+    <div class="seaweed s1"></div>
+    <div class="seaweed s2"></div>
+    <div class="seaweed s3"></div>
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+  </div>
+</div>
+
+<!-- #places-20: Theme Park -->
+<div class="place-diagram" id="places-20">
+  <div class="balloon"></div>
+  <div class="ferris-wheel">
+    <div class="cabin c1"></div>
+    <div class="cabin c2"></div>
+    <div class="cabin c3"></div>
+    <div class="cabin c4"></div>
+  </div>
+  <div class="ferris-stand"></div>
+  <div class="roller-coaster">
+    <div class="track"></div>
+    <div class="cart"></div>
+  </div>
+</div>
+
+<!-- #places-21: Sports Stadium -->
+<div class="place-diagram" id="places-21">
+  <div class="floodlight left"></div>
+  <div class="floodlight right"></div>
+  <div class="stadium">
+    <div class="stands"></div>
+    <div class="field">
+      <div class="field-lines"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #places-22: Swimming Pool -->
+<div class="place-diagram" id="places-22">
+  <div class="diving-board"></div>
+  <div class="pool">
+    <div class="lane-line l1"></div>
+    <div class="lane-line l2"></div>
+    <div class="swimmer"></div>
+    <div class="water-wave"></div>
+  </div>
+</div>
+
+<!-- #places-23: Gym/Fitness Center -->
+<div class="place-diagram" id="places-23">
+  <div class="dumbbell">
+    <div class="dumbbell-bar"></div>
+    <div class="dumbbell-weight left"></div>
+    <div class="dumbbell-weight right"></div>
+  </div>
+  <div class="treadmill"></div>
+  <div class="gym-sign">GYM</div>
+  <div class="gym-building">
+    <div class="gym-window"></div>
+  </div>
+</div>
+
+<!-- #places-24: Movie Theater -->
+<div class="place-diagram" id="places-24">
+  <div class="popcorn"></div>
+  <div class="marquee">
+    <div class="marquee-lights"></div>
+  </div>
+  <div class="theater-building">
+    <div class="screen"></div>
+    <div class="seats">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #places-25: Concert Hall -->
+<div class="place-diagram" id="places-25">
+  <div class="music-note n1">&#9835;</div>
+  <div class="music-note n2">&#9835;</div>
+  <div class="spotlight s1"></div>
+  <div class="spotlight s2"></div>
+  <div class="spotlight s3"></div>
+  <div class="speaker left"></div>
+  <div class="speaker right"></div>
+  <div class="microphone"></div>
+  <div class="stage"></div>
+</div>
+
+<!-- #places-26: Garden -->
+<div class="place-diagram" id="places-26">
+  <div class="sun"></div>
+  <div class="butterfly"></div>
+  <div class="flower f1">
+    <div class="petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+    <div class="stem"></div>
+  </div>
+  <div class="flower f2">
+    <div class="petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+    <div class="stem"></div>
+  </div>
+  <div class="flower f3">
+    <div class="petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+    <div class="stem"></div>
+  </div>
+  <div class="grass"></div>
+  <div class="ground"></div>
+</div>
+
+<!-- #places-27: Kitchen Scene -->
+<div class="place-diagram" id="places-27">
+  <div class="cabinet">
+    <div class="cabinet-door left"></div>
+    <div class="cabinet-door right"></div>
+  </div>
+  <div class="fridge">
+    <div class="fridge-handle"></div>
+  </div>
+  <div class="counter">
+    <div class="stove">
+      <div class="burner left"></div>
+      <div class="burner right"></div>
+    </div>
+    <div class="pot"></div>
+    <div class="steam"></div>
+  </div>
+</div>
+
+<!-- #places-28: Bedroom Scene -->
+<div class="place-diagram" id="places-28">
+  <div class="window">
+    <div class="moon"></div>
+  </div>
+  <div class="zzz">Zzz</div>
+  <div class="lamp">
+    <div class="lamp-shade"></div>
+    <div class="lamp-base"></div>
+  </div>
+  <div class="headboard"></div>
+  <div class="bed">
+    <div class="pillow"></div>
+    <div class="blanket"></div>
+  </div>
+  <div class="nightstand"></div>
+</div>
+
+<!-- #places-29: Bathroom -->
+<div class="place-diagram" id="places-29">
+  <div class="mirror"></div>
+  <div class="sink"></div>
+  <div class="faucet"></div>
+  <div class="bathtub">
+    <div class="water"></div>
+    <div class="bubbles">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+    <div class="duck"></div>
+  </div>
+  <div class="toilet">
+    <div class="toilet-lid"></div>
+  </div>
+</div>
+
+<!-- #places-30: Living Room -->
+<div class="place-diagram" id="places-30">
+  <div class="lamp"></div>
+  <div class="tv">
+    <div class="tv-screen"></div>
+    <div class="tv-stand"></div>
+  </div>
+  <div class="plant">
+    <div class="leaves"></div>
+    <div class="pot"></div>
+  </div>
+  <div class="sofa">
+    <div class="sofa-arm left"></div>
+    <div class="sofa-arm right"></div>
+    <div class="cushion c1"></div>
+    <div class="cushion c2"></div>
+  </div>
+  <div class="coffee-table"></div>
+  <div class="rug"></div>
+</div>

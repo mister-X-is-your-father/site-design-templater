@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Medical CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* health-01: Heart (Medical) */
+        .heart {
+            width: 60px;
+            height: 54px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 30px;
+            height: 48px;
+            background: #e53e3e;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .heart::before {
+            left: 30px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .heart:hover {
+            transform: scale(1.15);
+        }
+
+        /* health-02: Bandage */
+        .bandage {
+            width: 70px;
+            height: 28px;
+            background: #fbd38d;
+            border-radius: 6px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bandage::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 18px;
+            background: #f6e05e;
+            border-radius: 3px;
+        }
+
+        .bandage::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: repeating-linear-gradient(
+                90deg,
+                #d69e2e 0px,
+                #d69e2e 2px,
+                transparent 2px,
+                transparent 5px
+            );
+        }
+
+        .bandage:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        /* health-03: Pill/Medicine */
+        .pill {
+            width: 60px;
+            height: 24px;
+            position: relative;
+            transition: transform 0.3s ease, rotate 0.3s ease;
+        }
+
+        .pill::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 24px;
+            background: #e53e3e;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .pill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            width: 30px;
+            height: 24px;
+            background: #fc8181;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .pill:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* health-04: Syringe */
+        .syringe {
+            width: 70px;
+            height: 20px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .syringe::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 16px;
+            background: #a0aec0;
+            border-radius: 2px;
+        }
+
+        .syringe::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 4px;
+            background: #718096;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .syringe .plunger {
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 20px;
+            background: #4a5568;
+            border-radius: 2px;
+        }
+
+        .syringe .liquid {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 10px;
+            background: #48bb78;
+        }
+
+        .syringe:hover {
+            transform: translateX(5px);
+        }
+
+        /* health-05: Stethoscope */
+        .stethoscope {
+            width: 50px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .stethoscope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 30px;
+            border: 4px solid #4a5568;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .stethoscope::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #2d3748;
+            border-radius: 50%;
+        }
+
+        .stethoscope .earpiece-left,
+        .stethoscope .earpiece-right {
+            position: absolute;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            background: #2d3748;
+            border-radius: 50%;
+        }
+
+        .stethoscope .earpiece-left {
+            left: 2px;
+        }
+
+        .stethoscope .earpiece-right {
+            right: 2px;
+        }
+
+        .stethoscope:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* health-06: Thermometer */
+        .thermometer {
+            width: 16px;
+            height: 60px;
+            background: #e2e8f0;
+            border-radius: 8px 8px 10px 10px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .thermometer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: #e53e3e;
+            border-radius: 50%;
+        }
+
+        .thermometer::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 35px;
+            background: #e53e3e;
+            border-radius: 3px;
+        }
+
+        .thermometer:hover {
+            transform: scale(1.1);
+        }
+
+        .thermometer:hover::after {
+            height: 40px;
+        }
+
+        /* health-07: Hospital Bed */
+        .hospital-bed {
+            width: 70px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .hospital-bed::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 70px;
+            height: 20px;
+            background: #4299e1;
+            border-radius: 4px;
+        }
+
+        .hospital-bed::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 30px;
+            background: #2b6cb0;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .hospital-bed .leg-left,
+        .hospital-bed .leg-right {
+            position: absolute;
+            bottom: 0;
+            width: 6px;
+            height: 15px;
+            background: #718096;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .hospital-bed .leg-left {
+            left: 5px;
+        }
+
+        .hospital-bed .leg-right {
+            right: 5px;
+        }
+
+        .hospital-bed:hover {
+            transform: scale(1.1);
+        }
+
+        /* health-08: Wheelchair */
+        .wheelchair {
+            width: 50px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .wheelchair::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            width: 30px;
+            height: 30px;
+            border: 5px solid #4a5568;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .wheelchair::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            right: 5px;
+            width: 16px;
+            height: 16px;
+            border: 4px solid #718096;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .wheelchair .seat {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 25px;
+            height: 20px;
+            background: #2b6cb0;
+            border-radius: 3px;
+        }
+
+        .wheelchair .back {
+            position: absolute;
+            top: 0;
+            left: 8px;
+            width: 6px;
+            height: 30px;
+            background: #2b6cb0;
+            border-radius: 3px;
+        }
+
+        .wheelchair:hover {
+            transform: translateX(5px);
+        }
+
+        /* health-09: Medical Cross */
+        .medical-cross {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .medical-cross::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 18px;
+            background: #e53e3e;
+            border-radius: 3px;
+        }
+
+        .medical-cross::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 50px;
+            background: #e53e3e;
+            border-radius: 3px;
+        }
+
+        .medical-cross:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* health-10: Tooth */
+        .tooth {
+            width: 40px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .tooth::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 35px;
+            background: #f7fafc;
+            border-radius: 10px 10px 5px 5px;
+            border: 3px solid #e2e8f0;
+        }
+
+        .tooth .root-left,
+        .tooth .root-right {
+            position: absolute;
+            bottom: 0;
+            width: 12px;
+            height: 25px;
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+        }
+
+        .tooth .root-left {
+            left: 4px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .tooth .root-right {
+            right: 4px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .tooth:hover {
+            transform: scale(1.1);
+        }
+
+        /* health-11: Apple (Healthy) */
+        .apple {
+            width: 45px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .apple::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 42px;
+            background: #e53e3e;
+            border-radius: 50% 50% 50% 50%;
+        }
+
+        .apple::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 12px;
+            background: #744210;
+            border-radius: 2px;
+        }
+
+        .apple .leaf {
+            position: absolute;
+            top: 2px;
+            right: 8px;
+            width: 12px;
+            height: 8px;
+            background: #48bb78;
+            border-radius: 0 50% 50% 50%;
+            transform: rotate(45deg);
+        }
+
+        .apple:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* health-12: Water Drop */
+        .water-drop {
+            width: 35px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .water-drop::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 35px;
+            background: #4299e1;
+            border-radius: 50%;
+        }
+
+        .water-drop::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 17px solid transparent;
+            border-right: 17px solid transparent;
+            border-bottom: 25px solid #4299e1;
+        }
+
+        .water-drop:hover {
+            transform: translateY(-5px);
+        }
+
+        /* health-13: Brain */
+        .brain {
+            width: 55px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .brain::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 28px;
+            height: 40px;
+            background: #ed8936;
+            border-radius: 14px 5px 14px 14px;
+        }
+
+        .brain::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: 0;
+            width: 28px;
+            height: 40px;
+            background: #ed8936;
+            border-radius: 5px 14px 14px 14px;
+        }
+
+        .brain .stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 12px;
+            background: #c05621;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .brain:hover {
+            transform: scale(1.1);
+        }
+
+        /* health-14: Lungs */
+        .lungs {
+            width: 60px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .lungs::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 25px;
+            height: 40px;
+            background: #fc8181;
+            border-radius: 12px 5px 12px 12px;
+        }
+
+        .lungs::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 0;
+            width: 25px;
+            height: 40px;
+            background: #fc8181;
+            border-radius: 5px 12px 12px 12px;
+        }
+
+        .lungs .trachea {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 25px;
+            background: #e53e3e;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .lungs:hover {
+            transform: scale(1.15);
+        }
+
+        /* health-15: First Aid Kit */
+        .first-aid {
+            width: 55px;
+            height: 45px;
+            background: #e53e3e;
+            border-radius: 6px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .first-aid::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 8px;
+            background: #c53030;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .first-aid::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 8px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .first-aid .cross-v {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 24px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .first-aid:hover {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* health-16: Mask */
+        .mask {
+            width: 60px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .mask::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 32px;
+            background: #4299e1;
+            border-radius: 8px 8px 15px 15px;
+        }
+
+        .mask .strap-left,
+        .mask .strap-right {
+            position: absolute;
+            top: 50%;
+            width: 12px;
+            height: 4px;
+            background: #2b6cb0;
+        }
+
+        .mask .strap-left {
+            left: 0;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .mask .strap-right {
+            right: 0;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .mask .fold1,
+        .mask .fold2 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 2px;
+            background: #2b6cb0;
+        }
+
+        .mask .fold1 {
+            top: 14px;
+        }
+
+        .mask .fold2 {
+            top: 22px;
+        }
+
+        .mask:hover {
+            transform: scale(1.1);
+        }
+
+        /* health-17: Hand Washing */
+        .hand-wash {
+            width: 50px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .hand-wash::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 35px;
+            background: #fbd38d;
+            border-radius: 10px 10px 8px 8px;
+        }
+
+        .hand-wash .drop1,
+        .hand-wash .drop2,
+        .hand-wash .drop3 {
+            position: absolute;
+            width: 8px;
+            height: 10px;
+            background: #4299e1;
+            border-radius: 50% 50% 50% 50%;
+        }
+
+        .hand-wash .drop1 {
+            top: 0;
+            left: 12px;
+        }
+
+        .hand-wash .drop2 {
+            top: 5px;
+            left: 24px;
+        }
+
+        .hand-wash .drop3 {
+            top: 10px;
+            left: 36px;
+        }
+
+        .hand-wash .bubble {
+            position: absolute;
+            top: 20px;
+            left: 8px;
+            width: 10px;
+            height: 10px;
+            background: #bee3f8;
+            border-radius: 50%;
+        }
+
+        .hand-wash:hover {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        /* health-18: Exercise Figure */
+        .exercise {
+            width: 45px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #48bb78;
+            border-radius: 50%;
+        }
+
+        .exercise::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 22px;
+            background: #48bb78;
+            border-radius: 3px;
+        }
+
+        .exercise .arm-left,
+        .exercise .arm-right {
+            position: absolute;
+            top: 20px;
+            width: 18px;
+            height: 5px;
+            background: #48bb78;
+            border-radius: 2px;
+        }
+
+        .exercise .arm-left {
+            left: 0;
+            transform: rotate(-45deg);
+        }
+
+        .exercise .arm-right {
+            right: 0;
+            transform: rotate(45deg);
+        }
+
+        .exercise .leg-left,
+        .exercise .leg-right {
+            position: absolute;
+            bottom: 0;
+            width: 5px;
+            height: 20px;
+            background: #48bb78;
+            border-radius: 2px;
+        }
+
+        .exercise .leg-left {
+            left: 12px;
+            transform: rotate(20deg);
+        }
+
+        .exercise .leg-right {
+            right: 12px;
+            transform: rotate(-20deg);
+        }
+
+        .exercise:hover {
+            transform: scale(1.1) translateY(-3px);
+        }
+
+        /* health-19: Vegetables */
+        .vegetables {
+            width: 60px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .vegetables .carrot {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            width: 18px;
+            height: 35px;
+            background: #ed8936;
+            border-radius: 5px 5px 50% 50%;
+            transform: rotate(-15deg);
+        }
+
+        .vegetables .carrot::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 10px;
+            background: #48bb78;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .vegetables .broccoli {
+            position: absolute;
+            bottom: 0;
+            right: 5px;
+            width: 25px;
+            height: 30px;
+        }
+
+        .vegetables .broccoli::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 20px;
+            background: #38a169;
+            border-radius: 50%;
+        }
+
+        .vegetables .broccoli::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 15px;
+            background: #68d391;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .vegetables:hover {
+            transform: scale(1.1);
+        }
+
+        /* health-20: Sleeping/Rest */
+        .sleeping {
+            width: 60px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .sleeping::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 20px;
+            background: #805ad5;
+            border-radius: 10px;
+        }
+
+        .sleeping::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 5px;
+            width: 18px;
+            height: 18px;
+            background: #fbd38d;
+            border-radius: 50%;
+        }
+
+        .sleeping .pillow {
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 20px;
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .sleeping .z1,
+        .sleeping .z2,
+        .sleeping .z3 {
+            position: absolute;
+            color: #9f7aea;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .sleeping .z1 {
+            top: 10px;
+            right: 15px;
+            font-size: 10px;
+        }
+
+        .sleeping .z2 {
+            top: 3px;
+            right: 8px;
+            font-size: 12px;
+        }
+
+        .sleeping .z3 {
+            top: -5px;
+            right: 0;
+            font-size: 14px;
+        }
+
+        .sleeping:hover {
+            transform: scale(1.1);
+        }
+
+        .sleeping:hover .z1,
+        .sleeping:hover .z2,
+        .sleeping:hover .z3 {
+            animation: float 1s ease-in-out infinite;
+        }
+
+        .sleeping:hover .z2 {
+            animation-delay: 0.2s;
+        }
+
+        .sleeping:hover .z3 {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Health & Medical CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- health-01: Heart -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="heart" id="health-01"></div>
+            </div>
+            <span class="item-label">health-01: Heart</span>
+        </div>
+
+        <!-- health-02: Bandage -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="bandage" id="health-02"></div>
+            </div>
+            <span class="item-label">health-02: Bandage</span>
+        </div>
+
+        <!-- health-03: Pill -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="pill" id="health-03"></div>
+            </div>
+            <span class="item-label">health-03: Pill</span>
+        </div>
+
+        <!-- health-04: Syringe -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="syringe" id="health-04">
+                    <div class="plunger"></div>
+                    <div class="liquid"></div>
+                </div>
+            </div>
+            <span class="item-label">health-04: Syringe</span>
+        </div>
+
+        <!-- health-05: Stethoscope -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="stethoscope" id="health-05">
+                    <div class="earpiece-left"></div>
+                    <div class="earpiece-right"></div>
+                </div>
+            </div>
+            <span class="item-label">health-05: Stethoscope</span>
+        </div>
+
+        <!-- health-06: Thermometer -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="thermometer" id="health-06"></div>
+            </div>
+            <span class="item-label">health-06: Thermometer</span>
+        </div>
+
+        <!-- health-07: Hospital Bed -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="hospital-bed" id="health-07">
+                    <div class="leg-left"></div>
+                    <div class="leg-right"></div>
+                </div>
+            </div>
+            <span class="item-label">health-07: Hospital Bed</span>
+        </div>
+
+        <!-- health-08: Wheelchair -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="wheelchair" id="health-08">
+                    <div class="seat"></div>
+                    <div class="back"></div>
+                </div>
+            </div>
+            <span class="item-label">health-08: Wheelchair</span>
+        </div>
+
+        <!-- health-09: Medical Cross -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="medical-cross" id="health-09"></div>
+            </div>
+            <span class="item-label">health-09: Medical Cross</span>
+        </div>
+
+        <!-- health-10: Tooth -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="tooth" id="health-10">
+                    <div class="root-left"></div>
+                    <div class="root-right"></div>
+                </div>
+            </div>
+            <span class="item-label">health-10: Tooth</span>
+        </div>
+
+        <!-- health-11: Apple -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="apple" id="health-11">
+                    <div class="leaf"></div>
+                </div>
+            </div>
+            <span class="item-label">health-11: Apple</span>
+        </div>
+
+        <!-- health-12: Water Drop -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="water-drop" id="health-12"></div>
+            </div>
+            <span class="item-label">health-12: Water Drop</span>
+        </div>
+
+        <!-- health-13: Brain -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="brain" id="health-13">
+                    <div class="stem"></div>
+                </div>
+            </div>
+            <span class="item-label">health-13: Brain</span>
+        </div>
+
+        <!-- health-14: Lungs -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="lungs" id="health-14">
+                    <div class="trachea"></div>
+                </div>
+            </div>
+            <span class="item-label">health-14: Lungs</span>
+        </div>
+
+        <!-- health-15: First Aid Kit -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="first-aid" id="health-15">
+                    <div class="cross-v"></div>
+                </div>
+            </div>
+            <span class="item-label">health-15: First Aid Kit</span>
+        </div>
+
+        <!-- health-16: Mask -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="mask" id="health-16">
+                    <div class="strap-left"></div>
+                    <div class="strap-right"></div>
+                    <div class="fold1"></div>
+                    <div class="fold2"></div>
+                </div>
+            </div>
+            <span class="item-label">health-16: Mask</span>
+        </div>
+
+        <!-- health-17: Hand Washing -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="hand-wash" id="health-17">
+                    <div class="drop1"></div>
+                    <div class="drop2"></div>
+                    <div class="drop3"></div>
+                    <div class="bubble"></div>
+                </div>
+            </div>
+            <span class="item-label">health-17: Hand Wash</span>
+        </div>
+
+        <!-- health-18: Exercise Figure -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="exercise" id="health-18">
+                    <div class="arm-left"></div>
+                    <div class="arm-right"></div>
+                    <div class="leg-left"></div>
+                    <div class="leg-right"></div>
+                </div>
+            </div>
+            <span class="item-label">health-18: Exercise</span>
+        </div>
+
+        <!-- health-19: Vegetables -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="vegetables" id="health-19">
+                    <div class="carrot"></div>
+                    <div class="broccoli"></div>
+                </div>
+            </div>
+            <span class="item-label">health-19: Vegetables</span>
+        </div>
+
+        <!-- health-20: Sleeping -->
+        <div class="item">
+            <div class="icon-wrapper">
+                <div class="sleeping" id="health-20">
+                    <div class="pillow"></div>
+                    <span class="z1">z</span>
+                    <span class="z2">z</span>
+                    <span class="z3">z</span>
+                </div>
+            </div>
+            <span class="item-label">health-20: Sleeping</span>
+        </div>
+    </div>
+</body>
+</html>

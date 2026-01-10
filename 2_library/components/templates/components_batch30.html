@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Clean LP Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --black: #000000;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            --spacing-2xl: 12rem;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: var(--white);
+            color: var(--gray-900);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .container-narrow {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* ============================================
+           [AD01] Hero Section - Minimal Clean
+           ============================================ */
+        .ad01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            background: var(--white);
+        }
+
+        .ad01-hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .ad01-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad01-hero p {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: var(--gray-500);
+            max-width: 560px;
+            margin: 0 auto var(--spacing-lg);
+            line-height: 1.7;
+        }
+
+        .ad01-hero-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           [AD02] Feature Cards - Minimal Clean
+           ============================================ */
+        .ad02-features {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--white);
+        }
+
+        .ad02-features-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .ad02-features-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .ad02-features-header p {
+            font-size: 1.125rem;
+            color: var(--gray-500);
+        }
+
+        .ad02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .ad02-feature-card {
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .ad02-feature-number {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad02-feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.01em;
+        }
+
+        .ad02-feature-card p {
+            font-size: 1rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           [AD03] Pricing Table - Minimal Clean
+           ============================================ */
+        .ad03-pricing {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--gray-50);
+        }
+
+        .ad03-pricing-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .ad03-pricing-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .ad03-pricing-header p {
+            font-size: 1.125rem;
+            color: var(--gray-500);
+        }
+
+        .ad03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ad03-pricing-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--gray-200);
+            transition: border-color 0.2s ease;
+        }
+
+        .ad03-pricing-card:hover {
+            border-color: var(--black);
+        }
+
+        .ad03-pricing-card.featured {
+            border-color: var(--black);
+            border-width: 2px;
+        }
+
+        .ad03-pricing-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .ad03-pricing-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad03-pricing-price {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--black);
+            letter-spacing: -0.02em;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .ad03-pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray-500);
+        }
+
+        .ad03-pricing-desc {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .ad03-pricing-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .ad03-pricing-features li {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            padding: var(--spacing-xs) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .ad03-pricing-features li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--black);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           [AD04] CTA Button - Minimal Clean
+           ============================================ */
+        .ad04-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0;
+        }
+
+        .ad04-btn-primary {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .ad04-btn-primary:hover {
+            background: var(--gray-800);
+        }
+
+        .ad04-btn-secondary {
+            background: transparent;
+            color: var(--black);
+            border: 1px solid var(--gray-300);
+        }
+
+        .ad04-btn-secondary:hover {
+            border-color: var(--black);
+        }
+
+        .ad04-btn-text {
+            background: transparent;
+            color: var(--black);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--black);
+        }
+
+        .ad04-btn-text:hover {
+            opacity: 0.6;
+        }
+
+        .ad04-btn-lg {
+            padding: 1.25rem 3rem;
+            font-size: 1rem;
+        }
+
+        .ad04-cta-section {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--white);
+            text-align: center;
+        }
+
+        .ad04-cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad04-cta-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           [AD05] Testimonial - Minimal Clean
+           ============================================ */
+        .ad05-testimonials {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--white);
+        }
+
+        .ad05-testimonials-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .ad05-testimonials-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+
+        .ad05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .ad05-testimonial-card {
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .ad05-testimonial-text {
+            font-size: 1.125rem;
+            color: var(--gray-700);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad05-testimonial-text::before {
+            content: '"';
+        }
+
+        .ad05-testimonial-text::after {
+            content: '"';
+        }
+
+        .ad05-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .ad05-testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--gray-500);
+        }
+
+        .ad05-testimonial-info h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.125rem;
+        }
+
+        .ad05-testimonial-info p {
+            font-size: 0.8125rem;
+            color: var(--gray-500);
+        }
+
+        /* ============================================
+           [AD06] FAQ - Minimal Clean
+           ============================================ */
+        .ad06-faq {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--gray-50);
+        }
+
+        .ad06-faq-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .ad06-faq-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+
+        .ad06-faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .ad06-faq-item {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .ad06-faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: var(--spacing-md) 0;
+            text-align: left;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            color: var(--black);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-md);
+            transition: color 0.2s ease;
+        }
+
+        .ad06-faq-question:hover {
+            color: var(--gray-600);
+        }
+
+        .ad06-faq-icon {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--gray-400);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .ad06-faq-item.active .ad06-faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .ad06-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .ad06-faq-item.active .ad06-faq-answer {
+            max-height: 500px;
+            padding-bottom: var(--spacing-md);
+        }
+
+        .ad06-faq-answer p {
+            font-size: 1rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           [AD07] Footer - Minimal Clean
+           ============================================ */
+        .ad07-footer {
+            padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .ad07-footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .ad07-footer-brand h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.01em;
+        }
+
+        .ad07-footer-brand p {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .ad07-footer-section h4 {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad07-footer-links {
+            list-style: none;
+        }
+
+        .ad07-footer-links li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .ad07-footer-links a {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .ad07-footer-links a:hover {
+            color: var(--black);
+        }
+
+        .ad07-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .ad07-footer-copyright {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+        }
+
+        .ad07-footer-legal {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .ad07-footer-legal a {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .ad07-footer-legal a:hover {
+            color: var(--black);
+        }
+
+        /* ============================================
+           [AD08] Navigation - Minimal Clean
+           ============================================ */
+        .ad08-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: var(--spacing-sm) var(--spacing-md);
+            z-index: 1000;
+        }
+
+        .ad08-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ad08-nav-logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .ad08-nav-menu {
+            display: flex;
+            gap: var(--spacing-lg);
+            list-style: none;
+            align-items: center;
+        }
+
+        .ad08-nav-menu a {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .ad08-nav-menu a:hover {
+            color: var(--black);
+        }
+
+        .ad08-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ad08-nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--black);
+            position: absolute;
+            left: 0;
+            transition: all 0.2s ease;
+        }
+
+        .ad08-nav-toggle span:first-child {
+            top: 7px;
+        }
+
+        .ad08-nav-toggle span:last-child {
+            bottom: 7px;
+        }
+
+        /* ============================================
+           [AD09] Step Guide - Minimal Clean
+           ============================================ */
+        .ad09-steps {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--white);
+        }
+
+        .ad09-steps-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .ad09-steps-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .ad09-steps-header p {
+            font-size: 1.125rem;
+            color: var(--gray-500);
+        }
+
+        .ad09-steps-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .ad09-step-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .ad09-step-item:last-child {
+            border-bottom: none;
+        }
+
+        .ad09-step-number {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--gray-200);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .ad09-step-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: var(--spacing-xs);
+            letter-spacing: -0.01em;
+        }
+
+        .ad09-step-content p {
+            font-size: 1rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           [AD10] Registration Form - Minimal Clean
+           ============================================ */
+        .ad10-form-section {
+            padding: var(--spacing-2xl) var(--spacing-md);
+            background: var(--gray-50);
+        }
+
+        .ad10-form-container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .ad10-form-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .ad10-form-header h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .ad10-form-header p {
+            font-size: 1rem;
+            color: var(--gray-500);
+        }
+
+        .ad10-form {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .ad10-form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad10-form-label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .ad10-form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            color: var(--black);
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            transition: border-color 0.2s ease;
+        }
+
+        .ad10-form-input:focus {
+            outline: none;
+            border-color: var(--black);
+        }
+
+        .ad10-form-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .ad10-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ad10-form-checkbox input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--black);
+        }
+
+        .ad10-form-checkbox label {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+        }
+
+        .ad10-form-checkbox a {
+            color: var(--black);
+            text-decoration: underline;
+        }
+
+        .ad10-form-submit {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--white);
+            background: var(--black);
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .ad10-form-submit:hover {
+            background: var(--gray-800);
+        }
+
+        .ad10-form-divider {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+        }
+
+        .ad10-form-divider::before,
+        .ad10-form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .ad10-form-divider span {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+        }
+
+        .ad10-form-social {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .ad10-form-social-btn {
+            flex: 1;
+            padding: 0.875rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+
+        .ad10-form-social-btn:hover {
+            border-color: var(--black);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ad08-nav-menu {
+                display: none;
+            }
+
+            .ad08-nav-toggle {
+                display: block;
+            }
+
+            .ad07-footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ad09-step-item {
+                grid-template-columns: 60px 1fr;
+            }
+
+            .ad09-step-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ad07-footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ad10-form-social {
+                flex-direction: column;
+            }
+        }
+
+        /* Demo Page Styles */
+        .demo-section {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .demo-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [AD08] Navigation - Minimal Clean -->
+    <nav class="ad08-nav">
+        <div class="ad08-nav-content">
+            <a href="#" class="ad08-nav-logo">Brand</a>
+            <ul class="ad08-nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><button class="ad04-btn ad04-btn-primary">Get Started</button></li>
+            </ul>
+            <button class="ad08-nav-toggle">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- [AD01] Hero Section - Minimal Clean -->
+    <section class="ad01-hero">
+        <div class="ad01-hero-content">
+            <h1>Simple tools for<br>complex work</h1>
+            <p>Build faster, work smarter. Everything you need to bring your ideas to life, without the complexity.</p>
+            <div class="ad01-hero-actions">
+                <button class="ad04-btn ad04-btn-primary ad04-btn-lg">Start for free</button>
+                <button class="ad04-btn ad04-btn-secondary ad04-btn-lg">Learn more</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AD02] Feature Cards - Minimal Clean -->
+    <section class="ad02-features" id="features">
+        <div class="container">
+            <div class="ad02-features-header">
+                <h2>Built for the way you work</h2>
+                <p>Everything designed with purpose and precision</p>
+            </div>
+            <div class="ad02-features-grid">
+                <div class="ad02-feature-card">
+                    <div class="ad02-feature-number">01</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Performance that keeps up with your ideas. No lag, no waiting, just seamless productivity from start to finish.</p>
+                </div>
+                <div class="ad02-feature-card">
+                    <div class="ad02-feature-number">02</div>
+                    <h3>Effortlessly Simple</h3>
+                    <p>Complexity hidden, simplicity revealed. An interface so intuitive, you'll wonder how you worked without it.</p>
+                </div>
+                <div class="ad02-feature-card">
+                    <div class="ad02-feature-number">03</div>
+                    <h3>Always Secure</h3>
+                    <p>Enterprise-grade security without enterprise-grade complexity. Your data, protected by default.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AD03] Pricing Table - Minimal Clean -->
+    <section class="ad03-pricing" id="pricing">
+        <div class="container">
+            <div class="ad03-pricing-header">
+                <h2>Simple, transparent pricing</h2>
+                <p>No hidden fees. No surprises.</p>
+            </div>
+            <div class="ad03-pricing-grid">
+                <div class="ad03-pricing-card">
+                    <div class="ad03-pricing-label">Starter</div>
+                    <h3>For individuals</h3>
+                    <div class="ad03-pricing-price">$0 <span>/ month</span></div>
+                    <p class="ad03-pricing-desc">Perfect for trying things out</p>
+                    <ul class="ad03-pricing-features">
+                        <li>Up to 3 projects</li>
+                        <li>Basic analytics</li>
+                        <li>Community support</li>
+                        <li>1GB storage</li>
+                    </ul>
+                    <button class="ad04-btn ad04-btn-secondary" style="width: 100%;">Get started</button>
+                </div>
+                <div class="ad03-pricing-card featured">
+                    <div class="ad03-pricing-label">Pro</div>
+                    <h3>For professionals</h3>
+                    <div class="ad03-pricing-price">$29 <span>/ month</span></div>
+                    <p class="ad03-pricing-desc">Everything you need to grow</p>
+                    <ul class="ad03-pricing-features">
+                        <li>Unlimited projects</li>
+                        <li>Advanced analytics</li>
+                        <li>Priority support</li>
+                        <li>100GB storage</li>
+                        <li>Custom domains</li>
+                    </ul>
+                    <button class="ad04-btn ad04-btn-primary" style="width: 100%;">Start free trial</button>
+                </div>
+                <div class="ad03-pricing-card">
+                    <div class="ad03-pricing-label">Team</div>
+                    <h3>For organizations</h3>
+                    <div class="ad03-pricing-price">$99 <span>/ month</span></div>
+                    <p class="ad03-pricing-desc">Advanced features for teams</p>
+                    <ul class="ad03-pricing-features">
+                        <li>Everything in Pro</li>
+                        <li>Team collaboration</li>
+                        <li>Admin controls</li>
+                        <li>Unlimited storage</li>
+                        <li>SSO & SAML</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <button class="ad04-btn ad04-btn-secondary" style="width: 100%;">Contact sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AD04] CTA Section - Minimal Clean -->
+    <section class="ad04-cta-section">
+        <h2>Ready to get started?</h2>
+        <div class="ad04-cta-actions">
+            <button class="ad04-btn ad04-btn-primary ad04-btn-lg">Start your free trial</button>
+            <a href="#" class="ad04-btn ad04-btn-text">Schedule a demo</a>
+        </div>
+    </section>
+
+    <!-- [AD05] Testimonial - Minimal Clean -->
+    <section class="ad05-testimonials" id="testimonials">
+        <div class="container">
+            <div class="ad05-testimonials-header">
+                <h2>Trusted by thousands</h2>
+            </div>
+            <div class="ad05-testimonials-grid">
+                <div class="ad05-testimonial-card">
+                    <p class="ad05-testimonial-text">The simplicity is what sold me. I was up and running in minutes, not days. This is how software should be.</p>
+                    <div class="ad05-testimonial-author">
+                        <div class="ad05-testimonial-avatar">A</div>
+                        <div class="ad05-testimonial-info">
+                            <h4>Alex Chen</h4>
+                            <p>CEO, TechStart</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ad05-testimonial-card">
+                    <p class="ad05-testimonial-text">We replaced three different tools with this one. Our workflow has never been more streamlined.</p>
+                    <div class="ad05-testimonial-author">
+                        <div class="ad05-testimonial-avatar">M</div>
+                        <div class="ad05-testimonial-info">
+                            <h4>Maria Garcia</h4>
+                            <p>Product Lead, DesignCo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ad05-testimonial-card">
+                    <p class="ad05-testimonial-text">The attention to detail is remarkable. Every interaction feels considered and intentional.</p>
+                    <div class="ad05-testimonial-author">
+                        <div class="ad05-testimonial-avatar">J</div>
+                        <div class="ad05-testimonial-info">
+                            <h4>James Wilson</h4>
+                            <p>Director, Creative Labs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AD09] Step Guide - Minimal Clean -->
+    <section class="ad09-steps">
+        <div class="container">
+            <div class="ad09-steps-header">
+                <h2>How it works</h2>
+                <p>Get started in three simple steps</p>
+            </div>
+            <div class="ad09-steps-list">
+                <div class="ad09-step-item">
+                    <div class="ad09-step-number">01</div>
+                    <div class="ad09-step-content">
+                        <h3>Create your account</h3>
+                        <p>Sign up with your email in seconds. No credit card required to get started.</p>
+                    </div>
+                </div>
+                <div class="ad09-step-item">
+                    <div class="ad09-step-number">02</div>
+                    <div class="ad09-step-content">
+                        <h3>Set up your workspace</h3>
+                        <p>Customize your environment to match your workflow. Import existing data or start fresh.</p>
+                    </div>
+                </div>
+                <div class="ad09-step-item">
+                    <div class="ad09-step-number">03</div>
+                    <div class="ad09-step-content">
+                        <h3>Start building</h3>
+                        <p>Launch your first project and experience the difference. We're here if you need us.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AD06] FAQ - Minimal Clean -->
+    <section class="ad06-faq" id="faq">
+        <div class="container">
+            <div class="ad06-faq-header">
+                <h2>Frequently asked questions</h2>
+            </div>
+            <div class="ad06-faq-list">
+                <div class="ad06-faq-item">
+                    <button class="ad06-faq-question">
+                        <span>Is there a free trial?</span>
+                        <span class="ad06-faq-icon">+</span>
+                    </button>
+                    <div class="ad06-faq-answer">
+                        <p>Yes, we offer a 14-day free trial with full access to all features. No credit card required to start.</p>
+                    </div>
+                </div>
+                <div class="ad06-faq-item">
+                    <button class="ad06-faq-question">
+                        <span>Can I change plans anytime?</span>
+                        <span class="ad06-faq-icon">+</span>
+                    </button>
+                    <div class="ad06-faq-answer">
+                        <p>Absolutely. Upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any charges.</p>
+                    </div>
+                </div>
+                <div class="ad06-faq-item">
+                    <button class="ad06-faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <span class="ad06-faq-icon">+</span>
+                    </button>
+                    <div class="ad06-faq-answer">
+                        <p>We accept all major credit cards, PayPal, and bank transfers for annual plans. Invoicing is available for enterprise customers.</p>
+                    </div>
+                </div>
+                <div class="ad06-faq-item">
+                    <button class="ad06-faq-question">
+                        <span>How do I cancel my subscription?</span>
+                        <span class="ad06-faq-icon">+</span>
+                    </button>
+                    <div class="ad06-faq-answer">
+                        <p>You can cancel anytime from your account settings. No questions asked, no hidden fees. Your data will be available to export for 30 days after cancellation.</p>
+                    </div>
+                </div>
+                <div class="ad06-faq-item">
+                    <button class="ad06-faq-question">
+                        <span>Do you offer refunds?</span>
+                        <span class="ad06-faq-icon">+</span>
+                    </button>
+                    <div class="ad06-faq-answer">
+                        <p>Yes, we offer a 30-day money-back guarantee. If you're not satisfied, contact us for a full refund.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AD10] Registration Form - Minimal Clean -->
+    <section class="ad10-form-section">
+        <div class="ad10-form-container">
+            <div class="ad10-form-header">
+                <h2>Create your account</h2>
+                <p>Start your free trial today</p>
+            </div>
+            <form class="ad10-form">
+                <div class="ad10-form-group">
+                    <label class="ad10-form-label" for="name">Full name</label>
+                    <input type="text" id="name" class="ad10-form-input" placeholder="Enter your name">
+                </div>
+                <div class="ad10-form-group">
+                    <label class="ad10-form-label" for="email">Email address</label>
+                    <input type="email" id="email" class="ad10-form-input" placeholder="you@company.com">
+                </div>
+                <div class="ad10-form-group">
+                    <label class="ad10-form-label" for="password">Password</label>
+                    <input type="password" id="password" class="ad10-form-input" placeholder="Create a password">
+                </div>
+                <div class="ad10-form-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="ad10-form-submit">Create account</button>
+                <div class="ad10-form-divider">
+                    <span>or continue with</span>
+                </div>
+                <div class="ad10-form-social">
+                    <button type="button" class="ad10-form-social-btn">Google</button>
+                    <button type="button" class="ad10-form-social-btn">Apple</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- [AD07] Footer - Minimal Clean -->
+    <footer class="ad07-footer">
+        <div class="container">
+            <div class="ad07-footer-grid">
+                <div class="ad07-footer-brand">
+                    <h3>Brand</h3>
+                    <p>Simple tools for complex work. Built with care for people who create.</p>
+                </div>
+                <div class="ad07-footer-section">
+                    <h4>Product</h4>
+                    <ul class="ad07-footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="ad07-footer-section">
+                    <h4>Company</h4>
+                    <ul class="ad07-footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="ad07-footer-section">
+                    <h4>Resources</h4>
+                    <ul class="ad07-footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ad07-footer-bottom">
+                <p class="ad07-footer-copyright">&copy; 2026 Brand. All rights reserved.</p>
+                <div class="ad07-footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.ad06-faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                document.querySelectorAll('.ad06-faq-item').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.ad10-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Account created successfully!');
+        });
+    </script>
+
+</body>
+</html>

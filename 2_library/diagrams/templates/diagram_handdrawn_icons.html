@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand-drawn Icons & Marks - Diagram Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .icon-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .icon-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .icon-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-card h3 {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .icon-card p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        /* ==================== ICON STYLES ==================== */
+
+        /* 1. Hand-drawn Checkmark */
+        #handicon-1 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-1::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border: 3px solid #27ae60;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+            opacity: 0.7;
+            animation: wobbleRotate 0.1s infinite;
+        }
+
+        #handicon-1::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 25px;
+            border: 3px solid #27ae60;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+            top: 35px;
+            left: 20px;
+            border-radius: 4px 0 0 0;
+        }
+
+        /* 2. Sketchy X Mark */
+        #handicon-2 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-2::before,
+        #handicon-2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: #e74c3c;
+            top: 50%;
+            left: 5px;
+            transform-origin: center;
+        }
+
+        #handicon-2::before {
+            transform: rotate(45deg) translateY(-1.5px);
+            animation: sketchyJitter 0.15s infinite;
+        }
+
+        #handicon-2::after {
+            transform: rotate(-45deg) translateY(-1.5px);
+            animation: sketchyJitter 0.15s infinite reverse;
+        }
+
+        /* 3. Doodle Star Rating */
+        #handicon-3 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 28px;
+            color: #f39c12;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: doodleTwinkle 0.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 2px rgba(243, 156, 18, 0.4));
+        }
+
+        .star:nth-child(1) { transform: translate(-25px, -15px); animation-delay: 0s; }
+        .star:nth-child(2) { transform: translate(0, -25px); animation-delay: 0.2s; }
+        .star:nth-child(3) { transform: translate(25px, -15px); animation-delay: 0.4s; }
+
+        /* 4. Rough Heart Icon */
+        #handicon-4 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-4::before {
+            content: '♥';
+            font-size: 70px;
+            color: #e91e63;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            filter: drop-shadow(1px 1px 0 #e91e63) drop-shadow(-1px -1px 0 #e91e63);
+            animation: heartBeat 1.2s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* 5. Hand-drawn Lightbulb */
+        #handicon-5 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-5::before {
+            content: '';
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border: 2.5px solid #f39c12;
+            border-radius: 50% 50% 40% 40%;
+            top: 10px;
+            left: 17.5px;
+            background: radial-gradient(circle at 35% 35%, rgba(243, 156, 18, 0.3), transparent);
+        }
+
+        #handicon-5::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 12px;
+            border: 2px solid #f39c12;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            top: 55px;
+            left: 25px;
+        }
+
+        /* 6. Sketchy Question Mark */
+        #handicon-6 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            font-size: 60px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        #handicon-6::before {
+            content: '?';
+            animation: questionBounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes questionBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(-2deg); }
+        }
+
+        /* 7. Doodle Exclamation Mark */
+        #handicon-7 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #handicon-7::before {
+            content: '!';
+            font-size: 65px;
+            color: #e74c3c;
+            font-weight: bold;
+            animation: exclamationPulse 0.8s ease-in-out infinite;
+        }
+
+        @keyframes exclamationPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(3deg); }
+        }
+
+        /* 8. Rough Number Badges */
+        #handicon-8 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border: 2px solid;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .badge-1 {
+            border-color: #3498db;
+            color: #3498db;
+            top: 5px;
+            left: 5px;
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .badge-2 {
+            border-color: #2ecc71;
+            color: #2ecc71;
+            top: 5px;
+            left: 30px;
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .badge-3 {
+            border-color: #f39c12;
+            color: #f39c12;
+            top: 5px;
+            left: 55px;
+            background: rgba(243, 156, 18, 0.1);
+        }
+
+        /* 9. Hand-drawn Bullet Points */
+        #handicon-9 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .bullet {
+            position: absolute;
+            left: 10px;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #2c3e50 0%, #2c3e50 30%, transparent 100%);
+            border-radius: 1px;
+        }
+
+        .bullet::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #2c3e50;
+            border-radius: 50%;
+            left: -12px;
+            top: -2px;
+        }
+
+        .bullet:nth-child(1) { top: 15px; }
+        .bullet:nth-child(2) { top: 35px; }
+        .bullet:nth-child(3) { top: 55px; }
+
+        /* 10. Sketchy Emoji Faces */
+        #handicon-10 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .emoji-face {
+            width: 20px;
+            height: 20px;
+            border: 2px solid;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .emoji-happy {
+            border-color: #2ecc71;
+            background: radial-gradient(circle at 30% 30%, rgba(46, 204, 113, 0.2), transparent);
+        }
+
+        .emoji-sad {
+            border-color: #e74c3c;
+            background: radial-gradient(circle at 30% 30%, rgba(231, 76, 60, 0.2), transparent);
+        }
+
+        .emoji-neutral {
+            border-color: #f39c12;
+            background: radial-gradient(circle at 30% 30%, rgba(243, 156, 18, 0.2), transparent);
+        }
+
+        /* 11. Doodle Trophy Icon */
+        #handicon-11 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-11::before {
+            content: '🏆';
+            position: absolute;
+            font-size: 60px;
+            top: 10px;
+            left: 10px;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+            animation: trophyBounce 0.8s ease-in-out infinite;
+        }
+
+        @keyframes trophyBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        /* 12. Rough Medal/Award */
+        #handicon-12 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-12::before {
+            content: '★';
+            position: absolute;
+            font-size: 50px;
+            color: #f39c12;
+            top: 5px;
+            left: 15px;
+            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2)) drop-shadow(1px 1px 0 #ffd700);
+            animation: medalSpin 3s linear infinite;
+        }
+
+        #handicon-12::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 30px;
+            background: linear-gradient(90deg, #c41e3a, #ffd700);
+            bottom: 10px;
+            left: 36px;
+            border-radius: 4px;
+        }
+
+        @keyframes medalSpin {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* 13. Hand-drawn Flag Marker */
+        #handicon-13 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-13::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 28px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            top: 12px;
+            left: 20px;
+            border-radius: 2px 0 2px 2px;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+            animation: flagWave 0.8s ease-in-out infinite;
+        }
+
+        #handicon-13::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 50px;
+            background: #34495e;
+            top: 20px;
+            left: 17px;
+        }
+
+        @keyframes flagWave {
+            0%, 100% { transform: skewX(0deg) scaleX(1); }
+            50% { transform: skewX(-5deg) scaleX(0.95); }
+        }
+
+        /* 14. Sketchy Pin/Thumbtack */
+        #handicon-14 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-14::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at 35% 35%, #3498db, #2980b9);
+            border-radius: 50%;
+            top: 15px;
+            left: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #handicon-14::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 35px;
+            background: #34495e;
+            top: 45px;
+            left: 39px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 15. Doodle Clock Icon */
+        #handicon-15 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-15::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #9b59b6;
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            opacity: 0.8;
+        }
+
+        .clock-hand {
+            position: absolute;
+            background: #9b59b6;
+            transform-origin: bottom center;
+            left: 50%;
+        }
+
+        .hour-hand {
+            width: 2px;
+            height: 18px;
+            top: 22px;
+            margin-left: -1px;
+            animation: clockSpin 12s linear infinite;
+        }
+
+        .minute-hand {
+            width: 2px;
+            height: 25px;
+            top: 15px;
+            margin-left: -1px;
+            animation: clockSpin 1s linear infinite;
+        }
+
+        @keyframes clockSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 16. Rough Calendar Icon */
+        #handicon-16 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-16::before {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border: 2.5px solid #e74c3c;
+            border-radius: 4px;
+            top: 12px;
+            left: 12.5px;
+            background: linear-gradient(180deg, rgba(231, 76, 60, 0.05) 30%, transparent);
+        }
+
+        #handicon-16::after {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 12px;
+            border: 2px solid #e74c3c;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            top: 12px;
+            left: 12.5px;
+        }
+
+        /* 17. Hand-drawn Person Icon */
+        #handicon-17 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-17::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #34495e;
+            border-radius: 50%;
+            top: 12px;
+            left: 31px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #handicon-17::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 40px;
+            border: 2.5px solid #34495e;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            top: 30px;
+            left: 22.5px;
+        }
+
+        /* 18. Sketchy Location Pin */
+        #handicon-18 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-18::before {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 40px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            top: 10px;
+            left: 22.5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #handicon-18::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            top: 35px;
+            left: 34px;
+            box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 19. Doodle Book/Document */
+        #handicon-19 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-19::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 55px;
+            border: 2.5px solid #3498db;
+            border-radius: 3px;
+            top: 12px;
+            left: 15px;
+            background: linear-gradient(90deg, rgba(52, 152, 219, 0.05) 0%, transparent 50%);
+        }
+
+        .page-line {
+            position: absolute;
+            width: 35px;
+            height: 1.5px;
+            background: #3498db;
+            left: 22px;
+            opacity: 0.6;
+        }
+
+        .page-line:nth-child(1) { top: 25px; }
+        .page-line:nth-child(2) { top: 35px; }
+        .page-line:nth-child(3) { top: 45px; }
+        .page-line:nth-child(4) { top: 55px; }
+
+        /* 20. Rough Pencil/Pen Icon */
+        #handicon-20 {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        #handicon-20::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 50px;
+            background: linear-gradient(90deg, #d4a574, #c49060);
+            transform: rotate(-45deg);
+            top: 20px;
+            left: 25px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        #handicon-20::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            transform: rotate(-45deg);
+            top: 62px;
+            left: 26px;
+            border-radius: 1px 1px 3px 3px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+
+        @keyframes wobbleRotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        @keyframes sketchyJitter {
+            0%, 100% { transform: rotate(45deg) translateY(-1.5px) translateX(0); }
+            50% { transform: rotate(45deg) translateY(-1.5px) translateX(1px); }
+        }
+
+        @keyframes doodleTwinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        /* ==================== HOVER EFFECTS ==================== */
+
+        .icon-card:hover #handicon-1::before {
+            border-color: #229954;
+        }
+
+        .icon-card:hover #handicon-2::before,
+        .icon-card:hover #handicon-2::after {
+            background: #c0392b;
+        }
+
+        .icon-card:hover .star {
+            filter: drop-shadow(0 0 5px rgba(243, 156, 18, 0.8));
+        }
+
+        .icon-card:hover #handicon-4::before {
+            color: #ff1493;
+        }
+
+        .icon-card:hover #handicon-5::before,
+        .icon-card:hover #handicon-5::after {
+            border-color: #e67e22;
+            box-shadow: 0 0 10px rgba(230, 126, 34, 0.4);
+        }
+
+        .icon-card:hover #handicon-6::before {
+            color: #2980b9;
+        }
+
+        .icon-card:hover #handicon-7::before {
+            color: #c0392b;
+        }
+
+        .icon-card:hover .badge {
+            transform: scale(1.1);
+        }
+
+        .icon-card:hover .bullet {
+            background: linear-gradient(90deg, #1a252f 0%, #1a252f 40%, transparent 100%);
+        }
+
+        .icon-card:hover .emoji-face {
+            transform: scale(1.15);
+        }
+
+        .icon-card:hover #handicon-12::before {
+            color: #ffd700;
+            filter: drop-shadow(0 3px 8px rgba(255, 215, 0, 0.6));
+        }
+
+        .icon-card:hover #handicon-13::before {
+            background: linear-gradient(135deg, #c0392b, #922b21);
+        }
+
+        .icon-card:hover #handicon-14::before {
+            background: radial-gradient(circle at 35% 35%, #2980b9, #1a5276);
+        }
+
+        .icon-card:hover #handicon-15::before {
+            border-color: #8e44ad;
+            box-shadow: 0 0 12px rgba(155, 89, 182, 0.4);
+        }
+
+        .icon-card:hover #handicon-16::before,
+        .icon-card:hover #handicon-16::after {
+            border-color: #c0392b;
+        }
+
+        .icon-card:hover #handicon-18::before {
+            background: linear-gradient(135deg, #c0392b, #922b21);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .icon-card:hover #handicon-19::before {
+            border-color: #2980b9;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .icon-card:hover .page-line {
+            background: #2980b9;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .icon-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Hand-drawn Icons & Marks</h1>
+            <p>CSS-only sketchy and wobbly diagram templates • Hover to see effects</p>
+        </div>
+
+        <div class="gallery">
+            <!-- 1. Hand-drawn Checkmark -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-1"></div>
+                </div>
+                <h3>Checkmark</h3>
+                <p>Hand-drawn style checkmark with wobbly circle border</p>
+            </div>
+
+            <!-- 2. Sketchy X Mark -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-2"></div>
+                </div>
+                <h3>X Mark</h3>
+                <p>Sketchy X with jittering animation effect</p>
+            </div>
+
+            <!-- 3. Doodle Star Rating -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-3">
+                        <div class="star">★</div>
+                        <div class="star">★</div>
+                        <div class="star">★</div>
+                    </div>
+                </div>
+                <h3>Star Rating</h3>
+                <p>Doodle style twinkling stars with twinkling effect</p>
+            </div>
+
+            <!-- 4. Rough Heart Icon -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-4"></div>
+                </div>
+                <h3>Heart</h3>
+                <p>Rough heart icon with beating animation</p>
+            </div>
+
+            <!-- 5. Hand-drawn Lightbulb -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-5"></div>
+                </div>
+                <h3>Lightbulb</h3>
+                <p>Idea lightbulb with hand-drawn aesthetic</p>
+            </div>
+
+            <!-- 6. Sketchy Question Mark -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-6"></div>
+                </div>
+                <h3>Question Mark</h3>
+                <p>Sketchy question mark with bouncing motion</p>
+            </div>
+
+            <!-- 7. Doodle Exclamation Mark -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-7"></div>
+                </div>
+                <h3>Exclamation</h3>
+                <p>Doodle exclamation mark with pulsing effect</p>
+            </div>
+
+            <!-- 8. Rough Number Badges -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-8">
+                        <div class="badge badge-1">1</div>
+                        <div class="badge badge-2">2</div>
+                        <div class="badge badge-3">3</div>
+                    </div>
+                </div>
+                <h3>Number Badges</h3>
+                <p>Rough circle badges with numbers 1, 2, 3</p>
+            </div>
+
+            <!-- 9. Hand-drawn Bullet Points -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-9">
+                        <div class="bullet"></div>
+                        <div class="bullet"></div>
+                        <div class="bullet"></div>
+                    </div>
+                </div>
+                <h3>Bullet Points</h3>
+                <p>Hand-drawn style list bullet points</p>
+            </div>
+
+            <!-- 10. Sketchy Emoji Faces -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-10">
+                        <div class="emoji-face emoji-happy"></div>
+                        <div class="emoji-face emoji-neutral"></div>
+                        <div class="emoji-face emoji-sad"></div>
+                    </div>
+                </div>
+                <h3>Emoji Faces</h3>
+                <p>Sketchy emoji faces (happy, neutral, sad)</p>
+            </div>
+
+            <!-- 11. Doodle Trophy Icon -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-11"></div>
+                </div>
+                <h3>Trophy</h3>
+                <p>Doodle trophy with bouncing animation</p>
+            </div>
+
+            <!-- 12. Rough Medal/Award -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-12"></div>
+                </div>
+                <h3>Medal</h3>
+                <p>Rough medal with ribbon on spinning star</p>
+            </div>
+
+            <!-- 13. Hand-drawn Flag Marker -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-13"></div>
+                </div>
+                <h3>Flag Marker</h3>
+                <p>Hand-drawn flag with waving animation</p>
+            </div>
+
+            <!-- 14. Sketchy Pin/Thumbtack -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-14"></div>
+                </div>
+                <h3>Pin/Thumbtack</h3>
+                <p>Sketchy pushpin with 3D effect</p>
+            </div>
+
+            <!-- 15. Doodle Clock Icon -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-15">
+                        <div class="clock-hand hour-hand"></div>
+                        <div class="clock-hand minute-hand"></div>
+                    </div>
+                </div>
+                <h3>Clock</h3>
+                <p>Doodle clock with animated hands</p>
+            </div>
+
+            <!-- 16. Rough Calendar Icon -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-16"></div>
+                </div>
+                <h3>Calendar</h3>
+                <p>Rough calendar grid icon</p>
+            </div>
+
+            <!-- 17. Hand-drawn Person Icon -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-17"></div>
+                </div>
+                <h3>Person</h3>
+                <p>Hand-drawn person silhouette</p>
+            </div>
+
+            <!-- 18. Sketchy Location Pin -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-18"></div>
+                </div>
+                <h3>Location Pin</h3>
+                <p>Sketchy location marker with dot</p>
+            </div>
+
+            <!-- 19. Doodle Book/Document -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-19">
+                        <div class="page-line"></div>
+                        <div class="page-line"></div>
+                        <div class="page-line"></div>
+                        <div class="page-line"></div>
+                    </div>
+                </div>
+                <h3>Book/Document</h3>
+                <p>Doodle book with lined pages</p>
+            </div>
+
+            <!-- 20. Rough Pencil/Pen Icon -->
+            <div class="icon-card">
+                <div class="icon-container">
+                    <div id="handicon-20"></div>
+                </div>
+                <h3>Pencil/Pen</h3>
+                <p>Rough pencil with wooden texture</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

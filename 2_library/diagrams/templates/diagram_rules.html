@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules & Procedures Diagram Layouts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .diagram-container {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .diagram-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* ========================================
+           #rules-1: Do's and Don'ts Grid
+           ======================================== */
+        #rules-1 .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        #rules-1 .section {
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        #rules-1 .section.do {
+            background: #e8ffe8;
+            border: 2px solid #7ed957;
+        }
+
+        #rules-1 .section.dont {
+            background: #ffe8e8;
+            border: 2px solid #ff6b6b;
+        }
+
+        #rules-1 .section-title {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #rules-1 .item {
+            font-size: 12px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #rules-1 .check { color: #7ed957; font-weight: bold; }
+        #rules-1 .cross { color: #ff6b6b; font-weight: bold; }
+
+        /* ========================================
+           #rules-2: Traffic Light Rules
+           ======================================== */
+        #rules-2 .traffic-light {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-2 .light {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #rules-2 .light:hover {
+            transform: scale(1.02);
+        }
+
+        #rules-2 .light.green {
+            background: #e8ffe8;
+            border-left: 5px solid #7ed957;
+        }
+
+        #rules-2 .light.yellow {
+            background: #fff8e0;
+            border-left: 5px solid #ffd93d;
+        }
+
+        #rules-2 .light.red {
+            background: #ffe8e8;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        #rules-2 .circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        #rules-2 .light.green .circle { background: #7ed957; }
+        #rules-2 .light.yellow .circle { background: #ffd93d; }
+        #rules-2 .light.red .circle { background: #ff6b6b; }
+
+        #rules-2 .label {
+            font-size: 13px;
+            flex: 1;
+        }
+
+        /* ========================================
+           #rules-3: Warning Sign Rules
+           ======================================== */
+        #rules-3 .warning-box {
+            background: #fff8e0;
+            border: 3px solid #ff9f43;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        #rules-3 .warning-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        #rules-3 .warning-icon {
+            font-size: 24px;
+        }
+
+        #rules-3 .warning-content {
+            font-size: 12px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           #rules-4: Safety Rules Checklist
+           ======================================== */
+        #rules-4 .safety-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-4 .safety-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b9d;
+            transition: all 0.2s;
+        }
+
+        #rules-4 .safety-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        #rules-4 .shield {
+            width: 28px;
+            height: 28px;
+            background: #ff6b9d;
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        #rules-4 .label {
+            font-size: 13px;
+        }
+
+        /* ========================================
+           #rules-5: Class Rules Chart
+           ======================================== */
+        #rules-5 .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-5 .rule-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        #rules-5 .rule-item:hover {
+            background: #d8f0ff;
+        }
+
+        #rules-5 .rule-num {
+            width: 24px;
+            height: 24px;
+            background: #5bc0eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           #rules-6: House Rules Display
+           ======================================== */
+        #rules-6 .house-rules {
+            background: #fff5f8;
+            border: 2px dashed #ff6b9d;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #rules-6 .house-title {
+            font-weight: bold;
+            color: #ff6b9d;
+            margin-bottom: 12px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #rules-6 .house-icon {
+            font-size: 20px;
+        }
+
+        #rules-6 .rules-text {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        #rules-6 .rules-text li {
+            margin-left: 20px;
+            margin-bottom: 6px;
+        }
+
+        /* ========================================
+           #rules-7: Game Rules Board
+           ======================================== */
+        #rules-7 .game-rules {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-7 .game-rule {
+            padding: 12px;
+            background: #f0fff0;
+            border-radius: 10px;
+            border: 2px solid #7ed957;
+            transition: all 0.2s;
+        }
+
+        #rules-7 .game-rule:hover {
+            background: #e8ffe8;
+            box-shadow: 0 4px 10px rgba(126, 217, 87, 0.2);
+        }
+
+        #rules-7 .rule-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        #rules-7 .rule-desc {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-8: Forbidden Actions Diagram
+           ======================================== */
+        #rules-8 .forbidden-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        #rules-8 .forbidden-item {
+            padding: 12px;
+            background: #ffe8e8;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        #rules-8 .forbidden-item:hover {
+            transform: scale(1.05);
+        }
+
+        #rules-8 .forbidden-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        #rules-8 .forbidden-text {
+            font-size: 11px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        #rules-8 .forbidden-label {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           #rules-9: Recipe Steps Guide
+           ======================================== */
+        #rules-9 .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-9 .step {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: #fff8e0;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #rules-9 .step:hover {
+            background: #fff0d0;
+        }
+
+        #rules-9 .step-num {
+            width: 28px;
+            height: 28px;
+            background: #ffd93d;
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        #rules-9 .step-content {
+            flex: 1;
+        }
+
+        #rules-9 .step-title {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        #rules-9 .step-desc {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-10: Assembly Instructions
+           ======================================== */
+        #rules-10 .assembly {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-10 .assembly-step {
+            padding: 12px;
+            background: #e8f6ff;
+            border-left: 5px solid #5bc0eb;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        #rules-10 .assembly-step:hover {
+            background: #d8f0ff;
+        }
+
+        #rules-10 .assembly-title {
+            font-weight: bold;
+            font-size: 12px;
+            color: #5bc0eb;
+            margin-bottom: 6px;
+        }
+
+        #rules-10 .assembly-tools {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-11: How-To Guide
+           ======================================== */
+        #rules-11 .howto-steps {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        #rules-11 .howto-line {
+            position: absolute;
+            left: 12px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #ff6b9d;
+        }
+
+        #rules-11 .howto-item {
+            position: relative;
+            padding: 10px 0;
+            padding-left: 25px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        #rules-11 .howto-dot {
+            position: absolute;
+            left: -21px;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        /* ========================================
+           #rules-12: Fire Escape Route
+           ======================================== */
+        #rules-12 .evacuation {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #rules-12 .evac-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #rules-12 .evac-icon {
+            font-size: 20px;
+        }
+
+        #rules-12 .evac-content {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        #rules-12 .evac-content li {
+            margin-left: 20px;
+            margin-bottom: 6px;
+        }
+
+        /* ========================================
+           #rules-13: First Aid Instructions
+           ======================================== */
+        #rules-13 .firstaid {
+            background: #ffe8e8;
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #rules-13 .firstaid-header {
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        #rules-13 .aid-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-13 .aid-step {
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            font-size: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #rules-13 .aid-icon {
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           #rules-14: Recycling Guide
+           ======================================== */
+        #rules-14 .recycle-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        #rules-14 .recycle-item {
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        #rules-14 .recycle-item:hover {
+            transform: scale(1.05);
+        }
+
+        #rules-14 .recycle-item.yes {
+            background: #e8ffe8;
+            border: 2px solid #7ed957;
+        }
+
+        #rules-14 .recycle-item.no {
+            background: #ffe8e8;
+            border: 2px solid #ff6b6b;
+        }
+
+        #rules-14 .recycle-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        #rules-14 .recycle-label {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #rules-15: Dress Code Guide
+           ======================================== */
+        #rules-15 .dress-code {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-15 .dress-item {
+            padding: 12px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        #rules-15 .dress-item:hover {
+            background: #f0f0f0;
+        }
+
+        #rules-15 .dress-icon {
+            font-size: 24px;
+        }
+
+        #rules-15 .dress-label {
+            font-size: 12px;
+        }
+
+        /* ========================================
+           #rules-16: Etiquette Tips
+           ======================================== */
+        #rules-16 .etiquette {
+            background: #fff5f8;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #rules-16 .eti-title {
+            font-weight: bold;
+            color: #ff6b9d;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        #rules-16 .eti-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-16 .eti-tip {
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            font-size: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        #rules-16 .eti-icon {
+            font-size: 16px;
+        }
+
+        /* ========================================
+           #rules-17: Best Practices
+           ======================================== */
+        #rules-17 .practices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-17 .practice {
+            padding: 12px;
+            background: #f0fff0;
+            border-left: 4px solid #7ed957;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        #rules-17 .practice:hover {
+            background: #e8ffe8;
+            transform: translateX(5px);
+        }
+
+        #rules-17 .practice-title {
+            font-weight: bold;
+            font-size: 12px;
+            color: #4a9c4a;
+            margin-bottom: 4px;
+        }
+
+        #rules-17 .practice-desc {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-18: Standard Procedure Flowchart
+           ======================================== */
+        #rules-18 .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-18 .flow-box {
+            padding: 12px;
+            background: #5bc0eb;
+            color: white;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        #rules-18 .flow-box:hover {
+            transform: scale(1.05);
+        }
+
+        #rules-18 .flow-box.alt {
+            background: #9b5de5;
+        }
+
+        #rules-18 .flow-arrow {
+            text-align: center;
+            color: #5bc0eb;
+            font-size: 16px;
+        }
+
+        /* ========================================
+           #rules-19: Quality Checklist
+           ======================================== */
+        #rules-19 .quality-checks {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-19 .quality-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #fff8e0;
+            border-radius: 8px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        #rules-19 .quality-item:hover {
+            background: #fff0d0;
+        }
+
+        #rules-19 .quality-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffd93d;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        #rules-19 .quality-item.checked .quality-check::after {
+            content: '✓';
+            color: #ffd93d;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #rules-20: Approval Workflow
+           ======================================== */
+        #rules-20 .workflow {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-20 .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        #rules-20 .workflow-step:hover {
+            background: #d8f0ff;
+        }
+
+        #rules-20 .step-badge {
+            width: 26px;
+            height: 26px;
+            background: #5bc0eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        #rules-20 .step-person {
+            flex: 1;
+        }
+
+        #rules-20 .step-status {
+            background: #7ed957;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #rules-21: Permission Levels
+           ======================================== */
+        #rules-21 .permissions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-21 .perm-level {
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #rules-21 .perm-level:hover {
+            transform: translateX(5px);
+        }
+
+        #rules-21 .perm-level.admin {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        #rules-21 .perm-level.moderator {
+            background: #ff9f43;
+            color: white;
+        }
+
+        #rules-21 .perm-level.user {
+            background: #7ed957;
+            color: white;
+        }
+
+        #rules-21 .perm-level.guest {
+            background: #ccc;
+            color: white;
+        }
+
+        #rules-21 .perm-title {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        #rules-21 .perm-desc {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        /* ========================================
+           #rules-22: Age Restrictions
+           ======================================== */
+        #rules-22 .age-restrict {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        #rules-22 .age-item {
+            padding: 12px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        #rules-22 .age-item:hover {
+            background: #d8f0ff;
+        }
+
+        #rules-22 .age-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5bc0eb;
+            margin-bottom: 4px;
+        }
+
+        #rules-22 .age-text {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-23: Usage Guidelines
+           ======================================== */
+        #rules-23 .guidelines {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-23 .guideline {
+            padding: 12px;
+            background: #f8f8f8;
+            border-left: 4px solid #9b5de5;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        #rules-23 .guideline:hover {
+            background: #f0f0f0;
+        }
+
+        #rules-23 .guide-title {
+            font-weight: bold;
+            font-size: 12px;
+            color: #9b5de5;
+            margin-bottom: 4px;
+        }
+
+        #rules-23 .guide-text {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-24: Terms Summary
+           ======================================== */
+        #rules-24 .terms {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-24 .term {
+            padding: 12px;
+            background: #fff5f8;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #rules-24 .term:hover {
+            background: #ffe8ef;
+            box-shadow: 0 4px 10px rgba(255, 107, 157, 0.15);
+        }
+
+        #rules-24 .term-label {
+            font-weight: bold;
+            font-size: 12px;
+            color: #ff6b9d;
+            margin-bottom: 4px;
+        }
+
+        #rules-24 .term-desc {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-25: Compliance Checklist
+           ======================================== */
+        #rules-25 .compliance {
+            background: #f8fff8;
+            border: 2px solid #7ed957;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #rules-25 .compliance-title {
+            font-weight: bold;
+            color: #4a9c4a;
+            margin-bottom: 12px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #rules-25 .compliance-icon {
+            font-size: 20px;
+        }
+
+        #rules-25 .compliance-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-25 .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            background: white;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        #rules-25 .compliance-check {
+            width: 18px;
+            height: 18px;
+            background: #7ed957;
+            color: white;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           #rules-26: Policy Highlights
+           ======================================== */
+        #rules-26 .highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-26 .highlight {
+            padding: 12px;
+            background: #fff8e0;
+            border-radius: 10px;
+            border-left: 5px solid #ffd93d;
+            transition: all 0.2s;
+        }
+
+        #rules-26 .highlight:hover {
+            background: #fff0d0;
+            transform: translateX(5px);
+        }
+
+        #rules-26 .highlight-point {
+            font-weight: bold;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        #rules-26 .highlight-note {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-27: Prohibited Items
+           ======================================== */
+        #rules-27 .prohibited {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        #rules-27 .prohibited-item {
+            padding: 10px;
+            background: #ffe8e8;
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        #rules-27 .prohibited-item:hover {
+            transform: scale(1.08);
+        }
+
+        #rules-27 .prohibited-emoji {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        #rules-27 .prohibited-text {
+            font-size: 10px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #rules-28: Operating Instructions
+           ======================================== */
+        #rules-28 .operating {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-28 .operation {
+            padding: 12px;
+            background: #e8f6ff;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #rules-28 .operation:hover {
+            background: #d8f0ff;
+        }
+
+        #rules-28 .op-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            color: #5bc0eb;
+            margin-bottom: 6px;
+        }
+
+        #rules-28 .op-icon {
+            font-size: 18px;
+        }
+
+        #rules-28 .op-desc {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #rules-29: Precautions & Warnings
+           ======================================== */
+        #rules-29 .precautions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #rules-29 .precaution {
+            padding: 12px;
+            background: #fff8e0;
+            border-left: 5px solid #ff9f43;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        #rules-29 .precaution:hover {
+            background: #fff0d0;
+        }
+
+        #rules-29 .precaution-level {
+            font-weight: bold;
+            font-size: 11px;
+            color: #ff9f43;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        #rules-29 .precaution-text {
+            font-size: 12px;
+            color: #333;
+        }
+
+        /* ========================================
+           #rules-30: Required Documents
+           ======================================== */
+        #rules-30 .documents {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #rules-30 .document {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        #rules-30 .document:hover {
+            background: #d8f0ff;
+        }
+
+        #rules-30 .doc-icon {
+            width: 24px;
+            height: 24px;
+            background: #5bc0eb;
+            color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        #rules-30 .doc-name {
+            font-size: 12px;
+            flex: 1;
+        }
+
+        #rules-30 .doc-required {
+            background: #ff6b6b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rules & Procedures Diagram Layouts</h1>
+
+    <div class="gallery">
+        <!-- #rules-1: Do's and Don'ts -->\n        <div class="diagram-container" id="rules-1">
+            <h2>#1 Do's and Don'ts</h2>
+            <div class="grid">
+                <div class="section do">
+                    <div class="section-title"><span class="check">✓</span>DO</div>
+                    <div class="item"><span class="check">✓</span>Be punctual</div>
+                    <div class="item"><span class="check">✓</span>Listen actively</div>
+                    <div class="item"><span class="check">✓</span>Ask questions</div>
+                </div>
+                <div class="section dont">
+                    <div class="section-title"><span class="cross">✗</span>DON'T</div>
+                    <div class="item"><span class="cross">✗</span>Be late</div>
+                    <div class="item"><span class="cross">✗</span>Interrupt others</div>
+                    <div class="item"><span class="cross">✗</span>Use phones</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-2: Traffic Light Rules -->\n        <div class="diagram-container" id="rules-2">
+            <h2>#2 Traffic Light Rules</h2>
+            <div class="traffic-light">
+                <div class="light green">
+                    <div class="circle"></div>
+                    <span class="label">Allowed: Permitted actions</span>
+                </div>
+                <div class="light yellow">
+                    <div class="circle"></div>
+                    <span class="label">Caution: Use with care</span>
+                </div>
+                <div class="light red">
+                    <div class="circle"></div>
+                    <span class="label">Prohibited: Forbidden</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-3: Warning Sign Rules -->\n        <div class="diagram-container" id="rules-3">
+            <h2>#3 Warning Sign Rules</h2>
+            <div class="warning-box">
+                <div class="warning-header">
+                    <span class="warning-icon">⚠️</span>
+                    <span>Critical Warning</span>
+                </div>
+                <div class="warning-content">Do not touch the equipment without supervision. Always follow safety procedures.</div>
+            </div>
+            <div class="warning-box">
+                <div class="warning-header">
+                    <span class="warning-icon">🚫</span>
+                    <span>Dangerous Area</span>
+                </div>
+                <div class="warning-content">High voltage. Keep away from children.</div>
+            </div>
+        </div>
+
+        <!-- #rules-4: Safety Rules -->\n        <div class="diagram-container" id="rules-4">
+            <h2>#4 Safety Rules</h2>
+            <div class="safety-items">
+                <div class="safety-item">
+                    <div class="shield">🛡️</div>
+                    <span class="label">Wear protective equipment at all times</span>
+                </div>
+                <div class="safety-item">
+                    <div class="shield">🛡️</div>
+                    <span class="label">Report hazards immediately</span>
+                </div>
+                <div class="safety-item">
+                    <div class="shield">🛡️</div>
+                    <span class="label">Follow exit procedures during emergencies</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-5: Class Rules -->\n        <div class="diagram-container" id="rules-5">
+            <h2>#5 Class Rules</h2>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-num">1</div>
+                    <span>Respect everyone</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">2</div>
+                    <span>Listen carefully</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">3</div>
+                    <span>Raise your hand</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">4</div>
+                    <span>Be prepared</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-6: House Rules -->\n        <div class="diagram-container" id="rules-6">
+            <h2>#6 House Rules</h2>
+            <div class="house-rules">
+                <div class="house-title">
+                    <span class="house-icon">🏠</span>
+                    <span>Family Rules</span>
+                </div>
+                <ul class="rules-text">
+                    <li>Clean up after yourself</li>
+                    <li>Respect family members</li>
+                    <li>Dinner at 7 PM</li>
+                    <li>No loud noise after 10 PM</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- #rules-7: Game Rules -->\n        <div class="diagram-container" id="rules-7">
+            <h2>#7 Game Rules</h2>
+            <div class="game-rules">
+                <div class="game-rule">
+                    <div class="rule-header">🎲 Rolling Dice</div>
+                    <div class="rule-desc">Each player rolls once per turn</div>
+                </div>
+                <div class="game-rule">
+                    <div class="rule-header">🎯 Scoring</div>
+                    <div class="rule-desc">Higher number wins the point</div>
+                </div>
+                <div class="game-rule">
+                    <div class="rule-header">🏆 Victory</div>
+                    <div class="rule-desc">First to 10 points wins</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-8: Forbidden Actions -->\n        <div class="diagram-container" id="rules-8">
+            <h2>#8 Forbidden Actions</h2>
+            <div class="forbidden-grid">
+                <div class="forbidden-item">
+                    <div class="forbidden-icon">🚭</div>
+                    <div class="forbidden-text">No Running</div>
+                </div>
+                <div class="forbidden-item">
+                    <div class="forbidden-icon">🚫</div>
+                    <div class="forbidden-text">No Smoking</div>
+                </div>
+                <div class="forbidden-item">
+                    <div class="forbidden-icon">📵</div>
+                    <div class="forbidden-text">No Phones</div>
+                </div>
+                <div class="forbidden-item">
+                    <div class="forbidden-icon">🥀</div>
+                    <div class="forbidden-text">No Flowers</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-9: Recipe Steps -->\n        <div class="diagram-container" id="rules-9">
+            <h2>#9 Recipe Steps</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Prepare Ingredients</div>
+                        <div class="step-desc">Gather all materials needed</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Mix & Blend</div>
+                        <div class="step-desc">Combine ingredients smoothly</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Cook</div>
+                        <div class="step-desc">Heat until ready to serve</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-10: Assembly Instructions -->\n        <div class="diagram-container" id="rules-10">
+            <h2>#10 Assembly Instructions</h2>
+            <div class="assembly">
+                <div class="assembly-step">
+                    <div class="assembly-title">Step 1: Check Parts</div>
+                    <div class="assembly-tools">Tools: Screwdriver, Wrench</div>
+                </div>
+                <div class="assembly-step">
+                    <div class="assembly-title">Step 2: Assemble Base</div>
+                    <div class="assembly-tools">Estimated time: 15 minutes</div>
+                </div>
+                <div class="assembly-step">
+                    <div class="assembly-title">Step 3: Connect Components</div>
+                    <div class="assembly-tools">Attach securely and test</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-11: How-To Guide -->\n        <div class="diagram-container" id="rules-11">
+            <h2>#11 How-To Guide</h2>
+            <div class="howto-steps">
+                <div class="howto-line"></div>
+                <div class="howto-item">
+                    <div class="howto-dot">1</div>
+                    <span>Open the application</span>
+                </div>
+                <div class="howto-item">
+                    <div class="howto-dot">2</div>
+                    <span>Navigate to settings</span>
+                </div>
+                <div class="howto-item">
+                    <div class="howto-dot">3</div>
+                    <span>Configure preferences</span>
+                </div>
+                <div class="howto-item">
+                    <div class="howto-dot">4</div>
+                    <span>Save and restart</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-12: Fire Escape Route -->\n        <div class="diagram-container" id="rules-12">
+            <h2>#12 Fire Escape Route</h2>
+            <div class="evacuation">
+                <div class="evac-title">
+                    <span class="evac-icon">🚪</span>
+                    <span>Emergency Evacuation</span>
+                </div>
+                <ul class="evac-content">
+                    <li>Locate nearest exit immediately</li>
+                    <li>Alert others in calm manner</li>
+                    <li>Proceed to assembly point</li>
+                    <li>Do not use elevators</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- #rules-13: First Aid -->\n        <div class="diagram-container" id="rules-13">
+            <h2>#13 First Aid Instructions</h2>
+            <div class="firstaid">
+                <div class="firstaid-header">🏥 Basic First Aid Steps</div>
+                <div class="aid-steps">
+                    <div class="aid-step">
+                        <div class="aid-icon">A</div>
+                        <span>Assess the situation safely</span>
+                    </div>
+                    <div class="aid-step">
+                        <div class="aid-icon">B</div>
+                        <span>Call emergency services</span>
+                    </div>
+                    <div class="aid-step">
+                        <div class="aid-icon">C</div>
+                        <span>Provide care as trained</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-14: Recycling Guide -->\n        <div class="diagram-container" id="rules-14">
+            <h2>#14 Recycling Guide</h2>
+            <div class="recycle-grid">
+                <div class="recycle-item yes">
+                    <div class="recycle-icon">♻️</div>
+                    <div class="recycle-label">Plastic Bottles</div>
+                </div>
+                <div class="recycle-item no">
+                    <div class="recycle-icon">🍔</div>
+                    <div class="recycle-label">Food Waste</div>
+                </div>
+                <div class="recycle-item yes">
+                    <div class="recycle-icon">📰</div>
+                    <div class="recycle-label">Paper</div>
+                </div>
+                <div class="recycle-item no">
+                    <div class="recycle-icon">💡</div>
+                    <div class="recycle-label">Bulbs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-15: Dress Code -->\n        <div class="diagram-container" id="rules-15">
+            <h2>#15 Dress Code Guide</h2>
+            <div class="dress-code">
+                <div class="dress-item">
+                    <div class="dress-icon">👔</div>
+                    <div class="dress-label">Business: Formal attire required</div>
+                </div>
+                <div class="dress-item">
+                    <div class="dress-icon">👗</div>
+                    <div class="dress-label">Casual: Smart casual acceptable</div>
+                </div>
+                <div class="dress-item">
+                    <div class="dress-icon">👟</div>
+                    <div class="dress-label">Athletic: Sportswear allowed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-16: Etiquette Tips -->\n        <div class="diagram-container" id="rules-16">
+            <h2>#16 Etiquette Tips</h2>
+            <div class="etiquette">
+                <div class="eti-title">✨ Dining Etiquette</div>
+                <div class="eti-tips">
+                    <div class="eti-tip">
+                        <span class="eti-icon">🍽️</span>
+                        <span>Use utensils from outside in</span>
+                    </div>
+                    <div class="eti-tip">
+                        <span class="eti-icon">🥂</span>
+                        <span>Wait for host to begin</span>
+                    </div>
+                    <div class="eti-tip">
+                        <span class="eti-icon">🙏</span>
+                        <span>Say thank you sincerely</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-17: Best Practices -->\n        <div class="diagram-container" id="rules-17">
+            <h2>#17 Best Practices</h2>
+            <div class="practices">
+                <div class="practice">
+                    <div class="practice-title">Code Review</div>
+                    <div class="practice-desc">Always peer review before merge</div>
+                </div>
+                <div class="practice">
+                    <div class="practice-title">Testing</div>
+                    <div class="practice-desc">Write tests before implementation</div>
+                </div>
+                <div class="practice">
+                    <div class="practice-title">Documentation</div>
+                    <div class="practice-desc">Keep docs updated with code</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-18: Standard Procedure -->\n        <div class="diagram-container" id="rules-18">
+            <h2>#18 Standard Procedure</h2>
+            <div class="flowchart">
+                <div class="flow-box">Request Submitted</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box alt">Review & Verify</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">Approve or Reject</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box alt">Notify User</div>
+            </div>
+        </div>
+
+        <!-- #rules-19: Quality Checklist -->\n        <div class="diagram-container" id="rules-19">
+            <h2>#19 Quality Checklist</h2>
+            <div class="quality-checks">
+                <div class="quality-item checked">
+                    <div class="quality-check"></div>
+                    <span>Code passes linter</span>
+                </div>
+                <div class="quality-item checked">
+                    <div class="quality-check"></div>
+                    <span>Tests all passing</span>
+                </div>
+                <div class="quality-item">
+                    <div class="quality-check"></div>
+                    <span>Performance optimized</span>
+                </div>
+                <div class="quality-item">
+                    <div class="quality-check"></div>
+                    <span>Security reviewed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-20: Approval Workflow -->\n        <div class="diagram-container" id="rules-20">
+            <h2>#20 Approval Workflow</h2>
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="step-badge">1</div>
+                    <div class="step-person">Manager Review</div>
+                    <div class="step-status">✓ Done</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-badge">2</div>
+                    <div class="step-person">Director Approval</div>
+                    <div class="step-status">✓ Done</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-badge">3</div>
+                    <div class="step-person">Finance Check</div>
+                    <div class="step-status">Pending</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-21: Permission Levels -->\n        <div class="diagram-container" id="rules-21">
+            <h2>#21 Permission Levels</h2>
+            <div class="permissions">
+                <div class="perm-level admin">
+                    <div class="perm-title">Administrator</div>
+                    <div class="perm-desc">Full system access & control</div>
+                </div>
+                <div class="perm-level moderator">
+                    <div class="perm-title">Moderator</div>
+                    <div class="perm-desc">Content management & review</div>
+                </div>
+                <div class="perm-level user">
+                    <div class="perm-title">User</div>
+                    <div class="perm-desc">Basic feature access</div>
+                </div>
+                <div class="perm-level guest">
+                    <div class="perm-title">Guest</div>
+                    <div class="perm-desc">View-only access</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-22: Age Restrictions -->\n        <div class="diagram-container" id="rules-22">
+            <h2>#22 Age Restrictions</h2>
+            <div class="age-restrict">
+                <div class="age-item">
+                    <div class="age-number">13+</div>
+                    <div class="age-text">Social Features</div>
+                </div>
+                <div class="age-item">
+                    <div class="age-number">16+</div>
+                    <div class="age-text">Premium Content</div>
+                </div>
+                <div class="age-item">
+                    <div class="age-number">18+</div>
+                    <div class="age-text">Adult Content</div>
+                </div>
+                <div class="age-item">
+                    <div class="age-number">21+</div>
+                    <div class="age-text">Restricted Items</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-23: Usage Guidelines -->\n        <div class="diagram-container" id="rules-23">
+            <h2>#23 Usage Guidelines</h2>
+            <div class="guidelines">
+                <div class="guideline">
+                    <div class="guide-title">🔒 Privacy</div>
+                    <div class="guide-text">Protect personal information</div>
+                </div>
+                <div class="guideline">
+                    <div class="guide-title">⚖️ Fair Use</div>
+                    <div class="guide-text">Respect copyright & licensing</div>
+                </div>
+                <div class="guideline">
+                    <div class="guide-title">🤝 Respect</div>
+                    <div class="guide-text">No harassment or abuse</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-24: Terms Summary -->\n        <div class="diagram-container" id="rules-24">
+            <h2>#24 Terms Summary</h2>
+            <div class="terms">
+                <div class="term">
+                    <div class="term-label">Service Agreement</div>
+                    <div class="term-desc">Legal binding contract</div>
+                </div>
+                <div class="term">
+                    <div class="term-label">Data Protection</div>
+                    <div class="term-desc">GDPR compliance guaranteed</div>
+                </div>
+                <div class="term">
+                    <div class="term-label">Liability</div>
+                    <div class="term-desc">Limited to purchase amount</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-25: Compliance Checklist -->\n        <div class="diagram-container" id="rules-25">
+            <h2>#25 Compliance Checklist</h2>
+            <div class="compliance">
+                <div class="compliance-title">
+                    <span class="compliance-icon">✅</span>
+                    <span>Regulatory Compliance</span>
+                </div>
+                <div class="compliance-items">
+                    <div class="compliance-item">
+                        <div class="compliance-check">✓</div>
+                        <span>ISO 9001 certified</span>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-check">✓</div>
+                        <span>HIPAA compliant</span>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-check">✓</div>
+                        <span>SOC 2 verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-26: Policy Highlights -->\n        <div class="diagram-container" id="rules-26">
+            <h2>#26 Policy Highlights</h2>
+            <div class="highlights">
+                <div class="highlight">
+                    <div class="highlight-point">💼 Employment Policy</div>
+                    <div class="highlight-note">Equal opportunity for all</div>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-point">🏥 Health & Safety</div>
+                    <div class="highlight-note">Workplace safety mandatory</div>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-point">🌍 Environmental</div>
+                    <div class="highlight-note">Sustainability initiatives</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-27: Prohibited Items -->\n        <div class="diagram-container" id="rules-27">
+            <h2>#27 Prohibited Items</h2>
+            <div class="prohibited">
+                <div class="prohibited-item">
+                    <div class="prohibited-emoji">🚫</div>
+                    <div class="prohibited-text">Weapons</div>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-emoji">🚬</div>
+                    <div class="prohibited-text">Tobacco</div>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-emoji">🍸</div>
+                    <div class="prohibited-text">Alcohol</div>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-emoji">🔗</div>
+                    <div class="prohibited-text">Chains</div>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-emoji">🧨</div>
+                    <div class="prohibited-text">Explosives</div>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-emoji">⚗️</div>
+                    <div class="prohibited-text">Chemicals</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-28: Operating Instructions -->\n        <div class="diagram-container" id="rules-28">
+            <h2>#28 Operating Instructions</h2>
+            <div class="operating">
+                <div class="operation">
+                    <div class="op-header">
+                        <span class="op-icon">⚡</span>
+                        <span>Power On</span>
+                    </div>
+                    <div class="op-desc">Press button for 3 seconds</div>
+                </div>
+                <div class="operation">
+                    <div class="op-header">
+                        <span class="op-icon">🔌</span>
+                        <span>Connection</span>
+                    </div>
+                    <div class="op-desc">Connect USB cable securely</div>
+                </div>
+                <div class="operation">
+                    <div class="op-header">
+                        <span class="op-icon">⏱️</span>
+                        <span>Operation</span>
+                    </div>
+                    <div class="op-desc">Wait for startup sequence</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-29: Precautions & Warnings -->\n        <div class="diagram-container" id="rules-29">
+            <h2>#29 Precautions & Warnings</h2>
+            <div class="precautions">
+                <div class="precaution">
+                    <div class="precaution-level">⚠️ Caution</div>
+                    <div class="precaution-text">Hot surface - avoid direct contact</div>
+                </div>
+                <div class="precaution">
+                    <div class="precaution-level">⚠️ Warning</div>
+                    <div class="precaution-text">Electrical hazard - do not touch</div>
+                </div>
+                <div class="precaution">
+                    <div class="precaution-level">⚠️ Danger</div>
+                    <div class="precaution-text">High voltage area - keep out</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #rules-30: Required Documents -->\n        <div class="diagram-container" id="rules-30">
+            <h2>#30 Required Documents</h2>
+            <div class="documents">
+                <div class="document">
+                    <div class="doc-icon">📄</div>
+                    <div class="doc-name">Passport</div>
+                    <div class="doc-required">REQUIRED</div>
+                </div>
+                <div class="document">
+                    <div class="doc-icon">🎫</div>
+                    <div class="doc-name">Visa</div>
+                    <div class="doc-required">REQUIRED</div>
+                </div>
+                <div class="document">
+                    <div class="doc-icon">💳</div>
+                    <div class="doc-name">Travel Insurance</div>
+                    <div class="doc-required">Optional</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

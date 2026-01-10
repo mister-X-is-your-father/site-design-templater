@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Layouts - Comparison (比較図)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f8f9fa;
+            padding: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        .diagram-section {
+            margin-bottom: 80px;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #5b5bd6;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: attr(data-num);
+            background: #ff6b9d;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .section-desc {
+            color: #888;
+            margin-bottom: 30px;
+            padding-left: 42px;
+        }
+
+        /* ========================================
+           #comparison-1: Simple A vs B (2 columns)
+           ======================================== */
+        #comparison-1 .compare-container {
+            display: flex;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #comparison-1 .compare-side {
+            flex: 1;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #comparison-1 .compare-side:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        #comparison-1 .side-a {
+            background: #ff6b9d;
+            color: white;
+        }
+
+        #comparison-1 .side-b {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        #comparison-1 .side-label {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #comparison-1 .side-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #comparison-1 .side-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        #comparison-1 .vs-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffd93d;
+            color: #333;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        #comparison-1 .compare-wrapper {
+            position: relative;
+        }
+
+        /* ========================================
+           #comparison-2: A vs B with icons
+           ======================================== */
+        #comparison-2 .compare-container {
+            display: flex;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        #comparison-2 .compare-card {
+            flex: 1;
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            text-align: center;
+            border: 4px solid;
+            transition: all 0.3s;
+        }
+
+        #comparison-2 .compare-card:hover {
+            transform: scale(1.02);
+        }
+
+        #comparison-2 .card-a {
+            border-color: #ff6b9d;
+        }
+
+        #comparison-2 .card-b {
+            border-color: #87ceeb;
+        }
+
+        #comparison-2 .card-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        #comparison-2 .card-a .card-icon {
+            background: #ffe4ec;
+        }
+
+        #comparison-2 .card-b .card-icon {
+            background: #e4f4ff;
+        }
+
+        #comparison-2 .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #comparison-2 .card-a .card-title {
+            color: #ff6b9d;
+        }
+
+        #comparison-2 .card-b .card-title {
+            color: #5ba4d9;
+        }
+
+        #comparison-2 .card-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        #comparison-2 .card-features li {
+            padding: 10px 0;
+            border-bottom: 2px dashed #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #comparison-2 .card-features li::before {
+            content: "●";
+            font-size: 0.8rem;
+        }
+
+        #comparison-2 .card-a .card-features li::before {
+            color: #ff6b9d;
+        }
+
+        #comparison-2 .card-b .card-features li::before {
+            color: #87ceeb;
+        }
+
+        #comparison-2 .vs-circle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff6b9d 50%, #87ceeb 50%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            align-self: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* ========================================
+           #comparison-3: 3-way comparison
+           ======================================== */
+        #comparison-3 .compare-container {
+            display: flex;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        #comparison-3 .compare-column {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        #comparison-3 .compare-column:hover {
+            transform: translateY(-8px);
+        }
+
+        #comparison-3 .column-header {
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+
+        #comparison-3 .col-1 .column-header { background: #ff6b9d; }
+        #comparison-3 .col-2 .column-header { background: #ffd93d; color: #333; }
+        #comparison-3 .col-3 .column-header { background: #4ecdc4; }
+
+        #comparison-3 .column-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        #comparison-3 .column-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        #comparison-3 .column-body {
+            background: white;
+            padding: 25px;
+            border: 3px solid;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+        }
+
+        #comparison-3 .col-1 .column-body { border-color: #ff6b9d; }
+        #comparison-3 .col-2 .column-body { border-color: #ffd93d; }
+        #comparison-3 .col-3 .column-body { border-color: #4ecdc4; }
+
+        #comparison-3 .column-item {
+            padding: 12px 0;
+            border-bottom: 2px dotted #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #comparison-3 .column-item:last-child {
+            border-bottom: none;
+        }
+
+        #comparison-3 .item-bullet {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        #comparison-3 .col-1 .item-bullet { background: #ff6b9d; }
+        #comparison-3 .col-2 .item-bullet { background: #ffd93d; color: #333; }
+        #comparison-3 .col-3 .item-bullet { background: #4ecdc4; }
+
+        /* ========================================
+           #comparison-4: Feature comparison table
+           ======================================== */
+        #comparison-4 .compare-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        #comparison-4 .compare-table th,
+        #comparison-4 .compare-table td {
+            padding: 18px 25px;
+            text-align: center;
+        }
+
+        #comparison-4 .compare-table thead th {
+            background: #5b5bd6;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        #comparison-4 .compare-table thead th:first-child {
+            background: #ff6b9d;
+            text-align: left;
+        }
+
+        #comparison-4 .compare-table tbody tr {
+            transition: background 0.2s;
+        }
+
+        #comparison-4 .compare-table tbody tr:hover {
+            background: #f8f4ff;
+        }
+
+        #comparison-4 .compare-table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        #comparison-4 .compare-table tbody tr:nth-child(even):hover {
+            background: #f0ecff;
+        }
+
+        #comparison-4 .compare-table tbody td {
+            border-bottom: 2px solid #eee;
+        }
+
+        #comparison-4 .compare-table tbody td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #comparison-4 .check-yes {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+        }
+
+        #comparison-4 .check-no {
+            color: #ff6b9d;
+            font-size: 1.5rem;
+        }
+
+        #comparison-4 .check-partial {
+            color: #ffd93d;
+            font-size: 1.2rem;
+        }
+
+        /* ========================================
+           #comparison-5: Horizontal bars comparison
+           ======================================== */
+        #comparison-5 .bars-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #comparison-5 .bar-row {
+            margin-bottom: 25px;
+        }
+
+        #comparison-5 .bar-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        #comparison-5 .bar-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        #comparison-5 .bar-track {
+            flex: 1;
+            height: 35px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #comparison-5 .bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: width 0.5s ease-out;
+        }
+
+        #comparison-5 .bar-a .bar-fill {
+            background: #ff6b9d;
+        }
+
+        #comparison-5 .bar-b .bar-fill {
+            background: #4ecdc4;
+        }
+
+        #comparison-5 .bar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        #comparison-5 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #comparison-5 .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+        }
+
+        #comparison-5 .legend-a { background: #ff6b9d; }
+        #comparison-5 .legend-b { background: #4ecdc4; }
+
+        /* ========================================
+           #comparison-6: Vertical bars comparison
+           ======================================== */
+        #comparison-6 .vbars-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 0;
+            min-height: 350px;
+        }
+
+        #comparison-6 .vbar-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        #comparison-6 .vbar-item {
+            width: 60px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 15px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        #comparison-6 .vbar-item:hover {
+            transform: scaleY(1.05);
+            transform-origin: bottom;
+        }
+
+        #comparison-6 .vbar-a { background: #ff6b9d; }
+        #comparison-6 .vbar-b { background: #87ceeb; }
+
+        #comparison-6 .vbar-value {
+            position: absolute;
+            top: -30px;
+            font-weight: bold;
+        }
+
+        #comparison-6 .vbar-a .vbar-value { color: #ff6b9d; }
+        #comparison-6 .vbar-b .vbar-value { color: #87ceeb; }
+
+        #comparison-6 .vbar-label {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #comparison-6 .vbar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* ========================================
+           #comparison-7: Circular comparison
+           ======================================== */
+        #comparison-7 .circular-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #comparison-7 .circular-item {
+            text-align: center;
+        }
+
+        #comparison-7 .circle-chart {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 20px;
+            transition: transform 0.3s;
+        }
+
+        #comparison-7 .circle-chart:hover {
+            transform: scale(1.05);
+        }
+
+        #comparison-7 .circle-a {
+            background: conic-gradient(#ff6b9d 0% 75%, #ffe4ec 75% 100%);
+        }
+
+        #comparison-7 .circle-b {
+            background: conic-gradient(#4ecdc4 0% 60%, #d4f5f3 60% 100%);
+        }
+
+        #comparison-7 .circle-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #comparison-7 .circle-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        #comparison-7 .circle-a .circle-value { color: #ff6b9d; }
+        #comparison-7 .circle-b .circle-value { color: #4ecdc4; }
+
+        #comparison-7 .circle-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        #comparison-7 .circular-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* ========================================
+           #comparison-8: Card-based comparison
+           ======================================== */
+        #comparison-8 .cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #comparison-8 .compare-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        #comparison-8 .compare-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        #comparison-8 .card-header {
+            padding: 25px;
+            color: white;
+            text-align: center;
+        }
+
+        #comparison-8 .card-a .card-header { background: #ff6b9d; }
+        #comparison-8 .card-b .card-header { background: #87ceeb; }
+
+        #comparison-8 .card-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        #comparison-8 .card-name {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        #comparison-8 .card-body {
+            padding: 25px;
+        }
+
+        #comparison-8 .card-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 2px dotted #eee;
+        }
+
+        #comparison-8 .card-stat:last-child {
+            border-bottom: none;
+        }
+
+        #comparison-8 .stat-label {
+            color: #888;
+        }
+
+        #comparison-8 .stat-value {
+            font-weight: bold;
+        }
+
+        #comparison-8 .card-a .stat-value { color: #ff6b9d; }
+        #comparison-8 .card-b .stat-value { color: #5ba4d9; }
+
+        /* ========================================
+           #comparison-9: Slider comparison
+           ======================================== */
+        #comparison-9 .slider-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #comparison-9 .slider-row {
+            margin-bottom: 30px;
+        }
+
+        #comparison-9 .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #comparison-9 .slider-label-left {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+
+        #comparison-9 .slider-label-right {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+
+        #comparison-9 .slider-track {
+            height: 20px;
+            background: linear-gradient(to right, #ff6b9d 0%, #ffd93d 50%, #4ecdc4 100%);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        #comparison-9 .slider-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid #5b5bd6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: left 0.3s;
+        }
+
+        #comparison-9 .slider-category {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ========================================
+           #comparison-10: Scale/balance comparison
+           ======================================== */
+        #comparison-10 .scale-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #comparison-10 .scale-top {
+            width: 20px;
+            height: 60px;
+            background: #ffd93d;
+            margin: 0 auto;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #comparison-10 .scale-beam {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+        }
+
+        #comparison-10 .scale-bar {
+            width: 100%;
+            height: 12px;
+            background: #5b5bd6;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        #comparison-10 .scale-pivot {
+            width: 40px;
+            height: 40px;
+            background: #ffd93d;
+            border-radius: 50%;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid #5b5bd6;
+        }
+
+        #comparison-10 .scale-pans {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        #comparison-10 .scale-pan {
+            width: 180px;
+            padding: 25px;
+            border-radius: 0 0 50% 50%;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #comparison-10 .scale-pan:hover {
+            transform: translateY(5px);
+        }
+
+        #comparison-10 .pan-left {
+            background: #ff6b9d;
+            transform: translateY(20px);
+        }
+
+        #comparison-10 .pan-right {
+            background: #4ecdc4;
+            transform: translateY(-10px);
+        }
+
+        #comparison-10 .pan-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        #comparison-10 .pan-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        #comparison-10 .scale-strings {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 70px;
+        }
+
+        #comparison-10 .string {
+            width: 3px;
+            height: 40px;
+            background: #888;
+        }
+
+        #comparison-10 .string-left { height: 60px; }
+        #comparison-10 .string-right { height: 30px; }
+
+        /* ========================================
+           #comparison-11: Split screen comparison
+           ======================================== */
+        #comparison-11 .split-container {
+            display: flex;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        #comparison-11 .split-side {
+            flex: 1;
+            padding: 40px;
+            min-height: 300px;
+            transition: flex 0.3s;
+        }
+
+        #comparison-11 .split-side:hover {
+            flex: 1.1;
+        }
+
+        #comparison-11 .split-left {
+            background: #ff6b9d;
+            color: white;
+            text-align: right;
+        }
+
+        #comparison-11 .split-right {
+            background: #4ecdc4;
+            color: white;
+            text-align: left;
+        }
+
+        #comparison-11 .split-divider {
+            width: 6px;
+            background: white;
+            position: relative;
+        }
+
+        #comparison-11 .divider-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: #ffd93d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #comparison-11 .split-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #comparison-11 .split-list {
+            list-style: none;
+        }
+
+        #comparison-11 .split-list li {
+            padding: 10px 0;
+            opacity: 0.9;
+        }
+
+        /* ========================================
+           #comparison-12: Overlay comparison
+           ======================================== */
+        #comparison-12 .overlay-container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #comparison-12 .overlay-back {
+            background: #4ecdc4;
+            border-radius: 24px;
+            padding: 30px;
+            color: white;
+            margin-left: 40px;
+        }
+
+        #comparison-12 .overlay-front {
+            background: #ff6b9d;
+            border-radius: 24px;
+            padding: 30px;
+            color: white;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 80px;
+            box-shadow: 0 10px 40px rgba(255,107,157,0.4);
+            transition: transform 0.3s;
+        }
+
+        #comparison-12 .overlay-front:hover {
+            transform: translate(-10px, -10px);
+        }
+
+        #comparison-12 .overlay-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        #comparison-12 .overlay-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #comparison-12 .overlay-text {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           #comparison-13: Side by side with checkmarks
+           ======================================== */
+        #comparison-13 .check-container {
+            display: flex;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #comparison-13 .check-card {
+            flex: 1;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        #comparison-13 .check-header {
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+
+        #comparison-13 .card-good .check-header { background: #4ecdc4; }
+        #comparison-13 .card-bad .check-header { background: #ff6b9d; }
+
+        #comparison-13 .check-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        #comparison-13 .check-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        #comparison-13 .check-list {
+            list-style: none;
+            padding: 25px;
+        }
+
+        #comparison-13 .check-list li {
+            padding: 12px 0;
+            border-bottom: 2px dotted #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #comparison-13 .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        #comparison-13 .check-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        #comparison-13 .card-good .check-mark { background: #4ecdc4; }
+        #comparison-13 .card-bad .check-mark { background: #ff6b9d; }
+
+        /* ========================================
+           #comparison-14: Rating comparison (stars)
+           ======================================== */
+        #comparison-14 .rating-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #comparison-14 .rating-row {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        #comparison-14 .rating-row:hover {
+            transform: translateX(10px);
+        }
+
+        #comparison-14 .rating-category {
+            width: 150px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #comparison-14 .rating-bars {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #comparison-14 .rating-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #comparison-14 .rating-label {
+            width: 80px;
+            font-size: 0.9rem;
+        }
+
+        #comparison-14 .rating-a .rating-label { color: #ff6b9d; }
+        #comparison-14 .rating-b .rating-label { color: #4ecdc4; }
+
+        #comparison-14 .rating-stars {
+            display: flex;
+            gap: 3px;
+        }
+
+        #comparison-14 .star {
+            font-size: 1.3rem;
+        }
+
+        #comparison-14 .rating-a .star { color: #ff6b9d; }
+        #comparison-14 .rating-b .star { color: #4ecdc4; }
+
+        #comparison-14 .star-empty {
+            opacity: 0.3;
+        }
+
+        /* ========================================
+           #comparison-15: Price comparison
+           ======================================== */
+        #comparison-15 .price-container {
+            display: flex;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        #comparison-15 .price-card {
+            flex: 1;
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            text-align: center;
+            border: 4px solid;
+            transition: all 0.3s;
+        }
+
+        #comparison-15 .price-card:hover {
+            transform: scale(1.02);
+        }
+
+        #comparison-15 .card-budget { border-color: #4ecdc4; }
+        #comparison-15 .card-premium { border-color: #ff6b9d; }
+
+        #comparison-15 .price-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #comparison-15 .card-budget .price-tag {
+            background: #d4f5f3;
+            color: #2a9d8f;
+        }
+
+        #comparison-15 .card-premium .price-tag {
+            background: #ffe4ec;
+            color: #ff6b9d;
+        }
+
+        #comparison-15 .price-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #comparison-15 .card-budget .price-amount { color: #4ecdc4; }
+        #comparison-15 .card-premium .price-amount { color: #ff6b9d; }
+
+        #comparison-15 .price-period {
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        #comparison-15 .price-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        #comparison-15 .price-features li {
+            padding: 10px 0;
+            border-bottom: 2px dotted #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #comparison-15 .feature-check {
+            color: #4ecdc4;
+        }
+
+        #comparison-15 .feature-cross {
+            color: #ddd;
+        }
+
+        /* ========================================
+           #comparison-16: Specification comparison
+           ======================================== */
+        #comparison-16 .spec-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #comparison-16 .spec-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            background: #5b5bd6;
+            color: white;
+            border-radius: 20px 20px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #comparison-16 .spec-header > :first-child {
+            text-align: left;
+        }
+
+        #comparison-16 .spec-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            padding: 18px 20px;
+            background: white;
+            border-bottom: 2px solid #f0f0f0;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        #comparison-16 .spec-row:hover {
+            background: #f8f4ff;
+        }
+
+        #comparison-16 .spec-row:last-child {
+            border-radius: 0 0 20px 20px;
+        }
+
+        #comparison-16 .spec-label {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #comparison-16 .spec-icon {
+            width: 30px;
+            height: 30px;
+            background: #ffe4ec;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #comparison-16 .spec-value-a {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+
+        #comparison-16 .spec-value-b {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           #comparison-17: Timeline comparison
+           ======================================== */
+        #comparison-17 .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #comparison-17 .timeline-center {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: #ffd93d;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        #comparison-17 .timeline-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        #comparison-17 .timeline-left,
+        #comparison-17 .timeline-right {
+            flex: 1;
+            padding: 20px;
+        }
+
+        #comparison-17 .timeline-left {
+            text-align: right;
+            padding-right: 50px;
+        }
+
+        #comparison-17 .timeline-right {
+            padding-left: 50px;
+        }
+
+        #comparison-17 .timeline-card {
+            display: inline-block;
+            padding: 20px 25px;
+            border-radius: 16px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #comparison-17 .timeline-card:hover {
+            transform: scale(1.05);
+        }
+
+        #comparison-17 .timeline-left .timeline-card { background: #ff6b9d; }
+        #comparison-17 .timeline-right .timeline-card { background: #4ecdc4; }
+
+        #comparison-17 .timeline-year {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        #comparison-17 .timeline-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #comparison-17 .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid #ffd93d;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        /* ========================================
+           #comparison-18: Photo comparison frame
+           ======================================== */
+        #comparison-18 .photo-container {
+            display: flex;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #comparison-18 .photo-frame {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        #comparison-18 .photo-frame:hover {
+            transform: rotate(-2deg) scale(1.02);
+        }
+
+        #comparison-18 .photo-frame:last-child:hover {
+            transform: rotate(2deg) scale(1.02);
+        }
+
+        #comparison-18 .photo-placeholder {
+            height: 200px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        #comparison-18 .frame-before .photo-placeholder { background: #ffe4ec; }
+        #comparison-18 .frame-after .photo-placeholder { background: #d4f5f3; }
+
+        #comparison-18 .photo-label {
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #comparison-18 .frame-before .photo-label {
+            background: #ff6b9d;
+            color: white;
+        }
+
+        #comparison-18 .frame-after .photo-label {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        #comparison-18 .arrow-between {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            color: #ffd93d;
+        }
+
+        /* ========================================
+           #comparison-19: Percentage comparison
+           ======================================== */
+        #comparison-19 .percent-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #comparison-19 .percent-row {
+            margin-bottom: 25px;
+        }
+
+        #comparison-19 .percent-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        #comparison-19 .percent-category {
+            font-weight: 600;
+            color: #333;
+        }
+
+        #comparison-19 .percent-values {
+            display: flex;
+            gap: 20px;
+        }
+
+        #comparison-19 .value-a { color: #ff6b9d; font-weight: bold; }
+        #comparison-19 .value-b { color: #4ecdc4; font-weight: bold; }
+
+        #comparison-19 .percent-bar {
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        #comparison-19 .bar-segment-a {
+            background: #ff6b9d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: width 0.5s;
+        }
+
+        #comparison-19 .bar-segment-b {
+            background: #4ecdc4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: width 0.5s;
+        }
+
+        #comparison-19 .percent-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+        }
+
+        #comparison-19 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #comparison-19 .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        #comparison-19 .dot-a { background: #ff6b9d; }
+        #comparison-19 .dot-b { background: #4ecdc4; }
+
+        /* ========================================
+           #comparison-20: Winner/Loser comparison
+           ======================================== */
+        #comparison-20 .winner-container {
+            display: flex;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        #comparison-20 .winner-card,
+        #comparison-20 .loser-card {
+            flex: 1;
+            border-radius: 24px;
+            padding: 35px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #comparison-20 .winner-card {
+            background: #ffd93d;
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(255,217,61,0.4);
+        }
+
+        #comparison-20 .winner-card:hover {
+            transform: scale(1.1);
+        }
+
+        #comparison-20 .loser-card {
+            background: #f0f0f0;
+            opacity: 0.8;
+        }
+
+        #comparison-20 .loser-card:hover {
+            transform: scale(1.02);
+            opacity: 1;
+        }
+
+        #comparison-20 .result-badge {
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        #comparison-20 .winner-card .result-badge {
+            background: white;
+            color: #e6a800;
+        }
+
+        #comparison-20 .loser-card .result-badge {
+            background: #ddd;
+            color: #888;
+        }
+
+        #comparison-20 .result-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        #comparison-20 .result-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #comparison-20 .winner-card .result-title { color: #333; }
+        #comparison-20 .loser-card .result-title { color: #888; }
+
+        #comparison-20 .result-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        #comparison-20 .winner-card .result-score { color: #e6a800; }
+        #comparison-20 .loser-card .result-score { color: #aaa; }
+
+        #comparison-20 .vs-divider {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #5b5bd6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diagram Layouts - Comparison</h1>
+    <p class="subtitle">20 different comparison layout patterns for SNS infographics and education</p>
+
+    <!-- #comparison-1: Simple A vs B -->
+    <div class="diagram-section" id="comparison-1">
+        <h2 class="section-title" data-num="1">Simple A vs B (2 columns)</h2>
+        <p class="section-desc">Basic two-column comparison with VS badge</p>
+
+        <div class="compare-wrapper">
+            <div class="compare-container">
+                <div class="compare-side side-a">
+                    <div class="side-label">A</div>
+                    <div class="side-title">Option A Title</div>
+                    <div class="side-desc">Description for option A goes here. Explain the key features and benefits.</div>
+                </div>
+                <div class="compare-side side-b">
+                    <div class="side-label">B</div>
+                    <div class="side-title">Option B Title</div>
+                    <div class="side-desc">Description for option B goes here. Explain the key features and benefits.</div>
+                </div>
+            </div>
+            <div class="vs-badge">VS</div>
+        </div>
+    </div>
+
+    <!-- #comparison-2: A vs B with icons -->
+    <div class="diagram-section" id="comparison-2">
+        <h2 class="section-title" data-num="2">A vs B with Icons</h2>
+        <p class="section-desc">Comparison cards with icon headers and feature lists</p>
+
+        <div class="compare-container">
+            <div class="compare-card card-a">
+                <div class="card-icon">🍎</div>
+                <div class="card-title">Choice A</div>
+                <ul class="card-features">
+                    <li>Feature one description</li>
+                    <li>Feature two description</li>
+                    <li>Feature three description</li>
+                </ul>
+            </div>
+            <div class="vs-circle">VS</div>
+            <div class="compare-card card-b">
+                <div class="card-icon">🍊</div>
+                <div class="card-title">Choice B</div>
+                <ul class="card-features">
+                    <li>Feature one description</li>
+                    <li>Feature two description</li>
+                    <li>Feature three description</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-3: 3-way comparison -->
+    <div class="diagram-section" id="comparison-3">
+        <h2 class="section-title" data-num="3">3-Way Comparison</h2>
+        <p class="section-desc">Three-column comparison for multiple options</p>
+
+        <div class="compare-container">
+            <div class="compare-column col-1">
+                <div class="column-header">
+                    <div class="column-label">Option 1</div>
+                    <div class="column-title">Basic</div>
+                </div>
+                <div class="column-body">
+                    <div class="column-item">
+                        <span class="item-bullet">1</span>
+                        <span>First feature</span>
+                    </div>
+                    <div class="column-item">
+                        <span class="item-bullet">2</span>
+                        <span>Second feature</span>
+                    </div>
+                    <div class="column-item">
+                        <span class="item-bullet">3</span>
+                        <span>Third feature</span>
+                    </div>
+                </div>
+            </div>
+            <div class="compare-column col-2">
+                <div class="column-header">
+                    <div class="column-label">Option 2</div>
+                    <div class="column-title">Standard</div>
+                </div>
+                <div class="column-body">
+                    <div class="column-item">
+                        <span class="item-bullet">1</span>
+                        <span>First feature</span>
+                    </div>
+                    <div class="column-item">
+                        <span class="item-bullet">2</span>
+                        <span>Second feature</span>
+                    </div>
+                    <div class="column-item">
+                        <span class="item-bullet">3</span>
+                        <span>Third feature</span>
+                    </div>
+                </div>
+            </div>
+            <div class="compare-column col-3">
+                <div class="column-header">
+                    <div class="column-label">Option 3</div>
+                    <div class="column-title">Premium</div>
+                </div>
+                <div class="column-body">
+                    <div class="column-item">
+                        <span class="item-bullet">1</span>
+                        <span>First feature</span>
+                    </div>
+                    <div class="column-item">
+                        <span class="item-bullet">2</span>
+                        <span>Second feature</span>
+                    </div>
+                    <div class="column-item">
+                        <span class="item-bullet">3</span>
+                        <span>Third feature</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-4: Feature comparison table -->
+    <div class="diagram-section" id="comparison-4">
+        <h2 class="section-title" data-num="4">Feature Comparison Table</h2>
+        <p class="section-desc">Table format with checkmarks for feature availability</p>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Plan A</th>
+                    <th>Plan B</th>
+                    <th>Plan C</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Feature One</td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td>Feature Two</td>
+                    <td><span class="check-no">&#10005;</span></td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td>Feature Three</td>
+                    <td><span class="check-no">&#10005;</span></td>
+                    <td><span class="check-partial">&#9679;</span></td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td>Feature Four</td>
+                    <td><span class="check-no">&#10005;</span></td>
+                    <td><span class="check-no">&#10005;</span></td>
+                    <td><span class="check-yes">&#10003;</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- #comparison-5: Horizontal bars comparison -->
+    <div class="diagram-section" id="comparison-5">
+        <h2 class="section-title" data-num="5">Horizontal Bars Comparison</h2>
+        <p class="section-desc">Side-by-side horizontal progress bars</p>
+
+        <div class="bars-container">
+            <div class="bar-row">
+                <div class="bar-label">Category 1</div>
+                <div class="bar-wrapper">
+                    <div class="bar-track bar-a">
+                        <div class="bar-fill" style="width: 80%;">80%</div>
+                    </div>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar-track bar-b">
+                        <div class="bar-fill" style="width: 65%;">65%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Category 2</div>
+                <div class="bar-wrapper">
+                    <div class="bar-track bar-a">
+                        <div class="bar-fill" style="width: 55%;">55%</div>
+                    </div>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar-track bar-b">
+                        <div class="bar-fill" style="width: 90%;">90%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Category 3</div>
+                <div class="bar-wrapper">
+                    <div class="bar-track bar-a">
+                        <div class="bar-fill" style="width: 70%;">70%</div>
+                    </div>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar-track bar-b">
+                        <div class="bar-fill" style="width: 70%;">70%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bar-legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-a"></div>
+                    <span>Option A</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-b"></div>
+                    <span>Option B</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-6: Vertical bars comparison -->
+    <div class="diagram-section" id="comparison-6">
+        <h2 class="section-title" data-num="6">Vertical Bars Comparison</h2>
+        <p class="section-desc">Bar chart style vertical comparison</p>
+
+        <div class="vbars-container">
+            <div>
+                <div class="vbar-group">
+                    <div class="vbar-item vbar-a" style="height: 200px;">
+                        <span class="vbar-value">85</span>
+                    </div>
+                    <div class="vbar-item vbar-b" style="height: 150px;">
+                        <span class="vbar-value">65</span>
+                    </div>
+                </div>
+                <div class="vbar-label">Q1</div>
+            </div>
+            <div>
+                <div class="vbar-group">
+                    <div class="vbar-item vbar-a" style="height: 160px;">
+                        <span class="vbar-value">70</span>
+                    </div>
+                    <div class="vbar-item vbar-b" style="height: 220px;">
+                        <span class="vbar-value">92</span>
+                    </div>
+                </div>
+                <div class="vbar-label">Q2</div>
+            </div>
+            <div>
+                <div class="vbar-group">
+                    <div class="vbar-item vbar-a" style="height: 180px;">
+                        <span class="vbar-value">78</span>
+                    </div>
+                    <div class="vbar-item vbar-b" style="height: 180px;">
+                        <span class="vbar-value">78</span>
+                    </div>
+                </div>
+                <div class="vbar-label">Q3</div>
+            </div>
+            <div>
+                <div class="vbar-group">
+                    <div class="vbar-item vbar-a" style="height: 240px;">
+                        <span class="vbar-value">98</span>
+                    </div>
+                    <div class="vbar-item vbar-b" style="height: 190px;">
+                        <span class="vbar-value">82</span>
+                    </div>
+                </div>
+                <div class="vbar-label">Q4</div>
+            </div>
+        </div>
+        <div class="vbar-legend">
+            <div class="legend-item">
+                <div class="legend-color legend-a"></div>
+                <span>Product A</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-b"></div>
+                <span>Product B</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-7: Circular comparison -->
+    <div class="diagram-section" id="comparison-7">
+        <h2 class="section-title" data-num="7">Circular Comparison</h2>
+        <p class="section-desc">Donut charts for percentage comparison</p>
+
+        <div class="circular-container">
+            <div class="circular-item">
+                <div class="circle-chart circle-a">
+                    <div class="circle-inner">
+                        <span class="circle-value">75%</span>
+                        <span class="circle-label">Score</span>
+                    </div>
+                </div>
+                <div class="circular-title">Option A</div>
+            </div>
+            <div class="circular-item">
+                <div class="circle-chart circle-b">
+                    <div class="circle-inner">
+                        <span class="circle-value">60%</span>
+                        <span class="circle-label">Score</span>
+                    </div>
+                </div>
+                <div class="circular-title">Option B</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-8: Card-based comparison -->
+    <div class="diagram-section" id="comparison-8">
+        <h2 class="section-title" data-num="8">Card-Based Comparison</h2>
+        <p class="section-desc">Detailed cards with statistics and metrics</p>
+
+        <div class="cards-container">
+            <div class="compare-card card-a">
+                <div class="card-header">
+                    <div class="card-badge">Option A</div>
+                    <div class="card-name">Product Alpha</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-stat">
+                        <span class="stat-label">Speed</span>
+                        <span class="stat-value">Fast</span>
+                    </div>
+                    <div class="card-stat">
+                        <span class="stat-label">Price</span>
+                        <span class="stat-value">$99</span>
+                    </div>
+                    <div class="card-stat">
+                        <span class="stat-label">Rating</span>
+                        <span class="stat-value">4.5/5</span>
+                    </div>
+                    <div class="card-stat">
+                        <span class="stat-label">Support</span>
+                        <span class="stat-value">24/7</span>
+                    </div>
+                </div>
+            </div>
+            <div class="compare-card card-b">
+                <div class="card-header">
+                    <div class="card-badge">Option B</div>
+                    <div class="card-name">Product Beta</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-stat">
+                        <span class="stat-label">Speed</span>
+                        <span class="stat-value">Medium</span>
+                    </div>
+                    <div class="card-stat">
+                        <span class="stat-label">Price</span>
+                        <span class="stat-value">$79</span>
+                    </div>
+                    <div class="card-stat">
+                        <span class="stat-label">Rating</span>
+                        <span class="stat-value">4.2/5</span>
+                    </div>
+                    <div class="card-stat">
+                        <span class="stat-label">Support</span>
+                        <span class="stat-value">Business</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-9: Slider comparison -->
+    <div class="diagram-section" id="comparison-9">
+        <h2 class="section-title" data-num="9">Slider Comparison</h2>
+        <p class="section-desc">Gradient sliders showing position on a spectrum</p>
+
+        <div class="slider-container">
+            <div class="slider-row">
+                <div class="slider-header">
+                    <span class="slider-label-left">Low Cost</span>
+                    <span class="slider-label-right">High Quality</span>
+                </div>
+                <div class="slider-track">
+                    <div class="slider-marker" style="left: 70%;"></div>
+                </div>
+                <div class="slider-category">Product A</div>
+            </div>
+            <div class="slider-row">
+                <div class="slider-header">
+                    <span class="slider-label-left">Simple</span>
+                    <span class="slider-label-right">Complex</span>
+                </div>
+                <div class="slider-track">
+                    <div class="slider-marker" style="left: 35%;"></div>
+                </div>
+                <div class="slider-category">Product A</div>
+            </div>
+            <div class="slider-row">
+                <div class="slider-header">
+                    <span class="slider-label-left">Beginner</span>
+                    <span class="slider-label-right">Expert</span>
+                </div>
+                <div class="slider-track">
+                    <div class="slider-marker" style="left: 55%;"></div>
+                </div>
+                <div class="slider-category">Target Audience</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-10: Scale/balance comparison -->
+    <div class="diagram-section" id="comparison-10">
+        <h2 class="section-title" data-num="10">Scale/Balance Comparison</h2>
+        <p class="section-desc">Visual balance scale showing weighted comparison</p>
+
+        <div class="scale-container">
+            <div class="scale-top"></div>
+            <div class="scale-beam">
+                <div class="scale-bar">
+                    <div class="scale-pivot"></div>
+                </div>
+            </div>
+            <div class="scale-strings">
+                <div class="string string-left"></div>
+                <div class="string string-right"></div>
+            </div>
+            <div class="scale-pans">
+                <div class="scale-pan pan-left">
+                    <div class="pan-value">85</div>
+                    <div class="pan-label">Option A</div>
+                </div>
+                <div class="scale-pan pan-right">
+                    <div class="pan-value">65</div>
+                    <div class="pan-label">Option B</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-11: Split screen comparison -->
+    <div class="diagram-section" id="comparison-11">
+        <h2 class="section-title" data-num="11">Split Screen Comparison</h2>
+        <p class="section-desc">Full-width split view with draggable divider style</p>
+
+        <div class="split-container">
+            <div class="split-side split-left">
+                <div class="split-title">Before</div>
+                <ul class="split-list">
+                    <li>Old feature description</li>
+                    <li>Previous capability</li>
+                    <li>Former method</li>
+                </ul>
+            </div>
+            <div class="split-divider">
+                <div class="divider-handle">&#8596;</div>
+            </div>
+            <div class="split-side split-right">
+                <div class="split-title">After</div>
+                <ul class="split-list">
+                    <li>New feature description</li>
+                    <li>Enhanced capability</li>
+                    <li>Improved method</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-12: Overlay comparison -->
+    <div class="diagram-section" id="comparison-12">
+        <h2 class="section-title" data-num="12">Overlay Comparison</h2>
+        <p class="section-desc">Stacked cards with emphasis on the primary option</p>
+
+        <div class="overlay-container">
+            <div class="overlay-back">
+                <div class="overlay-badge">Standard</div>
+                <div class="overlay-title">Basic Plan</div>
+                <div class="overlay-text">The standard option with all essential features for everyday use.</div>
+            </div>
+            <div class="overlay-front">
+                <div class="overlay-badge">Recommended</div>
+                <div class="overlay-title">Premium Plan</div>
+                <div class="overlay-text">Enhanced features with priority support and advanced capabilities.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-13: Side by side with checkmarks -->
+    <div class="diagram-section" id="comparison-13">
+        <h2 class="section-title" data-num="13">Side by Side with Checkmarks</h2>
+        <p class="section-desc">Good vs Bad or Do vs Don't comparison</p>
+
+        <div class="check-container">
+            <div class="check-card card-good">
+                <div class="check-header">
+                    <div class="check-icon">&#10003;</div>
+                    <div class="check-title">DO</div>
+                </div>
+                <ul class="check-list">
+                    <li>
+                        <span class="check-mark">&#10003;</span>
+                        <span>Good practice one</span>
+                    </li>
+                    <li>
+                        <span class="check-mark">&#10003;</span>
+                        <span>Good practice two</span>
+                    </li>
+                    <li>
+                        <span class="check-mark">&#10003;</span>
+                        <span>Good practice three</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="check-card card-bad">
+                <div class="check-header">
+                    <div class="check-icon">&#10005;</div>
+                    <div class="check-title">DON'T</div>
+                </div>
+                <ul class="check-list">
+                    <li>
+                        <span class="check-mark">&#10005;</span>
+                        <span>Bad practice one</span>
+                    </li>
+                    <li>
+                        <span class="check-mark">&#10005;</span>
+                        <span>Bad practice two</span>
+                    </li>
+                    <li>
+                        <span class="check-mark">&#10005;</span>
+                        <span>Bad practice three</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-14: Rating comparison (stars) -->
+    <div class="diagram-section" id="comparison-14">
+        <h2 class="section-title" data-num="14">Rating Comparison (Stars)</h2>
+        <p class="section-desc">Star rating system for multiple criteria</p>
+
+        <div class="rating-container">
+            <div class="rating-row">
+                <div class="rating-category">Quality</div>
+                <div class="rating-bars">
+                    <div class="rating-item rating-a">
+                        <span class="rating-label">Product A</span>
+                        <div class="rating-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="rating-item rating-b">
+                        <span class="rating-label">Product B</span>
+                        <div class="rating-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-row">
+                <div class="rating-category">Value</div>
+                <div class="rating-bars">
+                    <div class="rating-item rating-a">
+                        <span class="rating-label">Product A</span>
+                        <div class="rating-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="rating-item rating-b">
+                        <span class="rating-label">Product B</span>
+                        <div class="rating-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-row">
+                <div class="rating-category">Support</div>
+                <div class="rating-bars">
+                    <div class="rating-item rating-a">
+                        <span class="rating-label">Product A</span>
+                        <div class="rating-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="rating-item rating-b">
+                        <span class="rating-label">Product B</span>
+                        <div class="rating-stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                            <span class="star star-empty">&#9733;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-15: Price comparison -->
+    <div class="diagram-section" id="comparison-15">
+        <h2 class="section-title" data-num="15">Price Comparison</h2>
+        <p class="section-desc">Pricing cards with feature breakdowns</p>
+
+        <div class="price-container">
+            <div class="price-card card-budget">
+                <div class="price-tag">Budget Friendly</div>
+                <div class="price-amount">$29</div>
+                <div class="price-period">per month</div>
+                <ul class="price-features">
+                    <li>
+                        <span class="feature-check">&#10003;</span>
+                        <span>Basic features included</span>
+                    </li>
+                    <li>
+                        <span class="feature-check">&#10003;</span>
+                        <span>Email support</span>
+                    </li>
+                    <li>
+                        <span class="feature-cross">&#10005;</span>
+                        <span>Advanced analytics</span>
+                    </li>
+                    <li>
+                        <span class="feature-cross">&#10005;</span>
+                        <span>Priority support</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="price-card card-premium">
+                <div class="price-tag">Best Value</div>
+                <div class="price-amount">$79</div>
+                <div class="price-period">per month</div>
+                <ul class="price-features">
+                    <li>
+                        <span class="feature-check">&#10003;</span>
+                        <span>All features included</span>
+                    </li>
+                    <li>
+                        <span class="feature-check">&#10003;</span>
+                        <span>24/7 support</span>
+                    </li>
+                    <li>
+                        <span class="feature-check">&#10003;</span>
+                        <span>Advanced analytics</span>
+                    </li>
+                    <li>
+                        <span class="feature-check">&#10003;</span>
+                        <span>Priority support</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-16: Specification comparison -->
+    <div class="diagram-section" id="comparison-16">
+        <h2 class="section-title" data-num="16">Specification Comparison</h2>
+        <p class="section-desc">Technical specs table with icons</p>
+
+        <div class="spec-container">
+            <div class="spec-header">
+                <div>Specification</div>
+                <div>Model A</div>
+                <div>Model B</div>
+            </div>
+            <div class="spec-row">
+                <div class="spec-label">
+                    <div class="spec-icon">&#9889;</div>
+                    <span>Speed</span>
+                </div>
+                <div class="spec-value-a">100 Mbps</div>
+                <div class="spec-value-b">250 Mbps</div>
+            </div>
+            <div class="spec-row">
+                <div class="spec-label">
+                    <div class="spec-icon">&#128190;</div>
+                    <span>Storage</span>
+                </div>
+                <div class="spec-value-a">256 GB</div>
+                <div class="spec-value-b">512 GB</div>
+            </div>
+            <div class="spec-row">
+                <div class="spec-label">
+                    <div class="spec-icon">&#128267;</div>
+                    <span>Battery</span>
+                </div>
+                <div class="spec-value-a">8 hours</div>
+                <div class="spec-value-b">12 hours</div>
+            </div>
+            <div class="spec-row">
+                <div class="spec-label">
+                    <div class="spec-icon">&#9878;</div>
+                    <span>Weight</span>
+                </div>
+                <div class="spec-value-a">1.2 kg</div>
+                <div class="spec-value-b">1.5 kg</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-17: Timeline comparison -->
+    <div class="diagram-section" id="comparison-17">
+        <h2 class="section-title" data-num="17">Timeline Comparison</h2>
+        <p class="section-desc">Side-by-side timeline for historical comparison</p>
+
+        <div class="timeline-container">
+            <div class="timeline-center"></div>
+
+            <div class="timeline-row">
+                <div class="timeline-left">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-title">Company A Launch</div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-right">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-title">Company B Launch</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-row">
+                <div class="timeline-left">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-title">Major Update v2.0</div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-right">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-title">Series A Funding</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-row">
+                <div class="timeline-left">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-title">Global Expansion</div>
+                    </div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-right">
+                    <div class="timeline-card">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-title">IPO Announced</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-18: Photo comparison frame -->
+    <div class="diagram-section" id="comparison-18">
+        <h2 class="section-title" data-num="18">Photo Comparison Frame</h2>
+        <p class="section-desc">Before/After photo frame layout</p>
+
+        <div class="photo-container">
+            <div class="photo-frame frame-before">
+                <div class="photo-placeholder">&#128247;</div>
+                <div class="photo-label">BEFORE</div>
+            </div>
+            <div class="arrow-between">&#10132;</div>
+            <div class="photo-frame frame-after">
+                <div class="photo-placeholder">&#128248;</div>
+                <div class="photo-label">AFTER</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-19: Percentage comparison -->
+    <div class="diagram-section" id="comparison-19">
+        <h2 class="section-title" data-num="19">Percentage Comparison</h2>
+        <p class="section-desc">Stacked bar showing market share or distribution</p>
+
+        <div class="percent-container">
+            <div class="percent-row">
+                <div class="percent-header">
+                    <span class="percent-category">Market Share 2023</span>
+                    <div class="percent-values">
+                        <span class="value-a">60%</span>
+                        <span class="value-b">40%</span>
+                    </div>
+                </div>
+                <div class="percent-bar">
+                    <div class="bar-segment-a" style="width: 60%;">60%</div>
+                    <div class="bar-segment-b" style="width: 40%;">40%</div>
+                </div>
+            </div>
+            <div class="percent-row">
+                <div class="percent-header">
+                    <span class="percent-category">User Preference</span>
+                    <div class="percent-values">
+                        <span class="value-a">45%</span>
+                        <span class="value-b">55%</span>
+                    </div>
+                </div>
+                <div class="percent-bar">
+                    <div class="bar-segment-a" style="width: 45%;">45%</div>
+                    <div class="bar-segment-b" style="width: 55%;">55%</div>
+                </div>
+            </div>
+            <div class="percent-row">
+                <div class="percent-header">
+                    <span class="percent-category">Revenue Split</span>
+                    <div class="percent-values">
+                        <span class="value-a">70%</span>
+                        <span class="value-b">30%</span>
+                    </div>
+                </div>
+                <div class="percent-bar">
+                    <div class="bar-segment-a" style="width: 70%;">70%</div>
+                    <div class="bar-segment-b" style="width: 30%;">30%</div>
+                </div>
+            </div>
+            <div class="percent-legend">
+                <div class="legend-item">
+                    <div class="legend-dot dot-a"></div>
+                    <span>Brand A</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-b"></div>
+                    <span>Brand B</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #comparison-20: Winner/Loser comparison -->
+    <div class="diagram-section" id="comparison-20">
+        <h2 class="section-title" data-num="20">Winner/Loser Comparison</h2>
+        <p class="section-desc">Highlight the winner with trophy styling</p>
+
+        <div class="winner-container">
+            <div class="winner-card">
+                <div class="result-badge">WINNER</div>
+                <div class="result-icon">&#127942;</div>
+                <div class="result-title">Champion A</div>
+                <div class="result-score">95 pts</div>
+            </div>
+            <div class="vs-divider">VS</div>
+            <div class="loser-card">
+                <div class="result-badge">Runner-up</div>
+                <div class="result-icon">&#129352;</div>
+                <div class="result-title">Challenger B</div>
+                <div class="result-score">78 pts</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funnel Diagram Templates - ファネル図レイアウト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2d3748;
+            font-size: 2rem;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .template-card h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed #e2e8f0;
+        }
+
+        .diagram-container {
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Color Palette */
+        :root {
+            --pink: #FF6B9D;
+            --sky-blue: #4FC3F7;
+            --mint: #81E6D9;
+            --yellow: #FFE066;
+            --orange: #FFB347;
+            --purple: #B794F6;
+            --coral: #FF8A80;
+            --lime: #C5E99B;
+            --lavender: #D4BBFF;
+            --peach: #FFCCBC;
+        }
+
+        /* ==================== */
+        /* #funnel-1: Simple Funnel */
+        /* ==================== */
+        #funnel-1 .funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #funnel-1 .funnel-stage {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+        }
+
+        #funnel-1 .funnel-stage:nth-child(1) { width: 280px; background: var(--sky-blue); }
+        #funnel-1 .funnel-stage:nth-child(2) { width: 220px; background: var(--mint); }
+        #funnel-1 .funnel-stage:nth-child(3) { width: 160px; background: var(--yellow); color: #666; }
+        #funnel-1 .funnel-stage:nth-child(4) { width: 100px; background: var(--pink); }
+
+        #funnel-1 .funnel-stage:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* ==================== */
+        /* #funnel-2: Marketing Funnel */
+        /* ==================== */
+        #funnel-2 .marketing-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        #funnel-2 .mf-stage {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-2 .mf-bar {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        #funnel-2 .mf-stage:nth-child(1) .mf-bar { width: 260px; background: var(--purple); }
+        #funnel-2 .mf-stage:nth-child(2) .mf-bar { width: 210px; background: var(--sky-blue); }
+        #funnel-2 .mf-stage:nth-child(3) .mf-bar { width: 160px; background: var(--mint); }
+        #funnel-2 .mf-stage:nth-child(4) .mf-bar { width: 110px; background: var(--orange); }
+        #funnel-2 .mf-stage:nth-child(5) .mf-bar { width: 70px; background: var(--pink); }
+
+        #funnel-2 .mf-label {
+            font-size: 0.7rem;
+            color: #666;
+            width: 70px;
+            text-align: left;
+        }
+
+        #funnel-2 .mf-stage:hover {
+            transform: translateX(5px);
+        }
+
+        /* ==================== */
+        /* #funnel-3: Sales Funnel */
+        /* ==================== */
+        #funnel-3 .sales-funnel {
+            position: relative;
+            width: 280px;
+        }
+
+        #funnel-3 .sf-layer {
+            position: relative;
+            margin: 0 auto;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-3 .sf-layer:nth-child(1) {
+            width: 100%;
+            background: var(--sky-blue);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+        }
+        #funnel-3 .sf-layer:nth-child(2) {
+            width: 90%;
+            background: var(--mint);
+            clip-path: polygon(5% 0, 95% 0, 90% 100%, 10% 100%);
+        }
+        #funnel-3 .sf-layer:nth-child(3) {
+            width: 80%;
+            background: var(--yellow);
+            color: #666;
+            clip-path: polygon(10% 0, 90% 0, 85% 100%, 15% 100%);
+        }
+        #funnel-3 .sf-layer:nth-child(4) {
+            width: 70%;
+            background: var(--orange);
+            clip-path: polygon(15% 0, 85% 0, 80% 100%, 20% 100%);
+        }
+        #funnel-3 .sf-layer:nth-child(5) {
+            width: 60%;
+            background: var(--pink);
+            clip-path: polygon(20% 0, 80% 0, 50% 100%, 50% 100%);
+            border-radius: 0 0 8px 8px;
+        }
+
+        #funnel-3 .sf-name { font-weight: bold; }
+        #funnel-3 .sf-value { opacity: 0.9; }
+
+        #funnel-3 .sf-layer:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        /* ==================== */
+        /* #funnel-4: Conversion Funnel */
+        /* ==================== */
+        #funnel-4 .conversion-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        #funnel-4 .cf-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-4 .cf-stage::after {
+            content: attr(data-rate);
+            position: absolute;
+            right: -50px;
+            font-size: 0.7rem;
+            color: #666;
+            background: #f0f4f8;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        #funnel-4 .cf-stage:nth-child(1) { width: 250px; background: var(--purple); border-radius: 8px 8px 0 0; }
+        #funnel-4 .cf-stage:nth-child(2) { width: 200px; background: var(--sky-blue); }
+        #funnel-4 .cf-stage:nth-child(3) { width: 150px; background: var(--mint); }
+        #funnel-4 .cf-stage:nth-child(4) { width: 100px; background: var(--pink); border-radius: 0 0 8px 8px; }
+
+        #funnel-4 .cf-stage:hover {
+            transform: scale(1.05);
+        }
+
+        /* ==================== */
+        /* #funnel-5: Inverted Funnel */
+        /* ==================== */
+        #funnel-5 .inverted-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #funnel-5 .if-stage {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+        }
+
+        #funnel-5 .if-stage:nth-child(1) { width: 80px; background: var(--pink); border-radius: 8px 8px 0 0; }
+        #funnel-5 .if-stage:nth-child(2) { width: 140px; background: var(--orange); }
+        #funnel-5 .if-stage:nth-child(3) { width: 200px; background: var(--yellow); color: #666; }
+        #funnel-5 .if-stage:nth-child(4) { width: 260px; background: var(--mint); }
+
+        #funnel-5 .if-stage:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* ==================== */
+        /* #funnel-6: Horizontal Funnel */
+        /* ==================== */
+        #funnel-6 .horizontal-funnel {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        #funnel-6 .hf-stage {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transition: all 0.3s ease;
+            clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 95%);
+        }
+
+        #funnel-6 .hf-stage:nth-child(1) { width: 70px; background: var(--sky-blue); clip-path: polygon(0% 0%, 100% 5%, 100% 95%, 0% 100%); }
+        #funnel-6 .hf-stage:nth-child(2) { width: 60px; height: 70px; background: var(--mint); }
+        #funnel-6 .hf-stage:nth-child(3) { width: 50px; height: 60px; background: var(--yellow); color: #666; }
+        #funnel-6 .hf-stage:nth-child(4) { width: 40px; height: 50px; background: var(--orange); }
+        #funnel-6 .hf-stage:nth-child(5) { width: 35px; height: 40px; background: var(--pink); clip-path: polygon(0% 5%, 100% 50%, 100% 50%, 0% 95%); }
+
+        #funnel-6 .hf-stage:hover {
+            filter: brightness(1.15);
+            transform: scaleY(1.1);
+        }
+
+        /* ==================== */
+        /* #funnel-7: Stepped Funnel */
+        /* ==================== */
+        #funnel-7 .stepped-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0;
+            padding-left: 20px;
+        }
+
+        #funnel-7 .step-row {
+            display: flex;
+            align-items: center;
+        }
+
+        #funnel-7 .step-bar {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-7 .step-row:nth-child(1) .step-bar { width: 260px; background: var(--purple); border-radius: 8px 8px 0 0; }
+        #funnel-7 .step-row:nth-child(2) .step-bar { width: 200px; background: var(--sky-blue); }
+        #funnel-7 .step-row:nth-child(3) .step-bar { width: 140px; background: var(--mint); }
+        #funnel-7 .step-row:nth-child(4) .step-bar { width: 80px; background: var(--pink); border-radius: 0 0 8px 8px; }
+
+        #funnel-7 .step-connector {
+            width: 3px;
+            height: 15px;
+            background: #ddd;
+            margin-left: 20px;
+        }
+
+        #funnel-7 .step-bar:hover {
+            transform: translateX(10px);
+            filter: brightness(1.1);
+        }
+
+        /* ==================== */
+        /* #funnel-8: Percentage Funnel */
+        /* ==================== */
+        #funnel-8 .percentage-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #funnel-8 .pf-stage {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #funnel-8 .pf-bar {
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-8 .pf-percent {
+            font-size: 1.2rem;
+            font-weight: bold;
+            width: 55px;
+            text-align: right;
+        }
+
+        #funnel-8 .pf-stage:nth-child(1) .pf-bar { width: 200px; background: var(--sky-blue); }
+        #funnel-8 .pf-stage:nth-child(1) .pf-percent { color: var(--sky-blue); }
+        #funnel-8 .pf-stage:nth-child(2) .pf-bar { width: 140px; background: var(--mint); }
+        #funnel-8 .pf-stage:nth-child(2) .pf-percent { color: var(--mint); }
+        #funnel-8 .pf-stage:nth-child(3) .pf-bar { width: 90px; background: var(--orange); }
+        #funnel-8 .pf-stage:nth-child(3) .pf-percent { color: var(--orange); }
+        #funnel-8 .pf-stage:nth-child(4) .pf-bar { width: 50px; background: var(--pink); }
+        #funnel-8 .pf-stage:nth-child(4) .pf-percent { color: var(--pink); }
+
+        #funnel-8 .pf-bar:hover {
+            transform: scale(1.05);
+        }
+
+        /* ==================== */
+        /* #funnel-9: Color Gradient Funnel */
+        /* ==================== */
+        #funnel-9 .gradient-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        #funnel-9 .gf-stage {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-9 .gf-stage:nth-child(1) { width: 260px; background: #FF6B9D; }
+        #funnel-9 .gf-stage:nth-child(2) { width: 230px; background: #FF8A80; }
+        #funnel-9 .gf-stage:nth-child(3) { width: 200px; background: #FFB347; }
+        #funnel-9 .gf-stage:nth-child(4) { width: 170px; background: #FFE066; color: #666; }
+        #funnel-9 .gf-stage:nth-child(5) { width: 140px; background: #C5E99B; color: #666; }
+        #funnel-9 .gf-stage:nth-child(6) { width: 110px; background: #81E6D9; }
+        #funnel-9 .gf-stage:nth-child(7) { width: 80px; background: #4FC3F7; }
+
+        #funnel-9 .gf-stage:first-child { border-radius: 8px 8px 0 0; }
+        #funnel-9 .gf-stage:last-child { border-radius: 0 0 8px 8px; }
+
+        #funnel-9 .gf-stage:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        /* ==================== */
+        /* #funnel-10: Layered Funnel */
+        /* ==================== */
+        #funnel-10 .layered-funnel {
+            position: relative;
+            width: 280px;
+            height: 220px;
+        }
+
+        #funnel-10 .lf-layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        #funnel-10 .lf-layer:nth-child(1) {
+            width: 260px;
+            height: 200px;
+            background: var(--sky-blue);
+            top: 0;
+            z-index: 1;
+            clip-path: polygon(10% 0%, 90% 0%, 70% 100%, 30% 100%);
+        }
+        #funnel-10 .lf-layer:nth-child(2) {
+            width: 200px;
+            height: 150px;
+            background: var(--mint);
+            top: 40px;
+            z-index: 2;
+            clip-path: polygon(10% 0%, 90% 0%, 70% 100%, 30% 100%);
+        }
+        #funnel-10 .lf-layer:nth-child(3) {
+            width: 140px;
+            height: 100px;
+            background: var(--yellow);
+            color: #666;
+            top: 80px;
+            z-index: 3;
+            clip-path: polygon(10% 0%, 90% 0%, 70% 100%, 30% 100%);
+        }
+        #funnel-10 .lf-layer:nth-child(4) {
+            width: 80px;
+            height: 50px;
+            background: var(--pink);
+            top: 120px;
+            z-index: 4;
+            clip-path: polygon(15% 0%, 85% 0%, 60% 100%, 40% 100%);
+        }
+
+        #funnel-10 .lf-layer span {
+            position: relative;
+            top: -20px;
+        }
+
+        #funnel-10 .lf-layer:hover {
+            filter: brightness(1.15);
+        }
+
+        /* ==================== */
+        /* #funnel-11: Arrow Funnel */
+        /* ==================== */
+        #funnel-11 .arrow-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #funnel-11 .af-stage {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-11 .af-box {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            position: relative;
+        }
+
+        #funnel-11 .af-box::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 15px solid;
+        }
+
+        #funnel-11 .af-stage:nth-child(1) .af-box { width: 180px; background: var(--purple); }
+        #funnel-11 .af-stage:nth-child(1) .af-box::after { border-left-color: var(--purple); }
+        #funnel-11 .af-stage:nth-child(2) .af-box { width: 140px; background: var(--sky-blue); }
+        #funnel-11 .af-stage:nth-child(2) .af-box::after { border-left-color: var(--sky-blue); }
+        #funnel-11 .af-stage:nth-child(3) .af-box { width: 100px; background: var(--mint); }
+        #funnel-11 .af-stage:nth-child(3) .af-box::after { border-left-color: var(--mint); }
+        #funnel-11 .af-stage:nth-child(4) .af-box { width: 60px; background: var(--pink); }
+        #funnel-11 .af-stage:nth-child(4) .af-box::after { display: none; }
+
+        #funnel-11 .af-arrow {
+            font-size: 1.5rem;
+            color: #ccc;
+        }
+
+        #funnel-11 .af-stage:hover {
+            transform: translateX(5px);
+        }
+
+        /* ==================== */
+        /* #funnel-12: Rounded Funnel */
+        /* ==================== */
+        #funnel-12 .rounded-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #funnel-12 .rf-stage {
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-12 .rf-stage:nth-child(1) { width: 250px; background: var(--purple); }
+        #funnel-12 .rf-stage:nth-child(2) { width: 200px; background: var(--sky-blue); }
+        #funnel-12 .rf-stage:nth-child(3) { width: 150px; background: var(--mint); }
+        #funnel-12 .rf-stage:nth-child(4) { width: 100px; background: var(--orange); }
+        #funnel-12 .rf-stage:nth-child(5) { width: 60px; background: var(--pink); }
+
+        #funnel-12 .rf-stage:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* ==================== */
+        /* #funnel-13: Flat/2D Funnel */
+        /* ==================== */
+        #funnel-13 .flat-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            border: 3px solid #333;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #funnel-13 .ff-stage {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-bottom: 2px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-13 .ff-stage:last-child {
+            border-bottom: none;
+        }
+
+        #funnel-13 .ff-stage:nth-child(1) { background: var(--sky-blue); color: white; }
+        #funnel-13 .ff-stage:nth-child(2) { background: var(--mint); color: #333; }
+        #funnel-13 .ff-stage:nth-child(3) { background: var(--yellow); color: #333; }
+        #funnel-13 .ff-stage:nth-child(4) { background: var(--pink); color: white; }
+
+        #funnel-13 .flat-funnel {
+            width: 240px;
+        }
+
+        #funnel-13 .ff-stage:hover {
+            filter: brightness(1.1);
+        }
+
+        /* ==================== */
+        /* #funnel-14: Numbers Funnel */
+        /* ==================== */
+        #funnel-14 .numbers-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #funnel-14 .nf-stage {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-14 .nf-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        #funnel-14 .nf-bar {
+            height: 36px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            border-radius: 0 18px 18px 0;
+        }
+
+        #funnel-14 .nf-stage:nth-child(1) .nf-number { background: var(--purple); }
+        #funnel-14 .nf-stage:nth-child(1) .nf-bar { width: 180px; background: var(--purple); }
+        #funnel-14 .nf-stage:nth-child(2) .nf-number { background: var(--sky-blue); }
+        #funnel-14 .nf-stage:nth-child(2) .nf-bar { width: 140px; background: var(--sky-blue); }
+        #funnel-14 .nf-stage:nth-child(3) .nf-number { background: var(--mint); }
+        #funnel-14 .nf-stage:nth-child(3) .nf-bar { width: 100px; background: var(--mint); }
+        #funnel-14 .nf-stage:nth-child(4) .nf-number { background: var(--pink); }
+        #funnel-14 .nf-stage:nth-child(4) .nf-bar { width: 60px; background: var(--pink); }
+
+        #funnel-14 .nf-stage:hover {
+            transform: translateX(5px);
+        }
+
+        /* ==================== */
+        /* #funnel-15: Icon Funnel */
+        /* ==================== */
+        #funnel-15 .icon-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #funnel-15 .icf-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 48px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-15 .icf-icon {
+            font-size: 1.3rem;
+        }
+
+        #funnel-15 .icf-stage:nth-child(1) { width: 240px; background: var(--sky-blue); }
+        #funnel-15 .icf-stage:nth-child(2) { width: 190px; background: var(--mint); }
+        #funnel-15 .icf-stage:nth-child(3) { width: 140px; background: var(--orange); }
+        #funnel-15 .icf-stage:nth-child(4) { width: 90px; background: var(--pink); }
+
+        #funnel-15 .icf-stage:hover {
+            transform: scale(1.05);
+        }
+
+        /* ==================== */
+        /* #funnel-16: Label + Stats Funnel */
+        /* ==================== */
+        #funnel-16 .stats-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #funnel-16 .stf-stage {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-16 .stf-label {
+            width: 80px;
+            text-align: right;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        #funnel-16 .stf-bar {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            border-radius: 4px;
+        }
+
+        #funnel-16 .stf-stat {
+            font-size: 0.7rem;
+            color: #999;
+            width: 50px;
+        }
+
+        #funnel-16 .stf-stage:nth-child(1) .stf-bar { width: 160px; background: var(--purple); }
+        #funnel-16 .stf-stage:nth-child(2) .stf-bar { width: 120px; background: var(--sky-blue); }
+        #funnel-16 .stf-stage:nth-child(3) .stf-bar { width: 80px; background: var(--mint); }
+        #funnel-16 .stf-stage:nth-child(4) .stf-bar { width: 50px; background: var(--pink); }
+
+        #funnel-16 .stf-stage:hover .stf-bar {
+            transform: scaleX(1.05);
+        }
+
+        /* ==================== */
+        /* #funnel-17: Filter Funnel */
+        /* ==================== */
+        #funnel-17 .filter-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        #funnel-17 .fif-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+            justify-content: center;
+            max-width: 200px;
+        }
+
+        #funnel-17 .fif-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-17 .fif-dot:nth-child(odd) { background: var(--pink); }
+        #funnel-17 .fif-dot:nth-child(even) { background: var(--sky-blue); }
+        #funnel-17 .fif-dot:nth-child(3n) { background: var(--mint); }
+
+        #funnel-17 .fif-filter {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 120px solid var(--purple);
+            position: relative;
+        }
+
+        #funnel-17 .fif-filter::after {
+            content: 'Filter';
+            position: absolute;
+            top: -90px;
+            left: -30px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #funnel-17 .fif-output {
+            display: flex;
+            gap: 5px;
+            margin-top: 15px;
+        }
+
+        #funnel-17 .fif-output .fif-dot {
+            background: var(--pink);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ==================== */
+        /* #funnel-18: Selection Funnel */
+        /* ==================== */
+        #funnel-18 .selection-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #funnel-18 .sef-row {
+            display: flex;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-18 .sef-item {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-18 .sef-row:nth-child(1) .sef-item { background: var(--sky-blue); }
+        #funnel-18 .sef-row:nth-child(2) .sef-item { background: var(--mint); }
+        #funnel-18 .sef-row:nth-child(3) .sef-item { background: var(--orange); }
+        #funnel-18 .sef-row:nth-child(4) .sef-item { background: var(--pink); }
+
+        #funnel-18 .sef-item.selected {
+            box-shadow: 0 0 0 3px #333;
+            transform: scale(1.1);
+        }
+
+        #funnel-18 .sef-arrow {
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+
+        #funnel-18 .sef-item:hover {
+            transform: scale(1.15);
+        }
+
+        /* ==================== */
+        /* #funnel-19: Elimination Funnel */
+        /* ==================== */
+        #funnel-19 .elimination-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #funnel-19 .elf-stage {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-19 .elf-bar {
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        #funnel-19 .elf-removed {
+            display: flex;
+            gap: 3px;
+        }
+
+        #funnel-19 .elf-x {
+            width: 20px;
+            height: 20px;
+            background: #ffcdd2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c62828;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        #funnel-19 .elf-stage:nth-child(1) .elf-bar { width: 180px; background: var(--sky-blue); }
+        #funnel-19 .elf-stage:nth-child(2) .elf-bar { width: 140px; background: var(--mint); }
+        #funnel-19 .elf-stage:nth-child(3) .elf-bar { width: 100px; background: var(--yellow); color: #666; }
+        #funnel-19 .elf-stage:nth-child(4) .elf-bar { width: 60px; background: var(--pink); }
+
+        #funnel-19 .elf-stage:hover {
+            transform: translateX(3px);
+        }
+
+        /* ==================== */
+        /* #funnel-20: Goal Funnel */
+        /* ==================== */
+        #funnel-20 .goal-funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            position: relative;
+        }
+
+        #funnel-20 .gof-stage {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        #funnel-20 .gof-stage:nth-child(1) {
+            width: 250px;
+            background: var(--sky-blue);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+            border-radius: 10px 10px 0 0;
+        }
+        #funnel-20 .gof-stage:nth-child(2) {
+            width: 200px;
+            background: var(--mint);
+            clip-path: polygon(5% 0, 95% 0, 90% 100%, 10% 100%);
+        }
+        #funnel-20 .gof-stage:nth-child(3) {
+            width: 150px;
+            background: var(--yellow);
+            color: #666;
+            clip-path: polygon(10% 0, 90% 0, 85% 100%, 15% 100%);
+        }
+        #funnel-20 .gof-stage:nth-child(4) {
+            width: 100px;
+            background: var(--orange);
+            clip-path: polygon(15% 0, 85% 0, 50% 100%, 50% 100%);
+        }
+
+        #funnel-20 .gof-goal {
+            margin-top: 10px;
+            padding: 12px 25px;
+            background: var(--pink);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px var(--pink); }
+            50% { box-shadow: 0 0 20px var(--pink), 0 0 30px var(--pink); }
+        }
+
+        #funnel-20 .gof-star {
+            font-size: 1.2rem;
+        }
+
+        #funnel-20 .gof-stage:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Funnel Diagram Templates - ファネル図レイアウト</h1>
+
+    <div class="template-grid">
+        <!-- #funnel-1: Simple Funnel -->
+        <div class="template-card" id="funnel-1">
+            <h3>#funnel-1: Simple Funnel（シンプルファネル）</h3>
+            <div class="diagram-container">
+                <div class="funnel">
+                    <div class="funnel-stage">認知</div>
+                    <div class="funnel-stage">興味</div>
+                    <div class="funnel-stage">検討</div>
+                    <div class="funnel-stage">購入</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-2: Marketing Funnel -->
+        <div class="template-card" id="funnel-2">
+            <h3>#funnel-2: Marketing Funnel（マーケティングファネル）</h3>
+            <div class="diagram-container">
+                <div class="marketing-funnel">
+                    <div class="mf-stage">
+                        <div class="mf-bar">AWARENESS</div>
+                        <span class="mf-label">認知段階</span>
+                    </div>
+                    <div class="mf-stage">
+                        <div class="mf-bar">INTEREST</div>
+                        <span class="mf-label">興味段階</span>
+                    </div>
+                    <div class="mf-stage">
+                        <div class="mf-bar">DESIRE</div>
+                        <span class="mf-label">欲求段階</span>
+                    </div>
+                    <div class="mf-stage">
+                        <div class="mf-bar">ACTION</div>
+                        <span class="mf-label">行動段階</span>
+                    </div>
+                    <div class="mf-stage">
+                        <div class="mf-bar">LOYAL</div>
+                        <span class="mf-label">継続段階</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-3: Sales Funnel -->
+        <div class="template-card" id="funnel-3">
+            <h3>#funnel-3: Sales Funnel（セールスファネル）</h3>
+            <div class="diagram-container">
+                <div class="sales-funnel">
+                    <div class="sf-layer">
+                        <span class="sf-name">リード</span>
+                        <span class="sf-value">10,000</span>
+                    </div>
+                    <div class="sf-layer">
+                        <span class="sf-name">見込み客</span>
+                        <span class="sf-value">5,000</span>
+                    </div>
+                    <div class="sf-layer">
+                        <span class="sf-name">商談</span>
+                        <span class="sf-value">1,500</span>
+                    </div>
+                    <div class="sf-layer">
+                        <span class="sf-name">提案</span>
+                        <span class="sf-value">500</span>
+                    </div>
+                    <div class="sf-layer">
+                        <span class="sf-name">成約</span>
+                        <span class="sf-value">200</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-4: Conversion Funnel -->
+        <div class="template-card" id="funnel-4">
+            <h3>#funnel-4: Conversion Funnel（コンバージョンファネル）</h3>
+            <div class="diagram-container">
+                <div class="conversion-funnel">
+                    <div class="cf-stage" data-rate="100%">訪問者</div>
+                    <div class="cf-stage" data-rate="45%">カート追加</div>
+                    <div class="cf-stage" data-rate="20%">チェックアウト</div>
+                    <div class="cf-stage" data-rate="8%">購入完了</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-5: Inverted Funnel -->
+        <div class="template-card" id="funnel-5">
+            <h3>#funnel-5: Inverted Funnel（逆ファネル）</h3>
+            <div class="diagram-container">
+                <div class="inverted-funnel">
+                    <div class="if-stage">コア</div>
+                    <div class="if-stage">アクティブ</div>
+                    <div class="if-stage">潜在顧客</div>
+                    <div class="if-stage">市場全体</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-6: Horizontal Funnel -->
+        <div class="template-card" id="funnel-6">
+            <h3>#funnel-6: Horizontal Funnel（横向きファネル）</h3>
+            <div class="diagram-container">
+                <div class="horizontal-funnel">
+                    <div class="hf-stage">入口</div>
+                    <div class="hf-stage">選別</div>
+                    <div class="hf-stage">評価</div>
+                    <div class="hf-stage">決定</div>
+                    <div class="hf-stage">成果</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-7: Stepped Funnel -->
+        <div class="template-card" id="funnel-7">
+            <h3>#funnel-7: Stepped Funnel（ステップファネル）</h3>
+            <div class="diagram-container">
+                <div class="stepped-funnel">
+                    <div class="step-row">
+                        <div class="step-bar">Step 1: 集客</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-row">
+                        <div class="step-bar">Step 2: 育成</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-row">
+                        <div class="step-bar">Step 3: 提案</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-row">
+                        <div class="step-bar">Step 4: 成約</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-8: Percentage Funnel -->
+        <div class="template-card" id="funnel-8">
+            <h3>#funnel-8: Percentage Funnel（パーセントファネル）</h3>
+            <div class="diagram-container">
+                <div class="percentage-funnel">
+                    <div class="pf-stage">
+                        <span class="pf-percent">100%</span>
+                        <div class="pf-bar">全体</div>
+                    </div>
+                    <div class="pf-stage">
+                        <span class="pf-percent">65%</span>
+                        <div class="pf-bar">興味あり</div>
+                    </div>
+                    <div class="pf-stage">
+                        <span class="pf-percent">30%</span>
+                        <div class="pf-bar">検討中</div>
+                    </div>
+                    <div class="pf-stage">
+                        <span class="pf-percent">12%</span>
+                        <div class="pf-bar">購入</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-9: Color Gradient Funnel -->
+        <div class="template-card" id="funnel-9">
+            <h3>#funnel-9: Color Gradient Funnel（カラーグラデーション）</h3>
+            <div class="diagram-container">
+                <div class="gradient-funnel">
+                    <div class="gf-stage">Level 1</div>
+                    <div class="gf-stage">Level 2</div>
+                    <div class="gf-stage">Level 3</div>
+                    <div class="gf-stage">Level 4</div>
+                    <div class="gf-stage">Level 5</div>
+                    <div class="gf-stage">Level 6</div>
+                    <div class="gf-stage">Level 7</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-10: Layered Funnel -->
+        <div class="template-card" id="funnel-10">
+            <h3>#funnel-10: Layered Funnel（レイヤーファネル）</h3>
+            <div class="diagram-container">
+                <div class="layered-funnel">
+                    <div class="lf-layer"><span>認知層</span></div>
+                    <div class="lf-layer"><span>関心層</span></div>
+                    <div class="lf-layer"><span>検討層</span></div>
+                    <div class="lf-layer"><span>購買層</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-11: Arrow Funnel -->
+        <div class="template-card" id="funnel-11">
+            <h3>#funnel-11: Arrow Funnel（矢印ファネル）</h3>
+            <div class="diagram-container">
+                <div class="arrow-funnel">
+                    <div class="af-stage">
+                        <div class="af-box">認知</div>
+                        <span class="af-arrow">↓</span>
+                    </div>
+                    <div class="af-stage">
+                        <div class="af-box">興味</div>
+                        <span class="af-arrow">↓</span>
+                    </div>
+                    <div class="af-stage">
+                        <div class="af-box">検討</div>
+                        <span class="af-arrow">↓</span>
+                    </div>
+                    <div class="af-stage">
+                        <div class="af-box">購入</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-12: Rounded Funnel -->
+        <div class="template-card" id="funnel-12">
+            <h3>#funnel-12: Rounded Funnel（丸みファネル）</h3>
+            <div class="diagram-container">
+                <div class="rounded-funnel">
+                    <div class="rf-stage">トップオブファネル</div>
+                    <div class="rf-stage">ミドルファネル</div>
+                    <div class="rf-stage">ボトムファネル</div>
+                    <div class="rf-stage">成約</div>
+                    <div class="rf-stage">LTV</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-13: Flat/2D Funnel -->
+        <div class="template-card" id="funnel-13">
+            <h3>#funnel-13: Flat/2D Funnel（フラットファネル）</h3>
+            <div class="diagram-container">
+                <div class="flat-funnel">
+                    <div class="ff-stage">TOFU - 認知</div>
+                    <div class="ff-stage">MOFU - 検討</div>
+                    <div class="ff-stage">BOFU - 決定</div>
+                    <div class="ff-stage">購入・契約</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-14: Numbers Funnel -->
+        <div class="template-card" id="funnel-14">
+            <h3>#funnel-14: Numbers Funnel（番号付きファネル）</h3>
+            <div class="diagram-container">
+                <div class="numbers-funnel">
+                    <div class="nf-stage">
+                        <div class="nf-number">1</div>
+                        <div class="nf-bar">集客フェーズ</div>
+                    </div>
+                    <div class="nf-stage">
+                        <div class="nf-number">2</div>
+                        <div class="nf-bar">教育フェーズ</div>
+                    </div>
+                    <div class="nf-stage">
+                        <div class="nf-number">3</div>
+                        <div class="nf-bar">販売フェーズ</div>
+                    </div>
+                    <div class="nf-stage">
+                        <div class="nf-number">4</div>
+                        <div class="nf-bar">継続</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-15: Icon Funnel -->
+        <div class="template-card" id="funnel-15">
+            <h3>#funnel-15: Icon Funnel（アイコン付きファネル）</h3>
+            <div class="diagram-container">
+                <div class="icon-funnel">
+                    <div class="icf-stage">
+                        <span class="icf-icon">👀</span>
+                        <span>認知・発見</span>
+                    </div>
+                    <div class="icf-stage">
+                        <span class="icf-icon">💭</span>
+                        <span>興味・関心</span>
+                    </div>
+                    <div class="icf-stage">
+                        <span class="icf-icon">🛒</span>
+                        <span>購入検討</span>
+                    </div>
+                    <div class="icf-stage">
+                        <span class="icf-icon">💳</span>
+                        <span>購入</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-16: Label + Stats Funnel -->
+        <div class="template-card" id="funnel-16">
+            <h3>#funnel-16: Label + Stats Funnel（ラベル統計ファネル）</h3>
+            <div class="diagram-container">
+                <div class="stats-funnel">
+                    <div class="stf-stage">
+                        <span class="stf-label">訪問者</span>
+                        <div class="stf-bar">10,000</div>
+                        <span class="stf-stat">100%</span>
+                    </div>
+                    <div class="stf-stage">
+                        <span class="stf-label">登録者</span>
+                        <div class="stf-bar">3,500</div>
+                        <span class="stf-stat">35%</span>
+                    </div>
+                    <div class="stf-stage">
+                        <span class="stf-label">アクティブ</span>
+                        <div class="stf-bar">1,200</div>
+                        <span class="stf-stat">12%</span>
+                    </div>
+                    <div class="stf-stage">
+                        <span class="stf-label">購入者</span>
+                        <div class="stf-bar">400</div>
+                        <span class="stf-stat">4%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-17: Filter Funnel -->
+        <div class="template-card" id="funnel-17">
+            <h3>#funnel-17: Filter Funnel（フィルターファネル）</h3>
+            <div class="diagram-container">
+                <div class="filter-funnel">
+                    <div class="fif-input">
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                    </div>
+                    <div class="fif-filter"></div>
+                    <div class="fif-output">
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                        <span class="fif-dot"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-18: Selection Funnel -->
+        <div class="template-card" id="funnel-18">
+            <h3>#funnel-18: Selection Funnel（選択ファネル）</h3>
+            <div class="diagram-container">
+                <div class="selection-funnel">
+                    <div class="sef-row">
+                        <div class="sef-item">A</div>
+                        <div class="sef-item">B</div>
+                        <div class="sef-item">C</div>
+                        <div class="sef-item">D</div>
+                        <div class="sef-item">E</div>
+                    </div>
+                    <span class="sef-arrow">↓</span>
+                    <div class="sef-row">
+                        <div class="sef-item">A</div>
+                        <div class="sef-item selected">B</div>
+                        <div class="sef-item">D</div>
+                    </div>
+                    <span class="sef-arrow">↓</span>
+                    <div class="sef-row">
+                        <div class="sef-item selected">B</div>
+                        <div class="sef-item">D</div>
+                    </div>
+                    <span class="sef-arrow">↓</span>
+                    <div class="sef-row">
+                        <div class="sef-item selected">B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-19: Elimination Funnel -->
+        <div class="template-card" id="funnel-19">
+            <h3>#funnel-19: Elimination Funnel（消去ファネル）</h3>
+            <div class="diagram-container">
+                <div class="elimination-funnel">
+                    <div class="elf-stage">
+                        <div class="elf-bar">応募者 100名</div>
+                        <div class="elf-removed">
+                            <span class="elf-x">×</span>
+                            <span class="elf-x">×</span>
+                            <span class="elf-x">×</span>
+                        </div>
+                    </div>
+                    <div class="elf-stage">
+                        <div class="elf-bar">書類通過 50名</div>
+                        <div class="elf-removed">
+                            <span class="elf-x">×</span>
+                            <span class="elf-x">×</span>
+                        </div>
+                    </div>
+                    <div class="elf-stage">
+                        <div class="elf-bar">面接通過 20名</div>
+                        <div class="elf-removed">
+                            <span class="elf-x">×</span>
+                        </div>
+                    </div>
+                    <div class="elf-stage">
+                        <div class="elf-bar">採用 5名</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #funnel-20: Goal Funnel -->
+        <div class="template-card" id="funnel-20">
+            <h3>#funnel-20: Goal Funnel（ゴールファネル）</h3>
+            <div class="diagram-container">
+                <div class="goal-funnel">
+                    <div class="gof-stage">見込み客獲得</div>
+                    <div class="gof-stage">関係構築</div>
+                    <div class="gof-stage">提案・交渉</div>
+                    <div class="gof-stage">クロージング</div>
+                    <div class="gof-goal">
+                        <span class="gof-star">★</span>
+                        GOAL達成!
+                        <span class="gof-star">★</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

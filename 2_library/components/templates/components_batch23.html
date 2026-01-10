@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Restaurant LP Components [T01-T10]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary warm colors */
+            --primary-orange: #e85d04;
+            --primary-red: #d62828;
+            --primary-yellow: #f9a825;
+            --primary-brown: #6d4c41;
+
+            /* Secondary colors */
+            --cream: #fff8e7;
+            --warm-white: #fffbf5;
+            --light-orange: #ffedd8;
+            --soft-peach: #ffecd2;
+
+            /* Accent colors */
+            --dark-brown: #3e2723;
+            --tomato: #ff6b6b;
+            --herb-green: #7cb342;
+
+            /* Text colors */
+            --text-primary: #3e2723;
+            --text-secondary: #5d4037;
+            --text-light: #8d6e63;
+
+            /* Shadows */
+            --shadow-soft: 0 4px 20px rgba(216, 67, 21, 0.1);
+            --shadow-medium: 0 8px 32px rgba(216, 67, 21, 0.15);
+            --shadow-strong: 0 12px 48px rgba(216, 67, 21, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+            color: var(--text-primary);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Decorative food pattern background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(232, 93, 4, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(249, 168, 37, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ===== [T01] HERO SECTION ===== */
+
+        .t01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(62, 39, 35, 0.85) 0%, rgba(109, 76, 65, 0.75) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="3" fill="%23f9a825" opacity="0.3"/><circle cx="70" cy="60" r="4" fill="%23e85d04" opacity="0.2"/><circle cx="40" cy="80" r="2" fill="%23ff6b6b" opacity="0.3"/></svg>');
+            background-size: cover;
+        }
+
+        .t01-hero::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--warm-white);
+            border-radius: 50% 50% 0 0;
+            transform: scaleX(1.5);
+        }
+
+        .t01-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+        }
+
+        .t01-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-yellow));
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            animation: t01-float 3s ease-in-out infinite;
+        }
+
+        @keyframes t01-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .t01-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .t01-hero-title span {
+            display: block;
+            background: linear-gradient(90deg, var(--primary-yellow), var(--primary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .t01-hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .t01-hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .t01-hero-stats {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .t01-stat {
+            text-align: center;
+        }
+
+        .t01-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+        }
+
+        .t01-stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ===== [T02] FEATURE CARDS ===== */
+
+        .t02-features {
+            padding: 100px 40px;
+            background: var(--warm-white);
+        }
+
+        .t02-features-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .t02-section-badge {
+            display: inline-block;
+            background: var(--light-orange);
+            color: var(--primary-orange);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .t02-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .t02-section-desc {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .t02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .t02-feature-card {
+            background: white;
+            border-radius: 24px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(232, 93, 4, 0.08);
+        }
+
+        .t02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .t02-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .t02-feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .t02-feature-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--light-orange), var(--soft-peach));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .t02-feature-card:hover .t02-feature-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .t02-feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .t02-feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== [T03] PRICING TABLE ===== */
+
+        .t03-pricing {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--light-orange) 100%);
+        }
+
+        .t03-pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .t03-pricing-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .t03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .t03-pricing-card {
+            background: white;
+            border-radius: 28px;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .t03-pricing-card.t03-featured {
+            border: 3px solid var(--primary-orange);
+            transform: scale(1.05);
+        }
+
+        .t03-pricing-card.t03-featured::before {
+            content: 'おすすめ';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+            color: white;
+            padding: 6px 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+
+        .t03-pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .t03-pricing-card.t03-featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .t03-plan-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--light-orange), var(--soft-peach));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .t03-plan-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .t03-plan-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .t03-plan-price {
+            margin-bottom: 24px;
+        }
+
+        .t03-price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+
+        .t03-price-period {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .t03-plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .t03-plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(109, 76, 65, 0.15);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .t03-plan-features li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--herb-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== [T04] CTA BUTTONS ===== */
+
+        .t04-buttons {
+            padding: 80px 40px;
+            background: var(--warm-white);
+        }
+
+        .t04-buttons-showcase {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .t04-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(232, 93, 4, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .t04-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .t04-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(232, 93, 4, 0.45);
+        }
+
+        .t04-btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .t04-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: white;
+            color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .t04-btn-secondary:hover {
+            background: var(--light-orange);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .t04-btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .t04-btn-ghost::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 28px;
+            right: 28px;
+            height: 2px;
+            background: var(--primary-orange);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .t04-btn-ghost:hover {
+            color: var(--primary-orange);
+        }
+
+        .t04-btn-ghost:hover::after {
+            transform: scaleX(1);
+        }
+
+        .t04-btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 168, 37, 0.4);
+        }
+
+        .t04-btn-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 25px rgba(249, 168, 37, 0.5);
+        }
+
+        /* ===== [T05] TESTIMONIALS ===== */
+
+        .t05-testimonials {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+        }
+
+        .t05-testimonials-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .t05-testimonials-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .t05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .t05-testimonial-card {
+            background: white;
+            border-radius: 24px;
+            padding: 36px;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .t05-testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            color: var(--light-orange);
+            line-height: 1;
+        }
+
+        .t05-testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .t05-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .t05-star {
+            color: var(--primary-yellow);
+            font-size: 1.2rem;
+        }
+
+        .t05-testimonial-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .t05-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .t05-author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-yellow));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .t05-author-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .t05-author-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .t05-menu-tag {
+            display: inline-block;
+            background: var(--light-orange);
+            color: var(--primary-orange);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* ===== [T06] FAQ ===== */
+
+        .t06-faq {
+            padding: 100px 40px;
+            background: var(--warm-white);
+        }
+
+        .t06-faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .t06-faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .t06-faq-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .t06-faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(232, 93, 4, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .t06-faq-item:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .t06-faq-question {
+            width: 100%;
+            padding: 24px 28px;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .t06-faq-question:hover {
+            background: rgba(255, 237, 216, 0.5);
+        }
+
+        .t06-question-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        .t06-faq-toggle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--light-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-orange);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .t06-faq-item.active .t06-faq-toggle {
+            background: var(--primary-orange);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .t06-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .t06-faq-item.active .t06-faq-answer {
+            max-height: 300px;
+        }
+
+        .t06-answer-content {
+            padding: 0 28px 24px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            border-top: 1px dashed rgba(109, 76, 65, 0.15);
+            padding-top: 20px;
+        }
+
+        /* ===== [T07] FOOTER ===== */
+
+        .t07-footer {
+            background: linear-gradient(180deg, var(--dark-brown) 0%, #2d1f1a 100%);
+            color: white;
+            padding: 80px 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .t07-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow), var(--primary-red));
+        }
+
+        .t07-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .t07-footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, var(--primary-yellow), var(--primary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .t07-footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .t07-footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .t07-social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .t07-social-link:hover {
+            background: var(--primary-orange);
+            transform: translateY(-3px);
+        }
+
+        .t07-footer-section h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--primary-yellow);
+        }
+
+        .t07-footer-section ul {
+            list-style: none;
+        }
+
+        .t07-footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .t07-footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .t07-footer-section a:hover {
+            color: var(--primary-orange);
+            transform: translateX(4px);
+        }
+
+        .t07-footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .t07-footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .t07-footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .t07-footer-legal a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .t07-footer-legal a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* ===== [T08] NAVBAR ===== */
+
+        .t08-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 251, 245, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(109, 76, 65, 0.08);
+            border-bottom: 1px solid rgba(232, 93, 4, 0.1);
+        }
+
+        .t08-nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .t08-nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-yellow));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .t08-nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .t08-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 8px 0;
+        }
+
+        .t08-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .t08-nav-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .t08-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .t08-nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .t08-nav-btn {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(232, 93, 4, 0.3);
+        }
+
+        .t08-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 93, 4, 0.4);
+        }
+
+        .t08-nav-mobile {
+            display: none;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .t08-nav-mobile span {
+            width: 24px;
+            height: 2px;
+            background: var(--primary-orange);
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== [T09] STEP GUIDE ===== */
+
+        .t09-steps {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--warm-white) 100%);
+        }
+
+        .t09-steps-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .t09-steps-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .t09-steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .t09-steps-container::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 60px;
+            bottom: 60px;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-orange), var(--primary-yellow), var(--herb-green));
+            border-radius: 2px;
+        }
+
+        .t09-step {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .t09-step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .t09-step:hover .t09-step-number {
+            background: var(--primary-orange);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .t09-step-content {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            flex: 1;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(232, 93, 4, 0.08);
+        }
+
+        .t09-step:hover .t09-step-content {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .t09-step-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .t09-step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .t09-step-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .t09-step-tag {
+            display: inline-block;
+            background: var(--light-orange);
+            color: var(--primary-orange);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        /* ===== [T10] REGISTRATION FORM ===== */
+
+        .t10-form-section {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, var(--dark-brown) 0%, #4a3228 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .t10-form-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 93, 4, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .t10-form-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(249, 168, 37, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .t10-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .t10-form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .t10-form-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-yellow));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .t10-form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .t10-form-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .t10-form {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .t10-form-group {
+            margin-bottom: 24px;
+        }
+
+        .t10-form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .t10-form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e8e0d8;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            background: var(--warm-white);
+        }
+
+        .t10-form-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .t10-form-input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 4px rgba(232, 93, 4, 0.1);
+        }
+
+        .t10-form-input:hover {
+            border-color: #d4c8be;
+        }
+
+        .t10-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .t10-form-select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e8e0d8;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--warm-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236d4c41'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 24px;
+        }
+
+        .t10-form-select:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 4px rgba(232, 93, 4, 0.1);
+        }
+
+        .t10-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .t10-checkbox-input {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #e8e0d8;
+            border-radius: 6px;
+            cursor: pointer;
+            accent-color: var(--primary-orange);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .t10-checkbox-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .t10-checkbox-label a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+
+        .t10-checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .t10-form-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(232, 93, 4, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .t10-form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 93, 4, 0.45);
+        }
+
+        .t10-form-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .t10-form-footer a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .t10-form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 1024px) {
+            .t07-footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .t01-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .t01-hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .t02-section-title,
+            .t03-pricing-title,
+            .t05-testimonials-title,
+            .t06-faq-title,
+            .t09-steps-title {
+                font-size: 2rem;
+            }
+
+            .t03-pricing-card.t03-featured {
+                transform: scale(1);
+            }
+
+            .t07-footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .t08-nav-links {
+                display: none;
+            }
+
+            .t08-nav-mobile {
+                display: flex;
+            }
+
+            .t09-steps-container::before {
+                left: 20px;
+            }
+
+            .t09-step {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .t09-step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .t10-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .t01-hero {
+                min-height: 90vh;
+                padding: 20px;
+            }
+
+            .t01-hero-title {
+                font-size: 2rem;
+            }
+
+            .t01-hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .t01-hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .t02-features,
+            .t03-pricing,
+            .t05-testimonials,
+            .t06-faq,
+            .t09-steps,
+            .t10-form-section {
+                padding: 60px 20px;
+            }
+
+            .t02-feature-card,
+            .t03-pricing-card,
+            .t05-testimonial-card,
+            .t09-step-content {
+                padding: 24px;
+            }
+
+            .t04-btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .t08-nav {
+                padding: 12px 20px;
+            }
+
+            .t10-form {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== [T08] NAVBAR ===== -->
+    <nav class="t08-nav">
+        <a href="#" class="t08-nav-logo">
+            <span class="t08-nav-logo-icon">🍳</span>
+            Cucina Bella
+        </a>
+        <ul class="t08-nav-links">
+            <li><a href="#menu">メニュー</a></li>
+            <li><a href="#features">こだわり</a></li>
+            <li><a href="#pricing">料金プラン</a></li>
+            <li><a href="#reviews">お客様の声</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+        </ul>
+        <div class="t08-nav-cta">
+            <button class="t08-nav-btn">今すぐ予約</button>
+        </div>
+        <button class="t08-nav-mobile">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ===== [T01] HERO SECTION ===== -->
+    <section class="t01-hero">
+        <div class="t01-hero-content">
+            <span class="t01-hero-badge">🌟 本格イタリアン</span>
+            <h1 class="t01-hero-title">
+                素材の味を活かした<br>
+                <span>至福のひととき</span>
+            </h1>
+            <p class="t01-hero-subtitle">
+                厳選された旬の食材と、熟練シェフの技が織りなす<br>
+                心に残る本格イタリアンをお届けします
+            </p>
+            <div class="t01-hero-cta">
+                <button class="t04-btn-primary">🍽️ 予約する</button>
+                <button class="t04-btn-secondary">📖 メニューを見る</button>
+            </div>
+            <div class="t01-hero-stats">
+                <div class="t01-stat">
+                    <div class="t01-stat-number">15</div>
+                    <div class="t01-stat-label">年の歴史</div>
+                </div>
+                <div class="t01-stat">
+                    <div class="t01-stat-number">50,000+</div>
+                    <div class="t01-stat-label">お客様数</div>
+                </div>
+                <div class="t01-stat">
+                    <div class="t01-stat-number">4.9</div>
+                    <div class="t01-stat-label">評価</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T02] FEATURE CARDS ===== -->
+    <section id="features" class="t02-features">
+        <div class="t02-features-header">
+            <span class="t02-section-badge">Our Promise</span>
+            <h2 class="t02-section-title">私たちのこだわり</h2>
+            <p class="t02-section-desc">
+                お客様に最高の食体験をお届けするための、
+                私たちが大切にしていること
+            </p>
+        </div>
+        <div class="t02-features-grid">
+            <div class="t02-feature-card">
+                <div class="t02-feature-icon">🥬</div>
+                <h3 class="t02-feature-title">厳選素材</h3>
+                <p class="t02-feature-desc">
+                    毎朝築地で仕入れる新鮮な魚介類と、
+                    契約農家から届く有機野菜を使用しています。
+                </p>
+            </div>
+            <div class="t02-feature-card">
+                <div class="t02-feature-icon">👨‍🍳</div>
+                <h3 class="t02-feature-title">熟練の技</h3>
+                <p class="t02-feature-desc">
+                    イタリアで修行を積んだシェフが、
+                    伝統的な技法と革新を融合させた料理を創作。
+                </p>
+            </div>
+            <div class="t02-feature-card">
+                <div class="t02-feature-icon">🍷</div>
+                <h3 class="t02-feature-title">厳選ワイン</h3>
+                <p class="t02-feature-desc">
+                    ソムリエが厳選した100種類以上のワインから、
+                    お料理に合う一本をご提案します。
+                </p>
+            </div>
+            <div class="t02-feature-card">
+                <div class="t02-feature-icon">🏠</div>
+                <h3 class="t02-feature-title">くつろぎの空間</h3>
+                <p class="t02-feature-desc">
+                    温かみのある照明と木のぬくもりを感じる店内で、
+                    ゆったりとお食事をお楽しみください。
+                </p>
+            </div>
+            <div class="t02-feature-card">
+                <div class="t02-feature-icon">🎂</div>
+                <h3 class="t02-feature-title">記念日演出</h3>
+                <p class="t02-feature-desc">
+                    大切な記念日を特別なものに。
+                    サプライズ演出やケーキのご用意も承ります。
+                </p>
+            </div>
+            <div class="t02-feature-card">
+                <div class="t02-feature-icon">🚗</div>
+                <h3 class="t02-feature-title">無料駐車場</h3>
+                <p class="t02-feature-desc">
+                    20台分の無料駐車場を完備。
+                    お車でのご来店も安心です。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T03] PRICING TABLE ===== -->
+    <section id="pricing" class="t03-pricing">
+        <div class="t03-pricing-header">
+            <span class="t02-section-badge">Course Menu</span>
+            <h2 class="t03-pricing-title">コースメニュー</h2>
+            <p class="t02-section-desc">
+                特別な日にふさわしい、シェフ自慢のコース料理
+            </p>
+        </div>
+        <div class="t03-pricing-grid">
+            <div class="t03-pricing-card">
+                <div class="t03-plan-icon">🍝</div>
+                <h3 class="t03-plan-name">カジュアルコース</h3>
+                <p class="t03-plan-desc">気軽に楽しむランチ向け</p>
+                <div class="t03-plan-price">
+                    <span class="t03-price-amount">¥3,500</span>
+                    <span class="t03-price-period">/ お一人様</span>
+                </div>
+                <ul class="t03-plan-features">
+                    <li>前菜盛り合わせ</li>
+                    <li>本日のパスタ</li>
+                    <li>デザート</li>
+                    <li>コーヒーまたは紅茶</li>
+                </ul>
+                <button class="t04-btn-secondary">予約する</button>
+            </div>
+            <div class="t03-pricing-card t03-featured">
+                <div class="t03-plan-icon">🥩</div>
+                <h3 class="t03-plan-name">シェフのおまかせ</h3>
+                <p class="t03-plan-desc">一番人気のディナーコース</p>
+                <div class="t03-plan-price">
+                    <span class="t03-price-amount">¥8,800</span>
+                    <span class="t03-price-period">/ お一人様</span>
+                </div>
+                <ul class="t03-plan-features">
+                    <li>アミューズ</li>
+                    <li>季節の前菜</li>
+                    <li>本日のスープ</li>
+                    <li>パスタまたはリゾット</li>
+                    <li>メインディッシュ（肉or魚）</li>
+                    <li>ドルチェ盛り合わせ</li>
+                </ul>
+                <button class="t04-btn-primary">予約する</button>
+            </div>
+            <div class="t03-pricing-card">
+                <div class="t03-plan-icon">👑</div>
+                <h3 class="t03-plan-name">プレミアムコース</h3>
+                <p class="t03-plan-desc">特別な記念日に</p>
+                <div class="t03-plan-price">
+                    <span class="t03-price-amount">¥15,000</span>
+                    <span class="t03-price-period">/ お一人様</span>
+                </div>
+                <ul class="t03-plan-features">
+                    <li>シャンパンで乾杯</li>
+                    <li>フルコース（全8品）</li>
+                    <li>黒トリュフ使用</li>
+                    <li>和牛フィレステーキ</li>
+                    <li>記念日プレート付き</li>
+                    <li>ソムリエのペアリング</li>
+                </ul>
+                <button class="t04-btn-secondary">予約する</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T04] CTA BUTTONS SHOWCASE ===== -->
+    <section class="t04-buttons">
+        <div class="t02-features-header">
+            <span class="t02-section-badge">Buttons</span>
+            <h2 class="t02-section-title">ボタンコンポーネント</h2>
+        </div>
+        <div class="t04-buttons-showcase">
+            <button class="t04-btn-primary">🍽️ 今すぐ予約する</button>
+            <button class="t04-btn-secondary">📖 メニューを見る</button>
+            <button class="t04-btn-ghost">詳しく見る →</button>
+            <div style="display: flex; gap: 16px;">
+                <button class="t04-btn-icon">📞</button>
+                <button class="t04-btn-icon">💬</button>
+                <button class="t04-btn-icon">❤️</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T05] TESTIMONIALS ===== -->
+    <section id="reviews" class="t05-testimonials">
+        <div class="t05-testimonials-header">
+            <span class="t02-section-badge">Reviews</span>
+            <h2 class="t05-testimonials-title">お客様の声</h2>
+            <p class="t02-section-desc">
+                ご来店いただいたお客様からの温かいお声
+            </p>
+        </div>
+        <div class="t05-testimonials-grid">
+            <div class="t05-testimonial-card">
+                <div class="t05-stars">
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                </div>
+                <p class="t05-testimonial-text">
+                    結婚記念日に利用しました。料理はもちろん、
+                    サプライズの演出まで完璧で、妻も大喜び。
+                    特別な日にまた来たいお店です。
+                </p>
+                <div class="t05-testimonial-author">
+                    <div class="t05-author-avatar">田</div>
+                    <div class="t05-author-info">
+                        <h4>田中様</h4>
+                        <p>40代・男性</p>
+                        <span class="t05-menu-tag">プレミアムコース</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t05-testimonial-card">
+                <div class="t05-stars">
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                </div>
+                <p class="t05-testimonial-text">
+                    パスタが本当に美味しい！イタリアで食べたものを
+                    思い出しました。ワインのセレクションも素晴らしく、
+                    ソムリエさんのおすすめが毎回当たりです。
+                </p>
+                <div class="t05-testimonial-author">
+                    <div class="t05-author-avatar">佐</div>
+                    <div class="t05-author-info">
+                        <h4>佐藤様</h4>
+                        <p>30代・女性</p>
+                        <span class="t05-menu-tag">シェフのおまかせ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t05-testimonial-card">
+                <div class="t05-stars">
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                    <span class="t05-star">★</span>
+                </div>
+                <p class="t05-testimonial-text">
+                    ランチで初めて訪問。カジュアルコースでも
+                    クオリティの高さに驚きました。
+                    コスパ最高で、常連になりそうです。
+                </p>
+                <div class="t05-testimonial-author">
+                    <div class="t05-author-avatar">山</div>
+                    <div class="t05-author-info">
+                        <h4>山田様</h4>
+                        <p>20代・女性</p>
+                        <span class="t05-menu-tag">カジュアルコース</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T09] STEP GUIDE ===== -->
+    <section class="t09-steps">
+        <div class="t09-steps-header">
+            <span class="t02-section-badge">How to Reserve</span>
+            <h2 class="t09-steps-title">ご予約の流れ</h2>
+            <p class="t02-section-desc">
+                簡単3ステップでご予約完了
+            </p>
+        </div>
+        <div class="t09-steps-container">
+            <div class="t09-step">
+                <div class="t09-step-number">1</div>
+                <div class="t09-step-content">
+                    <div class="t09-step-icon">📅</div>
+                    <h3 class="t09-step-title">日時を選択</h3>
+                    <p class="t09-step-desc">
+                        ご希望の日付と時間帯をカレンダーから選択してください。
+                        空席状況をリアルタイムで確認できます。
+                    </p>
+                    <span class="t09-step-tag">約1分</span>
+                </div>
+            </div>
+            <div class="t09-step">
+                <div class="t09-step-number">2</div>
+                <div class="t09-step-content">
+                    <div class="t09-step-icon">🍽️</div>
+                    <h3 class="t09-step-title">コースを選択</h3>
+                    <p class="t09-step-desc">
+                        お好みのコースをお選びください。
+                        アレルギーや苦手な食材があればご記入いただけます。
+                    </p>
+                    <span class="t09-step-tag">約1分</span>
+                </div>
+            </div>
+            <div class="t09-step">
+                <div class="t09-step-number">3</div>
+                <div class="t09-step-content">
+                    <div class="t09-step-icon">✉️</div>
+                    <h3 class="t09-step-title">予約完了</h3>
+                    <p class="t09-step-desc">
+                        確認メールをお送りします。
+                        当日はご予約名をお伝えいただくだけでOK。
+                    </p>
+                    <span class="t09-step-tag">完了！</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T06] FAQ ===== -->
+    <section id="faq" class="t06-faq">
+        <div class="t06-faq-container">
+            <div class="t06-faq-header">
+                <span class="t02-section-badge">FAQ</span>
+                <h2 class="t06-faq-title">よくある質問</h2>
+            </div>
+            <div class="t06-faq-item active">
+                <button class="t06-faq-question">
+                    <span class="t06-question-text">予約は必要ですか？</span>
+                    <span class="t06-faq-toggle">▼</span>
+                </button>
+                <div class="t06-faq-answer">
+                    <p class="t06-answer-content">
+                        ご予約いただくことをおすすめします。特に週末や祝日は混み合うことが多いため、
+                        事前のご予約で確実にお席をご用意いたします。当日のご来店も可能ですが、
+                        お待ちいただく場合がございます。
+                    </p>
+                </div>
+            </div>
+            <div class="t06-faq-item">
+                <button class="t06-faq-question">
+                    <span class="t06-question-text">ドレスコードはありますか？</span>
+                    <span class="t06-faq-toggle">▼</span>
+                </button>
+                <div class="t06-faq-answer">
+                    <p class="t06-answer-content">
+                        カジュアルエレガントな服装をおすすめしています。
+                        ビーチサンダルやタンクトップなどのカジュアルすぎる服装はご遠慮ください。
+                        特別な日のお食事にふさわしい雰囲気でお過ごしいただけます。
+                    </p>
+                </div>
+            </div>
+            <div class="t06-faq-item">
+                <button class="t06-faq-question">
+                    <span class="t06-question-text">アレルギー対応はできますか？</span>
+                    <span class="t06-faq-toggle">▼</span>
+                </button>
+                <div class="t06-faq-answer">
+                    <p class="t06-answer-content">
+                        はい、対応可能です。ご予約時にアレルギーや苦手な食材をお知らせください。
+                        シェフが代替メニューをご用意いたします。
+                        重度のアレルギーをお持ちの方は、事前にお電話でご相談ください。
+                    </p>
+                </div>
+            </div>
+            <div class="t06-faq-item">
+                <button class="t06-faq-question">
+                    <span class="t06-question-text">子供連れでも大丈夫ですか？</span>
+                    <span class="t06-faq-toggle">▼</span>
+                </button>
+                <div class="t06-faq-answer">
+                    <p class="t06-answer-content">
+                        もちろん歓迎いたします。お子様用の椅子やカトラリーもご用意しております。
+                        キッズメニューもございますので、ご家族でのお食事も安心してお楽しみください。
+                        ランチタイムは特にファミリーでのご利用が多いです。
+                    </p>
+                </div>
+            </div>
+            <div class="t06-faq-item">
+                <button class="t06-faq-question">
+                    <span class="t06-question-text">キャンセル料はかかりますか？</span>
+                    <span class="t06-faq-toggle">▼</span>
+                </button>
+                <div class="t06-faq-answer">
+                    <p class="t06-answer-content">
+                        前日までのキャンセルは無料です。当日キャンセルの場合は、
+                        コース料金の50%をキャンセル料としていただいております。
+                        人数変更は前日までにご連絡ください。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [T10] REGISTRATION FORM ===== -->
+    <section class="t10-form-section">
+        <div class="t10-form-container">
+            <div class="t10-form-header">
+                <div class="t10-form-icon">📧</div>
+                <h2 class="t10-form-title">会員登録</h2>
+                <p class="t10-form-subtitle">
+                    登録で初回10%OFF！お得な情報をお届けします
+                </p>
+            </div>
+            <form class="t10-form">
+                <div class="t10-form-row">
+                    <div class="t10-form-group">
+                        <label class="t10-form-label">姓</label>
+                        <input type="text" class="t10-form-input" placeholder="山田">
+                    </div>
+                    <div class="t10-form-group">
+                        <label class="t10-form-label">名</label>
+                        <input type="text" class="t10-form-input" placeholder="太郎">
+                    </div>
+                </div>
+                <div class="t10-form-group">
+                    <label class="t10-form-label">メールアドレス</label>
+                    <input type="email" class="t10-form-input" placeholder="example@email.com">
+                </div>
+                <div class="t10-form-group">
+                    <label class="t10-form-label">電話番号</label>
+                    <input type="tel" class="t10-form-input" placeholder="090-1234-5678">
+                </div>
+                <div class="t10-form-group">
+                    <label class="t10-form-label">お誕生月</label>
+                    <select class="t10-form-select">
+                        <option value="">選択してください</option>
+                        <option value="1">1月</option>
+                        <option value="2">2月</option>
+                        <option value="3">3月</option>
+                        <option value="4">4月</option>
+                        <option value="5">5月</option>
+                        <option value="6">6月</option>
+                        <option value="7">7月</option>
+                        <option value="8">8月</option>
+                        <option value="9">9月</option>
+                        <option value="10">10月</option>
+                        <option value="11">11月</option>
+                        <option value="12">12月</option>
+                    </select>
+                </div>
+                <div class="t10-form-checkbox">
+                    <input type="checkbox" class="t10-checkbox-input" id="terms">
+                    <label class="t10-checkbox-label" for="terms">
+                        <a href="#">利用規約</a>と<a href="#">プライバシーポリシー</a>に同意します
+                    </label>
+                </div>
+                <button type="submit" class="t10-form-submit">
+                    🎉 会員登録する
+                </button>
+                <p class="t10-form-footer">
+                    すでにアカウントをお持ちの方は<a href="#">こちら</a>
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== [T07] FOOTER ===== -->
+    <footer class="t07-footer">
+        <div class="t07-footer-content">
+            <div class="t07-footer-brand">
+                <h3>🍳 Cucina Bella</h3>
+                <p>
+                    素材の味を大切に、心に残る一皿をお届けする
+                    本格イタリアンレストラン。
+                    大切な人との特別なひとときを演出します。
+                </p>
+                <div class="t07-footer-socials">
+                    <a href="#" class="t07-social-link">📷</a>
+                    <a href="#" class="t07-social-link">🐦</a>
+                    <a href="#" class="t07-social-link">📘</a>
+                    <a href="#" class="t07-social-link">▶️</a>
+                </div>
+            </div>
+            <div class="t07-footer-section">
+                <h4>メニュー</h4>
+                <ul>
+                    <li><a href="#">ランチメニュー</a></li>
+                    <li><a href="#">ディナーメニュー</a></li>
+                    <li><a href="#">コース料理</a></li>
+                    <li><a href="#">ワインリスト</a></li>
+                    <li><a href="#">デザート</a></li>
+                </ul>
+            </div>
+            <div class="t07-footer-section">
+                <h4>ご案内</h4>
+                <ul>
+                    <li><a href="#">店舗情報</a></li>
+                    <li><a href="#">アクセス</a></li>
+                    <li><a href="#">ご予約</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                    <li><a href="#">採用情報</a></li>
+                </ul>
+            </div>
+            <div class="t07-footer-section">
+                <h4>営業時間</h4>
+                <ul>
+                    <li><a href="#">ランチ 11:30〜14:30</a></li>
+                    <li><a href="#">ディナー 17:30〜22:00</a></li>
+                    <li><a href="#">定休日: 火曜日</a></li>
+                    <li><a href="#">TEL: 03-1234-5678</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="t07-footer-bottom">
+            <p>&copy; 2026 Cucina Bella. All rights reserved.</p>
+            <div class="t07-footer-legal">
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">利用規約</a>
+                <a href="#">特定商取引法に基づく表記</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.t06-faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.t06-faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.t08-nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.t10-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('会員登録ありがとうございます！確認メールをお送りしました。');
+        });
+
+        // Mobile nav toggle (placeholder)
+        document.querySelector('.t08-nav-mobile').addEventListener('click', function() {
+            alert('モバイルメニューが開きます');
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.t08-nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 30px rgba(109, 76, 65, 0.15)';
+            } else {
+                nav.style.boxShadow = '0 2px 20px rgba(109, 76, 65, 0.08)';
+            }
+        });
+    </script>
+</body>
+</html>

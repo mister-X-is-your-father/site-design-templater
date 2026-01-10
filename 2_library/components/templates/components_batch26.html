@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Education LP Components</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Academic Color Palette */
+            --academic-navy: #0f2744;
+            --academic-navy-light: #1a3a5c;
+            --academic-teal: #0d7377;
+            --academic-teal-light: #14919b;
+            --academic-emerald: #065f46;
+            --academic-gold: #b8860b;
+            --academic-gold-light: #d4a523;
+            --academic-cream: #faf8f5;
+            --academic-paper: #f5f3ef;
+            --academic-text: #1f2937;
+            --academic-text-light: #4b5563;
+            --academic-border: rgba(15, 39, 68, 0.12);
+            --academic-shadow: rgba(15, 39, 68, 0.08);
+            --academic-shadow-dark: rgba(15, 39, 68, 0.15);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--academic-cream);
+            color: var(--academic-text);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== [I01] Hero Section - Academic ===== */
+        .hero-academic {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(165deg, var(--academic-navy) 0%, var(--academic-navy-light) 60%, var(--academic-teal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-academic::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(13, 115, 119, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(184, 134, 11, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-academic::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, rgba(250, 248, 245, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .hero-academic-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-academic-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-academic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .hero-academic-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--academic-gold-light);
+            border-radius: 50%;
+            animation: pulse-academic 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-academic {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .hero-academic h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-academic h1 .highlight {
+            background: linear-gradient(135deg, var(--academic-gold-light) 0%, var(--academic-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-academic-desc {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            line-height: 1.9;
+        }
+
+        .hero-academic-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--academic-gold-light);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.05em;
+        }
+
+        .hero-academic-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-academic-visual {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 400px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .hero-academic-visual svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ===== [I02] Feature Cards - Academic ===== */
+        .features-academic {
+            padding: 6rem 0;
+            background: var(--academic-cream);
+        }
+
+        .features-academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card-academic {
+            background: #ffffff;
+            border: 1px solid var(--academic-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .feature-card-academic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card-academic:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--academic-shadow-dark);
+            border-color: transparent;
+        }
+
+        .feature-card-academic:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card-academic-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--academic-navy) 0%, var(--academic-teal) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            box-shadow: 0 4px 16px rgba(13, 115, 119, 0.25);
+        }
+
+        .feature-card-academic-number {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--academic-border);
+            line-height: 1;
+        }
+
+        .feature-card-academic h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--academic-navy);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card-academic p {
+            color: var(--academic-text-light);
+            line-height: 1.8;
+            font-size: 0.9375rem;
+        }
+
+        .feature-card-academic-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1.5rem;
+            color: var(--academic-teal);
+            font-weight: 500;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-card-academic-link:hover {
+            gap: 12px;
+        }
+
+        /* ===== [I03] Pricing Table - Academic ===== */
+        .pricing-academic {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--academic-paper) 0%, var(--academic-cream) 100%);
+        }
+
+        .pricing-academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+
+        .pricing-card-academic {
+            background: #ffffff;
+            border: 2px solid var(--academic-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .pricing-card-academic.featured {
+            border-color: var(--academic-teal);
+            transform: scale(1.02);
+            box-shadow: 0 24px 48px var(--academic-shadow-dark);
+        }
+
+        .pricing-card-academic.featured::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        .pricing-card-academic.featured::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #ffffff;
+            border-radius: 18px;
+            z-index: -1;
+        }
+
+        .pricing-academic-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--academic-gold) 0%, var(--academic-gold-light) 100%);
+            color: #ffffff;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.35);
+        }
+
+        .pricing-card-academic-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--academic-border);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card-academic h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--academic-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card-academic-subtitle {
+            color: var(--academic-text-light);
+            font-size: 0.875rem;
+        }
+
+        .pricing-academic-price {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .pricing-academic-price .amount {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--academic-navy);
+        }
+
+        .pricing-academic-price .currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+            margin-right: 4px;
+        }
+
+        .pricing-academic-price .period {
+            font-size: 1rem;
+            color: var(--academic-text-light);
+            font-weight: 400;
+        }
+
+        .pricing-academic-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-academic-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 0.75rem 0;
+            color: var(--academic-text);
+            font-size: 0.9375rem;
+        }
+
+        .pricing-academic-features li::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 12px;
+        }
+
+        .pricing-academic-features li.disabled {
+            color: var(--academic-text-light);
+            opacity: 0.5;
+        }
+
+        .pricing-academic-features li.disabled::before {
+            background: var(--academic-border);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234b5563'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/%3E%3C/svg%3E");
+        }
+
+        /* ===== [I04] CTA Button - Academic ===== */
+        .cta-btn-academic {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 1rem 2.5rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn-academic-primary {
+            background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(13, 115, 119, 0.35);
+        }
+
+        .cta-btn-academic-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--academic-emerald) 0%, var(--academic-teal) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-btn-academic-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(13, 115, 119, 0.45);
+        }
+
+        .cta-btn-academic-primary:hover::before {
+            opacity: 1;
+        }
+
+        .cta-btn-academic-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn-academic-secondary {
+            background: transparent;
+            color: var(--academic-navy);
+            border: 2px solid var(--academic-navy);
+        }
+
+        .cta-btn-academic-secondary:hover {
+            background: var(--academic-navy);
+            color: #ffffff;
+        }
+
+        .cta-btn-academic-outline-light {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-btn-academic-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-btn-academic-gold {
+            background: linear-gradient(135deg, var(--academic-gold) 0%, var(--academic-gold-light) 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35);
+        }
+
+        .cta-btn-academic-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.45);
+        }
+
+        /* ===== [I05] Testimonial - Academic ===== */
+        .testimonial-academic {
+            padding: 6rem 0;
+            background: var(--academic-cream);
+        }
+
+        .testimonial-academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card-academic {
+            background: #ffffff;
+            border: 1px solid var(--academic-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card-academic:hover {
+            box-shadow: 0 16px 32px var(--academic-shadow);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-card-academic-quote {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 5rem;
+            color: var(--academic-teal);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .testimonial-card-academic-content {
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-card-academic-text {
+            font-size: 1.0625rem;
+            color: var(--academic-text);
+            line-height: 1.9;
+            position: relative;
+        }
+
+        .testimonial-card-academic-rating {
+            display: flex;
+            gap: 4px;
+            margin-top: 1rem;
+        }
+
+        .testimonial-card-academic-rating span {
+            color: var(--academic-gold);
+            font-size: 1.125rem;
+        }
+
+        .testimonial-card-academic-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--academic-border);
+        }
+
+        .testimonial-card-academic-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--academic-navy) 0%, var(--academic-teal) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-card-academic-info h4 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--academic-navy);
+            margin-bottom: 4px;
+        }
+
+        .testimonial-card-academic-info p {
+            font-size: 0.875rem;
+            color: var(--academic-text-light);
+        }
+
+        .testimonial-card-academic-badge {
+            margin-left: auto;
+            background: var(--academic-paper);
+            color: var(--academic-teal);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ===== [I06] FAQ - Academic ===== */
+        .faq-academic {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--academic-cream) 0%, var(--academic-paper) 100%);
+        }
+
+        .faq-academic-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item-academic {
+            background: #ffffff;
+            border: 1px solid var(--academic-border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item-academic:hover {
+            border-color: var(--academic-teal);
+        }
+
+        .faq-item-academic.active {
+            border-color: var(--academic-teal);
+            box-shadow: 0 8px 24px var(--academic-shadow);
+        }
+
+        .faq-question-academic {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 2rem;
+            text-align: left;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--academic-navy);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question-academic:hover {
+            color: var(--academic-teal);
+        }
+
+        .faq-question-academic-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--academic-paper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question-academic-icon::before {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--academic-teal);
+            line-height: 1;
+        }
+
+        .faq-item-academic.active .faq-question-academic-icon {
+            background: var(--academic-teal);
+            transform: rotate(45deg);
+        }
+
+        .faq-item-academic.active .faq-question-academic-icon::before {
+            color: #ffffff;
+        }
+
+        .faq-answer-academic {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item-academic.active .faq-answer-academic {
+            max-height: 500px;
+        }
+
+        .faq-answer-academic-content {
+            padding: 0 2rem 2rem;
+            color: var(--academic-text-light);
+            line-height: 1.9;
+            font-size: 0.9375rem;
+        }
+
+        .faq-answer-academic-content a {
+            color: var(--academic-teal);
+            text-decoration: underline;
+        }
+
+        /* ===== [I07] Footer - Academic ===== */
+        .footer-academic {
+            background: var(--academic-navy);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-academic-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-academic-brand h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-academic-brand p {
+            font-size: 0.9375rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            max-width: 300px;
+        }
+
+        .footer-academic-certifications {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-academic-cert {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-academic-section h4 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--academic-teal);
+            display: inline-block;
+        }
+
+        .footer-academic-links {
+            list-style: none;
+        }
+
+        .footer-academic-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-academic-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-academic-links a:hover {
+            color: var(--academic-gold-light);
+            padding-left: 8px;
+        }
+
+        .footer-academic-social {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .footer-academic-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-academic-social a:hover {
+            background: var(--academic-teal);
+            border-color: var(--academic-teal);
+            color: #ffffff;
+        }
+
+        .footer-academic-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-academic-copyright {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-academic-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-academic-legal a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-academic-legal a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ===== [I08] Navigation - Academic ===== */
+        .navbar-academic {
+            background: rgba(15, 39, 68, 0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-academic-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .navbar-academic-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .navbar-academic-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .navbar-academic-logo-text {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .navbar-academic-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .navbar-academic-menu a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-academic-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--academic-gold-light);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-academic-menu a:hover {
+            color: #ffffff;
+        }
+
+        .navbar-academic-menu a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-academic-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-academic-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* ===== [I09] Step Guide - Academic ===== */
+        .steps-academic {
+            padding: 6rem 0;
+            background: var(--academic-cream);
+        }
+
+        .steps-academic-container {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            position: relative;
+        }
+
+        .steps-academic-line {
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+        }
+
+        .step-item-academic {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .step-item-academic:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-academic-number {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(13, 115, 119, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-academic-content {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid var(--academic-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .step-academic-content:hover {
+            border-color: var(--academic-teal);
+            box-shadow: 0 12px 32px var(--academic-shadow);
+            transform: translateX(8px);
+        }
+
+        .step-academic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .step-academic-content h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--academic-navy);
+        }
+
+        .step-academic-time {
+            background: var(--academic-paper);
+            color: var(--academic-teal);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        .step-academic-content p {
+            color: var(--academic-text-light);
+            line-height: 1.8;
+            font-size: 0.9375rem;
+        }
+
+        .step-academic-checklist {
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .step-academic-checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 0.875rem;
+            color: var(--academic-text-light);
+        }
+
+        .step-academic-checklist li::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: var(--academic-paper);
+            border: 2px solid var(--academic-teal);
+            border-radius: 4px;
+        }
+
+        /* ===== [I10] Registration Form - Academic ===== */
+        .registration-academic {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--academic-navy) 0%, var(--academic-navy-light) 100%);
+        }
+
+        .registration-academic-container {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .registration-academic-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+        }
+
+        .registration-academic-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .registration-academic-header h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--academic-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .registration-academic-header p {
+            color: var(--academic-text-light);
+            font-size: 0.9375rem;
+        }
+
+        .registration-academic-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group-academic {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group-academic label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--academic-navy);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group-academic label .required {
+            color: #dc2626;
+            font-size: 0.75rem;
+        }
+
+        .form-input-academic {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--academic-border);
+            border-radius: 10px;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1rem;
+            color: var(--academic-text);
+            background: var(--academic-paper);
+            transition: all 0.3s ease;
+        }
+
+        .form-input-academic:focus {
+            outline: none;
+            border-color: var(--academic-teal);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(13, 115, 119, 0.1);
+        }
+
+        .form-input-academic::placeholder {
+            color: var(--academic-text-light);
+        }
+
+        .form-row-academic {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-select-academic {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--academic-border);
+            border-radius: 10px;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1rem;
+            color: var(--academic-text);
+            background: var(--academic-paper);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234b5563'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .form-select-academic:focus {
+            outline: none;
+            border-color: var(--academic-teal);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(13, 115, 119, 0.1);
+        }
+
+        .form-checkbox-academic {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .form-checkbox-academic input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--academic-teal);
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .form-checkbox-academic label {
+            font-size: 0.875rem;
+            color: var(--academic-text-light);
+            line-height: 1.6;
+        }
+
+        .form-checkbox-academic label a {
+            color: var(--academic-teal);
+            text-decoration: underline;
+        }
+
+        .form-submit-academic {
+            margin-top: 0.5rem;
+        }
+
+        .form-submit-academic button {
+            width: 100%;
+        }
+
+        .registration-academic-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .registration-academic-divider::before,
+        .registration-academic-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--academic-border);
+        }
+
+        .registration-academic-divider span {
+            font-size: 0.8125rem;
+            color: var(--academic-text-light);
+        }
+
+        .registration-academic-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-btn-academic {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border: 2px solid var(--academic-border);
+            border-radius: 10px;
+            background: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--academic-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn-academic:hover {
+            border-color: var(--academic-navy);
+            background: var(--academic-paper);
+        }
+
+        /* ===== Section Title Style ===== */
+        .section-title-academic {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title-academic-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title-academic h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: var(--academic-navy);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .section-title-academic p {
+            font-size: 1.0625rem;
+            color: var(--academic-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .footer-academic-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-academic-menu {
+                display: none;
+            }
+
+            .navbar-academic-toggle {
+                display: block;
+            }
+
+            .hero-academic-stats {
+                gap: 2rem;
+            }
+
+            .pricing-card-academic.featured {
+                transform: none;
+            }
+
+            .footer-academic-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-academic-brand p {
+                max-width: none;
+            }
+
+            .footer-academic-certifications {
+                justify-content: center;
+            }
+
+            .footer-academic-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-academic-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .step-item-academic {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .steps-academic-line {
+                display: none;
+            }
+
+            .form-row-academic {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-academic-social {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [I08] Navigation Bar - Academic -->
+    <nav class="navbar-academic">
+        <div class="container">
+            <div class="navbar-academic-content">
+                <a href="#" class="navbar-academic-logo">
+                    <div class="navbar-academic-logo-icon">A</div>
+                    <span class="navbar-academic-logo-text">Academia</span>
+                </a>
+                <ul class="navbar-academic-menu">
+                    <li><a href="#features">特徴</a></li>
+                    <li><a href="#curriculum">カリキュラム</a></li>
+                    <li><a href="#pricing">料金</a></li>
+                    <li><a href="#testimonials">受講生の声</a></li>
+                    <li><a href="#faq">よくある質問</a></li>
+                </ul>
+                <div class="navbar-academic-actions">
+                    <button class="cta-btn-academic cta-btn-academic-outline-light" style="padding: 10px 20px; font-size: 0.875rem;">ログイン</button>
+                    <button class="cta-btn-academic cta-btn-academic-primary" style="padding: 10px 20px; font-size: 0.875rem;"><span>無料体験</span></button>
+                </div>
+                <button class="navbar-academic-toggle">&#9776;</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [I01] Hero Section - Academic -->
+    <section class="hero-academic">
+        <div class="hero-academic-pattern"></div>
+        <div class="container">
+            <div class="hero-academic-content">
+                <div class="hero-academic-badge">
+                    2026年度 春期講座 受付開始
+                </div>
+                <h1>
+                    学びの本質を追求する<br>
+                    <span class="highlight">次世代アカデミア</span>
+                </h1>
+                <p class="hero-academic-desc">
+                    一流の講師陣による体系的なカリキュラムで、確かな知識と実践力を身につける。
+                    あなたのキャリアを次のステージへ導く、本格的な学習プラットフォームです。
+                </p>
+                <div class="hero-academic-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">15,000+</div>
+                        <div class="hero-stat-label">累計受講者数</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">98.5%</div>
+                        <div class="hero-stat-label">修了率</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">4.9</div>
+                        <div class="hero-stat-label">満足度評価</div>
+                    </div>
+                </div>
+                <div class="hero-academic-cta">
+                    <button class="cta-btn-academic cta-btn-academic-gold"><span>無料カウンセリング予約</span></button>
+                    <button class="cta-btn-academic cta-btn-academic-outline-light">カリキュラムを見る</button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-academic-visual">
+            <svg viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+                <circle cx="100" cy="100" r="60" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+                <circle cx="100" cy="100" r="40" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.1"/>
+                <path d="M100 20 L100 180 M20 100 L180 100" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- [I02] Feature Cards - Academic -->
+    <section class="features-academic" id="features">
+        <div class="container">
+            <div class="section-title-academic">
+                <span class="section-title-academic-badge">Why Choose Us</span>
+                <h2>選ばれる4つの理由</h2>
+                <p>私たちは「学び」の質にこだわり、受講者一人ひとりの成長を全力でサポートします</p>
+            </div>
+            <div class="features-academic-grid">
+                <div class="feature-card-academic">
+                    <div class="feature-card-academic-number">01</div>
+                    <div class="feature-card-academic-icon">&#x1F393;</div>
+                    <h3>一流の講師陣</h3>
+                    <p>現役の大学教授や業界のトップエキスパートが、最新の知見に基づいた講義を提供。理論と実践の両面から深い学びを得られます。</p>
+                    <a href="#" class="feature-card-academic-link">
+                        講師紹介を見る <span>&#x2192;</span>
+                    </a>
+                </div>
+                <div class="feature-card-academic">
+                    <div class="feature-card-academic-number">02</div>
+                    <div class="feature-card-academic-icon">&#x1F4DA;</div>
+                    <h3>体系的カリキュラム</h3>
+                    <p>基礎から応用まで段階的に学べる設計。各分野の知識を有機的につなげ、実務で活かせる総合力を養成します。</p>
+                    <a href="#" class="feature-card-academic-link">
+                        カリキュラム詳細 <span>&#x2192;</span>
+                    </a>
+                </div>
+                <div class="feature-card-academic">
+                    <div class="feature-card-academic-number">03</div>
+                    <div class="feature-card-academic-icon">&#x1F4AC;</div>
+                    <h3>手厚いサポート</h3>
+                    <p>専任のメンターによる個別指導やキャリア相談を完備。学習の悩みから進路の相談まで、きめ細やかにサポートします。</p>
+                    <a href="#" class="feature-card-academic-link">
+                        サポート体制を確認 <span>&#x2192;</span>
+                    </a>
+                </div>
+                <div class="feature-card-academic">
+                    <div class="feature-card-academic-number">04</div>
+                    <div class="feature-card-academic-icon">&#x1F3C6;</div>
+                    <h3>認定資格制度</h3>
+                    <p>修了者には公式認定証を発行。業界で広く認知された資格として、キャリアアップや転職時のアピールポイントになります。</p>
+                    <a href="#" class="feature-card-academic-link">
+                        認定制度について <span>&#x2192;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I03] Pricing Table - Academic -->
+    <section class="pricing-academic" id="pricing">
+        <div class="container">
+            <div class="section-title-academic">
+                <span class="section-title-academic-badge">Pricing Plans</span>
+                <h2>学習スタイルに合わせた<br>最適なプラン</h2>
+                <p>目標や学習ペースに合わせて、3つのプランからお選びいただけます</p>
+            </div>
+            <div class="pricing-academic-grid">
+                <div class="pricing-card-academic">
+                    <div class="pricing-card-academic-header">
+                        <h3>ベーシック</h3>
+                        <p class="pricing-card-academic-subtitle">独学で着実に学びたい方向け</p>
+                    </div>
+                    <div class="pricing-academic-price">
+                        <span class="currency">&#165;</span><span class="amount">19,800</span><span class="period">/月</span>
+                    </div>
+                    <ul class="pricing-academic-features">
+                        <li>全講座の動画視聴</li>
+                        <li>学習進捗管理ツール</li>
+                        <li>コミュニティフォーラム参加</li>
+                        <li>月1回のグループ質問会</li>
+                        <li class="disabled">個別メンタリング</li>
+                        <li class="disabled">キャリア相談</li>
+                    </ul>
+                    <button class="cta-btn-academic cta-btn-academic-secondary" style="width: 100%;">このプランを選択</button>
+                </div>
+                <div class="pricing-card-academic featured">
+                    <div class="pricing-academic-badge">最も人気</div>
+                    <div class="pricing-card-academic-header">
+                        <h3>スタンダード</h3>
+                        <p class="pricing-card-academic-subtitle">確実にスキルアップしたい方向け</p>
+                    </div>
+                    <div class="pricing-academic-price">
+                        <span class="currency">&#165;</span><span class="amount">49,800</span><span class="period">/月</span>
+                    </div>
+                    <ul class="pricing-academic-features">
+                        <li>ベーシックの全機能</li>
+                        <li>週1回の個別メンタリング</li>
+                        <li>課題添削（無制限）</li>
+                        <li>修了認定試験の受験資格</li>
+                        <li>限定イベント参加権</li>
+                        <li class="disabled">キャリア相談（月2回まで）</li>
+                    </ul>
+                    <button class="cta-btn-academic cta-btn-academic-primary" style="width: 100%;"><span>このプランを選択</span></button>
+                </div>
+                <div class="pricing-card-academic">
+                    <div class="pricing-card-academic-header">
+                        <h3>プレミアム</h3>
+                        <p class="pricing-card-academic-subtitle">最短でプロを目指す方向け</p>
+                    </div>
+                    <div class="pricing-academic-price">
+                        <span class="currency">&#165;</span><span class="amount">98,000</span><span class="period">/月</span>
+                    </div>
+                    <ul class="pricing-academic-features">
+                        <li>スタンダードの全機能</li>
+                        <li>週2回の個別メンタリング</li>
+                        <li>専任キャリアアドバイザー</li>
+                        <li>企業紹介・転職サポート</li>
+                        <li>卒業生ネットワーク参加</li>
+                        <li>修了後6ヶ月間の継続サポート</li>
+                    </ul>
+                    <button class="cta-btn-academic cta-btn-academic-secondary" style="width: 100%;">このプランを選択</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I04] CTA Button Section - Academic (Standalone Demo) -->
+    <section style="padding: 5rem 0; background: linear-gradient(135deg, var(--academic-teal) 0%, var(--academic-emerald) 100%);">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-family: 'Noto Serif JP', serif; color: #ffffff; font-size: 2rem; margin-bottom: 1rem;">
+                学びの第一歩を踏み出しましょう
+            </h2>
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.0625rem; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                無料カウンセリングで、あなたに最適な学習プランをご提案します
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="cta-btn-academic cta-btn-academic-gold"><span>無料カウンセリングを予約</span></button>
+                <button class="cta-btn-academic cta-btn-academic-outline-light">資料をダウンロード</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I05] Testimonial - Academic -->
+    <section class="testimonial-academic" id="testimonials">
+        <div class="container">
+            <div class="section-title-academic">
+                <span class="section-title-academic-badge">Testimonials</span>
+                <h2>受講生の声</h2>
+                <p>実際にプログラムを修了された方々からいただいた声をご紹介します</p>
+            </div>
+            <div class="testimonial-academic-grid">
+                <div class="testimonial-card-academic">
+                    <div class="testimonial-card-academic-quote">"</div>
+                    <div class="testimonial-card-academic-content">
+                        <p class="testimonial-card-academic-text">
+                            大学の講義とは違い、実務に直結した内容が学べました。特にメンターの方の丁寧な指導のおかげで、難しい概念も深く理解できるようになりました。
+                        </p>
+                        <div class="testimonial-card-academic-rating">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-academic-author">
+                        <div class="testimonial-card-academic-avatar">T</div>
+                        <div class="testimonial-card-academic-info">
+                            <h4>田中 誠一</h4>
+                            <p>データサイエンティスト</p>
+                        </div>
+                        <div class="testimonial-card-academic-badge">プレミアム修了</div>
+                    </div>
+                </div>
+                <div class="testimonial-card-academic">
+                    <div class="testimonial-card-academic-quote">"</div>
+                    <div class="testimonial-card-academic-content">
+                        <p class="testimonial-card-academic-text">
+                            仕事と両立しながらの学習でしたが、自分のペースで進められるカリキュラム設計のおかげで無理なく修了できました。キャリアチェンジも実現できて感謝しています。
+                        </p>
+                        <div class="testimonial-card-academic-rating">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-academic-author">
+                        <div class="testimonial-card-academic-avatar">S</div>
+                        <div class="testimonial-card-academic-info">
+                            <h4>佐藤 美咲</h4>
+                            <p>プロダクトマネージャー</p>
+                        </div>
+                        <div class="testimonial-card-academic-badge">スタンダード修了</div>
+                    </div>
+                </div>
+                <div class="testimonial-card-academic">
+                    <div class="testimonial-card-academic-quote">"</div>
+                    <div class="testimonial-card-academic-content">
+                        <p class="testimonial-card-academic-text">
+                            講師陣の質の高さに驚きました。最新の研究動向を踏まえた講義内容は、どの書籍にも載っていない貴重なものでした。学びの本質を体験できた講座です。
+                        </p>
+                        <div class="testimonial-card-academic-rating">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-academic-author">
+                        <div class="testimonial-card-academic-avatar">I</div>
+                        <div class="testimonial-card-academic-info">
+                            <h4>伊藤 健太</h4>
+                            <p>経営コンサルタント</p>
+                        </div>
+                        <div class="testimonial-card-academic-badge">プレミアム修了</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I06] FAQ Accordion - Academic -->
+    <section class="faq-academic" id="faq">
+        <div class="container">
+            <div class="section-title-academic">
+                <span class="section-title-academic-badge">FAQ</span>
+                <h2>よくある質問</h2>
+                <p>お申し込み前に多くいただくご質問にお答えします</p>
+            </div>
+            <div class="faq-academic-container">
+                <div class="faq-item-academic active">
+                    <button class="faq-question-academic">
+                        <span>初心者でも受講できますか？</span>
+                        <span class="faq-question-academic-icon"></span>
+                    </button>
+                    <div class="faq-answer-academic">
+                        <div class="faq-answer-academic-content">
+                            はい、初心者の方でも安心して受講いただけます。基礎から段階的に学べるカリキュラム設計となっており、各分野の前提知識がなくても理解できるよう構成されています。また、不明点があればメンターに質問できる体制も整えています。
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item-academic">
+                    <button class="faq-question-academic">
+                        <span>受講期間はどのくらいですか？</span>
+                        <span class="faq-question-academic-icon"></span>
+                    </button>
+                    <div class="faq-answer-academic">
+                        <div class="faq-answer-academic-content">
+                            標準的な受講期間は6ヶ月です。ただし、ご自身のペースで学習を進められるため、早めに修了される方もいれば、仕事と両立しながらゆっくり進められる方もいらっしゃいます。受講期間の延長も可能ですので、詳しくはカウンセリングでご相談ください。
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item-academic">
+                    <button class="faq-question-academic">
+                        <span>途中でプランを変更することはできますか？</span>
+                        <span class="faq-question-academic-icon"></span>
+                    </button>
+                    <div class="faq-answer-academic">
+                        <div class="faq-answer-academic-content">
+                            はい、月単位でプランの変更が可能です。学習を進める中でより手厚いサポートが必要になった場合や、逆に自分のペースで進められるようになった場合など、柔軟にプランを調整いただけます。変更は翌月から適用されます。
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item-academic">
+                    <button class="faq-question-academic">
+                        <span>修了後のサポートはありますか？</span>
+                        <span class="faq-question-academic-icon"></span>
+                    </button>
+                    <div class="faq-answer-academic">
+                        <div class="faq-answer-academic-content">
+                            プレミアムプランでは修了後6ヶ月間の継続サポートが含まれています。また、全プランの修了者は卒業生コミュニティに参加でき、継続的な学習機会やネットワーキングの場を提供しています。定期的な勉強会やイベントも開催しています。
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item-academic">
+                    <button class="faq-question-academic">
+                        <span>認定資格はどのように取得できますか？</span>
+                        <span class="faq-question-academic-icon"></span>
+                    </button>
+                    <div class="faq-answer-academic">
+                        <div class="faq-answer-academic-content">
+                            スタンダードプラン以上の受講者は、カリキュラム修了後に認定試験を受験できます。試験は実技と筆記の両方で構成され、合格者には公式認定証を発行いたします。認定証は業界で広く認知されており、就職・転職時のアピールポイントとしてご活用いただけます。詳細は<a href="#">認定制度のページ</a>をご覧ください。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I09] Step Guide - Academic -->
+    <section class="steps-academic">
+        <div class="container">
+            <div class="section-title-academic">
+                <span class="section-title-academic-badge">How It Works</span>
+                <h2>受講開始までの流れ</h2>
+                <p>お申し込みから学習開始まで、4つのステップで始められます</p>
+            </div>
+            <div class="steps-academic-container">
+                <div class="steps-academic-line"></div>
+                <div class="step-item-academic">
+                    <div class="step-academic-number">1</div>
+                    <div class="step-academic-content">
+                        <div class="step-academic-header">
+                            <h3>無料カウンセリング</h3>
+                            <span class="step-academic-time">約30分</span>
+                        </div>
+                        <p>
+                            まずは無料カウンセリングにお申し込みください。専門のアドバイザーがあなたの目標や学習スタイルをヒアリングし、最適なプランをご提案します。
+                        </p>
+                        <ul class="step-academic-checklist">
+                            <li>現状と目標のヒアリング</li>
+                            <li>カリキュラム・プランの説明</li>
+                            <li>学習スケジュールの相談</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item-academic">
+                    <div class="step-academic-number">2</div>
+                    <div class="step-academic-content">
+                        <div class="step-academic-header">
+                            <h3>プラン選択・お申し込み</h3>
+                            <span class="step-academic-time">約10分</span>
+                        </div>
+                        <p>
+                            カウンセリングを参考に、ご自身に合ったプランをお選びください。オンラインで簡単にお申し込みいただけます。お支払いはクレジットカードまたは銀行振込に対応しています。
+                        </p>
+                        <ul class="step-academic-checklist">
+                            <li>プランの最終確認</li>
+                            <li>アカウント作成</li>
+                            <li>お支払い手続き</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item-academic">
+                    <div class="step-academic-number">3</div>
+                    <div class="step-academic-content">
+                        <div class="step-academic-header">
+                            <h3>オリエンテーション</h3>
+                            <span class="step-academic-time">約60分</span>
+                        </div>
+                        <p>
+                            お申し込み完了後、オンラインでオリエンテーションを実施します。学習の進め方や各種ツールの使い方、サポート体制について詳しくご説明します。
+                        </p>
+                        <ul class="step-academic-checklist">
+                            <li>学習プラットフォームの使い方</li>
+                            <li>メンターとの顔合わせ</li>
+                            <li>学習目標の設定</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item-academic">
+                    <div class="step-academic-number">4</div>
+                    <div class="step-academic-content">
+                        <div class="step-academic-header">
+                            <h3>学習スタート</h3>
+                            <span class="step-academic-time">本格開始</span>
+                        </div>
+                        <p>
+                            いよいよ学習開始です。カリキュラムに沿って、自分のペースで学習を進めていきましょう。困ったことがあればいつでもメンターに相談できます。
+                        </p>
+                        <ul class="step-academic-checklist">
+                            <li>動画講義の視聴</li>
+                            <li>課題への取り組み</li>
+                            <li>定期的なメンタリング</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I10] Registration Form - Academic -->
+    <section class="registration-academic">
+        <div class="container">
+            <div class="registration-academic-container">
+                <div class="registration-academic-card">
+                    <div class="registration-academic-header">
+                        <h2>無料カウンセリング予約</h2>
+                        <p>まずはお気軽にご相談ください。専門アドバイザーが丁寧にご案内します。</p>
+                    </div>
+                    <form class="registration-academic-form">
+                        <div class="form-row-academic">
+                            <div class="form-group-academic">
+                                <label>姓 <span class="required">必須</span></label>
+                                <input type="text" class="form-input-academic" placeholder="山田">
+                            </div>
+                            <div class="form-group-academic">
+                                <label>名 <span class="required">必須</span></label>
+                                <input type="text" class="form-input-academic" placeholder="太郎">
+                            </div>
+                        </div>
+                        <div class="form-group-academic">
+                            <label>メールアドレス <span class="required">必須</span></label>
+                            <input type="email" class="form-input-academic" placeholder="example@email.com">
+                        </div>
+                        <div class="form-group-academic">
+                            <label>電話番号 <span class="required">必須</span></label>
+                            <input type="tel" class="form-input-academic" placeholder="090-1234-5678">
+                        </div>
+                        <div class="form-group-academic">
+                            <label>ご興味のある分野</label>
+                            <select class="form-select-academic">
+                                <option value="">選択してください</option>
+                                <option value="data-science">データサイエンス</option>
+                                <option value="business">ビジネス・経営</option>
+                                <option value="engineering">エンジニアリング</option>
+                                <option value="design">デザイン</option>
+                                <option value="other">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-group-academic">
+                            <label>希望日時</label>
+                            <select class="form-select-academic">
+                                <option value="">選択してください</option>
+                                <option value="weekday-morning">平日午前（10:00-12:00）</option>
+                                <option value="weekday-afternoon">平日午後（13:00-17:00）</option>
+                                <option value="weekday-evening">平日夜間（18:00-21:00）</option>
+                                <option value="weekend">土日（10:00-18:00）</option>
+                            </select>
+                        </div>
+                        <div class="form-checkbox-academic">
+                            <input type="checkbox" id="privacy">
+                            <label for="privacy">
+                                <a href="#">プライバシーポリシー</a>および<a href="#">利用規約</a>に同意します
+                            </label>
+                        </div>
+                        <div class="form-submit-academic">
+                            <button type="submit" class="cta-btn-academic cta-btn-academic-primary"><span>無料カウンセリングを予約する</span></button>
+                        </div>
+                    </form>
+                    <div class="registration-academic-divider">
+                        <span>または</span>
+                    </div>
+                    <div class="registration-academic-social">
+                        <button class="social-btn-academic">
+                            <span>G</span> Googleで登録
+                        </button>
+                        <button class="social-btn-academic">
+                            <span>L</span> LINEで登録
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I07] Footer - Academic -->
+    <footer class="footer-academic">
+        <div class="container">
+            <div class="footer-academic-grid">
+                <div class="footer-academic-brand">
+                    <h3>Academia</h3>
+                    <p>
+                        学びの本質を追求し、一人ひとりの成長を全力でサポートする次世代の教育プラットフォームです。
+                    </p>
+                    <div class="footer-academic-certifications">
+                        <span class="footer-academic-cert">ISO 29990認証</span>
+                        <span class="footer-academic-cert">厚労省認定</span>
+                    </div>
+                </div>
+                <div class="footer-academic-section">
+                    <h4>プログラム</h4>
+                    <ul class="footer-academic-links">
+                        <li><a href="#">データサイエンス</a></li>
+                        <li><a href="#">ビジネス戦略</a></li>
+                        <li><a href="#">エンジニアリング</a></li>
+                        <li><a href="#">デザイン思考</a></li>
+                        <li><a href="#">リーダーシップ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-academic-section">
+                    <h4>サポート</h4>
+                    <ul class="footer-academic-links">
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">学習ガイド</a></li>
+                        <li><a href="#">キャリア支援</a></li>
+                        <li><a href="#">卒業生の声</a></li>
+                    </ul>
+                </div>
+                <div class="footer-academic-section">
+                    <h4>企業情報</h4>
+                    <ul class="footer-academic-links">
+                        <li><a href="#">会社概要</a></li>
+                        <li><a href="#">講師紹介</a></li>
+                        <li><a href="#">採用情報</a></li>
+                        <li><a href="#">提携パートナー</a></li>
+                        <li><a href="#">ニュース</a></li>
+                    </ul>
+                    <div class="footer-academic-social">
+                        <a href="#">X</a>
+                        <a href="#">f</a>
+                        <a href="#">in</a>
+                        <a href="#">Y</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-academic-bottom">
+                <p class="footer-academic-copyright">
+                    &copy; 2026 Academia Inc. All rights reserved.
+                </p>
+                <div class="footer-academic-legal">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                    <a href="#">特定商取引法に基づく表記</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question-academic').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-item-academic').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.registration-academic-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('カウンセリングのご予約を受け付けました。確認メールをお送りしますので、しばらくお待ちください。');
+            e.target.reset();
+        });
+
+        // Mobile menu toggle
+        const toggle = document.querySelector('.navbar-academic-toggle');
+        const menu = document.querySelector('.navbar-academic-menu');
+
+        toggle.addEventListener('click', () => {
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            menu.style.position = 'absolute';
+            menu.style.top = '72px';
+            menu.style.left = '0';
+            menu.style.right = '0';
+            menu.style.flexDirection = 'column';
+            menu.style.background = 'var(--academic-navy)';
+            menu.style.padding = '1rem';
+            menu.style.gap = '1rem';
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotions & Expressions - CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-name {
+            font-size: 13px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Base Face Style */
+        .face {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .face:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* emotion-01: Happy Face */
+        #emotion-01 .face {
+            background-color: #FFD93D;
+        }
+
+        #emotion-01 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 24px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-01 .face::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 30px 30px;
+            top: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-01 .face:hover {
+            animation: bounce 0.5s ease;
+        }
+
+        /* emotion-02: Sad Face */
+        #emotion-02 .face {
+            background-color: #74B9FF;
+        }
+
+        #emotion-02 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 26px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-02 .face::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 12px;
+            border: 3px solid #333;
+            border-color: #333 transparent transparent transparent;
+            border-radius: 24px 24px 0 0;
+            top: 46px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-02 .face:hover {
+            animation: shake 0.5s ease;
+        }
+
+        /* emotion-03: Angry Face */
+        #emotion-03 .face {
+            background-color: #FF6B6B;
+        }
+
+        #emotion-03 .eyebrow {
+            position: absolute;
+            width: 12px;
+            height: 3px;
+            background-color: #333;
+            top: 20px;
+            left: 16px;
+            transform: rotate(-20deg);
+        }
+
+        #emotion-03 .eyebrow:nth-child(2) {
+            left: auto;
+            right: 16px;
+            transform: rotate(20deg);
+        }
+
+        #emotion-03 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 28px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-03 .face::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-03 .face:hover {
+            animation: shake 0.3s ease infinite;
+        }
+
+        /* emotion-04: Surprised Face */
+        #emotion-04 .face {
+            background-color: #FDCB6E;
+        }
+
+        #emotion-04 .face::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 14px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 22px;
+            left: 16px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-04 .face::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-04 .face:hover {
+            animation: jump 0.4s ease;
+        }
+
+        /* emotion-05: Confused Face */
+        #emotion-05 .face {
+            background-color: #A29BFE;
+        }
+
+        #emotion-05 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 26px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-05 .mouth {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 20px 20px;
+            top: 42px;
+            left: 38px;
+            transform: rotate(15deg);
+        }
+
+        #emotion-05 .eyebrow {
+            position: absolute;
+            width: 10px;
+            height: 3px;
+            background-color: #333;
+            top: 18px;
+            left: 16px;
+            transform: rotate(-15deg);
+        }
+
+        #emotion-05 .eyebrow:nth-child(2) {
+            left: auto;
+            right: 16px;
+            transform: rotate(15deg);
+        }
+
+        #emotion-05 .face:hover {
+            animation: tilt 0.5s ease infinite;
+        }
+
+        /* emotion-06: Sleepy Face */
+        #emotion-06 .face {
+            background-color: #81ECEC;
+        }
+
+        #emotion-06 .face::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+            top: 28px;
+            left: 16px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-06 .face::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 8px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 16px 16px;
+            top: 44px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-06 .zzz {
+            position: absolute;
+            top: -5px;
+            right: 0px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #emotion-06 .face:hover {
+            animation: nod 0.8s ease infinite;
+        }
+
+        /* emotion-07: Love Eyes */
+        #emotion-07 .face {
+            background-color: #FF85A2;
+        }
+
+        #emotion-07 .heart {
+            position: absolute;
+            top: 22px;
+            left: 14px;
+            width: 14px;
+            height: 14px;
+            background-color: #E74C3C;
+            transform: rotate(-45deg);
+        }
+
+        #emotion-07 .heart::before,
+        #emotion-07 .heart::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: #E74C3C;
+            border-radius: 50%;
+        }
+
+        #emotion-07 .heart::before {
+            top: -7px;
+            left: 0;
+        }
+
+        #emotion-07 .heart::after {
+            top: 0;
+            left: 7px;
+        }
+
+        #emotion-07 .heart:nth-child(2) {
+            left: auto;
+            right: 14px;
+        }
+
+        #emotion-07 .face::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 20px 20px;
+            top: 44px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-07 .face:hover {
+            animation: pulse 0.5s ease infinite;
+        }
+
+        /* emotion-08: Crying Face */
+        #emotion-08 .face {
+            background-color: #74B9FF;
+        }
+
+        #emotion-08 .face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 6px;
+            background-color: #333;
+            border-radius: 10px 10px 0 0;
+            top: 24px;
+            left: 17px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-08 .tear {
+            position: absolute;
+            width: 6px;
+            height: 14px;
+            background-color: #3498DB;
+            border-radius: 0 0 6px 6px;
+            top: 34px;
+            left: 19px;
+        }
+
+        #emotion-08 .tear:nth-child(2) {
+            left: auto;
+            right: 19px;
+        }
+
+        #emotion-08 .face::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            border: 3px solid #333;
+            border-color: #333 transparent transparent transparent;
+            border-radius: 20px 20px 0 0;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-08 .face:hover {
+            animation: shake 0.4s ease;
+        }
+
+        /* emotion-09: Laughing Face */
+        #emotion-09 .face {
+            background-color: #FFD93D;
+        }
+
+        #emotion-09 .face::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 4px 4px 0 0;
+            top: 26px;
+            left: 16px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-09 .face::after {
+            content: '';
+            position: absolute;
+            width: 32px;
+            height: 16px;
+            background-color: #333;
+            border-radius: 0 0 32px 32px;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-09 .cheek {
+            position: absolute;
+            width: 10px;
+            height: 6px;
+            background-color: #FF9F9F;
+            border-radius: 50%;
+            top: 34px;
+            left: 8px;
+        }
+
+        #emotion-09 .cheek:nth-child(2) {
+            left: auto;
+            right: 8px;
+        }
+
+        #emotion-09 .face:hover {
+            animation: bounce 0.3s ease infinite;
+        }
+
+        /* emotion-10: Worried Face */
+        #emotion-10 .face {
+            background-color: #DFE6E9;
+        }
+
+        #emotion-10 .eyebrow {
+            position: absolute;
+            width: 10px;
+            height: 3px;
+            background-color: #333;
+            top: 18px;
+            left: 16px;
+            transform: rotate(15deg);
+        }
+
+        #emotion-10 .eyebrow:nth-child(2) {
+            left: auto;
+            right: 16px;
+            transform: rotate(-15deg);
+        }
+
+        #emotion-10 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 28px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-10 .face::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 8px;
+            border: 3px solid #333;
+            border-color: #333 transparent transparent transparent;
+            border-radius: 18px 18px 0 0;
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-10 .face:hover {
+            animation: shake 0.5s ease;
+        }
+
+        /* emotion-11: Cool Sunglasses */
+        #emotion-11 .face {
+            background-color: #FFD93D;
+        }
+
+        #emotion-11 .glasses {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #emotion-11 .lens {
+            width: 20px;
+            height: 14px;
+            background-color: #2D3436;
+            border-radius: 3px;
+        }
+
+        #emotion-11 .bridge {
+            position: absolute;
+            width: 10px;
+            height: 3px;
+            background-color: #2D3436;
+            top: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-11 .face::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 10px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 22px 22px;
+            top: 44px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-11 .face:hover {
+            animation: tilt 0.3s ease;
+        }
+
+        /* emotion-12: Sick Face */
+        #emotion-12 .face {
+            background-color: #A8E6CF;
+        }
+
+        #emotion-12 .face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 6px;
+            background-color: #333;
+            border-radius: 10px 10px 0 0;
+            top: 26px;
+            left: 17px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-12 .face::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 6px;
+            border: 3px solid #333;
+            border-color: #333 transparent transparent transparent;
+            border-radius: 16px 16px 0 0;
+            top: 48px;
+            left: 38px;
+        }
+
+        #emotion-12 .sweat {
+            position: absolute;
+            width: 6px;
+            height: 10px;
+            background-color: #74B9FF;
+            border-radius: 0 0 6px 6px;
+            top: 18px;
+            right: 8px;
+        }
+
+        #emotion-12 .face:hover {
+            animation: shake 0.6s ease;
+        }
+
+        /* emotion-13: Thinking Face */
+        #emotion-13 .face {
+            background-color: #FFEAA7;
+        }
+
+        #emotion-13 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 26px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-13 .eyebrow {
+            position: absolute;
+            width: 12px;
+            height: 3px;
+            background-color: #333;
+            top: 18px;
+            right: 16px;
+            transform: rotate(-10deg);
+        }
+
+        #emotion-13 .face::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 10px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 14px 14px;
+            top: 44px;
+            left: 20px;
+        }
+
+        #emotion-13 .hand {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FFEAA7;
+            border: 2px solid #333;
+            border-radius: 50%;
+            bottom: 12px;
+            right: 10px;
+        }
+
+        #emotion-13 .face:hover {
+            animation: think 1s ease infinite;
+        }
+
+        /* emotion-14: Excited Face */
+        #emotion-14 .face {
+            background-color: #FF7675;
+        }
+
+        #emotion-14 .face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 22px;
+            left: 17px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-14 .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #FFF;
+            border-radius: 50%;
+            top: 23px;
+            left: 19px;
+        }
+
+        #emotion-14 .sparkle:nth-child(2) {
+            left: 45px;
+        }
+
+        #emotion-14 .face::after {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 14px;
+            background-color: #333;
+            border-radius: 0 0 28px 28px;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-14 .face:hover {
+            animation: bounce 0.2s ease infinite;
+        }
+
+        /* emotion-15: Bored Face */
+        #emotion-15 .face {
+            background-color: #B2BEC3;
+        }
+
+        #emotion-15 .face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 5px;
+            background-color: #333;
+            border-radius: 0 0 10px 10px;
+            top: 28px;
+            left: 17px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-15 .face::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-15 .face:hover {
+            animation: sigh 1s ease;
+        }
+
+        /* emotion-16: Scared Face */
+        #emotion-16 .face {
+            background-color: #DFE6E9;
+        }
+
+        #emotion-16 .face::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 14px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 20px;
+            left: 16px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-16 .face::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 14px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 44px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-16 .sweat {
+            position: absolute;
+            width: 5px;
+            height: 8px;
+            background-color: #74B9FF;
+            border-radius: 0 0 5px 5px;
+            top: 16px;
+            left: 12px;
+        }
+
+        #emotion-16 .face:hover {
+            animation: shake 0.2s ease infinite;
+        }
+
+        /* emotion-17: Proud Face */
+        #emotion-17 .face {
+            background-color: #FDCB6E;
+        }
+
+        #emotion-17 .face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+            top: 28px;
+            left: 17px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-17 .face::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 12px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 26px 26px;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-17 .cheek {
+            position: absolute;
+            width: 10px;
+            height: 6px;
+            background-color: #FF9F9F;
+            border-radius: 50%;
+            top: 36px;
+            left: 8px;
+        }
+
+        #emotion-17 .cheek:nth-child(2) {
+            left: auto;
+            right: 8px;
+        }
+
+        #emotion-17 .face:hover {
+            animation: grow 0.4s ease;
+        }
+
+        /* emotion-18: Silly Tongue Out */
+        #emotion-18 .face {
+            background-color: #FFD93D;
+        }
+
+        #emotion-18 .face::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 24px;
+            left: 18px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-18 .mouth {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 0 0 20px 20px;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-18 .tongue {
+            position: absolute;
+            width: 12px;
+            height: 14px;
+            background-color: #FF6B6B;
+            border-radius: 0 0 12px 12px;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-18 .face:hover {
+            animation: wiggle 0.3s ease infinite;
+        }
+
+        /* emotion-19: Winking Face */
+        #emotion-19 .face {
+            background-color: #FFD93D;
+        }
+
+        #emotion-19 .eye-open {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 26px;
+            left: 18px;
+        }
+
+        #emotion-19 .eye-wink {
+            position: absolute;
+            width: 10px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+            top: 28px;
+            right: 18px;
+            transform: rotate(5deg);
+        }
+
+        #emotion-19 .face::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 12px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 24px 24px;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-19 .face:hover {
+            animation: bounce 0.4s ease;
+        }
+
+        /* emotion-20: Embarrassed Face */
+        #emotion-20 .face {
+            background-color: #FFEAA7;
+        }
+
+        #emotion-20 .face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 10px 10px 0 0;
+            top: 26px;
+            left: 17px;
+            box-shadow: 26px 0 0 #333;
+        }
+
+        #emotion-20 .blush {
+            position: absolute;
+            width: 14px;
+            height: 8px;
+            background-color: #FF9F9F;
+            border-radius: 50%;
+            top: 34px;
+            left: 8px;
+        }
+
+        #emotion-20 .blush:nth-child(2) {
+            left: auto;
+            right: 8px;
+        }
+
+        #emotion-20 .face::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 8px;
+            border: 3px solid #333;
+            border-color: transparent transparent #333 transparent;
+            border-radius: 0 0 14px 14px;
+            top: 46px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #emotion-20 .face:hover {
+            animation: shrink 0.3s ease;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1.15); }
+            50% { transform: translateY(-8px) scale(1.15); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) scale(1.15); }
+            25% { transform: translateX(-4px) scale(1.15); }
+            75% { transform: translateX(4px) scale(1.15); }
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.3); }
+        }
+
+        @keyframes tilt {
+            0%, 100% { transform: rotate(0deg) scale(1.15); }
+            50% { transform: rotate(10deg) scale(1.15); }
+        }
+
+        @keyframes nod {
+            0%, 100% { transform: rotate(0deg) scale(1.15); }
+            25% { transform: rotate(5deg) scale(1.15); }
+            75% { transform: rotate(-5deg) scale(1.15); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.25); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg) scale(1.15); }
+            25% { transform: rotate(-5deg) scale(1.15); }
+            75% { transform: rotate(5deg) scale(1.15); }
+        }
+
+        @keyframes think {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.15) translateY(-3px); }
+        }
+
+        @keyframes sigh {
+            0% { transform: scale(1.15); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1.15); }
+        }
+
+        @keyframes grow {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.25); }
+        }
+
+        @keyframes shrink {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Emotions & Expressions</h1>
+
+    <div class="grid">
+        <!-- emotion-01: Happy Face -->
+        <div class="item" id="emotion-01">
+            <span class="item-label">emotion-01</span>
+            <div class="face"></div>
+            <span class="item-name">Happy</span>
+        </div>
+
+        <!-- emotion-02: Sad Face -->
+        <div class="item" id="emotion-02">
+            <span class="item-label">emotion-02</span>
+            <div class="face"></div>
+            <span class="item-name">Sad</span>
+        </div>
+
+        <!-- emotion-03: Angry Face -->
+        <div class="item" id="emotion-03">
+            <span class="item-label">emotion-03</span>
+            <div class="face">
+                <div class="eyebrow"></div>
+                <div class="eyebrow"></div>
+            </div>
+            <span class="item-name">Angry</span>
+        </div>
+
+        <!-- emotion-04: Surprised Face -->
+        <div class="item" id="emotion-04">
+            <span class="item-label">emotion-04</span>
+            <div class="face"></div>
+            <span class="item-name">Surprised</span>
+        </div>
+
+        <!-- emotion-05: Confused Face -->
+        <div class="item" id="emotion-05">
+            <span class="item-label">emotion-05</span>
+            <div class="face">
+                <div class="eyebrow"></div>
+                <div class="eyebrow"></div>
+                <div class="mouth"></div>
+            </div>
+            <span class="item-name">Confused</span>
+        </div>
+
+        <!-- emotion-06: Sleepy Face -->
+        <div class="item" id="emotion-06">
+            <span class="item-label">emotion-06</span>
+            <div class="face">
+                <span class="zzz">Zzz</span>
+            </div>
+            <span class="item-name">Sleepy</span>
+        </div>
+
+        <!-- emotion-07: Love Eyes -->
+        <div class="item" id="emotion-07">
+            <span class="item-label">emotion-07</span>
+            <div class="face">
+                <div class="heart"></div>
+                <div class="heart"></div>
+            </div>
+            <span class="item-name">Love Eyes</span>
+        </div>
+
+        <!-- emotion-08: Crying Face -->
+        <div class="item" id="emotion-08">
+            <span class="item-label">emotion-08</span>
+            <div class="face">
+                <div class="tear"></div>
+                <div class="tear"></div>
+            </div>
+            <span class="item-name">Crying</span>
+        </div>
+
+        <!-- emotion-09: Laughing Face -->
+        <div class="item" id="emotion-09">
+            <span class="item-label">emotion-09</span>
+            <div class="face">
+                <div class="cheek"></div>
+                <div class="cheek"></div>
+            </div>
+            <span class="item-name">Laughing</span>
+        </div>
+
+        <!-- emotion-10: Worried Face -->
+        <div class="item" id="emotion-10">
+            <span class="item-label">emotion-10</span>
+            <div class="face">
+                <div class="eyebrow"></div>
+                <div class="eyebrow"></div>
+            </div>
+            <span class="item-name">Worried</span>
+        </div>
+
+        <!-- emotion-11: Cool Sunglasses -->
+        <div class="item" id="emotion-11">
+            <span class="item-label">emotion-11</span>
+            <div class="face">
+                <div class="glasses">
+                    <div class="lens"></div>
+                    <div class="lens"></div>
+                </div>
+                <div class="bridge"></div>
+            </div>
+            <span class="item-name">Cool</span>
+        </div>
+
+        <!-- emotion-12: Sick Face -->
+        <div class="item" id="emotion-12">
+            <span class="item-label">emotion-12</span>
+            <div class="face">
+                <div class="sweat"></div>
+            </div>
+            <span class="item-name">Sick</span>
+        </div>
+
+        <!-- emotion-13: Thinking Face -->
+        <div class="item" id="emotion-13">
+            <span class="item-label">emotion-13</span>
+            <div class="face">
+                <div class="eyebrow"></div>
+                <div class="hand"></div>
+            </div>
+            <span class="item-name">Thinking</span>
+        </div>
+
+        <!-- emotion-14: Excited Face -->
+        <div class="item" id="emotion-14">
+            <span class="item-label">emotion-14</span>
+            <div class="face">
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+            </div>
+            <span class="item-name">Excited</span>
+        </div>
+
+        <!-- emotion-15: Bored Face -->
+        <div class="item" id="emotion-15">
+            <span class="item-label">emotion-15</span>
+            <div class="face"></div>
+            <span class="item-name">Bored</span>
+        </div>
+
+        <!-- emotion-16: Scared Face -->
+        <div class="item" id="emotion-16">
+            <span class="item-label">emotion-16</span>
+            <div class="face">
+                <div class="sweat"></div>
+            </div>
+            <span class="item-name">Scared</span>
+        </div>
+
+        <!-- emotion-17: Proud Face -->
+        <div class="item" id="emotion-17">
+            <span class="item-label">emotion-17</span>
+            <div class="face">
+                <div class="cheek"></div>
+                <div class="cheek"></div>
+            </div>
+            <span class="item-name">Proud</span>
+        </div>
+
+        <!-- emotion-18: Silly Tongue Out -->
+        <div class="item" id="emotion-18">
+            <span class="item-label">emotion-18</span>
+            <div class="face">
+                <div class="mouth"></div>
+                <div class="tongue"></div>
+            </div>
+            <span class="item-name">Silly</span>
+        </div>
+
+        <!-- emotion-19: Winking Face -->
+        <div class="item" id="emotion-19">
+            <span class="item-label">emotion-19</span>
+            <div class="face">
+                <div class="eye-open"></div>
+                <div class="eye-wink"></div>
+            </div>
+            <span class="item-name">Winking</span>
+        </div>
+
+        <!-- emotion-20: Embarrassed Face -->
+        <div class="item" id="emotion-20">
+            <span class="item-label">emotion-20</span>
+            <div class="face">
+                <div class="blush"></div>
+                <div class="blush"></div>
+            </div>
+            <span class="item-name">Embarrassed</span>
+        </div>
+    </div>
+</body>
+</html>

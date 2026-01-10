@@ -1,0 +1,2106 @@
+<!--
+  因果関係（Cause & Effect）ダイアグラムテンプレート
+  30 UNIQUE patterns for cause-effect relationships
+  Style: Simple, pop, colorful, flat design, CSS-only with hover effects
+-->
+
+<style>
+/* ===== 因果関係 共通スタイル ===== */
+.cause-effect-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Rounded Mplus 1c', 'Hiragino Maru Gothic Pro', sans-serif;
+  min-height: 200px;
+}
+
+/* 矢印共通 */
+.ce-arrow {
+  font-size: 28px;
+  color: #ff6b9d;
+  margin: 0 15px;
+  transition: transform 0.3s ease;
+}
+
+.cause-effect-diagram:hover .ce-arrow {
+  transform: scale(1.3);
+}
+
+/* ボックス共通 */
+.ce-box {
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.ce-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* カラーパレット */
+.ce-pink { background: #ffb6c1; color: #c71585; }
+.ce-sky { background: #87ceeb; color: #0066cc; }
+.ce-mint { background: #98fb98; color: #228b22; }
+.ce-yellow { background: #fff59d; color: #f57f17; }
+.ce-orange { background: #ffcc80; color: #e65100; }
+.ce-purple { background: #d1c4e9; color: #6a1b9a; }
+
+/* ===== Pattern 1: Simple cause → effect arrow ===== */
+#cause-1 .simple-cause {
+  background: #ffb6c1;
+  color: #c71585;
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#cause-1 .simple-effect {
+  background: #87ceeb;
+  color: #0066cc;
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#cause-1 .simple-arrow {
+  width: 80px;
+  height: 4px;
+  background: #ff6b9d;
+  position: relative;
+  margin: 0 10px;
+}
+
+#cause-1 .simple-arrow::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -8px;
+  border: 10px solid transparent;
+  border-left: 15px solid #ff6b9d;
+}
+
+#cause-1:hover .simple-arrow {
+  animation: pulse-arrow 0.5s ease infinite;
+}
+
+@keyframes pulse-arrow {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(1.1); }
+}
+
+/* ===== Pattern 2: Multiple causes → one effect ===== */
+#cause-2 {
+  flex-direction: column;
+  gap: 10px;
+}
+
+#cause-2 .causes-container {
+  display: flex;
+  gap: 15px;
+}
+
+#cause-2 .multi-cause {
+  background: #ffb6c1;
+  color: #c71585;
+  padding: 12px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#cause-2 .multi-cause:hover {
+  transform: scale(1.1);
+}
+
+#cause-2 .converge-arrows {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  color: #ff6b9d;
+  margin: 10px 0;
+}
+
+#cause-2 .single-effect {
+  background: #98fb98;
+  color: #228b22;
+  padding: 20px 40px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 4px solid #228b22;
+}
+
+/* ===== Pattern 3: One cause → multiple effects ===== */
+#cause-3 {
+  flex-direction: column;
+  gap: 10px;
+}
+
+#cause-3 .single-cause {
+  background: #fff59d;
+  color: #f57f17;
+  padding: 20px 40px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 4px solid #f57f17;
+}
+
+#cause-3 .diverge-arrows {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  color: #ff6b9d;
+  margin: 10px 0;
+}
+
+#cause-3 .effects-container {
+  display: flex;
+  gap: 15px;
+}
+
+#cause-3 .multi-effect {
+  background: #87ceeb;
+  color: #0066cc;
+  padding: 12px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#cause-3 .multi-effect:nth-child(1):hover { transform: translateX(-10px) scale(1.05); }
+#cause-3 .multi-effect:nth-child(2):hover { transform: translateY(10px) scale(1.05); }
+#cause-3 .multi-effect:nth-child(3):hover { transform: translateX(10px) scale(1.05); }
+
+/* ===== Pattern 4: Chain reaction (domino) ===== */
+#cause-4 .domino-chain {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#cause-4 .domino {
+  width: 20px;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  writing-mode: vertical-rl;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#cause-4 .domino:nth-child(1) { background: #ffb6c1; color: #c71585; }
+#cause-4 .domino:nth-child(2) { background: #ffcc80; color: #e65100; }
+#cause-4 .domino:nth-child(3) { background: #fff59d; color: #f57f17; }
+#cause-4 .domino:nth-child(4) { background: #98fb98; color: #228b22; }
+#cause-4 .domino:nth-child(5) { background: #87ceeb; color: #0066cc; }
+
+#cause-4:hover .domino:nth-child(1) { transform: rotate(20deg); }
+#cause-4:hover .domino:nth-child(2) { transform: rotate(20deg); transition-delay: 0.1s; }
+#cause-4:hover .domino:nth-child(3) { transform: rotate(20deg); transition-delay: 0.2s; }
+#cause-4:hover .domino:nth-child(4) { transform: rotate(20deg); transition-delay: 0.3s; }
+#cause-4:hover .domino:nth-child(5) { transform: rotate(20deg); transition-delay: 0.4s; }
+
+#cause-4 .chain-arrow {
+  font-size: 20px;
+  color: #ff6b9d;
+}
+
+/* ===== Pattern 5: Problem → Solution box ===== */
+#cause-5 .problem-box {
+  background: #ffb6c1;
+  border: 4px dashed #c71585;
+  padding: 25px 30px;
+  border-radius: 15px;
+  position: relative;
+}
+
+#cause-5 .problem-label {
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background: #c71585;
+  color: white;
+  padding: 3px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#cause-5 .solution-box {
+  background: #98fb98;
+  border: 4px solid #228b22;
+  padding: 25px 30px;
+  border-radius: 15px;
+  position: relative;
+}
+
+#cause-5 .solution-label {
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background: #228b22;
+  color: white;
+  padding: 3px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#cause-5 .solve-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+  color: #ff6b9d;
+}
+
+#cause-5 .solve-arrow span {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ===== Pattern 6: Question → Answer layout ===== */
+#cause-6 .qa-container {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+
+#cause-6 .question-bubble {
+  background: #d1c4e9;
+  padding: 20px 25px;
+  border-radius: 20px 20px 5px 20px;
+  position: relative;
+  max-width: 150px;
+}
+
+#cause-6 .question-mark {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  background: #6a1b9a;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#cause-6 .answer-bubble {
+  background: #98fb98;
+  padding: 20px 25px;
+  border-radius: 20px 20px 20px 5px;
+  position: relative;
+  max-width: 150px;
+}
+
+#cause-6 .answer-mark {
+  position: absolute;
+  top: -15px;
+  left: -10px;
+  background: #228b22;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#cause-6 .qa-arrow {
+  font-size: 30px;
+  color: #ff6b9d;
+  align-self: center;
+}
+
+/* ===== Pattern 7: If → Then conditional ===== */
+#cause-7 .conditional-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#cause-7 .if-box {
+  background: #fff59d;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border-left: 6px solid #f57f17;
+}
+
+#cause-7 .if-label {
+  color: #f57f17;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#cause-7 .then-box {
+  background: #87ceeb;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border-left: 6px solid #0066cc;
+}
+
+#cause-7 .then-label {
+  color: #0066cc;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#cause-7 .cond-arrow {
+  font-size: 24px;
+  color: #ff6b9d;
+}
+
+/* ===== Pattern 8: Action → Reaction pair ===== */
+#cause-8 .action-reaction {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-8 .action-circle {
+  width: 100px;
+  height: 100px;
+  background: #ffcc80;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #e65100;
+  transition: all 0.3s ease;
+}
+
+#cause-8 .action-circle:hover {
+  transform: scale(1.1) rotate(-10deg);
+}
+
+#cause-8 .reaction-circle {
+  width: 100px;
+  height: 100px;
+  background: #d1c4e9;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #6a1b9a;
+  transition: all 0.3s ease;
+}
+
+#cause-8 .reaction-circle:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+#cause-8 .ar-label {
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+#cause-8 .ar-text {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+#cause-8 .double-arrow {
+  font-size: 28px;
+  color: #ff6b9d;
+}
+
+/* ===== Pattern 9: Trigger → Response ===== */
+#cause-9 .trigger-response {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#cause-9 .trigger-btn {
+  background: #ff6b9d;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 4px 0 #c71585;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+#cause-9 .trigger-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #c71585;
+}
+
+#cause-9 .response-box {
+  background: #98fb98;
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #228b22;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+#cause-9:hover .response-box {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+#cause-9 .lightning {
+  font-size: 30px;
+  color: #fff59d;
+  text-shadow: 2px 2px 0 #f57f17;
+}
+
+/* ===== Pattern 10: Input → Process → Output ===== */
+#cause-10 .ipo-flow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#cause-10 .input-box {
+  background: #ffb6c1;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#cause-10 .process-box {
+  background: #fff59d;
+  padding: 20px 25px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+#cause-10 .process-box::before,
+#cause-10 .process-box::after {
+  content: '⚙';
+  position: absolute;
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+#cause-10 .process-box::before { top: 5px; left: 5px; }
+#cause-10 .process-box::after { bottom: 5px; right: 5px; }
+
+#cause-10 .output-box {
+  background: #98fb98;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#cause-10 .ipo-label {
+  font-size: 11px;
+  font-weight: bold;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+#cause-10 .ipo-arrow {
+  font-size: 20px;
+  color: #ff6b9d;
+}
+
+/* ===== Pattern 11: Stimulus → Response ===== */
+#cause-11 .stimulus-response {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-11 .stimulus {
+  background: #ffcc80;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  animation: pulse-stimulus 1s ease infinite;
+}
+
+@keyframes pulse-stimulus {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+#cause-11 .nerve-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#cause-11 .nerve-dot {
+  width: 10px;
+  height: 10px;
+  background: #ff6b9d;
+  border-radius: 50%;
+  animation: nerve-signal 0.5s ease infinite;
+}
+
+#cause-11 .nerve-dot:nth-child(2) { animation-delay: 0.1s; }
+#cause-11 .nerve-dot:nth-child(3) { animation-delay: 0.2s; }
+#cause-11 .nerve-dot:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes nerve-signal {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+#cause-11 .response {
+  background: #87ceeb;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+/* ===== Pattern 12: Before action → After result ===== */
+#cause-12 .before-after {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-12 .before-box {
+  background: #e0e0e0;
+  padding: 25px 30px;
+  border-radius: 15px;
+  position: relative;
+  border: 3px dashed #999;
+}
+
+#cause-12 .before-label {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #999;
+  color: white;
+  padding: 2px 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#cause-12 .after-box {
+  background: #98fb98;
+  padding: 25px 30px;
+  border-radius: 15px;
+  position: relative;
+  border: 3px solid #228b22;
+}
+
+#cause-12 .after-label {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #228b22;
+  color: white;
+  padding: 2px 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#cause-12 .transform-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-12 .transform-arrow span {
+  font-size: 24px;
+}
+
+#cause-12 .transform-arrow small {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* ===== Pattern 13: Root cause diagram ===== */
+#cause-13 {
+  flex-direction: column;
+  gap: 15px;
+}
+
+#cause-13 .root-cause {
+  background: #c71585;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#cause-13 .cause-levels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#cause-13 .cause-level {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#cause-13 .why-label {
+  background: #ffb6c1;
+  color: #c71585;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#cause-13 .cause-item {
+  background: #fff59d;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#cause-13 .down-arrow {
+  color: #ff6b9d;
+  font-size: 20px;
+}
+
+/* ===== Pattern 14: Consequence tree ===== */
+#cause-14 {
+  flex-direction: column;
+  gap: 10px;
+}
+
+#cause-14 .tree-root {
+  background: #ffcc80;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-weight: bold;
+  border: 3px solid #e65100;
+}
+
+#cause-14 .tree-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#cause-14 .tree-level {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+#cause-14 .tree-node {
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+#cause-14 .tree-node.level1 { background: #87ceeb; }
+#cause-14 .tree-node.level2 { background: #98fb98; font-size: 12px; }
+#cause-14 .tree-node.level3 { background: #d1c4e9; font-size: 11px; }
+
+#cause-14 .branch-line {
+  text-align: center;
+  color: #ff6b9d;
+  font-size: 14px;
+}
+
+/* ===== Pattern 15: Impact visualization ===== */
+#cause-15 .impact-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-15 .impact-source {
+  background: #ff6b9d;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#cause-15 .impact-waves {
+  display: flex;
+  align-items: center;
+}
+
+#cause-15 .impact-wave {
+  height: 80px;
+  border: 3px solid;
+  border-radius: 0 50% 50% 0;
+  border-left: none;
+  margin-left: -5px;
+  transition: all 0.3s ease;
+}
+
+#cause-15 .impact-wave:nth-child(1) { width: 30px; border-color: #ffb6c1; }
+#cause-15 .impact-wave:nth-child(2) { width: 40px; border-color: #ffcc80; }
+#cause-15 .impact-wave:nth-child(3) { width: 50px; border-color: #fff59d; }
+#cause-15 .impact-wave:nth-child(4) { width: 60px; border-color: #98fb98; }
+
+#cause-15:hover .impact-wave {
+  transform: scaleX(1.2);
+}
+
+#cause-15 .impact-target {
+  background: #87ceeb;
+  padding: 15px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+/* ===== Pattern 16: Butterfly effect (small → big) ===== */
+#cause-16 .butterfly-effect {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#cause-16 .butterfly {
+  font-size: 24px;
+  animation: flutter 0.5s ease infinite;
+}
+
+@keyframes flutter {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+#cause-16 .effect-growth {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+#cause-16 .growth-bar {
+  border-radius: 5px 5px 0 0;
+  transition: all 0.3s ease;
+}
+
+#cause-16 .growth-bar:nth-child(1) { width: 15px; height: 20px; background: #ffb6c1; }
+#cause-16 .growth-bar:nth-child(2) { width: 20px; height: 35px; background: #ffcc80; }
+#cause-16 .growth-bar:nth-child(3) { width: 25px; height: 55px; background: #fff59d; }
+#cause-16 .growth-bar:nth-child(4) { width: 30px; height: 80px; background: #98fb98; }
+
+#cause-16:hover .growth-bar {
+  transform: scaleY(1.2);
+}
+
+#cause-16 .tornado {
+  font-size: 50px;
+  margin-left: 10px;
+}
+
+/* ===== Pattern 17: Ripple effect circles ===== */
+#cause-17 .ripple-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#cause-17 .ripple-center {
+  width: 50px;
+  height: 50px;
+  background: #ff6b9d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  z-index: 10;
+  position: relative;
+}
+
+#cause-17 .ripple {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid;
+  animation: ripple-expand 2s ease-out infinite;
+}
+
+#cause-17 .ripple:nth-child(2) { width: 80px; height: 80px; border-color: #ffb6c1; animation-delay: 0s; }
+#cause-17 .ripple:nth-child(3) { width: 120px; height: 120px; border-color: #ffcc80; animation-delay: 0.5s; }
+#cause-17 .ripple:nth-child(4) { width: 160px; height: 160px; border-color: #fff59d; animation-delay: 1s; }
+#cause-17 .ripple:nth-child(5) { width: 200px; height: 200px; border-color: #98fb98; animation-delay: 1.5s; }
+
+@keyframes ripple-expand {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+/* ===== Pattern 18: Snowball effect (growing) ===== */
+#cause-18 .snowball-effect {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+#cause-18 .snowball {
+  background: #87ceeb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: 3px solid #0066cc;
+}
+
+#cause-18 .snowball:nth-child(1) { width: 30px; height: 30px; font-size: 10px; }
+#cause-18 .snowball:nth-child(2) { width: 50px; height: 50px; font-size: 12px; }
+#cause-18 .snowball:nth-child(3) { width: 70px; height: 70px; font-size: 14px; }
+#cause-18 .snowball:nth-child(4) { width: 100px; height: 100px; font-size: 16px; }
+
+#cause-18:hover .snowball {
+  animation: roll 0.5s ease infinite;
+}
+
+@keyframes roll {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+#cause-18 .slope {
+  width: 100%;
+  height: 5px;
+  background: #d1c4e9;
+  position: absolute;
+  bottom: 20px;
+  transform: rotate(-5deg);
+}
+
+/* ===== Pattern 19: Feedback loop ===== */
+#cause-19 .feedback-loop {
+  position: relative;
+  width: 200px;
+  height: 150px;
+}
+
+#cause-19 .loop-box {
+  position: absolute;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+#cause-19 .loop-action {
+  background: #ffb6c1;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#cause-19 .loop-result {
+  background: #87ceeb;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#cause-19 .loop-arrows {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#cause-19 .loop-arrow-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #ff6b9d;
+}
+
+#cause-19 .loop-arrow-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  font-size: 24px;
+  color: #98fb98;
+}
+
+#cause-19 .loop-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+/* ===== Pattern 20: Positive/negative outcome ===== */
+#cause-20 .outcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+#cause-20 .outcome-cause {
+  background: #fff59d;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+#cause-20 .outcome-branches {
+  display: flex;
+  gap: 40px;
+}
+
+#cause-20 .outcome-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#cause-20 .positive-outcome {
+  background: #98fb98;
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-weight: bold;
+  border: 3px solid #228b22;
+}
+
+#cause-20 .positive-outcome::before {
+  content: '✓';
+  margin-right: 5px;
+}
+
+#cause-20 .negative-outcome {
+  background: #ffb6c1;
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-weight: bold;
+  border: 3px solid #c71585;
+}
+
+#cause-20 .negative-outcome::before {
+  content: '✗';
+  margin-right: 5px;
+}
+
+#cause-20 .branch-arrow {
+  color: #ff6b9d;
+  font-size: 20px;
+}
+
+/* ===== Pattern 21: Risk → Consequence ===== */
+#cause-21 .risk-consequence {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-21 .risk-box {
+  background: #ffcc80;
+  padding: 20px 25px;
+  border-radius: 15px;
+  position: relative;
+  border: 3px solid #e65100;
+}
+
+#cause-21 .risk-icon {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  background: #e65100;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+#cause-21 .consequence-box {
+  background: #ffb6c1;
+  padding: 20px 25px;
+  border-radius: 15px;
+  border: 3px solid #c71585;
+}
+
+#cause-21 .warning-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #c71585;
+}
+
+#cause-21 .warning-arrow span {
+  font-size: 24px;
+}
+
+/* ===== Pattern 22: Decision → Result ===== */
+#cause-22 .decision-result {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-22 .decision-diamond {
+  width: 80px;
+  height: 80px;
+  background: #d1c4e9;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #6a1b9a;
+}
+
+#cause-22 .decision-text {
+  transform: rotate(-45deg);
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+}
+
+#cause-22 .result-box {
+  background: #87ceeb;
+  padding: 20px 30px;
+  border-radius: 15px;
+  font-weight: bold;
+  border: 3px solid #0066cc;
+}
+
+#cause-22 .path-arrow {
+  color: #ff6b9d;
+  font-size: 28px;
+}
+
+/* ===== Pattern 23: Effort → Reward ===== */
+#cause-23 .effort-reward {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-23 .effort-box {
+  background: #ffcc80;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#cause-23 .effort-icon {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+#cause-23 .reward-box {
+  background: #fff59d;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+}
+
+#cause-23 .reward-icon {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+#cause-23 .reward-sparkle {
+  position: absolute;
+  font-size: 16px;
+}
+
+#cause-23 .reward-sparkle:nth-child(1) { top: -10px; right: -10px; }
+#cause-23 .reward-sparkle:nth-child(2) { top: 5px; right: -15px; }
+#cause-23 .reward-sparkle:nth-child(3) { top: -5px; right: 5px; }
+
+#cause-23 .earn-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-23 .earn-arrow span {
+  font-size: 28px;
+}
+
+#cause-23 .earn-arrow small {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ===== Pattern 24: Investment → Return ===== */
+#cause-24 .investment-return {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#cause-24 .investment-box {
+  background: #87ceeb;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#cause-24 .coin-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#cause-24 .coin {
+  width: 25px;
+  height: 8px;
+  background: #fff59d;
+  border-radius: 50%;
+  border: 2px solid #f57f17;
+}
+
+#cause-24 .growth-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+#cause-24 .growth-segment {
+  width: 15px;
+  background: #98fb98;
+  border-radius: 3px;
+}
+
+#cause-24 .growth-segment:nth-child(1) { height: 15px; }
+#cause-24 .growth-segment:nth-child(2) { height: 25px; }
+#cause-24 .growth-segment:nth-child(3) { height: 40px; }
+#cause-24 .growth-segment:nth-child(4) { height: 60px; }
+
+#cause-24 .return-box {
+  background: #98fb98;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #228b22;
+}
+
+/* ===== Pattern 25: Mistake → Lesson learned ===== */
+#cause-25 .mistake-lesson {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-25 .mistake-box {
+  background: #ffb6c1;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+}
+
+#cause-25 .mistake-x {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #c71585;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#cause-25 .lesson-box {
+  background: #98fb98;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+}
+
+#cause-25 .lightbulb {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  font-size: 25px;
+}
+
+#cause-25 .learn-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-25 .learn-arrow span {
+  font-size: 24px;
+}
+
+#cause-25 .learn-arrow small {
+  font-size: 11px;
+  font-weight: bold;
+  background: #fff59d;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+/* ===== Pattern 26: Challenge → Growth ===== */
+#cause-26 .challenge-growth {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-26 .challenge-mountain {
+  width: 80px;
+  height: 60px;
+  background: #d1c4e9;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#cause-26 .challenge-flag {
+  position: absolute;
+  top: 5px;
+  font-size: 16px;
+}
+
+#cause-26 .growth-plant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cause-26 .plant-flower {
+  font-size: 35px;
+}
+
+#cause-26 .plant-stem {
+  width: 4px;
+  height: 30px;
+  background: #228b22;
+}
+
+#cause-26 .plant-pot {
+  width: 40px;
+  height: 25px;
+  background: #ffcc80;
+  border-radius: 0 0 10px 10px;
+}
+
+#cause-26 .overcome-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-26 .overcome-arrow span {
+  font-size: 28px;
+}
+
+/* ===== Pattern 27: Practice → Improvement ===== */
+#cause-27 .practice-improvement {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#cause-27 .practice-box {
+  background: #87ceeb;
+  padding: 15px 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#cause-27 .practice-reps {
+  display: flex;
+  gap: 3px;
+  margin-top: 8px;
+}
+
+#cause-27 .rep-dot {
+  width: 10px;
+  height: 10px;
+  background: #0066cc;
+  border-radius: 50%;
+  animation: rep-pulse 1s ease infinite;
+}
+
+#cause-27 .rep-dot:nth-child(2) { animation-delay: 0.2s; }
+#cause-27 .rep-dot:nth-child(3) { animation-delay: 0.4s; }
+#cause-27 .rep-dot:nth-child(4) { animation-delay: 0.6s; }
+#cause-27 .rep-dot:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes rep-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+#cause-27 .improvement-chart {
+  background: #98fb98;
+  padding: 15px 20px;
+  border-radius: 15px;
+}
+
+#cause-27 .chart-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 40px;
+}
+
+#cause-27 .chart-bar {
+  width: 12px;
+  background: #228b22;
+  border-radius: 3px;
+}
+
+#cause-27 .chart-bar:nth-child(1) { height: 30%; }
+#cause-27 .chart-bar:nth-child(2) { height: 45%; }
+#cause-27 .chart-bar:nth-child(3) { height: 60%; }
+#cause-27 .chart-bar:nth-child(4) { height: 80%; }
+#cause-27 .chart-bar:nth-child(5) { height: 100%; }
+
+#cause-27 .progress-arrow {
+  color: #ff6b9d;
+  font-size: 24px;
+}
+
+/* ===== Pattern 28: Study → Success ===== */
+#cause-28 .study-success {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-28 .study-box {
+  background: #fff59d;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#cause-28 .book-icon {
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+
+#cause-28 .success-box {
+  background: #ffcc80;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+}
+
+#cause-28 .trophy-icon {
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+
+#cause-28 .success-stars {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  gap: 2px;
+}
+
+#cause-28 .star {
+  color: #f57f17;
+  font-size: 14px;
+  animation: twinkle 1s ease infinite;
+}
+
+#cause-28 .star:nth-child(2) { animation-delay: 0.3s; }
+#cause-28 .star:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+#cause-28 .achieve-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-28 .achieve-arrow span {
+  font-size: 28px;
+}
+
+/* ===== Pattern 29: Exercise → Health ===== */
+#cause-29 .exercise-health {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-29 .exercise-box {
+  background: #87ceeb;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#cause-29 .runner-icon {
+  font-size: 35px;
+  margin-bottom: 5px;
+  animation: run 0.5s ease infinite;
+}
+
+@keyframes run {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+#cause-29 .health-box {
+  background: #98fb98;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#cause-29 .heart-icon {
+  font-size: 35px;
+  margin-bottom: 5px;
+  animation: heartbeat 1s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+#cause-29 .health-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-29 .health-arrow span {
+  font-size: 28px;
+}
+
+#cause-29 .health-arrow small {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* ===== Pattern 30: Kindness → Happiness ===== */
+#cause-30 .kindness-happiness {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#cause-30 .kindness-box {
+  background: #ffb6c1;
+  padding: 20px;
+  border-radius: 50%;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#cause-30 .hands-icon {
+  font-size: 30px;
+}
+
+#cause-30 .happiness-box {
+  background: #fff59d;
+  padding: 20px;
+  border-radius: 50%;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#cause-30 .smile-icon {
+  font-size: 35px;
+}
+
+#cause-30 .joy-sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#cause-30 .joy-sparkle {
+  position: absolute;
+  font-size: 14px;
+  animation: sparkle-float 1.5s ease infinite;
+}
+
+#cause-30 .joy-sparkle:nth-child(1) { top: -10px; left: 50%; }
+#cause-30 .joy-sparkle:nth-child(2) { top: 0; right: -5px; animation-delay: 0.5s; }
+#cause-30 .joy-sparkle:nth-child(3) { bottom: 0; right: -5px; animation-delay: 1s; }
+
+@keyframes sparkle-float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-5px) scale(1.2); opacity: 0.7; }
+}
+
+#cause-30 .spread-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff6b9d;
+}
+
+#cause-30 .spread-arrow span {
+  font-size: 28px;
+}
+
+#cause-30 .spread-arrow small {
+  font-size: 10px;
+  font-weight: bold;
+}
+</style>
+
+<!-- Pattern 1: Simple cause → effect arrow -->
+<div id="cause-1" class="cause-effect-diagram">
+  <div class="simple-cause">原因</div>
+  <div class="simple-arrow"></div>
+  <div class="simple-effect">結果</div>
+</div>
+
+<!-- Pattern 2: Multiple causes → one effect -->
+<div id="cause-2" class="cause-effect-diagram">
+  <div class="causes-container">
+    <div class="multi-cause">原因1</div>
+    <div class="multi-cause">原因2</div>
+    <div class="multi-cause">原因3</div>
+  </div>
+  <div class="converge-arrows">↓ ↓ ↓</div>
+  <div class="single-effect">一つの結果</div>
+</div>
+
+<!-- Pattern 3: One cause → multiple effects -->
+<div id="cause-3" class="cause-effect-diagram">
+  <div class="single-cause">一つの原因</div>
+  <div class="diverge-arrows">↓ ↓ ↓</div>
+  <div class="effects-container">
+    <div class="multi-effect">結果A</div>
+    <div class="multi-effect">結果B</div>
+    <div class="multi-effect">結果C</div>
+  </div>
+</div>
+
+<!-- Pattern 4: Chain reaction (domino) -->
+<div id="cause-4" class="cause-effect-diagram">
+  <div class="domino-chain">
+    <div class="domino">1</div>
+    <div class="chain-arrow">→</div>
+    <div class="domino">2</div>
+    <div class="chain-arrow">→</div>
+    <div class="domino">3</div>
+    <div class="chain-arrow">→</div>
+    <div class="domino">4</div>
+    <div class="chain-arrow">→</div>
+    <div class="domino">5</div>
+  </div>
+</div>
+
+<!-- Pattern 5: Problem → Solution box -->
+<div id="cause-5" class="cause-effect-diagram">
+  <div class="problem-box">
+    <div class="problem-label">問題</div>
+    <div class="problem-text">困っていること</div>
+  </div>
+  <div class="solve-arrow">
+    <span>解決</span>
+    <span>→</span>
+  </div>
+  <div class="solution-box">
+    <div class="solution-label">解決策</div>
+    <div class="solution-text">やるべきこと</div>
+  </div>
+</div>
+
+<!-- Pattern 6: Question → Answer layout -->
+<div id="cause-6" class="cause-effect-diagram">
+  <div class="qa-container">
+    <div class="question-bubble">
+      <div class="question-mark">?</div>
+      <div>質問内容</div>
+    </div>
+    <div class="qa-arrow">→</div>
+    <div class="answer-bubble">
+      <div class="answer-mark">!</div>
+      <div>回答内容</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 7: If → Then conditional -->
+<div id="cause-7" class="cause-effect-diagram">
+  <div class="conditional-container">
+    <div class="if-box">
+      <div class="if-label">IF（もし）</div>
+      <div>条件</div>
+    </div>
+    <div class="cond-arrow">→</div>
+    <div class="then-box">
+      <div class="then-label">THEN（なら）</div>
+      <div>実行すること</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 8: Action → Reaction pair -->
+<div id="cause-8" class="cause-effect-diagram">
+  <div class="action-reaction">
+    <div class="action-circle">
+      <div class="ar-label">ACTION</div>
+      <div class="ar-text">行動</div>
+    </div>
+    <div class="double-arrow">⇄</div>
+    <div class="reaction-circle">
+      <div class="ar-label">REACTION</div>
+      <div class="ar-text">反応</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 9: Trigger → Response -->
+<div id="cause-9" class="cause-effect-diagram">
+  <div class="trigger-response">
+    <div class="trigger-btn">トリガー</div>
+    <div class="lightning">⚡</div>
+    <div class="response-box">レスポンス</div>
+  </div>
+</div>
+
+<!-- Pattern 10: Input → Process → Output -->
+<div id="cause-10" class="cause-effect-diagram">
+  <div class="ipo-flow">
+    <div class="input-box">
+      <div class="ipo-label">INPUT</div>
+      <div>入力</div>
+    </div>
+    <div class="ipo-arrow">→</div>
+    <div class="process-box">
+      <div class="ipo-label">PROCESS</div>
+      <div>処理</div>
+    </div>
+    <div class="ipo-arrow">→</div>
+    <div class="output-box">
+      <div class="ipo-label">OUTPUT</div>
+      <div>出力</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 11: Stimulus → Response -->
+<div id="cause-11" class="cause-effect-diagram">
+  <div class="stimulus-response">
+    <div class="stimulus">刺激</div>
+    <div class="nerve-line">
+      <div class="nerve-dot"></div>
+      <div class="nerve-dot"></div>
+      <div class="nerve-dot"></div>
+      <div class="nerve-dot"></div>
+    </div>
+    <div class="response">反応</div>
+  </div>
+</div>
+
+<!-- Pattern 12: Before action → After result -->
+<div id="cause-12" class="cause-effect-diagram">
+  <div class="before-after">
+    <div class="before-box">
+      <div class="before-label">BEFORE</div>
+      <div>実行前</div>
+    </div>
+    <div class="transform-arrow">
+      <small>変化</small>
+      <span>→</span>
+    </div>
+    <div class="after-box">
+      <div class="after-label">AFTER</div>
+      <div>実行後</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 13: Root cause diagram -->
+<div id="cause-13" class="cause-effect-diagram">
+  <div class="root-cause">根本原因</div>
+  <div class="cause-levels">
+    <div class="down-arrow">↑</div>
+    <div class="cause-level">
+      <div class="why-label">なぜ？</div>
+      <div class="cause-item">原因1</div>
+    </div>
+    <div class="down-arrow">↑</div>
+    <div class="cause-level">
+      <div class="why-label">なぜ？</div>
+      <div class="cause-item">原因2</div>
+    </div>
+    <div class="down-arrow">↑</div>
+    <div class="cause-level">
+      <div class="why-label">なぜ？</div>
+      <div class="cause-item">現象</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 14: Consequence tree -->
+<div id="cause-14" class="cause-effect-diagram">
+  <div class="tree-root">原因</div>
+  <div class="tree-branches">
+    <div class="branch-line">↓</div>
+    <div class="tree-level">
+      <div class="tree-node level1">結果A</div>
+      <div class="tree-node level1">結果B</div>
+    </div>
+    <div class="branch-line">↓ ↓</div>
+    <div class="tree-level">
+      <div class="tree-node level2">A-1</div>
+      <div class="tree-node level2">A-2</div>
+      <div class="tree-node level2">B-1</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 15: Impact visualization -->
+<div id="cause-15" class="cause-effect-diagram">
+  <div class="impact-container">
+    <div class="impact-source">起点</div>
+    <div class="impact-waves">
+      <div class="impact-wave"></div>
+      <div class="impact-wave"></div>
+      <div class="impact-wave"></div>
+      <div class="impact-wave"></div>
+    </div>
+    <div class="impact-target">影響先</div>
+  </div>
+</div>
+
+<!-- Pattern 16: Butterfly effect (small → big) -->
+<div id="cause-16" class="cause-effect-diagram">
+  <div class="butterfly-effect">
+    <div class="butterfly">🦋</div>
+    <div class="effect-growth">
+      <div class="growth-bar"></div>
+      <div class="growth-bar"></div>
+      <div class="growth-bar"></div>
+      <div class="growth-bar"></div>
+    </div>
+    <div class="tornado">🌪</div>
+  </div>
+</div>
+
+<!-- Pattern 17: Ripple effect circles -->
+<div id="cause-17" class="cause-effect-diagram">
+  <div class="ripple-container">
+    <div class="ripple-center">起点</div>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+  </div>
+</div>
+
+<!-- Pattern 18: Snowball effect (growing) -->
+<div id="cause-18" class="cause-effect-diagram">
+  <div class="snowball-effect">
+    <div class="snowball">小</div>
+    <div class="snowball">中</div>
+    <div class="snowball">大</div>
+    <div class="snowball">巨大</div>
+  </div>
+</div>
+
+<!-- Pattern 19: Feedback loop -->
+<div id="cause-19" class="cause-effect-diagram">
+  <div class="feedback-loop">
+    <div class="loop-box loop-action">行動</div>
+    <div class="loop-box loop-result">結果</div>
+    <div class="loop-arrows">
+      <div class="loop-arrow-right">→</div>
+      <div class="loop-arrow-left">→</div>
+    </div>
+    <div class="loop-label">🔄</div>
+  </div>
+</div>
+
+<!-- Pattern 20: Positive/negative outcome -->
+<div id="cause-20" class="cause-effect-diagram">
+  <div class="outcome-container">
+    <div class="outcome-cause">原因・行動</div>
+    <div class="outcome-branches">
+      <div class="outcome-branch">
+        <div class="branch-arrow">↙</div>
+        <div class="positive-outcome">良い結果</div>
+      </div>
+      <div class="outcome-branch">
+        <div class="branch-arrow">↘</div>
+        <div class="negative-outcome">悪い結果</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 21: Risk → Consequence -->
+<div id="cause-21" class="cause-effect-diagram">
+  <div class="risk-consequence">
+    <div class="risk-box">
+      <div class="risk-icon">⚠</div>
+      <div>リスク</div>
+    </div>
+    <div class="warning-arrow">
+      <span>→</span>
+    </div>
+    <div class="consequence-box">
+      <div>結果・影響</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 22: Decision → Result -->
+<div id="cause-22" class="cause-effect-diagram">
+  <div class="decision-result">
+    <div class="decision-diamond">
+      <div class="decision-text">判断</div>
+    </div>
+    <div class="path-arrow">→</div>
+    <div class="result-box">結果</div>
+  </div>
+</div>
+
+<!-- Pattern 23: Effort → Reward -->
+<div id="cause-23" class="cause-effect-diagram">
+  <div class="effort-reward">
+    <div class="effort-box">
+      <div class="effort-icon">💪</div>
+      <div>努力</div>
+    </div>
+    <div class="earn-arrow">
+      <small>獲得</small>
+      <span>→</span>
+    </div>
+    <div class="reward-box">
+      <div class="reward-sparkle">✨</div>
+      <div class="reward-sparkle">✨</div>
+      <div class="reward-sparkle">✨</div>
+      <div class="reward-icon">🏆</div>
+      <div>報酬</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 24: Investment → Return -->
+<div id="cause-24" class="cause-effect-diagram">
+  <div class="investment-return">
+    <div class="investment-box">
+      <div class="coin-stack">
+        <div class="coin"></div>
+        <div class="coin"></div>
+        <div class="coin"></div>
+      </div>
+      <div>投資</div>
+    </div>
+    <div class="growth-line">
+      <div class="growth-segment"></div>
+      <div class="growth-segment"></div>
+      <div class="growth-segment"></div>
+      <div class="growth-segment"></div>
+    </div>
+    <div class="return-box">+リターン</div>
+  </div>
+</div>
+
+<!-- Pattern 25: Mistake → Lesson learned -->
+<div id="cause-25" class="cause-effect-diagram">
+  <div class="mistake-lesson">
+    <div class="mistake-box">
+      <div class="mistake-x">✕</div>
+      <div>失敗</div>
+    </div>
+    <div class="learn-arrow">
+      <small>学び</small>
+      <span>→</span>
+    </div>
+    <div class="lesson-box">
+      <div class="lightbulb">💡</div>
+      <div>教訓</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 26: Challenge → Growth -->
+<div id="cause-26" class="cause-effect-diagram">
+  <div class="challenge-growth">
+    <div class="challenge-mountain">
+      <div class="challenge-flag">🚩</div>
+    </div>
+    <div class="overcome-arrow">
+      <span>→</span>
+    </div>
+    <div class="growth-plant">
+      <div class="plant-flower">🌸</div>
+      <div class="plant-stem"></div>
+      <div class="plant-pot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 27: Practice → Improvement -->
+<div id="cause-27" class="cause-effect-diagram">
+  <div class="practice-improvement">
+    <div class="practice-box">
+      <div>練習</div>
+      <div class="practice-reps">
+        <div class="rep-dot"></div>
+        <div class="rep-dot"></div>
+        <div class="rep-dot"></div>
+        <div class="rep-dot"></div>
+        <div class="rep-dot"></div>
+      </div>
+    </div>
+    <div class="progress-arrow">→</div>
+    <div class="improvement-chart">
+      <div>上達</div>
+      <div class="chart-line">
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+        <div class="chart-bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 28: Study → Success -->
+<div id="cause-28" class="cause-effect-diagram">
+  <div class="study-success">
+    <div class="study-box">
+      <div class="book-icon">📚</div>
+      <div>勉強</div>
+    </div>
+    <div class="achieve-arrow">
+      <span>→</span>
+    </div>
+    <div class="success-box">
+      <div class="success-stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+      </div>
+      <div class="trophy-icon">🏆</div>
+      <div>成功</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 29: Exercise → Health -->
+<div id="cause-29" class="cause-effect-diagram">
+  <div class="exercise-health">
+    <div class="exercise-box">
+      <div class="runner-icon">🏃</div>
+      <div>運動</div>
+    </div>
+    <div class="health-arrow">
+      <small>習慣</small>
+      <span>→</span>
+    </div>
+    <div class="health-box">
+      <div class="heart-icon">❤️</div>
+      <div>健康</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pattern 30: Kindness → Happiness -->
+<div id="cause-30" class="cause-effect-diagram">
+  <div class="kindness-happiness">
+    <div class="kindness-box">
+      <div class="hands-icon">🤝</div>
+      <div>親切</div>
+    </div>
+    <div class="spread-arrow">
+      <small>広がる</small>
+      <span>→</span>
+    </div>
+    <div class="happiness-box">
+      <div class="joy-sparkles">
+        <span class="joy-sparkle">✨</span>
+        <span class="joy-sparkle">✨</span>
+        <span class="joy-sparkle">✨</span>
+      </div>
+      <div class="smile-icon">😊</div>
+      <div>幸せ</div>
+    </div>
+  </div>
+</div>

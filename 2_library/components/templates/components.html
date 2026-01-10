@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LPコンポーネントライブラリ - 300種類</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #1a1a1a;
+            border-right: 1px solid #333;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #10B981;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+        }
+
+        .filter-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+
+        .filter-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 4px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            color: #999;
+            font-size: 0.85rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: #252525;
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: #10B981;
+            color: #fff;
+        }
+
+        .filter-btn .badge {
+            float: right;
+            font-size: 0.7rem;
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .filter-btn.active .badge {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Main content */
+        .main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 24px;
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Component viewer */
+        .viewer {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .viewer-title {
+            font-weight: 600;
+        }
+
+        .viewer-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .viewer-btn {
+            padding: 8px 16px;
+            background: #333;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .viewer-btn:hover {
+            background: #444;
+        }
+
+        .viewer-btn.primary {
+            background: #10B981;
+        }
+
+        .viewer-btn.primary:hover {
+            background: #059669;
+        }
+
+        .viewer-frame {
+            width: 100%;
+            height: calc(100vh - 200px);
+            border: none;
+            background: #fff;
+        }
+
+        /* Model badges */
+        .model-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .model-haiku { background: #fef3c7; color: #92400e; }
+        .model-sonnet { background: #dbeafe; color: #1e40af; }
+        .model-opus { background: #f3e8ff; color: #7c3aed; }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat {
+            background: #1a1a1a;
+            padding: 16px 20px;
+            border-radius: 8px;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">LP Components</div>
+            <div class="subtitle">300 components / 30 styles</div>
+
+            <div class="filter-section">
+                <div class="filter-title">Model</div>
+                <button class="filter-btn" onclick="filterByModel('all')">All <span class="badge">300</span></button>
+                <button class="filter-btn" onclick="filterByModel('haiku')">Haiku <span class="badge">50</span></button>
+                <button class="filter-btn" onclick="filterByModel('sonnet')">Sonnet <span class="badge">50</span></button>
+                <button class="filter-btn" onclick="filterByModel('opus')">Opus <span class="badge">200</span></button>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Haiku (1-5)</div>
+                <button class="filter-btn" onclick="loadBatch(1)">B: Brutalist</button>
+                <button class="filter-btn" onclick="loadBatch(2)">L: Luxury</button>
+                <button class="filter-btn" onclick="loadBatch(3)">N: Neon 80s</button>
+                <button class="filter-btn" onclick="loadBatch(4)">O: Organic</button>
+                <button class="filter-btn" onclick="loadBatch(5)">C: Cyberpunk</button>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Sonnet (6-10)</div>
+                <button class="filter-btn" onclick="loadBatch(6)">P: Pastel</button>
+                <button class="filter-btn" onclick="loadBatch(7)">A: Art Deco</button>
+                <button class="filter-btn" onclick="loadBatch(8)">E: Editorial</button>
+                <button class="filter-btn" onclick="loadBatch(9)">G: Gradient</button>
+                <button class="filter-btn" onclick="loadBatch(10)">D: Dark Elegant</button>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Opus (11-30)</div>
+                <button class="filter-btn" onclick="loadBatch(11)">Z: Zen/Japanese</button>
+                <button class="filter-btn" onclick="loadBatch(12)">V: Pop/Colorful</button>
+                <button class="filter-btn" onclick="loadBatch(13)">M: Neumorphism</button>
+                <button class="filter-btn" onclick="loadBatch(14)">S: Swiss</button>
+                <button class="filter-btn" onclick="loadBatch(15)">R: Vintage</button>
+                <button class="filter-btn" onclick="loadBatch(16)">Y: Y2K</button>
+                <button class="filter-btn" onclick="loadBatch(17)">H: Boho</button>
+                <button class="filter-btn" onclick="loadBatch(18)">K: Corporate</button>
+                <button class="filter-btn" onclick="loadBatch(19)">X: Gaming</button>
+                <button class="filter-btn" onclick="loadBatch(20)">F: Fashion</button>
+                <button class="filter-btn" onclick="loadBatch(21)">W: Kids</button>
+                <button class="filter-btn" onclick="loadBatch(22)">Q: Medical</button>
+                <button class="filter-btn" onclick="loadBatch(23)">T: Food</button>
+                <button class="filter-btn" onclick="loadBatch(24)">J: Sports</button>
+                <button class="filter-btn" onclick="loadBatch(25)">U: Travel</button>
+                <button class="filter-btn" onclick="loadBatch(26)">I: Education</button>
+                <button class="filter-btn" onclick="loadBatch(27)">AA: Real Estate</button>
+                <button class="filter-btn" onclick="loadBatch(28)">AB: Music</button>
+                <button class="filter-btn" onclick="loadBatch(29)">AC: Pet</button>
+                <button class="filter-btn" onclick="loadBatch(30)">AD: Minimal</button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="header">
+                <h1>LPコンポーネントライブラリ</h1>
+                <p>30種類のテイスト x 10コンポーネント = 300パターン</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">300</div>
+                    <div class="stat-label">Total Components</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">30</div>
+                    <div class="stat-label">Design Styles</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">10</div>
+                    <div class="stat-label">Component Types</div>
+                </div>
+            </div>
+
+            <div class="viewer">
+                <div class="viewer-header">
+                    <span class="viewer-title" id="viewer-title">Select a style from sidebar</span>
+                    <div class="viewer-actions">
+                        <button class="viewer-btn" onclick="openInNewTab()">Open in new tab</button>
+                        <button class="viewer-btn primary" onclick="viewSource()">View Source</button>
+                    </div>
+                </div>
+                <iframe class="viewer-frame" id="viewer-frame" src="about:blank"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentBatch = null;
+
+        const batchNames = {
+            1: 'Brutalist', 2: 'Luxury', 3: 'Neon 80s', 4: 'Organic', 5: 'Cyberpunk',
+            6: 'Pastel', 7: 'Art Deco', 8: 'Editorial', 9: 'Gradient', 10: 'Dark Elegant',
+            11: 'Zen/Japanese', 12: 'Pop/Colorful', 13: 'Neumorphism', 14: 'Swiss', 15: 'Vintage',
+            16: 'Y2K', 17: 'Boho', 18: 'Corporate', 19: 'Gaming', 20: 'Fashion',
+            21: 'Kids', 22: 'Medical', 23: 'Food', 24: 'Sports', 25: 'Travel',
+            26: 'Education', 27: 'Real Estate', 28: 'Music', 29: 'Pet', 30: 'Minimal'
+        };
+
+        function getModel(batch) {
+            if (batch <= 5) return 'haiku';
+            if (batch <= 10) return 'sonnet';
+            return 'opus';
+        }
+
+        function loadBatch(num) {
+            currentBatch = num;
+            const frame = document.getElementById('viewer-frame');
+            const title = document.getElementById('viewer-title');
+            const model = getModel(num);
+
+            frame.src = `/components/batch/${num}`;
+            title.innerHTML = `Batch ${num}: ${batchNames[num]} <span class="model-badge model-${model}">${model}</span>`;
+
+            // Update active state
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function openInNewTab() {
+            if (currentBatch) {
+                window.open(`/components/batch/${currentBatch}`, '_blank');
+            }
+        }
+
+        function viewSource() {
+            if (currentBatch) {
+                window.open(`/components/source/${currentBatch}`, '_blank');
+            }
+        }
+
+        function filterByModel(model) {
+            // Future: filter sidebar by model
+            alert(`Filter by ${model} - Coming soon!`);
+        }
+    </script>
+</body>
+</html>

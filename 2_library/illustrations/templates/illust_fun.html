@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun & Miscellaneous CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        /* ========== fun-01: Robot ========== */
+        .robot {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .robot:hover {
+            transform: scale(1.1);
+        }
+
+        .robot .head {
+            width: 50px;
+            height: 40px;
+            background: #a0aec0;
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+
+        .robot .eye {
+            width: 12px;
+            height: 12px;
+            background: #48bb78;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            animation: robotBlink 2s infinite;
+        }
+
+        .robot .eye.left { left: 8px; }
+        .robot .eye.right { right: 8px; }
+
+        .robot .antenna {
+            width: 4px;
+            height: 12px;
+            background: #718096;
+            position: absolute;
+            top: -10px;
+            left: 23px;
+        }
+
+        .robot .antenna::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #fc8181;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            left: -3px;
+        }
+
+        .robot .body {
+            width: 60px;
+            height: 40px;
+            background: #718096;
+            border-radius: 6px;
+            position: absolute;
+            top: 44px;
+            left: 5px;
+        }
+
+        .robot .button {
+            width: 8px;
+            height: 8px;
+            background: #f6e05e;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .robot:hover .eye {
+            background: #68d391;
+            box-shadow: 0 0 8px #68d391;
+        }
+
+        @keyframes robotBlink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.3; }
+        }
+
+        /* ========== fun-02: Alien ========== */
+        .alien {
+            width: 70px;
+            height: 85px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .alien:hover {
+            animation: alienFloat 0.5s ease infinite alternate;
+        }
+
+        @keyframes alienFloat {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        .alien .head {
+            width: 60px;
+            height: 50px;
+            background: #9ae6b4;
+            border-radius: 50% 50% 40% 40%;
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+
+        .alien .eye {
+            width: 18px;
+            height: 22px;
+            background: #1a202c;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+        }
+
+        .alien .eye.left { left: 8px; }
+        .alien .eye.right { right: 8px; }
+
+        .alien .eye::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 4px;
+            left: 3px;
+        }
+
+        .alien .body {
+            width: 40px;
+            height: 30px;
+            background: #68d391;
+            border-radius: 20px 20px 10px 10px;
+            position: absolute;
+            top: 48px;
+            left: 15px;
+        }
+
+        /* ========== fun-03: Ghost ========== */
+        .ghost {
+            width: 65px;
+            height: 85px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .ghost:hover {
+            animation: ghostWobble 0.4s ease infinite;
+        }
+
+        @keyframes ghostWobble {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            25% { transform: translateX(-3px) rotate(-2deg); }
+            75% { transform: translateX(3px) rotate(2deg); }
+        }
+
+        .ghost .body {
+            width: 60px;
+            height: 70px;
+            background: #e2e8f0;
+            border-radius: 30px 30px 0 0;
+            position: absolute;
+            top: 0;
+            left: 2px;
+        }
+
+        .ghost .tail {
+            width: 60px;
+            height: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 2px;
+            display: flex;
+        }
+
+        .ghost .tail::before,
+        .ghost .tail::after,
+        .ghost .wave {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .ghost .wave {
+            position: absolute;
+            left: 20px;
+        }
+
+        .ghost .eye {
+            width: 10px;
+            height: 14px;
+            background: #2d3748;
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+        }
+
+        .ghost .eye.left { left: 14px; }
+        .ghost .eye.right { right: 14px; }
+
+        .ghost .mouth {
+            width: 12px;
+            height: 8px;
+            background: #2d3748;
+            border-radius: 0 0 50% 50%;
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ========== fun-04: Monster ========== */
+        .monster {
+            width: 80px;
+            height: 75px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .monster:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .monster .body {
+            width: 70px;
+            height: 60px;
+            background: #9f7aea;
+            border-radius: 35px 35px 20px 20px;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+        }
+
+        .monster .eye {
+            width: 22px;
+            height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+        }
+
+        .monster .eye.left { left: 10px; }
+        .monster .eye.right { right: 10px; }
+
+        .monster .eye::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #1a202c;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+        }
+
+        .monster .mouth {
+            width: 30px;
+            height: 15px;
+            background: #1a202c;
+            border-radius: 0 0 15px 15px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .monster .tooth {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            position: absolute;
+            top: 0;
+        }
+
+        .monster .tooth.left { left: 5px; }
+        .monster .tooth.right { right: 5px; }
+
+        .monster .horn {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 16px solid #805ad5;
+            position: absolute;
+            top: -14px;
+        }
+
+        .monster .horn.left { left: 12px; }
+        .monster .horn.right { right: 12px; }
+
+        /* ========== fun-05: Dinosaur ========== */
+        .dinosaur {
+            width: 90px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .dinosaur:hover {
+            animation: dinoWalk 0.3s ease infinite alternate;
+        }
+
+        @keyframes dinoWalk {
+            from { transform: rotate(-2deg); }
+            to { transform: rotate(2deg); }
+        }
+
+        .dinosaur .body {
+            width: 50px;
+            height: 40px;
+            background: #68d391;
+            border-radius: 25px;
+            position: absolute;
+            bottom: 12px;
+            left: 20px;
+        }
+
+        .dinosaur .head {
+            width: 30px;
+            height: 25px;
+            background: #68d391;
+            border-radius: 15px 15px 10px 5px;
+            position: absolute;
+            top: 8px;
+            right: 5px;
+        }
+
+        .dinosaur .eye {
+            width: 8px;
+            height: 8px;
+            background: #1a202c;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+        }
+
+        .dinosaur .tail {
+            width: 25px;
+            height: 12px;
+            background: #68d391;
+            border-radius: 10px 0 0 10px;
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+        }
+
+        .dinosaur .leg {
+            width: 10px;
+            height: 14px;
+            background: #48bb78;
+            border-radius: 0 0 5px 5px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .dinosaur .leg.front { right: 25px; }
+        .dinosaur .leg.back { left: 30px; }
+
+        .dinosaur .spike {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid #48bb78;
+            position: absolute;
+            top: 0;
+        }
+
+        .dinosaur .spike:nth-child(1) { left: 30px; }
+        .dinosaur .spike:nth-child(2) { left: 42px; }
+        .dinosaur .spike:nth-child(3) { left: 54px; }
+
+        /* ========== fun-06: Unicorn ========== */
+        .unicorn {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .unicorn:hover {
+            transform: scale(1.1);
+        }
+
+        .unicorn:hover .horn {
+            background: #f6e05e;
+            box-shadow: 0 0 10px #f6e05e;
+        }
+
+        .unicorn .head {
+            width: 45px;
+            height: 40px;
+            background: #fff;
+            border-radius: 20px 20px 15px 25px;
+            position: absolute;
+            top: 20px;
+            left: 18px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .unicorn .horn {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 25px solid #fbd38d;
+            position: absolute;
+            top: 0;
+            left: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .unicorn .ear {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid #fff;
+            position: absolute;
+            top: 10px;
+        }
+
+        .unicorn .ear.left { left: 20px; transform: rotate(-20deg); }
+        .unicorn .ear.right { left: 48px; transform: rotate(20deg); }
+
+        .unicorn .eye {
+            width: 8px;
+            height: 10px;
+            background: #1a202c;
+            border-radius: 50%;
+            position: absolute;
+            top: 32px;
+            left: 30px;
+        }
+
+        .unicorn .mane {
+            width: 20px;
+            height: 35px;
+            background: linear-gradient(to bottom, #fc8181, #f6ad55, #f6e05e, #68d391, #63b3ed, #b794f4);
+            border-radius: 10px;
+            position: absolute;
+            top: 25px;
+            left: 5px;
+        }
+
+        .unicorn .nose {
+            width: 4px;
+            height: 4px;
+            background: #feb2b2;
+            border-radius: 50%;
+            position: absolute;
+            top: 45px;
+            left: 55px;
+        }
+
+        /* ========== fun-07: Magic Wand ========== */
+        .magic-wand {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .magic-wand:hover {
+            transform: rotate(-15deg);
+        }
+
+        .magic-wand:hover .star {
+            animation: wandSparkle 0.5s ease infinite;
+        }
+
+        @keyframes wandSparkle {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .magic-wand .stick {
+            width: 8px;
+            height: 60px;
+            background: #1a202c;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) rotate(-20deg);
+        }
+
+        .magic-wand .star {
+            width: 30px;
+            height: 30px;
+            background: #f6e05e;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: all 0.3s ease;
+        }
+
+        .magic-wand .sparkle {
+            width: 6px;
+            height: 6px;
+            background: #faf089;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .magic-wand .sparkle:nth-child(3) { top: 0; left: 20px; }
+        .magic-wand .sparkle:nth-child(4) { top: 15px; left: 55px; }
+        .magic-wand .sparkle:nth-child(5) { top: 25px; left: 10px; }
+
+        /* ========== fun-08: Crown ========== */
+        .crown {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .crown:hover {
+            transform: translateY(-5px);
+        }
+
+        .crown:hover .gem {
+            animation: gemShine 0.5s ease infinite;
+        }
+
+        @keyframes gemShine {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .crown .base {
+            width: 70px;
+            height: 25px;
+            background: #f6ad55;
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+        }
+
+        .crown .point {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 30px solid #f6ad55;
+            position: absolute;
+            top: 5px;
+        }
+
+        .crown .point:nth-child(2) { left: 5px; }
+        .crown .point:nth-child(3) { left: 28px; }
+        .crown .point:nth-child(4) { left: 51px; }
+
+        .crown .gem {
+            width: 10px;
+            height: 10px;
+            background: #e53e3e;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        /* ========== fun-09: Treasure Chest ========== */
+        .treasure-chest {
+            width: 80px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .treasure-chest:hover .lid {
+            transform: rotate(-30deg);
+            transform-origin: bottom left;
+        }
+
+        .treasure-chest .box {
+            width: 75px;
+            height: 35px;
+            background: #975a16;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 2px;
+        }
+
+        .treasure-chest .box::before {
+            content: '';
+            width: 75px;
+            height: 8px;
+            background: #744210;
+            position: absolute;
+            top: 12px;
+        }
+
+        .treasure-chest .lid {
+            width: 75px;
+            height: 30px;
+            background: #b7791f;
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            top: 5px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .treasure-chest .lock {
+            width: 14px;
+            height: 18px;
+            background: #f6e05e;
+            border-radius: 3px;
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .treasure-chest .lock::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #975a16;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 4px;
+        }
+
+        /* ========== fun-10: Pirate Flag ========== */
+        .pirate-flag {
+            width: 75px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .pirate-flag:hover .flag {
+            animation: flagWave 0.3s ease infinite alternate;
+        }
+
+        @keyframes flagWave {
+            from { transform: skewY(0deg); }
+            to { transform: skewY(3deg); }
+        }
+
+        .pirate-flag .pole {
+            width: 6px;
+            height: 85px;
+            background: #a0aec0;
+            border-radius: 3px;
+            position: absolute;
+            left: 5px;
+            bottom: 0;
+        }
+
+        .pirate-flag .flag {
+            width: 55px;
+            height: 40px;
+            background: #1a202c;
+            position: absolute;
+            top: 5px;
+            left: 11px;
+            transition: transform 0.3s ease;
+        }
+
+        .pirate-flag .skull {
+            width: 20px;
+            height: 18px;
+            background: #fff;
+            border-radius: 10px 10px 8px 8px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pirate-flag .skull-eye {
+            width: 5px;
+            height: 5px;
+            background: #1a202c;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+        }
+
+        .pirate-flag .skull-eye.left { left: 3px; }
+        .pirate-flag .skull-eye.right { right: 3px; }
+
+        .pirate-flag .bone {
+            width: 20px;
+            height: 5px;
+            background: #fff;
+            border-radius: 3px;
+            position: absolute;
+            top: 27px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pirate-flag .bone.cross {
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .pirate-flag .bone.cross2 {
+            transform: translateX(-50%) rotate(-45deg);
+        }
+
+        /* ========== fun-11: Ninja Star ========== */
+        .ninja-star {
+            width: 70px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .ninja-star:hover {
+            animation: starSpin 0.5s linear infinite;
+        }
+
+        @keyframes starSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .ninja-star .star {
+            width: 60px;
+            height: 60px;
+            background: #718096;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+        }
+
+        .ninja-star .center {
+            width: 16px;
+            height: 16px;
+            background: #2d3748;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ========== fun-12: Superhero Mask ========== */
+        .superhero-mask {
+            width: 80px;
+            height: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .superhero-mask:hover {
+            transform: scale(1.1);
+        }
+
+        .superhero-mask .mask {
+            width: 75px;
+            height: 35px;
+            background: #e53e3e;
+            border-radius: 10px;
+            position: absolute;
+            top: 8px;
+            left: 2px;
+        }
+
+        .superhero-mask .eye-hole {
+            width: 22px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+        }
+
+        .superhero-mask .eye-hole.left { left: 8px; }
+        .superhero-mask .eye-hole.right { right: 8px; }
+
+        .superhero-mask .wing {
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            position: absolute;
+            top: 15px;
+        }
+
+        .superhero-mask .wing.left {
+            border-right: 15px solid #e53e3e;
+            left: -10px;
+        }
+
+        .superhero-mask .wing.right {
+            border-left: 15px solid #e53e3e;
+            right: -10px;
+        }
+
+        /* ========== fun-13: Wizard Hat ========== */
+        .wizard-hat {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .wizard-hat:hover {
+            transform: rotate(-10deg);
+        }
+
+        .wizard-hat:hover .star {
+            animation: hatStarTwinkle 0.5s ease infinite;
+        }
+
+        @keyframes hatStarTwinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .wizard-hat .cone {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 70px solid #5a67d8;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .wizard-hat .brim {
+            width: 75px;
+            height: 15px;
+            background: #4c51bf;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 5px;
+            left: -2px;
+        }
+
+        .wizard-hat .band {
+            width: 50px;
+            height: 8px;
+            background: #f6e05e;
+            position: absolute;
+            bottom: 18px;
+            left: 10px;
+        }
+
+        .wizard-hat .star {
+            width: 12px;
+            height: 12px;
+            background: #f6e05e;
+            position: absolute;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: all 0.3s ease;
+        }
+
+        .wizard-hat .star:nth-child(4) { top: 20px; left: 25px; }
+        .wizard-hat .star:nth-child(5) { top: 35px; left: 40px; }
+        .wizard-hat .star:nth-child(6) { top: 50px; left: 20px; }
+
+        /* ========== fun-14: Dragon ========== */
+        .dragon {
+            width: 90px;
+            height: 75px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .dragon:hover {
+            transform: scale(1.05);
+        }
+
+        .dragon:hover .flame {
+            animation: dragonFire 0.2s ease infinite;
+        }
+
+        @keyframes dragonFire {
+            0%, 100% { opacity: 1; transform: scaleX(1); }
+            50% { opacity: 0.8; transform: scaleX(1.2); }
+        }
+
+        .dragon .body {
+            width: 45px;
+            height: 35px;
+            background: #48bb78;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+
+        .dragon .head {
+            width: 30px;
+            height: 28px;
+            background: #48bb78;
+            border-radius: 15px 15px 10px 10px;
+            position: absolute;
+            top: 12px;
+            right: 5px;
+        }
+
+        .dragon .eye {
+            width: 8px;
+            height: 8px;
+            background: #f6e05e;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            right: 6px;
+        }
+
+        .dragon .eye::after {
+            content: '';
+            width: 4px;
+            height: 6px;
+            background: #1a202c;
+            border-radius: 50%;
+            position: absolute;
+            top: 1px;
+            left: 2px;
+        }
+
+        .dragon .horn {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 12px solid #2f855a;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+        .dragon .wing {
+            width: 25px;
+            height: 20px;
+            background: #68d391;
+            border-radius: 0 50% 0 0;
+            position: absolute;
+            top: 18px;
+            left: 25px;
+        }
+
+        .dragon .tail {
+            width: 20px;
+            height: 10px;
+            background: #48bb78;
+            border-radius: 10px 0 0 10px;
+            position: absolute;
+            bottom: 20px;
+            left: 5px;
+        }
+
+        .dragon .flame {
+            width: 15px;
+            height: 10px;
+            background: #f6ad55;
+            border-radius: 0 50% 50% 0;
+            position: absolute;
+            top: 25px;
+            right: -5px;
+            transition: all 0.3s ease;
+        }
+
+        /* ========== fun-15: Mermaid Tail ========== */
+        .mermaid-tail {
+            width: 60px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mermaid-tail:hover {
+            animation: tailSwim 0.4s ease infinite alternate;
+        }
+
+        @keyframes tailSwim {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+
+        .mermaid-tail .upper {
+            width: 35px;
+            height: 50px;
+            background: #63b3ed;
+            border-radius: 20px 20px 0 0;
+            position: absolute;
+            top: 0;
+            left: 12px;
+        }
+
+        .mermaid-tail .lower {
+            width: 25px;
+            height: 25px;
+            background: #4299e1;
+            border-radius: 0 0 15px 15px;
+            position: absolute;
+            top: 45px;
+            left: 17px;
+        }
+
+        .mermaid-tail .fin {
+            width: 50px;
+            height: 25px;
+            background: #90cdf4;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+        }
+
+        .mermaid-tail .scale {
+            width: 10px;
+            height: 8px;
+            background: #4299e1;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+        }
+
+        .mermaid-tail .scale:nth-child(4) { top: 15px; left: 18px; }
+        .mermaid-tail .scale:nth-child(5) { top: 15px; left: 30px; }
+        .mermaid-tail .scale:nth-child(6) { top: 28px; left: 24px; }
+
+        /* ========== fun-16: Spaceship ========== */
+        .spaceship {
+            width: 80px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .spaceship:hover {
+            animation: spaceshipHover 0.3s ease infinite alternate;
+        }
+
+        @keyframes spaceshipHover {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        .spaceship .body {
+            width: 50px;
+            height: 25px;
+            background: #a0aec0;
+            border-radius: 25px 25px 10px 10px;
+            position: absolute;
+            top: 20px;
+            left: 15px;
+        }
+
+        .spaceship .dome {
+            width: 25px;
+            height: 20px;
+            background: #90cdf4;
+            border-radius: 15px 15px 0 0;
+            position: absolute;
+            top: 5px;
+            left: 28px;
+        }
+
+        .spaceship .ring {
+            width: 70px;
+            height: 15px;
+            background: #718096;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+            left: 5px;
+        }
+
+        .spaceship .light {
+            width: 8px;
+            height: 8px;
+            background: #f6e05e;
+            border-radius: 50%;
+            position: absolute;
+            top: 32px;
+        }
+
+        .spaceship .light:nth-child(4) { left: 20px; }
+        .spaceship .light:nth-child(5) { left: 36px; }
+        .spaceship .light:nth-child(6) { left: 52px; }
+
+        .spaceship .flame {
+            width: 10px;
+            height: 15px;
+            background: #fc8181;
+            border-radius: 0 0 50% 50%;
+            position: absolute;
+            bottom: 0;
+            left: 35px;
+        }
+
+        /* ========== fun-17: Crystal Ball ========== */
+        .crystal-ball {
+            width: 70px;
+            height: 85px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .crystal-ball:hover .ball {
+            box-shadow: 0 0 20px #b794f4;
+        }
+
+        .crystal-ball:hover .mist {
+            animation: mistSwirl 1s ease infinite;
+        }
+
+        @keyframes mistSwirl {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+        }
+
+        .crystal-ball .ball {
+            width: 55px;
+            height: 55px;
+            background: #e9d8fd;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 8px;
+            border: 3px solid #d6bcfa;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .crystal-ball .mist {
+            width: 30px;
+            height: 30px;
+            background: #9f7aea;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .crystal-ball .shine {
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            opacity: 0.8;
+        }
+
+        .crystal-ball .stand {
+            width: 40px;
+            height: 15px;
+            background: #b7791f;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+        }
+
+        .crystal-ball .stand::before {
+            content: '';
+            width: 25px;
+            height: 10px;
+            background: #975a16;
+            border-radius: 0 0 5px 5px;
+            position: absolute;
+            top: -10px;
+            left: 8px;
+        }
+
+        /* ========== fun-18: Magic Lamp ========== */
+        .magic-lamp {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .magic-lamp:hover {
+            transform: scale(1.05);
+        }
+
+        .magic-lamp:hover .smoke {
+            animation: smokeRise 0.5s ease infinite;
+        }
+
+        @keyframes smokeRise {
+            0% { opacity: 0.3; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-10px) scale(1.5); }
+        }
+
+        .magic-lamp .body {
+            width: 50px;
+            height: 30px;
+            background: #f6ad55;
+            border-radius: 25px 25px 10px 10px;
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+        }
+
+        .magic-lamp .spout {
+            width: 20px;
+            height: 10px;
+            background: #ed8936;
+            border-radius: 0 10px 10px 0;
+            position: absolute;
+            bottom: 20px;
+            right: 5px;
+        }
+
+        .magic-lamp .handle {
+            width: 15px;
+            height: 20px;
+            border: 4px solid #ed8936;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 15px;
+            left: 5px;
+            background: transparent;
+            border-left: none;
+        }
+
+        .magic-lamp .lid {
+            width: 20px;
+            height: 10px;
+            background: #dd6b20;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            bottom: 35px;
+            left: 30px;
+        }
+
+        .magic-lamp .smoke {
+            width: 15px;
+            height: 15px;
+            background: #9f7aea;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 32px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .magic-lamp .base {
+            width: 60px;
+            height: 8px;
+            background: #c05621;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+        }
+
+        /* ========== fun-19: Potion Bottle ========== */
+        .potion-bottle {
+            width: 50px;
+            height: 85px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .potion-bottle:hover {
+            transform: rotate(-10deg);
+        }
+
+        .potion-bottle:hover .liquid {
+            animation: potionBubble 0.3s ease infinite;
+        }
+
+        @keyframes potionBubble {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.05); }
+        }
+
+        .potion-bottle .neck {
+            width: 16px;
+            height: 20px;
+            background: #a0aec0;
+            border-radius: 3px;
+            position: absolute;
+            top: 0;
+            left: 17px;
+        }
+
+        .potion-bottle .cork {
+            width: 20px;
+            height: 12px;
+            background: #975a16;
+            border-radius: 3px;
+            position: absolute;
+            top: -8px;
+            left: 15px;
+        }
+
+        .potion-bottle .body {
+            width: 40px;
+            height: 50px;
+            background: #a0aec0;
+            border-radius: 5px 5px 20px 20px;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            overflow: hidden;
+        }
+
+        .potion-bottle .liquid {
+            width: 36px;
+            height: 40px;
+            background: #9f7aea;
+            border-radius: 0 0 18px 18px;
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .potion-bottle .bubble {
+            width: 6px;
+            height: 6px;
+            background: #d6bcfa;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .potion-bottle .bubble:nth-child(5) { bottom: 10px; left: 10px; }
+        .potion-bottle .bubble:nth-child(6) { bottom: 20px; left: 20px; }
+        .potion-bottle .bubble:nth-child(7) { bottom: 15px; left: 28px; }
+
+        /* ========== fun-20: Fairy Wings ========== */
+        .fairy-wings {
+            width: 90px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .fairy-wings:hover {
+            animation: wingsFlutter 0.2s ease infinite alternate;
+        }
+
+        @keyframes wingsFlutter {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(1.05); }
+        }
+
+        .fairy-wings .wing {
+            width: 35px;
+            height: 50px;
+            background: #faf5ff;
+            border: 2px solid #e9d8fd;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: 0;
+        }
+
+        .fairy-wings .wing.left {
+            left: 0;
+            transform: rotate(-15deg);
+        }
+
+        .fairy-wings .wing.right {
+            right: 0;
+            transform: rotate(15deg);
+        }
+
+        .fairy-wings .wing-small {
+            width: 25px;
+            height: 30px;
+            background: #faf5ff;
+            border: 2px solid #e9d8fd;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .fairy-wings .wing-small.left {
+            left: 8px;
+            transform: rotate(-25deg);
+        }
+
+        .fairy-wings .wing-small.right {
+            right: 8px;
+            transform: rotate(25deg);
+        }
+
+        .fairy-wings .center {
+            width: 10px;
+            height: 20px;
+            background: #d6bcfa;
+            border-radius: 5px;
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .fairy-wings .sparkle {
+            width: 5px;
+            height: 5px;
+            background: #f6e05e;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .fairy-wings .sparkle:nth-child(6) { top: 15px; left: 15px; }
+        .fairy-wings .sparkle:nth-child(7) { top: 25px; right: 18px; }
+        .fairy-wings .sparkle:nth-child(8) { top: 10px; right: 25px; }
+    </style>
+</head>
+<body>
+    <h1>Fun & Miscellaneous CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- fun-01: Robot -->
+        <div class="item">
+            <div class="robot">
+                <div class="head">
+                    <div class="antenna"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                </div>
+                <div class="body">
+                    <div class="button"></div>
+                </div>
+            </div>
+            <span class="item-label">fun-01</span>
+            <span class="item-name">Robot</span>
+        </div>
+
+        <!-- fun-02: Alien -->
+        <div class="item">
+            <div class="alien">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                </div>
+                <div class="body"></div>
+            </div>
+            <span class="item-label">fun-02</span>
+            <span class="item-name">Alien</span>
+        </div>
+
+        <!-- fun-03: Ghost -->
+        <div class="item">
+            <div class="ghost">
+                <div class="body">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="tail">
+                    <div class="wave"></div>
+                </div>
+            </div>
+            <span class="item-label">fun-03</span>
+            <span class="item-name">Ghost</span>
+        </div>
+
+        <!-- fun-04: Monster -->
+        <div class="item">
+            <div class="monster">
+                <div class="horn left"></div>
+                <div class="horn right"></div>
+                <div class="body">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth">
+                        <div class="tooth left"></div>
+                        <div class="tooth right"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">fun-04</span>
+            <span class="item-name">Monster</span>
+        </div>
+
+        <!-- fun-05: Dinosaur -->
+        <div class="item">
+            <div class="dinosaur">
+                <div class="spike"></div>
+                <div class="spike"></div>
+                <div class="spike"></div>
+                <div class="tail"></div>
+                <div class="body"></div>
+                <div class="head">
+                    <div class="eye"></div>
+                </div>
+                <div class="leg front"></div>
+                <div class="leg back"></div>
+            </div>
+            <span class="item-label">fun-05</span>
+            <span class="item-name">Dinosaur</span>
+        </div>
+
+        <!-- fun-06: Unicorn -->
+        <div class="item">
+            <div class="unicorn">
+                <div class="mane"></div>
+                <div class="horn"></div>
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="head">
+                    <div class="eye"></div>
+                    <div class="nose"></div>
+                </div>
+            </div>
+            <span class="item-label">fun-06</span>
+            <span class="item-name">Unicorn</span>
+        </div>
+
+        <!-- fun-07: Magic Wand -->
+        <div class="item">
+            <div class="magic-wand">
+                <div class="star"></div>
+                <div class="stick"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+            </div>
+            <span class="item-label">fun-07</span>
+            <span class="item-name">Magic Wand</span>
+        </div>
+
+        <!-- fun-08: Crown -->
+        <div class="item">
+            <div class="crown">
+                <div class="point"></div>
+                <div class="point"></div>
+                <div class="point"></div>
+                <div class="point"></div>
+                <div class="base">
+                    <div class="gem"></div>
+                </div>
+            </div>
+            <span class="item-label">fun-08</span>
+            <span class="item-name">Crown</span>
+        </div>
+
+        <!-- fun-09: Treasure Chest -->
+        <div class="item">
+            <div class="treasure-chest">
+                <div class="lid"></div>
+                <div class="box"></div>
+                <div class="lock"></div>
+            </div>
+            <span class="item-label">fun-09</span>
+            <span class="item-name">Treasure Chest</span>
+        </div>
+
+        <!-- fun-10: Pirate Flag -->
+        <div class="item">
+            <div class="pirate-flag">
+                <div class="pole"></div>
+                <div class="flag">
+                    <div class="skull">
+                        <div class="skull-eye left"></div>
+                        <div class="skull-eye right"></div>
+                    </div>
+                    <div class="bone cross"></div>
+                    <div class="bone cross2"></div>
+                </div>
+            </div>
+            <span class="item-label">fun-10</span>
+            <span class="item-name">Pirate Flag</span>
+        </div>
+
+        <!-- fun-11: Ninja Star -->
+        <div class="item">
+            <div class="ninja-star">
+                <div class="star"></div>
+                <div class="center"></div>
+            </div>
+            <span class="item-label">fun-11</span>
+            <span class="item-name">Ninja Star</span>
+        </div>
+
+        <!-- fun-12: Superhero Mask -->
+        <div class="item">
+            <div class="superhero-mask">
+                <div class="mask">
+                    <div class="eye-hole left"></div>
+                    <div class="eye-hole right"></div>
+                </div>
+                <div class="wing left"></div>
+                <div class="wing right"></div>
+            </div>
+            <span class="item-label">fun-12</span>
+            <span class="item-name">Superhero Mask</span>
+        </div>
+
+        <!-- fun-13: Wizard Hat -->
+        <div class="item">
+            <div class="wizard-hat">
+                <div class="cone"></div>
+                <div class="band"></div>
+                <div class="brim"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+            <span class="item-label">fun-13</span>
+            <span class="item-name">Wizard Hat</span>
+        </div>
+
+        <!-- fun-14: Dragon -->
+        <div class="item">
+            <div class="dragon">
+                <div class="tail"></div>
+                <div class="wing"></div>
+                <div class="body"></div>
+                <div class="head">
+                    <div class="horn"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="flame"></div>
+            </div>
+            <span class="item-label">fun-14</span>
+            <span class="item-name">Dragon</span>
+        </div>
+
+        <!-- fun-15: Mermaid Tail -->
+        <div class="item">
+            <div class="mermaid-tail">
+                <div class="upper"></div>
+                <div class="lower"></div>
+                <div class="fin"></div>
+                <div class="scale"></div>
+                <div class="scale"></div>
+                <div class="scale"></div>
+            </div>
+            <span class="item-label">fun-15</span>
+            <span class="item-name">Mermaid Tail</span>
+        </div>
+
+        <!-- fun-16: Spaceship -->
+        <div class="item">
+            <div class="spaceship">
+                <div class="dome"></div>
+                <div class="body"></div>
+                <div class="ring"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="flame"></div>
+            </div>
+            <span class="item-label">fun-16</span>
+            <span class="item-name">Spaceship</span>
+        </div>
+
+        <!-- fun-17: Crystal Ball -->
+        <div class="item">
+            <div class="crystal-ball">
+                <div class="ball">
+                    <div class="mist"></div>
+                    <div class="shine"></div>
+                </div>
+                <div class="stand"></div>
+            </div>
+            <span class="item-label">fun-17</span>
+            <span class="item-name">Crystal Ball</span>
+        </div>
+
+        <!-- fun-18: Magic Lamp -->
+        <div class="item">
+            <div class="magic-lamp">
+                <div class="smoke"></div>
+                <div class="lid"></div>
+                <div class="handle"></div>
+                <div class="spout"></div>
+                <div class="body"></div>
+                <div class="base"></div>
+            </div>
+            <span class="item-label">fun-18</span>
+            <span class="item-name">Magic Lamp</span>
+        </div>
+
+        <!-- fun-19: Potion Bottle -->
+        <div class="item">
+            <div class="potion-bottle">
+                <div class="cork"></div>
+                <div class="neck"></div>
+                <div class="body">
+                    <div class="liquid">
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">fun-19</span>
+            <span class="item-name">Potion Bottle</span>
+        </div>
+
+        <!-- fun-20: Fairy Wings -->
+        <div class="item">
+            <div class="fairy-wings">
+                <div class="wing left"></div>
+                <div class="wing right"></div>
+                <div class="wing-small left"></div>
+                <div class="wing-small right"></div>
+                <div class="center"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+            </div>
+            <span class="item-label">fun-20</span>
+            <span class="item-name">Fairy Wings</span>
+        </div>
+    </div>
+</body>
+</html>

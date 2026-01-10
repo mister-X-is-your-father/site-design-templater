@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Transitions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #0a0a0a;
+        }
+
+        /* ========================================
+           Navigation
+        ======================================== */
+        .nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .nav-dot::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        .nav-dot.active {
+            background: #fff;
+        }
+
+        .nav-dot.active::before {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ========================================
+           Section Base Styles
+        ======================================== */
+        section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: #fff;
+            padding: 40px;
+            max-width: 900px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        section.in-view .section-title,
+        section.in-view .section-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           Section 1 - Hero with Particle Field
+        ======================================== */
+        #section1 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .particle-field {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float-particle 20s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: ring-pulse 4s ease-in-out infinite;
+        }
+
+        .hero-ring:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            animation-delay: 0s;
+        }
+
+        .hero-ring:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            animation-delay: 0.5s;
+        }
+
+        .hero-ring:nth-child(3) {
+            width: 700px;
+            height: 700px;
+            animation-delay: 1s;
+        }
+
+        @keyframes ring-pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.6;
+            }
+        }
+
+        #section1 .section-title {
+            background: linear-gradient(90deg, #fff, #a8dadc, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s linear infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce-indicator 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        @keyframes bounce-indicator {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ========================================
+           Section 2 - Morphing Shapes
+        ======================================== */
+        #section2 {
+            background: linear-gradient(135deg, #2d1b4e 0%, #1a1a2e 100%);
+        }
+
+        .morph-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .morph-shape {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(75, 0, 130, 0.2));
+            filter: blur(60px);
+            animation: morph 15s ease-in-out infinite;
+        }
+
+        .morph-shape:nth-child(2) {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(138, 43, 226, 0.2));
+            animation-delay: -5s;
+            animation-duration: 18s;
+        }
+
+        .morph-shape:nth-child(3) {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(75, 0, 130, 0.3));
+            animation-delay: -10s;
+            animation-duration: 20s;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                border-radius: 50% 60% 30% 60% / 30% 70% 60% 40%;
+                transform: rotate(180deg) scale(0.9);
+            }
+            75% {
+                border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+                transform: rotate(270deg) scale(1.05);
+            }
+        }
+
+        .floating-cards {
+            position: absolute;
+            inset: 0;
+            perspective: 1000px;
+        }
+
+        .floating-card {
+            position: absolute;
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: float-card 10s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .floating-card:nth-child(2) { top: 60%; left: 5%; animation-delay: -2s; }
+        .floating-card:nth-child(3) { top: 20%; right: 15%; animation-delay: -4s; }
+        .floating-card:nth-child(4) { top: 70%; right: 10%; animation-delay: -6s; }
+
+        @keyframes float-card {
+            0%, 100% {
+                transform: translateY(0) rotateX(10deg) rotateY(-10deg);
+            }
+            50% {
+                transform: translateY(-30px) rotateX(-10deg) rotateY(10deg);
+            }
+        }
+
+        /* ========================================
+           Section 3 - Wave Animation
+        ======================================== */
+        #section3 {
+            background: linear-gradient(180deg, #0c1821 0%, #1b2838 100%);
+        }
+
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,208C960,213,1056,171,1152,165.3C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            background-size: 50% 100%;
+            animation: wave-flow 15s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            opacity: 0.5;
+            animation-duration: 20s;
+            animation-direction: reverse;
+            bottom: 10%;
+        }
+
+        .wave:nth-child(3) {
+            opacity: 0.3;
+            animation-duration: 25s;
+            bottom: 20%;
+        }
+
+        @keyframes wave-flow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(25%); }
+        }
+
+        .glowing-orbs {
+            position: absolute;
+            inset: 0;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: orb-float 8s ease-in-out infinite;
+        }
+
+        .orb:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 212, 255, 0.3);
+            top: 20%;
+            left: 20%;
+        }
+
+        .orb:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: rgba(139, 92, 246, 0.3);
+            top: 40%;
+            right: 25%;
+            animation-delay: -3s;
+        }
+
+        .orb:nth-child(3) {
+            width: 180px;
+            height: 180px;
+            background: rgba(16, 185, 129, 0.3);
+            bottom: 30%;
+            left: 30%;
+            animation-delay: -5s;
+        }
+
+        @keyframes orb-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* ========================================
+           Section 4 - Geometric Patterns
+        ======================================== */
+        #section4 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        .geometric-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 2px;
+            padding: 40px;
+            opacity: 0.5;
+        }
+
+        .geo-cell {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
+            animation: cell-pulse var(--delay, 3s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        @keyframes cell-pulse {
+            0%, 100% {
+                background: rgba(255, 255, 255, 0.02);
+                transform: scale(1);
+            }
+            50% {
+                background: rgba(255, 215, 0, 0.1);
+                transform: scale(0.95);
+            }
+        }
+
+        .diagonal-lines {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .diagonal-line {
+            position: absolute;
+            width: 200%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transform-origin: left center;
+            animation: line-sweep 8s linear infinite;
+        }
+
+        .diagonal-line:nth-child(1) { top: 20%; transform: rotate(15deg); animation-delay: 0s; }
+        .diagonal-line:nth-child(2) { top: 40%; transform: rotate(-10deg); animation-delay: -2s; }
+        .diagonal-line:nth-child(3) { top: 60%; transform: rotate(20deg); animation-delay: -4s; }
+        .diagonal-line:nth-child(4) { top: 80%; transform: rotate(-15deg); animation-delay: -6s; }
+
+        @keyframes line-sweep {
+            0% { transform: translateX(-100%) rotate(var(--rotate, 15deg)); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(50%) rotate(var(--rotate, 15deg)); opacity: 0; }
+        }
+
+        #section4 .section-title {
+            color: #ffd700;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+        }
+
+        /* ========================================
+           Section 5 - Closing with Starburst
+        ======================================== */
+        #section5 {
+            background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a0a 70%);
+        }
+
+        .starburst {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ray {
+            position: absolute;
+            width: 2px;
+            height: 50vh;
+            background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform-origin: bottom center;
+            animation: ray-rotate 30s linear infinite;
+        }
+
+        @keyframes ray-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .central-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkle-twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle-twinkle {
+            0%, 100% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.4);
+        }
+
+        section.in-view .cta-button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           Transition Overlays
+        ======================================== */
+        .transition-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .transition-panel {
+            position: absolute;
+            width: 100%;
+            height: 25%;
+            background: #0a0a0a;
+            transform: scaleY(0);
+            transform-origin: top;
+        }
+
+        .transition-panel:nth-child(1) { top: 0; }
+        .transition-panel:nth-child(2) { top: 25%; transition-delay: 0.05s; }
+        .transition-panel:nth-child(3) { top: 50%; transition-delay: 0.1s; }
+        .transition-panel:nth-child(4) { top: 75%; transition-delay: 0.15s; }
+
+        .transitioning .transition-panel {
+            animation: panel-sweep 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes panel-sweep {
+            0% { transform: scaleY(0); transform-origin: top; }
+            45% { transform: scaleY(1); transform-origin: top; }
+            55% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* ========================================
+           Progress Bar
+        ======================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8a2be2, #00d4ff, #ffd700);
+            z-index: 1000;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        /* ========================================
+           Responsive
+        ======================================== */
+        @media (max-width: 768px) {
+            .nav {
+                right: 20px;
+            }
+
+            .nav-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .hero-ring {
+                display: none;
+            }
+
+            .floating-card {
+                width: 80px;
+                height: 100px;
+            }
+
+            .geometric-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation Dots -->
+    <nav class="nav">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+    </nav>
+
+    <!-- Transition Overlay -->
+    <div class="transition-overlay">
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+    </div>
+
+    <!-- Section 1: Hero -->
+    <section id="section1" class="in-view">
+        <div class="particle-field" id="particleField"></div>
+        <div class="hero-ring"></div>
+        <div class="hero-ring"></div>
+        <div class="hero-ring"></div>
+        <div class="section-content">
+            <h1 class="section-title">Immersive<br>Experience</h1>
+            <p class="section-subtitle">Scroll to discover a world of mesmerizing animations and seamless transitions that push the boundaries of web design.</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Section 2: Morphing -->
+    <section id="section2">
+        <div class="morph-container">
+            <div class="morph-shape"></div>
+            <div class="morph-shape"></div>
+            <div class="morph-shape"></div>
+        </div>
+        <div class="floating-cards">
+            <div class="floating-card"></div>
+            <div class="floating-card"></div>
+            <div class="floating-card"></div>
+            <div class="floating-card"></div>
+        </div>
+        <div class="section-content">
+            <h2 class="section-title">Fluid Motion</h2>
+            <p class="section-subtitle">Watch as organic shapes dance and transform, creating an ever-evolving visual symphony that captivates the senses.</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Waves -->
+    <section id="section3">
+        <div class="glowing-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="wave-container">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        <div class="section-content">
+            <h2 class="section-title">Ocean Depths</h2>
+            <p class="section-subtitle">Dive into layers of flowing waves and luminescent orbs, evoking the mysterious beauty of the deep sea.</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Geometric -->
+    <section id="section4">
+        <div class="geometric-grid" id="geoGrid"></div>
+        <div class="diagonal-lines">
+            <div class="diagonal-line"></div>
+            <div class="diagonal-line"></div>
+            <div class="diagonal-line"></div>
+            <div class="diagonal-line"></div>
+        </div>
+        <div class="section-content">
+            <h2 class="section-title">Precision</h2>
+            <p class="section-subtitle">Where mathematics meets art. Geometric patterns pulse with energy, creating order from chaos.</p>
+        </div>
+    </section>
+
+    <!-- Section 5: Finale -->
+    <section id="section5">
+        <div class="starburst" id="starburst"></div>
+        <div class="central-glow"></div>
+        <div id="sparkles"></div>
+        <div class="section-content">
+            <h2 class="section-title">The Journey<br>Continues</h2>
+            <p class="section-subtitle">Every end is a new beginning. Take the next step into infinite possibilities.</p>
+            <button class="cta-button" onclick="scrollToTop()">Start Again</button>
+        </div>
+    </section>
+
+    <script>
+        // ========================================
+        // Initialize Dynamic Elements
+        // ========================================
+
+        // Create particles
+        const particleField = document.getElementById('particleField');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particleField.appendChild(particle);
+        }
+
+        // Create geometric grid cells
+        const geoGrid = document.getElementById('geoGrid');
+        for (let i = 0; i < 48; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'geo-cell';
+            cell.style.setProperty('--delay', (Math.random() * 4 + 2) + 's');
+            geoGrid.appendChild(cell);
+        }
+
+        // Create starburst rays
+        const starburst = document.getElementById('starburst');
+        for (let i = 0; i < 24; i++) {
+            const ray = document.createElement('div');
+            ray.className = 'ray';
+            ray.style.transform = `rotate(${i * 15}deg)`;
+            ray.style.animationDelay = `${-i * 1.25}s`;
+            starburst.appendChild(ray);
+        }
+
+        // Create sparkles
+        const sparklesContainer = document.getElementById('sparkles');
+        for (let i = 0; i < 30; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            sparklesContainer.appendChild(sparkle);
+        }
+
+        // ========================================
+        // Intersection Observer for Sections
+        // ========================================
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const progressBar = document.querySelector('.progress-bar');
+        const transitionOverlay = document.querySelector('.transition-overlay');
+
+        let currentSection = 0;
+        let isTransitioning = false;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(sections).indexOf(entry.target);
+
+                    // Update section visibility
+                    sections.forEach(s => s.classList.remove('in-view'));
+                    entry.target.classList.add('in-view');
+
+                    // Update nav dots
+                    navDots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+
+                    // Update progress bar
+                    const progress = (index + 1) / sections.length;
+                    progressBar.style.transform = `scaleX(${progress})`;
+
+                    currentSection = index;
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // ========================================
+        // Navigation Click Handler
+        // ========================================
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                if (isTransitioning) return;
+
+                isTransitioning = true;
+                transitionOverlay.classList.add('transitioning');
+
+                setTimeout(() => {
+                    sections[index].scrollIntoView({ behavior: 'auto' });
+                }, 400);
+
+                setTimeout(() => {
+                    transitionOverlay.classList.remove('transitioning');
+                    isTransitioning = false;
+                }, 800);
+            });
+        });
+
+        // ========================================
+        // Scroll to Top Function
+        // ========================================
+        function scrollToTop() {
+            if (isTransitioning) return;
+
+            isTransitioning = true;
+            transitionOverlay.classList.add('transitioning');
+
+            setTimeout(() => {
+                sections[0].scrollIntoView({ behavior: 'auto' });
+            }, 400);
+
+            setTimeout(() => {
+                transitionOverlay.classList.remove('transitioning');
+                isTransitioning = false;
+            }, 800);
+        }
+
+        // ========================================
+        // Mouse Parallax Effect
+        // ========================================
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+
+            // Apply subtle parallax to hero rings
+            const rings = document.querySelectorAll('.hero-ring');
+            rings.forEach((ring, i) => {
+                const depth = (i + 1) * 10;
+                ring.style.transform = `translate(${mouseX * depth}px, ${mouseY * depth}px)`;
+            });
+
+            // Apply to morphing shapes
+            const morphShapes = document.querySelectorAll('.morph-shape');
+            morphShapes.forEach((shape, i) => {
+                const depth = (i + 1) * 15;
+                shape.style.marginLeft = `${mouseX * depth}px`;
+                shape.style.marginTop = `${mouseY * depth}px`;
+            });
+        });
+
+        // ========================================
+        // Keyboard Navigation
+        // ========================================
+        document.addEventListener('keydown', (e) => {
+            if (isTransitioning) return;
+
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                if (currentSection < sections.length - 1) {
+                    navigateToSection(currentSection + 1);
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                if (currentSection > 0) {
+                    navigateToSection(currentSection - 1);
+                }
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                navigateToSection(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                navigateToSection(sections.length - 1);
+            }
+        });
+
+        function navigateToSection(index) {
+            if (isTransitioning) return;
+
+            isTransitioning = true;
+            transitionOverlay.classList.add('transitioning');
+
+            setTimeout(() => {
+                sections[index].scrollIntoView({ behavior: 'auto' });
+            }, 400);
+
+            setTimeout(() => {
+                transitionOverlay.classList.remove('transitioning');
+                isTransitioning = false;
+            }, 800);
+        }
+
+        // ========================================
+        // Touch Swipe Support
+        // ========================================
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (isTransitioning) return;
+
+            touchEndY = e.changedTouches[0].screenY;
+            const swipeDistance = touchStartY - touchEndY;
+
+            if (Math.abs(swipeDistance) > 50) {
+                if (swipeDistance > 0 && currentSection < sections.length - 1) {
+                    navigateToSection(currentSection + 1);
+                } else if (swipeDistance < 0 && currentSection > 0) {
+                    navigateToSection(currentSection - 1);
+                }
+            }
+        }, { passive: true });
+
+        // ========================================
+        // Preloader Animation
+        // ========================================
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

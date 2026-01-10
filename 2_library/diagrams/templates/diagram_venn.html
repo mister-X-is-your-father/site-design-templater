@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venn Diagram Templates - ベン図レイアウト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #fff;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .template-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .template-id {
+            font-size: 0.8rem;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .diagram-container {
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* ===== Common Venn Styles ===== */
+        .venn-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .venn-label {
+            position: absolute;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .venn-wrapper {
+            position: relative;
+            width: 100%;
+            height: 250px;
+        }
+
+        /* ===== #venn-1: Simple 2-Circle Venn ===== */
+        #venn-1 .circle-a {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 107, 157, 0.6);
+            left: 50px;
+            top: 50px;
+        }
+
+        #venn-1 .circle-b {
+            width: 150px;
+            height: 150px;
+            background: rgba(107, 185, 255, 0.6);
+            left: 120px;
+            top: 50px;
+        }
+
+        #venn-1:hover .circle-a {
+            transform: translateX(-10px);
+        }
+
+        #venn-1:hover .circle-b {
+            transform: translateX(10px);
+        }
+
+        #venn-1 .label-a { left: 60px; top: 110px; }
+        #venn-1 .label-b { right: 60px; top: 110px; }
+        #venn-1 .label-ab { left: 50%; top: 110px; transform: translateX(-50%); color: #666; font-size: 0.75rem; }
+
+        /* ===== #venn-2: 3-Circle Venn ===== */
+        #venn-2 .circle-a {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 95px;
+            top: 20px;
+        }
+
+        #venn-2 .circle-b {
+            width: 130px;
+            height: 130px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 50px;
+            top: 90px;
+        }
+
+        #venn-2 .circle-c {
+            width: 130px;
+            height: 130px;
+            background: rgba(107, 255, 180, 0.5);
+            left: 140px;
+            top: 90px;
+        }
+
+        #venn-2:hover .circle-a { transform: translateY(-10px); }
+        #venn-2:hover .circle-b { transform: translate(-10px, 10px); }
+        #venn-2:hover .circle-c { transform: translate(10px, 10px); }
+
+        #venn-2 .label-a { left: 50%; top: 35px; transform: translateX(-50%); }
+        #venn-2 .label-b { left: 55px; bottom: 40px; }
+        #venn-2 .label-c { right: 55px; bottom: 40px; }
+
+        /* ===== #venn-3: 4-Circle Venn ===== */
+        #venn-3 .circle-a {
+            width: 110px;
+            height: 110px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 70px;
+            top: 30px;
+        }
+
+        #venn-3 .circle-b {
+            width: 110px;
+            height: 110px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 140px;
+            top: 30px;
+        }
+
+        #venn-3 .circle-c {
+            width: 110px;
+            height: 110px;
+            background: rgba(107, 255, 180, 0.5);
+            left: 70px;
+            top: 100px;
+        }
+
+        #venn-3 .circle-d {
+            width: 110px;
+            height: 110px;
+            background: rgba(255, 220, 100, 0.5);
+            left: 140px;
+            top: 100px;
+        }
+
+        #venn-3:hover .circle-a { transform: translate(-5px, -5px); }
+        #venn-3:hover .circle-b { transform: translate(5px, -5px); }
+        #venn-3:hover .circle-c { transform: translate(-5px, 5px); }
+        #venn-3:hover .circle-d { transform: translate(5px, 5px); }
+
+        #venn-3 .label-a { left: 70px; top: 55px; }
+        #venn-3 .label-b { right: 70px; top: 55px; }
+        #venn-3 .label-c { left: 70px; bottom: 55px; }
+        #venn-3 .label-d { right: 70px; bottom: 55px; }
+
+        /* ===== #venn-4: Concentric Circles ===== */
+        #venn-4 .circle-outer {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 107, 157, 0.4);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #venn-4 .circle-middle {
+            width: 140px;
+            height: 140px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #venn-4 .circle-inner {
+            width: 80px;
+            height: 80px;
+            background: rgba(107, 255, 180, 0.6);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #venn-4:hover .circle-outer { transform: translate(-50%, -50%) scale(1.05); }
+        #venn-4:hover .circle-middle { transform: translate(-50%, -50%) scale(1.08); }
+        #venn-4:hover .circle-inner { transform: translate(-50%, -50%) scale(1.1); }
+
+        #venn-4 .label-outer { right: 30px; top: 30px; }
+        #venn-4 .label-middle { right: 60px; top: 70px; font-size: 0.75rem; }
+        #venn-4 .label-inner { left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 0.7rem; }
+
+        /* ===== #venn-5: Overlapping Squares ===== */
+        #venn-5 .square {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        #venn-5 .square-a {
+            background: rgba(255, 107, 157, 0.5);
+            left: 60px;
+            top: 50px;
+        }
+
+        #venn-5 .square-b {
+            background: rgba(107, 185, 255, 0.5);
+            left: 140px;
+            top: 80px;
+        }
+
+        #venn-5:hover .square-a { transform: translate(-10px, -10px); }
+        #venn-5:hover .square-b { transform: translate(10px, 10px); }
+
+        #venn-5 .label-a { left: 70px; top: 85px; }
+        #venn-5 .label-b { right: 60px; bottom: 60px; }
+
+        /* ===== #venn-6: Labeled Intersections ===== */
+        #venn-6 .circle-a {
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 55px;
+            top: 55px;
+        }
+
+        #venn-6 .circle-b {
+            width: 140px;
+            height: 140px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 125px;
+            top: 55px;
+        }
+
+        #venn-6 .intersection-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #ff6b9d;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        #venn-6:hover .intersection-label {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #venn-6 .label-a { left: 45px; top: 110px; }
+        #venn-6 .label-b { right: 45px; top: 110px; }
+
+        /* ===== #venn-7: Percentage Overlap ===== */
+        #venn-7 .circle-a {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 45px;
+            top: 50px;
+        }
+
+        #venn-7 .circle-b {
+            width: 120px;
+            height: 120px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 140px;
+            top: 65px;
+        }
+
+        #venn-7 .percent-badge {
+            position: absolute;
+            background: #ff6b9d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        #venn-7 .percent-a { left: 60px; top: 105px; background: #ff6b9d; }
+        #venn-7 .percent-b { right: 55px; top: 110px; background: #6bb9ff; }
+        #venn-7 .percent-ab { left: 50%; top: 50%; transform: translate(-50%, -50%); background: #9b6bff; }
+
+        #venn-7:hover .percent-badge { transform: scale(1.1); }
+        #venn-7:hover .percent-ab { transform: translate(-50%, -50%) scale(1.2); }
+
+        /* ===== #venn-8: Comparison Venn ===== */
+        #venn-8 .circle-a {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 50px;
+            top: 60px;
+            border: 3px dashed #ff6b9d;
+        }
+
+        #venn-8 .circle-b {
+            width: 130px;
+            height: 130px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 140px;
+            top: 60px;
+            border: 3px dashed #6bb9ff;
+        }
+
+        #venn-8 .vs-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        #venn-8:hover .vs-badge { background: #ff6b9d; }
+
+        #venn-8 .label-a { left: 55px; top: 110px; }
+        #venn-8 .label-b { right: 55px; top: 110px; }
+
+        /* ===== #venn-9: Union/Intersection Highlight ===== */
+        #venn-9 .circle-a {
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 107, 157, 0.3);
+            left: 55px;
+            top: 55px;
+            border: 3px solid #ff6b9d;
+        }
+
+        #venn-9 .circle-b {
+            width: 140px;
+            height: 140px;
+            background: rgba(107, 185, 255, 0.3);
+            left: 125px;
+            top: 55px;
+            border: 3px solid #6bb9ff;
+        }
+
+        #venn-9 .highlight-intersection {
+            position: absolute;
+            width: 60px;
+            height: 100px;
+            background: rgba(180, 100, 255, 0.6);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        #venn-9:hover .highlight-intersection {
+            background: rgba(180, 100, 255, 0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #venn-9 .label-intersection {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.7rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* ===== #venn-10: Color Blend Overlap ===== */
+        #venn-10 .circle-a {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 0, 100, 0.4);
+            left: 55px;
+            top: 35px;
+        }
+
+        #venn-10 .circle-b {
+            width: 130px;
+            height: 130px;
+            background: rgba(0, 150, 255, 0.4);
+            left: 135px;
+            top: 35px;
+        }
+
+        #venn-10 .circle-c {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 220, 0, 0.4);
+            left: 95px;
+            top: 100px;
+        }
+
+        #venn-10:hover .circle-a,
+        #venn-10:hover .circle-b,
+        #venn-10:hover .circle-c {
+            filter: saturate(1.5);
+        }
+
+        #venn-10 .label-center {
+            left: 50%;
+            top: 100px;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #333;
+        }
+
+        /* ===== #venn-11: Euler Diagram ===== */
+        #venn-11 .circle-large {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 107, 157, 0.4);
+            left: 70px;
+            top: 35px;
+        }
+
+        #venn-11 .circle-small-1 {
+            width: 80px;
+            height: 80px;
+            background: rgba(107, 185, 255, 0.6);
+            left: 100px;
+            top: 55px;
+        }
+
+        #venn-11 .circle-small-2 {
+            width: 60px;
+            height: 60px;
+            background: rgba(107, 255, 180, 0.6);
+            left: 170px;
+            top: 120px;
+        }
+
+        #venn-11:hover .circle-small-1,
+        #venn-11:hover .circle-small-2 {
+            transform: scale(1.1);
+        }
+
+        #venn-11 .label-large { right: 50px; top: 50px; }
+        #venn-11 .label-s1 { left: 115px; top: 80px; font-size: 0.7rem; }
+        #venn-11 .label-s2 { left: 180px; top: 140px; font-size: 0.65rem; }
+
+        /* ===== #venn-12: Set Diagram ===== */
+        #venn-12 .set-container {
+            width: 280px;
+            height: 200px;
+            border: 3px solid #ff6b9d;
+            border-radius: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 107, 157, 0.1);
+        }
+
+        #venn-12 .set-item {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        #venn-12 .item-1 { width: 60px; height: 60px; background: #ff6b9d; left: 30px; top: 30px; }
+        #venn-12 .item-2 { width: 50px; height: 50px; background: #6bb9ff; left: 110px; top: 50px; }
+        #venn-12 .item-3 { width: 70px; height: 70px; background: #6bffb4; left: 60px; top: 110px; }
+        #venn-12 .item-4 { width: 45px; height: 45px; background: #ffdc64; left: 180px; top: 80px; }
+        #venn-12 .item-5 { width: 55px; height: 55px; background: #b46bff; left: 170px; top: 130px; }
+
+        #venn-12:hover .set-item { transform: scale(1.1); }
+
+        #venn-12 .set-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        /* ===== #venn-13: Similarity/Difference ===== */
+        #venn-13 .circle-left {
+            width: 130px;
+            height: 130px;
+            background: transparent;
+            left: 50px;
+            top: 60px;
+            border: 4px solid #ff6b9d;
+        }
+
+        #venn-13 .circle-right {
+            width: 130px;
+            height: 130px;
+            background: transparent;
+            left: 140px;
+            top: 60px;
+            border: 4px solid #6bb9ff;
+        }
+
+        #venn-13 .diff-icon {
+            position: absolute;
+            font-size: 1.5rem;
+        }
+
+        #venn-13 .icon-left { left: 75px; top: 110px; }
+        #venn-13 .icon-right { right: 75px; top: 110px; }
+        #venn-13 .icon-center { left: 50%; top: 110px; transform: translateX(-50%); }
+
+        #venn-13 .section-label {
+            position: absolute;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        #venn-13 .label-diff-left { left: 45px; bottom: 30px; }
+        #venn-13 .label-same { left: 50%; bottom: 30px; transform: translateX(-50%); }
+        #venn-13 .label-diff-right { right: 45px; bottom: 30px; }
+
+        /* ===== #venn-14: Common Ground Diagram ===== */
+        #venn-14 .circle-a {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 60px;
+            top: 65px;
+        }
+
+        #venn-14 .circle-b {
+            width: 120px;
+            height: 120px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 140px;
+            top: 65px;
+        }
+
+        #venn-14 .common-ground {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 220, 100, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: #333;
+            z-index: 5;
+        }
+
+        #venn-14:hover .common-ground {
+            transform: translate(-50%, -50%) scale(1.15);
+            box-shadow: 0 5px 20px rgba(255, 220, 100, 0.5);
+        }
+
+        #venn-14 .label-a { left: 50px; top: 110px; }
+        #venn-14 .label-b { right: 50px; top: 110px; }
+
+        /* ===== #venn-15: Shared Features ===== */
+        #venn-15 .circle-a {
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 107, 157, 0.4);
+            left: 50px;
+            top: 55px;
+        }
+
+        #venn-15 .circle-b {
+            width: 140px;
+            height: 140px;
+            background: rgba(107, 185, 255, 0.4);
+            left: 130px;
+            top: 55px;
+        }
+
+        #venn-15 .feature-dot {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        #venn-15 .dot-a1 { left: 70px; top: 80px; background: #ff6b9d; }
+        #venn-15 .dot-a2 { left: 85px; top: 130px; background: #ff6b9d; }
+        #venn-15 .dot-shared1 { left: 148px; top: 100px; background: #9b6bff; }
+        #venn-15 .dot-shared2 { left: 160px; top: 145px; background: #9b6bff; }
+        #venn-15 .dot-b1 { right: 70px; top: 90px; background: #6bb9ff; }
+        #venn-15 .dot-b2 { right: 85px; top: 140px; background: #6bb9ff; }
+
+        #venn-15:hover .feature-dot { transform: scale(1.2); }
+
+        /* ===== #venn-16: Unique vs Shared ===== */
+        #venn-16 .circle-a {
+            width: 140px;
+            height: 140px;
+            background: transparent;
+            left: 55px;
+            top: 55px;
+            border: 4px solid #ff6b9d;
+        }
+
+        #venn-16 .circle-b {
+            width: 140px;
+            height: 140px;
+            background: transparent;
+            left: 125px;
+            top: 55px;
+            border: 4px solid #6bb9ff;
+        }
+
+        #venn-16 .unique-zone {
+            position: absolute;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        #venn-16 .zone-a { left: 50px; top: 110px; background: #ff6b9d; }
+        #venn-16 .zone-b { right: 50px; top: 110px; background: #6bb9ff; }
+        #venn-16 .zone-shared {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #9b6bff;
+        }
+
+        #venn-16:hover .unique-zone { transform: scale(1.1); }
+        #venn-16:hover .zone-shared { transform: translate(-50%, -50%) scale(1.15); }
+
+        /* ===== #venn-17: Category Overlap ===== */
+        #venn-17 .category-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #venn-17 .cat-a {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 40px;
+            top: 25px;
+        }
+
+        #venn-17 .cat-b {
+            width: 130px;
+            height: 130px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 150px;
+            top: 25px;
+        }
+
+        #venn-17 .cat-c {
+            width: 130px;
+            height: 130px;
+            background: rgba(107, 255, 180, 0.5);
+            left: 95px;
+            top: 110px;
+        }
+
+        #venn-17 .cat-label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #venn-17 .cat-count {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        #venn-17:hover .category-circle { transform: scale(1.05); }
+
+        /* ===== #venn-18: Group Membership ===== */
+        #venn-18 .group-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 4px dashed;
+            transition: all 0.3s ease;
+        }
+
+        #venn-18 .group-a {
+            width: 140px;
+            height: 140px;
+            border-color: #ff6b9d;
+            left: 55px;
+            top: 55px;
+        }
+
+        #venn-18 .group-b {
+            width: 140px;
+            height: 140px;
+            border-color: #6bb9ff;
+            left: 125px;
+            top: 55px;
+        }
+
+        #venn-18 .member {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        #venn-18 .m1 { left: 70px; top: 80px; background: #ffe0eb; }
+        #venn-18 .m2 { left: 90px; top: 130px; background: #ffe0eb; }
+        #venn-18 .m3 { left: 143px; top: 100px; background: #e0d0ff; }
+        #venn-18 .m4 { right: 65px; top: 85px; background: #d0e8ff; }
+        #venn-18 .m5 { right: 80px; top: 140px; background: #d0e8ff; }
+
+        #venn-18:hover .member { transform: scale(1.15); }
+
+        /* ===== #venn-19: Inclusive Circles ===== */
+        #venn-19 .inclusive-outer {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 107, 157, 0.3);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #ff6b9d;
+        }
+
+        #venn-19 .inclusive-inner-1 {
+            width: 100px;
+            height: 100px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 45px;
+            top: 45px;
+        }
+
+        #venn-19 .inclusive-inner-2 {
+            width: 80px;
+            height: 80px;
+            background: rgba(107, 255, 180, 0.5);
+            right: 45px;
+            bottom: 45px;
+        }
+
+        #venn-19:hover .inclusive-inner-1,
+        #venn-19:hover .inclusive-inner-2 {
+            transform: scale(1.1);
+        }
+
+        #venn-19 .label-outer { right: 25px; top: 25px; font-size: 0.8rem; }
+        #venn-19 .label-in1 { left: 65px; top: 80px; font-size: 0.7rem; }
+        #venn-19 .label-in2 { right: 55px; bottom: 65px; font-size: 0.7rem; }
+
+        /* ===== #venn-20: Bubble Overlap ===== */
+        #venn-20 .bubble {
+            position: absolute;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        #venn-20 .bubble-1 {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 107, 157, 0.5);
+            left: 40px;
+            top: 40px;
+        }
+
+        #venn-20 .bubble-2 {
+            width: 80px;
+            height: 80px;
+            background: rgba(107, 185, 255, 0.5);
+            left: 110px;
+            top: 30px;
+        }
+
+        #venn-20 .bubble-3 {
+            width: 120px;
+            height: 120px;
+            background: rgba(107, 255, 180, 0.5);
+            left: 130px;
+            top: 90px;
+        }
+
+        #venn-20 .bubble-4 {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 220, 100, 0.5);
+            left: 60px;
+            top: 120px;
+        }
+
+        #venn-20 .bubble-5 {
+            width: 50px;
+            height: 50px;
+            background: rgba(180, 107, 255, 0.5);
+            left: 180px;
+            top: 50px;
+        }
+
+        #venn-20:hover .bubble { transform: scale(1.1); }
+
+        #venn-20 .bubble-label {
+            position: absolute;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #333;
+            pointer-events: none;
+        }
+
+        #venn-20 .bl-1 { left: 65px; top: 75px; }
+        #venn-20 .bl-2 { left: 130px; top: 55px; }
+        #venn-20 .bl-3 { left: 165px; top: 135px; }
+        #venn-20 .bl-4 { left: 75px; top: 145px; }
+        #venn-20 .bl-5 { left: 190px; top: 65px; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Venn Diagram Templates</h1>
+    <p class="subtitle">ベン図レイアウト集 - 20種類のデザインパターン</p>
+
+    <div class="gallery">
+        <!-- #venn-1: Simple 2-Circle Venn -->
+        <div class="template-card">
+            <div class="template-title">Simple 2-Circle Venn</div>
+            <div class="template-id">#venn-1</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-1">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <span class="venn-label label-a">A</span>
+                    <span class="venn-label label-b">B</span>
+                    <span class="venn-label label-ab">A∩B</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-2: 3-Circle Venn -->
+        <div class="template-card">
+            <div class="template-title">3-Circle Venn</div>
+            <div class="template-id">#venn-2</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-2">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="venn-circle circle-c"></div>
+                    <span class="venn-label label-a">A</span>
+                    <span class="venn-label label-b">B</span>
+                    <span class="venn-label label-c">C</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-3: 4-Circle Venn -->
+        <div class="template-card">
+            <div class="template-title">4-Circle Venn</div>
+            <div class="template-id">#venn-3</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-3">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="venn-circle circle-c"></div>
+                    <div class="venn-circle circle-d"></div>
+                    <span class="venn-label label-a">A</span>
+                    <span class="venn-label label-b">B</span>
+                    <span class="venn-label label-c">C</span>
+                    <span class="venn-label label-d">D</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-4: Concentric Circles -->
+        <div class="template-card">
+            <div class="template-title">Concentric Circles</div>
+            <div class="template-id">#venn-4</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-4">
+                    <div class="venn-circle circle-outer"></div>
+                    <div class="venn-circle circle-middle"></div>
+                    <div class="venn-circle circle-inner"></div>
+                    <span class="venn-label label-outer">外側</span>
+                    <span class="venn-label label-middle">中間</span>
+                    <span class="venn-label label-inner">中心</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-5: Overlapping Squares -->
+        <div class="template-card">
+            <div class="template-title">Overlapping Squares</div>
+            <div class="template-id">#venn-5</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-5">
+                    <div class="square square-a"></div>
+                    <div class="square square-b"></div>
+                    <span class="venn-label label-a">A</span>
+                    <span class="venn-label label-b">B</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-6: Labeled Intersections -->
+        <div class="template-card">
+            <div class="template-title">Labeled Intersections</div>
+            <div class="template-id">#venn-6</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-6">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="intersection-label">共通点</div>
+                    <span class="venn-label label-a">グループA</span>
+                    <span class="venn-label label-b">グループB</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-7: Percentage Overlap -->
+        <div class="template-card">
+            <div class="template-title">Percentage Overlap</div>
+            <div class="template-id">#venn-7</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-7">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <span class="percent-badge percent-a">40%</span>
+                    <span class="percent-badge percent-b">35%</span>
+                    <span class="percent-badge percent-ab">25%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-8: Comparison Venn -->
+        <div class="template-card">
+            <div class="template-title">Comparison Venn</div>
+            <div class="template-id">#venn-8</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-8">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="vs-badge">VS</div>
+                    <span class="venn-label label-a">Option A</span>
+                    <span class="venn-label label-b">Option B</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-9: Union/Intersection Highlight -->
+        <div class="template-card">
+            <div class="template-title">Union/Intersection Highlight</div>
+            <div class="template-id">#venn-9</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-9">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="highlight-intersection"></div>
+                    <span class="venn-label label-intersection">A∩B</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-10: Color Blend Overlap -->
+        <div class="template-card">
+            <div class="template-title">Color Blend Overlap</div>
+            <div class="template-id">#venn-10</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-10">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="venn-circle circle-c"></div>
+                    <span class="venn-label label-center">Mix</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-11: Euler Diagram -->
+        <div class="template-card">
+            <div class="template-title">Euler Diagram</div>
+            <div class="template-id">#venn-11</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-11">
+                    <div class="venn-circle circle-large"></div>
+                    <div class="venn-circle circle-small-1"></div>
+                    <div class="venn-circle circle-small-2"></div>
+                    <span class="venn-label label-large">全体集合</span>
+                    <span class="venn-label label-s1">部分A</span>
+                    <span class="venn-label label-s2">部分B</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-12: Set Diagram -->
+        <div class="template-card">
+            <div class="template-title">Set Diagram</div>
+            <div class="template-id">#venn-12</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-12">
+                    <div class="set-container">
+                        <span class="set-label">集合 S</span>
+                    </div>
+                    <div class="set-item item-1">a</div>
+                    <div class="set-item item-2">b</div>
+                    <div class="set-item item-3">c</div>
+                    <div class="set-item item-4">d</div>
+                    <div class="set-item item-5">e</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-13: Similarity/Difference -->
+        <div class="template-card">
+            <div class="template-title">Similarity / Difference</div>
+            <div class="template-id">#venn-13</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-13">
+                    <div class="venn-circle circle-left"></div>
+                    <div class="venn-circle circle-right"></div>
+                    <span class="diff-icon icon-left">✗</span>
+                    <span class="diff-icon icon-center">✓</span>
+                    <span class="diff-icon icon-right">✗</span>
+                    <span class="section-label label-diff-left">違い</span>
+                    <span class="section-label label-same">同じ</span>
+                    <span class="section-label label-diff-right">違い</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-14: Common Ground Diagram -->
+        <div class="template-card">
+            <div class="template-title">Common Ground Diagram</div>
+            <div class="template-id">#venn-14</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-14">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="common-ground">共通点</div>
+                    <span class="venn-label label-a">私</span>
+                    <span class="venn-label label-b">あなた</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-15: Shared Features -->
+        <div class="template-card">
+            <div class="template-title">Shared Features</div>
+            <div class="template-id">#venn-15</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-15">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <div class="feature-dot dot-a1">1</div>
+                    <div class="feature-dot dot-a2">2</div>
+                    <div class="feature-dot dot-shared1">★</div>
+                    <div class="feature-dot dot-shared2">★</div>
+                    <div class="feature-dot dot-b1">3</div>
+                    <div class="feature-dot dot-b2">4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-16: Unique vs Shared -->
+        <div class="template-card">
+            <div class="template-title">Unique vs Shared</div>
+            <div class="template-id">#venn-16</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-16">
+                    <div class="venn-circle circle-a"></div>
+                    <div class="venn-circle circle-b"></div>
+                    <span class="unique-zone zone-a">独自</span>
+                    <span class="unique-zone zone-shared">共有</span>
+                    <span class="unique-zone zone-b">独自</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-17: Category Overlap -->
+        <div class="template-card">
+            <div class="template-title">Category Overlap</div>
+            <div class="template-id">#venn-17</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-17">
+                    <div class="category-circle cat-a">
+                        <span class="cat-label">カテゴリA</span>
+                        <span class="cat-count">45</span>
+                    </div>
+                    <div class="category-circle cat-b">
+                        <span class="cat-label">カテゴリB</span>
+                        <span class="cat-count">38</span>
+                    </div>
+                    <div class="category-circle cat-c">
+                        <span class="cat-label">カテゴリC</span>
+                        <span class="cat-count">52</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-18: Group Membership -->
+        <div class="template-card">
+            <div class="template-title">Group Membership</div>
+            <div class="template-id">#venn-18</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-18">
+                    <div class="group-circle group-a"></div>
+                    <div class="group-circle group-b"></div>
+                    <div class="member m1">👤</div>
+                    <div class="member m2">👤</div>
+                    <div class="member m3">👤</div>
+                    <div class="member m4">👤</div>
+                    <div class="member m5">👤</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-19: Inclusive Circles -->
+        <div class="template-card">
+            <div class="template-title">Inclusive Circles</div>
+            <div class="template-id">#venn-19</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-19">
+                    <div class="venn-circle inclusive-outer"></div>
+                    <div class="venn-circle inclusive-inner-1"></div>
+                    <div class="venn-circle inclusive-inner-2"></div>
+                    <span class="venn-label label-outer">全体</span>
+                    <span class="venn-label label-in1">A</span>
+                    <span class="venn-label label-in2">B</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #venn-20: Bubble Overlap -->
+        <div class="template-card">
+            <div class="template-title">Bubble Overlap</div>
+            <div class="template-id">#venn-20</div>
+            <div class="diagram-container">
+                <div class="venn-wrapper" id="venn-20">
+                    <div class="bubble bubble-1"></div>
+                    <div class="bubble bubble-2"></div>
+                    <div class="bubble bubble-3"></div>
+                    <div class="bubble bubble-4"></div>
+                    <div class="bubble bubble-5"></div>
+                    <span class="bubble-label bl-1">主題A</span>
+                    <span class="bubble-label bl-2">主題B</span>
+                    <span class="bubble-label bl-3">主題C</span>
+                    <span class="bubble-label bl-4">主題D</span>
+                    <span class="bubble-label bl-5">主題E</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

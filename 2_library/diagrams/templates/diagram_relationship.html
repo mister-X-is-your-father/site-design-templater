@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Diagram Layouts - 関係図テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .diagram-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .diagram-title {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .diagram-id {
+            font-size: 11px;
+            color: #999;
+            font-weight: 400;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .diagram-desc {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .diagram-container {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Common node styles */
+        .node {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .node:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            z-index: 10;
+        }
+
+        .node-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .node-rect {
+            width: 80px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .node-small {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 10px;
+        }
+
+        .node-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+
+        /* Color palette */
+        .pink { background-color: #FF6B9D; }
+        .sky { background-color: #4ECDC4; }
+        .mint { background-color: #7ED957; }
+        .yellow { background-color: #FFD93D; color: #333; text-shadow: none; }
+        .orange { background-color: #FF9F43; }
+        .purple { background-color: #A66DD4; }
+        .coral { background-color: #FF7675; }
+        .blue { background-color: #74B9FF; }
+
+        /* Connection lines */
+        .line {
+            position: absolute;
+            background-color: #ddd;
+            z-index: 1;
+            transition: background-color 0.3s ease;
+        }
+
+        .line-h {
+            height: 3px;
+        }
+
+        .line-v {
+            width: 3px;
+        }
+
+        .line-pink { background-color: #FFB6C1; }
+        .line-sky { background-color: #87CEEB; }
+        .line-mint { background-color: #98FB98; }
+        .line-purple { background-color: #DDA0DD; }
+        .line-orange { background-color: #FFDAB9; }
+
+        /* Arrow styles */
+        .arrow {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        .arrow-right::after {
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 10px solid;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .arrow-left::after {
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right: 10px solid;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .arrow-down::after {
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top: 10px solid;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        .arrow-up::after {
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom: 10px solid;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        /* ============================================
+           #relationship-1: Hub and Spoke
+           ============================================ */
+        #relationship-1 .center-hub {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #FF6B9D;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            z-index: 3;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-1 .center-hub:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #relationship-1 .spoke {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-1 .spoke:hover {
+            transform: scale(1.2);
+        }
+
+        #relationship-1 .spoke-1 { top: 20px; left: 50%; transform: translateX(-50%); background: #4ECDC4; }
+        #relationship-1 .spoke-2 { top: 60px; right: 30px; background: #7ED957; }
+        #relationship-1 .spoke-3 { bottom: 60px; right: 30px; background: #FFD93D; color: #333; }
+        #relationship-1 .spoke-4 { bottom: 20px; left: 50%; transform: translateX(-50%); background: #FF9F43; }
+        #relationship-1 .spoke-5 { bottom: 60px; left: 30px; background: #A66DD4; }
+        #relationship-1 .spoke-6 { top: 60px; left: 30px; background: #74B9FF; }
+
+        #relationship-1 .hub-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ddd, transparent);
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            z-index: 1;
+        }
+
+        #relationship-1 .hub-line-1 { width: 70px; transform: rotate(-90deg) translateY(-50%); }
+        #relationship-1 .hub-line-2 { width: 70px; transform: rotate(-30deg); }
+        #relationship-1 .hub-line-3 { width: 70px; transform: rotate(30deg); }
+        #relationship-1 .hub-line-4 { width: 70px; transform: rotate(90deg) translateY(-50%); }
+        #relationship-1 .hub-line-5 { width: 70px; transform: rotate(150deg); }
+        #relationship-1 .hub-line-6 { width: 70px; transform: rotate(210deg); }
+
+        /* ============================================
+           #relationship-2: Network Web
+           ============================================ */
+        #relationship-2 .web-node {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #relationship-2 .web-node:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        #relationship-2 .n1 { top: 30px; left: 40%; background: #FF6B9D; }
+        #relationship-2 .n2 { top: 30px; right: 25%; background: #4ECDC4; }
+        #relationship-2 .n3 { top: 50%; left: 15%; background: #7ED957; }
+        #relationship-2 .n4 { top: 50%; right: 15%; background: #FFD93D; color: #333; }
+        #relationship-2 .n5 { bottom: 50px; left: 30%; background: #A66DD4; }
+        #relationship-2 .n6 { bottom: 50px; right: 30%; background: #FF9F43; }
+        #relationship-2 .n7 { top: 45%; left: 45%; background: #74B9FF; }
+
+        #relationship-2 .web-line {
+            position: absolute;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        #relationship-2 .wl1 { width: 60px; top: 55px; left: 47%; transform: rotate(10deg); }
+        #relationship-2 .wl2 { width: 80px; top: 80px; left: 20%; transform: rotate(45deg); }
+        #relationship-2 .wl3 { width: 80px; top: 80px; right: 20%; transform: rotate(-45deg); }
+        #relationship-2 .wl4 { width: 100px; top: 130px; left: 22%; transform: rotate(-15deg); }
+        #relationship-2 .wl5 { width: 100px; top: 130px; right: 22%; transform: rotate(15deg); }
+        #relationship-2 .wl6 { width: 70px; bottom: 90px; left: 35%; transform: rotate(45deg); }
+        #relationship-2 .wl7 { width: 70px; bottom: 90px; right: 35%; transform: rotate(-45deg); }
+        #relationship-2 .wl8 { width: 80px; bottom: 70px; left: 43%; transform: rotate(0deg); }
+
+        /* ============================================
+           #relationship-3: Parent-Child Tree
+           ============================================ */
+        #relationship-3 .tree-node {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-3 .tree-node:hover {
+            transform: scale(1.15);
+        }
+
+        #relationship-3 .parent {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #FF6B9D;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #relationship-3 .parent:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        #relationship-3 .child {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            top: 130px;
+        }
+
+        #relationship-3 .child-1 { left: 20%; background: #4ECDC4; }
+        #relationship-3 .child-2 { left: 50%; transform: translateX(-50%); background: #7ED957; }
+        #relationship-3 .child-3 { right: 20%; background: #FFD93D; color: #333; }
+
+        #relationship-3 .grandchild {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            bottom: 30px;
+            font-size: 9px;
+        }
+
+        #relationship-3 .gc-1 { left: 10%; background: #A66DD4; }
+        #relationship-3 .gc-2 { left: 25%; background: #FF9F43; }
+        #relationship-3 .gc-3 { left: 43%; background: #74B9FF; }
+        #relationship-3 .gc-4 { right: 43%; background: #FF7675; }
+        #relationship-3 .gc-5 { right: 25%; background: #A66DD4; }
+        #relationship-3 .gc-6 { right: 10%; background: #4ECDC4; }
+
+        #relationship-3 .tree-line {
+            position: absolute;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        #relationship-3 .tl-v1 { width: 3px; height: 35px; top: 95px; left: 50%; }
+        #relationship-3 .tl-h1 { height: 3px; width: 60%; top: 127px; left: 20%; }
+        #relationship-3 .tl-v2 { width: 3px; height: 30px; top: 185px; left: 27%; }
+        #relationship-3 .tl-v3 { width: 3px; height: 30px; top: 185px; left: 50%; }
+        #relationship-3 .tl-v4 { width: 3px; height: 30px; top: 185px; right: 27%; }
+        #relationship-3 .tl-h2 { height: 3px; width: 20%; top: 212px; left: 17%; }
+        #relationship-3 .tl-h3 { height: 3px; width: 15%; top: 212px; left: 43%; }
+        #relationship-3 .tl-h4 { height: 3px; width: 20%; top: 212px; right: 17%; }
+
+        /* ============================================
+           #relationship-4: Family Tree Style
+           ============================================ */
+        #relationship-4 .family-node {
+            position: absolute;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-4 .family-node:hover {
+            transform: scale(1.1);
+        }
+
+        #relationship-4 .grandparent {
+            width: 65px;
+            height: 35px;
+            top: 20px;
+        }
+
+        #relationship-4 .gp-1 { left: 25%; background: #A66DD4; }
+        #relationship-4 .gp-2 { right: 25%; background: #A66DD4; }
+
+        #relationship-4 .parent-gen {
+            width: 60px;
+            height: 32px;
+            top: 100px;
+        }
+
+        #relationship-4 .pg-1 { left: 15%; background: #FF6B9D; }
+        #relationship-4 .pg-2 { left: 38%; background: #4ECDC4; }
+        #relationship-4 .pg-3 { right: 15%; background: #7ED957; }
+
+        #relationship-4 .child-gen {
+            width: 50px;
+            height: 28px;
+            bottom: 40px;
+            font-size: 9px;
+        }
+
+        #relationship-4 .cg-1 { left: 8%; background: #FFD93D; color: #333; }
+        #relationship-4 .cg-2 { left: 25%; background: #FF9F43; }
+        #relationship-4 .cg-3 { left: 42%; background: #74B9FF; }
+        #relationship-4 .cg-4 { right: 25%; background: #FF7675; }
+        #relationship-4 .cg-5 { right: 8%; background: #4ECDC4; }
+
+        #relationship-4 .family-line {
+            position: absolute;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        #relationship-4 .fl-h1 { height: 3px; width: 35%; top: 55px; left: 32%; }
+        #relationship-4 .fl-v1 { width: 3px; height: 20px; top: 55px; left: 50%; }
+        #relationship-4 .fl-v2 { width: 3px; height: 25px; top: 75px; left: 22%; }
+        #relationship-4 .fl-v3 { width: 3px; height: 25px; top: 75px; left: 50%; }
+        #relationship-4 .fl-v4 { width: 3px; height: 25px; top: 75px; right: 22%; }
+        #relationship-4 .fl-h2 { height: 3px; width: 65%; top: 75px; left: 17%; }
+        #relationship-4 .fl-h3 { height: 3px; width: 75%; top: 152px; left: 12%; }
+        #relationship-4 .fl-v5 { width: 3px; height: 20px; top: 132px; left: 22%; }
+        #relationship-4 .fl-v6 { width: 3px; height: 20px; top: 132px; left: 50%; }
+        #relationship-4 .fl-v7 { width: 3px; height: 20px; top: 132px; right: 22%; }
+
+        /* ============================================
+           #relationship-5: Org Chart (3 levels)
+           ============================================ */
+        #relationship-5 .org-node {
+            position: absolute;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-5 .org-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #relationship-5 .ceo {
+            width: 80px;
+            height: 40px;
+            background: #FF6B9D;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #relationship-5 .ceo:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        #relationship-5 .director {
+            width: 70px;
+            height: 35px;
+            top: 100px;
+        }
+
+        #relationship-5 .d1 { left: 15%; background: #4ECDC4; }
+        #relationship-5 .d2 { left: 50%; transform: translateX(-50%); background: #7ED957; }
+        #relationship-5 .d3 { right: 15%; background: #FFD93D; color: #333; }
+
+        #relationship-5 .d2:hover { transform: translateX(-50%) scale(1.1); }
+
+        #relationship-5 .manager {
+            width: 55px;
+            height: 28px;
+            bottom: 40px;
+            font-size: 9px;
+        }
+
+        #relationship-5 .m1 { left: 5%; background: #A66DD4; }
+        #relationship-5 .m2 { left: 20%; background: #FF9F43; }
+        #relationship-5 .m3 { left: 38%; background: #74B9FF; }
+        #relationship-5 .m4 { right: 38%; background: #FF7675; }
+        #relationship-5 .m5 { right: 20%; background: #4ECDC4; }
+        #relationship-5 .m6 { right: 5%; background: #A66DD4; }
+
+        #relationship-5 .org-line {
+            position: absolute;
+            background: #ccc;
+            z-index: 1;
+        }
+
+        #relationship-5 .ol-v1 { width: 3px; height: 40px; top: 60px; left: 50%; }
+        #relationship-5 .ol-h1 { height: 3px; width: 55%; top: 97px; left: 22%; }
+        #relationship-5 .ol-v2 { width: 3px; height: 60px; top: 135px; left: 22%; }
+        #relationship-5 .ol-v3 { width: 3px; height: 60px; top: 135px; left: 50%; }
+        #relationship-5 .ol-v4 { width: 3px; height: 60px; top: 135px; right: 22%; }
+        #relationship-5 .ol-h2 { height: 3px; width: 22%; top: 192px; left: 11%; }
+        #relationship-5 .ol-h3 { height: 3px; width: 20%; top: 192px; left: 40%; }
+        #relationship-5 .ol-h4 { height: 3px; width: 22%; top: 192px; right: 11%; }
+
+        /* ============================================
+           #relationship-6: Two-way Relationship
+           ============================================ */
+        #relationship-6 .two-way-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-6 .two-way-node:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #relationship-6 .tw-left { left: 40px; background: #FF6B9D; }
+        #relationship-6 .tw-right { right: 40px; background: #4ECDC4; }
+
+        #relationship-6 .arrow-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 50px;
+        }
+
+        #relationship-6 .double-arrow {
+            position: absolute;
+            height: 4px;
+            background: #FFD93D;
+            width: 100px;
+        }
+
+        #relationship-6 .da-top {
+            top: 15px;
+            left: 0;
+        }
+
+        #relationship-6 .da-bottom {
+            bottom: 15px;
+            left: 0;
+        }
+
+        #relationship-6 .da-top::before,
+        #relationship-6 .da-top::after,
+        #relationship-6 .da-bottom::before,
+        #relationship-6 .da-bottom::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        #relationship-6 .da-top::after {
+            right: -8px;
+            top: -4px;
+            border-left: 12px solid #FFD93D;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        #relationship-6 .da-bottom::before {
+            left: -8px;
+            top: -4px;
+            border-right: 12px solid #FFD93D;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        #relationship-6 .relation-label {
+            position: absolute;
+            font-size: 10px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        #relationship-6 .label-top { top: 30%; left: 50%; transform: translateX(-50%); }
+        #relationship-6 .label-bottom { bottom: 30%; left: 50%; transform: translateX(-50%); }
+
+        /* ============================================
+           #relationship-7: One-to-Many
+           ============================================ */
+        #relationship-7 .one-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #FF6B9D;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-7 .one-node:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #relationship-7 .many-node {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-7 .many-node:hover {
+            transform: scale(1.15);
+        }
+
+        #relationship-7 .mn-1 { top: 30px; background: #4ECDC4; }
+        #relationship-7 .mn-2 { top: 90px; background: #7ED957; }
+        #relationship-7 .mn-3 { top: 150px; background: #FFD93D; color: #333; }
+        #relationship-7 .mn-4 { bottom: 30px; background: #A66DD4; }
+
+        #relationship-7 .otm-line {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+            left: 110px;
+            z-index: 1;
+        }
+
+        #relationship-7 .otm-1 { width: 120px; top: 55px; transform: rotate(15deg); }
+        #relationship-7 .otm-2 { width: 130px; top: 115px; transform: rotate(5deg); }
+        #relationship-7 .otm-3 { width: 130px; top: 175px; transform: rotate(-5deg); }
+        #relationship-7 .otm-4 { width: 120px; bottom: 55px; transform: rotate(-15deg); }
+
+        #relationship-7 .otm-arrow {
+            position: absolute;
+            right: 75px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #ddd;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        #relationship-7 .oa-1 { top: 52px; }
+        #relationship-7 .oa-2 { top: 112px; }
+        #relationship-7 .oa-3 { top: 172px; }
+        #relationship-7 .oa-4 { bottom: 52px; }
+
+        /* ============================================
+           #relationship-8: Many-to-Many
+           ============================================ */
+        #relationship-8 .mtm-left,
+        #relationship-8 .mtm-right {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-8 .mtm-left:hover,
+        #relationship-8 .mtm-right:hover {
+            transform: scale(1.15);
+        }
+
+        #relationship-8 .ml-1 { left: 25px; top: 50px; background: #FF6B9D; }
+        #relationship-8 .ml-2 { left: 25px; top: 115px; background: #4ECDC4; }
+        #relationship-8 .ml-3 { left: 25px; bottom: 50px; background: #7ED957; }
+
+        #relationship-8 .mr-1 { right: 25px; top: 50px; background: #FFD93D; color: #333; }
+        #relationship-8 .mr-2 { right: 25px; top: 115px; background: #A66DD4; }
+        #relationship-8 .mr-3 { right: 25px; bottom: 50px; background: #FF9F43; }
+
+        #relationship-8 .mtm-line {
+            position: absolute;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        #relationship-8 .mtm-connector {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #74B9FF;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 600;
+            color: white;
+            z-index: 2;
+        }
+
+        /* ============================================
+           #relationship-9: Circular Arrangement
+           ============================================ */
+        #relationship-9 .circle-node {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-9 .circle-node:hover {
+            transform: scale(1.2);
+        }
+
+        #relationship-9 .cn-1 { top: 15px; left: 50%; transform: translateX(-50%); background: #FF6B9D; }
+        #relationship-9 .cn-1:hover { transform: translateX(-50%) scale(1.2); }
+        #relationship-9 .cn-2 { top: 50px; right: 45px; background: #4ECDC4; }
+        #relationship-9 .cn-3 { top: 120px; right: 25px; background: #7ED957; }
+        #relationship-9 .cn-4 { bottom: 50px; right: 45px; background: #FFD93D; color: #333; }
+        #relationship-9 .cn-5 { bottom: 15px; left: 50%; transform: translateX(-50%); background: #A66DD4; }
+        #relationship-9 .cn-5:hover { transform: translateX(-50%) scale(1.2); }
+        #relationship-9 .cn-6 { bottom: 50px; left: 45px; background: #FF9F43; }
+        #relationship-9 .cn-7 { top: 120px; left: 25px; background: #74B9FF; }
+        #relationship-9 .cn-8 { top: 50px; left: 45px; background: #FF7675; }
+
+        #relationship-9 .circle-ring {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 3px dashed #ddd;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* ============================================
+           #relationship-10: Cluster Groups
+           ============================================ */
+        #relationship-10 .cluster {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 20px;
+            padding: 15px;
+        }
+
+        #relationship-10 .cluster-a {
+            width: 130px;
+            height: 120px;
+            left: 20px;
+            top: 30px;
+            border-color: #FFB6C1;
+            background: rgba(255, 182, 193, 0.1);
+        }
+
+        #relationship-10 .cluster-b {
+            width: 130px;
+            height: 120px;
+            right: 20px;
+            top: 30px;
+            border-color: #87CEEB;
+            background: rgba(135, 206, 235, 0.1);
+        }
+
+        #relationship-10 .cluster-c {
+            width: 150px;
+            height: 90px;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            border-color: #98FB98;
+            background: rgba(152, 251, 152, 0.1);
+        }
+
+        #relationship-10 .cluster-node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-10 .cluster-node:hover {
+            transform: scale(1.15);
+        }
+
+        #relationship-10 .ca-1 { top: 50px; left: 35px; background: #FF6B9D; }
+        #relationship-10 .ca-2 { top: 50px; left: 90px; background: #FF7675; }
+        #relationship-10 .ca-3 { top: 100px; left: 60px; background: #FF9F43; }
+
+        #relationship-10 .cb-1 { top: 50px; right: 90px; background: #4ECDC4; }
+        #relationship-10 .cb-2 { top: 50px; right: 35px; background: #74B9FF; }
+        #relationship-10 .cb-3 { top: 100px; right: 60px; background: #A66DD4; }
+
+        #relationship-10 .cc-1 { bottom: 40px; left: 35%; background: #7ED957; }
+        #relationship-10 .cc-2 { bottom: 40px; right: 35%; background: #FFD93D; color: #333; }
+
+        #relationship-10 .cluster-link {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        #relationship-10 .cl-1 { width: 50px; top: 90px; left: 148px; }
+        #relationship-10 .cl-2 { width: 60px; top: 170px; left: 80px; transform: rotate(50deg); }
+        #relationship-10 .cl-3 { width: 60px; top: 170px; right: 80px; transform: rotate(-50deg); }
+
+        /* ============================================
+           #relationship-11: Bridge Connection
+           ============================================ */
+        #relationship-11 .bridge-group {
+            position: absolute;
+            width: 100px;
+            height: 180px;
+            border: 3px solid;
+            border-radius: 15px;
+            top: 50px;
+        }
+
+        #relationship-11 .bg-left {
+            left: 25px;
+            border-color: #FFB6C1;
+            background: rgba(255, 182, 193, 0.1);
+        }
+
+        #relationship-11 .bg-right {
+            right: 25px;
+            border-color: #87CEEB;
+            background: rgba(135, 206, 235, 0.1);
+        }
+
+        #relationship-11 .bridge-node {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-11 .bridge-node:hover {
+            transform: scale(1.15);
+        }
+
+        #relationship-11 .bl-1 { top: 70px; left: 50px; background: #FF6B9D; }
+        #relationship-11 .bl-2 { top: 130px; left: 50px; background: #FF7675; }
+        #relationship-11 .bl-3 { top: 190px; left: 50px; background: #FF9F43; }
+
+        #relationship-11 .br-1 { top: 70px; right: 50px; background: #4ECDC4; }
+        #relationship-11 .br-2 { top: 130px; right: 50px; background: #74B9FF; }
+        #relationship-11 .br-3 { top: 190px; right: 50px; background: #A66DD4; }
+
+        #relationship-11 .bridge-connector {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #7ED957;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            z-index: 3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #relationship-11 .bridge-connector:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #relationship-11 .bridge-line {
+            position: absolute;
+            height: 3px;
+            background: #7ED957;
+            top: 50%;
+            z-index: 1;
+        }
+
+        #relationship-11 .bline-l { width: 55px; left: 125px; }
+        #relationship-11 .bline-r { width: 55px; right: 125px; }
+
+        /* ============================================
+           #relationship-12: Chain Link
+           ============================================ */
+        #relationship-12 .chain-node {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-12 .chain-node:hover {
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        #relationship-12 .ch-1 { left: 15px; background: #FF6B9D; }
+        #relationship-12 .ch-2 { left: 85px; background: #4ECDC4; }
+        #relationship-12 .ch-3 { left: 155px; background: #7ED957; }
+        #relationship-12 .ch-4 { right: 85px; background: #FFD93D; color: #333; }
+        #relationship-12 .ch-5 { right: 15px; background: #A66DD4; }
+
+        #relationship-12 .chain-link {
+            position: absolute;
+            width: 20px;
+            height: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        #relationship-12 .link-1 { left: 68px; background: #FFB6C1; }
+        #relationship-12 .link-2 { left: 138px; background: #87CEEB; }
+        #relationship-12 .link-3 { left: 208px; background: #98FB98; }
+        #relationship-12 .link-4 { right: 138px; background: #FFDAB9; }
+
+        #relationship-12 .chain-ring {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 4px solid;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #relationship-12 .ring-1 { left: 58px; border-color: #FFB6C1; }
+        #relationship-12 .ring-2 { left: 128px; border-color: #87CEEB; }
+        #relationship-12 .ring-3 { left: 198px; border-color: #98FB98; }
+        #relationship-12 .ring-4 { right: 128px; border-color: #FFDAB9; }
+
+        /* ============================================
+           #relationship-13: Satellite Relationship
+           ============================================ */
+        #relationship-13 .planet {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #FF6B9D;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            z-index: 3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #relationship-13 .planet:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #relationship-13 .orbit {
+            position: absolute;
+            border: 2px dashed;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #relationship-13 .orbit-1 {
+            width: 140px;
+            height: 140px;
+            border-color: #FFB6C1;
+        }
+
+        #relationship-13 .orbit-2 {
+            width: 220px;
+            height: 220px;
+            border-color: #87CEEB;
+        }
+
+        #relationship-13 .satellite {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #relationship-13 .satellite:hover {
+            transform: scale(1.2);
+        }
+
+        #relationship-13 .sat-1 { top: 55px; left: 50%; transform: translateX(-50%); background: #4ECDC4; }
+        #relationship-13 .sat-1:hover { transform: translateX(-50%) scale(1.2); }
+        #relationship-13 .sat-2 { top: 50%; right: 55px; transform: translateY(-50%); background: #7ED957; }
+        #relationship-13 .sat-2:hover { transform: translateY(-50%) scale(1.2); }
+        #relationship-13 .sat-3 { bottom: 55px; left: 50%; transform: translateX(-50%); background: #FFD93D; color: #333; }
+        #relationship-13 .sat-3:hover { transform: translateX(-50%) scale(1.2); }
+        #relationship-13 .sat-4 { top: 50%; left: 55px; transform: translateY(-50%); background: #A66DD4; }
+        #relationship-13 .sat-4:hover { transform: translateY(-50%) scale(1.2); }
+
+        #relationship-13 .outer-sat {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #relationship-13 .outer-sat:hover {
+            transform: scale(1.2);
+        }
+
+        #relationship-13 .os-1 { top: 25px; left: 40%; background: #FF9F43; }
+        #relationship-13 .os-2 { top: 60px; right: 30px; background: #74B9FF; }
+        #relationship-13 .os-3 { bottom: 60px; right: 30px; background: #FF7675; }
+        #relationship-13 .os-4 { bottom: 25px; right: 40%; background: #4ECDC4; }
+
+        /* ============================================
+           #relationship-14: Nested Circles
+           ============================================ */
+        #relationship-14 .nest-circle {
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #relationship-14 .nest-outer {
+            width: 220px;
+            height: 220px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 3px solid #4ECDC4;
+        }
+
+        #relationship-14 .nest-middle {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 107, 157, 0.2);
+            border: 3px solid #FF6B9D;
+        }
+
+        #relationship-14 .nest-inner {
+            width: 80px;
+            height: 80px;
+            background: rgba(126, 217, 87, 0.3);
+            border: 3px solid #7ED957;
+        }
+
+        #relationship-14 .nest-core {
+            width: 40px;
+            height: 40px;
+            background: #FFD93D;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #relationship-14 .nest-core:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #relationship-14 .nest-label {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #relationship-14 .nl-outer { top: 15px; left: 50%; transform: translateX(-50%); color: #4ECDC4; }
+        #relationship-14 .nl-middle { top: 50px; left: 50%; transform: translateX(-50%); color: #FF6B9D; }
+        #relationship-14 .nl-inner { top: 85px; left: 50%; transform: translateX(-50%); color: #7ED957; }
+        #relationship-14 .nl-core { top: 50%; left: 50%; transform: translate(-50%, -50%); color: #333; font-size: 9px; }
+
+        /* ============================================
+           #relationship-15: Overlap Relationship
+           ============================================ */
+        #relationship-15 .overlap-circle {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 25px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-15 .overlap-circle:hover {
+            opacity: 0.8;
+        }
+
+        #relationship-15 .ov-a {
+            left: 50px;
+            background: rgba(255, 107, 157, 0.7);
+        }
+
+        #relationship-15 .ov-b {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(78, 205, 196, 0.7);
+        }
+
+        #relationship-15 .ov-b:hover {
+            transform: translate(-50%, -50%);
+        }
+
+        #relationship-15 .ov-c {
+            right: 50px;
+            background: rgba(126, 217, 87, 0.7);
+        }
+
+        #relationship-15 .overlap-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: 600;
+            color: #333;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 8px;
+            z-index: 2;
+        }
+
+        /* ============================================
+           #relationship-16: Sequential Relationship
+           ============================================ */
+        #relationship-16 .seq-node {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-16 .seq-node:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #relationship-16 .seq-1 { left: 15px; background: #FF6B9D; }
+        #relationship-16 .seq-2 { left: 95px; background: #4ECDC4; }
+        #relationship-16 .seq-3 { left: 175px; background: #7ED957; }
+        #relationship-16 .seq-4 { right: 15px; background: #FFD93D; color: #333; }
+
+        #relationship-16 .seq-arrow {
+            position: absolute;
+            width: 25px;
+            height: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #relationship-16 .sa-1 { left: 73px; background: #FFB6C1; }
+        #relationship-16 .sa-2 { left: 153px; background: #87CEEB; }
+        #relationship-16 .sa-3 { right: 73px; background: #98FB98; }
+
+        #relationship-16 .seq-arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        #relationship-16 .sa-1::after { border-left-color: #FFB6C1; }
+        #relationship-16 .sa-2::after { border-left-color: #87CEEB; }
+        #relationship-16 .sa-3::after { border-left-color: #98FB98; }
+
+        #relationship-16 .seq-label {
+            position: absolute;
+            font-size: 9px;
+            color: #999;
+            top: 75%;
+        }
+
+        #relationship-16 .sl-1 { left: 30px; }
+        #relationship-16 .sl-2 { left: 110px; }
+        #relationship-16 .sl-3 { left: 190px; }
+        #relationship-16 .sl-4 { right: 25px; }
+
+        /* ============================================
+           #relationship-17: Dependency Arrows
+           ============================================ */
+        #relationship-17 .dep-node {
+            position: absolute;
+            width: 70px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-17 .dep-node:hover {
+            transform: scale(1.1);
+        }
+
+        #relationship-17 .dep-main {
+            width: 80px;
+            height: 55px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF6B9D;
+            font-size: 11px;
+        }
+
+        #relationship-17 .dep-main:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #relationship-17 .dep-1 { top: 30px; left: 25px; background: #4ECDC4; }
+        #relationship-17 .dep-2 { top: 30px; right: 25px; background: #7ED957; }
+        #relationship-17 .dep-3 { bottom: 30px; left: 25px; background: #FFD93D; color: #333; }
+        #relationship-17 .dep-4 { bottom: 30px; right: 25px; background: #A66DD4; }
+
+        #relationship-17 .dep-arrow {
+            position: absolute;
+            height: 3px;
+            z-index: 1;
+        }
+
+        #relationship-17 .da-1 { width: 50px; top: 55px; left: 95px; transform: rotate(35deg); background: #87CEEB; }
+        #relationship-17 .da-2 { width: 50px; top: 55px; right: 95px; transform: rotate(-35deg); background: #98FB98; }
+        #relationship-17 .da-3 { width: 50px; bottom: 55px; left: 95px; transform: rotate(-35deg); background: #FFDAB9; }
+        #relationship-17 .da-4 { width: 50px; bottom: 55px; right: 95px; transform: rotate(35deg); background: #DDA0DD; }
+
+        #relationship-17 .dep-arrow::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        #relationship-17 .da-1::after { border-left-color: #87CEEB; }
+        #relationship-17 .da-2::after { border-left-color: #98FB98; }
+        #relationship-17 .da-3::after { border-left-color: #FFDAB9; }
+        #relationship-17 .da-4::after { border-left-color: #DDA0DD; }
+
+        /* ============================================
+           #relationship-18: Bidirectional Arrows
+           ============================================ */
+        #relationship-18 .bi-node {
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-18 .bi-node:hover {
+            transform: scale(1.15);
+        }
+
+        #relationship-18 .bi-top { top: 25px; left: 50%; transform: translateX(-50%); background: #FF6B9D; }
+        #relationship-18 .bi-top:hover { transform: translateX(-50%) scale(1.15); }
+        #relationship-18 .bi-left { top: 50%; left: 30px; transform: translateY(-50%); background: #4ECDC4; }
+        #relationship-18 .bi-left:hover { transform: translateY(-50%) scale(1.15); }
+        #relationship-18 .bi-right { top: 50%; right: 30px; transform: translateY(-50%); background: #7ED957; }
+        #relationship-18 .bi-right:hover { transform: translateY(-50%) scale(1.15); }
+        #relationship-18 .bi-bottom { bottom: 25px; left: 50%; transform: translateX(-50%); background: #FFD93D; color: #333; }
+        #relationship-18 .bi-bottom:hover { transform: translateX(-50%) scale(1.15); }
+
+        #relationship-18 .bi-arrow {
+            position: absolute;
+            z-index: 1;
+        }
+
+        #relationship-18 .bi-h {
+            width: 80px;
+            height: 4px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #A66DD4;
+        }
+
+        #relationship-18 .bi-v {
+            width: 4px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF9F43;
+        }
+
+        #relationship-18 .bi-arrow::before,
+        #relationship-18 .bi-arrow::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        #relationship-18 .bi-h::before {
+            left: -8px;
+            top: -4px;
+            border-right: 10px solid #A66DD4;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        #relationship-18 .bi-h::after {
+            right: -8px;
+            top: -4px;
+            border-left: 10px solid #A66DD4;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        #relationship-18 .bi-v::before {
+            top: -8px;
+            left: -4px;
+            border-bottom: 10px solid #FF9F43;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        #relationship-18 .bi-v::after {
+            bottom: -8px;
+            left: -4px;
+            border-top: 10px solid #FF9F43;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        /* ============================================
+           #relationship-19: Grouped Clusters
+           ============================================ */
+        #relationship-19 .group-box {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+        }
+
+        #relationship-19 .group-a {
+            width: 120px;
+            height: 100px;
+            top: 20px;
+            left: 20px;
+            border-color: #FFB6C1;
+            background: rgba(255, 182, 193, 0.1);
+        }
+
+        #relationship-19 .group-b {
+            width: 120px;
+            height: 100px;
+            top: 20px;
+            right: 20px;
+            border-color: #87CEEB;
+            background: rgba(135, 206, 235, 0.1);
+        }
+
+        #relationship-19 .group-c {
+            width: 280px;
+            height: 80px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-color: #98FB98;
+            background: rgba(152, 251, 152, 0.1);
+        }
+
+        #relationship-19 .group-node {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-19 .group-node:hover {
+            transform: scale(1.2);
+        }
+
+        #relationship-19 .ga-1 { background: #FF6B9D; }
+        #relationship-19 .ga-2 { background: #FF7675; }
+        #relationship-19 .ga-3 { background: #FF9F43; }
+        #relationship-19 .ga-4 { background: #FFD93D; color: #333; }
+
+        #relationship-19 .gb-1 { background: #4ECDC4; }
+        #relationship-19 .gb-2 { background: #74B9FF; }
+        #relationship-19 .gb-3 { background: #A66DD4; }
+        #relationship-19 .gb-4 { background: #87CEEB; }
+
+        #relationship-19 .gc-1 { background: #7ED957; }
+        #relationship-19 .gc-2 { background: #98FB98; }
+        #relationship-19 .gc-3 { background: #4ECDC4; }
+        #relationship-19 .gc-4 { background: #FFD93D; color: #333; }
+        #relationship-19 .gc-5 { background: #FF6B9D; }
+        #relationship-19 .gc-6 { background: #A66DD4; }
+
+        #relationship-19 .group-label {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #relationship-19 .gl-a { top: 25px; left: 35px; color: #FF6B9D; }
+        #relationship-19 .gl-b { top: 25px; right: 35px; color: #4ECDC4; }
+        #relationship-19 .gl-c { bottom: 25px; left: 50%; transform: translateX(-50%); color: #7ED957; }
+
+        #relationship-19 .group-connect {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        #relationship-19 .gc-link-1 { width: 40px; top: 70px; left: 140px; }
+        #relationship-19 .gc-link-2 { width: 50px; top: 140px; left: 70px; transform: rotate(60deg); }
+        #relationship-19 .gc-link-3 { width: 50px; top: 140px; right: 70px; transform: rotate(-60deg); }
+
+        /* ============================================
+           #relationship-20: Radial Arrangement
+           ============================================ */
+        #relationship-20 .radial-center {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #FF6B9D;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            z-index: 3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #relationship-20 .radial-center:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #relationship-20 .radial-node {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #relationship-20 .radial-node:hover {
+            transform: scale(1.2);
+        }
+
+        #relationship-20 .rn-1 { top: 25px; left: 50%; transform: translateX(-50%); background: #4ECDC4; }
+        #relationship-20 .rn-1:hover { transform: translateX(-50%) scale(1.2); }
+        #relationship-20 .rn-2 { top: 50px; right: 40px; background: #7ED957; }
+        #relationship-20 .rn-3 { top: 50%; right: 20px; transform: translateY(-50%); background: #FFD93D; color: #333; }
+        #relationship-20 .rn-3:hover { transform: translateY(-50%) scale(1.2); }
+        #relationship-20 .rn-4 { bottom: 50px; right: 40px; background: #A66DD4; }
+        #relationship-20 .rn-5 { bottom: 25px; left: 50%; transform: translateX(-50%); background: #FF9F43; }
+        #relationship-20 .rn-5:hover { transform: translateX(-50%) scale(1.2); }
+        #relationship-20 .rn-6 { bottom: 50px; left: 40px; background: #74B9FF; }
+        #relationship-20 .rn-7 { top: 50%; left: 20px; transform: translateY(-50%); background: #FF7675; }
+        #relationship-20 .rn-7:hover { transform: translateY(-50%) scale(1.2); }
+        #relationship-20 .rn-8 { top: 50px; left: 40px; background: #4ECDC4; }
+
+        #relationship-20 .radial-line {
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: #e0e0e0;
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            z-index: 1;
+        }
+
+        #relationship-20 .rl-1 { transform: rotate(-90deg); }
+        #relationship-20 .rl-2 { transform: rotate(-45deg); }
+        #relationship-20 .rl-3 { transform: rotate(0deg); }
+        #relationship-20 .rl-4 { transform: rotate(45deg); }
+        #relationship-20 .rl-5 { transform: rotate(90deg); }
+        #relationship-20 .rl-6 { transform: rotate(135deg); }
+        #relationship-20 .rl-7 { transform: rotate(180deg); }
+        #relationship-20 .rl-8 { transform: rotate(225deg); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Relationship Diagram Layouts</h1>
+    <p class="subtitle">20 Different Relationship Diagram Patterns for SNS Infographics and Education</p>
+
+    <div class="grid">
+        <!-- #relationship-1: Hub and Spoke -->
+        <div class="diagram-card" id="relationship-1">
+            <div class="diagram-title">
+                Hub and Spoke
+                <span class="diagram-id">#relationship-1</span>
+            </div>
+            <div class="diagram-desc">Central element with radiating connections</div>
+            <div class="diagram-container">
+                <div class="hub-line hub-line-1"></div>
+                <div class="hub-line hub-line-2"></div>
+                <div class="hub-line hub-line-3"></div>
+                <div class="hub-line hub-line-4"></div>
+                <div class="hub-line hub-line-5"></div>
+                <div class="hub-line hub-line-6"></div>
+                <div class="center-hub">Center</div>
+                <div class="spoke spoke-1">Item A</div>
+                <div class="spoke spoke-2">Item B</div>
+                <div class="spoke spoke-3">Item C</div>
+                <div class="spoke spoke-4">Item D</div>
+                <div class="spoke spoke-5">Item E</div>
+                <div class="spoke spoke-6">Item F</div>
+            </div>
+        </div>
+
+        <!-- #relationship-2: Network Web -->
+        <div class="diagram-card" id="relationship-2">
+            <div class="diagram-title">
+                Network Web
+                <span class="diagram-id">#relationship-2</span>
+            </div>
+            <div class="diagram-desc">Interconnected network of nodes</div>
+            <div class="diagram-container">
+                <div class="web-line wl1"></div>
+                <div class="web-line wl2"></div>
+                <div class="web-line wl3"></div>
+                <div class="web-line wl4"></div>
+                <div class="web-line wl5"></div>
+                <div class="web-line wl6"></div>
+                <div class="web-line wl7"></div>
+                <div class="web-line wl8"></div>
+                <div class="web-node n1">Node 1</div>
+                <div class="web-node n2">Node 2</div>
+                <div class="web-node n3">Node 3</div>
+                <div class="web-node n4">Node 4</div>
+                <div class="web-node n5">Node 5</div>
+                <div class="web-node n6">Node 6</div>
+                <div class="web-node n7">Node 7</div>
+            </div>
+        </div>
+
+        <!-- #relationship-3: Parent-Child Tree -->
+        <div class="diagram-card" id="relationship-3">
+            <div class="diagram-title">
+                Parent-Child Tree
+                <span class="diagram-id">#relationship-3</span>
+            </div>
+            <div class="diagram-desc">Hierarchical parent-child structure</div>
+            <div class="diagram-container">
+                <div class="tree-line tl-v1"></div>
+                <div class="tree-line tl-h1"></div>
+                <div class="tree-line tl-v2"></div>
+                <div class="tree-line tl-v3"></div>
+                <div class="tree-line tl-v4"></div>
+                <div class="tree-line tl-h2"></div>
+                <div class="tree-line tl-h3"></div>
+                <div class="tree-line tl-h4"></div>
+                <div class="tree-node parent">Parent</div>
+                <div class="tree-node child child-1">Child 1</div>
+                <div class="tree-node child child-2">Child 2</div>
+                <div class="tree-node child child-3">Child 3</div>
+                <div class="tree-node grandchild gc-1">GC1</div>
+                <div class="tree-node grandchild gc-2">GC2</div>
+                <div class="tree-node grandchild gc-3">GC3</div>
+                <div class="tree-node grandchild gc-4">GC4</div>
+                <div class="tree-node grandchild gc-5">GC5</div>
+                <div class="tree-node grandchild gc-6">GC6</div>
+            </div>
+        </div>
+
+        <!-- #relationship-4: Family Tree Style -->
+        <div class="diagram-card" id="relationship-4">
+            <div class="diagram-title">
+                Family Tree Style
+                <span class="diagram-id">#relationship-4</span>
+            </div>
+            <div class="diagram-desc">Multi-generation family structure</div>
+            <div class="diagram-container">
+                <div class="family-line fl-h1"></div>
+                <div class="family-line fl-v1"></div>
+                <div class="family-line fl-h2"></div>
+                <div class="family-line fl-v2"></div>
+                <div class="family-line fl-v3"></div>
+                <div class="family-line fl-v4"></div>
+                <div class="family-line fl-h3"></div>
+                <div class="family-line fl-v5"></div>
+                <div class="family-line fl-v6"></div>
+                <div class="family-line fl-v7"></div>
+                <div class="family-node grandparent gp-1">Gen 1</div>
+                <div class="family-node grandparent gp-2">Gen 1</div>
+                <div class="family-node parent-gen pg-1">Gen 2</div>
+                <div class="family-node parent-gen pg-2">Gen 2</div>
+                <div class="family-node parent-gen pg-3">Gen 2</div>
+                <div class="family-node child-gen cg-1">Gen 3</div>
+                <div class="family-node child-gen cg-2">Gen 3</div>
+                <div class="family-node child-gen cg-3">Gen 3</div>
+                <div class="family-node child-gen cg-4">Gen 3</div>
+                <div class="family-node child-gen cg-5">Gen 3</div>
+            </div>
+        </div>
+
+        <!-- #relationship-5: Org Chart -->
+        <div class="diagram-card" id="relationship-5">
+            <div class="diagram-title">
+                Org Chart (3 Levels)
+                <span class="diagram-id">#relationship-5</span>
+            </div>
+            <div class="diagram-desc">Organization hierarchy structure</div>
+            <div class="diagram-container">
+                <div class="org-line ol-v1"></div>
+                <div class="org-line ol-h1"></div>
+                <div class="org-line ol-v2"></div>
+                <div class="org-line ol-v3"></div>
+                <div class="org-line ol-v4"></div>
+                <div class="org-line ol-h2"></div>
+                <div class="org-line ol-h3"></div>
+                <div class="org-line ol-h4"></div>
+                <div class="org-node ceo">CEO</div>
+                <div class="org-node director d1">Director</div>
+                <div class="org-node director d2">Director</div>
+                <div class="org-node director d3">Director</div>
+                <div class="org-node manager m1">Mgr</div>
+                <div class="org-node manager m2">Mgr</div>
+                <div class="org-node manager m3">Mgr</div>
+                <div class="org-node manager m4">Mgr</div>
+                <div class="org-node manager m5">Mgr</div>
+                <div class="org-node manager m6">Mgr</div>
+            </div>
+        </div>
+
+        <!-- #relationship-6: Two-way Relationship -->
+        <div class="diagram-card" id="relationship-6">
+            <div class="diagram-title">
+                Two-way Relationship
+                <span class="diagram-id">#relationship-6</span>
+            </div>
+            <div class="diagram-desc">Bidirectional interaction between two entities</div>
+            <div class="diagram-container">
+                <div class="two-way-node tw-left">Entity A</div>
+                <div class="two-way-node tw-right">Entity B</div>
+                <div class="arrow-container">
+                    <div class="double-arrow da-top"></div>
+                    <div class="double-arrow da-bottom"></div>
+                </div>
+                <span class="relation-label label-top">Gives</span>
+                <span class="relation-label label-bottom">Returns</span>
+            </div>
+        </div>
+
+        <!-- #relationship-7: One-to-Many -->
+        <div class="diagram-card" id="relationship-7">
+            <div class="diagram-title">
+                One-to-Many
+                <span class="diagram-id">#relationship-7</span>
+            </div>
+            <div class="diagram-desc">Single source connecting to multiple targets</div>
+            <div class="diagram-container">
+                <div class="otm-line otm-1"></div>
+                <div class="otm-line otm-2"></div>
+                <div class="otm-line otm-3"></div>
+                <div class="otm-line otm-4"></div>
+                <div class="otm-arrow oa-1"></div>
+                <div class="otm-arrow oa-2"></div>
+                <div class="otm-arrow oa-3"></div>
+                <div class="otm-arrow oa-4"></div>
+                <div class="one-node">Source</div>
+                <div class="many-node mn-1">Target 1</div>
+                <div class="many-node mn-2">Target 2</div>
+                <div class="many-node mn-3">Target 3</div>
+                <div class="many-node mn-4">Target 4</div>
+            </div>
+        </div>
+
+        <!-- #relationship-8: Many-to-Many -->
+        <div class="diagram-card" id="relationship-8">
+            <div class="diagram-title">
+                Many-to-Many
+                <span class="diagram-id">#relationship-8</span>
+            </div>
+            <div class="diagram-desc">Multiple sources to multiple targets via connector</div>
+            <div class="diagram-container">
+                <div class="mtm-line" style="width: 80px; top: 75px; left: 75px;"></div>
+                <div class="mtm-line" style="width: 80px; top: 140px; left: 75px;"></div>
+                <div class="mtm-line" style="width: 80px; bottom: 75px; left: 75px;"></div>
+                <div class="mtm-line" style="width: 80px; top: 75px; right: 75px;"></div>
+                <div class="mtm-line" style="width: 80px; top: 140px; right: 75px;"></div>
+                <div class="mtm-line" style="width: 80px; bottom: 75px; right: 75px;"></div>
+                <div class="mtm-left ml-1">A1</div>
+                <div class="mtm-left ml-2">A2</div>
+                <div class="mtm-left ml-3">A3</div>
+                <div class="mtm-connector">Link</div>
+                <div class="mtm-right mr-1">B1</div>
+                <div class="mtm-right mr-2">B2</div>
+                <div class="mtm-right mr-3">B3</div>
+            </div>
+        </div>
+
+        <!-- #relationship-9: Circular Arrangement -->
+        <div class="diagram-card" id="relationship-9">
+            <div class="diagram-title">
+                Circular Arrangement
+                <span class="diagram-id">#relationship-9</span>
+            </div>
+            <div class="diagram-desc">Elements arranged in a circular pattern</div>
+            <div class="diagram-container">
+                <div class="circle-ring"></div>
+                <div class="circle-node cn-1">A</div>
+                <div class="circle-node cn-2">B</div>
+                <div class="circle-node cn-3">C</div>
+                <div class="circle-node cn-4">D</div>
+                <div class="circle-node cn-5">E</div>
+                <div class="circle-node cn-6">F</div>
+                <div class="circle-node cn-7">G</div>
+                <div class="circle-node cn-8">H</div>
+            </div>
+        </div>
+
+        <!-- #relationship-10: Cluster Groups -->
+        <div class="diagram-card" id="relationship-10">
+            <div class="diagram-title">
+                Cluster Groups
+                <span class="diagram-id">#relationship-10</span>
+            </div>
+            <div class="diagram-desc">Grouped elements with inter-cluster connections</div>
+            <div class="diagram-container">
+                <div class="cluster cluster-a"></div>
+                <div class="cluster cluster-b"></div>
+                <div class="cluster cluster-c"></div>
+                <div class="cluster-link cl-1"></div>
+                <div class="cluster-link cl-2"></div>
+                <div class="cluster-link cl-3"></div>
+                <div class="cluster-node ca-1">A1</div>
+                <div class="cluster-node ca-2">A2</div>
+                <div class="cluster-node ca-3">A3</div>
+                <div class="cluster-node cb-1">B1</div>
+                <div class="cluster-node cb-2">B2</div>
+                <div class="cluster-node cb-3">B3</div>
+                <div class="cluster-node cc-1">C1</div>
+                <div class="cluster-node cc-2">C2</div>
+            </div>
+        </div>
+
+        <!-- #relationship-11: Bridge Connection -->
+        <div class="diagram-card" id="relationship-11">
+            <div class="diagram-title">
+                Bridge Connection
+                <span class="diagram-id">#relationship-11</span>
+            </div>
+            <div class="diagram-desc">Two groups connected by a bridge element</div>
+            <div class="diagram-container">
+                <div class="bridge-group bg-left"></div>
+                <div class="bridge-group bg-right"></div>
+                <div class="bridge-line bline-l"></div>
+                <div class="bridge-line bline-r"></div>
+                <div class="bridge-node bl-1">L1</div>
+                <div class="bridge-node bl-2">L2</div>
+                <div class="bridge-node bl-3">L3</div>
+                <div class="bridge-connector">Bridge</div>
+                <div class="bridge-node br-1">R1</div>
+                <div class="bridge-node br-2">R2</div>
+                <div class="bridge-node br-3">R3</div>
+            </div>
+        </div>
+
+        <!-- #relationship-12: Chain Link -->
+        <div class="diagram-card" id="relationship-12">
+            <div class="diagram-title">
+                Chain Link
+                <span class="diagram-id">#relationship-12</span>
+            </div>
+            <div class="diagram-desc">Sequential chain of connected elements</div>
+            <div class="diagram-container">
+                <div class="chain-ring ring-1"></div>
+                <div class="chain-ring ring-2"></div>
+                <div class="chain-ring ring-3"></div>
+                <div class="chain-ring ring-4"></div>
+                <div class="chain-node ch-1">Step 1</div>
+                <div class="chain-node ch-2">Step 2</div>
+                <div class="chain-node ch-3">Step 3</div>
+                <div class="chain-node ch-4">Step 4</div>
+                <div class="chain-node ch-5">Step 5</div>
+            </div>
+        </div>
+
+        <!-- #relationship-13: Satellite Relationship -->
+        <div class="diagram-card" id="relationship-13">
+            <div class="diagram-title">
+                Satellite Relationship
+                <span class="diagram-id">#relationship-13</span>
+            </div>
+            <div class="diagram-desc">Central core with orbiting elements</div>
+            <div class="diagram-container">
+                <div class="orbit orbit-2"></div>
+                <div class="orbit orbit-1"></div>
+                <div class="planet">Core</div>
+                <div class="satellite sat-1">S1</div>
+                <div class="satellite sat-2">S2</div>
+                <div class="satellite sat-3">S3</div>
+                <div class="satellite sat-4">S4</div>
+                <div class="outer-sat os-1">O1</div>
+                <div class="outer-sat os-2">O2</div>
+                <div class="outer-sat os-3">O3</div>
+                <div class="outer-sat os-4">O4</div>
+            </div>
+        </div>
+
+        <!-- #relationship-14: Nested Circles -->
+        <div class="diagram-card" id="relationship-14">
+            <div class="diagram-title">
+                Nested Circles
+                <span class="diagram-id">#relationship-14</span>
+            </div>
+            <div class="diagram-desc">Concentric layers showing containment</div>
+            <div class="diagram-container">
+                <div class="nest-circle nest-outer">
+                    <div class="nest-circle nest-middle">
+                        <div class="nest-circle nest-inner">
+                            <div class="nest-circle nest-core"></div>
+                        </div>
+                    </div>
+                </div>
+                <span class="nest-label nl-outer">Outer Layer</span>
+                <span class="nest-label nl-middle">Middle Layer</span>
+                <span class="nest-label nl-inner">Inner Layer</span>
+                <span class="nest-label nl-core">Core</span>
+            </div>
+        </div>
+
+        <!-- #relationship-15: Overlap Relationship -->
+        <div class="diagram-card" id="relationship-15">
+            <div class="diagram-title">
+                Overlap Relationship
+                <span class="diagram-id">#relationship-15</span>
+            </div>
+            <div class="diagram-desc">Venn diagram style overlap</div>
+            <div class="diagram-container">
+                <div class="overlap-circle ov-a">Group A</div>
+                <div class="overlap-circle ov-b">Group B</div>
+                <div class="overlap-circle ov-c">Group C</div>
+                <div class="overlap-center">Shared</div>
+            </div>
+        </div>
+
+        <!-- #relationship-16: Sequential Relationship -->
+        <div class="diagram-card" id="relationship-16">
+            <div class="diagram-title">
+                Sequential Relationship
+                <span class="diagram-id">#relationship-16</span>
+            </div>
+            <div class="diagram-desc">Step-by-step progression</div>
+            <div class="diagram-container">
+                <div class="seq-arrow sa-1"></div>
+                <div class="seq-arrow sa-2"></div>
+                <div class="seq-arrow sa-3"></div>
+                <div class="seq-node seq-1">Step 1</div>
+                <div class="seq-node seq-2">Step 2</div>
+                <div class="seq-node seq-3">Step 3</div>
+                <div class="seq-node seq-4">Step 4</div>
+                <span class="seq-label sl-1">Start</span>
+                <span class="seq-label sl-2">Process</span>
+                <span class="seq-label sl-3">Review</span>
+                <span class="seq-label sl-4">End</span>
+            </div>
+        </div>
+
+        <!-- #relationship-17: Dependency Arrows -->
+        <div class="diagram-card" id="relationship-17">
+            <div class="diagram-title">
+                Dependency Arrows
+                <span class="diagram-id">#relationship-17</span>
+            </div>
+            <div class="diagram-desc">Dependencies pointing to central element</div>
+            <div class="diagram-container">
+                <div class="dep-arrow da-1"></div>
+                <div class="dep-arrow da-2"></div>
+                <div class="dep-arrow da-3"></div>
+                <div class="dep-arrow da-4"></div>
+                <div class="dep-node dep-1">Dep A</div>
+                <div class="dep-node dep-2">Dep B</div>
+                <div class="dep-node dep-main">Main</div>
+                <div class="dep-node dep-3">Dep C</div>
+                <div class="dep-node dep-4">Dep D</div>
+            </div>
+        </div>
+
+        <!-- #relationship-18: Bidirectional Arrows -->
+        <div class="diagram-card" id="relationship-18">
+            <div class="diagram-title">
+                Bidirectional Arrows
+                <span class="diagram-id">#relationship-18</span>
+            </div>
+            <div class="diagram-desc">Four-way bidirectional connections</div>
+            <div class="diagram-container">
+                <div class="bi-arrow bi-h"></div>
+                <div class="bi-arrow bi-v"></div>
+                <div class="bi-node bi-top">North</div>
+                <div class="bi-node bi-left">West</div>
+                <div class="bi-node bi-right">East</div>
+                <div class="bi-node bi-bottom">South</div>
+            </div>
+        </div>
+
+        <!-- #relationship-19: Grouped Clusters -->
+        <div class="diagram-card" id="relationship-19">
+            <div class="diagram-title">
+                Grouped Clusters
+                <span class="diagram-id">#relationship-19</span>
+            </div>
+            <div class="diagram-desc">Multiple groups with labeled members</div>
+            <div class="diagram-container">
+                <div class="group-box group-a">
+                    <div class="group-node ga-1">A1</div>
+                    <div class="group-node ga-2">A2</div>
+                    <div class="group-node ga-3">A3</div>
+                    <div class="group-node ga-4">A4</div>
+                </div>
+                <div class="group-box group-b">
+                    <div class="group-node gb-1">B1</div>
+                    <div class="group-node gb-2">B2</div>
+                    <div class="group-node gb-3">B3</div>
+                    <div class="group-node gb-4">B4</div>
+                </div>
+                <div class="group-box group-c">
+                    <div class="group-node gc-1">C1</div>
+                    <div class="group-node gc-2">C2</div>
+                    <div class="group-node gc-3">C3</div>
+                    <div class="group-node gc-4">C4</div>
+                    <div class="group-node gc-5">C5</div>
+                    <div class="group-node gc-6">C6</div>
+                </div>
+                <span class="group-label gl-a">Group A</span>
+                <span class="group-label gl-b">Group B</span>
+                <span class="group-label gl-c">Group C</span>
+                <div class="group-connect gc-link-1"></div>
+                <div class="group-connect gc-link-2"></div>
+                <div class="group-connect gc-link-3"></div>
+            </div>
+        </div>
+
+        <!-- #relationship-20: Radial Arrangement -->
+        <div class="diagram-card" id="relationship-20">
+            <div class="diagram-title">
+                Radial Arrangement
+                <span class="diagram-id">#relationship-20</span>
+            </div>
+            <div class="diagram-desc">Central hub with radial spokes</div>
+            <div class="diagram-container">
+                <div class="radial-line rl-1"></div>
+                <div class="radial-line rl-2"></div>
+                <div class="radial-line rl-3"></div>
+                <div class="radial-line rl-4"></div>
+                <div class="radial-line rl-5"></div>
+                <div class="radial-line rl-6"></div>
+                <div class="radial-line rl-7"></div>
+                <div class="radial-line rl-8"></div>
+                <div class="radial-center">Center</div>
+                <div class="radial-node rn-1">R1</div>
+                <div class="radial-node rn-2">R2</div>
+                <div class="radial-node rn-3">R3</div>
+                <div class="radial-node rn-4">R4</div>
+                <div class="radial-node rn-5">R5</div>
+                <div class="radial-node rn-6">R6</div>
+                <div class="radial-node rn-7">R7</div>
+                <div class="radial-node rn-8">R8</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop & Colorful Components - LINE Ikemen Banana</title>
+    <style>
+        /* ============================================
+           Pop & Colorful Design System
+           ビビッドカラー、大胆な形、楽しい雰囲気
+           ============================================ */
+
+        :root {
+            /* Vivid Colors - Rainbow Palette */
+            --pop-pink: #FF6B9D;
+            --pop-pink-light: #FFB3CC;
+            --pop-orange: #FF9F43;
+            --pop-yellow: #FFEAA7;
+            --pop-yellow-bright: #FFD93D;
+            --pop-green: #6BCB77;
+            --pop-mint: #88D8B0;
+            --pop-blue: #4ECDC4;
+            --pop-sky: #74B9FF;
+            --pop-purple: #A29BFE;
+            --pop-lavender: #DDA0DD;
+            --pop-red: #FF6B6B;
+            --pop-coral: #FF7675;
+
+            /* Neutrals */
+            --pop-white: #FFFFFF;
+            --pop-cream: #FFF9F0;
+            --pop-black: #2D3436;
+            --pop-gray: #636E72;
+            --pop-light-gray: #B2BEC3;
+
+            /* Gradients */
+            --gradient-rainbow: linear-gradient(135deg, #FF6B9D 0%, #FF9F43 25%, #FFEAA7 50%, #6BCB77 75%, #4ECDC4 100%);
+            --gradient-sunset: linear-gradient(135deg, #FF6B9D 0%, #FF9F43 50%, #FFD93D 100%);
+            --gradient-ocean: linear-gradient(135deg, #4ECDC4 0%, #74B9FF 50%, #A29BFE 100%);
+            --gradient-candy: linear-gradient(135deg, #FF6B9D 0%, #A29BFE 100%);
+
+            /* Shadows - Colorful & Playful */
+            --shadow-pink: 0 8px 30px rgba(255, 107, 157, 0.4);
+            --shadow-blue: 0 8px 30px rgba(78, 205, 196, 0.4);
+            --shadow-purple: 0 8px 30px rgba(162, 155, 254, 0.4);
+            --shadow-pop: 0 10px 40px rgba(0, 0, 0, 0.1);
+
+            /* Border Radius - Rounded & Friendly */
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-xl: 50px;
+            --radius-full: 9999px;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 20px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Rounded Mplus 1c', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            background: var(--pop-cream);
+            color: var(--pop-black);
+            line-height: 1.7;
+        }
+
+        body {
+            padding: var(--space-xl);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(162, 155, 254, 0.1) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            padding: var(--space-xl);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-rainbow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-sm);
+        }
+
+        .page-header p {
+            color: var(--pop-gray);
+            font-size: 1.1rem;
+        }
+
+        .component-wrapper {
+            margin-bottom: var(--space-2xl);
+            background: var(--pop-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-pop);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-rainbow);
+        }
+
+        .component-id {
+            display: inline-block;
+            background: var(--gradient-candy);
+            color: var(--pop-white);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ============================================
+           [V01] HERO SECTION - Pop & Colorful
+           ============================================ */
+
+        .pop-hero {
+            background: var(--gradient-sunset);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl) var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pop-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.3) 2px, transparent 2px);
+            background-size: 30px 30px;
+            animation: sparkle 20s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .pop-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--pop-white);
+            color: var(--pop-pink);
+            padding: 10px 24px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .pop-hero__badge::before {
+            content: '🎉';
+            font-size: 18px;
+        }
+
+        .pop-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--pop-white);
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            margin-bottom: var(--space-md);
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+
+        .pop-hero__subtitle {
+            font-size: 1.25rem;
+            color: var(--pop-white);
+            opacity: 0.95;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .pop-hero__cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pop-hero__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .pop-hero__cta--primary {
+            background: var(--pop-white);
+            color: var(--pop-pink);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        .pop-hero__cta--primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .pop-hero__cta--secondary {
+            background: transparent;
+            color: var(--pop-white);
+            border: 3px solid var(--pop-white);
+        }
+
+        .pop-hero__cta--secondary:hover {
+            background: var(--pop-white);
+            color: var(--pop-pink);
+            transform: translateY(-5px);
+        }
+
+        .pop-hero__shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .pop-hero__shape {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pop-hero__shape--circle {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            top: 10%;
+            left: 5%;
+        }
+
+        .pop-hero__shape--square {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.15);
+            border-radius: var(--radius-sm);
+            top: 60%;
+            right: 10%;
+            transform: rotate(45deg);
+            animation-delay: -2s;
+        }
+
+        .pop-hero__shape--triangle {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 70px solid rgba(255,255,255,0.2);
+            top: 20%;
+            right: 15%;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* ============================================
+           [V02] FEATURE CARD - Pop & Colorful
+           ============================================ */
+
+        .pop-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .pop-feature-card {
+            background: var(--pop-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 3px solid transparent;
+        }
+
+        .pop-feature-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            border-color: var(--pop-pink);
+            box-shadow: var(--shadow-pink);
+        }
+
+        .pop-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--gradient-rainbow);
+        }
+
+        .pop-feature-card__icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+
+        .pop-feature-card__icon--pink {
+            background: linear-gradient(135deg, var(--pop-pink-light) 0%, var(--pop-pink) 100%);
+        }
+
+        .pop-feature-card__icon--blue {
+            background: linear-gradient(135deg, var(--pop-sky) 0%, var(--pop-blue) 100%);
+        }
+
+        .pop-feature-card__icon--green {
+            background: linear-gradient(135deg, var(--pop-mint) 0%, var(--pop-green) 100%);
+        }
+
+        .pop-feature-card__icon--purple {
+            background: linear-gradient(135deg, var(--pop-lavender) 0%, var(--pop-purple) 100%);
+        }
+
+        .pop-feature-card__title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--pop-black);
+            margin-bottom: var(--space-sm);
+        }
+
+        .pop-feature-card__desc {
+            color: var(--pop-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .pop-feature-card__tag {
+            display: inline-block;
+            background: var(--pop-yellow);
+            color: var(--pop-black);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: var(--space-md);
+        }
+
+        /* ============================================
+           [V03] PRICING TABLE - Pop & Colorful
+           ============================================ */
+
+        .pop-pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            padding: var(--space-md);
+        }
+
+        .pop-pricing-card {
+            background: var(--pop-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 4px solid var(--pop-light-gray);
+        }
+
+        .pop-pricing-card:hover {
+            transform: scale(1.03);
+        }
+
+        .pop-pricing-card--featured {
+            border-color: var(--pop-pink);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-pink);
+        }
+
+        .pop-pricing-card--featured:hover {
+            transform: scale(1.08);
+        }
+
+        .pop-pricing-card__ribbon {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-sunset);
+            color: var(--pop-white);
+            padding: 8px 24px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 800;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .pop-pricing-card__name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--pop-black);
+            margin-bottom: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .pop-pricing-card__price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: var(--space-md);
+        }
+
+        .pop-pricing-card__currency {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pop-pink);
+        }
+
+        .pop-pricing-card__amount {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .pop-pricing-card__period {
+            font-size: 1rem;
+            color: var(--pop-gray);
+        }
+
+        .pop-pricing-card__features {
+            list-style: none;
+            text-align: left;
+            margin: var(--space-lg) 0;
+            padding: var(--space-md);
+            background: var(--pop-cream);
+            border-radius: var(--radius-md);
+        }
+
+        .pop-pricing-card__feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 2px dashed var(--pop-light-gray);
+            font-size: 0.95rem;
+            color: var(--pop-black);
+        }
+
+        .pop-pricing-card__feature:last-child {
+            border-bottom: none;
+        }
+
+        .pop-pricing-card__feature::before {
+            content: '✨';
+            font-size: 1.2rem;
+        }
+
+        .pop-pricing-card__cta {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-sunset);
+            color: var(--pop-white);
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .pop-pricing-card__cta:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-pink);
+        }
+
+        .pop-pricing-card__cta--outline {
+            background: transparent;
+            border: 3px solid var(--pop-pink);
+            color: var(--pop-pink);
+        }
+
+        .pop-pricing-card__cta--outline:hover {
+            background: var(--pop-pink);
+            color: var(--pop-white);
+        }
+
+        /* ============================================
+           [V04] CTA BUTTON - Pop & Colorful
+           ============================================ */
+
+        .pop-btn-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+
+        .pop-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pop-btn--primary {
+            background: var(--gradient-sunset);
+            color: var(--pop-white);
+            box-shadow: 0 6px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .pop-btn--primary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.5);
+        }
+
+        .pop-btn--secondary {
+            background: var(--gradient-ocean);
+            color: var(--pop-white);
+            box-shadow: 0 6px 25px rgba(78, 205, 196, 0.4);
+        }
+
+        .pop-btn--secondary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(78, 205, 196, 0.5);
+        }
+
+        .pop-btn--outline {
+            background: transparent;
+            border: 3px solid var(--pop-pink);
+            color: var(--pop-pink);
+        }
+
+        .pop-btn--outline:hover {
+            background: var(--pop-pink);
+            color: var(--pop-white);
+            transform: translateY(-4px);
+        }
+
+        .pop-btn--ghost {
+            background: rgba(255, 107, 157, 0.1);
+            color: var(--pop-pink);
+        }
+
+        .pop-btn--ghost:hover {
+            background: var(--pop-pink);
+            color: var(--pop-white);
+            transform: translateY(-4px);
+        }
+
+        .pop-btn--large {
+            padding: 20px 48px;
+            font-size: 1.2rem;
+        }
+
+        .pop-btn--bounce:hover {
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
+            75% { transform: translateY(-8px); }
+        }
+
+        .pop-btn__sparkle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translate(-50%, -50%) skewX(-20deg) translateX(-200%);
+            transition: none;
+        }
+
+        .pop-btn:hover .pop-btn__sparkle {
+            animation: sparkle-slide 0.6s ease;
+        }
+
+        @keyframes sparkle-slide {
+            0% { transform: translate(-50%, -50%) skewX(-20deg) translateX(-200%); }
+            100% { transform: translate(-50%, -50%) skewX(-20deg) translateX(200%); }
+        }
+
+        /* ============================================
+           [V05] TESTIMONIAL - Pop & Colorful
+           ============================================ */
+
+        .pop-testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .pop-testimonial {
+            background: var(--pop-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pop-testimonial:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: var(--shadow-purple);
+        }
+
+        .pop-testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 6rem;
+            font-weight: 900;
+            background: var(--gradient-candy);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.3;
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        .pop-testimonial__content {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            color: var(--pop-black);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            padding-top: var(--space-md);
+        }
+
+        .pop-testimonial__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .pop-testimonial__avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-rainbow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--pop-white);
+            font-weight: 700;
+            border: 4px solid var(--pop-white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .pop-testimonial__info {
+            flex: 1;
+        }
+
+        .pop-testimonial__name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--pop-black);
+        }
+
+        .pop-testimonial__role {
+            font-size: 0.9rem;
+            color: var(--pop-gray);
+        }
+
+        .pop-testimonial__rating {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .pop-testimonial__star {
+            font-size: 1.2rem;
+        }
+
+        .pop-testimonial__star--filled {
+            color: var(--pop-yellow-bright);
+        }
+
+        .pop-testimonial__star--empty {
+            color: var(--pop-light-gray);
+        }
+
+        /* ============================================
+           [V06] FAQ ACCORDION - Pop & Colorful
+           ============================================ */
+
+        .pop-faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pop-faq-item {
+            background: var(--pop-white);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .pop-faq-item:hover {
+            border-color: var(--pop-pink-light);
+        }
+
+        .pop-faq-item--active {
+            border-color: var(--pop-pink);
+            box-shadow: var(--shadow-pink);
+        }
+
+        .pop-faq-question {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--pop-black);
+            transition: all 0.3s ease;
+        }
+
+        .pop-faq-question__icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-sunset);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pop-white);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .pop-faq-item--active .pop-faq-question__icon {
+            transform: rotate(45deg);
+        }
+
+        .pop-faq-question__text {
+            flex: 1;
+        }
+
+        .pop-faq-question__arrow {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--pop-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .pop-faq-item--active .pop-faq-question__arrow {
+            background: var(--pop-pink);
+            color: var(--pop-white);
+            transform: rotate(180deg);
+        }
+
+        .pop-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .pop-faq-item--active .pop-faq-answer {
+            max-height: 500px;
+        }
+
+        .pop-faq-answer__content {
+            padding: 0 var(--space-lg) var(--space-lg) var(--space-lg);
+            padding-left: calc(var(--space-lg) + 40px + var(--space-md));
+            color: var(--pop-gray);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           [V07] FOOTER - Pop & Colorful
+           ============================================ */
+
+        .pop-footer {
+            background: var(--pop-black);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            padding: var(--space-2xl) var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pop-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-rainbow);
+        }
+
+        .pop-footer__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .pop-footer__brand {
+            grid-column: span 2;
+        }
+
+        .pop-footer__logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-rainbow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+        }
+
+        .pop-footer__desc {
+            color: var(--pop-light-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .pop-footer__title {
+            color: var(--pop-white);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pop-footer__title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient-sunset);
+            border-radius: 2px;
+        }
+
+        .pop-footer__links {
+            list-style: none;
+        }
+
+        .pop-footer__link {
+            margin-bottom: var(--space-sm);
+        }
+
+        .pop-footer__link a {
+            color: var(--pop-light-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pop-footer__link a:hover {
+            color: var(--pop-pink);
+            transform: translateX(5px);
+        }
+
+        .pop-footer__link a::before {
+            content: '→';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pop-footer__link a:hover::before {
+            opacity: 1;
+        }
+
+        .pop-footer__social {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .pop-footer__social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--pop-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pop-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .pop-footer__social-link:hover {
+            background: var(--gradient-sunset);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .pop-footer__bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: var(--space-lg);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .pop-footer__copyright {
+            color: var(--pop-gray);
+            font-size: 0.85rem;
+        }
+
+        .pop-footer__bottom-links {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .pop-footer__bottom-links a {
+            color: var(--pop-gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .pop-footer__bottom-links a:hover {
+            color: var(--pop-pink);
+        }
+
+        /* ============================================
+           [V08] NAVIGATION BAR - Pop & Colorful
+           ============================================ */
+
+        .pop-navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-full);
+            padding: var(--space-sm) var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: var(--space-md);
+            z-index: 1000;
+        }
+
+        .pop-navbar__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 1.4rem;
+            font-weight: 900;
+            background: var(--gradient-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .pop-navbar__logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-sunset);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .pop-navbar__menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            list-style: none;
+        }
+
+        .pop-navbar__item a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--pop-black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: var(--radius-full);
+            transition: all 0.3s ease;
+        }
+
+        .pop-navbar__item a:hover {
+            background: var(--pop-pink-light);
+            color: var(--pop-pink);
+        }
+
+        .pop-navbar__item--active a {
+            background: var(--gradient-sunset);
+            color: var(--pop-white);
+        }
+
+        .pop-navbar__cta {
+            padding: 12px 28px;
+            background: var(--gradient-sunset);
+            color: var(--pop-white);
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .pop-navbar__cta:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-pink);
+        }
+
+        .pop-navbar__toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: var(--pop-cream);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .pop-navbar__toggle span {
+            width: 22px;
+            height: 3px;
+            background: var(--pop-pink);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .pop-navbar__menu {
+                display: none;
+            }
+
+            .pop-navbar__cta {
+                display: none;
+            }
+
+            .pop-navbar__toggle {
+                display: flex;
+            }
+        }
+
+        /* ============================================
+           [V09] STEP GUIDE - Pop & Colorful
+           ============================================ */
+
+        .pop-steps-container {
+            position: relative;
+            padding: var(--space-lg) 0;
+        }
+
+        .pop-steps-line {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 6px;
+            background: var(--pop-light-gray);
+            border-radius: 3px;
+            z-index: 0;
+        }
+
+        .pop-steps-line::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 66%;
+            height: 100%;
+            background: var(--gradient-rainbow);
+            border-radius: 3px;
+        }
+
+        .pop-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .pop-step {
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .pop-step__number {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto var(--space-md);
+            background: var(--pop-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--pop-gray);
+            border: 5px solid var(--pop-light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .pop-step--active .pop-step__number {
+            background: var(--gradient-sunset);
+            color: var(--pop-white);
+            border-color: var(--pop-white);
+            box-shadow: var(--shadow-pink);
+            transform: scale(1.1);
+        }
+
+        .pop-step--completed .pop-step__number {
+            background: var(--pop-green);
+            color: var(--pop-white);
+            border-color: var(--pop-white);
+        }
+
+        .pop-step--completed .pop-step__number::after {
+            content: '✓';
+            font-size: 2rem;
+        }
+
+        .pop-step__icon {
+            width: 100px;
+            height: 100px;
+            margin: var(--space-md) auto;
+            background: var(--pop-cream);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .pop-step:hover .pop-step__icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: var(--pop-pink-light);
+        }
+
+        .pop-step__title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--pop-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .pop-step__desc {
+            font-size: 0.95rem;
+            color: var(--pop-gray);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           [V10] NEWSLETTER FORM - Pop & Colorful
+           ============================================ */
+
+        .pop-newsletter {
+            background: var(--gradient-candy);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pop-newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.15) 0%, transparent 40%);
+        }
+
+        .pop-newsletter__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pop-newsletter__icon {
+            width: 80px;
+            height: 80px;
+            background: var(--pop-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-lg);
+            font-size: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .pop-newsletter__title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--pop-white);
+            margin-bottom: var(--space-sm);
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .pop-newsletter__desc {
+            font-size: 1.1rem;
+            color: var(--pop-white);
+            opacity: 0.95;
+            margin-bottom: var(--space-xl);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pop-newsletter__form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            max-width: 500px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        .pop-newsletter__input-wrapper {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .pop-newsletter__input {
+            width: 100%;
+            padding: 18px 24px;
+            padding-left: 50px;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            background: var(--pop-white);
+            color: var(--pop-black);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .pop-newsletter__input::placeholder {
+            color: var(--pop-gray);
+        }
+
+        .pop-newsletter__input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--pop-pink);
+        }
+
+        .pop-newsletter__btn {
+            padding: 18px 36px;
+            background: var(--pop-black);
+            color: var(--pop-white);
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pop-newsletter__btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .pop-newsletter__privacy {
+            margin-top: var(--space-md);
+            font-size: 0.85rem;
+            color: var(--pop-white);
+            opacity: 0.8;
+        }
+
+        .pop-newsletter__privacy a {
+            color: var(--pop-white);
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           Responsive Adjustments
+           ============================================ */
+
+        @media (max-width: 768px) {
+            body {
+                padding: var(--space-md);
+            }
+
+            .pop-hero {
+                padding: var(--space-xl) var(--space-md);
+                min-height: 400px;
+            }
+
+            .pop-hero__title {
+                font-size: 2rem;
+            }
+
+            .pop-hero__cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .pop-hero__cta {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pop-pricing-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pop-pricing-card--featured {
+                transform: none;
+            }
+
+            .pop-footer__brand {
+                grid-column: span 1;
+            }
+
+            .pop-footer__grid {
+                text-align: center;
+            }
+
+            .pop-footer__desc {
+                margin: 0 auto;
+            }
+
+            .pop-steps-line {
+                display: none;
+            }
+
+            .pop-newsletter {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .pop-newsletter__form {
+                flex-direction: column;
+            }
+
+            .pop-newsletter__input-wrapper {
+                min-width: 100%;
+            }
+
+            .pop-newsletter__btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Pop & Colorful Components</h1>
+            <p>ビビッドカラー・大胆な形・楽しい雰囲気のLPコンポーネント集</p>
+        </div>
+
+        <!-- [V01] ヒーローセクション - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V01</span>
+
+            <section class="pop-hero">
+                <div class="pop-hero__shapes">
+                    <div class="pop-hero__shape pop-hero__shape--circle"></div>
+                    <div class="pop-hero__shape pop-hero__shape--square"></div>
+                    <div class="pop-hero__shape pop-hero__shape--triangle"></div>
+                </div>
+                <span class="pop-hero__badge">新登場！期間限定キャンペーン中</span>
+                <h1 class="pop-hero__title">あなたの写真を<br>イケメンに変換!</h1>
+                <p class="pop-hero__subtitle">AIが魔法をかけて、あなたの写真をかっこよく変身させます。友達と盛り上がろう！</p>
+                <div class="pop-hero__cta-group">
+                    <a href="#" class="pop-hero__cta pop-hero__cta--primary">
+                        <span>今すぐ無料で試す</span>
+                        <span>→</span>
+                    </a>
+                    <a href="#" class="pop-hero__cta pop-hero__cta--secondary">
+                        <span>使い方を見る</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- [V02] 特徴カード - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V02</span>
+
+            <div class="pop-feature-grid">
+                <div class="pop-feature-card">
+                    <div class="pop-feature-card__icon pop-feature-card__icon--pink">
+                        ⚡
+                    </div>
+                    <h3 class="pop-feature-card__title">超カンタン操作</h3>
+                    <p class="pop-feature-card__desc">写真を送るだけ！難しい操作は一切なし。LINEで友達に送る感覚で使えます。</p>
+                    <span class="pop-feature-card__tag">人気No.1</span>
+                </div>
+
+                <div class="pop-feature-card">
+                    <div class="pop-feature-card__icon pop-feature-card__icon--blue">
+                        🎨
+                    </div>
+                    <h3 class="pop-feature-card__title">高品質AI変換</h3>
+                    <p class="pop-feature-card__desc">最新AIが自然で美しい変換を実現。違和感のない仕上がりに驚きます。</p>
+                    <span class="pop-feature-card__tag">NEW</span>
+                </div>
+
+                <div class="pop-feature-card">
+                    <div class="pop-feature-card__icon pop-feature-card__icon--green">
+                        🔒
+                    </div>
+                    <h3 class="pop-feature-card__title">安心セキュリティ</h3>
+                    <p class="pop-feature-card__desc">あなたの写真は安全に管理。自動削除でプライバシーを守ります。</p>
+                    <span class="pop-feature-card__tag">安心</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- [V03] 料金表 - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V03</span>
+
+            <div class="pop-pricing-container">
+                <div class="pop-pricing-card">
+                    <h3 class="pop-pricing-card__name">フリープラン</h3>
+                    <div class="pop-pricing-card__price">
+                        <span class="pop-pricing-card__currency">¥</span>
+                        <span class="pop-pricing-card__amount">0</span>
+                        <span class="pop-pricing-card__period">/月</span>
+                    </div>
+                    <ul class="pop-pricing-card__features">
+                        <li class="pop-pricing-card__feature">月3回まで変換</li>
+                        <li class="pop-pricing-card__feature">基本スタイル3種類</li>
+                        <li class="pop-pricing-card__feature">標準画質</li>
+                    </ul>
+                    <a href="#" class="pop-pricing-card__cta pop-pricing-card__cta--outline">無料で始める</a>
+                </div>
+
+                <div class="pop-pricing-card pop-pricing-card--featured">
+                    <span class="pop-pricing-card__ribbon">一番人気 🎉</span>
+                    <h3 class="pop-pricing-card__name">プレミアムプラン</h3>
+                    <div class="pop-pricing-card__price">
+                        <span class="pop-pricing-card__currency">¥</span>
+                        <span class="pop-pricing-card__amount">980</span>
+                        <span class="pop-pricing-card__period">/月</span>
+                    </div>
+                    <ul class="pop-pricing-card__features">
+                        <li class="pop-pricing-card__feature">無制限に変換</li>
+                        <li class="pop-pricing-card__feature">全スタイル使い放題</li>
+                        <li class="pop-pricing-card__feature">高画質出力</li>
+                        <li class="pop-pricing-card__feature">優先サポート</li>
+                    </ul>
+                    <a href="#" class="pop-pricing-card__cta">今すぐ申し込む</a>
+                </div>
+
+                <div class="pop-pricing-card">
+                    <h3 class="pop-pricing-card__name">チケットプラン</h3>
+                    <div class="pop-pricing-card__price">
+                        <span class="pop-pricing-card__currency">¥</span>
+                        <span class="pop-pricing-card__amount">300</span>
+                        <span class="pop-pricing-card__period">/1回</span>
+                    </div>
+                    <ul class="pop-pricing-card__features">
+                        <li class="pop-pricing-card__feature">1回分の変換</li>
+                        <li class="pop-pricing-card__feature">全スタイル選択可</li>
+                        <li class="pop-pricing-card__feature">高画質出力</li>
+                    </ul>
+                    <a href="#" class="pop-pricing-card__cta pop-pricing-card__cta--outline">チケット購入</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- [V04] CTAボタン - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V04</span>
+
+            <div class="pop-btn-showcase">
+                <button class="pop-btn pop-btn--primary pop-btn--bounce">
+                    <span class="pop-btn__sparkle"></span>
+                    今すぐ始める 🚀
+                </button>
+
+                <button class="pop-btn pop-btn--secondary">
+                    <span class="pop-btn__sparkle"></span>
+                    詳しく見る ✨
+                </button>
+
+                <button class="pop-btn pop-btn--outline">
+                    無料で試す
+                </button>
+
+                <button class="pop-btn pop-btn--ghost">
+                    もっと見る →
+                </button>
+
+                <button class="pop-btn pop-btn--primary pop-btn--large">
+                    <span class="pop-btn__sparkle"></span>
+                    LINE友だち追加 🍌
+                </button>
+            </div>
+        </div>
+
+        <!-- [V05] テスティモニアル - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V05</span>
+
+            <div class="pop-testimonial-grid">
+                <div class="pop-testimonial">
+                    <p class="pop-testimonial__content">友達との飲み会で使ったら大盛り上がり！みんな爆笑でした。こんなに簡単に面白い写真が作れるなんて最高！</p>
+                    <div class="pop-testimonial__author">
+                        <div class="pop-testimonial__avatar">T</div>
+                        <div class="pop-testimonial__info">
+                            <div class="pop-testimonial__name">たかし さん</div>
+                            <div class="pop-testimonial__role">会社員 / 28歳</div>
+                            <div class="pop-testimonial__rating">
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pop-testimonial">
+                    <p class="pop-testimonial__content">彼氏の誕生日にサプライズで変換してプレゼントしたら、すごく喜んでくれました💕 また使います！</p>
+                    <div class="pop-testimonial__author">
+                        <div class="pop-testimonial__avatar">M</div>
+                        <div class="pop-testimonial__info">
+                            <div class="pop-testimonial__name">みさき さん</div>
+                            <div class="pop-testimonial__role">大学生 / 21歳</div>
+                            <div class="pop-testimonial__rating">
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                                <span class="pop-testimonial__star pop-testimonial__star--filled">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [V06] FAQアコーディオン - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V06</span>
+
+            <div class="pop-faq-container">
+                <div class="pop-faq-item pop-faq-item--active">
+                    <button class="pop-faq-question">
+                        <span class="pop-faq-question__icon">Q</span>
+                        <span class="pop-faq-question__text">変換にかかる時間はどのくらいですか？</span>
+                        <span class="pop-faq-question__arrow">▼</span>
+                    </button>
+                    <div class="pop-faq-answer">
+                        <div class="pop-faq-answer__content">
+                            通常30秒〜1分程度で完了します！AIが高速処理するので、待ち時間はほとんどありません。混雑時でも最大3分以内には完了します。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pop-faq-item">
+                    <button class="pop-faq-question">
+                        <span class="pop-faq-question__icon">Q</span>
+                        <span class="pop-faq-question__text">送った写真のプライバシーは大丈夫？</span>
+                        <span class="pop-faq-question__arrow">▼</span>
+                    </button>
+                    <div class="pop-faq-answer">
+                        <div class="pop-faq-answer__content">
+                            ご安心ください！送っていただいた写真は変換完了後24時間以内に自動削除されます。第三者に公開されることはありません。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pop-faq-item">
+                    <button class="pop-faq-question">
+                        <span class="pop-faq-question__icon">Q</span>
+                        <span class="pop-faq-question__text">返金はできますか？</span>
+                        <span class="pop-faq-question__arrow">▼</span>
+                    </button>
+                    <div class="pop-faq-answer">
+                        <div class="pop-faq-answer__content">
+                            変換結果にご満足いただけない場合、7日以内であれば全額返金いたします。お気軽にサポートまでお問い合わせください。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [V07] フッター - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V07</span>
+
+            <footer class="pop-footer">
+                <div class="pop-footer__grid">
+                    <div class="pop-footer__brand">
+                        <div class="pop-footer__logo">🍌 Ikemen Banana</div>
+                        <p class="pop-footer__desc">AIの力であなたの写真をイケメンに変換！友達と楽しく盛り上がろう。</p>
+                        <div class="pop-footer__social">
+                            <a href="#" class="pop-footer__social-link">𝕏</a>
+                            <a href="#" class="pop-footer__social-link">📸</a>
+                            <a href="#" class="pop-footer__social-link">📺</a>
+                        </div>
+                    </div>
+
+                    <div class="pop-footer__column">
+                        <h4 class="pop-footer__title">サービス</h4>
+                        <ul class="pop-footer__links">
+                            <li class="pop-footer__link"><a href="#">機能紹介</a></li>
+                            <li class="pop-footer__link"><a href="#">料金プラン</a></li>
+                            <li class="pop-footer__link"><a href="#">使い方ガイド</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="pop-footer__column">
+                        <h4 class="pop-footer__title">サポート</h4>
+                        <ul class="pop-footer__links">
+                            <li class="pop-footer__link"><a href="#">よくある質問</a></li>
+                            <li class="pop-footer__link"><a href="#">お問い合わせ</a></li>
+                            <li class="pop-footer__link"><a href="#">ヘルプセンター</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="pop-footer__column">
+                        <h4 class="pop-footer__title">会社情報</h4>
+                        <ul class="pop-footer__links">
+                            <li class="pop-footer__link"><a href="#">運営会社</a></li>
+                            <li class="pop-footer__link"><a href="#">プライバシーポリシー</a></li>
+                            <li class="pop-footer__link"><a href="#">利用規約</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pop-footer__bottom">
+                    <p class="pop-footer__copyright">© 2024 Ikemen Banana. All rights reserved.</p>
+                    <div class="pop-footer__bottom-links">
+                        <a href="#">プライバシー</a>
+                        <a href="#">利用規約</a>
+                        <a href="#">特定商取引法</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- [V08] ナビゲーションバー - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V08</span>
+
+            <nav class="pop-navbar">
+                <a href="#" class="pop-navbar__logo">
+                    <span class="pop-navbar__logo-icon">🍌</span>
+                    Ikemen Banana
+                </a>
+
+                <ul class="pop-navbar__menu">
+                    <li class="pop-navbar__item pop-navbar__item--active">
+                        <a href="#">ホーム</a>
+                    </li>
+                    <li class="pop-navbar__item">
+                        <a href="#">機能</a>
+                    </li>
+                    <li class="pop-navbar__item">
+                        <a href="#">料金</a>
+                    </li>
+                    <li class="pop-navbar__item">
+                        <a href="#">FAQ</a>
+                    </li>
+                </ul>
+
+                <a href="#" class="pop-navbar__cta">今すぐ試す</a>
+
+                <button class="pop-navbar__toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- [V09] ステップガイド - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V09</span>
+
+            <div class="pop-steps-container">
+                <div class="pop-steps-line"></div>
+                <div class="pop-steps-grid">
+                    <div class="pop-step pop-step--completed">
+                        <div class="pop-step__number"></div>
+                        <div class="pop-step__icon">📱</div>
+                        <h3 class="pop-step__title">STEP 1</h3>
+                        <p class="pop-step__desc">LINEで友だち追加して、トーク画面を開く</p>
+                    </div>
+
+                    <div class="pop-step pop-step--active">
+                        <div class="pop-step__number">2</div>
+                        <div class="pop-step__icon">📸</div>
+                        <h3 class="pop-step__title">STEP 2</h3>
+                        <p class="pop-step__desc">変換したい写真を送信！カメラロールから選ぶだけ</p>
+                    </div>
+
+                    <div class="pop-step">
+                        <div class="pop-step__number">3</div>
+                        <div class="pop-step__icon">✨</div>
+                        <h3 class="pop-step__title">STEP 3</h3>
+                        <p class="pop-step__desc">約30秒で変換完了！イケメン写真をゲット</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [V10] ニュースレター登録フォーム - ポップ -->
+        <div class="component-wrapper">
+            <span class="component-id">V10</span>
+
+            <div class="pop-newsletter">
+                <div class="pop-newsletter__content">
+                    <div class="pop-newsletter__icon">📬</div>
+                    <h2 class="pop-newsletter__title">最新情報をお届け！</h2>
+                    <p class="pop-newsletter__desc">新機能やお得なキャンペーン情報をいち早くお届け。登録は無料です！</p>
+
+                    <form class="pop-newsletter__form">
+                        <div class="pop-newsletter__input-wrapper">
+                            <span class="pop-newsletter__input-icon">✉️</span>
+                            <input type="email" class="pop-newsletter__input" placeholder="メールアドレスを入力">
+                        </div>
+                        <button type="submit" class="pop-newsletter__btn">
+                            登録する
+                            <span>→</span>
+                        </button>
+                    </form>
+
+                    <p class="pop-newsletter__privacy">
+                        登録することで、<a href="#">プライバシーポリシー</a>に同意したものとみなされます。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.pop-faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.closest('.pop-faq-item');
+                const isActive = item.classList.contains('pop-faq-item--active');
+
+                // Close all items
+                document.querySelectorAll('.pop-faq-item').forEach(i => {
+                    i.classList.remove('pop-faq-item--active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('pop-faq-item--active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

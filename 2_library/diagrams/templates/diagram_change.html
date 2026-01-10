@@ -1,0 +1,2967 @@
+<!--
+  Diagram Templates: 変化・変換 (Change & Transformation)
+  30 unique patterns for transformation, state changes, evolution
+  IDs: #change-1 to #change-30
+-->
+
+<style>
+/* ===== Change & Transformation Base Styles ===== */
+.change-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  min-height: 200px;
+}
+
+/* Common transformation arrow */
+.transform-arrow {
+  font-size: 28px;
+  color: #FF6B9D;
+  margin: 0 12px;
+  transition: transform 0.3s ease;
+}
+
+.change-diagram:hover .transform-arrow {
+  transform: scale(1.3);
+}
+
+/* ===== #change-1: Caterpillar → Butterfly Metamorphosis ===== */
+#change-1 {
+  gap: 16px;
+}
+
+#change-1 .caterpillar {
+  width: 80px;
+  height: 30px;
+  background: #7ED957;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-1 .caterpillar::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #5BBF3D;
+  border-radius: 50%;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#change-1 .caterpillar-face {
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+#change-1 .cocoon {
+  width: 40px;
+  height: 60px;
+  background: #B8860B;
+  border-radius: 20px 20px 25px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+#change-1 .butterfly {
+  width: 70px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-1 .butterfly-body {
+  width: 10px;
+  height: 40px;
+  background: #333;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+#change-1 .butterfly-wing {
+  position: absolute;
+  width: 28px;
+  height: 36px;
+  background: #FF6B9D;
+  border-radius: 50% 50% 50% 50%;
+  transition: transform 0.3s ease;
+}
+
+#change-1 .butterfly-wing.left {
+  left: 5px;
+  transform: rotate(-15deg);
+}
+
+#change-1 .butterfly-wing.right {
+  right: 5px;
+  transform: rotate(15deg);
+}
+
+#change-1:hover .butterfly-wing.left {
+  transform: rotate(-25deg);
+}
+
+#change-1:hover .butterfly-wing.right {
+  transform: rotate(25deg);
+}
+
+/* ===== #change-2: Seed → Plant → Flower Growth ===== */
+#change-2 {
+  gap: 20px;
+}
+
+#change-2 .growth-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-2 .ground {
+  width: 60px;
+  height: 8px;
+  background: #8B4513;
+  border-radius: 4px;
+}
+
+#change-2 .seed {
+  width: 20px;
+  height: 14px;
+  background: #DEB887;
+  border-radius: 50%;
+}
+
+#change-2 .sprout {
+  width: 6px;
+  height: 30px;
+  background: #7ED957;
+  border-radius: 3px;
+  position: relative;
+}
+
+#change-2 .sprout::before,
+#change-2 .sprout::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 10px;
+  background: #7ED957;
+  border-radius: 50%;
+}
+
+#change-2 .sprout::before {
+  top: 5px;
+  left: -12px;
+  transform: rotate(-30deg);
+}
+
+#change-2 .sprout::after {
+  top: 5px;
+  right: -12px;
+  transform: rotate(30deg);
+}
+
+#change-2 .flower-stem {
+  width: 6px;
+  height: 50px;
+  background: #7ED957;
+  border-radius: 3px;
+  position: relative;
+}
+
+#change-2 .flower-head {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background: #FFD93D;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-2 .flower-head::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: #FF9500;
+  border-radius: 50%;
+}
+
+#change-2:hover .flower-head {
+  animation: bloom 0.5s ease;
+}
+
+@keyframes bloom {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.2); }
+}
+
+/* ===== #change-3: Egg → Chick → Chicken Lifecycle ===== */
+#change-3 {
+  gap: 20px;
+}
+
+#change-3 .egg {
+  width: 40px;
+  height: 52px;
+  background: #FFF8DC;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  border: 3px solid #DEB887;
+}
+
+#change-3 .chick {
+  width: 45px;
+  height: 45px;
+  background: #FFD93D;
+  border-radius: 50%;
+  position: relative;
+}
+
+#change-3 .chick::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid #FF9500;
+}
+
+#change-3 .chick-eyes {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#change-3 .chick-eye {
+  width: 6px;
+  height: 6px;
+  background: #333;
+  border-radius: 50%;
+}
+
+#change-3 .chicken {
+  width: 60px;
+  height: 55px;
+  background: #FFF8DC;
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+  border: 2px solid #DEB887;
+}
+
+#change-3 .chicken-comb {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 15px;
+  background: #FF4444;
+  border-radius: 50% 50% 20% 20%;
+}
+
+#change-3 .chicken-beak {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #FF9500;
+}
+
+/* ===== #change-4: Baby → Child → Adult → Elder Aging ===== */
+#change-4 {
+  gap: 12px;
+}
+
+#change-4 .person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#change-4 .person-head {
+  background: #FFE4C4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+#change-4 .baby .person-head {
+  width: 30px;
+  height: 30px;
+}
+
+#change-4 .child .person-head {
+  width: 32px;
+  height: 32px;
+}
+
+#change-4 .adult .person-head {
+  width: 35px;
+  height: 35px;
+}
+
+#change-4 .elder .person-head {
+  width: 34px;
+  height: 34px;
+}
+
+#change-4 .person-body {
+  background: #87CEEB;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+#change-4 .baby .person-body {
+  width: 25px;
+  height: 20px;
+}
+
+#change-4 .child .person-body {
+  width: 28px;
+  height: 35px;
+}
+
+#change-4 .adult .person-body {
+  width: 35px;
+  height: 50px;
+}
+
+#change-4 .elder .person-body {
+  width: 32px;
+  height: 45px;
+  background: #B0C4DE;
+}
+
+#change-4 .person-label {
+  font-size: 10px;
+  color: #666;
+  margin-top: 6px;
+}
+
+#change-4 .small-arrow {
+  font-size: 18px;
+  color: #FF6B9D;
+}
+
+/* ===== #change-5: Raw → Cooked Food Transformation ===== */
+#change-5 {
+  gap: 20px;
+}
+
+#change-5 .food-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-5 .raw-meat {
+  width: 60px;
+  height: 40px;
+  background: #FF6B6B;
+  border-radius: 8px;
+  position: relative;
+}
+
+#change-5 .raw-meat::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 8px;
+  background: #FFF;
+  border-radius: 4px;
+  top: 10px;
+  left: 10px;
+}
+
+#change-5 .cooking {
+  width: 60px;
+  height: 50px;
+  position: relative;
+}
+
+#change-5 .pan {
+  width: 60px;
+  height: 15px;
+  background: #444;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 0;
+}
+
+#change-5 .pan-handle {
+  width: 25px;
+  height: 8px;
+  background: #666;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 4px;
+  right: -20px;
+}
+
+#change-5 .steam {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  animation: steam-rise 1s infinite;
+}
+
+@keyframes steam-rise {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+}
+
+#change-5 .cooked-meat {
+  width: 60px;
+  height: 40px;
+  background: #8B4513;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+#change-5 .food-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-6: Day → Night Transition ===== */
+#change-6 {
+  gap: 16px;
+}
+
+#change-6 .sky-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+#change-6 .day-sky {
+  background: #87CEEB;
+}
+
+#change-6 .sunset-sky {
+  background: linear-gradient(to bottom, #FF9500, #FF6B9D);
+}
+
+#change-6 .night-sky {
+  background: #1a1a2e;
+}
+
+#change-6 .sun {
+  width: 35px;
+  height: 35px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#change-6 .sunset-sun {
+  width: 30px;
+  height: 15px;
+  background: #FF6B6B;
+  border-radius: 30px 30px 0 0;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+#change-6 .moon {
+  width: 30px;
+  height: 30px;
+  background: #FFF8DC;
+  border-radius: 50%;
+  box-shadow: inset -8px 0 0 #E8E8E8;
+}
+
+#change-6 .stars {
+  position: absolute;
+  top: 10px;
+  font-size: 10px;
+  color: #FFF;
+}
+
+#change-6 .sky-label {
+  font-size: 11px;
+  color: #666;
+  margin-top: 6px;
+}
+
+#change-6:hover .sun {
+  animation: sun-glow 0.5s ease;
+}
+
+@keyframes sun-glow {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 217, 61, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(255, 217, 61, 0.8); }
+}
+
+/* ===== #change-7: Calm → Storm Weather Change ===== */
+#change-7 {
+  gap: 16px;
+}
+
+#change-7 .weather-box {
+  width: 90px;
+  height: 70px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#change-7 .calm-weather {
+  background: #E8F4FD;
+}
+
+#change-7 .cloudy-weather {
+  background: #D3D3D3;
+}
+
+#change-7 .storm-weather {
+  background: #4A4A4A;
+}
+
+#change-7 .calm-sun {
+  width: 30px;
+  height: 30px;
+  background: #FFD93D;
+  border-radius: 50%;
+}
+
+#change-7 .cloud {
+  width: 45px;
+  height: 22px;
+  background: #FFF;
+  border-radius: 20px;
+  position: relative;
+}
+
+#change-7 .cloud::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #FFF;
+  border-radius: 50%;
+  top: -10px;
+  left: 8px;
+}
+
+#change-7 .storm-cloud {
+  background: #666;
+}
+
+#change-7 .storm-cloud::before {
+  background: #666;
+}
+
+#change-7 .lightning {
+  position: absolute;
+  bottom: 8px;
+  font-size: 18px;
+  animation: flash 0.5s infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+#change-7 .rain-drops {
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  gap: 4px;
+}
+
+#change-7 .rain-drop {
+  width: 3px;
+  height: 10px;
+  background: #87CEEB;
+  border-radius: 3px;
+}
+
+/* ===== #change-8: Ice → Water → Steam States ===== */
+#change-8 {
+  gap: 20px;
+}
+
+#change-8 .state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-8 .ice-cube {
+  width: 45px;
+  height: 45px;
+  background: #E0FFFF;
+  border: 3px solid #ADD8E6;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+#change-8 .water-drop {
+  width: 40px;
+  height: 50px;
+  background: #87CEEB;
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+#change-8 .steam-cloud {
+  width: 50px;
+  height: 35px;
+  background: #F0F0F0;
+  border-radius: 25px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-8 .steam-cloud::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #F0F0F0;
+  border-radius: 50%;
+  top: -8px;
+  left: 12px;
+}
+
+#change-8 .state-label {
+  font-size: 11px;
+  color: #666;
+  font-weight: bold;
+}
+
+#change-8 .temp-label {
+  font-size: 9px;
+  color: #999;
+}
+
+#change-8:hover .steam-cloud {
+  animation: float-up 0.8s ease infinite;
+}
+
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ===== #change-9: Old → New Renovation ===== */
+#change-9 {
+  gap: 20px;
+}
+
+#change-9 .house {
+  width: 70px;
+  height: 80px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#change-9 .roof {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 30px solid;
+}
+
+#change-9 .old-house .roof {
+  border-bottom-color: #8B7355;
+}
+
+#change-9 .new-house .roof {
+  border-bottom-color: #FF6B9D;
+}
+
+#change-9 .walls {
+  width: 60px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#change-9 .old-house .walls {
+  background: #A0A0A0;
+}
+
+#change-9 .new-house .walls {
+  background: #FFF8DC;
+  border: 2px solid #DEB887;
+}
+
+#change-9 .door {
+  width: 18px;
+  height: 28px;
+  border-radius: 9px 9px 0 0;
+  position: absolute;
+  bottom: 0;
+}
+
+#change-9 .old-house .door {
+  background: #5D4037;
+}
+
+#change-9 .new-house .door {
+  background: #87CEEB;
+}
+
+#change-9 .window {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 8px;
+}
+
+#change-9 .window.left {
+  left: 8px;
+}
+
+#change-9 .window.right {
+  right: 8px;
+}
+
+#change-9 .old-house .window {
+  background: #666;
+}
+
+#change-9 .new-house .window {
+  background: #E0FFFF;
+  border: 1px solid #333;
+}
+
+#change-9 .cracks {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 10px;
+  color: #666;
+}
+
+#change-9 .sparkle {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 14px;
+}
+
+#change-9 .house-label {
+  font-size: 11px;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* ===== #change-10: Messy → Clean Transformation ===== */
+#change-10 {
+  gap: 20px;
+}
+
+#change-10 .room {
+  width: 90px;
+  height: 70px;
+  background: #FFF8E7;
+  border: 3px solid #DEB887;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-10 .messy-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  font-size: 14px;
+  transform: rotate(-5deg);
+}
+
+#change-10 .clean-items {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+}
+
+#change-10 .broom {
+  font-size: 30px;
+}
+
+#change-10 .room-label {
+  position: absolute;
+  bottom: -20px;
+  font-size: 11px;
+  color: #666;
+}
+
+#change-10:hover .clean-items {
+  animation: sparkle-clean 0.5s ease;
+}
+
+@keyframes sparkle-clean {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+/* ===== #change-11: Broken → Fixed Repair ===== */
+#change-11 {
+  gap: 20px;
+}
+
+#change-11 .item-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-11 .broken-cup {
+  width: 40px;
+  height: 45px;
+  background: #FFF;
+  border: 3px solid #87CEEB;
+  border-radius: 5px 5px 15px 15px;
+  position: relative;
+}
+
+#change-11 .crack-line {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#change-11 .crack-line::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 30px;
+  background: #333;
+  top: 5px;
+  left: 15px;
+  transform: rotate(15deg);
+}
+
+#change-11 .repair-tools {
+  display: flex;
+  gap: 5px;
+  font-size: 24px;
+}
+
+#change-11 .fixed-cup {
+  width: 40px;
+  height: 45px;
+  background: #FFF;
+  border: 3px solid #87CEEB;
+  border-radius: 5px 5px 15px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-11 .cup-handle {
+  position: absolute;
+  right: -10px;
+  width: 12px;
+  height: 20px;
+  border: 3px solid #87CEEB;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+}
+
+#change-11 .item-label {
+  font-size: 11px;
+  color: #666;
+}
+
+#change-11 .sparkles {
+  font-size: 12px;
+}
+
+/* ===== #change-12: Empty → Full Filling ===== */
+#change-12 {
+  gap: 20px;
+}
+
+#change-12 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-12 .glass {
+  width: 45px;
+  height: 60px;
+  background: transparent;
+  border: 3px solid #ADD8E6;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+#change-12 .water-level {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #87CEEB;
+  transition: height 0.5s ease;
+}
+
+#change-12 .empty .water-level {
+  height: 0%;
+}
+
+#change-12 .half .water-level {
+  height: 50%;
+}
+
+#change-12 .full .water-level {
+  height: 95%;
+}
+
+#change-12 .pour {
+  font-size: 30px;
+}
+
+#change-12 .container-label {
+  font-size: 11px;
+  color: #666;
+}
+
+#change-12:hover .full .water-level {
+  animation: wave 0.5s ease;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* ===== #change-13: Closed → Open State ===== */
+#change-13 {
+  gap: 20px;
+}
+
+#change-13 .door-frame {
+  width: 50px;
+  height: 70px;
+  background: #8B4513;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#change-13 .door-panel {
+  width: 42px;
+  height: 62px;
+  background: #DEB887;
+  border-radius: 2px;
+  position: relative;
+  transition: transform 0.3s ease;
+  transform-origin: left center;
+}
+
+#change-13 .door-knob {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: #FFD700;
+  border-radius: 50%;
+}
+
+#change-13 .closed-door .door-panel {
+  transform: perspective(100px) rotateY(0deg);
+}
+
+#change-13 .opening-door .door-panel {
+  transform: perspective(100px) rotateY(-30deg);
+}
+
+#change-13 .open-door .door-panel {
+  transform: perspective(100px) rotateY(-70deg);
+}
+
+#change-13 .open-door .door-frame::after {
+  content: '🌟';
+  position: absolute;
+  font-size: 20px;
+}
+
+#change-13 .door-label {
+  position: absolute;
+  bottom: -22px;
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-14: Off → On Switch ===== */
+#change-14 {
+  gap: 24px;
+}
+
+#change-14 .switch-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#change-14 .bulb {
+  width: 45px;
+  height: 55px;
+  position: relative;
+}
+
+#change-14 .bulb-glass {
+  width: 45px;
+  height: 40px;
+  border-radius: 50% 50% 30% 30%;
+  transition: all 0.3s ease;
+}
+
+#change-14 .off-state .bulb-glass {
+  background: #E8E8E8;
+  border: 2px solid #CCC;
+}
+
+#change-14 .on-state .bulb-glass {
+  background: #FFD93D;
+  border: 2px solid #FF9500;
+  box-shadow: 0 0 20px rgba(255, 217, 61, 0.6);
+}
+
+#change-14 .bulb-base {
+  width: 25px;
+  height: 15px;
+  background: #888;
+  border-radius: 0 0 5px 5px;
+  margin: 0 auto;
+}
+
+#change-14 .switch {
+  width: 35px;
+  height: 50px;
+  background: #F5F5F5;
+  border: 2px solid #CCC;
+  border-radius: 5px;
+  position: relative;
+}
+
+#change-14 .switch-toggle {
+  width: 25px;
+  height: 20px;
+  background: #FFF;
+  border: 2px solid #999;
+  border-radius: 3px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.2s ease;
+}
+
+#change-14 .off-state .switch-toggle {
+  top: 22px;
+}
+
+#change-14 .on-state .switch-toggle {
+  top: 5px;
+}
+
+#change-14 .state-label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#change-14 .off-state .state-label {
+  color: #999;
+}
+
+#change-14 .on-state .state-label {
+  color: #FF9500;
+}
+
+/* ===== #change-15: Sad → Happy Mood Change ===== */
+#change-15 {
+  gap: 20px;
+}
+
+#change-15 .face {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  transition: all 0.3s ease;
+}
+
+#change-15 .sad-face {
+  background: #B0C4DE;
+}
+
+#change-15 .neutral-face {
+  background: #F0E68C;
+}
+
+#change-15 .happy-face {
+  background: #98FB98;
+}
+
+#change-15 .mood-change {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+}
+
+#change-15 .mood-label {
+  font-size: 10px;
+  color: #666;
+  margin-top: 5px;
+}
+
+#change-15:hover .happy-face {
+  animation: bounce-happy 0.4s ease;
+}
+
+@keyframes bounce-happy {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ===== #change-16: Weak → Strong Growth ===== */
+#change-16 {
+  gap: 20px;
+}
+
+#change-16 .strength-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+#change-16 .figure-head {
+  width: 25px;
+  height: 25px;
+  background: #FFE4C4;
+  border-radius: 50%;
+}
+
+#change-16 .figure-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#change-16 .weak .figure-torso {
+  width: 20px;
+  height: 30px;
+  background: #87CEEB;
+  border-radius: 5px;
+}
+
+#change-16 .weak .figure-arms {
+  width: 35px;
+  height: 6px;
+  background: #FFE4C4;
+  border-radius: 3px;
+  margin-top: -25px;
+}
+
+#change-16 .medium .figure-torso {
+  width: 28px;
+  height: 35px;
+  background: #98FB98;
+  border-radius: 5px;
+}
+
+#change-16 .medium .figure-arms {
+  width: 50px;
+  height: 8px;
+  background: #FFE4C4;
+  border-radius: 4px;
+  margin-top: -28px;
+}
+
+#change-16 .strong .figure-torso {
+  width: 40px;
+  height: 40px;
+  background: #FF6B9D;
+  border-radius: 8px;
+}
+
+#change-16 .strong .figure-arms {
+  width: 70px;
+  height: 12px;
+  background: #FFE4C4;
+  border-radius: 6px;
+  margin-top: -32px;
+  position: relative;
+}
+
+#change-16 .strong .figure-arms::before,
+#change-16 .strong .figure-arms::after {
+  content: '💪';
+  position: absolute;
+  font-size: 16px;
+  top: -8px;
+}
+
+#change-16 .strong .figure-arms::before {
+  left: -5px;
+}
+
+#change-16 .strong .figure-arms::after {
+  right: -5px;
+}
+
+#change-16 .strength-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-17: Beginner → Expert Skill Progression ===== */
+#change-17 {
+  gap: 16px;
+}
+
+#change-17 .skill-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-17 .skill-badge {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFF;
+}
+
+#change-17 .beginner .skill-badge {
+  background: #90EE90;
+}
+
+#change-17 .intermediate .skill-badge {
+  background: #87CEEB;
+}
+
+#change-17 .advanced .skill-badge {
+  background: #DDA0DD;
+}
+
+#change-17 .expert .skill-badge {
+  background: #FFD700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#change-17 .skill-stars {
+  display: flex;
+  gap: 2px;
+  font-size: 10px;
+}
+
+#change-17 .skill-label {
+  font-size: 10px;
+  color: #666;
+}
+
+#change-17 .progress-arrow {
+  font-size: 16px;
+  color: #FF6B9D;
+}
+
+/* ===== #change-18: Draft → Final Version ===== */
+#change-18 {
+  gap: 20px;
+}
+
+#change-18 .document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-18 .doc-paper {
+  width: 55px;
+  height: 70px;
+  background: #FFF;
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 6px;
+  position: relative;
+}
+
+#change-18 .draft .doc-paper {
+  border-color: #CCC;
+  border-style: dashed;
+}
+
+#change-18 .review .doc-paper {
+  border-color: #FFD93D;
+  border-style: solid;
+}
+
+#change-18 .final .doc-paper {
+  border-color: #98FB98;
+  border-style: solid;
+}
+
+#change-18 .doc-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#change-18 .doc-line {
+  height: 4px;
+  border-radius: 2px;
+}
+
+#change-18 .draft .doc-line {
+  background: #DDD;
+}
+
+#change-18 .review .doc-line {
+  background: #FFD93D;
+}
+
+#change-18 .final .doc-line {
+  background: #98FB98;
+}
+
+#change-18 .doc-line:nth-child(1) { width: 100%; }
+#change-18 .doc-line:nth-child(2) { width: 80%; }
+#change-18 .doc-line:nth-child(3) { width: 90%; }
+#change-18 .doc-line:nth-child(4) { width: 60%; }
+
+#change-18 .review .doc-paper::before {
+  content: '✏️';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 14px;
+}
+
+#change-18 .final .doc-paper::before {
+  content: '✅';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 14px;
+}
+
+#change-18 .doc-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-19: Idea → Product Development ===== */
+#change-19 {
+  gap: 16px;
+}
+
+#change-19 .dev-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-19 .idea-bulb {
+  width: 50px;
+  height: 60px;
+  position: relative;
+}
+
+#change-19 .idea-bulb .bulb-top {
+  width: 40px;
+  height: 35px;
+  background: #FFD93D;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+#change-19 .idea-bulb .bulb-bottom {
+  width: 25px;
+  height: 15px;
+  background: #999;
+  border-radius: 0 0 5px 5px;
+  margin: 0 auto;
+}
+
+#change-19 .prototype {
+  width: 50px;
+  height: 50px;
+  background: #E8E8E8;
+  border: 2px dashed #999;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #666;
+}
+
+#change-19 .product {
+  width: 55px;
+  height: 55px;
+  background: #FF6B9D;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(255, 107, 157, 0.3);
+}
+
+#change-19 .stage-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-20: Plan → Action → Result ===== */
+#change-20 {
+  gap: 16px;
+}
+
+#change-20 .phase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-20 .phase-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+#change-20 .plan-phase .phase-icon {
+  background: #E6E6FA;
+  border: 3px solid #DDA0DD;
+}
+
+#change-20 .action-phase .phase-icon {
+  background: #FFE4B5;
+  border: 3px solid #FFA500;
+}
+
+#change-20 .result-phase .phase-icon {
+  background: #98FB98;
+  border: 3px solid #32CD32;
+}
+
+#change-20 .phase-label {
+  font-size: 11px;
+  color: #666;
+  font-weight: bold;
+}
+
+#change-20:hover .result-phase .phase-icon {
+  animation: celebrate 0.5s ease;
+}
+
+@keyframes celebrate {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+/* ===== #change-21: Input → Transform → Output ===== */
+#change-21 {
+  gap: 16px;
+}
+
+#change-21 .process-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+#change-21 .input-box {
+  width: 50px;
+  height: 50px;
+  background: #FFE4E1;
+  border: 3px solid #FF6B6B;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+#change-21 .transform-box {
+  width: 60px;
+  height: 60px;
+  background: #E6E6FA;
+  border: 3px solid #9370DB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  position: relative;
+}
+
+#change-21 .transform-box::before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border: 2px dashed #9370DB;
+  border-radius: 50%;
+  animation: rotate-slow 4s linear infinite;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+#change-21 .output-box {
+  width: 50px;
+  height: 50px;
+  background: #E0FFE0;
+  border: 3px solid #32CD32;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+#change-21 .process-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-22: Question → Research → Answer ===== */
+#change-22 {
+  gap: 16px;
+}
+
+#change-22 .quest-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-22 .question-mark {
+  width: 50px;
+  height: 50px;
+  background: #FFB6C1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #FF1493;
+}
+
+#change-22 .research-icon {
+  width: 50px;
+  height: 50px;
+  background: #87CEEB;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  position: relative;
+}
+
+#change-22 .research-icon::after {
+  content: '...';
+  position: absolute;
+  bottom: -15px;
+  font-size: 12px;
+  color: #666;
+  animation: thinking 1s infinite;
+}
+
+@keyframes thinking {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+#change-22 .answer-icon {
+  width: 50px;
+  height: 50px;
+  background: #98FB98;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #228B22;
+}
+
+#change-22 .stage-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-23: Problem → Analysis → Solution ===== */
+#change-23 {
+  gap: 16px;
+}
+
+#change-23 .solve-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-23 .problem-icon {
+  width: 55px;
+  height: 55px;
+  background: #FF6B6B;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+#change-23 .analysis-icon {
+  width: 55px;
+  height: 55px;
+  background: #87CEEB;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+#change-23 .analysis-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 30px;
+}
+
+#change-23 .analysis-bar {
+  width: 8px;
+  background: #4169E1;
+  border-radius: 2px;
+}
+
+#change-23 .analysis-bar:nth-child(1) { height: 12px; }
+#change-23 .analysis-bar:nth-child(2) { height: 20px; }
+#change-23 .analysis-bar:nth-child(3) { height: 28px; }
+#change-23 .analysis-bar:nth-child(4) { height: 16px; }
+
+#change-23 .solution-icon {
+  width: 55px;
+  height: 55px;
+  background: #98FB98;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+#change-23 .solve-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-24: Chaos → Order Organization ===== */
+#change-24 {
+  gap: 20px;
+}
+
+#change-24 .order-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-24 .chaos-box {
+  width: 70px;
+  height: 60px;
+  background: #F5F5F5;
+  border: 2px solid #CCC;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+#change-24 .chaos-item {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  transform: rotate(var(--rotate));
+}
+
+#change-24 .chaos-item:nth-child(1) { background: #FF6B9D; --rotate: 15deg; margin: 2px 8px; }
+#change-24 .chaos-item:nth-child(2) { background: #87CEEB; --rotate: -20deg; margin: 5px 2px; }
+#change-24 .chaos-item:nth-child(3) { background: #98FB98; --rotate: 30deg; margin: 0 10px; }
+#change-24 .chaos-item:nth-child(4) { background: #FFD93D; --rotate: -10deg; margin: 3px 0; }
+#change-24 .chaos-item:nth-child(5) { background: #DDA0DD; --rotate: 25deg; margin: 1px 5px; }
+
+#change-24 .sorting-icon {
+  font-size: 30px;
+}
+
+#change-24 .order-box {
+  width: 70px;
+  height: 60px;
+  background: #F5F5F5;
+  border: 2px solid #98FB98;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 8px;
+}
+
+#change-24 .order-item {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+#change-24 .order-item:nth-child(1) { background: #FF6B9D; }
+#change-24 .order-item:nth-child(2) { background: #FFD93D; }
+#change-24 .order-item:nth-child(3) { background: #98FB98; }
+#change-24 .order-item:nth-child(4) { background: #87CEEB; }
+#change-24 .order-item:nth-child(5) { background: #DDA0DD; }
+
+#change-24 .state-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-25: Complex → Simple Simplification ===== */
+#change-25 {
+  gap: 20px;
+}
+
+#change-25 .complexity-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-25 .complex-shape {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+#change-25 .complex-layer {
+  position: absolute;
+  border: 3px solid;
+  border-radius: 50%;
+}
+
+#change-25 .complex-layer:nth-child(1) {
+  width: 70px;
+  height: 70px;
+  border-color: #FF6B9D;
+  top: 0;
+  left: 0;
+}
+
+#change-25 .complex-layer:nth-child(2) {
+  width: 50px;
+  height: 50px;
+  border-color: #87CEEB;
+  top: 10px;
+  left: 10px;
+}
+
+#change-25 .complex-layer:nth-child(3) {
+  width: 30px;
+  height: 30px;
+  border-color: #98FB98;
+  top: 20px;
+  left: 20px;
+}
+
+#change-25 .complex-layer:nth-child(4) {
+  width: 15px;
+  height: 15px;
+  border-color: #FFD93D;
+  background: #FFD93D;
+  top: 27px;
+  left: 27px;
+}
+
+#change-25 .simplify-icon {
+  font-size: 28px;
+}
+
+#change-25 .simple-shape {
+  width: 50px;
+  height: 50px;
+  background: #98FB98;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+#change-25 .complexity-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-26: Manual → Automatic Automation ===== */
+#change-26 {
+  gap: 20px;
+}
+
+#change-26 .work-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-26 .manual-work {
+  width: 60px;
+  height: 60px;
+  background: #FFE4C4;
+  border: 3px solid #DEB887;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+#change-26 .automate-icon {
+  font-size: 30px;
+  color: #9370DB;
+}
+
+#change-26 .automatic-work {
+  width: 60px;
+  height: 60px;
+  background: #E6E6FA;
+  border: 3px solid #9370DB;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  position: relative;
+}
+
+#change-26 .automatic-work::after {
+  content: '⚡';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 16px;
+}
+
+#change-26 .mode-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-27: Local → Global Expansion ===== */
+#change-27 {
+  gap: 20px;
+}
+
+#change-27 .scope-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-27 .local-icon {
+  width: 40px;
+  height: 45px;
+  position: relative;
+}
+
+#change-27 .local-pin {
+  width: 20px;
+  height: 30px;
+  background: #FF6B6B;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+#change-27 .local-pin::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #FFF;
+  border-radius: 50%;
+}
+
+#change-27 .expand-icon {
+  font-size: 28px;
+  color: #FF6B9D;
+}
+
+#change-27 .global-icon {
+  width: 55px;
+  height: 55px;
+  background: #87CEEB;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+#change-27 .global-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.3) 10px,
+    rgba(255,255,255,0.3) 12px
+  );
+}
+
+#change-27 .global-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.3) 10px,
+    rgba(255,255,255,0.3) 12px
+  );
+}
+
+#change-27 .continent {
+  position: absolute;
+  background: #32CD32;
+  border-radius: 30%;
+}
+
+#change-27 .continent:nth-child(1) {
+  width: 15px;
+  height: 12px;
+  top: 12px;
+  left: 8px;
+}
+
+#change-27 .continent:nth-child(2) {
+  width: 18px;
+  height: 15px;
+  top: 18px;
+  right: 8px;
+}
+
+#change-27 .continent:nth-child(3) {
+  width: 12px;
+  height: 10px;
+  bottom: 12px;
+  left: 20px;
+}
+
+#change-27 .scope-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-28: Individual → Team Scaling ===== */
+#change-28 {
+  gap: 20px;
+}
+
+#change-28 .team-size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-28 .individual {
+  width: 35px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#change-28 .person-icon {
+  width: 25px;
+  height: 25px;
+  background: #87CEEB;
+  border-radius: 50%;
+  margin-bottom: 3px;
+}
+
+#change-28 .person-body-icon {
+  width: 30px;
+  height: 20px;
+  background: #87CEEB;
+  border-radius: 10px 10px 0 0;
+}
+
+#change-28 .scale-icon {
+  font-size: 26px;
+  color: #FF6B9D;
+}
+
+#change-28 .team {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80px;
+  gap: 5px;
+}
+
+#change-28 .team-member {
+  width: 22px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#change-28 .team-member .person-icon {
+  width: 18px;
+  height: 18px;
+}
+
+#change-28 .team-member .person-body-icon {
+  width: 22px;
+  height: 12px;
+}
+
+#change-28 .team-member:nth-child(1) .person-icon,
+#change-28 .team-member:nth-child(1) .person-body-icon { background: #FF6B9D; }
+#change-28 .team-member:nth-child(2) .person-icon,
+#change-28 .team-member:nth-child(2) .person-body-icon { background: #98FB98; }
+#change-28 .team-member:nth-child(3) .person-icon,
+#change-28 .team-member:nth-child(3) .person-body-icon { background: #FFD93D; }
+#change-28 .team-member:nth-child(4) .person-icon,
+#change-28 .team-member:nth-child(4) .person-body-icon { background: #87CEEB; }
+#change-28 .team-member:nth-child(5) .person-icon,
+#change-28 .team-member:nth-child(5) .person-body-icon { background: #DDA0DD; }
+
+#change-28 .size-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ===== #change-29: Traditional → Modern Update ===== */
+#change-29 {
+  gap: 20px;
+}
+
+#change-29 .era-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-29 .traditional-item {
+  width: 55px;
+  height: 55px;
+  background: #8B4513;
+  border: 4px solid #654321;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+#change-29 .update-icon {
+  font-size: 26px;
+  color: #FF6B9D;
+}
+
+#change-29 .modern-item {
+  width: 55px;
+  height: 55px;
+  background: #F0F0F0;
+  border: 3px solid #87CEEB;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#change-29 .era-label {
+  font-size: 11px;
+  color: #666;
+}
+
+#change-29:hover .modern-item {
+  animation: modern-glow 0.5s ease;
+}
+
+@keyframes modern-glow {
+  0%, 100% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  50% { box-shadow: 0 4px 15px rgba(135, 206, 235, 0.5); }
+}
+
+/* ===== #change-30: Analog → Digital Conversion ===== */
+#change-30 {
+  gap: 20px;
+}
+
+#change-30 .tech-era {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#change-30 .analog-clock {
+  width: 55px;
+  height: 55px;
+  background: #FFF8DC;
+  border: 4px solid #8B4513;
+  border-radius: 50%;
+  position: relative;
+}
+
+#change-30 .clock-hand-hour {
+  position: absolute;
+  width: 3px;
+  height: 15px;
+  background: #333;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-30deg);
+  border-radius: 2px;
+}
+
+#change-30 .clock-hand-minute {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: #333;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) translateY(-100%) rotate(60deg);
+  border-radius: 2px;
+}
+
+#change-30 .clock-center {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #333;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#change-30 .convert-icon {
+  font-size: 26px;
+  color: #FF6B9D;
+}
+
+#change-30 .digital-clock {
+  width: 70px;
+  height: 45px;
+  background: #1a1a2e;
+  border: 3px solid #333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#change-30 .digital-display {
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  color: #00FF00;
+  letter-spacing: 2px;
+}
+
+#change-30 .tech-label {
+  font-size: 11px;
+  color: #666;
+}
+
+#change-30:hover .digital-display {
+  animation: digital-blink 0.5s ease;
+}
+
+@keyframes digital-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+</style>
+
+<!-- ===== HTML Templates ===== -->
+
+<!-- #change-1: Caterpillar → Butterfly Metamorphosis -->
+<div id="change-1" class="change-diagram">
+  <div class="caterpillar">
+    <span class="caterpillar-face">🐛</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="cocoon">🫘</div>
+  <span class="transform-arrow">→</span>
+  <div class="butterfly">
+    <div class="butterfly-wing left"></div>
+    <div class="butterfly-body"></div>
+    <div class="butterfly-wing right"></div>
+  </div>
+</div>
+
+<!-- #change-2: Seed → Plant → Flower Growth -->
+<div id="change-2" class="change-diagram">
+  <div class="growth-stage">
+    <div class="seed"></div>
+    <div class="ground"></div>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="growth-stage">
+    <div class="sprout"></div>
+    <div class="ground"></div>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="growth-stage">
+    <div class="flower-stem">
+      <div class="flower-head"></div>
+    </div>
+    <div class="ground"></div>
+  </div>
+</div>
+
+<!-- #change-3: Egg → Chick → Chicken Lifecycle -->
+<div id="change-3" class="change-diagram">
+  <div class="egg"></div>
+  <span class="transform-arrow">→</span>
+  <div class="chick">
+    <div class="chick-eyes">
+      <div class="chick-eye"></div>
+      <div class="chick-eye"></div>
+    </div>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="chicken">
+    <div class="chicken-comb"></div>
+    <div class="chicken-beak"></div>
+  </div>
+</div>
+
+<!-- #change-4: Baby → Child → Adult → Elder Aging -->
+<div id="change-4" class="change-diagram">
+  <div class="person baby">
+    <div class="person-head">👶</div>
+    <div class="person-body"></div>
+    <div class="person-label">Baby</div>
+  </div>
+  <span class="small-arrow">→</span>
+  <div class="person child">
+    <div class="person-head">🧒</div>
+    <div class="person-body"></div>
+    <div class="person-label">Child</div>
+  </div>
+  <span class="small-arrow">→</span>
+  <div class="person adult">
+    <div class="person-head">🧑</div>
+    <div class="person-body"></div>
+    <div class="person-label">Adult</div>
+  </div>
+  <span class="small-arrow">→</span>
+  <div class="person elder">
+    <div class="person-head">🧓</div>
+    <div class="person-body"></div>
+    <div class="person-label">Elder</div>
+  </div>
+</div>
+
+<!-- #change-5: Raw → Cooked Food Transformation -->
+<div id="change-5" class="change-diagram">
+  <div class="food-item">
+    <div class="raw-meat"></div>
+    <span class="food-label">Raw</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="food-item">
+    <div class="cooking">
+      <span class="steam">💨</span>
+      <div class="pan"></div>
+      <div class="pan-handle"></div>
+    </div>
+    <span class="food-label">Cooking</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="food-item">
+    <div class="cooked-meat">✨</div>
+    <span class="food-label">Cooked</span>
+  </div>
+</div>
+
+<!-- #change-6: Day → Night Transition -->
+<div id="change-6" class="change-diagram">
+  <div class="sky-box day-sky">
+    <div class="sun"></div>
+  </div>
+  <span class="sky-label">Day</span>
+  <span class="transform-arrow">→</span>
+  <div class="sky-box sunset-sky">
+    <div class="sunset-sun"></div>
+  </div>
+  <span class="sky-label">Sunset</span>
+  <span class="transform-arrow">→</span>
+  <div class="sky-box night-sky" style="position: relative;">
+    <span class="stars">✦ ✦</span>
+    <div class="moon"></div>
+  </div>
+  <span class="sky-label">Night</span>
+</div>
+
+<!-- #change-7: Calm → Storm Weather Change -->
+<div id="change-7" class="change-diagram">
+  <div class="weather-box calm-weather">
+    <div class="calm-sun"></div>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="weather-box cloudy-weather">
+    <div class="cloud"></div>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="weather-box storm-weather">
+    <div class="cloud storm-cloud"></div>
+    <span class="lightning">⚡</span>
+    <div class="rain-drops">
+      <div class="rain-drop"></div>
+      <div class="rain-drop"></div>
+      <div class="rain-drop"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #change-8: Ice → Water → Steam States -->
+<div id="change-8" class="change-diagram">
+  <div class="state-container">
+    <div class="ice-cube">🧊</div>
+    <span class="state-label">Solid</span>
+    <span class="temp-label">0°C↓</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="state-container">
+    <div class="water-drop">💧</div>
+    <span class="state-label">Liquid</span>
+    <span class="temp-label">0-100°C</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="state-container">
+    <div class="steam-cloud"></div>
+    <span class="state-label">Gas</span>
+    <span class="temp-label">100°C↑</span>
+  </div>
+</div>
+
+<!-- #change-9: Old → New Renovation -->
+<div id="change-9" class="change-diagram">
+  <div class="house old-house">
+    <div class="roof"></div>
+    <div class="walls">
+      <div class="cracks">╳</div>
+      <div class="window left"></div>
+      <div class="window right"></div>
+      <div class="door"></div>
+    </div>
+    <span class="house-label">Old</span>
+  </div>
+  <span class="transform-arrow">🔨→</span>
+  <div class="house new-house">
+    <div class="roof"></div>
+    <div class="walls">
+      <span class="sparkle">✨</span>
+      <div class="window left"></div>
+      <div class="window right"></div>
+      <div class="door"></div>
+    </div>
+    <span class="house-label">New</span>
+  </div>
+</div>
+
+<!-- #change-10: Messy → Clean Transformation -->
+<div id="change-10" class="change-diagram">
+  <div class="room">
+    <div class="messy-items">
+      📦📚👕🧦📄🎒
+    </div>
+    <span class="room-label">Messy</span>
+  </div>
+  <span class="transform-arrow">🧹→</span>
+  <div class="room">
+    <div class="clean-items">
+      📚 👔 ✨
+    </div>
+    <span class="room-label">Clean</span>
+  </div>
+</div>
+
+<!-- #change-11: Broken → Fixed Repair -->
+<div id="change-11" class="change-diagram">
+  <div class="item-box">
+    <div class="broken-cup" style="position: relative;">
+      <div class="crack-line"></div>
+      <div class="cup-handle"></div>
+    </div>
+    <span class="item-label">Broken</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="repair-tools">🔧🔨</div>
+  <span class="transform-arrow">→</span>
+  <div class="item-box">
+    <div class="fixed-cup" style="position: relative;">
+      <span class="sparkles">✨</span>
+      <div class="cup-handle"></div>
+    </div>
+    <span class="item-label">Fixed</span>
+  </div>
+</div>
+
+<!-- #change-12: Empty → Full Filling -->
+<div id="change-12" class="change-diagram">
+  <div class="container">
+    <div class="glass empty">
+      <div class="water-level"></div>
+    </div>
+    <span class="container-label">Empty</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="pour">🫗</div>
+  <span class="transform-arrow">→</span>
+  <div class="container">
+    <div class="glass half">
+      <div class="water-level"></div>
+    </div>
+    <span class="container-label">Half</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="container">
+    <div class="glass full">
+      <div class="water-level"></div>
+    </div>
+    <span class="container-label">Full</span>
+  </div>
+</div>
+
+<!-- #change-13: Closed → Open State -->
+<div id="change-13" class="change-diagram">
+  <div class="door-frame closed-door">
+    <div class="door-panel">
+      <div class="door-knob"></div>
+    </div>
+    <span class="door-label">Closed</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="door-frame opening-door">
+    <div class="door-panel">
+      <div class="door-knob"></div>
+    </div>
+    <span class="door-label">Opening</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="door-frame open-door">
+    <div class="door-panel">
+      <div class="door-knob"></div>
+    </div>
+    <span class="door-label">Open</span>
+  </div>
+</div>
+
+<!-- #change-14: Off → On Switch -->
+<div id="change-14" class="change-diagram">
+  <div class="switch-box off-state">
+    <div class="bulb">
+      <div class="bulb-glass"></div>
+      <div class="bulb-base"></div>
+    </div>
+    <div class="switch">
+      <div class="switch-toggle"></div>
+    </div>
+    <span class="state-label">OFF</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="switch-box on-state">
+    <div class="bulb">
+      <div class="bulb-glass"></div>
+      <div class="bulb-base"></div>
+    </div>
+    <div class="switch">
+      <div class="switch-toggle"></div>
+    </div>
+    <span class="state-label">ON</span>
+  </div>
+</div>
+
+<!-- #change-15: Sad → Happy Mood Change -->
+<div id="change-15" class="change-diagram">
+  <div class="face sad-face">😢</div>
+  <span class="mood-label">Sad</span>
+  <span class="transform-arrow">→</span>
+  <div class="mood-change">
+    <span>💝</span>
+    <span class="mood-label">care</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="face neutral-face">😐</div>
+  <span class="mood-label">Calm</span>
+  <span class="transform-arrow">→</span>
+  <div class="face happy-face">😄</div>
+  <span class="mood-label">Happy</span>
+</div>
+
+<!-- #change-16: Weak → Strong Growth -->
+<div id="change-16" class="change-diagram">
+  <div class="strength-figure weak">
+    <div class="figure-head"></div>
+    <div class="figure-body">
+      <div class="figure-arms"></div>
+      <div class="figure-torso"></div>
+    </div>
+    <span class="strength-label">Weak</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="strength-figure medium">
+    <div class="figure-head"></div>
+    <div class="figure-body">
+      <div class="figure-arms"></div>
+      <div class="figure-torso"></div>
+    </div>
+    <span class="strength-label">Growing</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="strength-figure strong">
+    <div class="figure-head"></div>
+    <div class="figure-body">
+      <div class="figure-arms"></div>
+      <div class="figure-torso"></div>
+    </div>
+    <span class="strength-label">Strong</span>
+  </div>
+</div>
+
+<!-- #change-17: Beginner → Expert Skill Progression -->
+<div id="change-17" class="change-diagram">
+  <div class="skill-level beginner">
+    <div class="skill-badge">Lv1</div>
+    <div class="skill-stars">⭐</div>
+    <span class="skill-label">Beginner</span>
+  </div>
+  <span class="progress-arrow">→</span>
+  <div class="skill-level intermediate">
+    <div class="skill-badge">Lv2</div>
+    <div class="skill-stars">⭐⭐</div>
+    <span class="skill-label">Intermediate</span>
+  </div>
+  <span class="progress-arrow">→</span>
+  <div class="skill-level advanced">
+    <div class="skill-badge">Lv3</div>
+    <div class="skill-stars">⭐⭐⭐</div>
+    <span class="skill-label">Advanced</span>
+  </div>
+  <span class="progress-arrow">→</span>
+  <div class="skill-level expert">
+    <div class="skill-badge">MAX</div>
+    <div class="skill-stars">⭐⭐⭐⭐⭐</div>
+    <span class="skill-label">Expert</span>
+  </div>
+</div>
+
+<!-- #change-18: Draft → Final Version -->
+<div id="change-18" class="change-diagram">
+  <div class="document draft">
+    <div class="doc-paper">
+      <div class="doc-lines">
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+      </div>
+    </div>
+    <span class="doc-label">Draft</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="document review">
+    <div class="doc-paper">
+      <div class="doc-lines">
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+      </div>
+    </div>
+    <span class="doc-label">Review</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="document final">
+    <div class="doc-paper">
+      <div class="doc-lines">
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+      </div>
+    </div>
+    <span class="doc-label">Final</span>
+  </div>
+</div>
+
+<!-- #change-19: Idea → Product Development -->
+<div id="change-19" class="change-diagram">
+  <div class="dev-stage">
+    <div class="idea-bulb">
+      <div class="bulb-top"></div>
+      <div class="bulb-bottom"></div>
+    </div>
+    <span class="stage-label">Idea</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="dev-stage">
+    <div class="prototype">Proto</div>
+    <span class="stage-label">Prototype</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="dev-stage">
+    <div class="product">📦</div>
+    <span class="stage-label">Product</span>
+  </div>
+</div>
+
+<!-- #change-20: Plan → Action → Result -->
+<div id="change-20" class="change-diagram">
+  <div class="phase plan-phase">
+    <div class="phase-icon">📋</div>
+    <span class="phase-label">Plan</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="phase action-phase">
+    <div class="phase-icon">⚡</div>
+    <span class="phase-label">Action</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="phase result-phase">
+    <div class="phase-icon">🏆</div>
+    <span class="phase-label">Result</span>
+  </div>
+</div>
+
+<!-- #change-21: Input → Transform → Output -->
+<div id="change-21" class="change-diagram">
+  <div class="process-box">
+    <div class="input-box">📥</div>
+    <span class="process-label">Input</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="process-box">
+    <div class="transform-box">⚙️</div>
+    <span class="process-label">Transform</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="process-box">
+    <div class="output-box">📤</div>
+    <span class="process-label">Output</span>
+  </div>
+</div>
+
+<!-- #change-22: Question → Research → Answer -->
+<div id="change-22" class="change-diagram">
+  <div class="quest-stage">
+    <div class="question-mark">?</div>
+    <span class="stage-label">Question</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="quest-stage">
+    <div class="research-icon">🔍</div>
+    <span class="stage-label">Research</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="quest-stage">
+    <div class="answer-icon">!</div>
+    <span class="stage-label">Answer</span>
+  </div>
+</div>
+
+<!-- #change-23: Problem → Analysis → Solution -->
+<div id="change-23" class="change-diagram">
+  <div class="solve-stage">
+    <div class="problem-icon">⚠️</div>
+    <span class="solve-label">Problem</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="solve-stage">
+    <div class="analysis-icon">
+      <div class="analysis-bars">
+        <div class="analysis-bar"></div>
+        <div class="analysis-bar"></div>
+        <div class="analysis-bar"></div>
+        <div class="analysis-bar"></div>
+      </div>
+    </div>
+    <span class="solve-label">Analysis</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="solve-stage">
+    <div class="solution-icon">✅</div>
+    <span class="solve-label">Solution</span>
+  </div>
+</div>
+
+<!-- #change-24: Chaos → Order Organization -->
+<div id="change-24" class="change-diagram">
+  <div class="order-state">
+    <div class="chaos-box">
+      <div class="chaos-item"></div>
+      <div class="chaos-item"></div>
+      <div class="chaos-item"></div>
+      <div class="chaos-item"></div>
+      <div class="chaos-item"></div>
+    </div>
+    <span class="state-label">Chaos</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="sorting-icon">🗂️</div>
+  <span class="transform-arrow">→</span>
+  <div class="order-state">
+    <div class="order-box">
+      <div class="order-item"></div>
+      <div class="order-item"></div>
+      <div class="order-item"></div>
+      <div class="order-item"></div>
+      <div class="order-item"></div>
+    </div>
+    <span class="state-label">Order</span>
+  </div>
+</div>
+
+<!-- #change-25: Complex → Simple Simplification -->
+<div id="change-25" class="change-diagram">
+  <div class="complexity-state">
+    <div class="complex-shape">
+      <div class="complex-layer"></div>
+      <div class="complex-layer"></div>
+      <div class="complex-layer"></div>
+      <div class="complex-layer"></div>
+    </div>
+    <span class="complexity-label">Complex</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="simplify-icon">✂️</div>
+  <span class="transform-arrow">→</span>
+  <div class="complexity-state">
+    <div class="simple-shape">●</div>
+    <span class="complexity-label">Simple</span>
+  </div>
+</div>
+
+<!-- #change-26: Manual → Automatic Automation -->
+<div id="change-26" class="change-diagram">
+  <div class="work-mode">
+    <div class="manual-work">✋</div>
+    <span class="mode-label">Manual</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="automate-icon">🔄</div>
+  <span class="transform-arrow">→</span>
+  <div class="work-mode">
+    <div class="automatic-work">🤖</div>
+    <span class="mode-label">Automatic</span>
+  </div>
+</div>
+
+<!-- #change-27: Local → Global Expansion -->
+<div id="change-27" class="change-diagram">
+  <div class="scope-level">
+    <div class="local-icon">
+      <div class="local-pin"></div>
+    </div>
+    <span class="scope-label">Local</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="expand-icon">📡</div>
+  <span class="transform-arrow">→</span>
+  <div class="scope-level">
+    <div class="global-icon">
+      <div class="continent"></div>
+      <div class="continent"></div>
+      <div class="continent"></div>
+    </div>
+    <span class="scope-label">Global</span>
+  </div>
+</div>
+
+<!-- #change-28: Individual → Team Scaling -->
+<div id="change-28" class="change-diagram">
+  <div class="team-size">
+    <div class="individual">
+      <div class="person-icon"></div>
+      <div class="person-body-icon"></div>
+    </div>
+    <span class="size-label">Individual</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="scale-icon">📈</div>
+  <span class="transform-arrow">→</span>
+  <div class="team-size">
+    <div class="team">
+      <div class="team-member">
+        <div class="person-icon"></div>
+        <div class="person-body-icon"></div>
+      </div>
+      <div class="team-member">
+        <div class="person-icon"></div>
+        <div class="person-body-icon"></div>
+      </div>
+      <div class="team-member">
+        <div class="person-icon"></div>
+        <div class="person-body-icon"></div>
+      </div>
+      <div class="team-member">
+        <div class="person-icon"></div>
+        <div class="person-body-icon"></div>
+      </div>
+      <div class="team-member">
+        <div class="person-icon"></div>
+        <div class="person-body-icon"></div>
+      </div>
+    </div>
+    <span class="size-label">Team</span>
+  </div>
+</div>
+
+<!-- #change-29: Traditional → Modern Update -->
+<div id="change-29" class="change-diagram">
+  <div class="era-style">
+    <div class="traditional-item">📜</div>
+    <span class="era-label">Traditional</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="update-icon">🔄</div>
+  <span class="transform-arrow">→</span>
+  <div class="era-style">
+    <div class="modern-item">💻</div>
+    <span class="era-label">Modern</span>
+  </div>
+</div>
+
+<!-- #change-30: Analog → Digital Conversion -->
+<div id="change-30" class="change-diagram">
+  <div class="tech-era">
+    <div class="analog-clock">
+      <div class="clock-hand-hour"></div>
+      <div class="clock-hand-minute"></div>
+      <div class="clock-center"></div>
+    </div>
+    <span class="tech-label">Analog</span>
+  </div>
+  <span class="transform-arrow">→</span>
+  <div class="convert-icon">⚡</div>
+  <span class="transform-arrow">→</span>
+  <div class="tech-era">
+    <div class="digital-clock">
+      <span class="digital-display">12:34</span>
+    </div>
+    <span class="tech-label">Digital</span>
+  </div>
+</div>

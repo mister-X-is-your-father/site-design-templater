@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morphing Shapes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 50%, #2d1b4e 100%);
+            color: #fff;
+        }
+
+        /* Floating background blobs */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            top: -200px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            top: 50%;
+            right: -150px;
+            animation-delay: -5s;
+            animation-duration: 25s;
+        }
+
+        .blob-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            bottom: -100px;
+            left: 30%;
+            animation-delay: -10s;
+            animation-duration: 22s;
+        }
+
+        .blob-4 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: 30%;
+            left: 10%;
+            animation-delay: -7s;
+            animation-duration: 18s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(50px, -80px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 60px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translate(80px, 40px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a18cd1 50%, #fbc2eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                filter: brightness(1);
+                transform: scale(1);
+            }
+            50% {
+                filter: brightness(1.2);
+                transform: scale(1.02);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SVG Morphing Container */
+        .morph-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .morph-svg {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+        }
+
+        .morph-svg-1 {
+            top: 10%;
+            left: 5%;
+            animation: morphRotate 15s linear infinite;
+        }
+
+        .morph-svg-2 {
+            bottom: 15%;
+            right: 8%;
+            animation: morphRotate 20s linear infinite reverse;
+        }
+
+        .morph-svg-3 {
+            top: 50%;
+            right: 20%;
+            width: 200px;
+            height: 200px;
+            animation: morphRotate 12s linear infinite;
+        }
+
+        @keyframes morphRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .morph-path {
+            fill: url(#gradient1);
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        .morph-path-2 {
+            fill: url(#gradient2);
+            animation: morph2 10s ease-in-out infinite;
+        }
+
+        .morph-path-3 {
+            fill: url(#gradient3);
+            animation: morph3 6s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                d: path("M150,30 Q270,80 240,150 Q270,250 150,270 Q30,250 60,150 Q30,80 150,30");
+            }
+            25% {
+                d: path("M150,50 Q250,60 260,150 Q250,260 150,250 Q50,260 40,150 Q50,60 150,50");
+            }
+            50% {
+                d: path("M150,40 Q280,100 230,150 Q280,220 150,260 Q20,220 70,150 Q20,100 150,40");
+            }
+            75% {
+                d: path("M150,60 Q240,40 270,150 Q240,280 150,240 Q60,280 30,150 Q60,40 150,60");
+            }
+        }
+
+        @keyframes morph2 {
+            0%, 100% {
+                d: path("M150,20 Q280,60 260,150 Q280,260 150,280 Q20,260 40,150 Q20,60 150,20");
+            }
+            33% {
+                d: path("M150,40 Q260,80 240,150 Q260,240 150,260 Q40,240 60,150 Q40,80 150,40");
+            }
+            66% {
+                d: path("M150,30 Q290,100 250,150 Q290,220 150,270 Q10,220 50,150 Q10,100 150,30");
+            }
+        }
+
+        @keyframes morph3 {
+            0%, 100% {
+                d: path("M100,20 Q180,40 180,100 Q180,180 100,180 Q20,180 20,100 Q20,40 100,20");
+            }
+            50% {
+                d: path("M100,30 Q170,30 180,100 Q170,170 100,170 Q30,170 20,100 Q30,30 100,30");
+            }
+        }
+
+        /* Liquid Wave Section */
+        .wave-section {
+            position: relative;
+            padding: 150px 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(102, 126, 234, 0.1) 100%);
+        }
+
+        .wave-top, .wave-bottom {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .wave-top {
+            top: 0;
+            transform: rotate(180deg);
+        }
+
+        .wave-bottom {
+            bottom: 0;
+        }
+
+        .wave-svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+        }
+
+        .wave-path {
+            animation: wave 8s linear infinite;
+        }
+
+        .wave-path-2 {
+            animation: wave 12s linear infinite;
+            animation-delay: -2s;
+        }
+
+        .wave-path-3 {
+            animation: wave 10s linear infinite;
+            animation-delay: -4s;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Feature Cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon-blob {
+            animation: iconMorph 4s ease-in-out infinite;
+        }
+
+        @keyframes iconMorph {
+            0%, 100% {
+                d: path("M40,10 Q70,20 70,40 Q70,70 40,70 Q10,70 10,40 Q10,20 40,10");
+            }
+            50% {
+                d: path("M40,5 Q75,15 75,40 Q75,75 40,75 Q5,75 5,40 Q5,15 40,5");
+            }
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+        }
+
+        /* Interactive Blob Section */
+        .blob-section {
+            padding: 100px 2rem;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .interactive-blob-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .interactive-blob {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .main-blob {
+            fill: url(#interactiveGradient);
+            filter: url(#goo);
+            transition: all 0.3s ease;
+        }
+
+        .blob-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Particle Effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #fff, #a18cd1);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1);
+            }
+        }
+
+        /* Footer Wave */
+        .footer {
+            position: relative;
+            padding: 100px 2rem 50px;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+            text-align: center;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff6b9d, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 50px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        /* Glow effect on hover elements */
+        .glow-on-hover {
+            position: relative;
+        }
+
+        .glow-on-hover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(161, 140, 209, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .glow-on-hover:hover::after {
+            opacity: 1;
+        }
+
+        /* Animated border gradient */
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #0c0c1e, #1a1a3e);
+            border-radius: 24px;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b9d, #4facfe, #a18cd1, #00f2fe, #ff6b9d);
+            background-size: 400% 400%;
+            border-radius: 26px;
+            z-index: -1;
+            animation: borderGradient 5s ease infinite;
+        }
+
+        @keyframes borderGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .blob {
+                transform: scale(0.6);
+            }
+
+            .morph-svg {
+                width: 150px;
+                height: 150px;
+            }
+
+            .interactive-blob-container {
+                width: 280px;
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background floating blobs -->
+    <div class="background-layer">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+    </div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- SVG Definitions -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#ff6b9d;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#c44569;stop-opacity:0.6" />
+            </linearGradient>
+            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.7" />
+                <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:0.5" />
+            </linearGradient>
+            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#a18cd1;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#fbc2eb;stop-opacity:0.6" />
+            </linearGradient>
+            <linearGradient id="interactiveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea" />
+                <stop offset="50%" style="stop-color:#764ba2" />
+                <stop offset="100%" style="stop-color:#f093fb" />
+            </linearGradient>
+            <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.1" />
+            </linearGradient>
+            <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.2" />
+                <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:0.05" />
+            </linearGradient>
+            <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#ff6b9d" />
+                <stop offset="100%" style="stop-color:#fbc2eb" />
+            </linearGradient>
+            <linearGradient id="iconGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4facfe" />
+                <stop offset="100%" style="stop-color:#00f2fe" />
+            </linearGradient>
+            <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#a18cd1" />
+                <stop offset="100%" style="stop-color:#fbc2eb" />
+            </linearGradient>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="morph-container">
+                <svg class="morph-svg morph-svg-1" viewBox="0 0 300 300">
+                    <path class="morph-path" d="M150,30 Q270,80 240,150 Q270,250 150,270 Q30,250 60,150 Q30,80 150,30"/>
+                </svg>
+                <svg class="morph-svg morph-svg-2" viewBox="0 0 300 300">
+                    <path class="morph-path-2" d="M150,20 Q280,60 260,150 Q280,260 150,280 Q20,260 40,150 Q20,60 150,20"/>
+                </svg>
+                <svg class="morph-svg morph-svg-3" viewBox="0 0 200 200">
+                    <path class="morph-path-3" d="M100,20 Q180,40 180,100 Q180,180 100,180 Q20,180 20,100 Q20,40 100,20"/>
+                </svg>
+            </div>
+
+            <div class="hero-content">
+                <h1 class="hero-title">Morphing Shapes</h1>
+                <p class="hero-subtitle">Fluid animations that bring your imagination to life</p>
+            </div>
+
+            <div class="scroll-indicator">
+                <svg viewBox="0 0 30 50">
+                    <rect x="8" y="5" width="14" height="24" rx="7" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                    <circle cx="15" cy="14" r="3" fill="rgba(255,255,255,0.8)">
+                        <animate attributeName="cy" values="14;20;14" dur="1.5s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Wave Section with Features -->
+        <section class="wave-section">
+            <div class="wave-top">
+                <svg class="wave-svg" viewBox="0 0 1440 150" preserveAspectRatio="none">
+                    <path class="wave-path" fill="url(#waveGradient1)" d="M0,50 C360,150 720,0 1080,100 C1260,150 1440,50 1440,50 L1440,150 L0,150 Z M1440,50 C1800,150 2160,0 2520,100 C2700,150 2880,50 2880,50 L2880,150 L1440,150 Z"/>
+                    <path class="wave-path-2" fill="url(#waveGradient2)" d="M0,80 C240,20 480,120 720,60 C960,0 1200,100 1440,80 L1440,150 L0,150 Z M1440,80 C1680,20 1920,120 2160,60 C2400,0 2640,100 2880,80 L2880,150 L1440,150 Z"/>
+                </svg>
+            </div>
+
+            <div class="section-content">
+                <h2 class="section-title">Liquid Design</h2>
+
+                <div class="features">
+                    <div class="feature-card glow-on-hover">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 80 80">
+                                <path class="icon-blob" fill="url(#iconGradient1)" d="M40,10 Q70,20 70,40 Q70,70 40,70 Q10,70 10,40 Q10,20 40,10"/>
+                                <path d="M30,35 L50,35 M30,45 L45,45" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">SVG Morphing</h3>
+                        <p class="feature-desc">Smooth path transitions that create mesmerizing shape transformations using pure CSS animations.</p>
+                    </div>
+
+                    <div class="feature-card glow-on-hover">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 80 80">
+                                <path class="icon-blob" fill="url(#iconGradient2)" d="M40,10 Q70,20 70,40 Q70,70 40,70 Q10,70 10,40 Q10,20 40,10" style="animation-delay: -1s"/>
+                                <circle cx="40" cy="40" r="12" fill="none" stroke="#fff" stroke-width="3"/>
+                                <circle cx="40" cy="40" r="5" fill="#fff"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Blob Effects</h3>
+                        <p class="feature-desc">Organic, fluid shapes that float and morph continuously, creating a living, breathing interface.</p>
+                    </div>
+
+                    <div class="feature-card glow-on-hover">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 80 80">
+                                <path class="icon-blob" fill="url(#iconGradient3)" d="M40,10 Q70,20 70,40 Q70,70 40,70 Q10,70 10,40 Q10,20 40,10" style="animation-delay: -2s"/>
+                                <path d="M25,40 Q40,25 55,40 Q40,55 25,40" fill="none" stroke="#fff" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Gradient Magic</h3>
+                        <p class="feature-desc">Dynamic color gradients that shift and blend, adding depth and dimension to every element.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wave-bottom">
+                <svg class="wave-svg" viewBox="0 0 1440 150" preserveAspectRatio="none">
+                    <path class="wave-path-3" fill="url(#waveGradient1)" d="M0,100 C180,50 360,130 540,80 C720,30 900,110 1080,60 C1260,10 1440,90 1440,100 L1440,0 L0,0 Z M1440,100 C1620,50 1800,130 1980,80 C2160,30 2340,110 2520,60 C2700,10 2880,90 2880,100 L2880,0 L1440,0 Z"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Interactive Blob Section -->
+        <section class="blob-section">
+            <div class="section-content" style="width: 100%;">
+                <h2 class="section-title" style="margin-bottom: 3rem;">Interactive Experience</h2>
+
+                <div class="interactive-blob-container" style="margin: 0 auto;">
+                    <svg class="interactive-blob" viewBox="0 0 400 400" id="interactiveBlob">
+                        <path class="main-blob" id="mainBlobPath" d="M200,50 Q350,100 350,200 Q350,350 200,350 Q50,350 50,200 Q50,100 200,50"/>
+                    </svg>
+                    <div class="blob-text">Hover Me</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animated Stats Section -->
+        <section class="wave-section" style="padding: 100px 2rem;">
+            <div class="section-content">
+                <h2 class="section-title">Pure CSS Magic</h2>
+                <p style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 600px; margin: 0 auto 3rem;">
+                    No external libraries. No JavaScript frameworks. Just pure HTML, CSS, and vanilla JS creating stunning visual effects.
+                </p>
+
+                <div class="features" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="gradient-border" style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #ff6b9d, #fbc2eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">0</div>
+                        <div style="color: rgba(255,255,255,0.6);">Dependencies</div>
+                    </div>
+                    <div class="gradient-border" style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">1</div>
+                        <div style="color: rgba(255,255,255,0.6);">Single File</div>
+                    </div>
+                    <div class="gradient-border" style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #a18cd1, #fbc2eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">∞</div>
+                        <div style="color: rgba(255,255,255,0.6);">Possibilities</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <h3 class="footer-title">Morphing Shapes</h3>
+                <p class="footer-text">Created with pure CSS animations</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.width = (3 + Math.random() * 6) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+
+        // Interactive blob animation
+        function setupInteractiveBlob() {
+            const blob = document.getElementById('interactiveBlob');
+            const path = document.getElementById('mainBlobPath');
+
+            const shapes = [
+                "M200,50 Q350,100 350,200 Q350,350 200,350 Q50,350 50,200 Q50,100 200,50",
+                "M200,30 Q380,80 370,200 Q380,380 200,370 Q20,380 30,200 Q20,80 200,30",
+                "M200,70 Q320,120 330,200 Q320,320 200,330 Q80,320 70,200 Q80,120 200,70",
+                "M200,40 Q360,60 360,200 Q360,360 200,360 Q40,360 40,200 Q40,60 200,40"
+            ];
+
+            let currentShape = 0;
+            let isAnimating = false;
+
+            function animateBlob() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                currentShape = (currentShape + 1) % shapes.length;
+                path.style.transition = 'd 0.5s ease-in-out';
+                path.setAttribute('d', shapes[currentShape]);
+
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 500);
+            }
+
+            blob.addEventListener('mouseenter', animateBlob);
+            blob.addEventListener('click', animateBlob);
+            blob.addEventListener('touchstart', animateBlob);
+
+            // Auto-animate
+            setInterval(() => {
+                if (!blob.matches(':hover')) {
+                    animateBlob();
+                }
+            }, 3000);
+        }
+
+        // Parallax effect for blobs
+        function setupParallax() {
+            const blobs = document.querySelectorAll('.blob');
+
+            window.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+                blobs.forEach((blob, index) => {
+                    const speed = (index + 1) * 10;
+                    const xOffset = x * speed;
+                    const yOffset = y * speed;
+                    blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                });
+            });
+        }
+
+        // Scroll-triggered animations
+        function setupScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.feature-card, .gradient-border').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            setupInteractiveBlob();
+            setupParallax();
+            setupScrollAnimations();
+        });
+    </script>
+</body>
+</html>

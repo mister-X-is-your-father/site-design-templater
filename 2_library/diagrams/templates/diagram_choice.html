@@ -1,0 +1,3413 @@
+<!--
+  Choice & Decision Diagram Templates
+  30 unique patterns for selection and decision-making visuals
+  Category: 選択・決定 (Choice & Decision)
+  IDs: #choice-1 to #choice-30
+-->
+
+<style>
+/* ========================================
+   CHOICE & DECISION - Base Styles
+   ======================================== */
+
+/* Color Variables */
+:root {
+  --choice-pink: #FF6B9D;
+  --choice-sky: #4ECDC4;
+  --choice-mint: #7ED957;
+  --choice-yellow: #FFE156;
+  --choice-orange: #FF8C42;
+  --choice-purple: #A855F7;
+  --choice-white: #FFFFFF;
+  --choice-dark: #2D3748;
+  --choice-light-pink: #FFE4EC;
+  --choice-light-sky: #E0F7F6;
+  --choice-light-mint: #E8F8E0;
+  --choice-light-yellow: #FFF9E0;
+  --choice-light-orange: #FFE8D9;
+  --choice-light-purple: #F3E8FF;
+}
+
+/* Common Container */
+.choice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+  min-height: 300px;
+}
+
+.choice-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--choice-dark);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* ========================================
+   #choice-1: Fork in the Road
+   ======================================== */
+#choice-1 .fork-container {
+  position: relative;
+  width: 300px;
+  height: 250px;
+}
+
+#choice-1 .fork-start {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 80px;
+  background: var(--choice-purple);
+  border-radius: 4px;
+}
+
+#choice-1 .fork-center {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: var(--choice-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--choice-dark);
+  border: 4px solid var(--choice-orange);
+  z-index: 2;
+}
+
+#choice-1 .fork-path {
+  position: absolute;
+  bottom: 110px;
+  width: 100px;
+  height: 20px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+#choice-1 .fork-path-left {
+  left: 20px;
+  background: var(--choice-pink);
+  transform: rotate(-30deg);
+  transform-origin: right center;
+}
+
+#choice-1 .fork-path-right {
+  right: 20px;
+  background: var(--choice-sky);
+  transform: rotate(30deg);
+  transform-origin: left center;
+}
+
+#choice-1 .fork-destination {
+  position: absolute;
+  top: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--choice-white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#choice-1 .fork-destination:hover {
+  transform: scale(1.1);
+}
+
+#choice-1 .fork-dest-a {
+  left: 0;
+  background: var(--choice-pink);
+}
+
+#choice-1 .fork-dest-b {
+  right: 0;
+  background: var(--choice-sky);
+}
+
+/* ========================================
+   #choice-2: Multiple Choice (A/B/C/D)
+   ======================================== */
+#choice-2 .mc-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 350px;
+}
+
+#choice-2 .mc-option {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: var(--choice-white);
+  border: 3px solid var(--choice-purple);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-2 .mc-option:hover {
+  background: var(--choice-light-purple);
+  transform: translateX(10px);
+}
+
+#choice-2 .mc-option.selected {
+  background: var(--choice-purple);
+  color: var(--choice-white);
+}
+
+#choice-2 .mc-letter {
+  width: 36px;
+  height: 36px;
+  background: var(--choice-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 15px;
+  color: var(--choice-dark);
+}
+
+#choice-2 .mc-option.selected .mc-letter {
+  background: var(--choice-white);
+}
+
+#choice-2 .mc-text {
+  font-weight: 500;
+}
+
+/* ========================================
+   #choice-3: Yes or No Buttons
+   ======================================== */
+#choice-3 .yesno-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+#choice-3 .yesno-btn {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+}
+
+#choice-3 .yesno-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 11px 0 rgba(0,0,0,0.2);
+}
+
+#choice-3 .yesno-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+#choice-3 .yes-btn {
+  background: var(--choice-mint);
+}
+
+#choice-3 .no-btn {
+  background: var(--choice-pink);
+}
+
+#choice-3 .yesno-icon {
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+#choice-3 .yesno-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--choice-white);
+}
+
+#choice-3 .yesno-vs {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--choice-purple);
+}
+
+/* ========================================
+   #choice-4: Voting Booth
+   ======================================== */
+#choice-4 .booth-container {
+  position: relative;
+  width: 200px;
+  height: 280px;
+}
+
+#choice-4 .booth-curtain {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  background: var(--choice-purple);
+  border-radius: 8px 8px 0 0;
+}
+
+#choice-4 .booth-curtain::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--choice-purple) 0px,
+    var(--choice-purple) 20px,
+    transparent 20px,
+    transparent 25px
+  );
+}
+
+#choice-4 .booth-body {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  height: 180px;
+  background: var(--choice-sky);
+  border: 4px solid var(--choice-dark);
+  border-top: none;
+}
+
+#choice-4 .booth-slot {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 8px;
+  background: var(--choice-dark);
+  border-radius: 4px;
+}
+
+#choice-4 .booth-paper {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 100px;
+  background: var(--choice-white);
+  border: 2px solid var(--choice-dark);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 8px;
+  animation: paper-insert 2s ease-in-out infinite;
+}
+
+@keyframes paper-insert {
+  0%, 100% { top: 20px; }
+  50% { top: 55px; }
+}
+
+#choice-4 .booth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+}
+
+#choice-4 .booth-check {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--choice-dark);
+}
+
+#choice-4 .booth-check.checked {
+  background: var(--choice-mint);
+}
+
+#choice-4 .booth-legs {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+#choice-4 .booth-leg {
+  width: 15px;
+  height: 40px;
+  background: var(--choice-dark);
+}
+
+/* ========================================
+   #choice-5: Ballot Box
+   ======================================== */
+#choice-5 .ballot-box {
+  position: relative;
+  width: 180px;
+  height: 200px;
+  background: var(--choice-orange);
+  border-radius: 8px;
+  border: 4px solid var(--choice-dark);
+}
+
+#choice-5 .ballot-top {
+  position: absolute;
+  top: -20px;
+  left: -4px;
+  right: -4px;
+  height: 40px;
+  background: var(--choice-yellow);
+  border: 4px solid var(--choice-dark);
+  border-radius: 8px 8px 0 0;
+}
+
+#choice-5 .ballot-slot {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 10px;
+  background: var(--choice-dark);
+  border-radius: 2px;
+}
+
+#choice-5 .ballot-paper {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 80px;
+  background: var(--choice-white);
+  border: 2px solid var(--choice-dark);
+  animation: drop-ballot 1.5s ease-in-out infinite;
+}
+
+@keyframes drop-ballot {
+  0% { top: -80px; opacity: 1; }
+  50% { top: -30px; opacity: 1; }
+  100% { top: 10px; opacity: 0; }
+}
+
+#choice-5 .ballot-label {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--choice-white);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#choice-5 .ballot-lock {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 35px;
+  background: var(--choice-yellow);
+  border-radius: 4px;
+  border: 3px solid var(--choice-dark);
+}
+
+#choice-5 .ballot-lock::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border: 4px solid var(--choice-dark);
+  border-radius: 50% 50% 0 0;
+  background: transparent;
+}
+
+/* ========================================
+   #choice-6: Hand Raise Vote
+   ======================================== */
+#choice-6 .hands-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+#choice-6 .hand-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#choice-6 .hand {
+  width: 50px;
+  height: 80px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#choice-6 .hand:hover {
+  transform: translateY(-10px);
+}
+
+#choice-6 .hand-palm {
+  width: 40px;
+  height: 45px;
+  border-radius: 8px 8px 12px 12px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#choice-6 .hand-fingers {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+
+#choice-6 .finger {
+  width: 8px;
+  height: 30px;
+  border-radius: 4px 4px 0 0;
+}
+
+#choice-6 .hand-1 .hand-palm,
+#choice-6 .hand-1 .finger { background: var(--choice-pink); }
+#choice-6 .hand-2 .hand-palm,
+#choice-6 .hand-2 .finger { background: var(--choice-sky); }
+#choice-6 .hand-3 .hand-palm,
+#choice-6 .hand-3 .finger { background: var(--choice-mint); }
+#choice-6 .hand-4 .hand-palm,
+#choice-6 .hand-4 .finger { background: var(--choice-yellow); }
+#choice-6 .hand-5 .hand-palm,
+#choice-6 .hand-5 .finger { background: var(--choice-orange); }
+
+#choice-6 .hand-count {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--choice-purple);
+}
+
+#choice-6 .hand-label {
+  font-size: 12px;
+  color: var(--choice-dark);
+}
+
+/* ========================================
+   #choice-7: Thumbs Up/Down Selection
+   ======================================== */
+#choice-7 .thumbs-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+#choice-7 .thumb-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 4px solid transparent;
+}
+
+#choice-7 .thumb-btn:hover {
+  transform: scale(1.15);
+}
+
+#choice-7 .thumb-up {
+  background: var(--choice-light-mint);
+  border-color: var(--choice-mint);
+}
+
+#choice-7 .thumb-down {
+  background: var(--choice-light-pink);
+  border-color: var(--choice-pink);
+}
+
+#choice-7 .thumb-icon {
+  font-size: 48px;
+}
+
+#choice-7 .thumb-down .thumb-icon {
+  transform: rotate(180deg);
+}
+
+#choice-7 .thumb-score {
+  text-align: center;
+}
+
+#choice-7 .thumb-number {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--choice-purple);
+}
+
+#choice-7 .thumb-label {
+  font-size: 12px;
+  color: var(--choice-dark);
+}
+
+/* ========================================
+   #choice-8: Star Rating Selector
+   ======================================== */
+#choice-8 .stars-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#choice-8 .stars-row {
+  display: flex;
+  gap: 10px;
+}
+
+#choice-8 .star {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#choice-8 .star:hover {
+  transform: scale(1.2);
+}
+
+#choice-8 .star::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 18px solid var(--choice-yellow);
+}
+
+#choice-8 .star::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 35px solid var(--choice-yellow);
+}
+
+#choice-8 .star.empty::before,
+#choice-8 .star.empty::after {
+  border-bottom-color: #E2E8F0;
+  border-top-color: #E2E8F0;
+}
+
+#choice-8 .star.filled::before,
+#choice-8 .star.filled::after {
+  border-bottom-color: var(--choice-yellow);
+  border-top-color: var(--choice-yellow);
+}
+
+#choice-8 .stars-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--choice-orange);
+}
+
+/* ========================================
+   #choice-9: Heart/Like Button
+   ======================================== */
+#choice-9 .like-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#choice-9 .heart-btn {
+  width: 120px;
+  height: 110px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#choice-9 .heart-btn:hover {
+  transform: scale(1.1);
+}
+
+#choice-9 .heart-btn::before,
+#choice-9 .heart-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 90px;
+  border-radius: 60px 60px 0 0;
+  background: var(--choice-pink);
+  transition: background 0.3s ease;
+}
+
+#choice-9 .heart-btn::before {
+  left: 60px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+#choice-9 .heart-btn::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+#choice-9 .heart-btn.liked::before,
+#choice-9 .heart-btn.liked::after {
+  background: var(--choice-pink);
+  animation: heartbeat 0.6s ease;
+}
+
+#choice-9 .heart-btn.unliked::before,
+#choice-9 .heart-btn.unliked::after {
+  background: #E2E8F0;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1) rotate(-45deg); }
+  50% { transform: scale(1.2) rotate(-45deg); }
+}
+
+#choice-9 .like-count {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--choice-pink);
+}
+
+#choice-9 .like-text {
+  font-size: 14px;
+  color: var(--choice-dark);
+}
+
+/* ========================================
+   #choice-10: Checkbox Selection
+   ======================================== */
+#choice-10 .checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+#choice-10 .checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 3px solid var(--choice-sky);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-10 .checkbox-item:hover {
+  background: var(--choice-light-sky);
+}
+
+#choice-10 .checkbox-box {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--choice-sky);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+#choice-10 .checkbox-item.checked .checkbox-box {
+  background: var(--choice-sky);
+}
+
+#choice-10 .checkbox-check {
+  width: 14px;
+  height: 8px;
+  border-left: 3px solid var(--choice-white);
+  border-bottom: 3px solid var(--choice-white);
+  transform: rotate(-45deg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#choice-10 .checkbox-item.checked .checkbox-check {
+  opacity: 1;
+}
+
+#choice-10 .checkbox-label {
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+/* ========================================
+   #choice-11: Radio Button Options
+   ======================================== */
+#choice-11 .radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+#choice-11 .radio-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 3px solid var(--choice-purple);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-11 .radio-item:hover {
+  background: var(--choice-light-purple);
+}
+
+#choice-11 .radio-circle {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--choice-purple);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+#choice-11 .radio-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--choice-purple);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.2s ease;
+}
+
+#choice-11 .radio-item.selected .radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#choice-11 .radio-label {
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+/* ========================================
+   #choice-12: Dropdown Menu
+   ======================================== */
+#choice-12 .dropdown-wrapper {
+  position: relative;
+  width: 280px;
+}
+
+#choice-12 .dropdown-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: var(--choice-white);
+  border: 3px solid var(--choice-orange);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-12 .dropdown-selected:hover {
+  border-color: var(--choice-pink);
+}
+
+#choice-12 .dropdown-arrow {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid var(--choice-orange);
+  transition: transform 0.3s ease;
+}
+
+#choice-12 .dropdown-wrapper.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+#choice-12 .dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--choice-white);
+  border: 3px solid var(--choice-orange);
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+#choice-12 .dropdown-wrapper.open .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#choice-12 .dropdown-option {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#choice-12 .dropdown-option:hover {
+  background: var(--choice-light-orange);
+}
+
+#choice-12 .dropdown-option.active {
+  background: var(--choice-orange);
+  color: var(--choice-white);
+}
+
+/* ========================================
+   #choice-13: Slider Preference
+   ======================================== */
+#choice-13 .slider-wrapper {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#choice-13 .slider-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#choice-13 .slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#choice-13 .slider-label {
+  font-weight: 600;
+  color: var(--choice-dark);
+}
+
+#choice-13 .slider-value {
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+#choice-13 .slider-track {
+  height: 12px;
+  background: #E2E8F0;
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+#choice-13 .slider-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+#choice-13 .slider-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  background: var(--choice-white);
+  border: 4px solid;
+  border-radius: 50%;
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+#choice-13 .slider-thumb:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+#choice-13 .slider-1 .slider-fill { background: var(--choice-pink); }
+#choice-13 .slider-1 .slider-thumb { border-color: var(--choice-pink); }
+#choice-13 .slider-1 .slider-value { background: var(--choice-light-pink); color: var(--choice-pink); }
+
+#choice-13 .slider-2 .slider-fill { background: var(--choice-mint); }
+#choice-13 .slider-2 .slider-thumb { border-color: var(--choice-mint); }
+#choice-13 .slider-2 .slider-value { background: var(--choice-light-mint); color: var(--choice-mint); }
+
+/* ========================================
+   #choice-14: Drag and Drop Ranking
+   ======================================== */
+#choice-14 .ranking-container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+#choice-14 .ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+}
+
+#choice-14 .ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 3px solid var(--choice-sky);
+  border-radius: 10px;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+#choice-14 .ranking-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#choice-14 .ranking-item.dragging {
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+#choice-14 .ranking-rank {
+  width: 32px;
+  height: 32px;
+  background: var(--choice-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--choice-dark);
+}
+
+#choice-14 .ranking-handle {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-left: auto;
+}
+
+#choice-14 .ranking-handle-line {
+  width: 18px;
+  height: 3px;
+  background: var(--choice-sky);
+  border-radius: 2px;
+}
+
+/* ========================================
+   #choice-15: This or That Comparison
+   ======================================== */
+#choice-15 .thisorthat-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+#choice-15 .thisorthat-option {
+  width: 140px;
+  height: 180px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 4px solid transparent;
+}
+
+#choice-15 .thisorthat-option:hover {
+  transform: scale(1.05);
+}
+
+#choice-15 .thisorthat-this {
+  background: var(--choice-pink);
+  border-color: var(--choice-pink);
+}
+
+#choice-15 .thisorthat-that {
+  background: var(--choice-sky);
+  border-color: var(--choice-sky);
+}
+
+#choice-15 .thisorthat-option.selected {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+#choice-15 .thisorthat-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+#choice-15 .thisorthat-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--choice-white);
+}
+
+#choice-15 .thisorthat-vs {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--choice-purple);
+  padding: 15px;
+  background: var(--choice-light-purple);
+  border-radius: 50%;
+}
+
+/* ========================================
+   #choice-16: Pick One Card Game
+   ======================================== */
+#choice-16 .cards-container {
+  display: flex;
+  gap: 15px;
+  perspective: 1000px;
+}
+
+#choice-16 .pick-card {
+  width: 100px;
+  height: 140px;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+#choice-16 .pick-card:hover {
+  transform: translateY(-15px);
+}
+
+#choice-16 .pick-card.flipped {
+  transform: rotateY(180deg);
+}
+
+#choice-16 .card-front,
+#choice-16 .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--choice-dark);
+}
+
+#choice-16 .card-back {
+  background: var(--choice-purple);
+}
+
+#choice-16 .card-pattern {
+  width: 70%;
+  height: 80%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--choice-light-purple) 0px,
+    var(--choice-light-purple) 10px,
+    var(--choice-purple) 10px,
+    var(--choice-purple) 20px
+  );
+  border-radius: 6px;
+}
+
+#choice-16 .card-front {
+  background: var(--choice-white);
+  transform: rotateY(180deg);
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#choice-16 .card-1 .card-front { background: var(--choice-light-pink); color: var(--choice-pink); }
+#choice-16 .card-2 .card-front { background: var(--choice-light-sky); color: var(--choice-sky); }
+#choice-16 .card-3 .card-front { background: var(--choice-light-mint); color: var(--choice-mint); }
+#choice-16 .card-4 .card-front { background: var(--choice-light-yellow); color: var(--choice-orange); }
+
+/* ========================================
+   #choice-17: Spinning Wheel Choice
+   ======================================== */
+#choice-17 .wheel-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+#choice-17 .wheel {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 6px solid var(--choice-dark);
+  animation: wheel-spin 4s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes wheel-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#choice-17 .wheel-segment {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform-origin: 100% 100%;
+}
+
+#choice-17 .wheel-segment:nth-child(1) { transform: rotate(0deg) skewY(30deg); background: var(--choice-pink); }
+#choice-17 .wheel-segment:nth-child(2) { transform: rotate(60deg) skewY(30deg); background: var(--choice-sky); }
+#choice-17 .wheel-segment:nth-child(3) { transform: rotate(120deg) skewY(30deg); background: var(--choice-mint); }
+#choice-17 .wheel-segment:nth-child(4) { transform: rotate(180deg) skewY(30deg); background: var(--choice-yellow); }
+#choice-17 .wheel-segment:nth-child(5) { transform: rotate(240deg) skewY(30deg); background: var(--choice-orange); }
+#choice-17 .wheel-segment:nth-child(6) { transform: rotate(300deg) skewY(30deg); background: var(--choice-purple); }
+
+#choice-17 .wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: var(--choice-white);
+  border-radius: 50%;
+  border: 4px solid var(--choice-dark);
+  z-index: 2;
+}
+
+#choice-17 .wheel-pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid var(--choice-dark);
+  z-index: 3;
+}
+
+/* ========================================
+   #choice-18: Random Picker
+   ======================================== */
+#choice-18 .picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+#choice-18 .picker-display {
+  width: 200px;
+  height: 80px;
+  background: var(--choice-dark);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#choice-18 .picker-result {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--choice-yellow);
+  animation: picker-flash 0.5s ease infinite;
+}
+
+@keyframes picker-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+#choice-18 .picker-btn {
+  padding: 15px 40px;
+  background: var(--choice-mint);
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--choice-white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 0 #5AB547;
+}
+
+#choice-18 .picker-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 #5AB547;
+}
+
+#choice-18 .picker-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #5AB547;
+}
+
+#choice-18 .picker-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 300px;
+}
+
+#choice-18 .picker-chip {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#choice-18 .picker-chip:nth-child(1) { background: var(--choice-light-pink); color: var(--choice-pink); }
+#choice-18 .picker-chip:nth-child(2) { background: var(--choice-light-sky); color: var(--choice-sky); }
+#choice-18 .picker-chip:nth-child(3) { background: var(--choice-light-mint); color: var(--choice-mint); }
+#choice-18 .picker-chip:nth-child(4) { background: var(--choice-light-orange); color: var(--choice-orange); }
+
+/* ========================================
+   #choice-19: Priority Sorter
+   ======================================== */
+#choice-19 .priority-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 350px;
+}
+
+#choice-19 .priority-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+#choice-19 .priority-item:hover {
+  transform: translateX(10px);
+}
+
+#choice-19 .priority-high {
+  background: var(--choice-pink);
+  border-left: 6px solid #E91E63;
+}
+
+#choice-19 .priority-medium {
+  background: var(--choice-yellow);
+  border-left: 6px solid var(--choice-orange);
+}
+
+#choice-19 .priority-low {
+  background: var(--choice-mint);
+  border-left: 6px solid #43A047;
+}
+
+#choice-19 .priority-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--choice-white);
+}
+
+#choice-19 .priority-high .priority-badge { background: #E91E63; }
+#choice-19 .priority-medium .priority-badge { background: var(--choice-orange); }
+#choice-19 .priority-low .priority-badge { background: #43A047; }
+
+#choice-19 .priority-text {
+  flex: 1;
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+#choice-19 .priority-grip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#choice-19 .priority-grip-dot {
+  display: flex;
+  gap: 2px;
+}
+
+#choice-19 .priority-grip-dot::before,
+#choice-19 .priority-grip-dot::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+/* ========================================
+   #choice-20: Favorites List
+   ======================================== */
+#choice-20 .favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+#choice-20 .favorite-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 3px solid #E2E8F0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+#choice-20 .favorite-item:hover {
+  border-color: var(--choice-pink);
+}
+
+#choice-20 .favorite-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+#choice-20 .favorite-item:nth-child(1) .favorite-icon { background: var(--choice-light-pink); }
+#choice-20 .favorite-item:nth-child(2) .favorite-icon { background: var(--choice-light-sky); }
+#choice-20 .favorite-item:nth-child(3) .favorite-icon { background: var(--choice-light-mint); }
+#choice-20 .favorite-item:nth-child(4) .favorite-icon { background: var(--choice-light-yellow); }
+
+#choice-20 .favorite-info {
+  flex: 1;
+}
+
+#choice-20 .favorite-name {
+  font-weight: 600;
+  color: var(--choice-dark);
+}
+
+#choice-20 .favorite-desc {
+  font-size: 12px;
+  color: #718096;
+}
+
+#choice-20 .favorite-star {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+#choice-20 .favorite-star::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 11px solid #E2E8F0;
+}
+
+#choice-20 .favorite-star.active::before {
+  border-bottom-color: var(--choice-yellow);
+}
+
+/* ========================================
+   #choice-21: Wish List Selector
+   ======================================== */
+#choice-21 .wishlist-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+#choice-21 .wishlist-item {
+  width: 100px;
+  height: 120px;
+  background: var(--choice-white);
+  border: 3px solid #E2E8F0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+#choice-21 .wishlist-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+#choice-21 .wishlist-item.added {
+  border-color: var(--choice-pink);
+  background: var(--choice-light-pink);
+}
+
+#choice-21 .wishlist-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+#choice-21 .wishlist-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+#choice-21 .wishlist-heart {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 18px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#choice-21 .wishlist-item.added .wishlist-heart {
+  opacity: 1;
+}
+
+#choice-21 .wishlist-heart::before,
+#choice-21 .wishlist-heart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 15px;
+  border-radius: 10px 10px 0 0;
+  background: var(--choice-pink);
+}
+
+#choice-21 .wishlist-heart::before {
+  left: 10px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+#choice-21 .wishlist-heart::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* ========================================
+   #choice-22: Shopping Cart Choices
+   ======================================== */
+#choice-22 .cart-container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+#choice-22 .cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#choice-22 .cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 2px solid #E2E8F0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+#choice-22 .cart-item:hover {
+  border-color: var(--choice-sky);
+}
+
+#choice-22 .cart-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+#choice-22 .cart-item:nth-child(1) .cart-thumb { background: var(--choice-light-pink); }
+#choice-22 .cart-item:nth-child(2) .cart-thumb { background: var(--choice-light-sky); }
+#choice-22 .cart-item:nth-child(3) .cart-thumb { background: var(--choice-light-mint); }
+
+#choice-22 .cart-details {
+  flex: 1;
+}
+
+#choice-22 .cart-name {
+  font-weight: 600;
+  color: var(--choice-dark);
+}
+
+#choice-22 .cart-price {
+  font-size: 14px;
+  color: var(--choice-orange);
+  font-weight: bold;
+}
+
+#choice-22 .cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#choice-22 .cart-qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--choice-sky);
+  border-radius: 6px;
+  background: var(--choice-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--choice-sky);
+  transition: all 0.2s ease;
+}
+
+#choice-22 .cart-qty-btn:hover {
+  background: var(--choice-sky);
+  color: var(--choice-white);
+}
+
+#choice-22 .cart-qty-num {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#choice-22 .cart-summary {
+  background: var(--choice-light-yellow);
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 150px;
+}
+
+#choice-22 .cart-total-label {
+  font-size: 14px;
+  color: #718096;
+}
+
+#choice-22 .cart-total {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--choice-orange);
+  margin: 8px 0 15px;
+}
+
+#choice-22 .cart-checkout {
+  width: 100%;
+  padding: 12px;
+  background: var(--choice-orange);
+  border: none;
+  border-radius: 8px;
+  color: var(--choice-white);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-22 .cart-checkout:hover {
+  background: #E67635;
+}
+
+/* ========================================
+   #choice-23: Menu Ordering
+   ======================================== */
+#choice-23 .menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+#choice-23 .menu-category {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--choice-purple);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--choice-light-purple);
+}
+
+#choice-23 .menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#choice-23 .menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 2px solid #E2E8F0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-23 .menu-item:hover {
+  border-color: var(--choice-mint);
+  background: var(--choice-light-mint);
+}
+
+#choice-23 .menu-item.selected {
+  border-color: var(--choice-mint);
+  background: var(--choice-mint);
+}
+
+#choice-23 .menu-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#choice-23 .menu-emoji {
+  font-size: 24px;
+}
+
+#choice-23 .menu-name {
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+#choice-23 .menu-item.selected .menu-name {
+  color: var(--choice-white);
+}
+
+#choice-23 .menu-price {
+  font-weight: bold;
+  color: var(--choice-orange);
+}
+
+#choice-23 .menu-item.selected .menu-price {
+  color: var(--choice-white);
+}
+
+#choice-23 .menu-check {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--choice-mint);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#choice-23 .menu-item.selected .menu-check {
+  opacity: 1;
+  background: var(--choice-white);
+}
+
+#choice-23 .menu-check::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 3px solid var(--choice-mint);
+  border-bottom: 3px solid var(--choice-mint);
+  transform: rotate(-45deg);
+}
+
+/* ========================================
+   #choice-24: Outfit Picker
+   ======================================== */
+#choice-24 .outfit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+#choice-24 .outfit-mannequin {
+  width: 120px;
+  height: 200px;
+  position: relative;
+}
+
+#choice-24 .outfit-head {
+  width: 50px;
+  height: 50px;
+  background: #FFD5C2;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#choice-24 .outfit-body {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px 8px 0 0;
+  transition: background 0.3s ease;
+}
+
+#choice-24 .outfit-legs {
+  width: 70px;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+#choice-24 .outfit-leg {
+  width: 28px;
+  height: 60px;
+  border-radius: 0 0 8px 8px;
+  transition: background 0.3s ease;
+}
+
+#choice-24 .outfit-options {
+  display: flex;
+  gap: 15px;
+}
+
+#choice-24 .outfit-category {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+#choice-24 .outfit-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--choice-dark);
+}
+
+#choice-24 .outfit-swatches {
+  display: flex;
+  gap: 6px;
+}
+
+#choice-24 .outfit-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+#choice-24 .outfit-swatch:hover {
+  transform: scale(1.15);
+}
+
+#choice-24 .outfit-swatch.active {
+  border-color: var(--choice-dark);
+}
+
+#choice-24 .swatch-pink { background: var(--choice-pink); }
+#choice-24 .swatch-sky { background: var(--choice-sky); }
+#choice-24 .swatch-mint { background: var(--choice-mint); }
+#choice-24 .swatch-yellow { background: var(--choice-yellow); }
+#choice-24 .swatch-orange { background: var(--choice-orange); }
+#choice-24 .swatch-purple { background: var(--choice-purple); }
+
+/* ========================================
+   #choice-25: Color Palette Selector
+   ======================================== */
+#choice-25 .palette-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+#choice-25 .palette-preview {
+  width: 200px;
+  height: 100px;
+  border-radius: 12px;
+  border: 4px solid var(--choice-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#choice-25 .palette-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+#choice-25 .palette-color {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+#choice-25 .palette-color:hover {
+  transform: scale(1.1);
+}
+
+#choice-25 .palette-color.selected {
+  border-color: var(--choice-dark);
+  transform: scale(1.15);
+}
+
+#choice-25 .color-row-1 .palette-color:nth-child(1) { background: #FF6B9D; }
+#choice-25 .color-row-1 .palette-color:nth-child(2) { background: #FF8C42; }
+#choice-25 .color-row-1 .palette-color:nth-child(3) { background: #FFE156; }
+#choice-25 .color-row-1 .palette-color:nth-child(4) { background: #7ED957; }
+#choice-25 .color-row-1 .palette-color:nth-child(5) { background: #4ECDC4; }
+#choice-25 .color-row-1 .palette-color:nth-child(6) { background: #A855F7; }
+
+#choice-25 .color-row-2 .palette-color:nth-child(1) { background: #FFB6C1; }
+#choice-25 .color-row-2 .palette-color:nth-child(2) { background: #FFCC99; }
+#choice-25 .color-row-2 .palette-color:nth-child(3) { background: #FFFACD; }
+#choice-25 .color-row-2 .palette-color:nth-child(4) { background: #B8F5B0; }
+#choice-25 .color-row-2 .palette-color:nth-child(5) { background: #B0E0E6; }
+#choice-25 .color-row-2 .palette-color:nth-child(6) { background: #DDA0DD; }
+
+/* ========================================
+   #choice-26: Font Chooser
+   ======================================== */
+#choice-26 .font-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+#choice-26 .font-preview {
+  padding: 25px;
+  background: var(--choice-white);
+  border: 4px solid var(--choice-purple);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 24px;
+  transition: font-family 0.3s ease;
+}
+
+#choice-26 .font-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#choice-26 .font-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 3px solid #E2E8F0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#choice-26 .font-option:hover {
+  border-color: var(--choice-sky);
+}
+
+#choice-26 .font-option.selected {
+  border-color: var(--choice-sky);
+  background: var(--choice-light-sky);
+}
+
+#choice-26 .font-name {
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+#choice-26 .font-sample {
+  font-size: 18px;
+  color: #718096;
+}
+
+#choice-26 .font-option:nth-child(1) .font-sample { font-family: 'Arial', sans-serif; }
+#choice-26 .font-option:nth-child(2) .font-sample { font-family: 'Georgia', serif; }
+#choice-26 .font-option:nth-child(3) .font-sample { font-family: 'Courier New', monospace; }
+#choice-26 .font-option:nth-child(4) .font-sample { font-family: 'Comic Sans MS', cursive; }
+
+#choice-26 .font-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--choice-sky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#choice-26 .font-option.selected .font-check {
+  opacity: 1;
+}
+
+#choice-26 .font-check::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid var(--choice-white);
+  border-bottom: 2px solid var(--choice-white);
+  transform: rotate(-45deg);
+}
+
+/* ========================================
+   #choice-27: Template Selector
+   ======================================== */
+#choice-27 .template-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+#choice-27 .template-card {
+  width: 110px;
+  height: 140px;
+  background: var(--choice-white);
+  border: 3px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+#choice-27 .template-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+#choice-27 .template-card.selected {
+  border-color: var(--choice-purple);
+  border-width: 4px;
+}
+
+#choice-27 .template-header {
+  height: 20px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+#choice-27 .template-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#choice-27 .template-line {
+  height: 6px;
+  border-radius: 3px;
+  background: #E2E8F0;
+}
+
+#choice-27 .template-card:nth-child(1) .template-header { background: var(--choice-pink); }
+#choice-27 .template-card:nth-child(2) .template-header { background: var(--choice-sky); }
+#choice-27 .template-card:nth-child(3) .template-header { background: var(--choice-mint); }
+#choice-27 .template-card:nth-child(4) .template-header { background: var(--choice-yellow); }
+#choice-27 .template-card:nth-child(5) .template-header { background: var(--choice-orange); }
+#choice-27 .template-card:nth-child(6) .template-header { background: var(--choice-purple); }
+
+#choice-27 .template-name {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--choice-dark);
+}
+
+#choice-27 .template-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background: var(--choice-purple);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#choice-27 .template-card.selected .template-badge {
+  opacity: 1;
+}
+
+#choice-27 .template-badge::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid var(--choice-white);
+  border-bottom: 2px solid var(--choice-white);
+  transform: rotate(-45deg);
+}
+
+/* ========================================
+   #choice-28: Plan Comparison
+   ======================================== */
+#choice-28 .plans-container {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+#choice-28 .plan-card {
+  width: 140px;
+  background: var(--choice-white);
+  border: 3px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#choice-28 .plan-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+#choice-28 .plan-card.popular {
+  border-color: var(--choice-orange);
+  transform: scale(1.05);
+}
+
+#choice-28 .plan-card.popular:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+#choice-28 .plan-badge {
+  background: var(--choice-orange);
+  color: var(--choice-white);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#choice-28 .plan-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--choice-dark);
+  margin-bottom: 5px;
+}
+
+#choice-28 .plan-price {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#choice-28 .plan-card:nth-child(1) .plan-price { color: var(--choice-mint); }
+#choice-28 .plan-card:nth-child(2) .plan-price { color: var(--choice-orange); }
+#choice-28 .plan-card:nth-child(3) .plan-price { color: var(--choice-purple); }
+
+#choice-28 .plan-period {
+  font-size: 12px;
+  color: #718096;
+  margin-bottom: 15px;
+}
+
+#choice-28 .plan-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+#choice-28 .plan-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--choice-dark);
+}
+
+#choice-28 .plan-feature-check {
+  width: 16px;
+  height: 16px;
+  background: var(--choice-mint);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#choice-28 .plan-feature-check::after {
+  content: '';
+  width: 6px;
+  height: 4px;
+  border-left: 2px solid var(--choice-white);
+  border-bottom: 2px solid var(--choice-white);
+  transform: rotate(-45deg);
+}
+
+#choice-28 .plan-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.2s ease;
+}
+
+#choice-28 .plan-card:nth-child(1) .plan-btn {
+  background: var(--choice-light-mint);
+  color: var(--choice-mint);
+}
+
+#choice-28 .plan-card:nth-child(2) .plan-btn {
+  background: var(--choice-orange);
+  color: var(--choice-white);
+}
+
+#choice-28 .plan-card:nth-child(3) .plan-btn {
+  background: var(--choice-light-purple);
+  color: var(--choice-purple);
+}
+
+/* ========================================
+   #choice-29: Feature Toggle Switches
+   ======================================== */
+#choice-29 .toggles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 320px;
+}
+
+#choice-29 .toggle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--choice-white);
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+#choice-29 .toggle-item:hover {
+  border-color: var(--choice-sky);
+}
+
+#choice-29 .toggle-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#choice-29 .toggle-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+#choice-29 .toggle-item:nth-child(1) .toggle-icon { background: var(--choice-light-pink); }
+#choice-29 .toggle-item:nth-child(2) .toggle-icon { background: var(--choice-light-sky); }
+#choice-29 .toggle-item:nth-child(3) .toggle-icon { background: var(--choice-light-mint); }
+#choice-29 .toggle-item:nth-child(4) .toggle-icon { background: var(--choice-light-yellow); }
+#choice-29 .toggle-item:nth-child(5) .toggle-icon { background: var(--choice-light-purple); }
+
+#choice-29 .toggle-label {
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+#choice-29 .toggle-switch {
+  width: 52px;
+  height: 28px;
+  background: #E2E8F0;
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#choice-29 .toggle-switch.on {
+  background: var(--choice-mint);
+}
+
+#choice-29 .toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: var(--choice-white);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#choice-29 .toggle-switch.on .toggle-knob {
+  transform: translateX(24px);
+}
+
+/* ========================================
+   #choice-30: Settings Preferences Panel
+   ======================================== */
+#choice-30 .settings-panel {
+  width: 100%;
+  max-width: 380px;
+  background: var(--choice-white);
+  border-radius: 16px;
+  border: 3px solid #E2E8F0;
+  overflow: hidden;
+}
+
+#choice-30 .settings-header {
+  background: var(--choice-purple);
+  color: var(--choice-white);
+  padding: 15px 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#choice-30 .settings-gear {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+#choice-30 .settings-gear::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--choice-white);
+  border-radius: 50%;
+}
+
+#choice-30 .settings-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#choice-30 .settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#choice-30 .settings-section-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #718096;
+  text-transform: uppercase;
+}
+
+#choice-30 .settings-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #F7FAFC;
+  border-radius: 8px;
+}
+
+#choice-30 .settings-option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--choice-dark);
+}
+
+#choice-30 .settings-option-icon {
+  font-size: 16px;
+}
+
+#choice-30 .settings-mini-toggle {
+  width: 40px;
+  height: 22px;
+  background: #E2E8F0;
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#choice-30 .settings-mini-toggle.on {
+  background: var(--choice-sky);
+}
+
+#choice-30 .settings-mini-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--choice-white);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+#choice-30 .settings-mini-toggle.on .settings-mini-knob {
+  transform: translateX(18px);
+}
+
+#choice-30 .settings-dropdown {
+  padding: 8px 12px;
+  border: 2px solid #E2E8F0;
+  border-radius: 6px;
+  background: var(--choice-white);
+  font-weight: 500;
+  color: var(--choice-dark);
+  cursor: pointer;
+}
+
+#choice-30 .settings-btn {
+  padding: 12px;
+  background: var(--choice-purple);
+  border: none;
+  border-radius: 8px;
+  color: var(--choice-white);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+#choice-30 .settings-btn:hover {
+  background: #9333EA;
+}
+</style>
+
+<!-- ========================================
+     TEMPLATE STRUCTURES
+     ======================================== -->
+
+<!-- #choice-1: Fork in the Road -->
+<div id="choice-1" class="choice-container">
+  <div class="choice-title">どちらの道を選ぶ？</div>
+  <div class="fork-container">
+    <div class="fork-destination fork-dest-a">選択肢A</div>
+    <div class="fork-destination fork-dest-b">選択肢B</div>
+    <div class="fork-path fork-path-left"></div>
+    <div class="fork-path fork-path-right"></div>
+    <div class="fork-center">?</div>
+    <div class="fork-start"></div>
+  </div>
+</div>
+
+<!-- #choice-2: Multiple Choice (A/B/C/D) -->
+<div id="choice-2" class="choice-container">
+  <div class="choice-title">正解を選んでください</div>
+  <div class="mc-options">
+    <div class="mc-option">
+      <div class="mc-letter">A</div>
+      <div class="mc-text">選択肢A</div>
+    </div>
+    <div class="mc-option selected">
+      <div class="mc-letter">B</div>
+      <div class="mc-text">選択肢B</div>
+    </div>
+    <div class="mc-option">
+      <div class="mc-letter">C</div>
+      <div class="mc-text">選択肢C</div>
+    </div>
+    <div class="mc-option">
+      <div class="mc-letter">D</div>
+      <div class="mc-text">選択肢D</div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-3: Yes or No Buttons -->
+<div id="choice-3" class="choice-container">
+  <div class="choice-title">参加しますか？</div>
+  <div class="yesno-wrapper">
+    <button class="yesno-btn yes-btn">
+      <span class="yesno-icon">○</span>
+      <span class="yesno-text">YES</span>
+    </button>
+    <span class="yesno-vs">or</span>
+    <button class="yesno-btn no-btn">
+      <span class="yesno-icon">×</span>
+      <span class="yesno-text">NO</span>
+    </button>
+  </div>
+</div>
+
+<!-- #choice-4: Voting Booth -->
+<div id="choice-4" class="choice-container">
+  <div class="choice-title">投票ブース</div>
+  <div class="booth-container">
+    <div class="booth-curtain"></div>
+    <div class="booth-body">
+      <div class="booth-slot"></div>
+      <div class="booth-paper">
+        <div class="booth-checkbox">
+          <div class="booth-check checked"></div>
+          <span>候補者A</span>
+        </div>
+        <div class="booth-checkbox">
+          <div class="booth-check"></div>
+          <span>候補者B</span>
+        </div>
+        <div class="booth-checkbox">
+          <div class="booth-check"></div>
+          <span>候補者C</span>
+        </div>
+      </div>
+    </div>
+    <div class="booth-legs">
+      <div class="booth-leg"></div>
+      <div class="booth-leg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-5: Ballot Box -->
+<div id="choice-5" class="choice-container">
+  <div class="choice-title">投票箱</div>
+  <div class="ballot-box">
+    <div class="ballot-top">
+      <div class="ballot-slot"></div>
+    </div>
+    <div class="ballot-paper"></div>
+    <div class="ballot-label">VOTE</div>
+    <div class="ballot-lock"></div>
+  </div>
+</div>
+
+<!-- #choice-6: Hand Raise Vote -->
+<div id="choice-6" class="choice-container">
+  <div class="choice-title">挙手で投票</div>
+  <div class="hands-container">
+    <div class="hand-group">
+      <div class="hand hand-1">
+        <div class="hand-fingers">
+          <div class="finger"></div>
+          <div class="finger"></div>
+          <div class="finger"></div>
+          <div class="finger"></div>
+        </div>
+        <div class="hand-palm"></div>
+      </div>
+      <div class="hand-count">5</div>
+      <div class="hand-label">賛成</div>
+    </div>
+    <div class="hand-group">
+      <div class="hand hand-2">
+        <div class="hand-fingers">
+          <div class="finger"></div>
+          <div class="finger"></div>
+          <div class="finger"></div>
+          <div class="finger"></div>
+        </div>
+        <div class="hand-palm"></div>
+      </div>
+      <div class="hand-count">3</div>
+      <div class="hand-label">反対</div>
+    </div>
+    <div class="hand-group">
+      <div class="hand hand-3">
+        <div class="hand-fingers">
+          <div class="finger"></div>
+          <div class="finger"></div>
+          <div class="finger"></div>
+          <div class="finger"></div>
+        </div>
+        <div class="hand-palm"></div>
+      </div>
+      <div class="hand-count">2</div>
+      <div class="hand-label">保留</div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-7: Thumbs Up/Down Selection -->
+<div id="choice-7" class="choice-container">
+  <div class="choice-title">どう思いますか？</div>
+  <div class="thumbs-wrapper">
+    <div class="thumb-btn thumb-up">
+      <span class="thumb-icon">👍</span>
+    </div>
+    <div class="thumb-score">
+      <div class="thumb-number">75%</div>
+      <div class="thumb-label">支持率</div>
+    </div>
+    <div class="thumb-btn thumb-down">
+      <span class="thumb-icon">👍</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-8: Star Rating Selector -->
+<div id="choice-8" class="choice-container">
+  <div class="choice-title">評価してください</div>
+  <div class="stars-container">
+    <div class="stars-row">
+      <div class="star filled"></div>
+      <div class="star filled"></div>
+      <div class="star filled"></div>
+      <div class="star filled"></div>
+      <div class="star empty"></div>
+    </div>
+    <div class="stars-label">4.0 / 5.0</div>
+  </div>
+</div>
+
+<!-- #choice-9: Heart/Like Button -->
+<div id="choice-9" class="choice-container">
+  <div class="choice-title">いいね！</div>
+  <div class="like-wrapper">
+    <div class="heart-btn liked"></div>
+    <div class="like-count">1,234</div>
+    <div class="like-text">いいね</div>
+  </div>
+</div>
+
+<!-- #choice-10: Checkbox Selection -->
+<div id="choice-10" class="choice-container">
+  <div class="choice-title">該当するものを選択</div>
+  <div class="checkbox-list">
+    <div class="checkbox-item checked">
+      <div class="checkbox-box">
+        <div class="checkbox-check"></div>
+      </div>
+      <span class="checkbox-label">オプション1</span>
+    </div>
+    <div class="checkbox-item">
+      <div class="checkbox-box">
+        <div class="checkbox-check"></div>
+      </div>
+      <span class="checkbox-label">オプション2</span>
+    </div>
+    <div class="checkbox-item checked">
+      <div class="checkbox-box">
+        <div class="checkbox-check"></div>
+      </div>
+      <span class="checkbox-label">オプション3</span>
+    </div>
+    <div class="checkbox-item">
+      <div class="checkbox-box">
+        <div class="checkbox-check"></div>
+      </div>
+      <span class="checkbox-label">オプション4</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-11: Radio Button Options -->
+<div id="choice-11" class="choice-container">
+  <div class="choice-title">1つ選択してください</div>
+  <div class="radio-group">
+    <div class="radio-item">
+      <div class="radio-circle">
+        <div class="radio-dot"></div>
+      </div>
+      <span class="radio-label">選択肢1</span>
+    </div>
+    <div class="radio-item selected">
+      <div class="radio-circle">
+        <div class="radio-dot"></div>
+      </div>
+      <span class="radio-label">選択肢2</span>
+    </div>
+    <div class="radio-item">
+      <div class="radio-circle">
+        <div class="radio-dot"></div>
+      </div>
+      <span class="radio-label">選択肢3</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-12: Dropdown Menu -->
+<div id="choice-12" class="choice-container">
+  <div class="choice-title">カテゴリを選択</div>
+  <div class="dropdown-wrapper open">
+    <div class="dropdown-selected">
+      <span>選択してください</span>
+      <div class="dropdown-arrow"></div>
+    </div>
+    <div class="dropdown-menu">
+      <div class="dropdown-option">カテゴリA</div>
+      <div class="dropdown-option active">カテゴリB</div>
+      <div class="dropdown-option">カテゴリC</div>
+      <div class="dropdown-option">カテゴリD</div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-13: Slider Preference -->
+<div id="choice-13" class="choice-container">
+  <div class="choice-title">好みを設定</div>
+  <div class="slider-wrapper">
+    <div class="slider-item slider-1">
+      <div class="slider-header">
+        <span class="slider-label">音量</span>
+        <span class="slider-value">75%</span>
+      </div>
+      <div class="slider-track">
+        <div class="slider-fill" style="width: 75%;"></div>
+        <div class="slider-thumb" style="left: 75%;"></div>
+      </div>
+    </div>
+    <div class="slider-item slider-2">
+      <div class="slider-header">
+        <span class="slider-label">明るさ</span>
+        <span class="slider-value">50%</span>
+      </div>
+      <div class="slider-track">
+        <div class="slider-fill" style="width: 50%;"></div>
+        <div class="slider-thumb" style="left: 50%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-14: Drag and Drop Ranking -->
+<div id="choice-14" class="choice-container">
+  <div class="choice-title">優先順位をドラッグで並べ替え</div>
+  <div class="ranking-container">
+    <div class="ranking-list">
+      <div class="ranking-item">
+        <div class="ranking-rank">1</div>
+        <span>項目A</span>
+        <div class="ranking-handle">
+          <div class="ranking-handle-line"></div>
+          <div class="ranking-handle-line"></div>
+          <div class="ranking-handle-line"></div>
+        </div>
+      </div>
+      <div class="ranking-item">
+        <div class="ranking-rank">2</div>
+        <span>項目B</span>
+        <div class="ranking-handle">
+          <div class="ranking-handle-line"></div>
+          <div class="ranking-handle-line"></div>
+          <div class="ranking-handle-line"></div>
+        </div>
+      </div>
+      <div class="ranking-item">
+        <div class="ranking-rank">3</div>
+        <span>項目C</span>
+        <div class="ranking-handle">
+          <div class="ranking-handle-line"></div>
+          <div class="ranking-handle-line"></div>
+          <div class="ranking-handle-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-15: This or That Comparison -->
+<div id="choice-15" class="choice-container">
+  <div class="choice-title">どっちが好き？</div>
+  <div class="thisorthat-wrapper">
+    <div class="thisorthat-option thisorthat-this selected">
+      <span class="thisorthat-icon">☀️</span>
+      <span class="thisorthat-label">夏</span>
+    </div>
+    <span class="thisorthat-vs">VS</span>
+    <div class="thisorthat-option thisorthat-that">
+      <span class="thisorthat-icon">❄️</span>
+      <span class="thisorthat-label">冬</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-16: Pick One Card Game -->
+<div id="choice-16" class="choice-container">
+  <div class="choice-title">1枚選んでください</div>
+  <div class="cards-container">
+    <div class="pick-card card-1">
+      <div class="card-back">
+        <div class="card-pattern"></div>
+      </div>
+      <div class="card-front">A</div>
+    </div>
+    <div class="pick-card card-2 flipped">
+      <div class="card-back">
+        <div class="card-pattern"></div>
+      </div>
+      <div class="card-front">B</div>
+    </div>
+    <div class="pick-card card-3">
+      <div class="card-back">
+        <div class="card-pattern"></div>
+      </div>
+      <div class="card-front">C</div>
+    </div>
+    <div class="pick-card card-4">
+      <div class="card-back">
+        <div class="card-pattern"></div>
+      </div>
+      <div class="card-front">D</div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-17: Spinning Wheel Choice -->
+<div id="choice-17" class="choice-container">
+  <div class="choice-title">ルーレットで決めよう！</div>
+  <div class="wheel-container">
+    <div class="wheel-pointer"></div>
+    <div class="wheel">
+      <div class="wheel-segment"></div>
+      <div class="wheel-segment"></div>
+      <div class="wheel-segment"></div>
+      <div class="wheel-segment"></div>
+      <div class="wheel-segment"></div>
+      <div class="wheel-segment"></div>
+    </div>
+    <div class="wheel-center"></div>
+  </div>
+</div>
+
+<!-- #choice-18: Random Picker -->
+<div id="choice-18" class="choice-container">
+  <div class="choice-title">ランダム抽選</div>
+  <div class="picker-container">
+    <div class="picker-display">
+      <span class="picker-result">???</span>
+    </div>
+    <button class="picker-btn">抽選する</button>
+    <div class="picker-options">
+      <span class="picker-chip">選択肢A</span>
+      <span class="picker-chip">選択肢B</span>
+      <span class="picker-chip">選択肢C</span>
+      <span class="picker-chip">選択肢D</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-19: Priority Sorter -->
+<div id="choice-19" class="choice-container">
+  <div class="choice-title">優先度で並べ替え</div>
+  <div class="priority-container">
+    <div class="priority-item priority-high">
+      <span class="priority-badge">高</span>
+      <span class="priority-text">緊急タスク</span>
+      <div class="priority-grip">
+        <div class="priority-grip-dot"></div>
+        <div class="priority-grip-dot"></div>
+      </div>
+    </div>
+    <div class="priority-item priority-medium">
+      <span class="priority-badge">中</span>
+      <span class="priority-text">通常タスク</span>
+      <div class="priority-grip">
+        <div class="priority-grip-dot"></div>
+        <div class="priority-grip-dot"></div>
+      </div>
+    </div>
+    <div class="priority-item priority-low">
+      <span class="priority-badge">低</span>
+      <span class="priority-text">余裕タスク</span>
+      <div class="priority-grip">
+        <div class="priority-grip-dot"></div>
+        <div class="priority-grip-dot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-20: Favorites List -->
+<div id="choice-20" class="choice-container">
+  <div class="choice-title">お気に入りリスト</div>
+  <div class="favorites-list">
+    <div class="favorite-item">
+      <div class="favorite-icon">📚</div>
+      <div class="favorite-info">
+        <div class="favorite-name">アイテム1</div>
+        <div class="favorite-desc">説明テキスト</div>
+      </div>
+      <div class="favorite-star active"></div>
+    </div>
+    <div class="favorite-item">
+      <div class="favorite-icon">🎵</div>
+      <div class="favorite-info">
+        <div class="favorite-name">アイテム2</div>
+        <div class="favorite-desc">説明テキスト</div>
+      </div>
+      <div class="favorite-star"></div>
+    </div>
+    <div class="favorite-item">
+      <div class="favorite-icon">🎮</div>
+      <div class="favorite-info">
+        <div class="favorite-name">アイテム3</div>
+        <div class="favorite-desc">説明テキスト</div>
+      </div>
+      <div class="favorite-star active"></div>
+    </div>
+    <div class="favorite-item">
+      <div class="favorite-icon">🎨</div>
+      <div class="favorite-info">
+        <div class="favorite-name">アイテム4</div>
+        <div class="favorite-desc">説明テキスト</div>
+      </div>
+      <div class="favorite-star"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-21: Wish List Selector -->
+<div id="choice-21" class="choice-container">
+  <div class="choice-title">ウィッシュリスト</div>
+  <div class="wishlist-container">
+    <div class="wishlist-item added">
+      <div class="wishlist-heart"></div>
+      <span class="wishlist-icon">👟</span>
+      <span class="wishlist-name">靴</span>
+    </div>
+    <div class="wishlist-item">
+      <div class="wishlist-heart"></div>
+      <span class="wishlist-icon">👜</span>
+      <span class="wishlist-name">バッグ</span>
+    </div>
+    <div class="wishlist-item added">
+      <div class="wishlist-heart"></div>
+      <span class="wishlist-icon">⌚</span>
+      <span class="wishlist-name">時計</span>
+    </div>
+    <div class="wishlist-item">
+      <div class="wishlist-heart"></div>
+      <span class="wishlist-icon">🕶️</span>
+      <span class="wishlist-name">サングラス</span>
+    </div>
+    <div class="wishlist-item added">
+      <div class="wishlist-heart"></div>
+      <span class="wishlist-icon">📱</span>
+      <span class="wishlist-name">スマホ</span>
+    </div>
+    <div class="wishlist-item">
+      <div class="wishlist-heart"></div>
+      <span class="wishlist-icon">💍</span>
+      <span class="wishlist-name">指輪</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-22: Shopping Cart Choices -->
+<div id="choice-22" class="choice-container">
+  <div class="choice-title">カートの中身</div>
+  <div class="cart-container">
+    <div class="cart-items">
+      <div class="cart-item">
+        <div class="cart-thumb">🍎</div>
+        <div class="cart-details">
+          <div class="cart-name">りんご</div>
+          <div class="cart-price">¥150</div>
+        </div>
+        <div class="cart-qty">
+          <button class="cart-qty-btn">-</button>
+          <span class="cart-qty-num">2</span>
+          <button class="cart-qty-btn">+</button>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-thumb">🍞</div>
+        <div class="cart-details">
+          <div class="cart-name">パン</div>
+          <div class="cart-price">¥200</div>
+        </div>
+        <div class="cart-qty">
+          <button class="cart-qty-btn">-</button>
+          <span class="cart-qty-num">1</span>
+          <button class="cart-qty-btn">+</button>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-thumb">🥛</div>
+        <div class="cart-details">
+          <div class="cart-name">牛乳</div>
+          <div class="cart-price">¥180</div>
+        </div>
+        <div class="cart-qty">
+          <button class="cart-qty-btn">-</button>
+          <span class="cart-qty-num">1</span>
+          <button class="cart-qty-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="cart-summary">
+      <div class="cart-total-label">合計</div>
+      <div class="cart-total">¥680</div>
+      <button class="cart-checkout">購入する</button>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-23: Menu Ordering -->
+<div id="choice-23" class="choice-container">
+  <div class="choice-title">メニューから選択</div>
+  <div class="menu-container">
+    <div class="menu-category">メインディッシュ</div>
+    <div class="menu-items">
+      <div class="menu-item selected">
+        <div class="menu-info">
+          <span class="menu-emoji">🍖</span>
+          <span class="menu-name">ステーキ</span>
+        </div>
+        <span class="menu-price">¥1,500</span>
+        <div class="menu-check"></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-info">
+          <span class="menu-emoji">🍝</span>
+          <span class="menu-name">パスタ</span>
+        </div>
+        <span class="menu-price">¥980</span>
+        <div class="menu-check"></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-info">
+          <span class="menu-emoji">🍣</span>
+          <span class="menu-name">寿司</span>
+        </div>
+        <span class="menu-price">¥1,200</span>
+        <div class="menu-check"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-24: Outfit Picker -->
+<div id="choice-24" class="choice-container">
+  <div class="choice-title">コーディネートを選択</div>
+  <div class="outfit-container">
+    <div class="outfit-mannequin">
+      <div class="outfit-head"></div>
+      <div class="outfit-body" style="background: var(--choice-pink);"></div>
+      <div class="outfit-legs">
+        <div class="outfit-leg" style="background: var(--choice-sky);"></div>
+        <div class="outfit-leg" style="background: var(--choice-sky);"></div>
+      </div>
+    </div>
+    <div class="outfit-options">
+      <div class="outfit-category">
+        <span class="outfit-label">トップス</span>
+        <div class="outfit-swatches">
+          <div class="outfit-swatch swatch-pink active"></div>
+          <div class="outfit-swatch swatch-sky"></div>
+          <div class="outfit-swatch swatch-mint"></div>
+        </div>
+      </div>
+      <div class="outfit-category">
+        <span class="outfit-label">ボトムス</span>
+        <div class="outfit-swatches">
+          <div class="outfit-swatch swatch-yellow"></div>
+          <div class="outfit-swatch swatch-sky active"></div>
+          <div class="outfit-swatch swatch-purple"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-25: Color Palette Selector -->
+<div id="choice-25" class="choice-container">
+  <div class="choice-title">カラーを選択</div>
+  <div class="palette-container">
+    <div class="palette-preview" style="background: var(--choice-pink); color: white;">
+      選択中の色
+    </div>
+    <div class="palette-grid">
+      <div class="color-row-1">
+        <div class="palette-color selected"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+      </div>
+      <div class="color-row-2">
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+        <div class="palette-color"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-26: Font Chooser -->
+<div id="choice-26" class="choice-container">
+  <div class="choice-title">フォントを選択</div>
+  <div class="font-container">
+    <div class="font-preview">サンプルテキスト</div>
+    <div class="font-options">
+      <div class="font-option selected">
+        <span class="font-name">ゴシック</span>
+        <span class="font-sample">Aa Bb Cc</span>
+        <div class="font-check"></div>
+      </div>
+      <div class="font-option">
+        <span class="font-name">明朝</span>
+        <span class="font-sample">Aa Bb Cc</span>
+        <div class="font-check"></div>
+      </div>
+      <div class="font-option">
+        <span class="font-name">等幅</span>
+        <span class="font-sample">Aa Bb Cc</span>
+        <div class="font-check"></div>
+      </div>
+      <div class="font-option">
+        <span class="font-name">手書き風</span>
+        <span class="font-sample">Aa Bb Cc</span>
+        <div class="font-check"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-27: Template Selector -->
+<div id="choice-27" class="choice-container">
+  <div class="choice-title">テンプレートを選択</div>
+  <div class="template-grid">
+    <div class="template-card selected">
+      <div class="template-badge"></div>
+      <div class="template-header"></div>
+      <div class="template-content">
+        <div class="template-line" style="width: 100%;"></div>
+        <div class="template-line" style="width: 80%;"></div>
+        <div class="template-line" style="width: 60%;"></div>
+      </div>
+      <span class="template-name">シンプル</span>
+    </div>
+    <div class="template-card">
+      <div class="template-badge"></div>
+      <div class="template-header"></div>
+      <div class="template-content">
+        <div class="template-line" style="width: 100%;"></div>
+        <div class="template-line" style="width: 100%;"></div>
+        <div class="template-line" style="width: 50%;"></div>
+      </div>
+      <span class="template-name">ビジネス</span>
+    </div>
+    <div class="template-card">
+      <div class="template-badge"></div>
+      <div class="template-header"></div>
+      <div class="template-content">
+        <div class="template-line" style="width: 70%;"></div>
+        <div class="template-line" style="width: 90%;"></div>
+        <div class="template-line" style="width: 70%;"></div>
+      </div>
+      <span class="template-name">カジュアル</span>
+    </div>
+    <div class="template-card">
+      <div class="template-badge"></div>
+      <div class="template-header"></div>
+      <div class="template-content">
+        <div class="template-line" style="width: 100%;"></div>
+        <div class="template-line" style="width: 40%;"></div>
+        <div class="template-line" style="width: 80%;"></div>
+      </div>
+      <span class="template-name">モダン</span>
+    </div>
+    <div class="template-card">
+      <div class="template-badge"></div>
+      <div class="template-header"></div>
+      <div class="template-content">
+        <div class="template-line" style="width: 60%;"></div>
+        <div class="template-line" style="width: 100%;"></div>
+        <div class="template-line" style="width: 60%;"></div>
+      </div>
+      <span class="template-name">クリエイティブ</span>
+    </div>
+    <div class="template-card">
+      <div class="template-badge"></div>
+      <div class="template-header"></div>
+      <div class="template-content">
+        <div class="template-line" style="width: 80%;"></div>
+        <div class="template-line" style="width: 80%;"></div>
+        <div class="template-line" style="width: 80%;"></div>
+      </div>
+      <span class="template-name">ミニマル</span>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-28: Plan Comparison -->
+<div id="choice-28" class="choice-container">
+  <div class="choice-title">プランを選択</div>
+  <div class="plans-container">
+    <div class="plan-card">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">¥0</div>
+      <div class="plan-period">/ 月</div>
+      <div class="plan-features">
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>機能A</span>
+        </div>
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>機能B</span>
+        </div>
+      </div>
+      <button class="plan-btn">選択</button>
+    </div>
+    <div class="plan-card popular">
+      <div class="plan-badge">人気</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">¥980</div>
+      <div class="plan-period">/ 月</div>
+      <div class="plan-features">
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>機能A</span>
+        </div>
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>機能B</span>
+        </div>
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>機能C</span>
+        </div>
+      </div>
+      <button class="plan-btn">選択</button>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">¥2,980</div>
+      <div class="plan-period">/ 月</div>
+      <div class="plan-features">
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>全機能</span>
+        </div>
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>優先サポート</span>
+        </div>
+        <div class="plan-feature">
+          <div class="plan-feature-check"></div>
+          <span>API利用</span>
+        </div>
+      </div>
+      <button class="plan-btn">選択</button>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-29: Feature Toggle Switches -->
+<div id="choice-29" class="choice-container">
+  <div class="choice-title">機能の切り替え</div>
+  <div class="toggles-container">
+    <div class="toggle-item">
+      <div class="toggle-info">
+        <div class="toggle-icon">🔔</div>
+        <span class="toggle-label">通知</span>
+      </div>
+      <div class="toggle-switch on">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+    <div class="toggle-item">
+      <div class="toggle-info">
+        <div class="toggle-icon">🌙</div>
+        <span class="toggle-label">ダークモード</span>
+      </div>
+      <div class="toggle-switch">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+    <div class="toggle-item">
+      <div class="toggle-info">
+        <div class="toggle-icon">🔒</div>
+        <span class="toggle-label">プライバシー</span>
+      </div>
+      <div class="toggle-switch on">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+    <div class="toggle-item">
+      <div class="toggle-info">
+        <div class="toggle-icon">📍</div>
+        <span class="toggle-label">位置情報</span>
+      </div>
+      <div class="toggle-switch">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+    <div class="toggle-item">
+      <div class="toggle-info">
+        <div class="toggle-icon">🔄</div>
+        <span class="toggle-label">自動同期</span>
+      </div>
+      <div class="toggle-switch on">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #choice-30: Settings Preferences Panel -->
+<div id="choice-30" class="choice-container">
+  <div class="choice-title">設定パネル</div>
+  <div class="settings-panel">
+    <div class="settings-header">
+      <div class="settings-gear"></div>
+      <span>設定</span>
+    </div>
+    <div class="settings-content">
+      <div class="settings-section">
+        <div class="settings-section-title">表示</div>
+        <div class="settings-option">
+          <div class="settings-option-label">
+            <span class="settings-option-icon">🌐</span>
+            <span>言語</span>
+          </div>
+          <select class="settings-dropdown">
+            <option>日本語</option>
+            <option>English</option>
+          </select>
+        </div>
+        <div class="settings-option">
+          <div class="settings-option-label">
+            <span class="settings-option-icon">🎨</span>
+            <span>テーマ</span>
+          </div>
+          <div class="settings-mini-toggle on">
+            <div class="settings-mini-knob"></div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">通知</div>
+        <div class="settings-option">
+          <div class="settings-option-label">
+            <span class="settings-option-icon">📧</span>
+            <span>メール通知</span>
+          </div>
+          <div class="settings-mini-toggle on">
+            <div class="settings-mini-knob"></div>
+          </div>
+        </div>
+        <div class="settings-option">
+          <div class="settings-option-label">
+            <span class="settings-option-icon">📱</span>
+            <span>プッシュ通知</span>
+          </div>
+          <div class="settings-mini-toggle">
+            <div class="settings-mini-knob"></div>
+          </div>
+        </div>
+      </div>
+      <button class="settings-btn">保存する</button>
+    </div>
+  </div>
+</div>

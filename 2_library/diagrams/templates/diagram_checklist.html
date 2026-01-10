@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist/List Diagram Layouts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .diagram-container {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .diagram-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* ========================================
+           #checklist-1: Simple Checkbox List
+           ======================================== */
+        #checklist-1 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #checklist-1 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #fff5f8;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #checklist-1 .item:hover {
+            background: #ffe8ef;
+            transform: translateX(5px);
+        }
+
+        #checklist-1 .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #ff6b9d;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        #checklist-1 .item.checked .checkbox {
+            background: #ff6b9d;
+        }
+
+        #checklist-1 .item.checked .checkbox::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #checklist-1 .label {
+            font-size: 15px;
+            color: #333;
+        }
+
+        #checklist-1 .item.checked .label {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        /* ========================================
+           #checklist-2: Numbered List
+           ======================================== */
+        #checklist-2 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #checklist-2 .item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: #f0f8ff;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        #checklist-2 .item:hover {
+            background: #e0f0ff;
+            transform: scale(1.02);
+        }
+
+        #checklist-2 .number {
+            width: 32px;
+            height: 32px;
+            background: #5bc0eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        #checklist-2 .label {
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* ========================================
+           #checklist-3: Bullet Point List
+           ======================================== */
+        #checklist-3 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 15px;
+            background: #f5fff5;
+            border-radius: 16px;
+        }
+
+        #checklist-3 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+
+        #checklist-3 .item:hover {
+            background: #e8ffe8;
+        }
+
+        #checklist-3 .bullet {
+            width: 12px;
+            height: 12px;
+            background: #7ed957;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        #checklist-3 .item:nth-child(2) .bullet { background: #5bc0eb; }
+        #checklist-3 .item:nth-child(3) .bullet { background: #ff6b9d; }
+        #checklist-3 .item:nth-child(4) .bullet { background: #ffd93d; }
+        #checklist-3 .item:nth-child(5) .bullet { background: #9b5de5; }
+
+        #checklist-3 .label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* ========================================
+           #checklist-4: Icon List
+           ======================================== */
+        #checklist-4 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #checklist-4 .item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            background: #fff8e8;
+            border-radius: 14px;
+            transition: all 0.2s;
+        }
+
+        #checklist-4 .item:hover {
+            background: #fff0d0;
+            transform: translateX(8px);
+        }
+
+        #checklist-4 .icon {
+            width: 36px;
+            height: 36px;
+            background: #ffd93d;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        #checklist-4 .item:nth-child(2) .icon { background: #ff6b9d; }
+        #checklist-4 .item:nth-child(3) .icon { background: #7ed957; }
+        #checklist-4 .item:nth-child(4) .icon { background: #5bc0eb; }
+
+        #checklist-4 .label {
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* ========================================
+           #checklist-5: Card List
+           ======================================== */
+        #checklist-5 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        #checklist-5 .card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 16px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        #checklist-5 .card:hover {
+            border-color: #9b5de5;
+            box-shadow: 0 4px 12px rgba(155, 93, 229, 0.2);
+        }
+
+        #checklist-5 .card.active {
+            border-color: #9b5de5;
+            background: #f8f0ff;
+        }
+
+        #checklist-5 .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        #checklist-5 .card-dot {
+            width: 10px;
+            height: 10px;
+            background: #9b5de5;
+            border-radius: 50%;
+        }
+
+        #checklist-5 .card-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 15px;
+        }
+
+        #checklist-5 .card-desc {
+            font-size: 13px;
+            color: #666;
+            padding-left: 20px;
+        }
+
+        /* ========================================
+           #checklist-6: Progress Checklist
+           ======================================== */
+        #checklist-6 .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        #checklist-6 .progress-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        #checklist-6 .progress-count {
+            background: #7ed957;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        #checklist-6 .progress-bar {
+            height: 10px;
+            background: #e8e8e8;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        #checklist-6 .progress-fill {
+            height: 100%;
+            width: 60%;
+            background: #7ed957;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        #checklist-6 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #checklist-6 .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #checklist-6 .item:hover {
+            background: #f5f5f5;
+        }
+
+        #checklist-6 .check-circle {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        #checklist-6 .item.done .check-circle {
+            background: #7ed957;
+            border-color: #7ed957;
+        }
+
+        #checklist-6 .item.done .check-circle::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+        }
+
+        #checklist-6 .item.done .label {
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        /* ========================================
+           #checklist-7: Todo List Style
+           ======================================== */
+        #checklist-7 .todo-container {
+            background: #5bc0eb;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        #checklist-7 .todo-header {
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #checklist-7 .list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #checklist-7 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        #checklist-7 .item:last-child {
+            border-bottom: none;
+        }
+
+        #checklist-7 .item:hover {
+            background: #f8f8f8;
+        }
+
+        #checklist-7 .todo-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #5bc0eb;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        #checklist-7 .item.done .todo-check {
+            background: #5bc0eb;
+        }
+
+        #checklist-7 .item.done .todo-check::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #checklist-7 .item.done .label {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        /* ========================================
+           #checklist-8: Shopping List Style
+           ======================================== */
+        #checklist-8 .shopping-container {
+            background: #fff5f8;
+            border-radius: 16px;
+            padding: 20px;
+            border: 2px dashed #ff6b9d;
+        }
+
+        #checklist-8 .shopping-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        #checklist-8 .shopping-icon {
+            font-size: 24px;
+        }
+
+        #checklist-8 .shopping-title {
+            font-weight: bold;
+            color: #ff6b9d;
+            font-size: 16px;
+        }
+
+        #checklist-8 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #checklist-8 .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #checklist-8 .item:hover {
+            transform: scale(1.02);
+        }
+
+        #checklist-8 .item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #checklist-8 .item-emoji {
+            font-size: 20px;
+        }
+
+        #checklist-8 .item-qty {
+            background: #ff6b9d;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #checklist-9: Strikethrough Completed
+           ======================================== */
+        #checklist-9 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        #checklist-9 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        #checklist-9 .item:hover {
+            background: #f0f0f0;
+        }
+
+        #checklist-9 .strike-box {
+            width: 22px;
+            height: 22px;
+            background: white;
+            border: 2px solid #9b5de5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        #checklist-9 .item.completed .strike-box {
+            background: #9b5de5;
+        }
+
+        #checklist-9 .item.completed .strike-box::after {
+            content: '✗';
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        #checklist-9 .label-wrap {
+            position: relative;
+            flex: 1;
+        }
+
+        #checklist-9 .item.completed .label-wrap::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: #9b5de5;
+        }
+
+        #checklist-9 .item.completed .label {
+            color: #999;
+        }
+
+        /* ========================================
+           #checklist-10: Color-coded Status
+           ======================================== */
+        #checklist-10 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #checklist-10 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-left: 5px solid;
+            transition: all 0.2s;
+        }
+
+        #checklist-10 .item:hover {
+            transform: translateX(5px);
+        }
+
+        #checklist-10 .item.status-done {
+            background: #e8ffe8;
+            border-color: #7ed957;
+        }
+
+        #checklist-10 .item.status-progress {
+            background: #fff8e0;
+            border-color: #ffd93d;
+        }
+
+        #checklist-10 .item.status-pending {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+
+        #checklist-10 .item.status-urgent {
+            background: #ffe8e8;
+            border-color: #ff6b6b;
+        }
+
+        #checklist-10 .status-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #checklist-10 .status-done .status-badge { background: #7ed957; }
+        #checklist-10 .status-progress .status-badge { background: #ffd93d; color: #333; }
+        #checklist-10 .status-pending .status-badge { background: #999; }
+        #checklist-10 .status-urgent .status-badge { background: #ff6b6b; }
+
+        #checklist-10 .label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        /* ========================================
+           #checklist-11: Priority Tags List
+           ======================================== */
+        #checklist-11 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #checklist-11 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: white;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        #checklist-11 .item:hover {
+            border-color: #5bc0eb;
+            box-shadow: 0 4px 10px rgba(91, 192, 235, 0.15);
+        }
+
+        #checklist-11 .priority {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #checklist-11 .priority.high { background: #ff6b6b; }
+        #checklist-11 .priority.medium { background: #ffd93d; color: #333; }
+        #checklist-11 .priority.low { background: #7ed957; }
+
+        #checklist-11 .label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        #checklist-11 .tag {
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* ========================================
+           #checklist-12: Category Grouped List
+           ======================================== */
+        #checklist-12 .category {
+            margin-bottom: 15px;
+        }
+
+        #checklist-12 .category:last-child {
+            margin-bottom: 0;
+        }
+
+        #checklist-12 .category-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        #checklist-12 .category-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        #checklist-12 .category-icon.pink { background: #ff6b9d; }
+        #checklist-12 .category-icon.blue { background: #5bc0eb; }
+        #checklist-12 .category-icon.green { background: #7ed957; }
+
+        #checklist-12 .category-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #checklist-12 .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-left: 36px;
+        }
+
+        #checklist-12 .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        #checklist-12 .item:hover {
+            background: #f0f0f0;
+            transform: translateX(3px);
+        }
+
+        #checklist-12 .mini-dot {
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+        }
+
+        /* ========================================
+           #checklist-13: Expandable List
+           ======================================== */
+        #checklist-13 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #checklist-13 .expand-item {
+            background: #fff0f5;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        #checklist-13 .expand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #checklist-13 .expand-header:hover {
+            background: #ffe0eb;
+        }
+
+        #checklist-13 .expand-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #checklist-13 .expand-icon {
+            width: 24px;
+            height: 24px;
+            background: #ff6b9d;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+
+        #checklist-13 .expand-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        #checklist-13 .expand-arrow {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        #checklist-13 .expand-item.open .expand-arrow {
+            transform: rotate(180deg);
+        }
+
+        #checklist-13 .expand-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
+        #checklist-13 .expand-item.open .expand-content {
+            max-height: 200px;
+        }
+
+        #checklist-13 .sub-list {
+            padding: 0 16px 14px 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        #checklist-13 .sub-item {
+            font-size: 13px;
+            color: #666;
+            padding: 6px 0;
+            border-bottom: 1px dashed #f0c0d0;
+        }
+
+        /* ========================================
+           #checklist-14: Compact Inline List
+           ======================================== */
+        #checklist-14 .inline-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        #checklist-14 .inline-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #f0f8ff;
+            border-radius: 20px;
+            font-size: 13px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        #checklist-14 .inline-item:hover {
+            background: #d8f0ff;
+            transform: scale(1.05);
+        }
+
+        #checklist-14 .inline-item.checked {
+            background: #5bc0eb;
+            color: white;
+        }
+
+        #checklist-14 .inline-check {
+            width: 16px;
+            height: 16px;
+            border: 2px solid currentColor;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        #checklist-14 .inline-item.checked .inline-check::after {
+            content: '✓';
+        }
+
+        /* ========================================
+           #checklist-15: Badge/Tag List
+           ======================================== */
+        #checklist-15 .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #checklist-15 .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        #checklist-15 .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        #checklist-15 .badge.pink {
+            background: #ff6b9d;
+            color: white;
+        }
+
+        #checklist-15 .badge.blue {
+            background: #5bc0eb;
+            color: white;
+        }
+
+        #checklist-15 .badge.green {
+            background: #7ed957;
+            color: white;
+        }
+
+        #checklist-15 .badge.yellow {
+            background: #ffd93d;
+            color: #333;
+        }
+
+        #checklist-15 .badge.purple {
+            background: #9b5de5;
+            color: white;
+        }
+
+        #checklist-15 .badge.orange {
+            background: #ff9f43;
+            color: white;
+        }
+
+        #checklist-15 .badge-count {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+
+        #checklist-15 .badge.yellow .badge-count {
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ========================================
+           #checklist-16: Step Checklist
+           ======================================== */
+        #checklist-16 .step-list {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        #checklist-16 .step-line {
+            position: absolute;
+            left: 14px;
+            top: 20px;
+            bottom: 20px;
+            width: 3px;
+            background: #e8e8e8;
+        }
+
+        #checklist-16 .step {
+            position: relative;
+            padding: 12px 0;
+            padding-left: 25px;
+        }
+
+        #checklist-16 .step-circle {
+            position: absolute;
+            left: -23px;
+            top: 14px;
+            width: 28px;
+            height: 28px;
+            background: #e8e8e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #999;
+            z-index: 1;
+        }
+
+        #checklist-16 .step.done .step-circle {
+            background: #7ed957;
+            color: white;
+        }
+
+        #checklist-16 .step.done .step-circle::after {
+            content: '✓';
+        }
+
+        #checklist-16 .step.current .step-circle {
+            background: #5bc0eb;
+            color: white;
+            box-shadow: 0 0 0 4px rgba(91, 192, 235, 0.3);
+        }
+
+        #checklist-16 .step-content {
+            background: #f8f8f8;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #checklist-16 .step:hover .step-content {
+            background: #f0f0f0;
+        }
+
+        #checklist-16 .step.done .step-content {
+            background: #e8ffe8;
+        }
+
+        #checklist-16 .step.current .step-content {
+            background: #e8f6ff;
+            border: 2px solid #5bc0eb;
+        }
+
+        #checklist-16 .step-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #checklist-16 .step.done .step-title {
+            color: #7ed957;
+        }
+
+        /* ========================================
+           #checklist-17: Verification List
+           ======================================== */
+        #checklist-17 .verify-container {
+            background: #f8fff8;
+            border: 2px solid #7ed957;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        #checklist-17 .verify-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px dashed #c8f0c8;
+        }
+
+        #checklist-17 .verify-icon {
+            font-size: 24px;
+        }
+
+        #checklist-17 .verify-title {
+            font-weight: bold;
+            color: #4a9c4a;
+            font-size: 16px;
+        }
+
+        #checklist-17 .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #checklist-17 .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        #checklist-17 .item:hover {
+            transform: translateX(5px);
+        }
+
+        #checklist-17 .verify-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        #checklist-17 .verify-status.pass { background: #7ed957; }
+        #checklist-17 .verify-status.fail { background: #ff6b6b; }
+        #checklist-17 .verify-status.pending { background: #ffd93d; }
+
+        #checklist-17 .label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        /* ========================================
+           #checklist-18: Requirements List
+           ======================================== */
+        #checklist-18 .req-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #checklist-18 .req-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px;
+            background: #f8f8ff;
+            border-radius: 12px;
+            border-left: 4px solid #9b5de5;
+            transition: all 0.2s;
+        }
+
+        #checklist-18 .req-item:hover {
+            background: #f0f0ff;
+            transform: translateX(3px);
+        }
+
+        #checklist-18 .req-num {
+            width: 28px;
+            height: 28px;
+            background: #9b5de5;
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        #checklist-18 .req-content {
+            flex: 1;
+        }
+
+        #checklist-18 .req-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        #checklist-18 .req-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        #checklist-18 .req-status {
+            align-self: center;
+        }
+
+        #checklist-18 .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        #checklist-18 .status-dot.met { background: #7ed957; }
+        #checklist-18 .status-dot.partial { background: #ffd93d; }
+        #checklist-18 .status-dot.unmet { background: #ff6b6b; }
+
+        /* ========================================
+           #checklist-19: Feature List
+           ======================================== */
+        #checklist-19 .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #checklist-19 .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s;
+        }
+
+        #checklist-19 .feature:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        #checklist-19 .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        #checklist-19 .feature-icon.pink { background: #fff0f5; }
+        #checklist-19 .feature-icon.blue { background: #f0f8ff; }
+        #checklist-19 .feature-icon.green { background: #f0fff0; }
+        #checklist-19 .feature-icon.yellow { background: #fffef0; }
+
+        #checklist-19 .feature-content {
+            flex: 1;
+        }
+
+        #checklist-19 .feature-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        #checklist-19 .feature-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        #checklist-19 .feature-check {
+            color: #7ed957;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #checklist-20: Accomplishment List
+           ======================================== */
+        #checklist-20 .accomplish-container {
+            background: linear-gradient(135deg, #fff8e0 0%, #fff0f5 100%);
+            background: #fff8e0;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        #checklist-20 .accomplish-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        #checklist-20 .trophy {
+            font-size: 28px;
+        }
+
+        #checklist-20 .accomplish-title {
+            font-weight: bold;
+            font-size: 18px;
+            color: #e69500;
+        }
+
+        #checklist-20 .accomplish-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #checklist-20 .accomplish-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: white;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #checklist-20 .accomplish-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        #checklist-20 .accomplish-star {
+            width: 32px;
+            height: 32px;
+            background: #ffd93d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        #checklist-20 .accomplish-item:hover .accomplish-star {
+            transform: rotate(360deg);
+        }
+
+        #checklist-20 .accomplish-content {
+            flex: 1;
+        }
+
+        #checklist-20 .accomplish-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #checklist-20 .accomplish-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        #checklist-20 .accomplish-badge {
+            background: #ff6b9d;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Checklist/List Diagram Layouts</h1>
+
+    <div class="gallery">
+        <!-- #checklist-1: Simple Checkbox List -->
+        <div class="diagram-container" id="checklist-1">
+            <h2>#1 Simple Checkbox List</h2>
+            <div class="list">
+                <div class="item checked" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox"></div>
+                    <span class="label">Morning exercise completed</span>
+                </div>
+                <div class="item" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox"></div>
+                    <span class="label">Read for 30 minutes</span>
+                </div>
+                <div class="item checked" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox"></div>
+                    <span class="label">Drink 8 glasses of water</span>
+                </div>
+                <div class="item" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox"></div>
+                    <span class="label">Practice meditation</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-2: Numbered List -->
+        <div class="diagram-container" id="checklist-2">
+            <h2>#2 Numbered List</h2>
+            <div class="list">
+                <div class="item">
+                    <div class="number">1</div>
+                    <span class="label">First step: Prepare materials</span>
+                </div>
+                <div class="item">
+                    <div class="number">2</div>
+                    <span class="label">Second step: Mix ingredients</span>
+                </div>
+                <div class="item">
+                    <div class="number">3</div>
+                    <span class="label">Third step: Heat the pan</span>
+                </div>
+                <div class="item">
+                    <div class="number">4</div>
+                    <span class="label">Fourth step: Cook and serve</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-3: Bullet Point List -->
+        <div class="diagram-container" id="checklist-3">
+            <h2>#3 Bullet Point List</h2>
+            <div class="list">
+                <div class="item">
+                    <div class="bullet"></div>
+                    <span class="label">Key point one: Introduction</span>
+                </div>
+                <div class="item">
+                    <div class="bullet"></div>
+                    <span class="label">Key point two: Main content</span>
+                </div>
+                <div class="item">
+                    <div class="bullet"></div>
+                    <span class="label">Key point three: Examples</span>
+                </div>
+                <div class="item">
+                    <div class="bullet"></div>
+                    <span class="label">Key point four: Summary</span>
+                </div>
+                <div class="item">
+                    <div class="bullet"></div>
+                    <span class="label">Key point five: Conclusion</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-4: Icon List -->
+        <div class="diagram-container" id="checklist-4">
+            <h2>#4 Icon List</h2>
+            <div class="list">
+                <div class="item">
+                    <div class="icon">📚</div>
+                    <span class="label">Study time: 2 hours</span>
+                </div>
+                <div class="item">
+                    <div class="icon">🎨</div>
+                    <span class="label">Creative activity: Drawing</span>
+                </div>
+                <div class="item">
+                    <div class="icon">🏃</div>
+                    <span class="label">Exercise: Running</span>
+                </div>
+                <div class="item">
+                    <div class="icon">🎵</div>
+                    <span class="label">Music practice: Piano</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-5: Card List -->
+        <div class="diagram-container" id="checklist-5">
+            <h2>#5 Card List</h2>
+            <div class="list">
+                <div class="card active" onclick="this.classList.toggle('active')">
+                    <div class="card-header">
+                        <div class="card-dot"></div>
+                        <span class="card-title">Project Planning</span>
+                    </div>
+                    <p class="card-desc">Define goals and timeline</p>
+                </div>
+                <div class="card" onclick="this.classList.toggle('active')">
+                    <div class="card-header">
+                        <div class="card-dot"></div>
+                        <span class="card-title">Research Phase</span>
+                    </div>
+                    <p class="card-desc">Gather information and data</p>
+                </div>
+                <div class="card" onclick="this.classList.toggle('active')">
+                    <div class="card-header">
+                        <div class="card-dot"></div>
+                        <span class="card-title">Implementation</span>
+                    </div>
+                    <p class="card-desc">Build and develop solution</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-6: Progress Checklist -->
+        <div class="diagram-container" id="checklist-6">
+            <h2>#6 Progress Checklist</h2>
+            <div class="progress-header">
+                <span class="progress-title">Daily Goals</span>
+                <span class="progress-count">3/5 Done</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="list">
+                <div class="item done">
+                    <div class="check-circle"></div>
+                    <span class="label">Wake up early</span>
+                </div>
+                <div class="item done">
+                    <div class="check-circle"></div>
+                    <span class="label">Healthy breakfast</span>
+                </div>
+                <div class="item done">
+                    <div class="check-circle"></div>
+                    <span class="label">Morning workout</span>
+                </div>
+                <div class="item">
+                    <div class="check-circle"></div>
+                    <span class="label">Complete homework</span>
+                </div>
+                <div class="item">
+                    <div class="check-circle"></div>
+                    <span class="label">Evening walk</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-7: Todo List Style -->
+        <div class="diagram-container" id="checklist-7">
+            <h2>#7 Todo List Style</h2>
+            <div class="todo-container">
+                <div class="todo-header">
+                    <span>📝</span>
+                    <span>Today's Tasks</span>
+                </div>
+                <div class="list">
+                    <div class="item done" onclick="this.classList.toggle('done')">
+                        <div class="todo-check"></div>
+                        <span class="label">Send email report</span>
+                    </div>
+                    <div class="item" onclick="this.classList.toggle('done')">
+                        <div class="todo-check"></div>
+                        <span class="label">Team meeting at 2pm</span>
+                    </div>
+                    <div class="item done" onclick="this.classList.toggle('done')">
+                        <div class="todo-check"></div>
+                        <span class="label">Review documents</span>
+                    </div>
+                    <div class="item" onclick="this.classList.toggle('done')">
+                        <div class="todo-check"></div>
+                        <span class="label">Call client</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-8: Shopping List Style -->
+        <div class="diagram-container" id="checklist-8">
+            <h2>#8 Shopping List Style</h2>
+            <div class="shopping-container">
+                <div class="shopping-header">
+                    <span class="shopping-icon">🛒</span>
+                    <span class="shopping-title">Shopping List</span>
+                </div>
+                <div class="list">
+                    <div class="item">
+                        <div class="item-left">
+                            <span class="item-emoji">🥛</span>
+                            <span>Milk</span>
+                        </div>
+                        <span class="item-qty">x2</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-left">
+                            <span class="item-emoji">🍞</span>
+                            <span>Bread</span>
+                        </div>
+                        <span class="item-qty">x1</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-left">
+                            <span class="item-emoji">🥚</span>
+                            <span>Eggs</span>
+                        </div>
+                        <span class="item-qty">x12</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-left">
+                            <span class="item-emoji">🍎</span>
+                            <span>Apples</span>
+                        </div>
+                        <span class="item-qty">x6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-9: Strikethrough Completed -->
+        <div class="diagram-container" id="checklist-9">
+            <h2>#9 Strikethrough Completed</h2>
+            <div class="list">
+                <div class="item completed" onclick="this.classList.toggle('completed')">
+                    <div class="strike-box"></div>
+                    <div class="label-wrap"><span class="label">Finish presentation</span></div>
+                </div>
+                <div class="item" onclick="this.classList.toggle('completed')">
+                    <div class="strike-box"></div>
+                    <div class="label-wrap"><span class="label">Book flight tickets</span></div>
+                </div>
+                <div class="item completed" onclick="this.classList.toggle('completed')">
+                    <div class="strike-box"></div>
+                    <div class="label-wrap"><span class="label">Update resume</span></div>
+                </div>
+                <div class="item" onclick="this.classList.toggle('completed')">
+                    <div class="strike-box"></div>
+                    <div class="label-wrap"><span class="label">Schedule meeting</span></div>
+                </div>
+                <div class="item" onclick="this.classList.toggle('completed')">
+                    <div class="strike-box"></div>
+                    <div class="label-wrap"><span class="label">Submit report</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-10: Color-coded Status -->
+        <div class="diagram-container" id="checklist-10">
+            <h2>#10 Color-coded Status</h2>
+            <div class="list">
+                <div class="item status-done">
+                    <span class="status-badge">Done</span>
+                    <span class="label">Database migration</span>
+                </div>
+                <div class="item status-progress">
+                    <span class="status-badge">In Progress</span>
+                    <span class="label">API development</span>
+                </div>
+                <div class="item status-pending">
+                    <span class="status-badge">Pending</span>
+                    <span class="label">UI design review</span>
+                </div>
+                <div class="item status-urgent">
+                    <span class="status-badge">Urgent</span>
+                    <span class="label">Security patch</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-11: Priority Tags List -->
+        <div class="diagram-container" id="checklist-11">
+            <h2>#11 Priority Tags List</h2>
+            <div class="list">
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <span class="label">Fix critical bug</span>
+                    <span class="tag">Backend</span>
+                </div>
+                <div class="item">
+                    <span class="priority medium">MED</span>
+                    <span class="label">Update documentation</span>
+                    <span class="tag">Docs</span>
+                </div>
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <span class="label">Deploy to production</span>
+                    <span class="tag">DevOps</span>
+                </div>
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <span class="label">Refactor code</span>
+                    <span class="tag">Clean-up</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-12: Category Grouped List -->
+        <div class="diagram-container" id="checklist-12">
+            <h2>#12 Category Grouped List</h2>
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-icon pink">🎯</div>
+                    <span class="category-title">Work Tasks</span>
+                </div>
+                <div class="category-list">
+                    <div class="item"><div class="mini-dot"></div>Complete report</div>
+                    <div class="item"><div class="mini-dot"></div>Review code PR</div>
+                </div>
+            </div>
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-icon blue">🏠</div>
+                    <span class="category-title">Home Tasks</span>
+                </div>
+                <div class="category-list">
+                    <div class="item"><div class="mini-dot"></div>Clean room</div>
+                    <div class="item"><div class="mini-dot"></div>Laundry</div>
+                </div>
+            </div>
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-icon green">💪</div>
+                    <span class="category-title">Health</span>
+                </div>
+                <div class="category-list">
+                    <div class="item"><div class="mini-dot"></div>Go to gym</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-13: Expandable List -->
+        <div class="diagram-container" id="checklist-13">
+            <h2>#13 Expandable List</h2>
+            <div class="list">
+                <div class="expand-item open" onclick="this.classList.toggle('open')">
+                    <div class="expand-header">
+                        <div class="expand-left">
+                            <div class="expand-icon">📦</div>
+                            <span class="expand-title">Project Setup</span>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </div>
+                    <div class="expand-content">
+                        <div class="sub-list">
+                            <div class="sub-item">Install dependencies</div>
+                            <div class="sub-item">Configure environment</div>
+                            <div class="sub-item">Set up database</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expand-item" onclick="this.classList.toggle('open')">
+                    <div class="expand-header">
+                        <div class="expand-left">
+                            <div class="expand-icon">🔧</div>
+                            <span class="expand-title">Development</span>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </div>
+                    <div class="expand-content">
+                        <div class="sub-list">
+                            <div class="sub-item">Write code</div>
+                            <div class="sub-item">Test features</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expand-item" onclick="this.classList.toggle('open')">
+                    <div class="expand-header">
+                        <div class="expand-left">
+                            <div class="expand-icon">🚀</div>
+                            <span class="expand-title">Deployment</span>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </div>
+                    <div class="expand-content">
+                        <div class="sub-list">
+                            <div class="sub-item">Build application</div>
+                            <div class="sub-item">Deploy to server</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-14: Compact Inline List -->
+        <div class="diagram-container" id="checklist-14">
+            <h2>#14 Compact Inline List</h2>
+            <div class="inline-list">
+                <div class="inline-item checked" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>HTML</span>
+                </div>
+                <div class="inline-item checked" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>CSS</span>
+                </div>
+                <div class="inline-item" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>JavaScript</span>
+                </div>
+                <div class="inline-item checked" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>Python</span>
+                </div>
+                <div class="inline-item" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>React</span>
+                </div>
+                <div class="inline-item" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>Node.js</span>
+                </div>
+                <div class="inline-item checked" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>SQL</span>
+                </div>
+                <div class="inline-item" onclick="this.classList.toggle('checked')">
+                    <div class="inline-check"></div>
+                    <span>Git</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-15: Badge/Tag List -->
+        <div class="diagram-container" id="checklist-15">
+            <h2>#15 Badge/Tag List</h2>
+            <div class="badge-list">
+                <div class="badge pink">
+                    <span>Design</span>
+                    <span class="badge-count">12</span>
+                </div>
+                <div class="badge blue">
+                    <span>Development</span>
+                    <span class="badge-count">8</span>
+                </div>
+                <div class="badge green">
+                    <span>Testing</span>
+                    <span class="badge-count">5</span>
+                </div>
+                <div class="badge yellow">
+                    <span>Review</span>
+                    <span class="badge-count">3</span>
+                </div>
+                <div class="badge purple">
+                    <span>Deploy</span>
+                    <span class="badge-count">2</span>
+                </div>
+                <div class="badge orange">
+                    <span>Bugs</span>
+                    <span class="badge-count">7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-16: Step Checklist -->
+        <div class="diagram-container" id="checklist-16">
+            <h2>#16 Step Checklist</h2>
+            <div class="step-list">
+                <div class="step-line"></div>
+                <div class="step done">
+                    <div class="step-circle"></div>
+                    <div class="step-content">
+                        <div class="step-title">Step 1: Planning</div>
+                    </div>
+                </div>
+                <div class="step done">
+                    <div class="step-circle"></div>
+                    <div class="step-content">
+                        <div class="step-title">Step 2: Design</div>
+                    </div>
+                </div>
+                <div class="step current">
+                    <div class="step-circle">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 3: Development</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 4: Testing</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 5: Launch</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-17: Verification List -->
+        <div class="diagram-container" id="checklist-17">
+            <h2>#17 Verification List</h2>
+            <div class="verify-container">
+                <div class="verify-header">
+                    <span class="verify-icon">✅</span>
+                    <span class="verify-title">Quality Check</span>
+                </div>
+                <div class="list">
+                    <div class="item">
+                        <div class="verify-status pass">✓</div>
+                        <span class="label">Code review completed</span>
+                    </div>
+                    <div class="item">
+                        <div class="verify-status pass">✓</div>
+                        <span class="label">Unit tests passed</span>
+                    </div>
+                    <div class="item">
+                        <div class="verify-status pending">!</div>
+                        <span class="label">Integration test in progress</span>
+                    </div>
+                    <div class="item">
+                        <div class="verify-status fail">✗</div>
+                        <span class="label">Performance benchmark</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-18: Requirements List -->
+        <div class="diagram-container" id="checklist-18">
+            <h2>#18 Requirements List</h2>
+            <div class="req-list">
+                <div class="req-item">
+                    <div class="req-num">R1</div>
+                    <div class="req-content">
+                        <div class="req-title">User Authentication</div>
+                        <div class="req-desc">Secure login with OAuth 2.0</div>
+                    </div>
+                    <div class="req-status">
+                        <div class="status-dot met"></div>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <div class="req-num">R2</div>
+                    <div class="req-content">
+                        <div class="req-title">Data Encryption</div>
+                        <div class="req-desc">AES-256 for sensitive data</div>
+                    </div>
+                    <div class="req-status">
+                        <div class="status-dot partial"></div>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <div class="req-num">R3</div>
+                    <div class="req-content">
+                        <div class="req-title">Response Time</div>
+                        <div class="req-desc">Under 200ms for API calls</div>
+                    </div>
+                    <div class="req-status">
+                        <div class="status-dot unmet"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-19: Feature List -->
+        <div class="diagram-container" id="checklist-19">
+            <h2>#19 Feature List</h2>
+            <div class="feature-list">
+                <div class="feature">
+                    <div class="feature-icon pink">🎨</div>
+                    <div class="feature-content">
+                        <div class="feature-title">Custom Themes</div>
+                        <div class="feature-desc">Personalize your experience</div>
+                    </div>
+                    <span class="feature-check">✓</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon blue">☁️</div>
+                    <div class="feature-content">
+                        <div class="feature-title">Cloud Sync</div>
+                        <div class="feature-desc">Access anywhere, anytime</div>
+                    </div>
+                    <span class="feature-check">✓</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon green">🔒</div>
+                    <div class="feature-content">
+                        <div class="feature-title">End-to-End Encryption</div>
+                        <div class="feature-desc">Your data stays private</div>
+                    </div>
+                    <span class="feature-check">✓</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon yellow">⚡</div>
+                    <div class="feature-content">
+                        <div class="feature-title">Lightning Fast</div>
+                        <div class="feature-desc">Optimized performance</div>
+                    </div>
+                    <span class="feature-check">✓</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #checklist-20: Accomplishment List -->
+        <div class="diagram-container" id="checklist-20">
+            <h2>#20 Accomplishment List</h2>
+            <div class="accomplish-container">
+                <div class="accomplish-header">
+                    <span class="trophy">🏆</span>
+                    <span class="accomplish-title">Achievements</span>
+                </div>
+                <div class="accomplish-list">
+                    <div class="accomplish-item">
+                        <div class="accomplish-star">⭐</div>
+                        <div class="accomplish-content">
+                            <div class="accomplish-name">First Project Completed</div>
+                            <div class="accomplish-date">Jan 5, 2026</div>
+                        </div>
+                        <span class="accomplish-badge">NEW</span>
+                    </div>
+                    <div class="accomplish-item">
+                        <div class="accomplish-star">⭐</div>
+                        <div class="accomplish-content">
+                            <div class="accomplish-name">100 Tasks Finished</div>
+                            <div class="accomplish-date">Dec 20, 2025</div>
+                        </div>
+                        <span class="accomplish-badge">GOLD</span>
+                    </div>
+                    <div class="accomplish-item">
+                        <div class="accomplish-star">⭐</div>
+                        <div class="accomplish-content">
+                            <div class="accomplish-name">7-Day Streak</div>
+                            <div class="accomplish-date">Dec 15, 2025</div>
+                        </div>
+                        <span class="accomplish-badge">FIRE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

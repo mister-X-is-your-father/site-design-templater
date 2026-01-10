@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP Components - Pastel & Cute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+            line-height: 1.6;
+            color: #5a5a5a;
+            background: #fef9f5;
+        }
+
+        /* [P01] ヒーローセクション - パステル */
+        .p01-hero {
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p01-hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: p01-float 6s ease-in-out infinite;
+        }
+
+        .p01-hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -80px;
+            left: -80px;
+            animation: p01-float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes p01-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .p01-container {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .p01-badge {
+            display: inline-block;
+            background: white;
+            color: #ff6b9d;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.2);
+        }
+
+        .p01-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .p01-subtitle {
+            font-size: 1.3rem;
+            color: #7a7a7a;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .p01-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .p01-btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .p01-btn-primary {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+        }
+
+        .p01-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.4);
+        }
+
+        .p01-btn-secondary {
+            background: white;
+            color: #ff6b9d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .p01-btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* [P02] 特徴カード - パステル */
+        .p02-features {
+            padding: 5rem 2rem;
+            background: #fef9f5;
+        }
+
+        .p02-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p02-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .p02-header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p02-header-desc {
+            font-size: 1.1rem;
+            color: #7a7a7a;
+        }
+
+        .p02-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .p02-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p02-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd6e8, #c4e4ff, #ffe4d6);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .p02-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .p02-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .p02-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .p02-card:nth-child(1) .p02-icon {
+            background: linear-gradient(135deg, #ffd6e8 0%, #ffb3d9 100%);
+        }
+
+        .p02-card:nth-child(2) .p02-icon {
+            background: linear-gradient(135deg, #c4e4ff 0%, #a0d4ff 100%);
+        }
+
+        .p02-card:nth-child(3) .p02-icon {
+            background: linear-gradient(135deg, #ffe4d6 0%, #ffc8a3 100%);
+        }
+
+        .p02-card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p02-card-desc {
+            color: #7a7a7a;
+            line-height: 1.8;
+        }
+
+        /* [P03] 料金表 - パステル */
+        .p03-pricing {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #fef9f5 0%, #fff5f8 100%);
+        }
+
+        .p03-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p03-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .p03-header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p03-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .p03-plan {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .p03-plan.featured {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.2);
+            border: 3px solid #ff6b9d;
+        }
+
+        .p03-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .p03-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .p03-plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p03-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ff6b9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .p03-price-unit {
+            font-size: 1rem;
+            color: #7a7a7a;
+            font-weight: 400;
+        }
+
+        .p03-features {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .p03-feature {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .p03-feature:last-child {
+            border-bottom: none;
+        }
+
+        .p03-check {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #c4e4ff 0%, #a0d4ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .p03-btn {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .p03-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        /* [P04] CTA ボタン - パステル */
+        .p04-cta-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #c4e4ff 0%, #ffd6e8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p04-cta-section::before {
+            content: '✨';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%) rotate(-15deg);
+        }
+
+        .p04-cta-section::after {
+            content: '💫';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%) rotate(15deg);
+        }
+
+        .p04-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .p04-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .p04-desc {
+            font-size: 1.2rem;
+            color: #7a7a7a;
+            margin-bottom: 2.5rem;
+        }
+
+        .p04-btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .p04-btn {
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p04-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .p04-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .p04-btn-primary {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.3);
+        }
+
+        .p04-btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(255, 107, 157, 0.4);
+        }
+
+        .p04-btn-outline {
+            background: white;
+            color: #ff6b9d;
+            border: 3px solid #ff6b9d;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .p04-btn-outline:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* [P05] テスティモニアル（口コミ） - パステル */
+        .p05-testimonials {
+            padding: 5rem 2rem;
+            background: #fef9f5;
+        }
+
+        .p05-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p05-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .p05-header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p05-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .p05-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .p05-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: #ffd6e8;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .p05-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .p05-stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .p05-star {
+            color: #ffa06b;
+            font-size: 1.2rem;
+        }
+
+        .p05-text {
+            color: #5a5a5a;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .p05-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .p05-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .p05-author-info {
+            flex: 1;
+        }
+
+        .p05-author-name {
+            font-weight: 700;
+            color: #4a4a4a;
+            margin-bottom: 0.25rem;
+        }
+
+        .p05-author-role {
+            color: #7a7a7a;
+            font-size: 0.9rem;
+        }
+
+        /* [P06] FAQ アコーディオン - パステル */
+        .p06-faq {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #fff5f8 0%, #fef9f5 100%);
+        }
+
+        .p06-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .p06-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .p06-header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p06-item {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .p06-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .p06-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .p06-question:hover {
+            color: #ff6b9d;
+        }
+
+        .p06-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .p06-item.active .p06-icon {
+            transform: rotate(45deg);
+        }
+
+        .p06-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 2rem;
+            color: #7a7a7a;
+            line-height: 1.8;
+        }
+
+        .p06-item.active .p06-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        /* [P07] フッター - パステル */
+        .p07-footer {
+            background: linear-gradient(135deg, #4a4a4a 0%, #6a6a6a 100%);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .p07-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p07-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .p07-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .p07-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .p07-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .p07-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .p07-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .p07-social-link:hover {
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            transform: translateY(-3px);
+        }
+
+        .p07-section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .p07-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .p07-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .p07-link:hover {
+            color: #ffd6e8;
+            transform: translateX(5px);
+        }
+
+        .p07-bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* [P08] ナビゲーションバー - パステル */
+        .p08-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .p08-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .p08-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .p08-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .p08-link {
+            color: #5a5a5a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .p08-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b9d 0%, #ffa06b 100%);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .p08-link:hover {
+            color: #ff6b9d;
+        }
+
+        .p08-link:hover::after {
+            width: 100%;
+        }
+
+        .p08-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .p08-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .p08-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .p08-hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ff6b9d;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .p08-menu {
+                display: none;
+            }
+            .p08-hamburger {
+                display: flex;
+            }
+        }
+
+        /* [P09] ステップガイド（使い方説明） - パステル */
+        .p09-steps {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #fef9f5 0%, #fff5f8 100%);
+        }
+
+        .p09-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p09-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .p09-header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p09-header-desc {
+            font-size: 1.1rem;
+            color: #7a7a7a;
+        }
+
+        .p09-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .p09-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ffd6e8 0%, #c4e4ff 50%, #ffe4d6 100%);
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        .p09-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .p09-step:nth-child(even) .p09-content {
+            order: 2;
+        }
+
+        .p09-step:nth-child(even) .p09-visual {
+            order: 1;
+        }
+
+        .p09-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .p09-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .p09-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .p09-step-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p09-step-desc {
+            color: #7a7a7a;
+            line-height: 1.8;
+        }
+
+        .p09-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            border-radius: 30px;
+            padding: 3rem;
+            font-size: 5rem;
+            min-height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .p09-timeline::before {
+                left: 30px;
+            }
+            .p09-step {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .p09-step:nth-child(even) .p09-content,
+            .p09-step:nth-child(even) .p09-visual {
+                order: initial;
+            }
+            .p09-number {
+                left: 30px;
+            }
+        }
+
+        /* [P10] ニュースレター登録フォーム - パステル */
+        .p10-newsletter {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #ffd6e8 0%, #c4e4ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p10-newsletter::before {
+            content: '📮';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+        }
+
+        .p10-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .p10-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .p10-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+
+        .p10-desc {
+            font-size: 1.1rem;
+            color: #7a7a7a;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .p10-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .p10-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 1.2rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .p10-input:focus {
+            outline: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .p10-submit {
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa06b 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+        }
+
+        .p10-submit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.4);
+        }
+
+        .p10-privacy {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #7a7a7a;
+        }
+
+        .p10-privacy a {
+            color: #ff6b9d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .p10-benefits {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .p10-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            font-weight: 600;
+            color: #4a4a4a;
+        }
+
+        .p10-benefit-icon {
+            font-size: 1.5rem;
+        }
+
+        /* レスポンシブ調整 */
+        @media (max-width: 768px) {
+            .p01-title {
+                font-size: 2rem;
+            }
+            .p01-subtitle {
+                font-size: 1rem;
+            }
+            .p02-header-title,
+            .p03-header-title,
+            .p04-title,
+            .p05-header-title,
+            .p06-header-title,
+            .p09-header-title,
+            .p10-title {
+                font-size: 2rem;
+            }
+            .p10-form {
+                flex-direction: column;
+            }
+            .p10-input {
+                min-width: 100%;
+            }
+        }
+
+        /* FAQ アコーディオンのJavaScript連動用クラス */
+        .p06-item.active .p06-question {
+            color: #ff6b9d;
+        }
+    </style>
+</head>
+<body>
+
+<!-- [P08] ナビゲーションバー - パステル -->
+<nav class="p08-nav">
+    <div class="p08-container">
+        <a href="#" class="p08-logo">✨ Pastel</a>
+        <div class="p08-menu">
+            <a href="#features" class="p08-link">特徴</a>
+            <a href="#pricing" class="p08-link">料金</a>
+            <a href="#testimonials" class="p08-link">口コミ</a>
+            <a href="#faq" class="p08-link">FAQ</a>
+            <a href="#" class="p08-btn">今すぐ始める</a>
+        </div>
+        <div class="p08-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- [P01] ヒーローセクション - パステル -->
+<section class="p01-hero">
+    <div class="p01-container">
+        <div class="p01-badge">✨ 新登場！</div>
+        <h1 class="p01-title">かわいくて、やさしい<br>あなただけの体験を</h1>
+        <p class="p01-subtitle">パステルカラーで彩る、新しいサービスの形</p>
+        <div class="p01-cta-group">
+            <a href="#" class="p01-btn p01-btn-primary">無料で始める</a>
+            <a href="#" class="p01-btn p01-btn-secondary">もっと詳しく</a>
+        </div>
+    </div>
+</section>
+
+<!-- [P02] 特徴カード - パステル -->
+<section class="p02-features" id="features">
+    <div class="p02-container">
+        <div class="p02-header">
+            <h2 class="p02-header-title">選ばれる3つの理由</h2>
+            <p class="p02-header-desc">あなたの毎日をもっと楽しく、もっとかわいく</p>
+        </div>
+        <div class="p02-grid">
+            <div class="p02-card">
+                <div class="p02-icon">💖</div>
+                <h3 class="p02-card-title">かわいいデザイン</h3>
+                <p class="p02-card-desc">パステルカラーを基調とした、やさしく温かみのあるデザイン。毎日使いたくなる、そんな体験をお届けします。</p>
+            </div>
+            <div class="p02-card">
+                <div class="p02-icon">⚡</div>
+                <h3 class="p02-card-title">簡単・スピーディ</h3>
+                <p class="p02-card-desc">わずか3ステップで始められる簡単さ。面倒な設定は一切なし。すぐに使い始めることができます。</p>
+            </div>
+            <div class="p02-card">
+                <div class="p02-icon">🌈</div>
+                <h3 class="p02-card-title">豊富なカスタマイズ</h3>
+                <p class="p02-card-desc">あなた好みにカスタマイズ可能。色やスタイルを自由に変更して、あなただけの空間を作りましょう。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [P09] ステップガイド（使い方説明） - パステル -->
+<section class="p09-steps">
+    <div class="p09-container">
+        <div class="p09-header">
+            <h2 class="p09-header-title">始め方はとっても簡単</h2>
+            <p class="p09-header-desc">たった3ステップで、あなたの新しい体験がスタートします</p>
+        </div>
+        <div class="p09-timeline">
+            <div class="p09-step">
+                <div class="p09-number">1</div>
+                <div class="p09-content">
+                    <h3 class="p09-step-title">アカウント登録</h3>
+                    <p class="p09-step-desc">メールアドレスとパスワードだけで、わずか30秒で登録完了。面倒な情報入力は一切ありません。</p>
+                </div>
+                <div class="p09-visual">📝</div>
+            </div>
+            <div class="p09-step">
+                <div class="p09-number">2</div>
+                <div class="p09-content">
+                    <h3 class="p09-step-title">プロフィール設定</h3>
+                    <p class="p09-step-desc">あなたの好みやスタイルを選択。パステルカラーの中から、お気に入りのテーマを選びましょう。</p>
+                </div>
+                <div class="p09-visual">🎨</div>
+            </div>
+            <div class="p09-step">
+                <div class="p09-number">3</div>
+                <div class="p09-content">
+                    <h3 class="p09-step-title">さあ、始めよう！</h3>
+                    <p class="p09-step-desc">準備完了！今すぐあなただけのかわいい体験を始めましょう。サポートも充実しているので安心です。</p>
+                </div>
+                <div class="p09-visual">🚀</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [P03] 料金表 - パステル -->
+<section class="p03-pricing" id="pricing">
+    <div class="p03-container">
+        <div class="p03-header">
+            <h2 class="p03-header-title">シンプルな料金プラン</h2>
+        </div>
+        <div class="p03-grid">
+            <div class="p03-plan">
+                <h3 class="p03-plan-name">フリー</h3>
+                <div class="p03-price">¥0<span class="p03-price-unit">/月</span></div>
+                <div class="p03-features">
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>基本機能</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>5つのテンプレート</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>コミュニティサポート</span>
+                    </div>
+                </div>
+                <button class="p03-btn">無料で始める</button>
+            </div>
+            <div class="p03-plan featured">
+                <div class="p03-badge">人気No.1</div>
+                <h3 class="p03-plan-name">プレミアム</h3>
+                <div class="p03-price">¥980<span class="p03-price-unit">/月</span></div>
+                <div class="p03-features">
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>すべての機能</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>無制限テンプレート</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>優先サポート</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>広告なし</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>高度な分析機能</span>
+                    </div>
+                </div>
+                <button class="p03-btn">今すぐ始める</button>
+            </div>
+            <div class="p03-plan">
+                <h3 class="p03-plan-name">ビジネス</h3>
+                <div class="p03-price">¥2,980<span class="p03-price-unit">/月</span></div>
+                <div class="p03-features">
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>プレミアムの全機能</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>チーム管理</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>API アクセス</span>
+                    </div>
+                    <div class="p03-feature">
+                        <div class="p03-check">✓</div>
+                        <span>専任サポート</span>
+                    </div>
+                </div>
+                <button class="p03-btn">お問い合わせ</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [P05] テスティモニアル（口コミ） - パステル -->
+<section class="p05-testimonials" id="testimonials">
+    <div class="p05-container">
+        <div class="p05-header">
+            <h2 class="p05-header-title">利用者の声</h2>
+        </div>
+        <div class="p05-grid">
+            <div class="p05-card">
+                <div class="p05-stars">
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                </div>
+                <p class="p05-text">デザインがとってもかわいくて、毎日使うのが楽しみです！パステルカラーが優しくて、見ているだけで癒されます。</p>
+                <div class="p05-author">
+                    <div class="p05-avatar">A</div>
+                    <div class="p05-author-info">
+                        <div class="p05-author-name">あやさん</div>
+                        <div class="p05-author-role">フリーランスデザイナー</div>
+                    </div>
+                </div>
+            </div>
+            <div class="p05-card">
+                <div class="p05-stars">
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                </div>
+                <p class="p05-text">操作が簡単でわかりやすい！ITが苦手な私でも、すぐに使いこなせるようになりました。サポートも親切で助かります。</p>
+                <div class="p05-author">
+                    <div class="p05-avatar">M</div>
+                    <div class="p05-author-info">
+                        <div class="p05-author-name">まいさん</div>
+                        <div class="p05-author-role">主婦・ブロガー</div>
+                    </div>
+                </div>
+            </div>
+            <div class="p05-card">
+                <div class="p05-stars">
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                    <span class="p05-star">★</span>
+                </div>
+                <p class="p05-text">カスタマイズの自由度が高くて、自分好みに仕上げられるのが最高！チームみんなで使っていますが、とても好評です。</p>
+                <div class="p05-author">
+                    <div class="p05-avatar">Y</div>
+                    <div class="p05-author-info">
+                        <div class="p05-author-name">ゆうきさん</div>
+                        <div class="p05-author-role">スタートアップCEO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [P06] FAQ アコーディオン - パステル -->
+<section class="p06-faq" id="faq">
+    <div class="p06-container">
+        <div class="p06-header">
+            <h2 class="p06-header-title">よくある質問</h2>
+        </div>
+        <div class="p06-item">
+            <div class="p06-question" onclick="toggleFaq(this)">
+                <span>無料プランでどこまで使えますか？</span>
+                <div class="p06-icon">+</div>
+            </div>
+            <div class="p06-answer">
+                無料プランでは、基本機能と5つのテンプレートをご利用いただけます。個人利用であれば十分な機能が揃っていますので、まずは無料プランでお試しください。
+            </div>
+        </div>
+        <div class="p06-item">
+            <div class="p06-question" onclick="toggleFaq(this)">
+                <span>プランはいつでも変更できますか？</span>
+                <div class="p06-icon">+</div>
+            </div>
+            <div class="p06-answer">
+                はい、いつでも自由にプラン変更が可能です。アップグレードは即座に反映され、ダウングレードは次回の更新日から適用されます。
+            </div>
+        </div>
+        <div class="p06-item">
+            <div class="p06-question" onclick="toggleFaq(this)">
+                <span>支払い方法は何が使えますか？</span>
+                <div class="p06-icon">+</div>
+            </div>
+            <div class="p06-answer">
+                クレジットカード（Visa、Mastercard、JCB、American Express）、デビットカード、PayPalでのお支払いが可能です。
+            </div>
+        </div>
+        <div class="p06-item">
+            <div class="p06-question" onclick="toggleFaq(this)">
+                <span>解約は簡単にできますか？</span>
+                <div class="p06-icon">+</div>
+            </div>
+            <div class="p06-answer">
+                はい、管理画面からいつでも簡単に解約できます。解約後も、契約期間内は引き続きサービスをご利用いただけます。
+            </div>
+        </div>
+        <div class="p06-item">
+            <div class="p06-question" onclick="toggleFaq(this)">
+                <span>サポートはどのように受けられますか？</span>
+                <div class="p06-icon">+</div>
+            </div>
+            <div class="p06-answer">
+                フリープランはコミュニティサポート、プレミアムプランは優先メールサポート、ビジネスプランは専任サポート（電話・チャット対応）をご提供しています。
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [P04] CTA ボタン - パステル -->
+<section class="p04-cta-section">
+    <div class="p04-container">
+        <h2 class="p04-title">さあ、あなたも始めませんか？</h2>
+        <p class="p04-desc">今すぐ無料で試して、かわいくて優しい体験を</p>
+        <div class="p04-btn-group">
+            <a href="#" class="p04-btn p04-btn-primary">無料で始める</a>
+            <a href="#" class="p04-btn p04-btn-outline">デモを見る</a>
+        </div>
+    </div>
+</section>
+
+<!-- [P10] ニュースレター登録フォーム - パステル -->
+<section class="p10-newsletter">
+    <div class="p10-container">
+        <div class="p10-icon">💌</div>
+        <h2 class="p10-title">最新情報をお届けします</h2>
+        <p class="p10-desc">お得なキャンペーンや新機能の情報を<br>いち早くお届けします</p>
+        <form class="p10-form">
+            <input type="email" class="p10-input" placeholder="メールアドレスを入力" required>
+            <button type="submit" class="p10-submit">登録する</button>
+        </form>
+        <p class="p10-privacy">
+            登録することで、<a href="#">プライバシーポリシー</a>に同意したものとみなされます
+        </p>
+        <div class="p10-benefits">
+            <div class="p10-benefit">
+                <span class="p10-benefit-icon">🎁</span>
+                <span>限定特典</span>
+            </div>
+            <div class="p10-benefit">
+                <span class="p10-benefit-icon">📰</span>
+                <span>最新ニュース</span>
+            </div>
+            <div class="p10-benefit">
+                <span class="p10-benefit-icon">💝</span>
+                <span>お得情報</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [P07] フッター - パステル -->
+<footer class="p07-footer">
+    <div class="p07-container">
+        <div class="p07-top">
+            <div class="p07-brand">
+                <div class="p07-logo">✨ Pastel</div>
+                <p class="p07-tagline">かわいくて、やさしい<br>あなただけの体験を</p>
+                <div class="p07-social">
+                    <a href="#" class="p07-social-link">f</a>
+                    <a href="#" class="p07-social-link">𝕏</a>
+                    <a href="#" class="p07-social-link">in</a>
+                    <a href="#" class="p07-social-link">📷</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="p07-section-title">プロダクト</h4>
+                <div class="p07-links">
+                    <a href="#" class="p07-link">→ 特徴</a>
+                    <a href="#" class="p07-link">→ 料金</a>
+                    <a href="#" class="p07-link">→ テンプレート</a>
+                    <a href="#" class="p07-link">→ 使い方</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="p07-section-title">サポート</h4>
+                <div class="p07-links">
+                    <a href="#" class="p07-link">→ ヘルプセンター</a>
+                    <a href="#" class="p07-link">→ お問い合わせ</a>
+                    <a href="#" class="p07-link">→ コミュニティ</a>
+                    <a href="#" class="p07-link">→ チュートリアル</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="p07-section-title">会社情報</h4>
+                <div class="p07-links">
+                    <a href="#" class="p07-link">→ 運営会社</a>
+                    <a href="#" class="p07-link">→ 採用情報</a>
+                    <a href="#" class="p07-link">→ プレスキット</a>
+                    <a href="#" class="p07-link">→ ブログ</a>
+                </div>
+            </div>
+        </div>
+        <div class="p07-bottom">
+            <p>&copy; 2026 Pastel. All rights reserved. | プライバシーポリシー | 利用規約</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // [P06] FAQ アコーディオン機能
+    function toggleFaq(element) {
+        const item = element.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // すべてのアイテムを閉じる
+        document.querySelectorAll('.p06-item').forEach(i => {
+            i.classList.remove('active');
+        });
+
+        // クリックされたアイテムをトグル
+        if (!isActive) {
+            item.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2901 @@
+<!--
+  Diagram Templates: 時間・順序 (Time & Sequence) Category
+  30 UNIQUE patterns for time-based and sequential visualizations
+  Style: Simple, pop, colorful, flat design, CSS-only with hover effects
+  Colors: pink (#FF6B9D), sky blue (#4ECDC4), mint green (#7ED321), yellow (#FFE66D), orange (#FF8C42), purple (#A855F7)
+-->
+
+<style>
+/* ===== Time & Sequence Category Base Styles ===== */
+.time-diagram {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 16px;
+  background: #FAFAFA;
+}
+
+.time-diagram * {
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* ===== #time-1: Morning → Afternoon → Night ===== */
+#time-1 .day-phases {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+#time-1 .phase {
+  flex: 1;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 20px;
+  position: relative;
+}
+
+#time-1 .phase.morning {
+  background: #FFE66D;
+  border: 4px solid #E6CF00;
+}
+
+#time-1 .phase.afternoon {
+  background: #FF8C42;
+  border: 4px solid #E67300;
+}
+
+#time-1 .phase.night {
+  background: #A855F7;
+  border: 4px solid #8B3FD4;
+  color: white;
+}
+
+#time-1 .phase-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+#time-1 .phase-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#time-1 .phase-time {
+  font-size: 14px;
+  margin-top: 5px;
+  opacity: 0.8;
+}
+
+#time-1 .arrow {
+  font-size: 30px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+#time-1 .phase:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* ===== #time-2: Yesterday → Today → Tomorrow ===== */
+#time-2 .day-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#time-2 .day-card {
+  width: 140px;
+  padding: 25px 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+#time-2 .day-card.yesterday {
+  background: #E0E0E0;
+  border: 4px solid #BDBDBD;
+  opacity: 0.7;
+}
+
+#time-2 .day-card.today {
+  background: #FF6B9D;
+  border: 4px solid #E05080;
+  color: white;
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+#time-2 .day-card.tomorrow {
+  background: #4ECDC4;
+  border: 4px solid #38B5AC;
+  color: white;
+}
+
+#time-2 .day-name {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#time-2 .day-number {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+#time-2 .day-label {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+#time-2 .flow-arrow {
+  font-size: 24px;
+  color: #999;
+}
+
+#time-2 .day-card:hover {
+  transform: scale(1.1);
+}
+
+#time-2 .day-card.today:hover {
+  transform: scale(1.2);
+}
+
+/* ===== #time-3: Past → Present → Future ===== */
+#time-3 .time-continuum {
+  display: flex;
+  align-items: stretch;
+  height: 180px;
+  position: relative;
+}
+
+#time-3 .time-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+#time-3 .time-zone.past {
+  background: #E8D5B7;
+  border-radius: 16px 0 0 16px;
+  border: 4px solid #D4B896;
+  border-right: none;
+}
+
+#time-3 .time-zone.present {
+  background: #7ED321;
+  border: 4px solid #6BBF1A;
+  border-left: none;
+  border-right: none;
+  z-index: 2;
+}
+
+#time-3 .time-zone.future {
+  background: #4ECDC4;
+  border-radius: 0 16px 16px 0;
+  border: 4px solid #38B5AC;
+  border-left: none;
+}
+
+#time-3 .zone-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+#time-3 .zone-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+#time-3 .zone-desc {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #555;
+}
+
+#time-3 .time-arrow {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(to right, #E8D5B7, #7ED321, #4ECDC4);
+  border-radius: 4px;
+}
+
+#time-3 .time-arrow::after {
+  content: '▶';
+  position: absolute;
+  right: -20px;
+  top: -8px;
+  font-size: 24px;
+  color: #4ECDC4;
+}
+
+#time-3 .time-zone:hover {
+  transform: scaleY(1.05);
+}
+
+/* ===== #time-4: Spring → Summer → Fall → Winter ===== */
+#time-4 .seasons {
+  display: flex;
+  gap: 15px;
+}
+
+#time-4 .season {
+  flex: 1;
+  padding: 25px 15px;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+}
+
+#time-4 .season.spring {
+  background: #FF6B9D;
+  border: 4px solid #E05080;
+}
+
+#time-4 .season.summer {
+  background: #FFE66D;
+  border: 4px solid #E6CF00;
+}
+
+#time-4 .season.fall {
+  background: #FF8C42;
+  border: 4px solid #E67300;
+}
+
+#time-4 .season.winter {
+  background: #4ECDC4;
+  border: 4px solid #38B5AC;
+}
+
+#time-4 .season-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+#time-4 .season-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+#time-4 .season-months {
+  font-size: 11px;
+  margin-top: 8px;
+  color: #555;
+}
+
+#time-4 .season::after {
+  content: '→';
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #999;
+}
+
+#time-4 .season:last-child::after {
+  content: '↻';
+  right: -25px;
+  font-size: 24px;
+  color: #FF6B9D;
+}
+
+#time-4 .season:hover {
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+/* ===== #time-5: Monday to Sunday Week View ===== */
+#time-5 .week-view {
+  display: flex;
+  gap: 8px;
+}
+
+#time-5 .weekday {
+  flex: 1;
+  padding: 20px 10px;
+  border-radius: 12px;
+  text-align: center;
+  background: white;
+  border: 3px solid #E0E0E0;
+}
+
+#time-5 .weekday.mon { border-color: #FF6B9D; }
+#time-5 .weekday.tue { border-color: #FF8C42; }
+#time-5 .weekday.wed { border-color: #FFE66D; }
+#time-5 .weekday.thu { border-color: #7ED321; }
+#time-5 .weekday.fri { border-color: #4ECDC4; }
+#time-5 .weekday.sat { border-color: #4ECDC4; background: #E8F8F7; }
+#time-5 .weekday.sun { border-color: #FF6B9D; background: #FFE8EF; }
+
+#time-5 .weekday-abbr {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+}
+
+#time-5 .weekday-full {
+  font-size: 10px;
+  color: #999;
+  margin-top: 5px;
+}
+
+#time-5 .weekday-date {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+#time-5 .weekday.today {
+  background: #A855F7;
+  border-color: #8B3FD4;
+  color: white;
+}
+
+#time-5 .weekday.today .weekday-abbr,
+#time-5 .weekday.today .weekday-full,
+#time-5 .weekday.today .weekday-date {
+  color: white;
+}
+
+#time-5 .weekday:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== #time-6: January to December Calendar ===== */
+#time-6 .year-calendar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+#time-6 .month {
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  background: white;
+  border: 3px solid #E0E0E0;
+  cursor: pointer;
+}
+
+#time-6 .month.q1 { border-color: #FF6B9D; }
+#time-6 .month.q2 { border-color: #7ED321; }
+#time-6 .month.q3 { border-color: #FFE66D; }
+#time-6 .month.q4 { border-color: #4ECDC4; }
+
+#time-6 .month.current {
+  background: #A855F7;
+  border-color: #8B3FD4;
+  color: white;
+}
+
+#time-6 .month-num {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#time-6 .month-name {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+#time-6 .month:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== #time-7: Hour by Hour Schedule ===== */
+#time-7 .hourly-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#time-7 .hour-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#time-7 .hour-label {
+  width: 60px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  text-align: right;
+}
+
+#time-7 .hour-bar {
+  flex: 1;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#time-7 .hour-bar.morning { background: #FFE66D; }
+#time-7 .hour-bar.afternoon { background: #FF8C42; color: white; }
+#time-7 .hour-bar.evening { background: #A855F7; color: white; }
+#time-7 .hour-bar.empty { background: #F0F0F0; border: 2px dashed #CCC; }
+
+#time-7 .hour-row:hover .hour-bar {
+  transform: scaleX(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ===== #time-8: Alarm Clock Times ===== */
+#time-8 .alarm-clocks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#time-8 .alarm {
+  text-align: center;
+}
+
+#time-8 .clock-face {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: white;
+}
+
+#time-8 .alarm.active .clock-face {
+  border-color: #FF6B9D;
+  animation: alarm-ring 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes alarm-ring {
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(5deg); }
+}
+
+#time-8 .clock-bells {
+  position: absolute;
+  top: -15px;
+  display: flex;
+  gap: 30px;
+}
+
+#time-8 .bell {
+  width: 20px;
+  height: 20px;
+  background: #333;
+  border-radius: 50%;
+}
+
+#time-8 .alarm.active .bell {
+  background: #FF6B9D;
+}
+
+#time-8 .clock-time {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+#time-8 .alarm-label {
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 20px;
+  background: #E0E0E0;
+}
+
+#time-8 .alarm.active .alarm-label {
+  background: #FF6B9D;
+  color: white;
+}
+
+#time-8 .alarm:hover {
+  transform: scale(1.1);
+}
+
+/* ===== #time-9: Countdown Timer (3-2-1) ===== */
+#time-9 .countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+#time-9 .count-num {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  position: relative;
+}
+
+#time-9 .count-num.three {
+  background: #FF6B9D;
+  border: 5px solid #E05080;
+}
+
+#time-9 .count-num.two {
+  background: #FFE66D;
+  color: #333;
+  border: 5px solid #E6CF00;
+}
+
+#time-9 .count-num.one {
+  background: #7ED321;
+  border: 5px solid #6BBF1A;
+}
+
+#time-9 .count-num.go {
+  width: 120px;
+  height: 120px;
+  background: #4ECDC4;
+  border: 5px solid #38B5AC;
+  font-size: 32px;
+}
+
+#time-9 .count-arrow {
+  font-size: 30px;
+  color: #999;
+}
+
+#time-9 .count-num:hover {
+  transform: scale(1.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#time-9 .count-num.active {
+  animation: countdown-pulse 1s ease-in-out infinite;
+}
+
+@keyframes countdown-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ===== #time-10: Stopwatch Laps ===== */
+#time-10 .stopwatch-laps {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+#time-10 .stopwatch-display {
+  text-align: center;
+  padding: 30px;
+  background: #333;
+  border-radius: 20px;
+  color: white;
+}
+
+#time-10 .stopwatch-time {
+  font-size: 48px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  color: #7ED321;
+}
+
+#time-10 .stopwatch-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+#time-10 .sw-btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#time-10 .sw-btn.start { background: #7ED321; }
+#time-10 .sw-btn.stop { background: #FF6B9D; color: white; }
+#time-10 .sw-btn.lap { background: #4ECDC4; }
+
+#time-10 .laps-list {
+  flex: 1;
+}
+
+#time-10 .lap-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background: white;
+  border: 3px solid #E0E0E0;
+}
+
+#time-10 .lap-item:nth-child(1) { border-color: #FFE66D; background: #FFFDE7; }
+#time-10 .lap-item:nth-child(2) { border-color: #E0E0E0; background: #F5F5F5; }
+#time-10 .lap-item:nth-child(3) { border-color: #FF8C42; background: #FFF3E0; }
+
+#time-10 .lap-num {
+  font-weight: bold;
+  color: #666;
+}
+
+#time-10 .lap-time {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+#time-10 .lap-item:hover {
+  transform: translateX(5px);
+}
+
+/* ===== #time-11: Duration Comparison Bars ===== */
+#time-11 .duration-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#time-11 .duration-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#time-11 .duration-label {
+  width: 100px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+}
+
+#time-11 .duration-bar-container {
+  flex: 1;
+  height: 30px;
+  background: #F0F0F0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#time-11 .duration-bar {
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#time-11 .duration-bar.short { width: 30%; background: #7ED321; }
+#time-11 .duration-bar.medium { width: 60%; background: #FFE66D; color: #333; }
+#time-11 .duration-bar.long { width: 85%; background: #FF8C42; }
+#time-11 .duration-bar.very-long { width: 100%; background: #FF6B9D; }
+
+#time-11 .duration-item:hover .duration-bar {
+  filter: brightness(1.1);
+}
+
+/* ===== #time-12: Age Progression ===== */
+#time-12 .age-progression {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 200px;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+#time-12 .age-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+#time-12 .age-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#time-12 .age-head {
+  width: 30px;
+  height: 30px;
+  background: #FFE0B2;
+  border-radius: 50%;
+  border: 3px solid #FFAB91;
+}
+
+#time-12 .age-body {
+  border-radius: 10px 10px 5px 5px;
+  margin-top: -5px;
+}
+
+#time-12 .age-stage.baby .age-body { width: 25px; height: 30px; background: #FF6B9D; }
+#time-12 .age-stage.child .age-body { width: 30px; height: 50px; background: #4ECDC4; }
+#time-12 .age-stage.teen .age-body { width: 35px; height: 70px; background: #7ED321; }
+#time-12 .age-stage.adult .age-body { width: 40px; height: 90px; background: #A855F7; }
+#time-12 .age-stage.elder .age-body { width: 38px; height: 80px; background: #FFE66D; }
+
+#time-12 .age-label {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+}
+
+#time-12 .age-years {
+  font-size: 10px;
+  color: #999;
+}
+
+#time-12 .timeline-bar {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  height: 4px;
+  background: #E0E0E0;
+  border-radius: 2px;
+}
+
+#time-12 .age-stage:hover {
+  transform: scale(1.1);
+}
+
+/* ===== #time-13: Historical Era Timeline ===== */
+#time-13 .era-timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+#time-13 .era-line {
+  height: 8px;
+  background: #E0E0E0;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden;
+}
+
+#time-13 .era-segment {
+  height: 100%;
+  position: relative;
+}
+
+#time-13 .era-segment.ancient { flex: 2; background: #D4B896; }
+#time-13 .era-segment.medieval { flex: 1; background: #FF8C42; }
+#time-13 .era-segment.renaissance { flex: 0.5; background: #A855F7; }
+#time-13 .era-segment.modern { flex: 0.3; background: #4ECDC4; }
+#time-13 .era-segment.contemporary { flex: 0.2; background: #7ED321; }
+
+#time-13 .era-labels {
+  display: flex;
+  margin-top: 15px;
+}
+
+#time-13 .era-label {
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#time-13 .era-label.ancient { flex: 2; background: #F5E6D3; }
+#time-13 .era-label.medieval { flex: 1; background: #FFE0CC; }
+#time-13 .era-label.renaissance { flex: 0.5; background: #F0E0FF; }
+#time-13 .era-label.modern { flex: 0.3; background: #E0F7F6; }
+#time-13 .era-label.contemporary { flex: 0.2; background: #E8F5E9; }
+
+#time-13 .era-label:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== #time-14: Project Deadline Tracker ===== */
+#time-14 .deadline-tracker {
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  border: 3px solid #E0E0E0;
+}
+
+#time-14 .deadline-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#time-14 .deadline-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#time-14 .deadline-date {
+  padding: 5px 15px;
+  background: #FF6B9D;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+#time-14 .progress-track {
+  height: 20px;
+  background: #F0F0F0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+#time-14 .progress-fill {
+  height: 100%;
+  background: #7ED321;
+  border-radius: 10px;
+  position: relative;
+}
+
+#time-14 .progress-marker {
+  position: absolute;
+  top: -25px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 2px solid #7ED321;
+}
+
+#time-14 .milestone-dots {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#time-14 .milestone {
+  text-align: center;
+}
+
+#time-14 .milestone-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin: 0 auto 5px;
+  border: 3px solid;
+}
+
+#time-14 .milestone.done .milestone-dot { background: #7ED321; border-color: #6BBF1A; }
+#time-14 .milestone.current .milestone-dot { background: #FFE66D; border-color: #E6CF00; }
+#time-14 .milestone.pending .milestone-dot { background: white; border-color: #E0E0E0; }
+
+#time-14 .milestone-label {
+  font-size: 10px;
+  color: #666;
+}
+
+#time-14 .deadline-tracker:hover {
+  border-color: #7ED321;
+}
+
+/* ===== #time-15: Event Schedule Cards ===== */
+#time-15 .event-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#time-15 .event-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  background: white;
+  border-left: 6px solid;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+#time-15 .event-card.meeting { border-color: #FF6B9D; }
+#time-15 .event-card.deadline { border-color: #FF8C42; }
+#time-15 .event-card.break { border-color: #7ED321; }
+#time-15 .event-card.event { border-color: #A855F7; }
+
+#time-15 .event-time {
+  width: 80px;
+  text-align: center;
+  padding-right: 15px;
+  border-right: 2px solid #E0E0E0;
+}
+
+#time-15 .event-hour {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#time-15 .event-ampm {
+  font-size: 11px;
+  color: #999;
+}
+
+#time-15 .event-details {
+  flex: 1;
+  padding-left: 15px;
+}
+
+#time-15 .event-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+#time-15 .event-location {
+  font-size: 12px;
+  color: #666;
+}
+
+#time-15 .event-duration {
+  padding: 5px 12px;
+  background: #F0F0F0;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#time-15 .event-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== #time-16: Meeting Time Slots ===== */
+#time-16 .time-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+#time-16 .slot {
+  padding: 20px 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 3px solid;
+  cursor: pointer;
+}
+
+#time-16 .slot.available {
+  background: white;
+  border-color: #7ED321;
+}
+
+#time-16 .slot.booked {
+  background: #FFE8EF;
+  border-color: #FF6B9D;
+}
+
+#time-16 .slot.selected {
+  background: #4ECDC4;
+  border-color: #38B5AC;
+  color: white;
+}
+
+#time-16 .slot-time {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#time-16 .slot-status {
+  font-size: 11px;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+#time-16 .slot:hover:not(.booked) {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== #time-17: Daily Routine Icons ===== */
+#time-17 .daily-routine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+#time-17 .routine-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+#time-17 .routine-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border: 4px solid;
+}
+
+#time-17 .routine-item.wake .routine-icon { background: #FFE66D; border-color: #E6CF00; }
+#time-17 .routine-item.breakfast .routine-icon { background: #FF8C42; border-color: #E67300; }
+#time-17 .routine-item.work .routine-icon { background: #4ECDC4; border-color: #38B5AC; }
+#time-17 .routine-item.lunch .routine-icon { background: #7ED321; border-color: #6BBF1A; }
+#time-17 .routine-item.exercise .routine-icon { background: #A855F7; border-color: #8B3FD4; }
+#time-17 .routine-item.dinner .routine-icon { background: #FF6B9D; border-color: #E05080; }
+#time-17 .routine-item.sleep .routine-icon { background: #666; border-color: #444; }
+
+#time-17 .routine-time {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#time-17 .routine-label {
+  font-size: 10px;
+  color: #666;
+}
+
+#time-17 .routine-line {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background: #E0E0E0;
+  z-index: 1;
+}
+
+#time-17 .routine-item:hover {
+  transform: scale(1.15);
+}
+
+/* ===== #time-18: Weekly Planner Grid ===== */
+#time-18 .weekly-planner {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  gap: 3px;
+}
+
+#time-18 .planner-header {
+  padding: 10px 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  background: #333;
+  color: white;
+  border-radius: 6px 6px 0 0;
+}
+
+#time-18 .planner-header.corner {
+  background: transparent;
+}
+
+#time-18 .planner-time {
+  padding: 8px 5px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: bold;
+  color: #666;
+  background: #F5F5F5;
+}
+
+#time-18 .planner-cell {
+  padding: 8px 5px;
+  min-height: 40px;
+  background: white;
+  border: 1px solid #E0E0E0;
+  font-size: 10px;
+  border-radius: 4px;
+}
+
+#time-18 .planner-cell.has-event {
+  font-weight: bold;
+}
+
+#time-18 .planner-cell.pink { background: #FFE8EF; border-color: #FF6B9D; }
+#time-18 .planner-cell.blue { background: #E8F8F7; border-color: #4ECDC4; }
+#time-18 .planner-cell.yellow { background: #FFFDE7; border-color: #FFE66D; }
+#time-18 .planner-cell.green { background: #E8F5E9; border-color: #7ED321; }
+#time-18 .planner-cell.purple { background: #F3E5F5; border-color: #A855F7; }
+
+#time-18 .planner-cell:hover {
+  transform: scale(1.05);
+  z-index: 2;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* ===== #time-19: Monthly Calendar Blocks ===== */
+#time-19 .monthly-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#time-19 .calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: #A855F7;
+  color: white;
+  border-radius: 12px;
+}
+
+#time-19 .month-nav {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+#time-19 .month-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#time-19 .calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+#time-19 .day-header {
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+}
+
+#time-19 .day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: white;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+#time-19 .day-cell.other-month {
+  color: #CCC;
+}
+
+#time-19 .day-cell.today {
+  background: #FF6B9D;
+  color: white;
+  font-weight: bold;
+}
+
+#time-19 .day-cell.has-event {
+  border-color: #4ECDC4;
+}
+
+#time-19 .day-cell.has-event::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  width: 6px;
+  height: 6px;
+  background: #4ECDC4;
+  border-radius: 50%;
+}
+
+#time-19 .day-cell:hover {
+  background: #F0F0F0;
+  transform: scale(1.1);
+}
+
+#time-19 .day-cell.today:hover {
+  background: #E05080;
+}
+
+/* ===== #time-20: Yearly Milestone Markers ===== */
+#time-20 .yearly-milestones {
+  position: relative;
+  padding: 40px 0;
+}
+
+#time-20 .year-line {
+  height: 6px;
+  background: #E0E0E0;
+  border-radius: 3px;
+  position: relative;
+}
+
+#time-20 .milestone-marker {
+  position: absolute;
+  top: -15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+#time-20 .milestone-marker.q1 { left: 12.5%; background: #FF6B9D; }
+#time-20 .milestone-marker.q2 { left: 37.5%; background: #7ED321; }
+#time-20 .milestone-marker.q3 { left: 62.5%; background: #FFE66D; color: #333; }
+#time-20 .milestone-marker.q4 { left: 87.5%; background: #4ECDC4; }
+
+#time-20 .milestone-info {
+  position: absolute;
+  top: 30px;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 80px;
+}
+
+#time-20 .milestone-info.q1 { left: 12.5%; }
+#time-20 .milestone-info.q2 { left: 37.5%; }
+#time-20 .milestone-info.q3 { left: 62.5%; }
+#time-20 .milestone-info.q4 { left: 87.5%; }
+
+#time-20 .milestone-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#time-20 .milestone-date {
+  font-size: 10px;
+  color: #666;
+}
+
+#time-20 .milestone-marker:hover {
+  transform: translateX(-50%) scale(1.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ===== #time-21: Century Timeline ===== */
+#time-21 .century-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#time-21 .century-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#time-21 .century-label {
+  width: 80px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+}
+
+#time-21 .century-bar {
+  flex: 1;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#time-21 .century-bar.c19 { background: #D4B896; color: #333; }
+#time-21 .century-bar.c20 { background: #FF8C42; }
+#time-21 .century-bar.c21 { background: #4ECDC4; }
+
+#time-21 .century-events {
+  display: flex;
+  gap: 10px;
+}
+
+#time-21 .century-event {
+  padding: 3px 10px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+#time-21 .century-row:hover .century-bar {
+  transform: scaleX(1.02);
+}
+
+/* ===== #time-22: Generation Comparison ===== */
+#time-22 .generations {
+  display: flex;
+  gap: 15px;
+}
+
+#time-22 .generation {
+  flex: 1;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  border: 4px solid;
+}
+
+#time-22 .generation.boomer {
+  background: #FFF3E0;
+  border-color: #FF8C42;
+}
+
+#time-22 .generation.genx {
+  background: #E8F5E9;
+  border-color: #7ED321;
+}
+
+#time-22 .generation.millennial {
+  background: #E8F8F7;
+  border-color: #4ECDC4;
+}
+
+#time-22 .generation.genz {
+  background: #F3E5F5;
+  border-color: #A855F7;
+}
+
+#time-22 .gen-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+#time-22 .gen-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#time-22 .gen-years {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+#time-22 .gen-trait {
+  font-size: 11px;
+  padding: 5px 10px;
+  background: white;
+  border-radius: 15px;
+  display: inline-block;
+}
+
+#time-22 .generation:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ===== #time-23: Era Transition Arrows ===== */
+#time-23 .era-transitions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#time-23 .era-box {
+  padding: 25px 20px;
+  border-radius: 12px;
+  text-align: center;
+  flex: 1;
+  position: relative;
+}
+
+#time-23 .era-box.stone { background: #D4B896; }
+#time-23 .era-box.bronze { background: #FF8C42; }
+#time-23 .era-box.iron { background: #90A4AE; }
+#time-23 .era-box.industrial { background: #7ED321; }
+#time-23 .era-box.digital { background: #4ECDC4; }
+
+#time-23 .era-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+#time-23 .era-period {
+  font-size: 10px;
+  margin-top: 5px;
+  color: #555;
+}
+
+#time-23 .transition-arrow {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #A855F7;
+  color: white;
+  border-radius: 50%;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+#time-23 .era-box:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+/* ===== #time-24: Season Cycle Wheel ===== */
+#time-24 .season-wheel {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#time-24 .wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 2;
+  border: 4px solid #333;
+}
+
+#time-24 .wheel-segment {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#time-24 .wheel-segment.spring {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FF6B9D;
+}
+
+#time-24 .wheel-segment.summer {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #FFE66D;
+}
+
+#time-24 .wheel-segment.fall {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FF8C42;
+}
+
+#time-24 .wheel-segment.winter {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #4ECDC4;
+}
+
+#time-24 .segment-icon {
+  font-size: 28px;
+}
+
+#time-24 .segment-label {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+#time-24 .wheel-arrows {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border: 4px dashed #CCC;
+  border-radius: 50%;
+}
+
+#time-24 .wheel-segment:hover {
+  transform: translateX(-50%) scale(1.1);
+  z-index: 3;
+}
+
+#time-24 .wheel-segment.summer:hover,
+#time-24 .wheel-segment.winter:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ===== #time-25: Day/Night Cycle ===== */
+#time-25 .day-night-cycle {
+  height: 150px;
+  border-radius: 75px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+#time-25 .cycle-half {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#time-25 .cycle-half.day {
+  background: #FFE66D;
+}
+
+#time-25 .cycle-half.night {
+  background: #2C3E50;
+  color: white;
+}
+
+#time-25 .cycle-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+#time-25 .cycle-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#time-25 .cycle-time {
+  font-size: 12px;
+  margin-top: 5px;
+  opacity: 0.8;
+}
+
+#time-25 .cycle-divider {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #FF8C42, #A855F7);
+  transform: translateX(-50%);
+}
+
+#time-25 .sun-moon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFE66D 50%, #F5F5F5 50%);
+  border: 4px solid #333;
+  z-index: 2;
+}
+
+#time-25 .cycle-half:hover {
+  filter: brightness(1.1);
+}
+
+/* ===== #time-26: Meal Time Schedule ===== */
+#time-26 .meal-schedule {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+#time-26 .meal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#time-26 .meal-plate {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 6px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background: white;
+}
+
+#time-26 .meal.breakfast .meal-plate { border-color: #FFE66D; }
+#time-26 .meal.lunch .meal-plate { border-color: #FF8C42; }
+#time-26 .meal.dinner .meal-plate { border-color: #A855F7; }
+
+#time-26 .meal-time {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#time-26 .meal-name {
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#time-26 .meal-connector {
+  position: absolute;
+  top: 50px;
+  left: 15%;
+  right: 15%;
+  height: 4px;
+  background: #E0E0E0;
+  z-index: -1;
+}
+
+#time-26 .meal:hover {
+  transform: scale(1.1);
+}
+
+#time-26 .meal:hover .meal-plate {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ===== #time-27: School Period Timetable ===== */
+#time-27 .school-timetable {
+  border: 3px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#time-27 .timetable-header {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+  background: #333;
+  color: white;
+}
+
+#time-27 .timetable-header > div {
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+#time-27 .timetable-row {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+  border-top: 2px solid #E0E0E0;
+}
+
+#time-27 .period-num {
+  background: #F5F5F5;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  border-right: 2px solid #E0E0E0;
+}
+
+#time-27 .subject-cell {
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  border-right: 1px solid #E0E0E0;
+}
+
+#time-27 .subject-cell:last-child {
+  border-right: none;
+}
+
+#time-27 .subject-cell.math { background: #FFE8EF; }
+#time-27 .subject-cell.science { background: #E8F5E9; }
+#time-27 .subject-cell.english { background: #E8F8F7; }
+#time-27 .subject-cell.history { background: #FFF3E0; }
+#time-27 .subject-cell.pe { background: #F3E5F5; }
+#time-27 .subject-cell.art { background: #FFFDE7; }
+
+#time-27 .subject-cell:hover {
+  filter: brightness(0.95);
+  transform: scale(1.02);
+}
+
+/* ===== #time-28: Work Shift Schedule ===== */
+#time-28 .shift-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#time-28 .shift-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#time-28 .shift-name {
+  width: 80px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#time-28 .shift-bar-container {
+  flex: 1;
+  height: 40px;
+  background: #F0F0F0;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+#time-28 .shift-bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#time-28 .shift-bar.morning {
+  left: 25%;
+  width: 35%;
+  background: #FFE66D;
+  color: #333;
+}
+
+#time-28 .shift-bar.afternoon {
+  left: 40%;
+  width: 35%;
+  background: #FF8C42;
+}
+
+#time-28 .shift-bar.night {
+  left: 60%;
+  width: 35%;
+  background: #A855F7;
+}
+
+#time-28 .shift-bar.full {
+  left: 25%;
+  width: 50%;
+  background: #4ECDC4;
+}
+
+#time-28 .time-markers {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 11px;
+  color: #666;
+}
+
+#time-28 .shift-row:hover .shift-bar {
+  filter: brightness(1.1);
+}
+
+/* ===== #time-29: Sleep/Wake Cycle ===== */
+#time-29 .sleep-cycle {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#time-29 .cycle-display {
+  height: 80px;
+  border-radius: 40px;
+  display: flex;
+  overflow: hidden;
+  border: 4px solid #333;
+}
+
+#time-29 .awake-zone {
+  background: #FFE66D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+#time-29 .sleep-zone {
+  background: #2C3E50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+#time-29 .cycle-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+#time-29 .cycle-stat {
+  text-align: center;
+  padding: 15px 25px;
+  border-radius: 12px;
+  background: white;
+  border: 3px solid #E0E0E0;
+}
+
+#time-29 .stat-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+#time-29 .stat-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#time-29 .stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+#time-29 .cycle-stat.sleep-stat { border-color: #A855F7; }
+#time-29 .cycle-stat.wake-stat { border-color: #FFE66D; }
+#time-29 .cycle-stat.quality-stat { border-color: #7ED321; }
+
+#time-29 .cycle-stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== #time-30: Holiday Countdown ===== */
+#time-30 .holiday-countdown {
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #FF6B9D 0%, #A855F7 100%);
+  border-radius: 20px;
+  color: white;
+}
+
+#time-30 .holiday-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+#time-30 .holiday-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#time-30 .countdown-units {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+#time-30 .countdown-unit {
+  background: rgba(255,255,255,0.2);
+  padding: 20px 25px;
+  border-radius: 12px;
+  min-width: 80px;
+}
+
+#time-30 .unit-value {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#time-30 .unit-label {
+  font-size: 12px;
+  margin-top: 5px;
+  opacity: 0.9;
+}
+
+#time-30 .countdown-unit:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+#time-30 .holiday-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+</style>
+
+<!-- ===== Template #time-1: Morning → Afternoon → Night ===== -->
+<div id="time-1" class="time-diagram">
+  <div class="day-phases">
+    <div class="phase morning">
+      <div class="phase-icon">🌅</div>
+      <div class="phase-label">Morning</div>
+      <div class="phase-time">6:00 - 12:00</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="phase afternoon">
+      <div class="phase-icon">☀️</div>
+      <div class="phase-label">Afternoon</div>
+      <div class="phase-time">12:00 - 18:00</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="phase night">
+      <div class="phase-icon">🌙</div>
+      <div class="phase-label">Night</div>
+      <div class="phase-time">18:00 - 6:00</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-2: Yesterday → Today → Tomorrow ===== -->
+<div id="time-2" class="time-diagram">
+  <div class="day-flow">
+    <div class="day-card yesterday">
+      <div class="day-name">Mon</div>
+      <div class="day-number">14</div>
+      <div class="day-label">Yesterday</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="day-card today">
+      <div class="day-name">Tue</div>
+      <div class="day-number">15</div>
+      <div class="day-label">Today</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="day-card tomorrow">
+      <div class="day-name">Wed</div>
+      <div class="day-number">16</div>
+      <div class="day-label">Tomorrow</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-3: Past → Present → Future ===== -->
+<div id="time-3" class="time-diagram">
+  <div class="time-continuum">
+    <div class="time-zone past">
+      <div class="zone-icon">📜</div>
+      <div class="zone-label">Past</div>
+      <div class="zone-desc">What happened</div>
+    </div>
+    <div class="time-zone present">
+      <div class="zone-icon">⚡</div>
+      <div class="zone-label">Present</div>
+      <div class="zone-desc">Now</div>
+    </div>
+    <div class="time-zone future">
+      <div class="zone-icon">🔮</div>
+      <div class="zone-label">Future</div>
+      <div class="zone-desc">What's next</div>
+    </div>
+    <div class="time-arrow"></div>
+  </div>
+</div>
+
+<!-- ===== Template #time-4: Spring → Summer → Fall → Winter ===== -->
+<div id="time-4" class="time-diagram">
+  <div class="seasons">
+    <div class="season spring">
+      <div class="season-icon">🌸</div>
+      <div class="season-name">Spring</div>
+      <div class="season-months">Mar - May</div>
+    </div>
+    <div class="season summer">
+      <div class="season-icon">🌻</div>
+      <div class="season-name">Summer</div>
+      <div class="season-months">Jun - Aug</div>
+    </div>
+    <div class="season fall">
+      <div class="season-icon">🍂</div>
+      <div class="season-name">Fall</div>
+      <div class="season-months">Sep - Nov</div>
+    </div>
+    <div class="season winter">
+      <div class="season-icon">❄️</div>
+      <div class="season-name">Winter</div>
+      <div class="season-months">Dec - Feb</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-5: Monday to Sunday Week View ===== -->
+<div id="time-5" class="time-diagram">
+  <div class="week-view">
+    <div class="weekday mon">
+      <div class="weekday-abbr">Mon</div>
+      <div class="weekday-full">Monday</div>
+      <div class="weekday-date">13</div>
+    </div>
+    <div class="weekday tue">
+      <div class="weekday-abbr">Tue</div>
+      <div class="weekday-full">Tuesday</div>
+      <div class="weekday-date">14</div>
+    </div>
+    <div class="weekday wed today">
+      <div class="weekday-abbr">Wed</div>
+      <div class="weekday-full">Wednesday</div>
+      <div class="weekday-date">15</div>
+    </div>
+    <div class="weekday thu">
+      <div class="weekday-abbr">Thu</div>
+      <div class="weekday-full">Thursday</div>
+      <div class="weekday-date">16</div>
+    </div>
+    <div class="weekday fri">
+      <div class="weekday-abbr">Fri</div>
+      <div class="weekday-full">Friday</div>
+      <div class="weekday-date">17</div>
+    </div>
+    <div class="weekday sat">
+      <div class="weekday-abbr">Sat</div>
+      <div class="weekday-full">Saturday</div>
+      <div class="weekday-date">18</div>
+    </div>
+    <div class="weekday sun">
+      <div class="weekday-abbr">Sun</div>
+      <div class="weekday-full">Sunday</div>
+      <div class="weekday-date">19</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-6: January to December Calendar ===== -->
+<div id="time-6" class="time-diagram">
+  <div class="year-calendar">
+    <div class="month q1">
+      <div class="month-num">01</div>
+      <div class="month-name">Jan</div>
+    </div>
+    <div class="month q1">
+      <div class="month-num">02</div>
+      <div class="month-name">Feb</div>
+    </div>
+    <div class="month q1">
+      <div class="month-num">03</div>
+      <div class="month-name">Mar</div>
+    </div>
+    <div class="month q2">
+      <div class="month-num">04</div>
+      <div class="month-name">Apr</div>
+    </div>
+    <div class="month q2">
+      <div class="month-num">05</div>
+      <div class="month-name">May</div>
+    </div>
+    <div class="month q2 current">
+      <div class="month-num">06</div>
+      <div class="month-name">Jun</div>
+    </div>
+    <div class="month q3">
+      <div class="month-num">07</div>
+      <div class="month-name">Jul</div>
+    </div>
+    <div class="month q3">
+      <div class="month-num">08</div>
+      <div class="month-name">Aug</div>
+    </div>
+    <div class="month q3">
+      <div class="month-num">09</div>
+      <div class="month-name">Sep</div>
+    </div>
+    <div class="month q4">
+      <div class="month-num">10</div>
+      <div class="month-name">Oct</div>
+    </div>
+    <div class="month q4">
+      <div class="month-num">11</div>
+      <div class="month-name">Nov</div>
+    </div>
+    <div class="month q4">
+      <div class="month-num">12</div>
+      <div class="month-name">Dec</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-7: Hour by Hour Schedule ===== -->
+<div id="time-7" class="time-diagram">
+  <div class="hourly-schedule">
+    <div class="hour-row">
+      <div class="hour-label">9:00 AM</div>
+      <div class="hour-bar morning">Team Standup</div>
+    </div>
+    <div class="hour-row">
+      <div class="hour-label">10:00 AM</div>
+      <div class="hour-bar morning">Deep Work Session</div>
+    </div>
+    <div class="hour-row">
+      <div class="hour-label">11:00 AM</div>
+      <div class="hour-bar empty"></div>
+    </div>
+    <div class="hour-row">
+      <div class="hour-label">12:00 PM</div>
+      <div class="hour-bar afternoon">Lunch Break</div>
+    </div>
+    <div class="hour-row">
+      <div class="hour-label">1:00 PM</div>
+      <div class="hour-bar afternoon">Client Meeting</div>
+    </div>
+    <div class="hour-row">
+      <div class="hour-label">2:00 PM</div>
+      <div class="hour-bar evening">Review Session</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-8: Alarm Clock Times ===== -->
+<div id="time-8" class="time-diagram">
+  <div class="alarm-clocks">
+    <div class="alarm">
+      <div class="clock-face">
+        <div class="clock-bells">
+          <div class="bell"></div>
+          <div class="bell"></div>
+        </div>
+        <div class="clock-time">6:00</div>
+      </div>
+      <div class="alarm-label">Weekday</div>
+    </div>
+    <div class="alarm active">
+      <div class="clock-face">
+        <div class="clock-bells">
+          <div class="bell"></div>
+          <div class="bell"></div>
+        </div>
+        <div class="clock-time">7:30</div>
+      </div>
+      <div class="alarm-label">Active</div>
+    </div>
+    <div class="alarm">
+      <div class="clock-face">
+        <div class="clock-bells">
+          <div class="bell"></div>
+          <div class="bell"></div>
+        </div>
+        <div class="clock-time">9:00</div>
+      </div>
+      <div class="alarm-label">Weekend</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-9: Countdown Timer (3-2-1) ===== -->
+<div id="time-9" class="time-diagram">
+  <div class="countdown">
+    <div class="count-num three">3</div>
+    <div class="count-arrow">→</div>
+    <div class="count-num two">2</div>
+    <div class="count-arrow">→</div>
+    <div class="count-num one">1</div>
+    <div class="count-arrow">→</div>
+    <div class="count-num go">GO!</div>
+  </div>
+</div>
+
+<!-- ===== Template #time-10: Stopwatch Laps ===== -->
+<div id="time-10" class="time-diagram">
+  <div class="stopwatch-laps">
+    <div class="stopwatch-display">
+      <div class="stopwatch-time">02:34.56</div>
+      <div class="stopwatch-buttons">
+        <button class="sw-btn start">Start</button>
+        <button class="sw-btn stop">Stop</button>
+        <button class="sw-btn lap">Lap</button>
+      </div>
+    </div>
+    <div class="laps-list">
+      <div class="lap-item">
+        <span class="lap-num">Lap 1</span>
+        <span class="lap-time">00:45.23</span>
+      </div>
+      <div class="lap-item">
+        <span class="lap-num">Lap 2</span>
+        <span class="lap-time">00:48.91</span>
+      </div>
+      <div class="lap-item">
+        <span class="lap-num">Lap 3</span>
+        <span class="lap-time">01:00.42</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-11: Duration Comparison Bars ===== -->
+<div id="time-11" class="time-diagram">
+  <div class="duration-chart">
+    <div class="duration-item">
+      <div class="duration-label">Quick Task</div>
+      <div class="duration-bar-container">
+        <div class="duration-bar short">15 min</div>
+      </div>
+    </div>
+    <div class="duration-item">
+      <div class="duration-label">Meeting</div>
+      <div class="duration-bar-container">
+        <div class="duration-bar medium">1 hour</div>
+      </div>
+    </div>
+    <div class="duration-item">
+      <div class="duration-label">Workshop</div>
+      <div class="duration-bar-container">
+        <div class="duration-bar long">3 hours</div>
+      </div>
+    </div>
+    <div class="duration-item">
+      <div class="duration-label">Full Day</div>
+      <div class="duration-bar-container">
+        <div class="duration-bar very-long">8 hours</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-12: Age Progression ===== -->
+<div id="time-12" class="time-diagram">
+  <div class="age-progression">
+    <div class="age-stage baby">
+      <div class="age-figure">
+        <div class="age-head"></div>
+        <div class="age-body"></div>
+      </div>
+      <div class="age-label">Baby</div>
+      <div class="age-years">0-2</div>
+    </div>
+    <div class="age-stage child">
+      <div class="age-figure">
+        <div class="age-head"></div>
+        <div class="age-body"></div>
+      </div>
+      <div class="age-label">Child</div>
+      <div class="age-years">3-12</div>
+    </div>
+    <div class="age-stage teen">
+      <div class="age-figure">
+        <div class="age-head"></div>
+        <div class="age-body"></div>
+      </div>
+      <div class="age-label">Teen</div>
+      <div class="age-years">13-19</div>
+    </div>
+    <div class="age-stage adult">
+      <div class="age-figure">
+        <div class="age-head"></div>
+        <div class="age-body"></div>
+      </div>
+      <div class="age-label">Adult</div>
+      <div class="age-years">20-59</div>
+    </div>
+    <div class="age-stage elder">
+      <div class="age-figure">
+        <div class="age-head"></div>
+        <div class="age-body"></div>
+      </div>
+      <div class="age-label">Elder</div>
+      <div class="age-years">60+</div>
+    </div>
+    <div class="timeline-bar"></div>
+  </div>
+</div>
+
+<!-- ===== Template #time-13: Historical Era Timeline ===== -->
+<div id="time-13" class="time-diagram">
+  <div class="era-timeline">
+    <div class="era-line">
+      <div class="era-segment ancient"></div>
+      <div class="era-segment medieval"></div>
+      <div class="era-segment renaissance"></div>
+      <div class="era-segment modern"></div>
+      <div class="era-segment contemporary"></div>
+    </div>
+    <div class="era-labels">
+      <div class="era-label ancient">Ancient<br>3000BC-500AD</div>
+      <div class="era-label medieval">Medieval<br>500-1500</div>
+      <div class="era-label renaissance">Renaissance<br>1500-1700</div>
+      <div class="era-label modern">Modern<br>1700-1950</div>
+      <div class="era-label contemporary">Now<br>1950+</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-14: Project Deadline Tracker ===== -->
+<div id="time-14" class="time-diagram">
+  <div class="deadline-tracker">
+    <div class="deadline-header">
+      <div class="deadline-title">Project Alpha</div>
+      <div class="deadline-date">Due: Dec 31</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 65%;">
+        <div class="progress-marker">65%</div>
+      </div>
+    </div>
+    <div class="milestone-dots">
+      <div class="milestone done">
+        <div class="milestone-dot"></div>
+        <div class="milestone-label">Planning</div>
+      </div>
+      <div class="milestone done">
+        <div class="milestone-dot"></div>
+        <div class="milestone-label">Design</div>
+      </div>
+      <div class="milestone current">
+        <div class="milestone-dot"></div>
+        <div class="milestone-label">Development</div>
+      </div>
+      <div class="milestone pending">
+        <div class="milestone-dot"></div>
+        <div class="milestone-label">Testing</div>
+      </div>
+      <div class="milestone pending">
+        <div class="milestone-dot"></div>
+        <div class="milestone-label">Launch</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-15: Event Schedule Cards ===== -->
+<div id="time-15" class="time-diagram">
+  <div class="event-schedule">
+    <div class="event-card meeting">
+      <div class="event-time">
+        <div class="event-hour">9:00</div>
+        <div class="event-ampm">AM</div>
+      </div>
+      <div class="event-details">
+        <div class="event-title">Team Standup</div>
+        <div class="event-location">Conference Room A</div>
+      </div>
+      <div class="event-duration">30m</div>
+    </div>
+    <div class="event-card deadline">
+      <div class="event-time">
+        <div class="event-hour">11:00</div>
+        <div class="event-ampm">AM</div>
+      </div>
+      <div class="event-details">
+        <div class="event-title">Report Deadline</div>
+        <div class="event-location">Submit online</div>
+      </div>
+      <div class="event-duration">Due</div>
+    </div>
+    <div class="event-card break">
+      <div class="event-time">
+        <div class="event-hour">12:30</div>
+        <div class="event-ampm">PM</div>
+      </div>
+      <div class="event-details">
+        <div class="event-title">Lunch Break</div>
+        <div class="event-location">Cafeteria</div>
+      </div>
+      <div class="event-duration">1h</div>
+    </div>
+    <div class="event-card event">
+      <div class="event-time">
+        <div class="event-hour">3:00</div>
+        <div class="event-ampm">PM</div>
+      </div>
+      <div class="event-details">
+        <div class="event-title">Workshop</div>
+        <div class="event-location">Training Center</div>
+      </div>
+      <div class="event-duration">2h</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-16: Meeting Time Slots ===== -->
+<div id="time-16" class="time-diagram">
+  <div class="time-slots">
+    <div class="slot available">
+      <div class="slot-time">9:00</div>
+      <div class="slot-status">Available</div>
+    </div>
+    <div class="slot booked">
+      <div class="slot-time">9:30</div>
+      <div class="slot-status">Booked</div>
+    </div>
+    <div class="slot available">
+      <div class="slot-time">10:00</div>
+      <div class="slot-status">Available</div>
+    </div>
+    <div class="slot selected">
+      <div class="slot-time">10:30</div>
+      <div class="slot-status">Selected</div>
+    </div>
+    <div class="slot available">
+      <div class="slot-time">11:00</div>
+      <div class="slot-status">Available</div>
+    </div>
+    <div class="slot booked">
+      <div class="slot-time">11:30</div>
+      <div class="slot-status">Booked</div>
+    </div>
+    <div class="slot booked">
+      <div class="slot-time">12:00</div>
+      <div class="slot-status">Booked</div>
+    </div>
+    <div class="slot available">
+      <div class="slot-time">12:30</div>
+      <div class="slot-status">Available</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-17: Daily Routine Icons ===== -->
+<div id="time-17" class="time-diagram">
+  <div class="daily-routine">
+    <div class="routine-line"></div>
+    <div class="routine-item wake">
+      <div class="routine-icon">🌅</div>
+      <div class="routine-time">6:00</div>
+      <div class="routine-label">Wake Up</div>
+    </div>
+    <div class="routine-item breakfast">
+      <div class="routine-icon">🍳</div>
+      <div class="routine-time">7:00</div>
+      <div class="routine-label">Breakfast</div>
+    </div>
+    <div class="routine-item work">
+      <div class="routine-icon">💼</div>
+      <div class="routine-time">9:00</div>
+      <div class="routine-label">Work</div>
+    </div>
+    <div class="routine-item lunch">
+      <div class="routine-icon">🥗</div>
+      <div class="routine-time">12:00</div>
+      <div class="routine-label">Lunch</div>
+    </div>
+    <div class="routine-item exercise">
+      <div class="routine-icon">🏃</div>
+      <div class="routine-time">18:00</div>
+      <div class="routine-label">Exercise</div>
+    </div>
+    <div class="routine-item dinner">
+      <div class="routine-icon">🍽️</div>
+      <div class="routine-time">19:00</div>
+      <div class="routine-label">Dinner</div>
+    </div>
+    <div class="routine-item sleep">
+      <div class="routine-icon">😴</div>
+      <div class="routine-time">22:00</div>
+      <div class="routine-label">Sleep</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-18: Weekly Planner Grid ===== -->
+<div id="time-18" class="time-diagram">
+  <div class="weekly-planner">
+    <div class="planner-header corner"></div>
+    <div class="planner-header">Mon</div>
+    <div class="planner-header">Tue</div>
+    <div class="planner-header">Wed</div>
+    <div class="planner-header">Thu</div>
+    <div class="planner-header">Fri</div>
+    <div class="planner-header">Sat</div>
+    <div class="planner-header">Sun</div>
+
+    <div class="planner-time">9:00</div>
+    <div class="planner-cell has-event pink">Meeting</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell has-event blue">Call</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell has-event pink">Meeting</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell"></div>
+
+    <div class="planner-time">12:00</div>
+    <div class="planner-cell has-event green">Lunch</div>
+    <div class="planner-cell has-event green">Lunch</div>
+    <div class="planner-cell has-event green">Lunch</div>
+    <div class="planner-cell has-event green">Lunch</div>
+    <div class="planner-cell has-event green">Lunch</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell"></div>
+
+    <div class="planner-time">15:00</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell has-event purple">Workshop</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell has-event yellow">Review</div>
+    <div class="planner-cell"></div>
+    <div class="planner-cell has-event blue">Gym</div>
+    <div class="planner-cell"></div>
+  </div>
+</div>
+
+<!-- ===== Template #time-19: Monthly Calendar Blocks ===== -->
+<div id="time-19" class="time-diagram">
+  <div class="monthly-calendar">
+    <div class="calendar-header">
+      <div class="month-nav">◀</div>
+      <div class="month-name">January 2026</div>
+      <div class="month-nav">▶</div>
+    </div>
+    <div class="calendar-days">
+      <div class="day-header">Sun</div>
+      <div class="day-header">Mon</div>
+      <div class="day-header">Tue</div>
+      <div class="day-header">Wed</div>
+      <div class="day-header">Thu</div>
+      <div class="day-header">Fri</div>
+      <div class="day-header">Sat</div>
+
+      <div class="day-cell other-month">28</div>
+      <div class="day-cell other-month">29</div>
+      <div class="day-cell other-month">30</div>
+      <div class="day-cell other-month">31</div>
+      <div class="day-cell">1</div>
+      <div class="day-cell">2</div>
+      <div class="day-cell">3</div>
+
+      <div class="day-cell">4</div>
+      <div class="day-cell">5</div>
+      <div class="day-cell">6</div>
+      <div class="day-cell">7</div>
+      <div class="day-cell today">8</div>
+      <div class="day-cell has-event">9</div>
+      <div class="day-cell">10</div>
+
+      <div class="day-cell">11</div>
+      <div class="day-cell">12</div>
+      <div class="day-cell has-event">13</div>
+      <div class="day-cell">14</div>
+      <div class="day-cell">15</div>
+      <div class="day-cell">16</div>
+      <div class="day-cell">17</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-20: Yearly Milestone Markers ===== -->
+<div id="time-20" class="time-diagram">
+  <div class="yearly-milestones">
+    <div class="year-line">
+      <div class="milestone-marker q1">Q1</div>
+      <div class="milestone-marker q2">Q2</div>
+      <div class="milestone-marker q3">Q3</div>
+      <div class="milestone-marker q4">Q4</div>
+    </div>
+    <div class="milestone-info q1">
+      <div class="milestone-title">Launch</div>
+      <div class="milestone-date">Mar 15</div>
+    </div>
+    <div class="milestone-info q2">
+      <div class="milestone-title">Expand</div>
+      <div class="milestone-date">Jun 1</div>
+    </div>
+    <div class="milestone-info q3">
+      <div class="milestone-title">Scale</div>
+      <div class="milestone-date">Sep 30</div>
+    </div>
+    <div class="milestone-info q4">
+      <div class="milestone-title">Review</div>
+      <div class="milestone-date">Dec 15</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-21: Century Timeline ===== -->
+<div id="time-21" class="time-diagram">
+  <div class="century-timeline">
+    <div class="century-row">
+      <div class="century-label">19th Century</div>
+      <div class="century-bar c19">
+        <div class="century-events">
+          <span class="century-event">Industrial Rev.</span>
+          <span class="century-event">Railways</span>
+        </div>
+      </div>
+    </div>
+    <div class="century-row">
+      <div class="century-label">20th Century</div>
+      <div class="century-bar c20">
+        <div class="century-events">
+          <span class="century-event">World Wars</span>
+          <span class="century-event">Space Age</span>
+          <span class="century-event">Internet</span>
+        </div>
+      </div>
+    </div>
+    <div class="century-row">
+      <div class="century-label">21st Century</div>
+      <div class="century-bar c21">
+        <div class="century-events">
+          <span class="century-event">Social Media</span>
+          <span class="century-event">AI Era</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-22: Generation Comparison ===== -->
+<div id="time-22" class="time-diagram">
+  <div class="generations">
+    <div class="generation boomer">
+      <div class="gen-icon">📺</div>
+      <div class="gen-name">Boomers</div>
+      <div class="gen-years">1946-1964</div>
+      <div class="gen-trait">Traditional</div>
+    </div>
+    <div class="generation genx">
+      <div class="gen-icon">🎸</div>
+      <div class="gen-name">Gen X</div>
+      <div class="gen-years">1965-1980</div>
+      <div class="gen-trait">Independent</div>
+    </div>
+    <div class="generation millennial">
+      <div class="gen-icon">💻</div>
+      <div class="gen-name">Millennials</div>
+      <div class="gen-years">1981-1996</div>
+      <div class="gen-trait">Digital Native</div>
+    </div>
+    <div class="generation genz">
+      <div class="gen-icon">📱</div>
+      <div class="gen-name">Gen Z</div>
+      <div class="gen-years">1997-2012</div>
+      <div class="gen-trait">Social First</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-23: Era Transition Arrows ===== -->
+<div id="time-23" class="time-diagram">
+  <div class="era-transitions">
+    <div class="era-box stone">
+      <div class="era-name">Stone Age</div>
+      <div class="era-period">3.4M - 6000 BC</div>
+    </div>
+    <div class="transition-arrow">→</div>
+    <div class="era-box bronze">
+      <div class="era-name">Bronze Age</div>
+      <div class="era-period">3300 - 1200 BC</div>
+    </div>
+    <div class="transition-arrow">→</div>
+    <div class="era-box iron">
+      <div class="era-name">Iron Age</div>
+      <div class="era-period">1200 BC - 1 AD</div>
+    </div>
+    <div class="transition-arrow">→</div>
+    <div class="era-box industrial">
+      <div class="era-name">Industrial</div>
+      <div class="era-period">1760 - 1840</div>
+    </div>
+    <div class="transition-arrow">→</div>
+    <div class="era-box digital">
+      <div class="era-name">Digital</div>
+      <div class="era-period">1970 - Now</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-24: Season Cycle Wheel ===== -->
+<div id="time-24" class="time-diagram">
+  <div class="season-wheel">
+    <div class="wheel-arrows"></div>
+    <div class="wheel-center">Year<br>Cycle</div>
+    <div class="wheel-segment spring">
+      <div class="segment-icon">🌸</div>
+      <div class="segment-label">Spring</div>
+    </div>
+    <div class="wheel-segment summer">
+      <div class="segment-icon">☀️</div>
+      <div class="segment-label">Summer</div>
+    </div>
+    <div class="wheel-segment fall">
+      <div class="segment-icon">🍂</div>
+      <div class="segment-label">Fall</div>
+    </div>
+    <div class="wheel-segment winter">
+      <div class="segment-icon">❄️</div>
+      <div class="segment-label">Winter</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-25: Day/Night Cycle ===== -->
+<div id="time-25" class="time-diagram">
+  <div class="day-night-cycle">
+    <div class="cycle-half day">
+      <div class="cycle-icon">☀️</div>
+      <div class="cycle-label">Day</div>
+      <div class="cycle-time">6:00 AM - 6:00 PM</div>
+    </div>
+    <div class="cycle-divider"></div>
+    <div class="sun-moon"></div>
+    <div class="cycle-half night">
+      <div class="cycle-icon">🌙</div>
+      <div class="cycle-label">Night</div>
+      <div class="cycle-time">6:00 PM - 6:00 AM</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-26: Meal Time Schedule ===== -->
+<div id="time-26" class="time-diagram">
+  <div class="meal-schedule">
+    <div class="meal-connector"></div>
+    <div class="meal breakfast">
+      <div class="meal-plate">🍳</div>
+      <div class="meal-time">7:00</div>
+      <div class="meal-name">Breakfast</div>
+    </div>
+    <div class="meal lunch">
+      <div class="meal-plate">🥗</div>
+      <div class="meal-time">12:00</div>
+      <div class="meal-name">Lunch</div>
+    </div>
+    <div class="meal dinner">
+      <div class="meal-plate">🍽️</div>
+      <div class="meal-time">19:00</div>
+      <div class="meal-name">Dinner</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-27: School Period Timetable ===== -->
+<div id="time-27" class="time-diagram">
+  <div class="school-timetable">
+    <div class="timetable-header">
+      <div>Period</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+    </div>
+    <div class="timetable-row">
+      <div class="period-num">1</div>
+      <div class="subject-cell math">Math</div>
+      <div class="subject-cell english">English</div>
+      <div class="subject-cell science">Science</div>
+      <div class="subject-cell history">History</div>
+      <div class="subject-cell art">Art</div>
+    </div>
+    <div class="timetable-row">
+      <div class="period-num">2</div>
+      <div class="subject-cell english">English</div>
+      <div class="subject-cell math">Math</div>
+      <div class="subject-cell pe">PE</div>
+      <div class="subject-cell science">Science</div>
+      <div class="subject-cell math">Math</div>
+    </div>
+    <div class="timetable-row">
+      <div class="period-num">3</div>
+      <div class="subject-cell science">Science</div>
+      <div class="subject-cell history">History</div>
+      <div class="subject-cell english">English</div>
+      <div class="subject-cell pe">PE</div>
+      <div class="subject-cell english">English</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-28: Work Shift Schedule ===== -->
+<div id="time-28" class="time-diagram">
+  <div class="shift-schedule">
+    <div class="time-markers">
+      <span>6AM</span>
+      <span>9AM</span>
+      <span>12PM</span>
+      <span>3PM</span>
+      <span>6PM</span>
+      <span>9PM</span>
+      <span>12AM</span>
+    </div>
+    <div class="shift-row">
+      <div class="shift-name">Alice</div>
+      <div class="shift-bar-container">
+        <div class="shift-bar morning">Morning</div>
+      </div>
+    </div>
+    <div class="shift-row">
+      <div class="shift-name">Bob</div>
+      <div class="shift-bar-container">
+        <div class="shift-bar afternoon">Afternoon</div>
+      </div>
+    </div>
+    <div class="shift-row">
+      <div class="shift-name">Carol</div>
+      <div class="shift-bar-container">
+        <div class="shift-bar night">Night</div>
+      </div>
+    </div>
+    <div class="shift-row">
+      <div class="shift-name">Dave</div>
+      <div class="shift-bar-container">
+        <div class="shift-bar full">Full Day</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-29: Sleep/Wake Cycle ===== -->
+<div id="time-29" class="time-diagram">
+  <div class="sleep-cycle">
+    <div class="cycle-display">
+      <div class="awake-zone" style="flex: 2;">☀️</div>
+      <div class="sleep-zone" style="flex: 1;">🌙</div>
+    </div>
+    <div class="cycle-info">
+      <div class="cycle-stat sleep-stat">
+        <div class="stat-icon">😴</div>
+        <div class="stat-value">8h</div>
+        <div class="stat-label">Sleep Time</div>
+      </div>
+      <div class="cycle-stat wake-stat">
+        <div class="stat-icon">⏰</div>
+        <div class="stat-value">6:30</div>
+        <div class="stat-label">Wake Time</div>
+      </div>
+      <div class="cycle-stat quality-stat">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value">85%</div>
+        <div class="stat-label">Quality</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Template #time-30: Holiday Countdown ===== -->
+<div id="time-30" class="time-diagram">
+  <div class="holiday-countdown">
+    <div class="holiday-icon">🎄</div>
+    <div class="holiday-title">Countdown To</div>
+    <div class="holiday-name">Christmas 2026</div>
+    <div class="countdown-units">
+      <div class="countdown-unit">
+        <div class="unit-value">351</div>
+        <div class="unit-label">Days</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="unit-value">14</div>
+        <div class="unit-label">Hours</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="unit-value">32</div>
+        <div class="unit-label">Minutes</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="unit-value">08</div>
+        <div class="unit-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbols & Signs - CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-name {
+            font-size: 12px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Base symbol container */
+        .symbol {
+            width: 70px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* ========================================
+           SYMBOL-01: Checkmark in Circle
+           ======================================== */
+        #symbol-01 .circle {
+            width: 70px;
+            height: 70px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #symbol-01 .check {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 16px;
+            transform: translate(-50%, -60%) rotate(-45deg);
+        }
+
+        #symbol-01 .check::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        #symbol-01 .check::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 5px;
+            height: 16px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        #symbol-01:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           SYMBOL-02: X in Circle
+           ======================================== */
+        #symbol-02 .circle {
+            width: 70px;
+            height: 70px;
+            background: #F44336;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #symbol-02 .x-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 5px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        #symbol-02 .x-line:first-child {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        #symbol-02 .x-line:last-child {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        #symbol-02:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* ========================================
+           SYMBOL-03: Warning Triangle
+           ======================================== */
+        #symbol-03 .triangle {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 60px solid #FF9800;
+            position: relative;
+        }
+
+        #symbol-03 .exclamation {
+            position: absolute;
+            top: 22px;
+            left: -3px;
+            width: 6px;
+            height: 20px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        #symbol-03 .exclamation::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        #symbol-03:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ========================================
+           SYMBOL-04: Info Circle
+           ======================================== */
+        #symbol-04 .circle {
+            width: 70px;
+            height: 70px;
+            background: #2196F3;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #symbol-04 .info-dot {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 7px;
+            height: 7px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        #symbol-04 .info-line {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 24px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        #symbol-04:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           SYMBOL-05: Stop Sign
+           ======================================== */
+        #symbol-05 .octagon {
+            width: 70px;
+            height: 70px;
+            background: #D32F2F;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #symbol-05 .stop-text {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        #symbol-05:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           SYMBOL-06: Go/Green Light
+           ======================================== */
+        #symbol-06 .light-box {
+            width: 30px;
+            height: 70px;
+            background: #333;
+            border-radius: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 6px 0;
+        }
+
+        #symbol-06 .light {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #555;
+        }
+
+        #symbol-06 .light.green {
+            background: #4CAF50;
+            box-shadow: 0 0 10px #4CAF50;
+        }
+
+        #symbol-06:hover {
+            transform: scale(1.1);
+        }
+
+        #symbol-06:hover .light.green {
+            box-shadow: 0 0 20px #4CAF50;
+        }
+
+        /* ========================================
+           SYMBOL-07: Pause Button
+           ======================================== */
+        #symbol-07 .circle {
+            width: 70px;
+            height: 70px;
+            background: #607D8B;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #symbol-07 .bar {
+            width: 8px;
+            height: 28px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        #symbol-07:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           SYMBOL-08: Play Button
+           ======================================== */
+        #symbol-08 .circle {
+            width: 70px;
+            height: 70px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #symbol-08 .play {
+            position: absolute;
+            top: 50%;
+            left: 54%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            border-left: 22px solid #fff;
+        }
+
+        #symbol-08:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           SYMBOL-09: Refresh/Reload
+           ======================================== */
+        #symbol-09 .arrow-circle {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #2196F3;
+            border-radius: 50%;
+            border-right-color: transparent;
+            position: relative;
+            margin: 5px;
+        }
+
+        #symbol-09 .arrow-head {
+            position: absolute;
+            top: -4px;
+            right: 2px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 12px solid #2196F3;
+            transform: rotate(45deg);
+        }
+
+        #symbol-09:hover {
+            transform: rotate(180deg);
+        }
+
+        /* ========================================
+           SYMBOL-10: Download Arrow
+           ======================================== */
+        #symbol-10 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-10 .arrow-down {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 35px;
+            background: #673AB7;
+        }
+
+        #symbol-10 .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 16px solid transparent;
+            border-right: 16px solid transparent;
+            border-top: 16px solid #673AB7;
+        }
+
+        #symbol-10 .base {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 6px;
+            background: #673AB7;
+            border-radius: 2px;
+        }
+
+        #symbol-10:hover {
+            transform: translateY(5px);
+        }
+
+        /* ========================================
+           SYMBOL-11: Upload Arrow
+           ======================================== */
+        #symbol-11 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-11 .arrow-up {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 35px;
+            background: #009688;
+        }
+
+        #symbol-11 .arrow-up::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 16px solid transparent;
+            border-right: 16px solid transparent;
+            border-bottom: 16px solid #009688;
+        }
+
+        #symbol-11 .base {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 6px;
+            background: #009688;
+            border-radius: 2px;
+        }
+
+        #symbol-11:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ========================================
+           SYMBOL-12: Share Icon
+           ======================================== */
+        #symbol-12 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-12 .node {
+            width: 16px;
+            height: 16px;
+            background: #3F51B5;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        #symbol-12 .node:nth-child(1) {
+            top: 10px;
+            right: 10px;
+        }
+
+        #symbol-12 .node:nth-child(2) {
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        #symbol-12 .node:nth-child(3) {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        #symbol-12 .line {
+            position: absolute;
+            height: 3px;
+            background: #3F51B5;
+            transform-origin: left center;
+        }
+
+        #symbol-12 .line:nth-child(4) {
+            width: 30px;
+            top: 26px;
+            left: 22px;
+            transform: rotate(-30deg);
+        }
+
+        #symbol-12 .line:nth-child(5) {
+            width: 30px;
+            bottom: 26px;
+            left: 22px;
+            transform: rotate(30deg);
+        }
+
+        #symbol-12:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           SYMBOL-13: Like/Thumbs Up
+           ======================================== */
+        #symbol-13 .hand {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-13 .thumb {
+            position: absolute;
+            bottom: 25px;
+            left: 22px;
+            width: 12px;
+            height: 35px;
+            background: #FF5722;
+            border-radius: 6px;
+            transform: rotate(-15deg);
+        }
+
+        #symbol-13 .palm {
+            position: absolute;
+            bottom: 10px;
+            left: 30px;
+            width: 28px;
+            height: 22px;
+            background: #FF5722;
+            border-radius: 4px;
+        }
+
+        #symbol-13 .fingers {
+            position: absolute;
+            bottom: 30px;
+            left: 32px;
+            width: 24px;
+            height: 20px;
+            background: #FF5722;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #symbol-13:hover {
+            transform: scale(1.1) rotate(-10deg);
+        }
+
+        /* ========================================
+           SYMBOL-14: Bookmark
+           ======================================== */
+        #symbol-14 .bookmark {
+            width: 40px;
+            height: 60px;
+            background: #E91E63;
+            position: relative;
+            margin: 5px auto;
+            border-radius: 4px 4px 0 0;
+        }
+
+        #symbol-14 .bookmark::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid #E91E63;
+            border-right: 20px solid #E91E63;
+            border-bottom: 15px solid transparent;
+        }
+
+        #symbol-14:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ========================================
+           SYMBOL-15: Pin/Location
+           ======================================== */
+        #symbol-15 .pin {
+            width: 40px;
+            height: 55px;
+            background: #F44336;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        #symbol-15 .pin::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        #symbol-15 .pin::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 18px solid #F44336;
+        }
+
+        #symbol-15:hover {
+            transform: translateY(-8px);
+        }
+
+        /* ========================================
+           SYMBOL-16: Flag
+           ======================================== */
+        #symbol-16 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-16 .pole {
+            position: absolute;
+            left: 18px;
+            top: 5px;
+            width: 5px;
+            height: 60px;
+            background: #795548;
+            border-radius: 2px;
+        }
+
+        #symbol-16 .flag-cloth {
+            position: absolute;
+            left: 23px;
+            top: 5px;
+            width: 35px;
+            height: 28px;
+            background: #F44336;
+            clip-path: polygon(0 0, 100% 15%, 85% 50%, 100% 85%, 0 100%);
+        }
+
+        #symbol-16:hover .flag-cloth {
+            transform: scaleX(1.1);
+            transform-origin: left;
+        }
+
+        /* ========================================
+           SYMBOL-17: Recycle Symbol
+           ======================================== */
+        #symbol-17 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-17 .arrow {
+            position: absolute;
+            width: 20px;
+            height: 8px;
+            background: #4CAF50;
+        }
+
+        #symbol-17 .arrow::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        #symbol-17 .arrow:nth-child(1) {
+            top: 12px;
+            left: 25px;
+            transform: rotate(-30deg);
+        }
+
+        #symbol-17 .arrow:nth-child(1)::after {
+            right: -8px;
+            top: -4px;
+            border-left: 12px solid #4CAF50;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        #symbol-17 .arrow:nth-child(2) {
+            top: 40px;
+            left: 8px;
+            transform: rotate(90deg);
+        }
+
+        #symbol-17 .arrow:nth-child(2)::after {
+            right: -8px;
+            top: -4px;
+            border-left: 12px solid #4CAF50;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        #symbol-17 .arrow:nth-child(3) {
+            top: 40px;
+            right: 8px;
+            transform: rotate(-150deg);
+        }
+
+        #symbol-17 .arrow:nth-child(3)::after {
+            right: -8px;
+            top: -4px;
+            border-left: 12px solid #4CAF50;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        #symbol-17:hover {
+            transform: rotate(120deg);
+        }
+
+        /* ========================================
+           SYMBOL-18: Power Button
+           ======================================== */
+        #symbol-18 .circle {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #333;
+            border-radius: 50%;
+            border-top-color: transparent;
+            position: relative;
+            margin: 5px;
+        }
+
+        #symbol-18 .line {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 28px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        #symbol-18:hover {
+            transform: scale(1.1);
+        }
+
+        #symbol-18:hover .circle {
+            border-color: #4CAF50;
+            border-top-color: transparent;
+        }
+
+        #symbol-18:hover .line {
+            background: #4CAF50;
+        }
+
+        /* ========================================
+           SYMBOL-19: Volume Speaker
+           ======================================== */
+        #symbol-19 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-19 .speaker {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 18px;
+            background: #607D8B;
+        }
+
+        #symbol-19 .speaker::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-top: 17px solid transparent;
+            border-bottom: 17px solid transparent;
+            border-left: 16px solid #607D8B;
+        }
+
+        #symbol-19 .wave {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 4px solid #607D8B;
+            border-left: none;
+            border-radius: 0 50% 50% 0;
+        }
+
+        #symbol-19 .wave:nth-child(2) {
+            left: 40px;
+            width: 8px;
+            height: 20px;
+        }
+
+        #symbol-19 .wave:nth-child(3) {
+            left: 50px;
+            width: 10px;
+            height: 32px;
+        }
+
+        #symbol-19:hover .wave {
+            animation: pulse 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        /* ========================================
+           SYMBOL-20: Mute Icon
+           ======================================== */
+        #symbol-20 .container {
+            width: 70px;
+            height: 70px;
+            position: relative;
+        }
+
+        #symbol-20 .speaker {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 18px;
+            background: #9E9E9E;
+        }
+
+        #symbol-20 .speaker::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-top: 17px solid transparent;
+            border-bottom: 17px solid transparent;
+            border-left: 16px solid #9E9E9E;
+        }
+
+        #symbol-20 .mute-line {
+            position: absolute;
+            top: 50%;
+            left: 42px;
+            width: 22px;
+            height: 4px;
+            background: #F44336;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        #symbol-20 .mute-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 22px;
+            height: 4px;
+            background: #F44336;
+            transform: rotate(-90deg);
+        }
+
+        #symbol-20:hover {
+            transform: scale(1.1);
+        }
+
+        #symbol-20:hover .mute-line {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateY(-50%) rotate(45deg); }
+            25% { transform: translateY(-50%) rotate(50deg); }
+            75% { transform: translateY(-50%) rotate(40deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Symbols & Signs - CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- Symbol 01: Checkmark in Circle -->
+        <div class="item">
+            <div class="symbol" id="symbol-01">
+                <div class="circle">
+                    <div class="check"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-01</span>
+            <span class="item-name">Checkmark</span>
+        </div>
+
+        <!-- Symbol 02: X in Circle -->
+        <div class="item">
+            <div class="symbol" id="symbol-02">
+                <div class="circle">
+                    <div class="x-line"></div>
+                    <div class="x-line"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-02</span>
+            <span class="item-name">X / Close</span>
+        </div>
+
+        <!-- Symbol 03: Warning Triangle -->
+        <div class="item">
+            <div class="symbol" id="symbol-03">
+                <div class="triangle">
+                    <div class="exclamation"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-03</span>
+            <span class="item-name">Warning</span>
+        </div>
+
+        <!-- Symbol 04: Info Circle -->
+        <div class="item">
+            <div class="symbol" id="symbol-04">
+                <div class="circle">
+                    <div class="info-dot"></div>
+                    <div class="info-line"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-04</span>
+            <span class="item-name">Info</span>
+        </div>
+
+        <!-- Symbol 05: Stop Sign -->
+        <div class="item">
+            <div class="symbol" id="symbol-05">
+                <div class="octagon">
+                    <span class="stop-text">STOP</span>
+                </div>
+            </div>
+            <span class="item-label">symbol-05</span>
+            <span class="item-name">Stop Sign</span>
+        </div>
+
+        <!-- Symbol 06: Go/Green Light -->
+        <div class="item">
+            <div class="symbol" id="symbol-06">
+                <div class="light-box">
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light green"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-06</span>
+            <span class="item-name">Green Light</span>
+        </div>
+
+        <!-- Symbol 07: Pause Button -->
+        <div class="item">
+            <div class="symbol" id="symbol-07">
+                <div class="circle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-07</span>
+            <span class="item-name">Pause</span>
+        </div>
+
+        <!-- Symbol 08: Play Button -->
+        <div class="item">
+            <div class="symbol" id="symbol-08">
+                <div class="circle">
+                    <div class="play"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-08</span>
+            <span class="item-name">Play</span>
+        </div>
+
+        <!-- Symbol 09: Refresh/Reload -->
+        <div class="item">
+            <div class="symbol" id="symbol-09">
+                <div class="arrow-circle">
+                    <div class="arrow-head"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-09</span>
+            <span class="item-name">Refresh</span>
+        </div>
+
+        <!-- Symbol 10: Download Arrow -->
+        <div class="item">
+            <div class="symbol" id="symbol-10">
+                <div class="container">
+                    <div class="arrow-down"></div>
+                    <div class="base"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-10</span>
+            <span class="item-name">Download</span>
+        </div>
+
+        <!-- Symbol 11: Upload Arrow -->
+        <div class="item">
+            <div class="symbol" id="symbol-11">
+                <div class="container">
+                    <div class="arrow-up"></div>
+                    <div class="base"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-11</span>
+            <span class="item-name">Upload</span>
+        </div>
+
+        <!-- Symbol 12: Share Icon -->
+        <div class="item">
+            <div class="symbol" id="symbol-12">
+                <div class="container">
+                    <div class="node"></div>
+                    <div class="node"></div>
+                    <div class="node"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-12</span>
+            <span class="item-name">Share</span>
+        </div>
+
+        <!-- Symbol 13: Like/Thumbs Up -->
+        <div class="item">
+            <div class="symbol" id="symbol-13">
+                <div class="hand">
+                    <div class="thumb"></div>
+                    <div class="palm"></div>
+                    <div class="fingers"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-13</span>
+            <span class="item-name">Thumbs Up</span>
+        </div>
+
+        <!-- Symbol 14: Bookmark -->
+        <div class="item">
+            <div class="symbol" id="symbol-14">
+                <div class="bookmark"></div>
+            </div>
+            <span class="item-label">symbol-14</span>
+            <span class="item-name">Bookmark</span>
+        </div>
+
+        <!-- Symbol 15: Pin/Location -->
+        <div class="item">
+            <div class="symbol" id="symbol-15">
+                <div class="pin"></div>
+            </div>
+            <span class="item-label">symbol-15</span>
+            <span class="item-name">Location Pin</span>
+        </div>
+
+        <!-- Symbol 16: Flag -->
+        <div class="item">
+            <div class="symbol" id="symbol-16">
+                <div class="container">
+                    <div class="pole"></div>
+                    <div class="flag-cloth"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-16</span>
+            <span class="item-name">Flag</span>
+        </div>
+
+        <!-- Symbol 17: Recycle Symbol -->
+        <div class="item">
+            <div class="symbol" id="symbol-17">
+                <div class="container">
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-17</span>
+            <span class="item-name">Recycle</span>
+        </div>
+
+        <!-- Symbol 18: Power Button -->
+        <div class="item">
+            <div class="symbol" id="symbol-18">
+                <div class="circle">
+                    <div class="line"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-18</span>
+            <span class="item-name">Power</span>
+        </div>
+
+        <!-- Symbol 19: Volume Speaker -->
+        <div class="item">
+            <div class="symbol" id="symbol-19">
+                <div class="container">
+                    <div class="speaker"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-19</span>
+            <span class="item-name">Volume</span>
+        </div>
+
+        <!-- Symbol 20: Mute Icon -->
+        <div class="item">
+            <div class="symbol" id="symbol-20">
+                <div class="container">
+                    <div class="speaker"></div>
+                    <div class="mute-line"></div>
+                </div>
+            </div>
+            <span class="item-label">symbol-20</span>
+            <span class="item-name">Mute</span>
+        </div>
+    </div>
+</body>
+</html>

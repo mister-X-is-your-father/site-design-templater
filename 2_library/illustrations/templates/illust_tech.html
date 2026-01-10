@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & Devices - Flat Illustration Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 0.75rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-name {
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
+        /* ===== tech-01: Smartphone ===== */
+        .smartphone {
+            width: 40px;
+            height: 70px;
+            background: #4a5568;
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .smartphone::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 4px;
+            width: 32px;
+            height: 50px;
+            background: #63b3ed;
+            border-radius: 2px;
+        }
+        .smartphone::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 4px;
+            background: #718096;
+            border-radius: 2px;
+        }
+        .smartphone:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* ===== tech-02: Laptop ===== */
+        .laptop {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .laptop-screen {
+            width: 70px;
+            height: 45px;
+            background: #2d3748;
+            border-radius: 4px 4px 0 0;
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+        .laptop-screen::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 62px;
+            height: 34px;
+            background: #68d391;
+            border-radius: 2px;
+        }
+        .laptop-base {
+            width: 80px;
+            height: 6px;
+            background: #a0aec0;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .laptop:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ===== tech-03: Desktop Computer ===== */
+        .desktop {
+            width: 80px;
+            height: 75px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .desktop-monitor {
+            width: 70px;
+            height: 50px;
+            background: #2d3748;
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+        .desktop-monitor::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 62px;
+            height: 38px;
+            background: #fc8181;
+            border-radius: 2px;
+        }
+        .desktop-stand {
+            width: 16px;
+            height: 12px;
+            background: #a0aec0;
+            position: absolute;
+            bottom: 8px;
+            left: 32px;
+        }
+        .desktop-base {
+            width: 30px;
+            height: 5px;
+            background: #a0aec0;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 3px;
+            left: 25px;
+        }
+        .desktop:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== tech-04: Tablet ===== */
+        .tablet {
+            width: 60px;
+            height: 75px;
+            background: #2d3748;
+            border-radius: 6px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .tablet::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 5px;
+            width: 50px;
+            height: 55px;
+            background: #f6ad55;
+            border-radius: 2px;
+        }
+        .tablet::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #4a5568;
+            border-radius: 50%;
+        }
+        .tablet:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        /* ===== tech-05: TV ===== */
+        .tv {
+            width: 80px;
+            height: 65px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .tv-screen {
+            width: 80px;
+            height: 50px;
+            background: #1a202c;
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+        }
+        .tv-screen::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 72px;
+            height: 42px;
+            background: #9f7aea;
+            border-radius: 2px;
+        }
+        .tv-leg-left {
+            width: 4px;
+            height: 12px;
+            background: #4a5568;
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            border-radius: 0 0 2px 2px;
+        }
+        .tv-leg-right {
+            width: 4px;
+            height: 12px;
+            background: #4a5568;
+            position: absolute;
+            bottom: 0;
+            right: 15px;
+            border-radius: 0 0 2px 2px;
+        }
+        .tv:hover {
+            transform: scale(1.08);
+        }
+
+        /* ===== tech-06: Camera ===== */
+        .camera {
+            width: 70px;
+            height: 50px;
+            background: #2d3748;
+            border-radius: 6px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .camera::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: #1a202c;
+            border-radius: 50%;
+            border: 4px solid #4a5568;
+        }
+        .camera::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 12px;
+            height: 8px;
+            background: #f56565;
+            border-radius: 2px;
+        }
+        .camera-flash {
+            width: 10px;
+            height: 6px;
+            background: #faf089;
+            position: absolute;
+            top: -3px;
+            left: 20px;
+            border-radius: 2px 2px 0 0;
+        }
+        .camera:hover {
+            transform: scale(1.1);
+        }
+        .camera:hover::after {
+            background: #fc8181;
+        }
+
+        /* ===== tech-07: Headphones ===== */
+        .headphones {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .headphones-band {
+            width: 50px;
+            height: 30px;
+            border: 6px solid #4a5568;
+            border-bottom: none;
+            border-radius: 30px 30px 0 0;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        .headphones-left {
+            width: 16px;
+            height: 24px;
+            background: #ed8936;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 5px;
+            left: 2px;
+        }
+        .headphones-right {
+            width: 16px;
+            height: 24px;
+            background: #ed8936;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 5px;
+            right: 2px;
+        }
+        .headphones:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* ===== tech-08: Microphone ===== */
+        .microphone {
+            width: 40px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mic-head {
+            width: 30px;
+            height: 40px;
+            background: #4a5568;
+            border-radius: 15px 15px 8px 8px;
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+        .mic-head::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 25px;
+            background: repeating-linear-gradient(
+                0deg,
+                #718096 0px,
+                #718096 2px,
+                #4a5568 2px,
+                #4a5568 4px
+            );
+            border-radius: 10px 10px 4px 4px;
+        }
+        .mic-stand {
+            width: 6px;
+            height: 30px;
+            background: #a0aec0;
+            position: absolute;
+            bottom: 8px;
+            left: 17px;
+        }
+        .mic-base {
+            width: 24px;
+            height: 6px;
+            background: #718096;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 2px;
+            left: 8px;
+        }
+        .microphone:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== tech-09: Game Controller ===== */
+        .controller {
+            width: 80px;
+            height: 50px;
+            background: #2d3748;
+            border-radius: 12px 12px 25px 25px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .controller-dpad {
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+        }
+        .controller-dpad::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 0;
+            width: 18px;
+            height: 6px;
+            background: #4a5568;
+        }
+        .controller-dpad::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 6px;
+            width: 6px;
+            height: 18px;
+            background: #4a5568;
+        }
+        .controller-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 22px;
+            height: 22px;
+        }
+        .btn-a {
+            width: 8px;
+            height: 8px;
+            background: #48bb78;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 7px;
+        }
+        .btn-b {
+            width: 8px;
+            height: 8px;
+            background: #f56565;
+            border-radius: 50%;
+            position: absolute;
+            top: 7px;
+            right: 0;
+        }
+        .btn-x {
+            width: 8px;
+            height: 8px;
+            background: #4299e1;
+            border-radius: 50%;
+            position: absolute;
+            top: 7px;
+            left: 0;
+        }
+        .btn-y {
+            width: 8px;
+            height: 8px;
+            background: #ecc94b;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 7px;
+        }
+        .controller:hover {
+            transform: rotate(-3deg) scale(1.08);
+        }
+
+        /* ===== tech-10: USB ===== */
+        .usb {
+            width: 25px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .usb-connector {
+            width: 20px;
+            height: 12px;
+            background: #a0aec0;
+            position: absolute;
+            top: 0;
+            left: 2.5px;
+            border-radius: 2px 2px 0 0;
+        }
+        .usb-connector::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 14px;
+            height: 6px;
+            background: #718096;
+            border-radius: 1px;
+        }
+        .usb-body {
+            width: 25px;
+            height: 50px;
+            background: #4299e1;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 0;
+        }
+        .usb-body::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+        .usb:hover {
+            transform: translateY(-8px);
+        }
+
+        /* ===== tech-11: WiFi Symbol ===== */
+        .wifi {
+            width: 60px;
+            height: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .wifi-dot {
+            width: 10px;
+            height: 10px;
+            background: #48bb78;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .wifi-wave1 {
+            width: 24px;
+            height: 12px;
+            border: 5px solid #48bb78;
+            border-bottom: none;
+            border-radius: 24px 24px 0 0;
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .wifi-wave2 {
+            width: 40px;
+            height: 20px;
+            border: 5px solid #48bb78;
+            border-bottom: none;
+            border-radius: 40px 40px 0 0;
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .wifi-wave3 {
+            width: 56px;
+            height: 28px;
+            border: 5px solid #48bb78;
+            border-bottom: none;
+            border-radius: 56px 56px 0 0;
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .wifi:hover {
+            transform: scale(1.15);
+        }
+        .wifi:hover .wifi-dot,
+        .wifi:hover .wifi-wave1,
+        .wifi:hover .wifi-wave2,
+        .wifi:hover .wifi-wave3 {
+            background-color: #68d391;
+            border-color: #68d391;
+        }
+
+        /* ===== tech-12: Battery ===== */
+        .battery {
+            width: 60px;
+            height: 30px;
+            background: #e2e8f0;
+            border: 3px solid #4a5568;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .battery::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 12px;
+            background: #4a5568;
+            border-radius: 0 2px 2px 0;
+        }
+        .battery-level {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 42px;
+            height: 18px;
+            background: #48bb78;
+            border-radius: 2px;
+        }
+        .battery:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== tech-13: Lightbulb ===== */
+        .lightbulb {
+            width: 45px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .bulb-glass {
+            width: 45px;
+            height: 45px;
+            background: #faf089;
+            border-radius: 50% 50% 40% 40%;
+            position: absolute;
+            top: 0;
+        }
+        .bulb-base {
+            width: 25px;
+            height: 18px;
+            background: #a0aec0;
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            border-radius: 0 0 4px 4px;
+        }
+        .bulb-base::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 25px;
+            height: 12px;
+            background: repeating-linear-gradient(
+                0deg,
+                #718096 0px,
+                #718096 3px,
+                #a0aec0 3px,
+                #a0aec0 6px
+            );
+        }
+        .lightbulb:hover {
+            transform: scale(1.1);
+        }
+        .lightbulb:hover .bulb-glass {
+            background: #fefcbf;
+            box-shadow: 0 0 20px #faf089;
+        }
+
+        /* ===== tech-14: Gear/Settings ===== */
+        .gear {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        .gear-body {
+            width: 40px;
+            height: 40px;
+            background: #718096;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .gear-body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: #e2e8f0;
+            border-radius: 50%;
+        }
+        .gear-tooth {
+            width: 10px;
+            height: 16px;
+            background: #718096;
+            position: absolute;
+            border-radius: 3px;
+        }
+        .tooth1 { top: 0; left: 25px; }
+        .tooth2 { bottom: 0; left: 25px; }
+        .tooth3 { left: 0; top: 22px; transform: rotate(90deg); }
+        .tooth4 { right: 0; top: 22px; transform: rotate(90deg); }
+        .tooth5 { top: 5px; left: 5px; transform: rotate(45deg); }
+        .tooth6 { top: 5px; right: 5px; transform: rotate(-45deg); }
+        .tooth7 { bottom: 5px; left: 5px; transform: rotate(-45deg); }
+        .tooth8 { bottom: 5px; right: 5px; transform: rotate(45deg); }
+        .gear:hover {
+            transform: rotate(45deg);
+        }
+
+        /* ===== tech-15: Clock ===== */
+        .clock {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid #4a5568;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .clock-center {
+            width: 6px;
+            height: 6px;
+            background: #f56565;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        .hour-hand {
+            width: 4px;
+            height: 16px;
+            background: #2d3748;
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+        .minute-hand {
+            width: 3px;
+            height: 22px;
+            background: #4a5568;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg);
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+        .clock:hover {
+            transform: scale(1.1);
+        }
+        .clock:hover .minute-hand {
+            animation: clockTick 0.5s ease;
+        }
+        @keyframes clockTick {
+            0% { transform: translateX(-50%) rotate(90deg); }
+            50% { transform: translateX(-50%) rotate(120deg); }
+            100% { transform: translateX(-50%) rotate(90deg); }
+        }
+
+        /* ===== tech-16: Calendar ===== */
+        .calendar {
+            width: 55px;
+            height: 60px;
+            background: white;
+            border: 3px solid #4a5568;
+            border-radius: 6px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .calendar-header {
+            width: 100%;
+            height: 16px;
+            background: #f56565;
+            border-radius: 3px 3px 0 0;
+            position: absolute;
+            top: 0;
+        }
+        .calendar-ring-left {
+            width: 6px;
+            height: 10px;
+            background: #4a5568;
+            border-radius: 3px;
+            position: absolute;
+            top: -5px;
+            left: 12px;
+        }
+        .calendar-ring-right {
+            width: 6px;
+            height: 10px;
+            background: #4a5568;
+            border-radius: 3px;
+            position: absolute;
+            top: -5px;
+            right: 12px;
+        }
+        .calendar-date {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3748;
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .calendar:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* ===== tech-17: Email Envelope ===== */
+        .envelope {
+            width: 70px;
+            height: 50px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .envelope-flap {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-top: 25px solid #cbd5e0;
+            position: absolute;
+            top: 0;
+        }
+        .envelope-inner {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 30px solid #4299e1;
+            position: absolute;
+            bottom: 0;
+        }
+        .envelope:hover {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* ===== tech-18: Notification Bell ===== */
+        .bell {
+            width: 50px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .bell-body {
+            width: 40px;
+            height: 40px;
+            background: #ecc94b;
+            border-radius: 20px 20px 5px 5px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        .bell-top {
+            width: 8px;
+            height: 8px;
+            background: #ecc94b;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 21px;
+        }
+        .bell-clapper {
+            width: 10px;
+            height: 10px;
+            background: #d69e2e;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 3px;
+            left: 20px;
+        }
+        .bell-badge {
+            width: 14px;
+            height: 14px;
+            background: #f56565;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            right: 2px;
+        }
+        .bell:hover {
+            animation: bellRing 0.4s ease;
+        }
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
+        }
+
+        /* ===== tech-19: Search Magnifier ===== */
+        .magnifier {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .magnifier-glass {
+            width: 35px;
+            height: 35px;
+            border: 6px solid #4a5568;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #ebf8ff;
+        }
+        .magnifier-handle {
+            width: 8px;
+            height: 25px;
+            background: #4a5568;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            right: 8px;
+            transform: rotate(-45deg);
+            transform-origin: top center;
+        }
+        .magnifier:hover {
+            transform: scale(1.15) rotate(-10deg);
+        }
+
+        /* ===== tech-20: Lock ===== */
+        .lock {
+            width: 45px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .lock-shackle {
+            width: 26px;
+            height: 20px;
+            border: 6px solid #4a5568;
+            border-bottom: none;
+            border-radius: 13px 13px 0 0;
+            position: absolute;
+            top: 0;
+            left: 9.5px;
+        }
+        .lock-body {
+            width: 40px;
+            height: 32px;
+            background: #ecc94b;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 2.5px;
+        }
+        .lock-keyhole {
+            width: 8px;
+            height: 8px;
+            background: #4a5568;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .lock-keyhole::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 10px;
+            background: #4a5568;
+        }
+        .lock:hover {
+            transform: scale(1.1);
+        }
+        .lock:hover .lock-body {
+            background: #f6e05e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tech & Devices - Flat Illustration Components</h1>
+
+    <div class="grid">
+        <!-- tech-01: Smartphone -->
+        <div class="item">
+            <div class="smartphone" id="tech-01"></div>
+            <span class="item-label">tech-01</span>
+            <span class="item-name">Smartphone</span>
+        </div>
+
+        <!-- tech-02: Laptop -->
+        <div class="item">
+            <div class="laptop" id="tech-02">
+                <div class="laptop-screen"></div>
+                <div class="laptop-base"></div>
+            </div>
+            <span class="item-label">tech-02</span>
+            <span class="item-name">Laptop</span>
+        </div>
+
+        <!-- tech-03: Desktop Computer -->
+        <div class="item">
+            <div class="desktop" id="tech-03">
+                <div class="desktop-monitor"></div>
+                <div class="desktop-stand"></div>
+                <div class="desktop-base"></div>
+            </div>
+            <span class="item-label">tech-03</span>
+            <span class="item-name">Desktop</span>
+        </div>
+
+        <!-- tech-04: Tablet -->
+        <div class="item">
+            <div class="tablet" id="tech-04"></div>
+            <span class="item-label">tech-04</span>
+            <span class="item-name">Tablet</span>
+        </div>
+
+        <!-- tech-05: TV -->
+        <div class="item">
+            <div class="tv" id="tech-05">
+                <div class="tv-screen"></div>
+                <div class="tv-leg-left"></div>
+                <div class="tv-leg-right"></div>
+            </div>
+            <span class="item-label">tech-05</span>
+            <span class="item-name">TV</span>
+        </div>
+
+        <!-- tech-06: Camera -->
+        <div class="item">
+            <div class="camera" id="tech-06">
+                <div class="camera-flash"></div>
+            </div>
+            <span class="item-label">tech-06</span>
+            <span class="item-name">Camera</span>
+        </div>
+
+        <!-- tech-07: Headphones -->
+        <div class="item">
+            <div class="headphones" id="tech-07">
+                <div class="headphones-band"></div>
+                <div class="headphones-left"></div>
+                <div class="headphones-right"></div>
+            </div>
+            <span class="item-label">tech-07</span>
+            <span class="item-name">Headphones</span>
+        </div>
+
+        <!-- tech-08: Microphone -->
+        <div class="item">
+            <div class="microphone" id="tech-08">
+                <div class="mic-head"></div>
+                <div class="mic-stand"></div>
+                <div class="mic-base"></div>
+            </div>
+            <span class="item-label">tech-08</span>
+            <span class="item-name">Microphone</span>
+        </div>
+
+        <!-- tech-09: Game Controller -->
+        <div class="item">
+            <div class="controller" id="tech-09">
+                <div class="controller-dpad"></div>
+                <div class="controller-buttons">
+                    <div class="btn-a"></div>
+                    <div class="btn-b"></div>
+                    <div class="btn-x"></div>
+                    <div class="btn-y"></div>
+                </div>
+            </div>
+            <span class="item-label">tech-09</span>
+            <span class="item-name">Controller</span>
+        </div>
+
+        <!-- tech-10: USB -->
+        <div class="item">
+            <div class="usb" id="tech-10">
+                <div class="usb-connector"></div>
+                <div class="usb-body"></div>
+            </div>
+            <span class="item-label">tech-10</span>
+            <span class="item-name">USB</span>
+        </div>
+
+        <!-- tech-11: WiFi Symbol -->
+        <div class="item">
+            <div class="wifi" id="tech-11">
+                <div class="wifi-dot"></div>
+                <div class="wifi-wave1"></div>
+                <div class="wifi-wave2"></div>
+                <div class="wifi-wave3"></div>
+            </div>
+            <span class="item-label">tech-11</span>
+            <span class="item-name">WiFi</span>
+        </div>
+
+        <!-- tech-12: Battery -->
+        <div class="item">
+            <div class="battery" id="tech-12">
+                <div class="battery-level"></div>
+            </div>
+            <span class="item-label">tech-12</span>
+            <span class="item-name">Battery</span>
+        </div>
+
+        <!-- tech-13: Lightbulb -->
+        <div class="item">
+            <div class="lightbulb" id="tech-13">
+                <div class="bulb-glass"></div>
+                <div class="bulb-base"></div>
+            </div>
+            <span class="item-label">tech-13</span>
+            <span class="item-name">Lightbulb</span>
+        </div>
+
+        <!-- tech-14: Gear/Settings -->
+        <div class="item">
+            <div class="gear" id="tech-14">
+                <div class="gear-tooth tooth1"></div>
+                <div class="gear-tooth tooth2"></div>
+                <div class="gear-tooth tooth3"></div>
+                <div class="gear-tooth tooth4"></div>
+                <div class="gear-tooth tooth5"></div>
+                <div class="gear-tooth tooth6"></div>
+                <div class="gear-tooth tooth7"></div>
+                <div class="gear-tooth tooth8"></div>
+                <div class="gear-body"></div>
+            </div>
+            <span class="item-label">tech-14</span>
+            <span class="item-name">Gear/Settings</span>
+        </div>
+
+        <!-- tech-15: Clock -->
+        <div class="item">
+            <div class="clock" id="tech-15">
+                <div class="hour-hand"></div>
+                <div class="minute-hand"></div>
+                <div class="clock-center"></div>
+            </div>
+            <span class="item-label">tech-15</span>
+            <span class="item-name">Clock</span>
+        </div>
+
+        <!-- tech-16: Calendar -->
+        <div class="item">
+            <div class="calendar" id="tech-16">
+                <div class="calendar-header"></div>
+                <div class="calendar-ring-left"></div>
+                <div class="calendar-ring-right"></div>
+                <span class="calendar-date">15</span>
+            </div>
+            <span class="item-label">tech-16</span>
+            <span class="item-name">Calendar</span>
+        </div>
+
+        <!-- tech-17: Email Envelope -->
+        <div class="item">
+            <div class="envelope" id="tech-17">
+                <div class="envelope-flap"></div>
+                <div class="envelope-inner"></div>
+            </div>
+            <span class="item-label">tech-17</span>
+            <span class="item-name">Email</span>
+        </div>
+
+        <!-- tech-18: Notification Bell -->
+        <div class="item">
+            <div class="bell" id="tech-18">
+                <div class="bell-top"></div>
+                <div class="bell-body"></div>
+                <div class="bell-clapper"></div>
+                <div class="bell-badge"></div>
+            </div>
+            <span class="item-label">tech-18</span>
+            <span class="item-name">Notification</span>
+        </div>
+
+        <!-- tech-19: Search Magnifier -->
+        <div class="item">
+            <div class="magnifier" id="tech-19">
+                <div class="magnifier-glass"></div>
+                <div class="magnifier-handle"></div>
+            </div>
+            <span class="item-label">tech-19</span>
+            <span class="item-name">Search</span>
+        </div>
+
+        <!-- tech-20: Lock -->
+        <div class="item">
+            <div class="lock" id="tech-20">
+                <div class="lock-shackle"></div>
+                <div class="lock-body">
+                    <div class="lock-keyhole"></div>
+                </div>
+            </div>
+            <span class="item-label">tech-20</span>
+            <span class="item-name">Lock</span>
+        </div>
+    </div>
+</body>
+</html>

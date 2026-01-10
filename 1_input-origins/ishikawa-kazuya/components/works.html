@@ -1,0 +1,182 @@
+{#
+    Ishikawa Works/Portfolio Section Component
+
+    Parameters:
+    - works_label: str (default: "Works")
+    - works_title: str (default: "作品紹介")
+    - works_desc: str - Section description
+    - works: list of dicts with 'image', 'image_placeholder', 'tags', 'title', 'desc', 'link_text', 'link_href' keys
+
+    Usage:
+    {% set works = [
+        {
+            "image_placeholder": "🛒",
+            "tags": ["E-commerce", "React"],
+            "title": "ECサイトリニューアル",
+            "desc": "Description here",
+            "link_text": "詳しく見る",
+            "link_href": "#"
+        }
+    ] %}
+    {% include "components/ishikawa/works.html" %}
+#}
+{% set works_label = works_label|default("Works") %}
+{% set works_title = works_title|default("作品紹介") %}
+{% set works_desc = works_desc|default("これまでに手がけたプロジェクトの一部をご紹介します。") %}
+{% set works = works|default([
+    {
+        "image_placeholder": "🛒",
+        "tags": ["E-commerce", "React"],
+        "title": "ECサイトリニューアル",
+        "desc": "大手アパレルブランドのECサイトをフルリニューアル。売上30%向上を達成。",
+        "link_text": "詳しく見る",
+        "link_href": "#"
+    },
+    {
+        "image_placeholder": "📊",
+        "tags": ["Dashboard", "Vue.js"],
+        "title": "データダッシュボード",
+        "desc": "リアルタイムデータを可視化するダッシュボードを設計・開発。",
+        "link_text": "詳しく見る",
+        "link_href": "#"
+    },
+    {
+        "image_placeholder": "📱",
+        "tags": ["Mobile", "Flutter"],
+        "title": "フィットネスアプリ",
+        "desc": "ヘルスケアスタートアップのモバイルアプリをゼロから開発。",
+        "link_text": "詳しく見る",
+        "link_href": "#"
+    }
+]) %}
+
+<style>
+.ik-works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.ik-work-card {
+    background: var(--ik-white);
+    border-radius: var(--ik-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--ik-shadow-sm);
+    transition: all 0.3s var(--ik-ease);
+    border: 1px solid var(--ik-border-light);
+}
+
+.ik-work-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ik-shadow-lg);
+}
+
+.ik-work-card__image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    background: var(--ik-bg);
+}
+
+.ik-work-card__image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--ik-bg), var(--ik-border));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+}
+
+.ik-work-card__content {
+    padding: 24px;
+}
+
+.ik-work-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ik-work-card__tag {
+    padding: 4px 10px;
+    background: var(--ik-primary-light);
+    color: var(--ik-primary);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 100px;
+}
+
+.ik-work-card__title {
+    font-family: var(--ik-font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.ik-work-card__desc {
+    font-size: 14px;
+    color: var(--ik-text-muted);
+    line-height: 1.6;
+}
+
+.ik-work-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ik-primary);
+    text-decoration: none;
+    transition: gap 0.2s var(--ik-ease);
+}
+
+.ik-work-card__link:hover {
+    gap: 10px;
+}
+
+@media (max-width: 1024px) {
+    .ik-works-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .ik-works-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<section class="ik-section ik-section--alt" id="works">
+    <div class="ik-container">
+        <div class="ik-section__header">
+            <span class="ik-section__label">{{ works_label }}</span>
+            <h2 class="ik-section__title">{{ works_title }}</h2>
+            <p class="ik-section__desc">{{ works_desc }}</p>
+        </div>
+        <div class="ik-works-grid">
+            {% for work in works %}
+            <div class="ik-work-card ik-fade-in ik-delay-{{ loop.index }}">
+                {% if work.image %}
+                <img src="{{ work.image }}" alt="{{ work.title }}" class="ik-work-card__image">
+                {% else %}
+                <div class="ik-work-card__image-placeholder">{{ work.image_placeholder }}</div>
+                {% endif %}
+                <div class="ik-work-card__content">
+                    <div class="ik-work-card__tags">
+                        {% for tag in work.tags %}
+                        <span class="ik-work-card__tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    <h3 class="ik-work-card__title">{{ work.title }}</h3>
+                    <p class="ik-work-card__desc">{{ work.desc }}</p>
+                    <a href="{{ work.link_href }}" class="ik-work-card__link">{{ work.link_text }} <span>→</span></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

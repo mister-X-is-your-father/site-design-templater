@@ -1,0 +1,2996 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Comparison Diagrams - 数量・比較図解テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b9d;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .template-id {
+            display: inline-block;
+            background: #ffe4ec;
+            color: #ff6b9d;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .template-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .diagram-container {
+            background: #fafbfc;
+            border-radius: 15px;
+            padding: 25px;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===================================
+           #quantity-1: Big vs Small Circles
+           =================================== */
+        #quantity-1 .size-compare {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-1 .size-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-1 .big-circle {
+            width: 120px;
+            height: 120px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
+        }
+
+        #quantity-1 .big-circle:hover {
+            transform: scale(1.1);
+        }
+
+        #quantity-1 .small-circle {
+            width: 60px;
+            height: 60px;
+            background: #87ceeb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(135,206,235,0.3);
+        }
+
+        #quantity-1 .small-circle:hover {
+            transform: scale(1.2);
+        }
+
+        #quantity-1 .size-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-1 .vs-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd93d;
+        }
+
+        /* ===================================
+           #quantity-2: Tall vs Short Bars
+           =================================== */
+        #quantity-2 .height-compare {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 50px;
+            height: 200px;
+            width: 100%;
+        }
+
+        #quantity-2 .height-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-2 .tall-bar {
+            width: 60px;
+            height: 160px;
+            background: linear-gradient(to top, #a8e6cf, #95e1d3);
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        #quantity-2 .tall-bar:hover {
+            transform: scaleY(1.05);
+            transform-origin: bottom;
+        }
+
+        #quantity-2 .short-bar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to top, #ffd93d, #ffe66d);
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        #quantity-2 .short-bar:hover {
+            transform: scaleY(1.1);
+            transform-origin: bottom;
+        }
+
+        #quantity-2 .height-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-3: Many vs Few Dots
+           =================================== */
+        #quantity-3 .dots-compare {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            gap: 30px;
+        }
+
+        #quantity-3 .dots-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-3 .dots-container {
+            display: grid;
+            gap: 6px;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        #quantity-3 .many-dots {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        #quantity-3 .few-dots {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #quantity-3 .dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        #quantity-3 .dot:hover {
+            transform: scale(1.3);
+        }
+
+        #quantity-3 .dot-pink { background: #ff6b9d; }
+        #quantity-3 .dot-blue { background: #87ceeb; }
+
+        #quantity-3 .dots-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        #quantity-3 .dots-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #quantity-3 .count-pink { color: #ff6b9d; }
+        #quantity-3 .count-blue { color: #87ceeb; }
+
+        /* ===================================
+           #quantity-4: Heavy vs Light (Scale)
+           =================================== */
+        #quantity-4 .weight-scale {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        #quantity-4 .scale-beam {
+            width: 280px;
+            height: 8px;
+            background: #5c6bc0;
+            border-radius: 4px;
+            position: relative;
+            transform: rotate(-8deg);
+            transition: transform 0.3s;
+        }
+
+        #quantity-4 .scale-beam:hover {
+            transform: rotate(-12deg);
+        }
+
+        #quantity-4 .scale-pivot {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 20px solid #ffd93d;
+        }
+
+        #quantity-4 .scale-pans {
+            display: flex;
+            justify-content: space-between;
+            width: 280px;
+            margin-top: -5px;
+        }
+
+        #quantity-4 .pan {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #quantity-4 .pan-string {
+            width: 3px;
+            background: #888;
+        }
+
+        #quantity-4 .heavy-string { height: 50px; }
+        #quantity-4 .light-string { height: 25px; }
+
+        #quantity-4 .pan-dish {
+            width: 80px;
+            height: 25px;
+            border-radius: 0 0 40px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        #quantity-4 .heavy-dish { background: #ff6b9d; }
+        #quantity-4 .light-dish { background: #a8e6cf; }
+
+        #quantity-4 .weight-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 280px;
+            margin-top: 15px;
+        }
+
+        #quantity-4 .weight-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-5: Full vs Empty Container
+           =================================== */
+        #quantity-5 .container-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-5 .container-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #quantity-5 .container-vessel {
+            width: 70px;
+            height: 100px;
+            border: 4px solid #5c6bc0;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        #quantity-5 .container-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: height 0.5s;
+        }
+
+        #quantity-5 .full-fill {
+            height: 90%;
+            background: #4ecdc4;
+        }
+
+        #quantity-5 .empty-fill {
+            height: 15%;
+            background: #ffd93d;
+        }
+
+        #quantity-5 .fill-label {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #quantity-5 .container-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-6: Thick vs Thin Lines
+           =================================== */
+        #quantity-6 .line-compare {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #quantity-6 .line-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #quantity-6 .thick-line {
+            flex: 1;
+            height: 25px;
+            background: #ff6b9d;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        #quantity-6 .thick-line:hover {
+            transform: scaleY(1.2);
+        }
+
+        #quantity-6 .thin-line {
+            flex: 1;
+            height: 6px;
+            background: #87ceeb;
+            border-radius: 3px;
+            transition: transform 0.3s;
+        }
+
+        #quantity-6 .thin-line:hover {
+            transform: scaleY(2);
+        }
+
+        #quantity-6 .line-label {
+            width: 60px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-7: Wide vs Narrow Rectangles
+           =================================== */
+        #quantity-7 .width-compare {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+
+        #quantity-7 .width-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-7 .wide-rect {
+            width: 250px;
+            height: 50px;
+            background: #a8e6cf;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        #quantity-7 .wide-rect:hover {
+            transform: scaleX(1.05);
+        }
+
+        #quantity-7 .narrow-rect {
+            width: 80px;
+            height: 50px;
+            background: #dda0dd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        #quantity-7 .narrow-rect:hover {
+            transform: scaleX(1.1);
+        }
+
+        #quantity-7 .width-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-8: Long vs Short Arrows
+           =================================== */
+        #quantity-8 .arrow-compare {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+        }
+
+        #quantity-8 .arrow-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-8 .arrow-label {
+            width: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-8 .arrow-body {
+            display: flex;
+            align-items: center;
+        }
+
+        #quantity-8 .long-shaft {
+            width: 200px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 10px 0 0 10px;
+        }
+
+        #quantity-8 .short-shaft {
+            width: 60px;
+            height: 20px;
+            background: #87ceeb;
+            border-radius: 10px 0 0 10px;
+        }
+
+        #quantity-8 .arrow-head {
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+
+        #quantity-8 .long-head {
+            border-left: 25px solid #ff6b9d;
+        }
+
+        #quantity-8 .short-head {
+            border-left: 20px solid #87ceeb;
+        }
+
+        #quantity-8 .arrow-value {
+            margin-left: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #quantity-8 .value-pink { color: #ff6b9d; }
+        #quantity-8 .value-blue { color: #87ceeb; }
+
+        /* ===================================
+           #quantity-9: More vs Less Stacks
+           =================================== */
+        #quantity-9 .stack-compare {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            width: 100%;
+        }
+
+        #quantity-9 .stack-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-9 .stack-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        #quantity-9 .stack-block {
+            width: 70px;
+            height: 20px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        #quantity-9 .stack-block:hover {
+            transform: translateX(5px);
+        }
+
+        #quantity-9 .block-pink { background: #ff6b9d; }
+        #quantity-9 .block-yellow { background: #ffd93d; }
+        #quantity-9 .block-mint { background: #a8e6cf; }
+        #quantity-9 .block-purple { background: #dda0dd; }
+        #quantity-9 .block-blue { background: #87ceeb; }
+
+        #quantity-9 .stack-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-9 .stack-count {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #5c6bc0;
+        }
+
+        /* ===================================
+           #quantity-10: Majority vs Minority Pie
+           =================================== */
+        #quantity-10 .pie-compare {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        #quantity-10 .majority-pie {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff6b9d 0deg 288deg,
+                #f0f0f0 288deg 360deg
+            );
+            position: relative;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 20px rgba(255,107,157,0.2);
+        }
+
+        #quantity-10 .majority-pie:hover {
+            transform: scale(1.05);
+        }
+
+        #quantity-10 .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #quantity-10 .pie-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        #quantity-10 .pie-label {
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        #quantity-10 .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #quantity-10 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        #quantity-10 .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        #quantity-10 .dot-majority { background: #ff6b9d; }
+        #quantity-10 .dot-minority { background: #f0f0f0; border: 2px solid #ddd; }
+
+        /* ===================================
+           #quantity-11: Dense vs Sparse Grid
+           =================================== */
+        #quantity-11 .density-compare {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-11 .density-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #quantity-11 .dense-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 3px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        #quantity-11 .sparse-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        #quantity-11 .grid-cell {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            transition: transform 0.2s;
+        }
+
+        #quantity-11 .grid-cell:hover {
+            transform: scale(1.5);
+        }
+
+        #quantity-11 .cell-mint { background: #4ecdc4; }
+        #quantity-11 .cell-orange { background: #ffa07a; }
+
+        #quantity-11 .density-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-12: High vs Low Water Level
+           =================================== */
+        #quantity-12 .water-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-12 .water-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #quantity-12 .water-tank {
+            width: 80px;
+            height: 120px;
+            border: 4px solid #5c6bc0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #f0f8ff 0%, #e6f3ff 100%);
+        }
+
+        #quantity-12 .water-level {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, #4ecdc4 0%, #87ceeb 100%);
+            transition: height 0.5s;
+        }
+
+        #quantity-12 .water-level::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+        }
+
+        #quantity-12 .high-water { height: 85%; }
+        #quantity-12 .low-water { height: 25%; }
+
+        #quantity-12 .water-percent {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #quantity-12 .water-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-13: Crowded vs Empty Room
+           =================================== */
+        #quantity-13 .room-compare {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        #quantity-13 .room-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #quantity-13 .room-box {
+            width: 120px;
+            height: 100px;
+            border: 3px solid #5c6bc0;
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 10px;
+            background: white;
+        }
+
+        #quantity-13 .person-icon {
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        #quantity-13 .person-icon:hover {
+            transform: scale(1.2);
+        }
+
+        #quantity-13 .person-icon::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 3px;
+            width: 14px;
+            height: 12px;
+            background: #ff6b9d;
+            border-radius: 3px 3px 5px 5px;
+        }
+
+        #quantity-13 .room-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-14: Rich vs Poor Coins
+           =================================== */
+        #quantity-14 .coins-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-14 .coins-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-14 .coins-stack {
+            position: relative;
+            width: 80px;
+            height: 100px;
+        }
+
+        #quantity-14 .coin {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #ffd93d, #f0c419);
+            border-radius: 50%;
+            border: 3px solid #e6b800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #8b6914;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        #quantity-14 .coin:hover {
+            transform: translateY(-5px);
+            z-index: 10;
+        }
+
+        #quantity-14 .rich-stack .coin:nth-child(1) { left: 15px; top: 0; }
+        #quantity-14 .rich-stack .coin:nth-child(2) { left: 0; top: 20px; }
+        #quantity-14 .rich-stack .coin:nth-child(3) { left: 30px; top: 25px; }
+        #quantity-14 .rich-stack .coin:nth-child(4) { left: 10px; top: 45px; }
+        #quantity-14 .rich-stack .coin:nth-child(5) { left: 25px; top: 50px; }
+
+        #quantity-14 .poor-stack .coin:nth-child(1) { left: 15px; top: 50px; }
+
+        #quantity-14 .coins-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-14 .coins-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e6b800;
+        }
+
+        /* ===================================
+           #quantity-15: Fast vs Slow Speedometer
+           =================================== */
+        #quantity-15 .speed-compare {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-15 .speed-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-15 .speedometer {
+            width: 100px;
+            height: 50px;
+            border-radius: 100px 100px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #quantity-15 .speed-bg {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 180deg,
+                #4ecdc4 0deg,
+                #ffd93d 90deg,
+                #ff6b9d 180deg,
+                transparent 180deg
+            );
+        }
+
+        #quantity-15 .speed-mask {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            top: 20px;
+            left: 20px;
+        }
+
+        #quantity-15 .speed-needle {
+            position: absolute;
+            width: 3px;
+            height: 35px;
+            background: #333;
+            bottom: 0;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+
+        #quantity-15 .fast-needle {
+            transform: translateX(-50%) rotate(70deg);
+        }
+
+        #quantity-15 .slow-needle {
+            transform: translateX(-50%) rotate(-60deg);
+        }
+
+        #quantity-15 .speed-center {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #quantity-15 .speed-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-15 .speed-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #quantity-15 .value-fast { color: #ff6b9d; }
+        #quantity-15 .value-slow { color: #4ecdc4; }
+
+        /* ===================================
+           #quantity-16: Hot vs Cold Temperature
+           =================================== */
+        #quantity-16 .temp-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-16 .temp-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-16 .thermometer {
+            width: 30px;
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 15px 15px 20px 20px;
+            position: relative;
+            border: 3px solid #ddd;
+            overflow: hidden;
+        }
+
+        #quantity-16 .temp-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 0 0 15px 15px;
+            transition: height 0.5s;
+        }
+
+        #quantity-16 .hot-fill {
+            height: 85%;
+            background: linear-gradient(to top, #ff6b9d, #ff9a8b);
+        }
+
+        #quantity-16 .cold-fill {
+            height: 25%;
+            background: linear-gradient(to top, #87ceeb, #b8e4f9);
+        }
+
+        #quantity-16 .temp-bulb {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #ddd;
+        }
+
+        #quantity-16 .hot-bulb { background: #ff6b9d; }
+        #quantity-16 .cold-bulb { background: #87ceeb; }
+
+        #quantity-16 .temp-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        #quantity-16 .temp-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #quantity-16 .value-hot { color: #ff6b9d; }
+        #quantity-16 .value-cold { color: #87ceeb; }
+
+        /* ===================================
+           #quantity-17: Loud vs Quiet Sound Waves
+           =================================== */
+        #quantity-17 .sound-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-17 .sound-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-17 .sound-waves {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 80px;
+        }
+
+        #quantity-17 .wave-bar {
+            width: 8px;
+            border-radius: 4px;
+            transition: height 0.3s;
+        }
+
+        #quantity-17 .loud-waves .wave-bar {
+            background: #ff6b9d;
+        }
+
+        #quantity-17 .loud-waves .wave-bar:nth-child(1) { height: 30px; }
+        #quantity-17 .loud-waves .wave-bar:nth-child(2) { height: 60px; }
+        #quantity-17 .loud-waves .wave-bar:nth-child(3) { height: 80px; }
+        #quantity-17 .loud-waves .wave-bar:nth-child(4) { height: 60px; }
+        #quantity-17 .loud-waves .wave-bar:nth-child(5) { height: 30px; }
+
+        #quantity-17 .quiet-waves .wave-bar {
+            background: #a8e6cf;
+        }
+
+        #quantity-17 .quiet-waves .wave-bar:nth-child(1) { height: 10px; }
+        #quantity-17 .quiet-waves .wave-bar:nth-child(2) { height: 20px; }
+        #quantity-17 .quiet-waves .wave-bar:nth-child(3) { height: 25px; }
+        #quantity-17 .quiet-waves .wave-bar:nth-child(4) { height: 20px; }
+        #quantity-17 .quiet-waves .wave-bar:nth-child(5) { height: 10px; }
+
+        #quantity-17 .sound-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-17 .sound-db {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #quantity-17 .db-loud { color: #ff6b9d; }
+        #quantity-17 .db-quiet { color: #a8e6cf; }
+
+        /* ===================================
+           #quantity-18: Bright vs Dark Light Bulbs
+           =================================== */
+        #quantity-18 .light-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-18 .light-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-18 .bulb-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        #quantity-18 .bulb-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        #quantity-18 .bright-glow {
+            background: radial-gradient(circle, rgba(255,217,61,0.8) 0%, rgba(255,217,61,0) 70%);
+        }
+
+        #quantity-18 .dark-glow {
+            background: radial-gradient(circle, rgba(200,200,200,0.2) 0%, rgba(200,200,200,0) 70%);
+        }
+
+        #quantity-18 .bulb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 60px;
+            border-radius: 50% 50% 45% 45%;
+        }
+
+        #quantity-18 .bright-bulb {
+            background: linear-gradient(145deg, #ffd93d, #ffeb3b);
+            box-shadow: 0 0 30px rgba(255,217,61,0.6);
+        }
+
+        #quantity-18 .dark-bulb {
+            background: linear-gradient(145deg, #ccc, #aaa);
+            box-shadow: none;
+        }
+
+        #quantity-18 .bulb-base {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 15px;
+            background: #888;
+            border-radius: 0 0 5px 5px;
+        }
+
+        #quantity-18 .light-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-19: Strong vs Weak Muscles
+           =================================== */
+        #quantity-19 .strength-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-19 .strength-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-19 .arm-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        #quantity-19 .arm {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+        }
+
+        #quantity-19 .muscle-size {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        #quantity-19 .strong-badge {
+            background: #ff6b9d;
+        }
+
+        #quantity-19 .weak-badge {
+            background: #87ceeb;
+        }
+
+        #quantity-19 .strength-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-19 .strength-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #quantity-19 .value-strong { color: #ff6b9d; }
+        #quantity-19 .value-weak { color: #87ceeb; }
+
+        /* ===================================
+           #quantity-20: Old vs New Comparison
+           =================================== */
+        #quantity-20 .age-compare {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-20 .age-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        #quantity-20 .age-item:hover {
+            transform: scale(1.05);
+        }
+
+        #quantity-20 .old-item {
+            background: linear-gradient(135deg, #f5f5dc, #e8e4d0);
+            border: 3px dashed #c9c19f;
+        }
+
+        #quantity-20 .new-item {
+            background: linear-gradient(135deg, #e8f8f5, #d4f5f3);
+            border: 3px solid #4ecdc4;
+        }
+
+        #quantity-20 .age-icon {
+            font-size: 3rem;
+        }
+
+        #quantity-20 .age-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        #quantity-20 .old-badge {
+            background: #c9c19f;
+            color: #666;
+        }
+
+        #quantity-20 .new-badge {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        #quantity-20 .age-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-21: Near vs Far Distance
+           =================================== */
+        #quantity-21 .distance-compare {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+        }
+
+        #quantity-21 .distance-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-21 .distance-label {
+            width: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-21 .distance-visual {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 40px;
+        }
+
+        #quantity-21 .point-a {
+            width: 30px;
+            height: 30px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        #quantity-21 .distance-line {
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                #ddd,
+                #ddd 5px,
+                transparent 5px,
+                transparent 10px
+            );
+        }
+
+        #quantity-21 .near-line { width: 40px; }
+        #quantity-21 .far-line { width: 180px; }
+
+        #quantity-21 .point-b {
+            width: 30px;
+            height: 30px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        #quantity-21 .distance-value {
+            margin-left: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #5c6bc0;
+        }
+
+        /* ===================================
+           #quantity-22: Deep vs Shallow Depth
+           =================================== */
+        #quantity-22 .depth-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-22 .depth-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-22 .depth-container {
+            width: 80px;
+            border: 4px solid #5c6bc0;
+            border-top: none;
+            position: relative;
+            background: linear-gradient(to bottom, #87ceeb 0%, #1e90ff 50%, #000080 100%);
+            border-radius: 0 0 10px 10px;
+        }
+
+        #quantity-22 .deep-container { height: 140px; }
+        #quantity-22 .shallow-container { height: 50px; }
+
+        #quantity-22 .water-surface {
+            position: absolute;
+            top: 0;
+            left: -4px;
+            right: -4px;
+            height: 8px;
+            background: #87ceeb;
+            border-radius: 0 0 50% 50%;
+        }
+
+        #quantity-22 .depth-marker {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+        }
+
+        #quantity-22 .depth-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-22 .depth-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e90ff;
+        }
+
+        /* ===================================
+           #quantity-23: Expensive vs Cheap Price Tags
+           =================================== */
+        #quantity-23 .price-compare {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-23 .price-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-23 .price-tag {
+            position: relative;
+            padding: 20px 30px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        #quantity-23 .price-tag:hover {
+            transform: scale(1.05);
+        }
+
+        #quantity-23 .expensive-tag {
+            background: linear-gradient(135deg, #ffd93d, #f0c419);
+            border: 3px solid #e6b800;
+        }
+
+        #quantity-23 .cheap-tag {
+            background: linear-gradient(135deg, #a8e6cf, #95e1d3);
+            border: 3px solid #7ed6c4;
+        }
+
+        #quantity-23 .price-tag::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid;
+        }
+
+        #quantity-23 .expensive-tag::before { border-color: #e6b800; }
+        #quantity-23 .cheap-tag::before { border-color: #7ed6c4; }
+
+        #quantity-23 .price-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        #quantity-23 .expensive-amount { color: #8b6914; }
+        #quantity-23 .cheap-amount { color: #2e8b7a; }
+
+        #quantity-23 .price-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* ===================================
+           #quantity-24: Popular vs Rare Stars
+           =================================== */
+        #quantity-24 .popularity-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-24 .popularity-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-24 .stars-container {
+            display: flex;
+            gap: 5px;
+        }
+
+        #quantity-24 .star {
+            font-size: 1.8rem;
+            transition: transform 0.2s;
+        }
+
+        #quantity-24 .star:hover {
+            transform: scale(1.3);
+        }
+
+        #quantity-24 .star-filled { color: #ffd93d; }
+        #quantity-24 .star-empty { color: #ddd; }
+
+        #quantity-24 .popularity-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-24 .popularity-count {
+            font-size: 1rem;
+            color: #888;
+        }
+
+        /* ===================================
+           #quantity-25: Easy vs Hard Difficulty Meter
+           =================================== */
+        #quantity-25 .difficulty-compare {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+        }
+
+        #quantity-25 .difficulty-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-25 .difficulty-label {
+            width: 60px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-25 .difficulty-meter {
+            display: flex;
+            gap: 5px;
+        }
+
+        #quantity-25 .meter-segment {
+            width: 30px;
+            height: 20px;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        #quantity-25 .meter-segment:hover {
+            transform: scaleY(1.3);
+        }
+
+        #quantity-25 .easy-meter .meter-segment:nth-child(1) { background: #4ecdc4; }
+        #quantity-25 .easy-meter .meter-segment:nth-child(2) { background: #a8e6cf; }
+        #quantity-25 .easy-meter .meter-segment:nth-child(3),
+        #quantity-25 .easy-meter .meter-segment:nth-child(4),
+        #quantity-25 .easy-meter .meter-segment:nth-child(5) { background: #f0f0f0; }
+
+        #quantity-25 .hard-meter .meter-segment:nth-child(1) { background: #4ecdc4; }
+        #quantity-25 .hard-meter .meter-segment:nth-child(2) { background: #a8e6cf; }
+        #quantity-25 .hard-meter .meter-segment:nth-child(3) { background: #ffd93d; }
+        #quantity-25 .hard-meter .meter-segment:nth-child(4) { background: #ffa07a; }
+        #quantity-25 .hard-meter .meter-segment:nth-child(5) { background: #ff6b9d; }
+
+        #quantity-25 .difficulty-text {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #quantity-25 .text-easy { color: #4ecdc4; }
+        #quantity-25 .text-hard { color: #ff6b9d; }
+
+        /* ===================================
+           #quantity-26: Quick vs Slow Timer
+           =================================== */
+        #quantity-26 .timer-compare {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        #quantity-26 .timer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #quantity-26 .timer-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 6px solid #f0f0f0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #quantity-26 .quick-circle {
+            border-color: #4ecdc4;
+            border-top-color: #f0f0f0;
+        }
+
+        #quantity-26 .slow-circle {
+            border-color: #ff6b9d;
+            border-top-color: #f0f0f0;
+            border-right-color: #f0f0f0;
+            border-bottom-color: #f0f0f0;
+        }
+
+        #quantity-26 .timer-hand {
+            position: absolute;
+            width: 3px;
+            height: 30px;
+            background: #333;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+
+        #quantity-26 .quick-hand {
+            transform: translateX(-50%) rotate(280deg);
+        }
+
+        #quantity-26 .slow-hand {
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        #quantity-26 .timer-center {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #quantity-26 .timer-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-26 .timer-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        #quantity-26 .value-quick { color: #4ecdc4; }
+        #quantity-26 .value-slow { color: #ff6b9d; }
+
+        /* ===================================
+           #quantity-27: Maximum vs Minimum Gauge
+           =================================== */
+        #quantity-27 .minmax-compare {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        #quantity-27 .minmax-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantity-27 .gauge-bar {
+            width: 40px;
+            height: 140px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #ddd;
+        }
+
+        #quantity-27 .gauge-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 0 0 15px 15px;
+            transition: height 0.5s;
+        }
+
+        #quantity-27 .max-fill {
+            height: 95%;
+            background: linear-gradient(to top, #ff6b9d, #ff9a8b);
+        }
+
+        #quantity-27 .min-fill {
+            height: 10%;
+            background: linear-gradient(to top, #87ceeb, #b8e4f9);
+        }
+
+        #quantity-27 .gauge-markers {
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            right: 5px;
+            width: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #quantity-27 .marker {
+            width: 5px;
+            height: 2px;
+            background: #aaa;
+        }
+
+        #quantity-27 .minmax-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-27 .minmax-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        #quantity-27 .max-badge { background: #ff6b9d; }
+        #quantity-27 .min-badge { background: #87ceeb; }
+
+        /* ===================================
+           #quantity-28: Positive vs Negative Scale
+           =================================== */
+        #quantity-28 .posneg-compare {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        #quantity-28 .scale-bar {
+            width: 280px;
+            height: 30px;
+            background: linear-gradient(to right, #ff6b9d 0%, #fff 50%, #4ecdc4 100%);
+            border-radius: 15px;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #quantity-28 .scale-center {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 40px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        #quantity-28 .scale-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: left 0.3s;
+        }
+
+        #quantity-28 .positive-marker { left: 80%; }
+        #quantity-28 .negative-marker { left: 20%; }
+
+        #quantity-28 .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 280px;
+        }
+
+        #quantity-28 .label-negative {
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        #quantity-28 .label-zero {
+            font-weight: bold;
+            color: #888;
+        }
+
+        #quantity-28 .label-positive {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        #quantity-28 .current-values {
+            display: flex;
+            gap: 40px;
+        }
+
+        #quantity-28 .value-box {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        #quantity-28 .positive-box {
+            background: #e8f8f5;
+            color: #4ecdc4;
+        }
+
+        #quantity-28 .negative-box {
+            background: #ffe4ec;
+            color: #ff6b9d;
+        }
+
+        /* ===================================
+           #quantity-29: Success vs Failure Rate
+           =================================== */
+        #quantity-29 .rate-compare {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-29 .rate-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #quantity-29 .rate-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        #quantity-29 .rate-circle:hover {
+            transform: scale(1.1);
+        }
+
+        #quantity-29 .success-circle {
+            background: conic-gradient(#4ecdc4 0deg 306deg, #f0f0f0 306deg 360deg);
+            box-shadow: 0 4px 20px rgba(78,205,196,0.3);
+        }
+
+        #quantity-29 .failure-circle {
+            background: conic-gradient(#ff6b9d 0deg 72deg, #f0f0f0 72deg 360deg);
+            box-shadow: 0 4px 20px rgba(255,107,157,0.3);
+        }
+
+        #quantity-29 .rate-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #quantity-29 .rate-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        #quantity-29 .success-value { color: #4ecdc4; }
+        #quantity-29 .failure-value { color: #ff6b9d; }
+
+        #quantity-29 .rate-text {
+            font-size: 0.65rem;
+            color: #888;
+        }
+
+        #quantity-29 .rate-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-29 .rate-icon {
+            font-size: 1.5rem;
+        }
+
+        /* ===================================
+           #quantity-30: Growth vs Decline Trend
+           =================================== */
+        #quantity-30 .trend-compare {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        #quantity-30 .trend-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        #quantity-30 .trend-item:hover {
+            transform: translateY(-5px);
+        }
+
+        #quantity-30 .trend-arrow {
+            font-size: 3rem;
+            transition: transform 0.3s;
+        }
+
+        #quantity-30 .trend-item:hover .trend-arrow {
+            transform: translateY(-5px);
+        }
+
+        #quantity-30 .growth-arrow { color: #4ecdc4; }
+        #quantity-30 .decline-arrow { color: #ff6b9d; }
+
+        #quantity-30 .trend-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 50px;
+        }
+
+        #quantity-30 .chart-bar {
+            width: 12px;
+            border-radius: 3px;
+            transition: height 0.3s;
+        }
+
+        #quantity-30 .growth-chart .chart-bar:nth-child(1) { height: 20px; background: #a8e6cf; }
+        #quantity-30 .growth-chart .chart-bar:nth-child(2) { height: 25px; background: #95e1d3; }
+        #quantity-30 .growth-chart .chart-bar:nth-child(3) { height: 35px; background: #7ed6c4; }
+        #quantity-30 .growth-chart .chart-bar:nth-child(4) { height: 45px; background: #4ecdc4; }
+        #quantity-30 .growth-chart .chart-bar:nth-child(5) { height: 50px; background: #3dbdad; }
+
+        #quantity-30 .decline-chart .chart-bar:nth-child(1) { height: 50px; background: #ff6b9d; }
+        #quantity-30 .decline-chart .chart-bar:nth-child(2) { height: 40px; background: #ff8aac; }
+        #quantity-30 .decline-chart .chart-bar:nth-child(3) { height: 30px; background: #ffa8bc; }
+        #quantity-30 .decline-chart .chart-bar:nth-child(4) { height: 20px; background: #ffc7d3; }
+        #quantity-30 .decline-chart .chart-bar:nth-child(5) { height: 15px; background: #ffe4ec; }
+
+        #quantity-30 .trend-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        #quantity-30 .trend-percent {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #quantity-30 .growth-percent { color: #4ecdc4; }
+        #quantity-30 .decline-percent { color: #ff6b9d; }
+
+        /* ===================================
+           Responsive Adjustments
+           =================================== */
+        @media (max-width: 768px) {
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #quantity-1 .size-compare,
+            #quantity-3 .dots-compare,
+            #quantity-5 .container-compare,
+            #quantity-12 .water-compare,
+            #quantity-14 .coins-compare {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            #quantity-21 .far-line {
+                width: 100px;
+            }
+
+            #quantity-28 .scale-bar,
+            #quantity-28 .scale-labels {
+                width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">Quantity Comparison Diagrams</h1>
+    <p class="page-subtitle">数量・比較図解テンプレート - 30 Patterns</p>
+
+    <div class="template-grid">
+
+        <!-- #quantity-1: Big vs Small Circles -->
+        <div class="template-card" id="quantity-1">
+            <span class="template-id">#quantity-1</span>
+            <h3 class="template-name">Big vs Small Circles / 大きい vs 小さい</h3>
+            <div class="diagram-container">
+                <div class="size-compare">
+                    <div class="size-item">
+                        <div class="big-circle">BIG</div>
+                        <span class="size-label">Large Size</span>
+                    </div>
+                    <span class="vs-text">VS</span>
+                    <div class="size-item">
+                        <div class="small-circle">S</div>
+                        <span class="size-label">Small Size</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-2: Tall vs Short Bars -->
+        <div class="template-card" id="quantity-2">
+            <span class="template-id">#quantity-2</span>
+            <h3 class="template-name">Tall vs Short Bars / 高い vs 低い</h3>
+            <div class="diagram-container">
+                <div class="height-compare">
+                    <div class="height-item">
+                        <div class="tall-bar">180cm</div>
+                        <span class="height-label">Tall</span>
+                    </div>
+                    <div class="height-item">
+                        <div class="short-bar">60</div>
+                        <span class="height-label">Short</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-3: Many vs Few Dots -->
+        <div class="template-card" id="quantity-3">
+            <span class="template-id">#quantity-3</span>
+            <h3 class="template-name">Many vs Few Dots / 多い vs 少ない</h3>
+            <div class="diagram-container">
+                <div class="dots-compare">
+                    <div class="dots-group">
+                        <div class="dots-container many-dots">
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                            <div class="dot dot-pink"></div>
+                        </div>
+                        <span class="dots-count count-pink">15</span>
+                        <span class="dots-label">Many</span>
+                    </div>
+                    <div class="dots-group">
+                        <div class="dots-container few-dots">
+                            <div class="dot dot-blue"></div>
+                            <div class="dot dot-blue"></div>
+                            <div class="dot dot-blue"></div>
+                        </div>
+                        <span class="dots-count count-blue">3</span>
+                        <span class="dots-label">Few</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-4: Heavy vs Light (Scale) -->
+        <div class="template-card" id="quantity-4">
+            <span class="template-id">#quantity-4</span>
+            <h3 class="template-name">Heavy vs Light (Scale) / 重い vs 軽い</h3>
+            <div class="diagram-container">
+                <div class="weight-scale">
+                    <div class="scale-beam">
+                        <div class="scale-pivot"></div>
+                    </div>
+                    <div class="scale-pans">
+                        <div class="pan">
+                            <div class="pan-string heavy-string"></div>
+                            <div class="pan-dish heavy-dish">10kg</div>
+                        </div>
+                        <div class="pan">
+                            <div class="pan-string light-string"></div>
+                            <div class="pan-dish light-dish">2kg</div>
+                        </div>
+                    </div>
+                    <div class="weight-labels">
+                        <span class="weight-label">Heavy</span>
+                        <span class="weight-label">Light</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-5: Full vs Empty Container -->
+        <div class="template-card" id="quantity-5">
+            <span class="template-id">#quantity-5</span>
+            <h3 class="template-name">Full vs Empty Container / 満タン vs 空</h3>
+            <div class="diagram-container">
+                <div class="container-compare">
+                    <div class="container-item">
+                        <div class="container-vessel">
+                            <div class="container-fill full-fill">
+                                <span class="fill-label">90%</span>
+                            </div>
+                        </div>
+                        <span class="container-label">Full</span>
+                    </div>
+                    <div class="container-item">
+                        <div class="container-vessel">
+                            <div class="container-fill empty-fill">
+                                <span class="fill-label">15%</span>
+                            </div>
+                        </div>
+                        <span class="container-label">Empty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-6: Thick vs Thin Lines -->
+        <div class="template-card" id="quantity-6">
+            <span class="template-id">#quantity-6</span>
+            <h3 class="template-name">Thick vs Thin Lines / 太い vs 細い</h3>
+            <div class="diagram-container">
+                <div class="line-compare">
+                    <div class="line-item">
+                        <span class="line-label">Thick</span>
+                        <div class="thick-line"></div>
+                    </div>
+                    <div class="line-item">
+                        <span class="line-label">Thin</span>
+                        <div class="thin-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-7: Wide vs Narrow Rectangles -->
+        <div class="template-card" id="quantity-7">
+            <span class="template-id">#quantity-7</span>
+            <h3 class="template-name">Wide vs Narrow / 広い vs 狭い</h3>
+            <div class="diagram-container">
+                <div class="width-compare">
+                    <div class="width-item">
+                        <div class="wide-rect">WIDE</div>
+                        <span class="width-label">250px width</span>
+                    </div>
+                    <div class="width-item">
+                        <div class="narrow-rect">Narrow</div>
+                        <span class="width-label">80px width</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-8: Long vs Short Arrows -->
+        <div class="template-card" id="quantity-8">
+            <span class="template-id">#quantity-8</span>
+            <h3 class="template-name">Long vs Short Arrows / 長い vs 短い</h3>
+            <div class="diagram-container">
+                <div class="arrow-compare">
+                    <div class="arrow-item">
+                        <span class="arrow-label">Long</span>
+                        <div class="arrow-body">
+                            <div class="long-shaft"></div>
+                            <div class="arrow-head long-head"></div>
+                        </div>
+                        <span class="arrow-value value-pink">200km</span>
+                    </div>
+                    <div class="arrow-item">
+                        <span class="arrow-label">Short</span>
+                        <div class="arrow-body">
+                            <div class="short-shaft"></div>
+                            <div class="arrow-head short-head"></div>
+                        </div>
+                        <span class="arrow-value value-blue">60km</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-9: More vs Less Stacks -->
+        <div class="template-card" id="quantity-9">
+            <span class="template-id">#quantity-9</span>
+            <h3 class="template-name">More vs Less Stacks / 積み上げ比較</h3>
+            <div class="diagram-container">
+                <div class="stack-compare">
+                    <div class="stack-item">
+                        <div class="stack-blocks">
+                            <div class="stack-block block-pink"></div>
+                            <div class="stack-block block-yellow"></div>
+                            <div class="stack-block block-mint"></div>
+                            <div class="stack-block block-purple"></div>
+                            <div class="stack-block block-blue"></div>
+                        </div>
+                        <span class="stack-count">5 layers</span>
+                        <span class="stack-label">More</span>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-blocks">
+                            <div class="stack-block block-mint"></div>
+                            <div class="stack-block block-yellow"></div>
+                        </div>
+                        <span class="stack-count">2 layers</span>
+                        <span class="stack-label">Less</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-10: Majority vs Minority Pie -->
+        <div class="template-card" id="quantity-10">
+            <span class="template-id">#quantity-10</span>
+            <h3 class="template-name">Majority vs Minority / 多数派 vs 少数派</h3>
+            <div class="diagram-container">
+                <div class="pie-compare">
+                    <div class="majority-pie">
+                        <div class="pie-center">
+                            <span class="pie-value">80%</span>
+                            <span class="pie-label">Majority</span>
+                        </div>
+                    </div>
+                    <div class="pie-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot dot-majority"></div>
+                            <span>Majority (80%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot dot-minority"></div>
+                            <span>Minority (20%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-11: Dense vs Sparse Grid -->
+        <div class="template-card" id="quantity-11">
+            <span class="template-id">#quantity-11</span>
+            <h3 class="template-name">Dense vs Sparse / 密 vs 疎</h3>
+            <div class="diagram-container">
+                <div class="density-compare">
+                    <div class="density-item">
+                        <div class="dense-grid">
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                            <div class="grid-cell cell-mint"></div>
+                        </div>
+                        <span class="density-label">Dense (High)</span>
+                    </div>
+                    <div class="density-item">
+                        <div class="sparse-grid">
+                            <div class="grid-cell cell-orange"></div>
+                            <div class="grid-cell cell-orange"></div>
+                            <div class="grid-cell cell-orange"></div>
+                            <div class="grid-cell cell-orange"></div>
+                            <div class="grid-cell cell-orange"></div>
+                            <div class="grid-cell cell-orange"></div>
+                        </div>
+                        <span class="density-label">Sparse (Low)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-12: High vs Low Water Level -->
+        <div class="template-card" id="quantity-12">
+            <span class="template-id">#quantity-12</span>
+            <h3 class="template-name">High vs Low Water Level / 水位比較</h3>
+            <div class="diagram-container">
+                <div class="water-compare">
+                    <div class="water-item">
+                        <div class="water-tank">
+                            <div class="water-level high-water">
+                                <span class="water-percent">85%</span>
+                            </div>
+                        </div>
+                        <span class="water-label">High Level</span>
+                    </div>
+                    <div class="water-item">
+                        <div class="water-tank">
+                            <div class="water-level low-water">
+                                <span class="water-percent">25%</span>
+                            </div>
+                        </div>
+                        <span class="water-label">Low Level</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-13: Crowded vs Empty Room -->
+        <div class="template-card" id="quantity-13">
+            <span class="template-id">#quantity-13</span>
+            <h3 class="template-name">Crowded vs Empty / 混雑 vs 空き</h3>
+            <div class="diagram-container">
+                <div class="room-compare">
+                    <div class="room-item">
+                        <div class="room-box">
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                            <div class="person-icon"></div>
+                        </div>
+                        <span class="room-label">Crowded</span>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-box">
+                            <div class="person-icon"></div>
+                        </div>
+                        <span class="room-label">Empty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-14: Rich vs Poor Coins -->
+        <div class="template-card" id="quantity-14">
+            <span class="template-id">#quantity-14</span>
+            <h3 class="template-name">Rich vs Poor Coins / お金持ち vs 貧乏</h3>
+            <div class="diagram-container">
+                <div class="coins-compare">
+                    <div class="coins-item">
+                        <div class="coins-stack rich-stack">
+                            <div class="coin">$</div>
+                            <div class="coin">$</div>
+                            <div class="coin">$</div>
+                            <div class="coin">$</div>
+                            <div class="coin">$</div>
+                        </div>
+                        <span class="coins-amount">$50,000</span>
+                        <span class="coins-label">Rich</span>
+                    </div>
+                    <div class="coins-item">
+                        <div class="coins-stack poor-stack">
+                            <div class="coin">$</div>
+                        </div>
+                        <span class="coins-amount">$100</span>
+                        <span class="coins-label">Poor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-15: Fast vs Slow Speedometer -->
+        <div class="template-card" id="quantity-15">
+            <span class="template-id">#quantity-15</span>
+            <h3 class="template-name">Fast vs Slow Speedometer / 速い vs 遅い</h3>
+            <div class="diagram-container">
+                <div class="speed-compare">
+                    <div class="speed-item">
+                        <div class="speedometer">
+                            <div class="speed-bg"></div>
+                            <div class="speed-mask"></div>
+                            <div class="speed-needle fast-needle"></div>
+                            <div class="speed-center"></div>
+                        </div>
+                        <span class="speed-value value-fast">120 km/h</span>
+                        <span class="speed-label">Fast</span>
+                    </div>
+                    <div class="speed-item">
+                        <div class="speedometer">
+                            <div class="speed-bg"></div>
+                            <div class="speed-mask"></div>
+                            <div class="speed-needle slow-needle"></div>
+                            <div class="speed-center"></div>
+                        </div>
+                        <span class="speed-value value-slow">30 km/h</span>
+                        <span class="speed-label">Slow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-16: Hot vs Cold Temperature -->
+        <div class="template-card" id="quantity-16">
+            <span class="template-id">#quantity-16</span>
+            <h3 class="template-name">Hot vs Cold Temperature / 熱い vs 冷たい</h3>
+            <div class="diagram-container">
+                <div class="temp-compare">
+                    <div class="temp-item">
+                        <div class="thermometer">
+                            <div class="temp-fill hot-fill"></div>
+                            <div class="temp-bulb hot-bulb"></div>
+                        </div>
+                        <span class="temp-label">Hot</span>
+                        <span class="temp-value value-hot">38°C</span>
+                    </div>
+                    <div class="temp-item">
+                        <div class="thermometer">
+                            <div class="temp-fill cold-fill"></div>
+                            <div class="temp-bulb cold-bulb"></div>
+                        </div>
+                        <span class="temp-label">Cold</span>
+                        <span class="temp-value value-cold">5°C</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-17: Loud vs Quiet Sound Waves -->
+        <div class="template-card" id="quantity-17">
+            <span class="template-id">#quantity-17</span>
+            <h3 class="template-name">Loud vs Quiet Sound / うるさい vs 静か</h3>
+            <div class="diagram-container">
+                <div class="sound-compare">
+                    <div class="sound-item">
+                        <div class="sound-waves loud-waves">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
+                        <span class="sound-db db-loud">90 dB</span>
+                        <span class="sound-label">Loud</span>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-waves quiet-waves">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
+                        <span class="sound-db db-quiet">30 dB</span>
+                        <span class="sound-label">Quiet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-18: Bright vs Dark Light Bulbs -->
+        <div class="template-card" id="quantity-18">
+            <span class="template-id">#quantity-18</span>
+            <h3 class="template-name">Bright vs Dark Light / 明るい vs 暗い</h3>
+            <div class="diagram-container">
+                <div class="light-compare">
+                    <div class="light-item">
+                        <div class="bulb-container">
+                            <div class="bulb-glow bright-glow"></div>
+                            <div class="bulb bright-bulb"></div>
+                            <div class="bulb-base"></div>
+                        </div>
+                        <span class="light-label">Bright (ON)</span>
+                    </div>
+                    <div class="light-item">
+                        <div class="bulb-container">
+                            <div class="bulb-glow dark-glow"></div>
+                            <div class="bulb dark-bulb"></div>
+                            <div class="bulb-base"></div>
+                        </div>
+                        <span class="light-label">Dark (OFF)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-19: Strong vs Weak Muscles -->
+        <div class="template-card" id="quantity-19">
+            <span class="template-id">#quantity-19</span>
+            <h3 class="template-name">Strong vs Weak / 強い vs 弱い</h3>
+            <div class="diagram-container">
+                <div class="strength-compare">
+                    <div class="strength-item">
+                        <div class="arm-container">
+                            <div class="arm">💪</div>
+                            <div class="muscle-size strong-badge">MAX</div>
+                        </div>
+                        <span class="strength-value value-strong">100 Power</span>
+                        <span class="strength-label">Strong</span>
+                    </div>
+                    <div class="strength-item">
+                        <div class="arm-container">
+                            <div class="arm" style="font-size: 2rem; opacity: 0.6;">💪</div>
+                            <div class="muscle-size weak-badge">MIN</div>
+                        </div>
+                        <span class="strength-value value-weak">20 Power</span>
+                        <span class="strength-label">Weak</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-20: Old vs New Comparison -->
+        <div class="template-card" id="quantity-20">
+            <span class="template-id">#quantity-20</span>
+            <h3 class="template-name">Old vs New / 古い vs 新しい</h3>
+            <div class="diagram-container">
+                <div class="age-compare">
+                    <div class="age-item old-item">
+                        <div class="age-icon">📺</div>
+                        <span class="age-badge old-badge">1990</span>
+                        <span class="age-label">Old Model</span>
+                    </div>
+                    <div class="age-item new-item">
+                        <div class="age-icon">📱</div>
+                        <span class="age-badge new-badge">2024</span>
+                        <span class="age-label">New Model</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-21: Near vs Far Distance -->
+        <div class="template-card" id="quantity-21">
+            <span class="template-id">#quantity-21</span>
+            <h3 class="template-name">Near vs Far Distance / 近い vs 遠い</h3>
+            <div class="diagram-container">
+                <div class="distance-compare">
+                    <div class="distance-item">
+                        <span class="distance-label">Near</span>
+                        <div class="distance-visual">
+                            <div class="point-a">A</div>
+                            <div class="distance-line near-line"></div>
+                            <div class="point-b">B</div>
+                        </div>
+                        <span class="distance-value">500m</span>
+                    </div>
+                    <div class="distance-item">
+                        <span class="distance-label">Far</span>
+                        <div class="distance-visual">
+                            <div class="point-a">A</div>
+                            <div class="distance-line far-line"></div>
+                            <div class="point-b">B</div>
+                        </div>
+                        <span class="distance-value">10km</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-22: Deep vs Shallow Depth -->
+        <div class="template-card" id="quantity-22">
+            <span class="template-id">#quantity-22</span>
+            <h3 class="template-name">Deep vs Shallow / 深い vs 浅い</h3>
+            <div class="diagram-container">
+                <div class="depth-compare">
+                    <div class="depth-item">
+                        <div class="depth-container deep-container">
+                            <div class="water-surface"></div>
+                            <div class="depth-marker">🐠</div>
+                        </div>
+                        <span class="depth-label">Deep</span>
+                        <span class="depth-value">100m</span>
+                    </div>
+                    <div class="depth-item">
+                        <div class="depth-container shallow-container">
+                            <div class="water-surface"></div>
+                            <div class="depth-marker">🐚</div>
+                        </div>
+                        <span class="depth-label">Shallow</span>
+                        <span class="depth-value">2m</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-23: Expensive vs Cheap Price Tags -->
+        <div class="template-card" id="quantity-23">
+            <span class="template-id">#quantity-23</span>
+            <h3 class="template-name">Expensive vs Cheap / 高価 vs 安価</h3>
+            <div class="diagram-container">
+                <div class="price-compare">
+                    <div class="price-item">
+                        <div class="price-tag expensive-tag">
+                            <span class="price-amount expensive-amount">$999</span>
+                        </div>
+                        <span class="price-label">Expensive</span>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-tag cheap-tag">
+                            <span class="price-amount cheap-amount">$9.99</span>
+                        </div>
+                        <span class="price-label">Cheap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-24: Popular vs Rare Stars -->
+        <div class="template-card" id="quantity-24">
+            <span class="template-id">#quantity-24</span>
+            <h3 class="template-name">Popular vs Rare / 人気 vs レア</h3>
+            <div class="diagram-container">
+                <div class="popularity-compare">
+                    <div class="popularity-item">
+                        <div class="stars-container">
+                            <span class="star star-filled">★</span>
+                            <span class="star star-filled">★</span>
+                            <span class="star star-filled">★</span>
+                            <span class="star star-filled">★</span>
+                            <span class="star star-filled">★</span>
+                        </div>
+                        <span class="popularity-count">10,000+ reviews</span>
+                        <span class="popularity-label">Popular</span>
+                    </div>
+                    <div class="popularity-item">
+                        <div class="stars-container">
+                            <span class="star star-filled">★</span>
+                            <span class="star star-empty">★</span>
+                            <span class="star star-empty">★</span>
+                            <span class="star star-empty">★</span>
+                            <span class="star star-empty">★</span>
+                        </div>
+                        <span class="popularity-count">5 reviews</span>
+                        <span class="popularity-label">Rare</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-25: Easy vs Hard Difficulty Meter -->
+        <div class="template-card" id="quantity-25">
+            <span class="template-id">#quantity-25</span>
+            <h3 class="template-name">Easy vs Hard Difficulty / 簡単 vs 難しい</h3>
+            <div class="diagram-container">
+                <div class="difficulty-compare">
+                    <div class="difficulty-item">
+                        <span class="difficulty-label">Easy</span>
+                        <div class="difficulty-meter easy-meter">
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                        </div>
+                        <span class="difficulty-text text-easy">Level 2/5</span>
+                    </div>
+                    <div class="difficulty-item">
+                        <span class="difficulty-label">Hard</span>
+                        <div class="difficulty-meter hard-meter">
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                            <div class="meter-segment"></div>
+                        </div>
+                        <span class="difficulty-text text-hard">Level 5/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-26: Quick vs Slow Timer -->
+        <div class="template-card" id="quantity-26">
+            <span class="template-id">#quantity-26</span>
+            <h3 class="template-name">Quick vs Slow Timer / 早い vs ゆっくり</h3>
+            <div class="diagram-container">
+                <div class="timer-compare">
+                    <div class="timer-item">
+                        <div class="timer-circle quick-circle">
+                            <div class="timer-hand quick-hand"></div>
+                            <div class="timer-center"></div>
+                        </div>
+                        <span class="timer-value value-quick">5 min</span>
+                        <span class="timer-label">Quick</span>
+                    </div>
+                    <div class="timer-item">
+                        <div class="timer-circle slow-circle">
+                            <div class="timer-hand slow-hand"></div>
+                            <div class="timer-center"></div>
+                        </div>
+                        <span class="timer-value value-slow">60 min</span>
+                        <span class="timer-label">Slow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-27: Maximum vs Minimum Gauge -->
+        <div class="template-card" id="quantity-27">
+            <span class="template-id">#quantity-27</span>
+            <h3 class="template-name">Maximum vs Minimum / 最大 vs 最小</h3>
+            <div class="diagram-container">
+                <div class="minmax-compare">
+                    <div class="minmax-item">
+                        <div class="gauge-bar">
+                            <div class="gauge-fill max-fill"></div>
+                            <div class="gauge-markers">
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                            </div>
+                        </div>
+                        <span class="minmax-badge max-badge">MAX</span>
+                        <span class="minmax-label">Maximum</span>
+                    </div>
+                    <div class="minmax-item">
+                        <div class="gauge-bar">
+                            <div class="gauge-fill min-fill"></div>
+                            <div class="gauge-markers">
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                                <div class="marker"></div>
+                            </div>
+                        </div>
+                        <span class="minmax-badge min-badge">MIN</span>
+                        <span class="minmax-label">Minimum</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-28: Positive vs Negative Scale -->
+        <div class="template-card" id="quantity-28">
+            <span class="template-id">#quantity-28</span>
+            <h3 class="template-name">Positive vs Negative / プラス vs マイナス</h3>
+            <div class="diagram-container">
+                <div class="posneg-compare">
+                    <div class="scale-bar">
+                        <div class="scale-center"></div>
+                        <div class="scale-marker positive-marker"></div>
+                    </div>
+                    <div class="scale-labels">
+                        <span class="label-negative">-100</span>
+                        <span class="label-zero">0</span>
+                        <span class="label-positive">+100</span>
+                    </div>
+                    <div class="current-values">
+                        <div class="value-box positive-box">+60</div>
+                        <div class="value-box negative-box">-40</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-29: Success vs Failure Rate -->
+        <div class="template-card" id="quantity-29">
+            <span class="template-id">#quantity-29</span>
+            <h3 class="template-name">Success vs Failure Rate / 成功率 vs 失敗率</h3>
+            <div class="diagram-container">
+                <div class="rate-compare">
+                    <div class="rate-item">
+                        <div class="rate-circle success-circle">
+                            <div class="rate-inner">
+                                <span class="rate-value success-value">85%</span>
+                                <span class="rate-text">Success</span>
+                            </div>
+                        </div>
+                        <span class="rate-icon">✓</span>
+                        <span class="rate-label">High Success</span>
+                    </div>
+                    <div class="rate-item">
+                        <div class="rate-circle failure-circle">
+                            <div class="rate-inner">
+                                <span class="rate-value failure-value">20%</span>
+                                <span class="rate-text">Success</span>
+                            </div>
+                        </div>
+                        <span class="rate-icon">✗</span>
+                        <span class="rate-label">Low Success</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #quantity-30: Growth vs Decline Trend -->
+        <div class="template-card" id="quantity-30">
+            <span class="template-id">#quantity-30</span>
+            <h3 class="template-name">Growth vs Decline / 成長 vs 衰退</h3>
+            <div class="diagram-container">
+                <div class="trend-compare">
+                    <div class="trend-item">
+                        <span class="trend-arrow growth-arrow">↗</span>
+                        <div class="trend-chart growth-chart">
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                        </div>
+                        <span class="trend-percent growth-percent">+45%</span>
+                        <span class="trend-label">Growth</span>
+                    </div>
+                    <div class="trend-item">
+                        <span class="trend-arrow decline-arrow">↘</span>
+                        <div class="trend-chart decline-chart">
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                        </div>
+                        <span class="trend-percent decline-percent">-30%</span>
+                        <span class="trend-label">Decline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

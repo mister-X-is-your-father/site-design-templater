@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Deco Components - Batch 7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Didot', 'Bodoni MT', 'Times New Roman', serif;
+            background: #0a0a0a;
+            color: #e8dcc4;
+            line-height: 1.6;
+        }
+
+        /* [A01] ヒーローセクション */
+        .hero-deco {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .hero-deco::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(45deg, transparent 45%, rgba(212, 175, 55, 0.1) 45%, rgba(212, 175, 55, 0.1) 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(212, 175, 55, 0.1) 45%, rgba(212, 175, 55, 0.1) 55%, transparent 55%);
+            background-size: 60px 60px;
+            opacity: 0.3;
+        }
+
+        .hero-deco-content {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-deco-border {
+            border: 3px solid #d4af37;
+            border-image: linear-gradient(45deg, #d4af37, #ffd700, #d4af37) 1;
+            padding: 4rem 3rem;
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-deco-border::before,
+        .hero-deco-border::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ffd700;
+        }
+
+        .hero-deco-border::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .hero-deco-border::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .hero-deco h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero-deco-ornament {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .hero-deco-ornament::before,
+        .hero-deco-ornament::after {
+            content: '◆';
+            position: absolute;
+            top: -8px;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .hero-deco-ornament::before {
+            left: -30px;
+        }
+
+        .hero-deco-ornament::after {
+            right: -30px;
+        }
+
+        .hero-deco p {
+            font-size: 1.4rem;
+            letter-spacing: 0.1em;
+            color: #e8dcc4;
+            margin-bottom: 3rem;
+        }
+
+        /* [A02] 特徴カード */
+        .features-deco {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card-deco {
+            position: relative;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card-deco::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        }
+
+        .feature-card-deco:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .feature-icon-deco {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ffd700;
+            background:
+                linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 30%, rgba(212, 175, 55, 0.1) 70%, transparent 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(212, 175, 55, 0.1) 30%, rgba(212, 175, 55, 0.1) 70%, transparent 70%);
+            position: relative;
+        }
+
+        .feature-icon-deco::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #d4af37;
+            transform: rotate(45deg);
+        }
+
+        .feature-card-deco h3 {
+            font-size: 1.8rem;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .feature-card-deco p {
+            text-align: center;
+            color: #e8dcc4;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* [A03] 料金表 */
+        .pricing-deco {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            padding: 5rem 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .pricing-card-deco {
+            position: relative;
+            background: #0f0f0f;
+            border: 3px solid #d4af37;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card-deco.featured {
+            transform: scale(1.05);
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+        }
+
+        .pricing-card-deco::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .pricing-card-deco::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .pricing-header-deco {
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card-deco h3 {
+            font-size: 1.6rem;
+            color: #ffd700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .pricing-price-deco {
+            font-size: 4rem;
+            color: #ffd700;
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+        }
+
+        .pricing-price-deco::before {
+            content: '¥';
+            font-size: 2rem;
+            position: absolute;
+            left: -25px;
+            top: 10px;
+        }
+
+        .pricing-duration-deco {
+            font-size: 1.1rem;
+            color: #e8dcc4;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .pricing-features-deco {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features-deco li {
+            padding: 1rem 0;
+            color: #e8dcc4;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .pricing-features-deco li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+        }
+
+        .pricing-badge-deco {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: #0a0a0a;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: bold;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+        }
+
+        /* [A04] CTAボタン */
+        .cta-deco {
+            position: relative;
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37);
+            color: #0a0a0a;
+            text-decoration: none;
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: bold;
+            clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .cta-deco::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-deco:hover::before {
+            left: 100%;
+        }
+
+        .cta-deco:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .cta-deco-outline {
+            background: transparent;
+            color: #ffd700;
+            border: 2px solid #d4af37;
+            position: relative;
+        }
+
+        .cta-deco-outline::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+            z-index: -1;
+        }
+
+        .cta-deco-outline:hover::after {
+            opacity: 0.2;
+        }
+
+        /* [A05] テスティモニアル */
+        .testimonials-deco {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-deco {
+            background: #1a1a1a;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            border-left: 4px solid #d4af37;
+            border-right: 4px solid #d4af37;
+        }
+
+        .testimonial-deco::before,
+        .testimonial-deco::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: #d4af37;
+        }
+
+        .testimonial-deco::before {
+            top: 0;
+            left: 0;
+        }
+
+        .testimonial-deco::after {
+            bottom: 0;
+            right: 0;
+        }
+
+        .testimonial-quote-deco {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .testimonial-text-deco {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e8dcc4;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author-deco {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .testimonial-avatar-deco {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #d4af37;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #0a0a0a;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .testimonial-avatar-deco::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+            top: -6px;
+            left: -6px;
+        }
+
+        .testimonial-info-deco h4 {
+            font-size: 1.4rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .testimonial-info-deco p {
+            color: #e8dcc4;
+            opacity: 0.8;
+        }
+
+        /* [A06] FAQアコーディオン */
+        .faq-deco {
+            max-width: 900px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .faq-item-deco {
+            margin-bottom: 2rem;
+            border: 2px solid #d4af37;
+            background: #1a1a1a;
+            position: relative;
+        }
+
+        .faq-item-deco::before,
+        .faq-item-deco::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        .faq-item-deco::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .faq-item-deco::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .faq-question-deco {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        .faq-question-deco:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .faq-question-deco h3 {
+            font-size: 1.3rem;
+            color: #ffd700;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            flex: 1;
+        }
+
+        .faq-icon-deco {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d4af37;
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .faq-icon-deco::before {
+            content: '+';
+            transform: rotate(-45deg);
+            font-size: 1.5rem;
+            color: #ffd700;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item-deco.active .faq-icon-deco {
+            background: #d4af37;
+        }
+
+        .faq-item-deco.active .faq-icon-deco::before {
+            content: '−';
+        }
+
+        .faq-answer-deco {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 2rem;
+            color: #e8dcc4;
+            line-height: 1.8;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item-deco.active .faq-answer-deco {
+            max-height: 500px;
+            padding: 2rem;
+            border-top-color: rgba(212, 175, 55, 0.3);
+        }
+
+        /* [A07] フッター */
+        .footer-deco {
+            background: #0a0a0a;
+            border-top: 3px solid #d4af37;
+            padding: 4rem 2rem 2rem;
+            position: relative;
+        }
+
+        .footer-deco::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                #d4af37,
+                #d4af37 20px,
+                transparent 20px,
+                transparent 40px
+            );
+        }
+
+        .footer-content-deco {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section-deco h4 {
+            font-size: 1.4rem;
+            color: #ffd700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 300;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .footer-section-deco h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffd700, transparent);
+        }
+
+        .footer-section-deco ul {
+            list-style: none;
+        }
+
+        .footer-section-deco ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section-deco a {
+            color: #e8dcc4;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-section-deco a::before {
+            content: '◆';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: #d4af37;
+        }
+
+        .footer-section-deco a:hover {
+            color: #ffd700;
+            padding-left: 20px;
+        }
+
+        .footer-section-deco a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .footer-bottom-deco {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            color: #e8dcc4;
+            opacity: 0.8;
+        }
+
+        .footer-ornament-deco {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 2rem auto;
+        }
+
+        /* [A08] ナビゲーションバー */
+        .nav-deco {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #d4af37;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container-deco {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo-deco {
+            font-size: 2rem;
+            color: #ffd700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-logo-deco::before,
+        .nav-logo-deco::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid #ffd700;
+            transform: rotate(45deg);
+        }
+
+        .nav-logo-deco::before {
+            top: 0;
+            left: 0;
+        }
+
+        .nav-logo-deco::after {
+            bottom: 0;
+            right: 0;
+        }
+
+        .nav-menu-deco {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-menu-deco a {
+            color: #e8dcc4;
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu-deco a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #ffd700);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu-deco a:hover {
+            color: #ffd700;
+        }
+
+        .nav-menu-deco a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu-deco a.active {
+            color: #ffd700;
+        }
+
+        .nav-menu-deco a.active::after {
+            width: 100%;
+        }
+
+        /* [A09] ステップガイド */
+        .steps-deco {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .steps-container-deco {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
+        }
+
+        .step-deco {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number-deco {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ffd700;
+            position: relative;
+            font-weight: 300;
+        }
+
+        .step-number-deco::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #d4af37;
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .step-number-deco::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(45deg, transparent 45%, rgba(212, 175, 55, 0.1) 45%, rgba(212, 175, 55, 0.1) 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(212, 175, 55, 0.1) 45%, rgba(212, 175, 55, 0.1) 55%, transparent 55%);
+            background-size: 20px 20px;
+        }
+
+        .step-deco:hover .step-number-deco::before {
+            transform: rotate(45deg) scale(1.1);
+            border-color: #ffd700;
+        }
+
+        .step-number-deco span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-deco h3 {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .step-deco p {
+            color: #e8dcc4;
+            line-height: 1.8;
+        }
+
+        .step-connector-deco {
+            position: absolute;
+            top: 50px;
+            left: calc(50% + 50px);
+            width: calc(100% - 100px);
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, transparent, #d4af37);
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .step-deco:not(:last-child) .step-connector-deco {
+                display: block;
+            }
+        }
+
+        /* [A10] ニュースレター登録フォーム */
+        .newsletter-deco {
+            max-width: 800px;
+            margin: 5rem auto;
+            padding: 4rem 2rem;
+            background: #1a1a1a;
+            position: relative;
+            border: 3px solid #d4af37;
+        }
+
+        .newsletter-deco::before,
+        .newsletter-deco::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+        }
+
+        .newsletter-deco::before {
+            top: -3px;
+            left: -3px;
+            border-top: 3px solid #ffd700;
+            border-left: 3px solid #ffd700;
+        }
+
+        .newsletter-deco::after {
+            bottom: -3px;
+            right: -3px;
+            border-bottom: 3px solid #ffd700;
+            border-right: 3px solid #ffd700;
+        }
+
+        .newsletter-content-deco {
+            text-align: center;
+        }
+
+        .newsletter-icon-deco {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-content-deco h3 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .newsletter-ornament-deco {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 1.5rem auto;
+            position: relative;
+        }
+
+        .newsletter-ornament-deco::before,
+        .newsletter-ornament-deco::after {
+            content: '◆';
+            position: absolute;
+            top: -7px;
+            color: #d4af37;
+        }
+
+        .newsletter-ornament-deco::before {
+            left: -15px;
+        }
+
+        .newsletter-ornament-deco::after {
+            right: -15px;
+        }
+
+        .newsletter-content-deco p {
+            color: #e8dcc4;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .newsletter-form-deco {
+            display: flex;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-input-deco {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            background: #0a0a0a;
+            border: 2px solid #d4af37;
+            color: #e8dcc4;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            outline: none;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+
+        .newsletter-input-deco:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .newsletter-input-deco::placeholder {
+            color: rgba(232, 220, 196, 0.5);
+            letter-spacing: 0.1em;
+        }
+
+        .newsletter-submit-deco {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: #0a0a0a;
+            border: none;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            white-space: nowrap;
+        }
+
+        .newsletter-submit-deco:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .newsletter-privacy-deco {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(232, 220, 196, 0.6);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .hero-deco h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-menu-deco {
+                display: none;
+            }
+
+            .newsletter-form-deco {
+                flex-direction: column;
+            }
+
+            .pricing-card-deco.featured {
+                transform: scale(1);
+            }
+        }
+
+        /* デモ用のスペーシング */
+        section {
+            margin: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #ffd700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [A01] ヒーローセクション - アートデコ -->
+    <section class="hero-deco">
+        <div class="hero-deco-content">
+            <div class="hero-deco-border">
+                <h1>ELEGANCE</h1>
+                <div class="hero-deco-ornament"></div>
+                <p>1920年代の輝きを現代に</p>
+                <button class="cta-deco">今すぐ始める</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A02] 特徴カード -->
+    <section>
+        <h2 class="section-title">Features</h2>
+        <div class="features-deco">
+            <div class="feature-card-deco">
+                <div class="feature-icon-deco">★</div>
+                <h3>Premium</h3>
+                <p>最高品質のサービスを提供します。細部まで洗練されたデザインと機能性を兼ね備えています。</p>
+            </div>
+            <div class="feature-card-deco">
+                <div class="feature-icon-deco">◆</div>
+                <h3>Luxury</h3>
+                <p>贅沢な体験をお届けします。すべての瞬間があなたにとって特別なものになります。</p>
+            </div>
+            <div class="feature-card-deco">
+                <div class="feature-icon-deco">✦</div>
+                <h3>Elegance</h3>
+                <p>優雅さと品格を追求しました。時代を超えて愛される美しさがここにあります。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A03] 料金表 -->
+    <section>
+        <h2 class="section-title">Pricing</h2>
+        <div class="pricing-deco">
+            <div class="pricing-card-deco">
+                <div class="pricing-header-deco">
+                    <h3>Basic</h3>
+                    <div class="pricing-price-deco">9,800</div>
+                    <div class="pricing-duration-deco">/ 月額</div>
+                </div>
+                <ul class="pricing-features-deco">
+                    <li>基本機能すべて</li>
+                    <li>月間100件まで</li>
+                    <li>メールサポート</li>
+                    <li>モバイルアプリ</li>
+                </ul>
+                <button class="cta-deco-outline">詳細を見る</button>
+            </div>
+
+            <div class="pricing-card-deco featured">
+                <span class="pricing-badge-deco">人気</span>
+                <div class="pricing-header-deco">
+                    <h3>Premium</h3>
+                    <div class="pricing-price-deco">29,800</div>
+                    <div class="pricing-duration-deco">/ 月額</div>
+                </div>
+                <ul class="pricing-features-deco">
+                    <li>すべての機能</li>
+                    <li>月間500件まで</li>
+                    <li>優先サポート</li>
+                    <li>カスタマイズ可能</li>
+                    <li>API アクセス</li>
+                </ul>
+                <button class="cta-deco">今すぐ始める</button>
+            </div>
+
+            <div class="pricing-card-deco">
+                <div class="pricing-header-deco">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price-deco">99,800</div>
+                    <div class="pricing-duration-deco">/ 月額</div>
+                </div>
+                <ul class="pricing-features-deco">
+                    <li>無制限アクセス</li>
+                    <li>専任サポート</li>
+                    <li>オンサイト対応</li>
+                    <li>カスタム開発</li>
+                    <li>SLA保証</li>
+                </ul>
+                <button class="cta-deco-outline">お問い合わせ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A04] CTAボタンのバリエーション -->
+    <section style="text-align: center; padding: 5rem 2rem;">
+        <h2 class="section-title">Call to Action</h2>
+        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+            <button class="cta-deco">今すぐ始める</button>
+            <button class="cta-deco-outline">詳細を見る</button>
+        </div>
+    </section>
+
+    <!-- [A05] テスティモニアル（口コミ） -->
+    <section>
+        <h2 class="section-title">Testimonials</h2>
+        <div class="testimonials-deco">
+            <div class="testimonial-deco">
+                <div class="testimonial-quote-deco">"</div>
+                <p class="testimonial-text-deco">
+                    このサービスは私のビジネスを完全に変えました。洗練されたデザインと使いやすさが素晴らしい。
+                    1920年代の美学が現代に蘇ったような感覚です。
+                </p>
+                <div class="testimonial-author-deco">
+                    <div class="testimonial-avatar-deco">M</div>
+                    <div class="testimonial-info-deco">
+                        <h4>田中 美咲</h4>
+                        <p>株式会社エレガンス CEO</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-deco">
+                <div class="testimonial-quote-deco">"</div>
+                <p class="testimonial-text-deco">
+                    優雅さと機能性が完璧に融合しています。クライアントからの評価も上々で、
+                    導入して本当に良かったと感じています。
+                </p>
+                <div class="testimonial-author-deco">
+                    <div class="testimonial-avatar-deco">K</div>
+                    <div class="testimonial-info-deco">
+                        <h4>佐藤 健太</h4>
+                        <p>デザインスタジオ K ディレクター</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A06] FAQアコーディオン -->
+    <section>
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq-deco">
+            <div class="faq-item-deco">
+                <div class="faq-question-deco" onclick="this.parentElement.classList.toggle('active')">
+                    <h3>サービスの利用開始までどのくらいかかりますか？</h3>
+                    <div class="faq-icon-deco"></div>
+                </div>
+                <div class="faq-answer-deco">
+                    お申し込みから最短で当日中にご利用を開始いただけます。アカウント作成後、すぐに全機能にアクセス可能です。
+                    必要に応じて、専任スタッフが初期設定をサポートいたします。
+                </div>
+            </div>
+
+            <div class="faq-item-deco">
+                <div class="faq-question-deco" onclick="this.parentElement.classList.toggle('active')">
+                    <h3>プランの変更は可能ですか？</h3>
+                    <div class="faq-icon-deco"></div>
+                </div>
+                <div class="faq-answer-deco">
+                    はい、いつでも上位プランへのアップグレード、または下位プランへの変更が可能です。
+                    プラン変更は即座に反映され、料金は日割り計算されます。
+                </div>
+            </div>
+
+            <div class="faq-item-deco">
+                <div class="faq-question-deco" onclick="this.parentElement.classList.toggle('active')">
+                    <h3>無料トライアルはありますか？</h3>
+                    <div class="faq-icon-deco"></div>
+                </div>
+                <div class="faq-answer-deco">
+                    14日間の無料トライアル期間をご用意しております。クレジットカード登録不要で、
+                    すべての機能を制限なくお試しいただけます。
+                </div>
+            </div>
+
+            <div class="faq-item-deco">
+                <div class="faq-question-deco" onclick="this.parentElement.classList.toggle('active')">
+                    <h3>サポート体制について教えてください</h3>
+                    <div class="faq-icon-deco"></div>
+                </div>
+                <div class="faq-answer-deco">
+                    Basic プランではメールサポート、Premium プランでは優先サポート、
+                    Enterprise プランでは専任サポートチームが24時間365日対応いたします。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A07] フッター -->
+    <footer class="footer-deco">
+        <div class="footer-content-deco">
+            <div class="footer-section-deco">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">会社概要</a></li>
+                    <li><a href="#">私たちのビジョン</a></li>
+                    <li><a href="#">チーム</a></li>
+                    <li><a href="#">採用情報</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section-deco">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">料金プラン</a></li>
+                    <li><a href="#">機能一覧</a></li>
+                    <li><a href="#">導入事例</a></li>
+                    <li><a href="#">API ドキュメント</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section-deco">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">ヘルプセンター</a></li>
+                    <li><a href="#">よくある質問</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                    <li><a href="#">システムステータス</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section-deco">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">利用規約</a></li>
+                    <li><a href="#">プライバシーポリシー</a></li>
+                    <li><a href="#">特定商取引法</a></li>
+                    <li><a href="#">セキュリティ</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-ornament-deco"></div>
+
+        <div class="footer-bottom-deco">
+            <p>&copy; 2026 ELEGANCE. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- [A08] ナビゲーションバー -->
+    <nav class="nav-deco" style="position: relative; margin-top: 3rem;">
+        <div class="nav-container-deco">
+            <a href="#" class="nav-logo-deco">DECO</a>
+            <ul class="nav-menu-deco">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- [A09] ステップガイド（使い方説明） -->
+    <section>
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-deco">
+            <div class="steps-container-deco">
+                <div class="step-deco">
+                    <div class="step-number-deco">
+                        <span>01</span>
+                    </div>
+                    <h3>登録</h3>
+                    <p>メールアドレスを入力して、アカウントを作成します。わずか30秒で完了します。</p>
+                    <div class="step-connector-deco"></div>
+                </div>
+
+                <div class="step-deco">
+                    <div class="step-number-deco">
+                        <span>02</span>
+                    </div>
+                    <h3>設定</h3>
+                    <p>プロフィールを設定し、お好みのカスタマイズを行います。ガイドが丁寧にサポート。</p>
+                    <div class="step-connector-deco"></div>
+                </div>
+
+                <div class="step-deco">
+                    <div class="step-number-deco">
+                        <span>03</span>
+                    </div>
+                    <h3>利用開始</h3>
+                    <p>すぐにすべての機能を使い始められます。直感的なUIで迷うことはありません。</p>
+                    <div class="step-connector-deco"></div>
+                </div>
+
+                <div class="step-deco">
+                    <div class="step-number-deco">
+                        <span>04</span>
+                    </div>
+                    <h3>成果</h3>
+                    <p>あなたのビジネスが加速します。データに基づいた改善提案も受け取れます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A10] ニュースレター登録フォーム -->
+    <section>
+        <div class="newsletter-deco">
+            <div class="newsletter-content-deco">
+                <div class="newsletter-icon-deco">✉</div>
+                <h3>Newsletter</h3>
+                <div class="newsletter-ornament-deco"></div>
+                <p>最新情報や特別オファーをいち早くお届けします。<br>今すぐ登録して、エレガントな情報をあなたのもとへ。</p>
+                <form class="newsletter-form-deco">
+                    <input
+                        type="email"
+                        class="newsletter-input-deco"
+                        placeholder="メールアドレスを入力"
+                        required
+                    >
+                    <button type="submit" class="newsletter-submit-deco">登録する</button>
+                </form>
+                <p class="newsletter-privacy-deco">
+                    ご登録いただいたメールアドレスは、プライバシーポリシーに基づいて管理されます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // FAQアコーディオンの動作（既に inline onclick で実装済み）
+        // ニュースレターフォームの送信処理（デモ用）
+        document.querySelector('.newsletter-form-deco')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('ご登録ありがとうございます！');
+        });
+    </script>
+
+</body>
+</html>

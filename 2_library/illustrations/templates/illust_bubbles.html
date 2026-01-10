@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Bubbles & Labels - CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        /* bubble-01: Round Speech Bubble */
+        .round-speech-bubble {
+            width: 100px;
+            height: 80px;
+            background: #4ECDC4;
+            border-radius: 50px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .round-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #4ECDC4;
+        }
+        .round-speech-bubble:hover {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* bubble-02: Square Speech Bubble */
+        .square-speech-bubble {
+            width: 100px;
+            height: 80px;
+            background: #FF6B6B;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .square-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 15px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 20px solid #FF6B6B;
+        }
+        .square-speech-bubble:hover {
+            transform: translateY(-5px);
+        }
+
+        /* bubble-03: Thought Bubble */
+        .thought-bubble {
+            width: 90px;
+            height: 70px;
+            background: #A8E6CF;
+            border-radius: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .thought-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 15px;
+            width: 20px;
+            height: 20px;
+            background: #A8E6CF;
+            border-radius: 50%;
+        }
+        .thought-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -22px;
+            left: 8px;
+            width: 12px;
+            height: 12px;
+            background: #A8E6CF;
+            border-radius: 50%;
+        }
+        .thought-bubble:hover {
+            transform: scale(1.1);
+        }
+
+        /* bubble-04: Shout Bubble */
+        .shout-bubble {
+            width: 100px;
+            height: 90px;
+            background: #FFE66D;
+            position: relative;
+            clip-path: polygon(
+                50% 0%, 65% 15%, 85% 5%, 80% 25%, 100% 35%,
+                85% 50%, 95% 70%, 75% 65%, 60% 85%, 50% 70%,
+                40% 85%, 25% 65%, 5% 70%, 15% 50%, 0% 35%,
+                20% 25%, 15% 5%, 35% 15%
+            );
+            transition: transform 0.2s ease;
+        }
+        .shout-bubble:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* bubble-05: Whisper Bubble */
+        .whisper-bubble {
+            width: 100px;
+            height: 60px;
+            background: transparent;
+            border: 3px dashed #95A5A6;
+            border-radius: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .whisper-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 20px;
+            width: 15px;
+            height: 15px;
+            border-bottom: 3px dashed #95A5A6;
+            border-right: 3px dashed #95A5A6;
+            transform: rotate(45deg);
+            background: #f5f5f5;
+        }
+        .whisper-bubble:hover {
+            border-color: #7F8C8D;
+            transform: scale(1.05);
+        }
+
+        /* bubble-06: Chat Bubble */
+        .chat-bubble {
+            width: 90px;
+            height: 70px;
+            background: #5C6BC0;
+            border-radius: 20px 20px 20px 5px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+        .chat-bubble:hover {
+            transform: translateX(5px);
+        }
+
+        /* bubble-07: Callout Box */
+        .callout-box {
+            width: 100px;
+            height: 80px;
+            background: #26A69A;
+            border-radius: 8px;
+            position: relative;
+            border-left: 6px solid #00796B;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .callout-box::before {
+            content: '!';
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+        .callout-box:hover {
+            transform: translateX(5px);
+            box-shadow: -5px 5px 0 #00796B;
+        }
+
+        /* bubble-08: Banner Ribbon */
+        .banner-ribbon {
+            width: 110px;
+            height: 40px;
+            background: #E91E63;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .banner-ribbon::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-right: 15px solid #E91E63;
+        }
+        .banner-ribbon::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 15px solid #E91E63;
+        }
+        .banner-ribbon:hover {
+            transform: scaleX(1.1);
+        }
+
+        /* bubble-09: Tag Label */
+        .tag-label {
+            width: 90px;
+            height: 45px;
+            background: #9C27B0;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+            margin-left: 15px;
+            transition: transform 0.3s ease;
+        }
+        .tag-label::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 22.5px solid transparent;
+            border-bottom: 22.5px solid transparent;
+            border-right: 22px solid #9C27B0;
+        }
+        .tag-label::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+        .tag-label:hover {
+            transform: translateX(8px);
+        }
+
+        /* bubble-10: Sticker Shape */
+        .sticker-shape {
+            width: 90px;
+            height: 90px;
+            background: #FF9800;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .sticker-shape::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, transparent 50%, #E65100 50%);
+            border-radius: 0 0 50% 0;
+        }
+        .sticker-shape:hover {
+            transform: rotate(10deg);
+            box-shadow: 0 10px 25px rgba(255, 152, 0, 0.4);
+        }
+
+        /* bubble-11: Explosion Bubble */
+        .explosion-bubble {
+            width: 100px;
+            height: 100px;
+            background: #F44336;
+            clip-path: polygon(
+                50% 0%, 61% 20%, 80% 10%, 75% 30%, 100% 40%,
+                80% 50%, 100% 65%, 75% 70%, 80% 90%, 60% 75%,
+                50% 100%, 40% 75%, 20% 90%, 25% 70%, 0% 65%,
+                20% 50%, 0% 40%, 25% 30%, 20% 10%, 39% 20%
+            );
+            transition: transform 0.2s ease;
+        }
+        .explosion-bubble:hover {
+            transform: scale(1.2) rotate(-5deg);
+        }
+
+        /* bubble-12: Cloud Bubble */
+        .cloud-bubble {
+            width: 100px;
+            height: 60px;
+            background: #90CAF9;
+            border-radius: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .cloud-bubble::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #90CAF9;
+            border-radius: 50%;
+        }
+        .cloud-bubble::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 45px;
+            width: 50px;
+            height: 50px;
+            background: #90CAF9;
+            border-radius: 50%;
+        }
+        .cloud-bubble:hover {
+            transform: translateY(-8px);
+        }
+
+        /* bubble-13: Heart Bubble */
+        .heart-bubble {
+            width: 90px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .heart-bubble::before,
+        .heart-bubble::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 45px;
+            height: 70px;
+            background: #EC407A;
+            border-radius: 45px 45px 0 0;
+        }
+        .heart-bubble::before {
+            left: 45px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart-bubble::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .heart-bubble:hover {
+            transform: scale(1.15);
+        }
+
+        /* bubble-14: Star Burst */
+        .star-burst {
+            width: 90px;
+            height: 90px;
+            background: #FFC107;
+            clip-path: polygon(
+                50% 0%, 61% 35%, 98% 35%, 68% 57%,
+                79% 91%, 50% 70%, 21% 91%, 32% 57%,
+                2% 35%, 39% 35%
+            );
+            transition: transform 0.3s ease;
+        }
+        .star-burst:hover {
+            transform: rotate(36deg) scale(1.1);
+        }
+
+        /* bubble-15: Info Box */
+        .info-box {
+            width: 100px;
+            height: 80px;
+            background: #2196F3;
+            border-radius: 10px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .info-box::before {
+            content: 'i';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+            font-style: italic;
+            color: white;
+            font-family: Georgia, serif;
+        }
+        .info-box:hover {
+            transform: perspective(500px) rotateY(15deg);
+        }
+
+        /* bubble-16: Quote Box */
+        .quote-box {
+            width: 100px;
+            height: 80px;
+            background: #607D8B;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 5px;
+            left: 12px;
+            font-size: 50px;
+            color: rgba(255,255,255,0.5);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .quote-box::after {
+            content: '"';
+            position: absolute;
+            bottom: -10px;
+            right: 12px;
+            font-size: 50px;
+            color: rgba(255,255,255,0.5);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .quote-box:hover {
+            transform: scale(1.08);
+        }
+
+        /* bubble-17: Notification Badge */
+        .notification-badge {
+            width: 80px;
+            height: 80px;
+            background: #F44336;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .notification-badge::before {
+            content: '3';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+        }
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #FFCDD2;
+            border-radius: 50%;
+            opacity: 0;
+            animation: none;
+        }
+        .notification-badge:hover {
+            transform: scale(1.1);
+        }
+        .notification-badge:hover::after {
+            animation: ping 1s ease-out infinite;
+        }
+        @keyframes ping {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        /* bubble-18: Tooltip */
+        .tooltip {
+            width: 100px;
+            height: 50px;
+            background: #37474F;
+            border-radius: 6px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #37474F;
+        }
+        .tooltip::before {
+            content: '...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
+            letter-spacing: 3px;
+        }
+        .tooltip:hover {
+            transform: translateY(-5px);
+        }
+
+        /* bubble-19: Memo Note */
+        .memo-note {
+            width: 90px;
+            height: 100px;
+            background: #FFEB3B;
+            position: relative;
+            box-shadow: 3px 3px 0 #F9A825;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .memo-note::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 20px solid #FDD835;
+            border-right: 20px solid white;
+        }
+        .memo-note::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            width: 60px;
+            height: 6px;
+            background: rgba(0,0,0,0.15);
+            box-shadow:
+                0 15px 0 rgba(0,0,0,0.15),
+                0 30px 0 rgba(0,0,0,0.15);
+        }
+        .memo-note:hover {
+            transform: rotate(-3deg) translateY(-5px);
+            box-shadow: 6px 6px 0 #F9A825;
+        }
+
+        /* bubble-20: Price Tag */
+        .price-tag {
+            width: 80px;
+            height: 100px;
+            background: #8BC34A;
+            border-radius: 0 0 8px 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .price-tag::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 20px solid #8BC34A;
+        }
+        .price-tag::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+        }
+        .price-tag:hover {
+            transform: translateY(-8px) rotate(5deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Speech Bubbles & Labels</h1>
+
+    <div class="grid">
+        <!-- bubble-01: Round Speech Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="round-speech-bubble" id="bubble-01"></div>
+            </div>
+            <span class="item-label">bubble-01</span>
+        </div>
+
+        <!-- bubble-02: Square Speech Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="square-speech-bubble" id="bubble-02"></div>
+            </div>
+            <span class="item-label">bubble-02</span>
+        </div>
+
+        <!-- bubble-03: Thought Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="thought-bubble" id="bubble-03"></div>
+            </div>
+            <span class="item-label">bubble-03</span>
+        </div>
+
+        <!-- bubble-04: Shout Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="shout-bubble" id="bubble-04"></div>
+            </div>
+            <span class="item-label">bubble-04</span>
+        </div>
+
+        <!-- bubble-05: Whisper Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="whisper-bubble" id="bubble-05"></div>
+            </div>
+            <span class="item-label">bubble-05</span>
+        </div>
+
+        <!-- bubble-06: Chat Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="chat-bubble" id="bubble-06"></div>
+            </div>
+            <span class="item-label">bubble-06</span>
+        </div>
+
+        <!-- bubble-07: Callout Box -->
+        <div class="item">
+            <div class="item-container">
+                <div class="callout-box" id="bubble-07"></div>
+            </div>
+            <span class="item-label">bubble-07</span>
+        </div>
+
+        <!-- bubble-08: Banner Ribbon -->
+        <div class="item">
+            <div class="item-container">
+                <div class="banner-ribbon" id="bubble-08"></div>
+            </div>
+            <span class="item-label">bubble-08</span>
+        </div>
+
+        <!-- bubble-09: Tag Label -->
+        <div class="item">
+            <div class="item-container">
+                <div class="tag-label" id="bubble-09"></div>
+            </div>
+            <span class="item-label">bubble-09</span>
+        </div>
+
+        <!-- bubble-10: Sticker Shape -->
+        <div class="item">
+            <div class="item-container">
+                <div class="sticker-shape" id="bubble-10"></div>
+            </div>
+            <span class="item-label">bubble-10</span>
+        </div>
+
+        <!-- bubble-11: Explosion Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="explosion-bubble" id="bubble-11"></div>
+            </div>
+            <span class="item-label">bubble-11</span>
+        </div>
+
+        <!-- bubble-12: Cloud Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="cloud-bubble" id="bubble-12"></div>
+            </div>
+            <span class="item-label">bubble-12</span>
+        </div>
+
+        <!-- bubble-13: Heart Bubble -->
+        <div class="item">
+            <div class="item-container">
+                <div class="heart-bubble" id="bubble-13"></div>
+            </div>
+            <span class="item-label">bubble-13</span>
+        </div>
+
+        <!-- bubble-14: Star Burst -->
+        <div class="item">
+            <div class="item-container">
+                <div class="star-burst" id="bubble-14"></div>
+            </div>
+            <span class="item-label">bubble-14</span>
+        </div>
+
+        <!-- bubble-15: Info Box -->
+        <div class="item">
+            <div class="item-container">
+                <div class="info-box" id="bubble-15"></div>
+            </div>
+            <span class="item-label">bubble-15</span>
+        </div>
+
+        <!-- bubble-16: Quote Box -->
+        <div class="item">
+            <div class="item-container">
+                <div class="quote-box" id="bubble-16"></div>
+            </div>
+            <span class="item-label">bubble-16</span>
+        </div>
+
+        <!-- bubble-17: Notification Badge -->
+        <div class="item">
+            <div class="item-container">
+                <div class="notification-badge" id="bubble-17"></div>
+            </div>
+            <span class="item-label">bubble-17</span>
+        </div>
+
+        <!-- bubble-18: Tooltip -->
+        <div class="item">
+            <div class="item-container">
+                <div class="tooltip" id="bubble-18"></div>
+            </div>
+            <span class="item-label">bubble-18</span>
+        </div>
+
+        <!-- bubble-19: Memo Note -->
+        <div class="item">
+            <div class="item-container">
+                <div class="memo-note" id="bubble-19"></div>
+            </div>
+            <span class="item-label">bubble-19</span>
+        </div>
+
+        <!-- bubble-20: Price Tag -->
+        <div class="item">
+            <div class="item-container">
+                <div class="price-tag" id="bubble-20"></div>
+            </div>
+            <span class="item-label">bubble-20</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet & Animal LP Components - Batch 29</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Warm Pet Colors */
+            --pet-cream: #FFF8F0;
+            --pet-warm: #FFF5EB;
+            --pet-peach: #FFE8D6;
+            --pet-coral: #FF9B7B;
+            --pet-orange: #FF7043;
+            --pet-brown: #8D6E63;
+            --pet-dark-brown: #5D4037;
+            --pet-caramel: #D4A574;
+            --pet-gold: #FFB74D;
+            --pet-mint: #B2DFDB;
+            --pet-soft-green: #C8E6C9;
+            --pet-pink: #F8BBD9;
+            --pet-soft-pink: #FCE4EC;
+            --pet-text: #4E342E;
+            --pet-text-light: #795548;
+            --pet-shadow: rgba(141, 110, 99, 0.15);
+            --pet-shadow-hover: rgba(141, 110, 99, 0.25);
+        }
+
+        body {
+            font-family: 'Rounded Mplus 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', sans-serif;
+            background: var(--pet-cream);
+            color: var(--pet-text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Paw Print Decoration */
+        .paw-print {
+            display: inline-block;
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        .paw-print::before {
+            content: '🐾';
+            font-size: 1.2em;
+        }
+
+        /* ================================================
+           [AC01] Hero Section - Pet & Animal
+           ================================================ */
+        .hero-pet {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--pet-warm) 0%, var(--pet-peach) 50%, var(--pet-soft-pink) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pet::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 155, 123, 0.2) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-pet::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(248, 187, 217, 0.3) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-pet-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .hero-pet-mascot {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero-pet h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--pet-dark-brown);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .hero-pet .highlight {
+            background: linear-gradient(135deg, var(--pet-coral) 0%, var(--pet-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-pet .highlight::after {
+            content: '🐾';
+            position: absolute;
+            font-size: 0.5em;
+            top: -10px;
+            right: -25px;
+        }
+
+        .hero-pet p {
+            font-size: 1.25rem;
+            color: var(--pet-text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-pet-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--pet-text-light);
+            box-shadow: 0 4px 15px var(--pet-shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-cta-group-pet {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================
+           [AC02] Feature Cards - Pet & Animal
+           ================================================ */
+        .features-pet {
+            padding: 5rem 0;
+            background: var(--pet-cream);
+            position: relative;
+        }
+
+        .features-pet::before {
+            content: '🐱 🐶 🐰';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            opacity: 0.3;
+            letter-spacing: 2rem;
+        }
+
+        .features-grid-pet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card-pet {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 30px var(--pet-shadow);
+            border: 3px solid transparent;
+            overflow: hidden;
+        }
+
+        .feature-card-pet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pet-coral), var(--pet-gold), var(--pet-mint));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .feature-card-pet:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--pet-peach);
+            box-shadow: 0 20px 50px var(--pet-shadow-hover);
+        }
+
+        .feature-icon-pet {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--pet-peach) 0%, var(--pet-soft-pink) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(255, 155, 123, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card-pet:hover .feature-icon-pet {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .feature-card-pet h3 {
+            font-size: 1.4rem;
+            color: var(--pet-dark-brown);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .feature-card-pet p {
+            color: var(--pet-text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            background: var(--pet-soft-green);
+            color: #2E7D32;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* ================================================
+           [AC03] Pricing Table - Pet & Animal
+           ================================================ */
+        .pricing-pet {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, var(--pet-cream) 0%, var(--pet-warm) 100%);
+        }
+
+        .pricing-grid-pet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card-pet {
+            background: white;
+            border-radius: 32px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px var(--pet-shadow);
+            border: 4px solid var(--pet-peach);
+        }
+
+        .pricing-card-pet.featured-pet {
+            border-color: var(--pet-coral);
+            transform: scale(1.05);
+            background: linear-gradient(135deg, white 0%, var(--pet-soft-pink) 100%);
+        }
+
+        .pricing-card-pet:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--pet-shadow-hover);
+        }
+
+        .pricing-card-pet.featured-pet:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge-pet {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--pet-coral) 0%, var(--pet-orange) 100%);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 112, 67, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-mascot {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card-pet h3 {
+            font-size: 1.5rem;
+            color: var(--pet-dark-brown);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .pricing-desc {
+            text-align: center;
+            color: var(--pet-text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-price-pet {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--pet-dark-brown);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .pricing-price-pet span {
+            font-size: 1rem;
+            color: var(--pet-text-light);
+            font-weight: 400;
+        }
+
+        .pricing-features-pet {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--pet-warm);
+            border-radius: 16px;
+        }
+
+        .pricing-features-pet li {
+            padding: 0.6rem 0;
+            color: var(--pet-text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features-pet li::before {
+            content: '🐾';
+            font-size: 1rem;
+        }
+
+        /* ================================================
+           [AC04] CTA Button - Pet & Animal
+           ================================================ */
+        .cta-btn-pet {
+            background: linear-gradient(135deg, var(--pet-coral) 0%, var(--pet-orange) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(255, 112, 67, 0.4);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .cta-btn-pet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-btn-pet:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 35px rgba(255, 112, 67, 0.5);
+        }
+
+        .cta-btn-pet:hover::before {
+            left: 100%;
+        }
+
+        .cta-btn-pet:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .cta-btn-outline-pet {
+            background: transparent;
+            color: var(--pet-brown);
+            border: 3px solid var(--pet-peach);
+            box-shadow: 0 4px 15px var(--pet-shadow);
+        }
+
+        .cta-btn-outline-pet:hover {
+            background: var(--pet-peach);
+            border-color: var(--pet-coral);
+            color: var(--pet-dark-brown);
+            box-shadow: 0 8px 25px var(--pet-shadow-hover);
+        }
+
+        .cta-btn-soft {
+            background: linear-gradient(135deg, var(--pet-mint) 0%, var(--pet-soft-green) 100%);
+            color: #2E7D32;
+            box-shadow: 0 6px 25px rgba(178, 223, 219, 0.5);
+        }
+
+        .cta-btn-soft:hover {
+            box-shadow: 0 10px 35px rgba(178, 223, 219, 0.6);
+        }
+
+        /* ================================================
+           [AC05] Testimonial - Pet & Animal
+           ================================================ */
+        .testimonial-pet {
+            padding: 5rem 0;
+            background: var(--pet-soft-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-pet::before {
+            content: '🐾🐾🐾🐾🐾';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            opacity: 0.2;
+            letter-spacing: 3rem;
+        }
+
+        .testimonial-grid-pet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card-pet {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 10px 40px var(--pet-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card-pet:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px var(--pet-shadow-hover);
+        }
+
+        .testimonial-pet-type {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--pet-gold);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--pet-dark-brown);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .testimonial-content-pet {
+            margin-top: 1rem;
+        }
+
+        .testimonial-text-pet {
+            color: var(--pet-text);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .testimonial-text-pet::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--pet-peach);
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-author-pet {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 2px dashed var(--pet-peach);
+        }
+
+        .testimonial-avatar-pet {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--pet-peach) 0%, var(--pet-coral) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(255, 155, 123, 0.3);
+        }
+
+        .testimonial-info-pet h4 {
+            color: var(--pet-dark-brown);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info-pet p {
+            color: var(--pet-text-light);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            margin-top: 0.5rem;
+            color: var(--pet-gold);
+            font-size: 1rem;
+        }
+
+        /* ================================================
+           [AC06] FAQ - Pet & Animal
+           ================================================ */
+        .faq-pet {
+            padding: 5rem 0;
+            background: var(--pet-cream);
+        }
+
+        .faq-container-pet {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item-pet {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 20px var(--pet-shadow);
+            border: 2px solid var(--pet-peach);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item-pet:hover {
+            border-color: var(--pet-coral);
+            box-shadow: 0 8px 30px var(--pet-shadow-hover);
+        }
+
+        .faq-question-pet {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem;
+            text-align: left;
+            color: var(--pet-dark-brown);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question-pet:hover {
+            background: var(--pet-warm);
+        }
+
+        .faq-question-pet span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .faq-icon-pet {
+            width: 36px;
+            height: 36px;
+            background: var(--pet-peach);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            color: var(--pet-coral);
+        }
+
+        .faq-item-pet.active .faq-icon-pet {
+            background: var(--pet-coral);
+            color: white;
+            transform: rotate(45deg);
+        }
+
+        .faq-answer-pet {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            color: var(--pet-text-light);
+            line-height: 1.8;
+            background: var(--pet-warm);
+        }
+
+        .faq-item-pet.active .faq-answer-pet {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .faq-answer-pet p {
+            padding-top: 1rem;
+            border-top: 2px dashed var(--pet-peach);
+        }
+
+        /* ================================================
+           [AC07] Footer - Pet & Animal
+           ================================================ */
+        .footer-pet {
+            background: var(--pet-dark-brown);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-pet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--pet-coral), var(--pet-gold), var(--pet-mint), var(--pet-pink), var(--pet-coral));
+        }
+
+        .footer-top-pet {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo-pet {
+            text-align: center;
+        }
+
+        .footer-logo-pet .logo-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo-pet h3 {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 800;
+        }
+
+        .footer-logo-pet p {
+            color: var(--pet-caramel);
+            font-size: 0.9rem;
+        }
+
+        .footer-grid-pet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section-pet h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links-pet {
+            list-style: none;
+        }
+
+        .footer-links-pet li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links-pet a {
+            color: var(--pet-caramel);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links-pet a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-social-pet {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon-pet {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pet-caramel);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icon-pet:hover {
+            background: var(--pet-coral);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom-pet {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--pet-caramel);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-pet a {
+            color: var(--pet-caramel);
+            text-decoration: none;
+        }
+
+        .footer-bottom-pet a:hover {
+            color: white;
+        }
+
+        /* ================================================
+           [AC08] Navigation Bar - Pet & Animal
+           ================================================ */
+        .navbar-pet {
+            background: rgba(255, 248, 240, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--pet-peach);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--pet-shadow);
+        }
+
+        .navbar-content-pet {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo-pet {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .navbar-logo-pet .logo-icon {
+            font-size: 2rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .navbar-logo-pet span {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--pet-dark-brown);
+        }
+
+        .navbar-menu-pet {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .navbar-menu-pet a {
+            color: var(--pet-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-menu-pet a::after {
+            content: '🐾';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-menu-pet a:hover {
+            color: var(--pet-coral);
+        }
+
+        .navbar-menu-pet a:hover::after {
+            transform: translateX(-50%) scale(1);
+        }
+
+        .navbar-toggle-pet {
+            display: none;
+            background: var(--pet-peach);
+            border: none;
+            color: var(--pet-dark-brown);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        /* ================================================
+           [AC09] Step Guide - Pet & Animal
+           ================================================ */
+        .steps-pet {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, var(--pet-cream) 0%, var(--pet-soft-green) 100%);
+        }
+
+        .steps-container-pet {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .step-item-pet {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .step-item-pet::before {
+            content: '';
+            position: absolute;
+            left: 39px;
+            top: 80px;
+            width: 4px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(180deg, var(--pet-coral) 0%, var(--pet-peach) 50%, transparent 100%);
+            border-radius: 2px;
+        }
+
+        .step-item-pet:last-child::before {
+            display: none;
+        }
+
+        .step-number-pet {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 4px solid var(--pet-coral);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 25px var(--pet-shadow);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number-pet .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--pet-coral);
+        }
+
+        .step-number-pet .icon {
+            font-size: 1.5rem;
+            margin-top: -5px;
+        }
+
+        .step-content-pet {
+            flex: 1;
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px var(--pet-shadow);
+            border: 3px solid var(--pet-peach);
+            transition: all 0.3s ease;
+        }
+
+        .step-content-pet:hover {
+            transform: translateX(10px);
+            border-color: var(--pet-coral);
+            box-shadow: 0 15px 40px var(--pet-shadow-hover);
+        }
+
+        .step-content-pet h3 {
+            color: var(--pet-dark-brown);
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-content-pet p {
+            color: var(--pet-text-light);
+            line-height: 1.7;
+        }
+
+        .step-tip {
+            background: var(--pet-warm);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--pet-brown);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ================================================
+           [AC10] Registration Form - Pet & Animal
+           ================================================ */
+        .register-pet {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--pet-warm) 0%, var(--pet-soft-pink) 100%);
+        }
+
+        .register-container-pet {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px var(--pet-shadow);
+            border: 4px solid var(--pet-peach);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-container-pet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--pet-coral), var(--pet-gold), var(--pet-mint));
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .register-header .mascot {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .register-header h2 {
+            font-size: 1.75rem;
+            color: var(--pet-dark-brown);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .register-header p {
+            color: var(--pet-text-light);
+            font-size: 1rem;
+        }
+
+        .register-form-pet {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group-pet {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group-pet label {
+            font-weight: 600;
+            color: var(--pet-dark-brown);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-input-pet {
+            background: var(--pet-warm);
+            border: 2px solid var(--pet-peach);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            color: var(--pet-text);
+            transition: all 0.3s ease;
+        }
+
+        .form-input-pet:focus {
+            outline: none;
+            border-color: var(--pet-coral);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 155, 123, 0.15);
+        }
+
+        .form-input-pet::placeholder {
+            color: var(--pet-text-light);
+        }
+
+        .form-select-pet {
+            background: var(--pet-warm);
+            border: 2px solid var(--pet-peach);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            color: var(--pet-text);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238D6E63' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.25rem;
+        }
+
+        .form-select-pet:focus {
+            outline: none;
+            border-color: var(--pet-coral);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(255, 155, 123, 0.15);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--pet-warm);
+            border-radius: 12px;
+        }
+
+        .form-checkbox-pet {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--pet-coral);
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .form-checkbox-label {
+            font-size: 0.9rem;
+            color: var(--pet-text-light);
+            line-height: 1.5;
+        }
+
+        .form-checkbox-label a {
+            color: var(--pet-coral);
+            text-decoration: underline;
+        }
+
+        .form-submit-pet {
+            margin-top: 0.5rem;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--pet-text-light);
+            margin-top: 1rem;
+        }
+
+        .form-note a {
+            color: var(--pet-coral);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Section Title Style */
+        .section-title-pet {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title-pet .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title-pet h2 {
+            font-size: 2.25rem;
+            color: var(--pet-dark-brown);
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+        }
+
+        .section-title-pet p {
+            font-size: 1.1rem;
+            color: var(--pet-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-menu-pet {
+                display: none;
+            }
+
+            .navbar-toggle-pet {
+                display: block;
+            }
+
+            .pricing-card-pet.featured-pet {
+                transform: none;
+            }
+
+            .pricing-card-pet.featured-pet:hover {
+                transform: translateY(-10px);
+            }
+
+            .step-item-pet {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .step-item-pet::before {
+                display: none;
+            }
+
+            .hero-pet-mascot {
+                font-size: 4rem;
+            }
+
+            .register-container-pet {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [AC08] Navigation Bar - ペット -->
+    <nav class="navbar-pet">
+        <div class="container">
+            <div class="navbar-content-pet">
+                <a href="#" class="navbar-logo-pet">
+                    <span class="logo-icon">🐕</span>
+                    <span>PetLife</span>
+                </a>
+                <ul class="navbar-menu-pet">
+                    <li><a href="#features">特徴</a></li>
+                    <li><a href="#pricing">料金</a></li>
+                    <li><a href="#testimonials">お客様の声</a></li>
+                    <li><a href="#faq">よくある質問</a></li>
+                    <li><button class="cta-btn-pet" style="padding: 0.75rem 1.5rem;">無料で始める</button></li>
+                </ul>
+                <button class="navbar-toggle-pet">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [AC01] Hero Section - ペット -->
+    <section class="hero-pet">
+        <div class="container">
+            <div class="hero-pet-content">
+                <div class="hero-pet-mascot">🐕🐈</div>
+                <h1>
+                    大切なペットと<br>
+                    <span class="highlight">もっと幸せに</span>暮らそう
+                </h1>
+                <p>
+                    ペットとの毎日をもっと楽しく、もっと安心に。
+                    専門家監修のサービスで、家族みんなの笑顔を守ります。
+                </p>
+                <div class="hero-pet-badges">
+                    <div class="hero-badge">
+                        <span>🏥</span>
+                        <span>獣医師監修</span>
+                    </div>
+                    <div class="hero-badge">
+                        <span>📱</span>
+                        <span>24時間対応</span>
+                    </div>
+                    <div class="hero-badge">
+                        <span>💯</span>
+                        <span>満足度98%</span>
+                    </div>
+                </div>
+                <div class="hero-cta-group-pet">
+                    <button class="cta-btn-pet">🐾 今すぐ無料で始める</button>
+                    <button class="cta-btn-pet cta-btn-outline-pet">詳しく見る</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC02] Feature Cards - ペット -->
+    <section class="features-pet" id="features">
+        <div class="container">
+            <div class="section-title-pet">
+                <span class="icon">🌟</span>
+                <h2>選ばれる3つの理由</h2>
+                <p>ペットと飼い主さまの幸せを第一に考えたサービス</p>
+            </div>
+            <div class="features-grid-pet">
+                <div class="feature-card-pet">
+                    <div class="feature-icon-pet">🏥</div>
+                    <h3>いつでも獣医師に相談</h3>
+                    <p>24時間365日、経験豊富な獣医師にオンラインで相談できます。ちょっとした心配事も、すぐに解決。</p>
+                    <span class="feature-tag">人気No.1</span>
+                </div>
+                <div class="feature-card-pet">
+                    <div class="feature-icon-pet">📊</div>
+                    <h3>健康管理が簡単に</h3>
+                    <p>体重、食事、運動量を記録するだけで、AIがペットの健康状態を分析。異変を早期発見できます。</p>
+                    <span class="feature-tag">新機能</span>
+                </div>
+                <div class="feature-card-pet">
+                    <div class="feature-icon-pet">🎁</div>
+                    <h3>お得なペットグッズ</h3>
+                    <p>厳選されたペットフードやおもちゃを会員価格でお届け。毎月届くサプライズボックスも人気です。</p>
+                    <span class="feature-tag">送料無料</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC03] Pricing Table - ペット -->
+    <section class="pricing-pet" id="pricing">
+        <div class="container">
+            <div class="section-title-pet">
+                <span class="icon">💝</span>
+                <h2>料金プラン</h2>
+                <p>ペットの数や必要な機能に合わせて選べます</p>
+            </div>
+            <div class="pricing-grid-pet">
+                <div class="pricing-card-pet">
+                    <div class="pricing-mascot">🐱</div>
+                    <h3>ライトプラン</h3>
+                    <p class="pricing-desc">はじめてのペットライフに</p>
+                    <div class="pricing-price-pet">
+                        ¥980<span>/月</span>
+                    </div>
+                    <ul class="pricing-features-pet">
+                        <li>健康記録（1匹まで）</li>
+                        <li>獣医師チャット（月3回）</li>
+                        <li>お役立ちコラム読み放題</li>
+                        <li>メールサポート</li>
+                    </ul>
+                    <button class="cta-btn-pet cta-btn-outline-pet" style="width: 100%;">このプランで始める</button>
+                </div>
+                <div class="pricing-card-pet featured-pet">
+                    <div class="pricing-badge-pet">🔥 一番人気</div>
+                    <div class="pricing-mascot">🐕</div>
+                    <h3>スタンダードプラン</h3>
+                    <p class="pricing-desc">しっかりサポートが欲しい方に</p>
+                    <div class="pricing-price-pet">
+                        ¥1,980<span>/月</span>
+                    </div>
+                    <ul class="pricing-features-pet">
+                        <li>健康記録（3匹まで）</li>
+                        <li>獣医師チャット（無制限）</li>
+                        <li>AIによる健康分析</li>
+                        <li>優先サポート</li>
+                        <li>会員限定セール</li>
+                    </ul>
+                    <button class="cta-btn-pet" style="width: 100%;">🐾 このプランで始める</button>
+                </div>
+                <div class="pricing-card-pet">
+                    <div class="pricing-mascot">🐕🐱🐰</div>
+                    <h3>ファミリープラン</h3>
+                    <p class="pricing-desc">多頭飼いの方におすすめ</p>
+                    <div class="pricing-price-pet">
+                        ¥2,980<span>/月</span>
+                    </div>
+                    <ul class="pricing-features-pet">
+                        <li>健康記録（無制限）</li>
+                        <li>獣医師ビデオ通話</li>
+                        <li>月1回の健康レポート</li>
+                        <li>専任コンシェルジュ</li>
+                        <li>グッズ毎月無料お届け</li>
+                        <li>保険割引特典</li>
+                    </ul>
+                    <button class="cta-btn-pet cta-btn-soft" style="width: 100%;">このプランで始める</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC04] CTA Button Demo - ペット -->
+    <section style="padding: 5rem 0; background: var(--pet-cream);">
+        <div class="container" style="text-align: center;">
+            <h2 style="color: var(--pet-dark-brown); font-size: 2rem; margin-bottom: 2rem;">
+                🐾 今なら初月無料キャンペーン中！
+            </h2>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="cta-btn-pet">🎉 無料で始める</button>
+                <button class="cta-btn-pet cta-btn-outline-pet">📖 詳しく見る</button>
+                <button class="cta-btn-pet cta-btn-soft">💬 相談する</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC05] Testimonial - ペット -->
+    <section class="testimonial-pet" id="testimonials">
+        <div class="container">
+            <div class="section-title-pet">
+                <span class="icon">💬</span>
+                <h2>飼い主さまの声</h2>
+                <p>たくさんの嬉しいお声をいただいています</p>
+            </div>
+            <div class="testimonial-grid-pet">
+                <div class="testimonial-card-pet">
+                    <div class="testimonial-pet-type">
+                        <span>🐕</span>
+                        <span>犬 / ポメラニアン</span>
+                    </div>
+                    <div class="testimonial-content-pet">
+                        <p class="testimonial-text-pet">
+                            夜中に愛犬が急に吐いた時、すぐに獣医師さんに相談できて本当に助かりました。
+                            的確なアドバイスで、翌朝には元気になっていて安心しました。
+                        </p>
+                        <div class="testimonial-author-pet">
+                            <div class="testimonial-avatar-pet">🐕</div>
+                            <div class="testimonial-info-pet">
+                                <h4>田中さま</h4>
+                                <p>ポメラニアン「モコ」の飼い主</p>
+                                <div class="testimonial-rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card-pet">
+                    <div class="testimonial-pet-type">
+                        <span>🐱</span>
+                        <span>猫 / スコティッシュ</span>
+                    </div>
+                    <div class="testimonial-content-pet">
+                        <p class="testimonial-text-pet">
+                            健康管理機能で食欲の変化に気づいて、早めに病院に行ったら初期の腎臓病が見つかりました。
+                            早期発見できて本当に感謝しています。
+                        </p>
+                        <div class="testimonial-author-pet">
+                            <div class="testimonial-avatar-pet">🐱</div>
+                            <div class="testimonial-info-pet">
+                                <h4>佐藤さま</h4>
+                                <p>スコティッシュ「ミケ」の飼い主</p>
+                                <div class="testimonial-rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card-pet">
+                    <div class="testimonial-pet-type">
+                        <span>🐰</span>
+                        <span>うさぎ / ホーランドロップ</span>
+                    </div>
+                    <div class="testimonial-content-pet">
+                        <p class="testimonial-text-pet">
+                            うさぎの情報って少ないので、専門の獣医師に相談できるのは心強いです。
+                            毎月届くおやつも、うちの子のお気に入りばかりで大満足！
+                        </p>
+                        <div class="testimonial-author-pet">
+                            <div class="testimonial-avatar-pet">🐰</div>
+                            <div class="testimonial-info-pet">
+                                <h4>鈴木さま</h4>
+                                <p>ホーランドロップ「うに」の飼い主</p>
+                                <div class="testimonial-rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC06] FAQ Accordion - ペット -->
+    <section class="faq-pet" id="faq">
+        <div class="container">
+            <div class="section-title-pet">
+                <span class="icon">❓</span>
+                <h2>よくあるご質問</h2>
+                <p>気になることがあればお気軽にお問い合わせください</p>
+            </div>
+            <div class="faq-container-pet">
+                <div class="faq-item-pet">
+                    <button class="faq-question-pet">
+                        <span><span>🐕</span> どんなペットでも利用できますか？</span>
+                        <span class="faq-icon-pet">+</span>
+                    </button>
+                    <div class="faq-answer-pet">
+                        <p>はい！犬、猫はもちろん、うさぎ、ハムスター、小鳥など、様々なペットに対応しています。各動物の専門知識を持った獣医師がサポートいたします。</p>
+                    </div>
+                </div>
+                <div class="faq-item-pet">
+                    <button class="faq-question-pet">
+                        <span><span>💊</span> 薬の処方もしてもらえますか？</span>
+                        <span class="faq-icon-pet">+</span>
+                    </button>
+                    <div class="faq-answer-pet">
+                        <p>オンライン相談のみでは処方箋は出せませんが、獣医師の判断で通院が必要な場合は、お近くの提携動物病院をご紹介いたします。緊急時の応急処置のアドバイスは可能です。</p>
+                    </div>
+                </div>
+                <div class="faq-item-pet">
+                    <button class="faq-question-pet">
+                        <span><span>📱</span> スマホアプリはありますか？</span>
+                        <span class="faq-icon-pet">+</span>
+                    </button>
+                    <div class="faq-answer-pet">
+                        <p>iOS・Android両対応のアプリをご用意しています。健康記録、獣医師チャット、お知らせなど、すべての機能をスマホで簡単にご利用いただけます。</p>
+                    </div>
+                </div>
+                <div class="faq-item-pet">
+                    <button class="faq-question-pet">
+                        <span><span>💰</span> いつでも解約できますか？</span>
+                        <span class="faq-icon-pet">+</span>
+                    </button>
+                    <div class="faq-answer-pet">
+                        <p>はい、いつでも解約可能です。解約金はかかりません。マイページから簡単に手続きでき、解約後も記録データはダウンロードできます。</p>
+                    </div>
+                </div>
+                <div class="faq-item-pet">
+                    <button class="faq-question-pet">
+                        <span><span>🎁</span> グッズの配送エリアは？</span>
+                        <span class="faq-icon-pet">+</span>
+                    </button>
+                    <div class="faq-answer-pet">
+                        <p>日本国内であれば全国どこでも送料無料でお届けします。離島の場合も追加料金はかかりません。毎月10日頃に届くよう発送しています。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC09] Step Guide - ペット -->
+    <section class="steps-pet">
+        <div class="container">
+            <div class="section-title-pet">
+                <span class="icon">📝</span>
+                <h2>かんたん3ステップで開始</h2>
+                <p>登録はたった3分で完了します</p>
+            </div>
+            <div class="steps-container-pet">
+                <div class="step-item-pet">
+                    <div class="step-number-pet">
+                        <span class="number">1</span>
+                        <span class="icon">✉️</span>
+                    </div>
+                    <div class="step-content-pet">
+                        <h3>🐾 無料アカウント登録</h3>
+                        <p>
+                            メールアドレスだけで簡単に登録できます。SNSアカウントでもOK！
+                            最短30秒でアカウント作成が完了します。
+                        </p>
+                        <div class="step-tip">
+                            💡 ヒント: LINEで登録すると通知も届いて便利です
+                        </div>
+                    </div>
+                </div>
+                <div class="step-item-pet">
+                    <div class="step-number-pet">
+                        <span class="number">2</span>
+                        <span class="icon">🐕</span>
+                    </div>
+                    <div class="step-content-pet">
+                        <h3>🐾 ペット情報を登録</h3>
+                        <p>
+                            ペットの名前、種類、生年月日、体重などを入力します。
+                            写真を登録すると、専用のプロフィールカードが作れます。
+                        </p>
+                        <div class="step-tip">
+                            💡 ヒント: 複数のペットを登録できます
+                        </div>
+                    </div>
+                </div>
+                <div class="step-item-pet">
+                    <div class="step-number-pet">
+                        <span class="number">3</span>
+                        <span class="icon">🎉</span>
+                    </div>
+                    <div class="step-content-pet">
+                        <h3>🐾 利用開始！</h3>
+                        <p>
+                            すべての機能が使えるようになります。まずは獣医師に相談してみましょう。
+                            初回は無料で15分間のビデオ相談ができます。
+                        </p>
+                        <div class="step-tip">
+                            💡 ヒント: 初月無料キャンペーン実施中！
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC10] Registration Form - ペット -->
+    <section class="register-pet">
+        <div class="container">
+            <div class="register-container-pet">
+                <div class="register-header">
+                    <div class="mascot">🐾</div>
+                    <h2>無料で始めよう</h2>
+                    <p>たった3分で登録完了。今なら初月無料！</p>
+                </div>
+                <form class="register-form-pet">
+                    <div class="form-group-pet">
+                        <label><span>👤</span> お名前</label>
+                        <input type="text" class="form-input-pet" placeholder="山田 太郎" required>
+                    </div>
+                    <div class="form-group-pet">
+                        <label><span>✉️</span> メールアドレス</label>
+                        <input type="email" class="form-input-pet" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group-pet">
+                        <label><span>🔒</span> パスワード</label>
+                        <input type="password" class="form-input-pet" placeholder="8文字以上で設定" required>
+                    </div>
+                    <div class="form-group-pet">
+                        <label><span>🐕</span> ペットの種類</label>
+                        <select class="form-select-pet" required>
+                            <option value="">選択してください</option>
+                            <option value="dog">🐕 犬</option>
+                            <option value="cat">🐱 猫</option>
+                            <option value="rabbit">🐰 うさぎ</option>
+                            <option value="hamster">🐹 ハムスター</option>
+                            <option value="bird">🐦 小鳥</option>
+                            <option value="other">🐾 その他</option>
+                        </select>
+                    </div>
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox-pet" id="terms" required>
+                        <label for="terms" class="form-checkbox-label">
+                            <a href="#">利用規約</a>と<a href="#">プライバシーポリシー</a>に同意します
+                        </label>
+                    </div>
+                    <div class="form-submit-pet">
+                        <button type="submit" class="cta-btn-pet" style="width: 100%;">🐾 無料で登録する</button>
+                    </div>
+                </form>
+                <p class="form-note">
+                    すでにアカウントをお持ちの方は<a href="#">こちらからログイン</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- [AC07] Footer - ペット -->
+    <footer class="footer-pet">
+        <div class="container">
+            <div class="footer-top-pet">
+                <div class="footer-logo-pet">
+                    <div class="logo-icon">🐕🐱🐰</div>
+                    <h3>PetLife</h3>
+                    <p>ペットとの毎日をもっと幸せに</p>
+                </div>
+            </div>
+            <div class="footer-grid-pet">
+                <div class="footer-section-pet">
+                    <h4>🏠 サービス</h4>
+                    <ul class="footer-links-pet">
+                        <li><a href="#">獣医師相談</a></li>
+                        <li><a href="#">健康管理</a></li>
+                        <li><a href="#">グッズショップ</a></li>
+                        <li><a href="#">お役立ちコラム</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section-pet">
+                    <h4>💰 料金プラン</h4>
+                    <ul class="footer-links-pet">
+                        <li><a href="#">ライトプラン</a></li>
+                        <li><a href="#">スタンダードプラン</a></li>
+                        <li><a href="#">ファミリープラン</a></li>
+                        <li><a href="#">法人プラン</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section-pet">
+                    <h4>📚 サポート</h4>
+                    <ul class="footer-links-pet">
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">使い方ガイド</a></li>
+                        <li><a href="#">提携病院一覧</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section-pet">
+                    <h4>🏢 会社情報</h4>
+                    <ul class="footer-links-pet">
+                        <li><a href="#">運営会社</a></li>
+                        <li><a href="#">採用情報</a></li>
+                        <li><a href="#">プレスキット</a></li>
+                    </ul>
+                    <div class="footer-social-pet">
+                        <a href="#" class="social-icon-pet">𝕏</a>
+                        <a href="#" class="social-icon-pet">📷</a>
+                        <a href="#" class="social-icon-pet">📺</a>
+                        <a href="#" class="social-icon-pet">💬</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-pet">
+                <p>&copy; 2026 PetLife Inc. All rights reserved. | <a href="#">プライバシーポリシー</a> | <a href="#">利用規約</a> | <a href="#">特定商取引法に基づく表記</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question-pet').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-item-pet').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.register-form-pet').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('登録ありがとうございます！確認メールをお送りしました🐾');
+            e.target.reset();
+        });
+    </script>
+
+</body>
+</html>

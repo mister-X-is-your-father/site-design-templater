@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music & Art - Flat Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --yellow: #FFE66D;
+            --purple: #A06CD5;
+            --blue: #74B9FF;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --light: #FAFAFA;
+            --mint: #00B894;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem 3rem;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .item-label {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--dark);
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .item-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 0.25rem;
+        }
+
+        /* ==================== */
+        /* art-01: Music Note */
+        /* ==================== */
+        .music-note {
+            width: 60px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .music-note:hover {
+            transform: rotate(-15deg) scale(1.1);
+        }
+
+        .music-note .stem {
+            position: absolute;
+            right: 8px;
+            top: 0;
+            width: 6px;
+            height: 55px;
+            background: var(--coral);
+            border-radius: 3px;
+        }
+
+        .music-note .head {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 28px;
+            height: 22px;
+            background: var(--coral);
+            border-radius: 50%;
+            transform: rotate(-25deg);
+        }
+
+        .music-note .flag {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 25px;
+            height: 30px;
+            background: var(--coral);
+            border-radius: 0 0 25px 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
+        }
+
+        /* ==================== */
+        /* art-02: Treble Clef */
+        /* ==================== */
+        .treble-clef {
+            width: 40px;
+            height: 90px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .treble-clef:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .treble-clef .main-curve {
+            position: absolute;
+            width: 35px;
+            height: 60px;
+            border: 6px solid var(--purple);
+            border-radius: 50%;
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+            top: 15px;
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        .treble-clef .inner-curve {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            border: 5px solid var(--purple);
+            border-radius: 50%;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            top: 35px;
+            left: 8px;
+            transform: rotate(45deg);
+        }
+
+        .treble-clef .stem {
+            position: absolute;
+            width: 6px;
+            height: 70px;
+            background: var(--purple);
+            border-radius: 3px;
+            left: 17px;
+            top: 5px;
+        }
+
+        .treble-clef .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--purple);
+            border-radius: 50%;
+            bottom: 0;
+            left: 14px;
+        }
+
+        /* ==================== */
+        /* art-03: Piano Keys */
+        /* ==================== */
+        .piano-keys {
+            width: 84px;
+            height: 70px;
+            display: flex;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .piano-keys:hover {
+            transform: scale(1.1);
+        }
+
+        .piano-keys .white-key {
+            width: 12px;
+            height: 70px;
+            background: var(--light);
+            border: 2px solid var(--dark);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .piano-keys .white-key:hover {
+            background: #e0e0e0;
+        }
+
+        .piano-keys .black-keys {
+            position: absolute;
+            top: 0;
+            left: 8px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .piano-keys .black-key {
+            width: 8px;
+            height: 42px;
+            background: var(--dark);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .piano-keys .black-key:nth-child(3) {
+            margin-left: 6px;
+        }
+
+        /* ==================== */
+        /* art-04: Guitar */
+        /* ==================== */
+        .guitar {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .guitar:hover {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .guitar .body {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 50px;
+            height: 55px;
+            background: var(--orange);
+            border-radius: 50% 50% 45% 45%;
+        }
+
+        .guitar .sound-hole {
+            position: absolute;
+            bottom: 20px;
+            left: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .guitar .neck {
+            position: absolute;
+            top: 0;
+            left: 28px;
+            width: 14px;
+            height: 45px;
+            background: #8B4513;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .guitar .head {
+            position: absolute;
+            top: -5px;
+            left: 25px;
+            width: 20px;
+            height: 12px;
+            background: #8B4513;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .guitar .strings {
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            width: 10px;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .guitar .string {
+            width: 1px;
+            height: 100%;
+            background: var(--dark);
+        }
+
+        /* ==================== */
+        /* art-05: Drum */
+        /* ==================== */
+        .drum {
+            width: 70px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .drum:hover {
+            transform: scale(1.15);
+            animation: drum-shake 0.2s ease infinite;
+        }
+
+        @keyframes drum-shake {
+            0%, 100% { transform: scale(1.15) rotate(-2deg); }
+            50% { transform: scale(1.15) rotate(2deg); }
+        }
+
+        .drum .body {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 60px;
+            height: 50px;
+            background: var(--coral);
+            border-radius: 0 0 10px 10px;
+        }
+
+        .drum .top {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 70px;
+            height: 20px;
+            background: #F5F5DC;
+            border-radius: 50%;
+            border: 3px solid var(--coral);
+        }
+
+        .drum .stripe {
+            position: absolute;
+            bottom: 15px;
+            left: 5px;
+            width: 60px;
+            height: 8px;
+            background: var(--yellow);
+        }
+
+        /* ==================== */
+        /* art-06: Microphone */
+        /* ==================== */
+        .microphone {
+            width: 40px;
+            height: 85px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .microphone:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .microphone .head {
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 30px;
+            height: 40px;
+            background: var(--dark);
+            border-radius: 15px 15px 10px 10px;
+        }
+
+        .microphone .mesh {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 20px;
+            height: 25px;
+            background: repeating-linear-gradient(
+                0deg,
+                #555 0px,
+                #555 2px,
+                var(--dark) 2px,
+                var(--dark) 4px
+            );
+            border-radius: 10px 10px 5px 5px;
+        }
+
+        .microphone .body {
+            position: absolute;
+            top: 38px;
+            left: 15px;
+            width: 10px;
+            height: 35px;
+            background: linear-gradient(90deg, #888 0%, #aaa 50%, #888 100%);
+            border-radius: 2px;
+        }
+
+        .microphone .base {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 20px;
+            height: 8px;
+            background: var(--dark);
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* ==================== */
+        /* art-07: Headphones */
+        /* ==================== */
+        .headphones {
+            width: 80px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .headphones:hover {
+            transform: scale(1.15);
+            animation: headphones-bounce 0.4s ease infinite;
+        }
+
+        @keyframes headphones-bounce {
+            0%, 100% { transform: scale(1.15) translateY(0); }
+            50% { transform: scale(1.15) translateY(-5px); }
+        }
+
+        .headphones .band {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            width: 60px;
+            height: 35px;
+            border: 8px solid var(--teal);
+            border-bottom: none;
+            border-radius: 35px 35px 0 0;
+        }
+
+        .headphones .cup-left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 28px;
+            height: 35px;
+            background: var(--teal);
+            border-radius: 8px;
+        }
+
+        .headphones .cup-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 35px;
+            background: var(--teal);
+            border-radius: 8px;
+        }
+
+        .headphones .cushion-left,
+        .headphones .cushion-right {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: var(--dark);
+            border-radius: 5px;
+            bottom: 5px;
+        }
+
+        .headphones .cushion-left { left: 4px; }
+        .headphones .cushion-right { right: 4px; }
+
+        /* ==================== */
+        /* art-08: Speaker */
+        /* ==================== */
+        .speaker {
+            width: 60px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .speaker:hover {
+            transform: scale(1.1);
+            animation: speaker-pulse 0.2s ease infinite;
+        }
+
+        @keyframes speaker-pulse {
+            0%, 100% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .speaker .cabinet {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 80px;
+            background: var(--dark);
+            border-radius: 8px;
+        }
+
+        .speaker .woofer {
+            position: absolute;
+            bottom: 12px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            background: #444;
+            border-radius: 50%;
+            border: 3px solid #555;
+        }
+
+        .speaker .woofer-center {
+            position: absolute;
+            bottom: 24px;
+            left: 22px;
+            width: 16px;
+            height: 16px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .speaker .tweeter {
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background: #444;
+            border-radius: 50%;
+            border: 2px solid #555;
+        }
+
+        /* ==================== */
+        /* art-09: Vinyl Record */
+        /* ==================== */
+        .vinyl-record {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .vinyl-record:hover {
+            animation: vinyl-spin 1s linear infinite;
+        }
+
+        @keyframes vinyl-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .vinyl-record .disc {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .vinyl-record .groove1 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            border: 1px solid #444;
+            border-radius: 50%;
+        }
+
+        .vinyl-record .groove2 {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 44px;
+            height: 44px;
+            border: 1px solid #444;
+            border-radius: 50%;
+        }
+
+        .vinyl-record .label {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 30px;
+            height: 30px;
+            background: var(--coral);
+            border-radius: 50%;
+        }
+
+        .vinyl-record .center {
+            position: absolute;
+            top: 36px;
+            left: 36px;
+            width: 8px;
+            height: 8px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        /* ==================== */
+        /* art-10: Paintbrush */
+        /* ==================== */
+        .paintbrush {
+            width: 20px;
+            height: 90px;
+            position: relative;
+            transform: rotate(-30deg);
+            transition: transform 0.3s ease;
+        }
+
+        .paintbrush:hover {
+            transform: rotate(-30deg) scale(1.15) translateY(-5px);
+        }
+
+        .paintbrush .bristles {
+            position: absolute;
+            top: 0;
+            left: 3px;
+            width: 14px;
+            height: 25px;
+            background: var(--blue);
+            border-radius: 5px 5px 0 0;
+        }
+
+        .paintbrush .ferrule {
+            position: absolute;
+            top: 23px;
+            left: 2px;
+            width: 16px;
+            height: 12px;
+            background: #C0C0C0;
+            border-radius: 2px;
+        }
+
+        .paintbrush .handle {
+            position: absolute;
+            top: 33px;
+            left: 4px;
+            width: 12px;
+            height: 55px;
+            background: #DEB887;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* ==================== */
+        /* art-11: Palette */
+        /* ==================== */
+        .palette {
+            width: 85px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .palette:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .palette .board {
+            position: absolute;
+            width: 85px;
+            height: 60px;
+            background: #DEB887;
+            border-radius: 40px 40px 30px 50px;
+            top: 5px;
+        }
+
+        .palette .thumb-hole {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            bottom: 15px;
+            left: 10px;
+        }
+
+        .palette .color1 {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--coral);
+            border-radius: 50%;
+            top: 15px;
+            left: 15px;
+        }
+
+        .palette .color2 {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--yellow);
+            border-radius: 50%;
+            top: 12px;
+            left: 35px;
+        }
+
+        .palette .color3 {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--blue);
+            border-radius: 50%;
+            top: 15px;
+            right: 15px;
+        }
+
+        .palette .color4 {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--mint);
+            border-radius: 50%;
+            top: 35px;
+            right: 20px;
+        }
+
+        .palette .color5 {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--purple);
+            border-radius: 50%;
+            top: 38px;
+            left: 40px;
+        }
+
+        /* ==================== */
+        /* art-12: Easel */
+        /* ==================== */
+        .easel {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .easel:hover {
+            transform: scale(1.1);
+        }
+
+        .easel .leg-left {
+            position: absolute;
+            bottom: 0;
+            left: 8px;
+            width: 6px;
+            height: 70px;
+            background: #8B4513;
+            transform: rotate(8deg);
+            transform-origin: top;
+            border-radius: 2px;
+        }
+
+        .easel .leg-right {
+            position: absolute;
+            bottom: 0;
+            right: 8px;
+            width: 6px;
+            height: 70px;
+            background: #8B4513;
+            transform: rotate(-8deg);
+            transform-origin: top;
+            border-radius: 2px;
+        }
+
+        .easel .leg-back {
+            position: absolute;
+            bottom: 0;
+            left: 32px;
+            width: 6px;
+            height: 55px;
+            background: #654321;
+            transform: rotate(20deg);
+            transform-origin: top;
+            border-radius: 2px;
+        }
+
+        .easel .shelf {
+            position: absolute;
+            top: 50px;
+            left: 5px;
+            width: 60px;
+            height: 6px;
+            background: #8B4513;
+            border-radius: 2px;
+        }
+
+        .easel .canvas {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 50px;
+            height: 45px;
+            background: white;
+            border: 3px solid #DEB887;
+        }
+
+        /* ==================== */
+        /* art-13: Picture Frame */
+        /* ==================== */
+        .picture-frame {
+            width: 70px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .picture-frame:hover {
+            transform: scale(1.15) rotate(-3deg);
+        }
+
+        .picture-frame .frame {
+            position: absolute;
+            width: 70px;
+            height: 80px;
+            background: #DAA520;
+            border-radius: 4px;
+        }
+
+        .picture-frame .inner {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 54px;
+            height: 64px;
+            background: var(--teal);
+        }
+
+        .picture-frame .mount {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 42px;
+            height: 52px;
+            background: white;
+        }
+
+        .picture-frame .art {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--pink);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .picture-frame .art-stem {
+            position: absolute;
+            bottom: 20px;
+            left: 33px;
+            width: 4px;
+            height: 18px;
+            background: var(--mint);
+        }
+
+        /* ==================== */
+        /* art-14: Camera */
+        /* ==================== */
+        .camera {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .camera:hover {
+            transform: scale(1.15);
+            animation: camera-flash 0.3s ease;
+        }
+
+        @keyframes camera-flash {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .camera .body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 50px;
+            background: var(--dark);
+            border-radius: 8px;
+        }
+
+        .camera .viewfinder {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            width: 20px;
+            height: 12px;
+            background: var(--dark);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .camera .lens {
+            position: absolute;
+            bottom: 10px;
+            left: 25px;
+            width: 30px;
+            height: 30px;
+            background: #444;
+            border-radius: 50%;
+            border: 4px solid #555;
+        }
+
+        .camera .lens-inner {
+            position: absolute;
+            bottom: 18px;
+            left: 33px;
+            width: 14px;
+            height: 14px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+
+        .camera .flash {
+            position: absolute;
+            top: 15px;
+            right: 8px;
+            width: 12px;
+            height: 8px;
+            background: var(--yellow);
+            border-radius: 2px;
+        }
+
+        .camera .button {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            width: 10px;
+            height: 6px;
+            background: var(--coral);
+            border-radius: 3px;
+        }
+
+        /* ==================== */
+        /* art-15: Film Reel */
+        /* ==================== */
+        .film-reel {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .film-reel:hover {
+            animation: reel-spin 1.5s linear infinite;
+        }
+
+        @keyframes reel-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .film-reel .outer {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .film-reel .inner {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 50px;
+            height: 50px;
+            background: #444;
+            border-radius: 50%;
+        }
+
+        .film-reel .center {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--yellow);
+            border-radius: 50%;
+        }
+
+        .film-reel .hole1 {
+            position: absolute;
+            top: 8px;
+            left: 35px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .film-reel .hole2 {
+            position: absolute;
+            top: 35px;
+            left: 8px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .film-reel .hole3 {
+            position: absolute;
+            top: 35px;
+            right: 8px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .film-reel .hole4 {
+            position: absolute;
+            bottom: 8px;
+            left: 35px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* ==================== */
+        /* art-16: Theater Masks */
+        /* ==================== */
+        .theater-masks {
+            width: 90px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .theater-masks:hover {
+            transform: scale(1.15);
+        }
+
+        .theater-masks .happy {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 55px;
+            background: var(--yellow);
+            border-radius: 25px 25px 20px 20px;
+            z-index: 2;
+        }
+
+        .theater-masks .happy-eye-left {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            width: 8px;
+            height: 10px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .theater-masks .happy-eye-right {
+            position: absolute;
+            top: 15px;
+            left: 32px;
+            width: 8px;
+            height: 10px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .theater-masks .happy-mouth {
+            position: absolute;
+            top: 32px;
+            left: 15px;
+            width: 20px;
+            height: 12px;
+            border: 3px solid var(--dark);
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .theater-masks .sad {
+            position: absolute;
+            top: 15px;
+            right: 0;
+            width: 50px;
+            height: 55px;
+            background: var(--blue);
+            border-radius: 25px 25px 20px 20px;
+            z-index: 1;
+        }
+
+        .theater-masks .sad-eye-left {
+            position: absolute;
+            top: 30px;
+            right: 32px;
+            width: 8px;
+            height: 10px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .theater-masks .sad-eye-right {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            width: 8px;
+            height: 10px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .theater-masks .sad-mouth {
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            width: 20px;
+            height: 12px;
+            border: 3px solid var(--dark);
+            border-bottom: none;
+            border-radius: 15px 15px 0 0;
+        }
+
+        /* ==================== */
+        /* art-17: Ballet Shoes */
+        /* ==================== */
+        .ballet-shoes {
+            width: 90px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .ballet-shoes:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .ballet-shoes .shoe-left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 35px;
+            height: 45px;
+            background: var(--pink);
+            border-radius: 15px 15px 5px 10px;
+            transform: rotate(-15deg);
+        }
+
+        .ballet-shoes .shoe-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 35px;
+            height: 45px;
+            background: var(--pink);
+            border-radius: 15px 15px 10px 5px;
+            transform: rotate(15deg);
+        }
+
+        .ballet-shoes .ribbon-left {
+            position: absolute;
+            top: 5px;
+            left: 25px;
+            width: 25px;
+            height: 4px;
+            background: var(--pink);
+            border-radius: 2px;
+            transform: rotate(30deg);
+        }
+
+        .ballet-shoes .ribbon-right {
+            position: absolute;
+            top: 5px;
+            right: 25px;
+            width: 25px;
+            height: 4px;
+            background: var(--pink);
+            border-radius: 2px;
+            transform: rotate(-30deg);
+        }
+
+        .ballet-shoes .bow {
+            position: absolute;
+            top: 0;
+            left: 38px;
+            width: 14px;
+            height: 14px;
+            background: var(--pink);
+            border-radius: 50%;
+        }
+
+        /* ==================== */
+        /* art-18: Violin */
+        /* ==================== */
+        .violin {
+            width: 45px;
+            height: 95px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .violin:hover {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .violin .body-top {
+            position: absolute;
+            bottom: 30px;
+            left: 5px;
+            width: 35px;
+            height: 30px;
+            background: #CD853F;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .violin .body-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 35px;
+            height: 35px;
+            background: #CD853F;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .violin .waist {
+            position: absolute;
+            bottom: 28px;
+            left: 10px;
+            width: 25px;
+            height: 12px;
+            background: white;
+        }
+
+        .violin .waist::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            width: 10px;
+            height: 12px;
+            background: #CD853F;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .violin .waist::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            width: 10px;
+            height: 12px;
+            background: #CD853F;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .violin .neck {
+            position: absolute;
+            top: 10px;
+            left: 18px;
+            width: 9px;
+            height: 30px;
+            background: #8B4513;
+            border-radius: 2px;
+        }
+
+        .violin .scroll {
+            position: absolute;
+            top: 0;
+            left: 14px;
+            width: 17px;
+            height: 14px;
+            background: #8B4513;
+            border-radius: 8px;
+        }
+
+        .violin .f-hole-left {
+            position: absolute;
+            bottom: 18px;
+            left: 10px;
+            width: 4px;
+            height: 18px;
+            background: var(--dark);
+            border-radius: 2px;
+            transform: rotate(-10deg);
+        }
+
+        .violin .f-hole-right {
+            position: absolute;
+            bottom: 18px;
+            right: 10px;
+            width: 4px;
+            height: 18px;
+            background: var(--dark);
+            border-radius: 2px;
+            transform: rotate(10deg);
+        }
+
+        /* ==================== */
+        /* art-19: Trumpet */
+        /* ==================== */
+        .trumpet {
+            width: 95px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .trumpet:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .trumpet .bell {
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 35px;
+            height: 40px;
+            background: var(--yellow);
+            border-radius: 0 50% 50% 0;
+        }
+
+        .trumpet .bell-inner {
+            position: absolute;
+            right: 5px;
+            top: 15px;
+            width: 15px;
+            height: 20px;
+            background: #B8860B;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .trumpet .tube {
+            position: absolute;
+            left: 10px;
+            top: 18px;
+            width: 55px;
+            height: 14px;
+            background: var(--yellow);
+            border-radius: 7px 0 0 7px;
+        }
+
+        .trumpet .mouthpiece {
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 15px;
+            height: 18px;
+            background: var(--yellow);
+            border-radius: 5px 0 0 5px;
+        }
+
+        .trumpet .valve1 {
+            position: absolute;
+            left: 25px;
+            top: 5px;
+            width: 8px;
+            height: 18px;
+            background: #B8860B;
+            border-radius: 4px;
+        }
+
+        .trumpet .valve2 {
+            position: absolute;
+            left: 38px;
+            top: 5px;
+            width: 8px;
+            height: 18px;
+            background: #B8860B;
+            border-radius: 4px;
+        }
+
+        .trumpet .valve3 {
+            position: absolute;
+            left: 51px;
+            top: 5px;
+            width: 8px;
+            height: 18px;
+            background: #B8860B;
+            border-radius: 4px;
+        }
+
+        /* ==================== */
+        /* art-20: Harp */
+        /* ==================== */
+        .harp {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .harp:hover {
+            transform: scale(1.1);
+        }
+
+        .harp .pillar {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 80px;
+            background: #DAA520;
+            border-radius: 5px 5px 10px 10px;
+        }
+
+        .harp .neck {
+            position: absolute;
+            left: 5px;
+            top: 0;
+            width: 60px;
+            height: 10px;
+            background: #DAA520;
+            border-radius: 5px;
+            transform: rotate(-15deg);
+            transform-origin: left center;
+        }
+
+        .harp .soundboard {
+            position: absolute;
+            left: 5px;
+            bottom: 0;
+            width: 50px;
+            height: 30px;
+            background: #CD853F;
+            border-radius: 0 0 25px 5px;
+        }
+
+        .harp .string1 {
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            width: 2px;
+            height: 60px;
+            background: var(--yellow);
+        }
+
+        .harp .string2 {
+            position: absolute;
+            left: 25px;
+            top: 10px;
+            width: 2px;
+            height: 65px;
+            background: var(--yellow);
+        }
+
+        .harp .string3 {
+            position: absolute;
+            left: 35px;
+            top: 8px;
+            width: 2px;
+            height: 68px;
+            background: var(--yellow);
+        }
+
+        .harp .string4 {
+            position: absolute;
+            left: 45px;
+            top: 6px;
+            width: 2px;
+            height: 70px;
+            background: var(--yellow);
+        }
+
+        .harp .string5 {
+            position: absolute;
+            left: 55px;
+            top: 4px;
+            width: 2px;
+            height: 65px;
+            background: var(--yellow);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .item-card {
+                padding: 1rem;
+                min-height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MUSIC & ART</h1>
+        <p>Flat Illustration Components</p>
+    </header>
+
+    <main class="grid-container">
+        <!-- art-01: Music Note -->
+        <div class="item-card" id="art-01">
+            <div class="music-note">
+                <div class="stem"></div>
+                <div class="head"></div>
+                <div class="flag"></div>
+            </div>
+            <span class="item-label">art-01</span>
+            <span class="item-name">Music Note</span>
+        </div>
+
+        <!-- art-02: Treble Clef -->
+        <div class="item-card" id="art-02">
+            <div class="treble-clef">
+                <div class="stem"></div>
+                <div class="main-curve"></div>
+                <div class="inner-curve"></div>
+                <div class="dot"></div>
+            </div>
+            <span class="item-label">art-02</span>
+            <span class="item-name">Treble Clef</span>
+        </div>
+
+        <!-- art-03: Piano Keys -->
+        <div class="item-card" id="art-03">
+            <div class="piano-keys">
+                <div class="white-key"></div>
+                <div class="white-key"></div>
+                <div class="white-key"></div>
+                <div class="white-key"></div>
+                <div class="white-key"></div>
+                <div class="white-key"></div>
+                <div class="white-key"></div>
+                <div class="black-keys">
+                    <div class="black-key"></div>
+                    <div class="black-key"></div>
+                    <div class="black-key"></div>
+                    <div class="black-key"></div>
+                    <div class="black-key"></div>
+                </div>
+            </div>
+            <span class="item-label">art-03</span>
+            <span class="item-name">Piano Keys</span>
+        </div>
+
+        <!-- art-04: Guitar -->
+        <div class="item-card" id="art-04">
+            <div class="guitar">
+                <div class="body"></div>
+                <div class="sound-hole"></div>
+                <div class="neck"></div>
+                <div class="head"></div>
+                <div class="strings">
+                    <div class="string"></div>
+                    <div class="string"></div>
+                    <div class="string"></div>
+                    <div class="string"></div>
+                </div>
+            </div>
+            <span class="item-label">art-04</span>
+            <span class="item-name">Guitar</span>
+        </div>
+
+        <!-- art-05: Drum -->
+        <div class="item-card" id="art-05">
+            <div class="drum">
+                <div class="body"></div>
+                <div class="top"></div>
+                <div class="stripe"></div>
+            </div>
+            <span class="item-label">art-05</span>
+            <span class="item-name">Drum</span>
+        </div>
+
+        <!-- art-06: Microphone -->
+        <div class="item-card" id="art-06">
+            <div class="microphone">
+                <div class="head"></div>
+                <div class="mesh"></div>
+                <div class="body"></div>
+                <div class="base"></div>
+            </div>
+            <span class="item-label">art-06</span>
+            <span class="item-name">Microphone</span>
+        </div>
+
+        <!-- art-07: Headphones -->
+        <div class="item-card" id="art-07">
+            <div class="headphones">
+                <div class="band"></div>
+                <div class="cup-left"></div>
+                <div class="cup-right"></div>
+                <div class="cushion-left"></div>
+                <div class="cushion-right"></div>
+            </div>
+            <span class="item-label">art-07</span>
+            <span class="item-name">Headphones</span>
+        </div>
+
+        <!-- art-08: Speaker -->
+        <div class="item-card" id="art-08">
+            <div class="speaker">
+                <div class="cabinet"></div>
+                <div class="tweeter"></div>
+                <div class="woofer"></div>
+                <div class="woofer-center"></div>
+            </div>
+            <span class="item-label">art-08</span>
+            <span class="item-name">Speaker</span>
+        </div>
+
+        <!-- art-09: Vinyl Record -->
+        <div class="item-card" id="art-09">
+            <div class="vinyl-record">
+                <div class="disc"></div>
+                <div class="groove1"></div>
+                <div class="groove2"></div>
+                <div class="label"></div>
+                <div class="center"></div>
+            </div>
+            <span class="item-label">art-09</span>
+            <span class="item-name">Vinyl Record</span>
+        </div>
+
+        <!-- art-10: Paintbrush -->
+        <div class="item-card" id="art-10">
+            <div class="paintbrush">
+                <div class="bristles"></div>
+                <div class="ferrule"></div>
+                <div class="handle"></div>
+            </div>
+            <span class="item-label">art-10</span>
+            <span class="item-name">Paintbrush</span>
+        </div>
+
+        <!-- art-11: Palette -->
+        <div class="item-card" id="art-11">
+            <div class="palette">
+                <div class="board"></div>
+                <div class="thumb-hole"></div>
+                <div class="color1"></div>
+                <div class="color2"></div>
+                <div class="color3"></div>
+                <div class="color4"></div>
+                <div class="color5"></div>
+            </div>
+            <span class="item-label">art-11</span>
+            <span class="item-name">Palette</span>
+        </div>
+
+        <!-- art-12: Easel -->
+        <div class="item-card" id="art-12">
+            <div class="easel">
+                <div class="leg-left"></div>
+                <div class="leg-right"></div>
+                <div class="leg-back"></div>
+                <div class="shelf"></div>
+                <div class="canvas"></div>
+            </div>
+            <span class="item-label">art-12</span>
+            <span class="item-name">Easel</span>
+        </div>
+
+        <!-- art-13: Picture Frame -->
+        <div class="item-card" id="art-13">
+            <div class="picture-frame">
+                <div class="frame"></div>
+                <div class="inner"></div>
+                <div class="mount"></div>
+                <div class="art"></div>
+                <div class="art-stem"></div>
+            </div>
+            <span class="item-label">art-13</span>
+            <span class="item-name">Picture Frame</span>
+        </div>
+
+        <!-- art-14: Camera -->
+        <div class="item-card" id="art-14">
+            <div class="camera">
+                <div class="body"></div>
+                <div class="viewfinder"></div>
+                <div class="lens"></div>
+                <div class="lens-inner"></div>
+                <div class="flash"></div>
+                <div class="button"></div>
+            </div>
+            <span class="item-label">art-14</span>
+            <span class="item-name">Camera</span>
+        </div>
+
+        <!-- art-15: Film Reel -->
+        <div class="item-card" id="art-15">
+            <div class="film-reel">
+                <div class="outer"></div>
+                <div class="inner"></div>
+                <div class="center"></div>
+                <div class="hole1"></div>
+                <div class="hole2"></div>
+                <div class="hole3"></div>
+                <div class="hole4"></div>
+            </div>
+            <span class="item-label">art-15</span>
+            <span class="item-name">Film Reel</span>
+        </div>
+
+        <!-- art-16: Theater Masks -->
+        <div class="item-card" id="art-16">
+            <div class="theater-masks">
+                <div class="happy">
+                    <div class="happy-eye-left"></div>
+                    <div class="happy-eye-right"></div>
+                    <div class="happy-mouth"></div>
+                </div>
+                <div class="sad">
+                    <div class="sad-eye-left"></div>
+                    <div class="sad-eye-right"></div>
+                    <div class="sad-mouth"></div>
+                </div>
+            </div>
+            <span class="item-label">art-16</span>
+            <span class="item-name">Theater Masks</span>
+        </div>
+
+        <!-- art-17: Ballet Shoes -->
+        <div class="item-card" id="art-17">
+            <div class="ballet-shoes">
+                <div class="shoe-left"></div>
+                <div class="shoe-right"></div>
+                <div class="ribbon-left"></div>
+                <div class="ribbon-right"></div>
+                <div class="bow"></div>
+            </div>
+            <span class="item-label">art-17</span>
+            <span class="item-name">Ballet Shoes</span>
+        </div>
+
+        <!-- art-18: Violin -->
+        <div class="item-card" id="art-18">
+            <div class="violin">
+                <div class="body-top"></div>
+                <div class="body-bottom"></div>
+                <div class="waist"></div>
+                <div class="neck"></div>
+                <div class="scroll"></div>
+                <div class="f-hole-left"></div>
+                <div class="f-hole-right"></div>
+            </div>
+            <span class="item-label">art-18</span>
+            <span class="item-name">Violin</span>
+        </div>
+
+        <!-- art-19: Trumpet -->
+        <div class="item-card" id="art-19">
+            <div class="trumpet">
+                <div class="bell"></div>
+                <div class="bell-inner"></div>
+                <div class="tube"></div>
+                <div class="mouthpiece"></div>
+                <div class="valve1"></div>
+                <div class="valve2"></div>
+                <div class="valve3"></div>
+            </div>
+            <span class="item-label">art-19</span>
+            <span class="item-name">Trumpet</span>
+        </div>
+
+        <!-- art-20: Harp -->
+        <div class="item-card" id="art-20">
+            <div class="harp">
+                <div class="pillar"></div>
+                <div class="neck"></div>
+                <div class="soundboard"></div>
+                <div class="string1"></div>
+                <div class="string2"></div>
+                <div class="string3"></div>
+                <div class="string4"></div>
+                <div class="string5"></div>
+            </div>
+            <span class="item-label">art-20</span>
+            <span class="item-name">Harp</span>
+        </div>
+    </main>
+</body>
+</html>

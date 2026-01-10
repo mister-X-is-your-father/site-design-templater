@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Drinks CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FFF5F5;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FF6B6B;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            background: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .illustration {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .illustration:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           food-01: Apple
+           ======================================== */
+        #food-01 .apple {
+            width: 60px;
+            height: 65px;
+            background: #FF6B6B;
+            border-radius: 50% 50% 50% 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #food-01 .apple::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 15px;
+            background: #8B4513;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        #food-01 .apple::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 10px;
+            background: #4CAF50;
+            top: -8px;
+            left: 55%;
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(30deg);
+        }
+
+        #food-01 .apple .shine {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            top: 12px;
+            left: 12px;
+        }
+
+        #food-01:hover .apple {
+            animation: apple-bounce 0.5s ease infinite;
+        }
+
+        @keyframes apple-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ========================================
+           food-02: Banana
+           ======================================== */
+        #food-02 .banana {
+            width: 70px;
+            height: 25px;
+            background: #FFE135;
+            border-radius: 50px 50px 0 0;
+            position: absolute;
+            top: 30px;
+            left: 5px;
+            transform: rotate(-20deg);
+        }
+
+        #food-02 .banana::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background: #8B7355;
+            top: -5px;
+            left: 5px;
+            border-radius: 3px 3px 0 0;
+            transform: rotate(-10deg);
+        }
+
+        #food-02 .banana::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #8B7355;
+            bottom: -3px;
+            right: 5px;
+            border-radius: 50%;
+        }
+
+        #food-02:hover .banana {
+            animation: banana-swing 0.4s ease infinite;
+        }
+
+        @keyframes banana-swing {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(-10deg); }
+        }
+
+        /* ========================================
+           food-03: Orange
+           ======================================== */
+        #food-03 .orange {
+            width: 60px;
+            height: 60px;
+            background: #FFA500;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #food-03 .orange::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 8px;
+            background: #4CAF50;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 0 0;
+        }
+
+        #food-03 .orange .dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2) 2px, transparent 2px),
+                        radial-gradient(circle at 60% 20%, rgba(255,255,255,0.2) 2px, transparent 2px),
+                        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.2) 2px, transparent 2px),
+                        radial-gradient(circle at 30% 70%, rgba(255,255,255,0.2) 2px, transparent 2px);
+        }
+
+        #food-03:hover .orange {
+            animation: orange-roll 0.6s ease;
+        }
+
+        @keyframes orange-roll {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========================================
+           food-04: Strawberry
+           ======================================== */
+        #food-04 .strawberry {
+            width: 45px;
+            height: 55px;
+            background: #FF4757;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: 15px;
+            left: 18px;
+        }
+
+        #food-04 .strawberry::before {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 15px;
+            background: #4CAF50;
+            top: -8px;
+            left: -5px;
+            border-radius: 0 0 50% 50%;
+            clip-path: polygon(10% 0%, 30% 100%, 50% 0%, 70% 100%, 90% 0%, 100% 100%, 0% 100%);
+        }
+
+        #food-04 .strawberry .seeds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #FFE135 3px, transparent 3px),
+                        radial-gradient(circle at 60% 25%, #FFE135 3px, transparent 3px),
+                        radial-gradient(circle at 20% 55%, #FFE135 3px, transparent 3px),
+                        radial-gradient(circle at 50% 50%, #FFE135 3px, transparent 3px),
+                        radial-gradient(circle at 75% 55%, #FFE135 3px, transparent 3px),
+                        radial-gradient(circle at 35% 75%, #FFE135 3px, transparent 3px),
+                        radial-gradient(circle at 60% 75%, #FFE135 3px, transparent 3px);
+        }
+
+        #food-04:hover .strawberry {
+            animation: strawberry-wiggle 0.3s ease infinite;
+        }
+
+        @keyframes strawberry-wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* ========================================
+           food-05: Cake
+           ======================================== */
+        #food-05 .cake {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+        }
+
+        #food-05 .cake .base {
+            width: 60px;
+            height: 35px;
+            background: #FFEAA7;
+            border-radius: 5px 5px 10px 10px;
+            position: relative;
+        }
+
+        #food-05 .cake .cream {
+            position: absolute;
+            width: 60px;
+            height: 15px;
+            background: #FFF;
+            top: -10px;
+            border-radius: 50% 50% 0 0;
+        }
+
+        #food-05 .cake .cream::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #FF6B6B;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        #food-05:hover .cake {
+            animation: cake-jiggle 0.4s ease infinite;
+        }
+
+        @keyframes cake-jiggle {
+            0%, 100% { transform: scale(1, 1); }
+            50% { transform: scale(1.05, 0.95); }
+        }
+
+        /* ========================================
+           food-06: Pizza
+           ======================================== */
+        #food-06 .pizza {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 60px solid #FFB347;
+            position: absolute;
+            top: 10px;
+            left: 5px;
+        }
+
+        #food-06 .pizza::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 50px solid #FF6347;
+            top: 8px;
+            left: -30px;
+        }
+
+        #food-06 .pizza .topping1 {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #FF4500;
+            border-radius: 50%;
+            top: 25px;
+            left: -6px;
+        }
+
+        #food-06 .pizza .topping2 {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FF4500;
+            border-radius: 50%;
+            top: 40px;
+            left: -15px;
+        }
+
+        #food-06 .pizza .topping3 {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FF4500;
+            border-radius: 50%;
+            top: 40px;
+            left: 5px;
+        }
+
+        #food-06:hover .pizza {
+            animation: pizza-float 0.5s ease infinite;
+        }
+
+        @keyframes pizza-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(3deg); }
+        }
+
+        /* ========================================
+           food-07: Hamburger
+           ======================================== */
+        #food-07 .burger {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #food-07 .burger .top-bun {
+            width: 60px;
+            height: 25px;
+            background: #D4A574;
+            border-radius: 30px 30px 5px 5px;
+            position: relative;
+        }
+
+        #food-07 .burger .top-bun::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFF8DC;
+            border-radius: 50%;
+            top: 5px;
+            left: 10px;
+        }
+
+        #food-07 .burger .top-bun::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #FFF8DC;
+            border-radius: 50%;
+            top: 8px;
+            left: 40px;
+        }
+
+        #food-07 .burger .lettuce {
+            width: 65px;
+            height: 8px;
+            background: #4CAF50;
+            margin-top: 2px;
+            margin-left: -2px;
+            border-radius: 2px;
+            clip-path: polygon(0% 50%, 5% 0%, 15% 50%, 25% 0%, 35% 50%, 45% 0%, 55% 50%, 65% 0%, 75% 50%, 85% 0%, 95% 50%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        #food-07 .burger .patty {
+            width: 58px;
+            height: 12px;
+            background: #8B4513;
+            margin-left: 1px;
+            border-radius: 3px;
+        }
+
+        #food-07 .burger .cheese {
+            width: 62px;
+            height: 6px;
+            background: #FFD700;
+            margin-left: -1px;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 80% 50%, 60% 100%, 40% 50%, 20% 100%, 5% 50%);
+        }
+
+        #food-07 .burger .bottom-bun {
+            width: 60px;
+            height: 15px;
+            background: #D4A574;
+            border-radius: 5px 5px 15px 15px;
+        }
+
+        #food-07:hover .burger {
+            animation: burger-bounce 0.4s ease infinite;
+        }
+
+        @keyframes burger-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ========================================
+           food-08: Ice Cream
+           ======================================== */
+        #food-08 .icecream {
+            position: absolute;
+            top: 5px;
+            left: 20px;
+        }
+
+        #food-08 .icecream .scoop1 {
+            width: 40px;
+            height: 40px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            position: relative;
+            z-index: 3;
+        }
+
+        #food-08 .icecream .scoop2 {
+            width: 35px;
+            height: 35px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: relative;
+            top: -15px;
+            left: 3px;
+            z-index: 2;
+        }
+
+        #food-08 .icecream .cone {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #DEB887;
+            position: relative;
+            top: -20px;
+            z-index: 1;
+        }
+
+        #food-08:hover .icecream {
+            animation: icecream-wobble 0.4s ease infinite;
+        }
+
+        @keyframes icecream-wobble {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* ========================================
+           food-09: Coffee Cup
+           ======================================== */
+        #food-09 .coffee {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        #food-09 .coffee .cup {
+            width: 45px;
+            height: 45px;
+            background: #FFF;
+            border-radius: 5px 5px 15px 15px;
+            position: relative;
+            border: 3px solid #E0E0E0;
+        }
+
+        #food-09 .coffee .cup::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 25px;
+            border: 4px solid #E0E0E0;
+            border-left: none;
+            border-radius: 0 15px 15px 0;
+            right: -18px;
+            top: 5px;
+        }
+
+        #food-09 .coffee .liquid {
+            width: 35px;
+            height: 30px;
+            background: #8B4513;
+            border-radius: 0 0 12px 12px;
+            position: absolute;
+            bottom: 3px;
+            left: 2px;
+        }
+
+        #food-09 .coffee .steam {
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        #food-09 .coffee .steam span {
+            width: 3px;
+            height: 15px;
+            background: #DDD;
+            border-radius: 3px;
+            animation: steam-rise 1s ease infinite;
+        }
+
+        #food-09 .coffee .steam span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        #food-09 .coffee .steam span:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes steam-rise {
+            0%, 100% { opacity: 0; transform: translateY(0) scaleY(0.5); }
+            50% { opacity: 1; transform: translateY(-5px) scaleY(1); }
+        }
+
+        #food-09:hover .coffee .steam span {
+            animation-duration: 0.5s;
+        }
+
+        /* ========================================
+           food-10: Juice
+           ======================================== */
+        #food-10 .juice {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        #food-10 .juice .glass {
+            width: 40px;
+            height: 55px;
+            background: rgba(255, 165, 0, 0.7);
+            border-radius: 3px 3px 10px 10px;
+            position: relative;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #food-10 .juice .glass::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFF;
+            border-radius: 50%;
+            opacity: 0.6;
+            top: 10px;
+            left: 8px;
+        }
+
+        #food-10 .juice .straw {
+            width: 5px;
+            height: 40px;
+            background: #FF6B6B;
+            position: absolute;
+            top: -20px;
+            right: 8px;
+            border-radius: 2px;
+            transform: rotate(15deg);
+        }
+
+        #food-10 .juice .orange-slice {
+            width: 20px;
+            height: 10px;
+            background: #FFA500;
+            border-radius: 20px 20px 0 0;
+            position: absolute;
+            top: -5px;
+            left: 5px;
+            border: 2px solid #FF8C00;
+        }
+
+        #food-10:hover .juice {
+            animation: juice-shake 0.3s ease infinite;
+        }
+
+        @keyframes juice-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        /* ========================================
+           food-11: Bread
+           ======================================== */
+        #food-11 .bread {
+            width: 60px;
+            height: 50px;
+            background: #DEB887;
+            border-radius: 30px 30px 10px 10px;
+            position: absolute;
+            top: 15px;
+            left: 10px;
+        }
+
+        #food-11 .bread::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 35px;
+            background: #D2A679;
+            border-radius: 25px 25px 8px 8px;
+            top: 8px;
+            left: 5px;
+        }
+
+        #food-11 .bread .line {
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: #C49A6C;
+            top: 15px;
+            left: 15px;
+            border-radius: 2px;
+        }
+
+        #food-11:hover .bread {
+            animation: bread-squish 0.4s ease infinite;
+        }
+
+        @keyframes bread-squish {
+            0%, 100% { transform: scale(1, 1); }
+            50% { transform: scale(1.1, 0.9); }
+        }
+
+        /* ========================================
+           food-12: Rice Ball (Onigiri)
+           ======================================== */
+        #food-12 .onigiri {
+            width: 0;
+            height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 55px solid #FFF;
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            border-radius: 10px;
+        }
+
+        #food-12 .onigiri::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 25px;
+            background: #2C3E50;
+            bottom: -55px;
+            left: -25px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        #food-12 .onigiri .face {
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 20px;
+            height: 10px;
+        }
+
+        #food-12 .onigiri .face::before,
+        #food-12 .onigiri .face::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #2C3E50;
+            border-radius: 50%;
+        }
+
+        #food-12 .onigiri .face::before {
+            left: 0;
+        }
+
+        #food-12 .onigiri .face::after {
+            right: 0;
+        }
+
+        #food-12:hover .onigiri {
+            animation: onigiri-hop 0.4s ease infinite;
+        }
+
+        @keyframes onigiri-hop {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ========================================
+           food-13: Sushi
+           ======================================== */
+        #food-13 .sushi {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+        }
+
+        #food-13 .sushi .rice {
+            width: 55px;
+            height: 25px;
+            background: #FFF;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #food-13 .sushi .fish {
+            width: 50px;
+            height: 15px;
+            background: #FA8072;
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            top: -12px;
+            left: 2px;
+        }
+
+        #food-13 .sushi .fish::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, transparent 20%, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.3) 25%, transparent 25%, transparent 45%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.3) 50%, transparent 50%, transparent 70%, rgba(255,255,255,0.3) 70%, rgba(255,255,255,0.3) 75%, transparent 75%);
+            border-radius: 8px 8px 0 0;
+        }
+
+        #food-13:hover .sushi {
+            animation: sushi-wiggle 0.3s ease infinite;
+        }
+
+        @keyframes sushi-wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* ========================================
+           food-14: Ramen
+           ======================================== */
+        #food-14 .ramen {
+            position: absolute;
+            top: 15px;
+            left: 5px;
+        }
+
+        #food-14 .ramen .bowl {
+            width: 70px;
+            height: 35px;
+            background: #FFF;
+            border-radius: 0 0 35px 35px;
+            position: relative;
+            border: 4px solid #FF6B6B;
+            border-top: none;
+        }
+
+        #food-14 .ramen .soup {
+            width: 58px;
+            height: 25px;
+            background: #FFD93D;
+            border-radius: 0 0 30px 30px;
+            position: absolute;
+            bottom: 3px;
+            left: 2px;
+        }
+
+        #food-14 .ramen .noodles {
+            position: absolute;
+            top: -5px;
+            left: 15px;
+            width: 40px;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FFEAA7 0px,
+                #FFEAA7 3px,
+                transparent 3px,
+                transparent 6px
+            );
+        }
+
+        #food-14 .ramen .egg {
+            width: 20px;
+            height: 12px;
+            background: #FFF;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            right: 10px;
+        }
+
+        #food-14 .ramen .egg::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 8px;
+            background: #FFD700;
+            border-radius: 50%;
+            top: 2px;
+            left: 5px;
+        }
+
+        #food-14 .ramen .naruto {
+            width: 15px;
+            height: 15px;
+            background: #FFF;
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+            left: 5px;
+            border: 2px solid #FF69B4;
+        }
+
+        #food-14:hover .ramen {
+            animation: ramen-steam 0.5s ease infinite;
+        }
+
+        @keyframes ramen-steam {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* ========================================
+           food-15: Donut
+           ======================================== */
+        #food-15 .donut {
+            width: 60px;
+            height: 60px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #food-15 .donut::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #FFF5F5;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #food-15 .donut .sprinkle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #food-15 .donut .sprinkle::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 3px;
+            background: #FF6B6B;
+            top: 10px;
+            left: 25px;
+            border-radius: 2px;
+            box-shadow:
+                15px 5px 0 #4ECDC4,
+                -10px 15px 0 #FFE66D,
+                20px 20px 0 #95E1D3,
+                5px 35px 0 #F38181,
+                -5px 40px 0 #4ECDC4,
+                25px 40px 0 #FFE66D;
+        }
+
+        #food-15:hover .donut {
+            animation: donut-spin 0.8s ease;
+        }
+
+        @keyframes donut-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========================================
+           food-16: Cookie
+           ======================================== */
+        #food-16 .cookie {
+            width: 60px;
+            height: 60px;
+            background: #D2691E;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #food-16 .cookie .chips {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 25% 25%, #5D4037 8px, transparent 8px),
+                radial-gradient(circle at 60% 20%, #5D4037 6px, transparent 6px),
+                radial-gradient(circle at 75% 50%, #5D4037 7px, transparent 7px),
+                radial-gradient(circle at 30% 60%, #5D4037 6px, transparent 6px),
+                radial-gradient(circle at 55% 70%, #5D4037 8px, transparent 8px),
+                radial-gradient(circle at 20% 80%, #5D4037 5px, transparent 5px);
+            border-radius: 50%;
+        }
+
+        #food-16:hover .cookie {
+            animation: cookie-crumble 0.3s ease infinite;
+        }
+
+        @keyframes cookie-crumble {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+        }
+
+        /* ========================================
+           food-17: Candy
+           ======================================== */
+        #food-17 .candy {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+        }
+
+        #food-17 .candy .wrapper-left {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 15px solid #FF69B4;
+            position: absolute;
+            left: -15px;
+            top: 5px;
+        }
+
+        #food-17 .candy .body {
+            width: 50px;
+            height: 30px;
+            background: repeating-linear-gradient(
+                45deg,
+                #FF69B4,
+                #FF69B4 8px,
+                #FFF 8px,
+                #FFF 16px
+            );
+            border-radius: 15px;
+        }
+
+        #food-17 .candy .wrapper-right {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #FF69B4;
+            position: absolute;
+            right: -15px;
+            top: 5px;
+        }
+
+        #food-17:hover .candy {
+            animation: candy-twist 0.4s ease infinite;
+        }
+
+        @keyframes candy-twist {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* ========================================
+           food-18: Watermelon
+           ======================================== */
+        #food-18 .watermelon {
+            width: 70px;
+            height: 35px;
+            background: #FF6B6B;
+            border-radius: 70px 70px 0 0;
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            border: 8px solid #4CAF50;
+            border-bottom: none;
+        }
+
+        #food-18 .watermelon .seeds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #food-18 .watermelon .seeds::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 10px;
+            background: #2C3E50;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: 5px;
+            left: 15px;
+            box-shadow:
+                15px 5px 0 #2C3E50,
+                30px 0 0 #2C3E50,
+                8px 15px 0 #2C3E50,
+                22px 12px 0 #2C3E50;
+        }
+
+        #food-18:hover .watermelon {
+            animation: watermelon-bounce 0.4s ease infinite;
+        }
+
+        @keyframes watermelon-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ========================================
+           food-19: Carrot
+           ======================================== */
+        #food-19 .carrot {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        #food-19 .carrot .body {
+            width: 20px;
+            height: 55px;
+            background: #FF7F50;
+            border-radius: 5px 5px 50% 50%;
+            position: relative;
+        }
+
+        #food-19 .carrot .body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+        }
+
+        #food-19 .carrot .leaves {
+            position: absolute;
+            top: -15px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+        }
+
+        #food-19 .carrot .leaves::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: #4CAF50;
+            border-radius: 50% 50% 0 0;
+            left: 0;
+            transform: rotate(-15deg);
+        }
+
+        #food-19 .carrot .leaves::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: #4CAF50;
+            border-radius: 50% 50% 0 0;
+            left: 6px;
+        }
+
+        #food-19 .carrot .leaf3 {
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: #4CAF50;
+            border-radius: 50% 50% 0 0;
+            top: -12px;
+            left: 14px;
+            transform: rotate(15deg);
+        }
+
+        #food-19:hover .carrot {
+            animation: carrot-wiggle 0.3s ease infinite;
+        }
+
+        @keyframes carrot-wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* ========================================
+           food-20: Egg
+           ======================================== */
+        #food-20 .egg {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        #food-20 .egg .white {
+            width: 55px;
+            height: 55px;
+            background: #FFF;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #food-20 .egg .yolk {
+            width: 25px;
+            height: 25px;
+            background: #FFD700;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #food-20 .egg .yolk::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+
+        #food-20:hover .egg {
+            animation: egg-wobble 0.4s ease infinite;
+        }
+
+        @keyframes egg-wobble {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Food & Drinks CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- food-01: Apple -->
+        <div class="item">
+            <div class="illustration" id="food-01">
+                <div class="apple">
+                    <div class="shine"></div>
+                </div>
+            </div>
+            <span class="item-label">food-01</span>
+            <span class="item-name">Apple</span>
+        </div>
+
+        <!-- food-02: Banana -->
+        <div class="item">
+            <div class="illustration" id="food-02">
+                <div class="banana"></div>
+            </div>
+            <span class="item-label">food-02</span>
+            <span class="item-name">Banana</span>
+        </div>
+
+        <!-- food-03: Orange -->
+        <div class="item">
+            <div class="illustration" id="food-03">
+                <div class="orange">
+                    <div class="dots"></div>
+                </div>
+            </div>
+            <span class="item-label">food-03</span>
+            <span class="item-name">Orange</span>
+        </div>
+
+        <!-- food-04: Strawberry -->
+        <div class="item">
+            <div class="illustration" id="food-04">
+                <div class="strawberry">
+                    <div class="seeds"></div>
+                </div>
+            </div>
+            <span class="item-label">food-04</span>
+            <span class="item-name">Strawberry</span>
+        </div>
+
+        <!-- food-05: Cake -->
+        <div class="item">
+            <div class="illustration" id="food-05">
+                <div class="cake">
+                    <div class="cream"></div>
+                    <div class="base"></div>
+                </div>
+            </div>
+            <span class="item-label">food-05</span>
+            <span class="item-name">Cake</span>
+        </div>
+
+        <!-- food-06: Pizza -->
+        <div class="item">
+            <div class="illustration" id="food-06">
+                <div class="pizza">
+                    <div class="topping1"></div>
+                    <div class="topping2"></div>
+                    <div class="topping3"></div>
+                </div>
+            </div>
+            <span class="item-label">food-06</span>
+            <span class="item-name">Pizza</span>
+        </div>
+
+        <!-- food-07: Hamburger -->
+        <div class="item">
+            <div class="illustration" id="food-07">
+                <div class="burger">
+                    <div class="top-bun"></div>
+                    <div class="lettuce"></div>
+                    <div class="patty"></div>
+                    <div class="cheese"></div>
+                    <div class="bottom-bun"></div>
+                </div>
+            </div>
+            <span class="item-label">food-07</span>
+            <span class="item-name">Hamburger</span>
+        </div>
+
+        <!-- food-08: Ice Cream -->
+        <div class="item">
+            <div class="illustration" id="food-08">
+                <div class="icecream">
+                    <div class="scoop1"></div>
+                    <div class="scoop2"></div>
+                    <div class="cone"></div>
+                </div>
+            </div>
+            <span class="item-label">food-08</span>
+            <span class="item-name">Ice Cream</span>
+        </div>
+
+        <!-- food-09: Coffee Cup -->
+        <div class="item">
+            <div class="illustration" id="food-09">
+                <div class="coffee">
+                    <div class="steam">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="cup">
+                        <div class="liquid"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">food-09</span>
+            <span class="item-name">Coffee Cup</span>
+        </div>
+
+        <!-- food-10: Juice -->
+        <div class="item">
+            <div class="illustration" id="food-10">
+                <div class="juice">
+                    <div class="glass">
+                        <div class="straw"></div>
+                        <div class="orange-slice"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">food-10</span>
+            <span class="item-name">Juice</span>
+        </div>
+
+        <!-- food-11: Bread -->
+        <div class="item">
+            <div class="illustration" id="food-11">
+                <div class="bread">
+                    <div class="line"></div>
+                </div>
+            </div>
+            <span class="item-label">food-11</span>
+            <span class="item-name">Bread</span>
+        </div>
+
+        <!-- food-12: Rice Ball -->
+        <div class="item">
+            <div class="illustration" id="food-12">
+                <div class="onigiri">
+                    <div class="face"></div>
+                </div>
+            </div>
+            <span class="item-label">food-12</span>
+            <span class="item-name">Rice Ball</span>
+        </div>
+
+        <!-- food-13: Sushi -->
+        <div class="item">
+            <div class="illustration" id="food-13">
+                <div class="sushi">
+                    <div class="fish"></div>
+                    <div class="rice"></div>
+                </div>
+            </div>
+            <span class="item-label">food-13</span>
+            <span class="item-name">Sushi</span>
+        </div>
+
+        <!-- food-14: Ramen -->
+        <div class="item">
+            <div class="illustration" id="food-14">
+                <div class="ramen">
+                    <div class="bowl">
+                        <div class="soup"></div>
+                        <div class="noodles"></div>
+                        <div class="egg"></div>
+                        <div class="naruto"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">food-14</span>
+            <span class="item-name">Ramen</span>
+        </div>
+
+        <!-- food-15: Donut -->
+        <div class="item">
+            <div class="illustration" id="food-15">
+                <div class="donut">
+                    <div class="sprinkle"></div>
+                </div>
+            </div>
+            <span class="item-label">food-15</span>
+            <span class="item-name">Donut</span>
+        </div>
+
+        <!-- food-16: Cookie -->
+        <div class="item">
+            <div class="illustration" id="food-16">
+                <div class="cookie">
+                    <div class="chips"></div>
+                </div>
+            </div>
+            <span class="item-label">food-16</span>
+            <span class="item-name">Cookie</span>
+        </div>
+
+        <!-- food-17: Candy -->
+        <div class="item">
+            <div class="illustration" id="food-17">
+                <div class="candy">
+                    <div class="wrapper-left"></div>
+                    <div class="body"></div>
+                    <div class="wrapper-right"></div>
+                </div>
+            </div>
+            <span class="item-label">food-17</span>
+            <span class="item-name">Candy</span>
+        </div>
+
+        <!-- food-18: Watermelon -->
+        <div class="item">
+            <div class="illustration" id="food-18">
+                <div class="watermelon">
+                    <div class="seeds"></div>
+                </div>
+            </div>
+            <span class="item-label">food-18</span>
+            <span class="item-name">Watermelon</span>
+        </div>
+
+        <!-- food-19: Carrot -->
+        <div class="item">
+            <div class="illustration" id="food-19">
+                <div class="carrot">
+                    <div class="leaves"></div>
+                    <div class="leaf3"></div>
+                    <div class="body"></div>
+                </div>
+            </div>
+            <span class="item-label">food-19</span>
+            <span class="item-name">Carrot</span>
+        </div>
+
+        <!-- food-20: Egg -->
+        <div class="item">
+            <div class="illustration" id="food-20">
+                <div class="egg">
+                    <div class="white">
+                        <div class="yolk"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">food-20</span>
+            <span class="item-name">Egg</span>
+        </div>
+    </div>
+</body>
+</html>

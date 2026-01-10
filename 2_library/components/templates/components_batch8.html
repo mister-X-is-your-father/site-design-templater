@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial Magazine Components - Batch 8</title>
+    <style>
+        /* ==============================================
+           Editorial Magazine Style Components
+           Theme: Bold Typography, Asymmetric Layout, B&W + Accent
+           ============================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray-100: #F5F5F5;
+            --color-gray-300: #E0E0E0;
+            --color-gray-600: #757575;
+            --color-gray-900: #212121;
+            --color-accent: #FF3366;
+            --color-accent-dark: #CC0033;
+
+            --font-display: 'Times New Roman', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: var(--color-black);
+            background: var(--color-white);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ==============================================
+           [E01] ヒーローセクション
+           ============================================== */
+
+        .e01-hero {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            background: var(--color-black);
+        }
+
+        .e01-hero__content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px;
+            background: var(--color-white);
+        }
+
+        .e01-hero__eyebrow {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .e01-hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 7vw, 96px);
+            font-weight: 700;
+            line-height: 0.95;
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .e01-hero__subtitle {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--color-gray-600);
+            max-width: 500px;
+            margin-bottom: 48px;
+        }
+
+        .e01-hero__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 20px 48px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            border: 2px solid var(--color-black);
+        }
+
+        .e01-hero__cta:hover {
+            background: var(--color-white);
+            color: var(--color-black);
+            transform: translateX(8px);
+        }
+
+        .e01-hero__visual {
+            position: relative;
+            background: var(--color-gray-900);
+            overflow: hidden;
+        }
+
+        .e01-hero__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        .e01-hero__label {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 16px 32px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: rotate(-2deg);
+        }
+
+        @media (max-width: 968px) {
+            .e01-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .e01-hero__visual {
+                min-height: 50vh;
+            }
+
+            .e01-hero__content {
+                padding: 60px 32px;
+            }
+        }
+
+        /* ==============================================
+           [E02] 特徴カード
+           ============================================== */
+
+        .e02-features {
+            padding: 120px 0;
+            background: var(--color-gray-100);
+        }
+
+        .e02-features__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2px;
+            background: var(--color-white);
+        }
+
+        .e02-feature-card {
+            background: var(--color-white);
+            padding: 60px 40px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .e02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--color-accent);
+            transition: height 0.4s ease;
+        }
+
+        .e02-feature-card:hover::before {
+            height: 100%;
+        }
+
+        .e02-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .e02-feature-card__number {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-gray-300);
+            margin-bottom: 24px;
+        }
+
+        .e02-feature-card__title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .e02-feature-card__description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-gray-600);
+        }
+
+        /* ==============================================
+           [E03] 料金表
+           ============================================== */
+
+        .e03-pricing {
+            padding: 120px 0;
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .e03-pricing__header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .e03-pricing__title {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5vw, 72px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .e03-pricing__subtitle {
+            font-size: 20px;
+            color: var(--color-gray-300);
+        }
+
+        .e03-pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .e03-pricing-card {
+            background: var(--color-white);
+            color: var(--color-black);
+            padding: 60px 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .e03-pricing-card--featured {
+            background: var(--color-accent);
+            color: var(--color-white);
+            transform: scale(1.05);
+        }
+
+        .e03-pricing-card--featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .e03-pricing-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .e03-pricing-card--featured:hover {
+            transform: scale(1.08) translateY(-12px);
+        }
+
+        .e03-pricing-card__name {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .e03-pricing-card__price {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .e03-pricing-card__period {
+            font-size: 16px;
+            color: var(--color-gray-600);
+            margin-bottom: 32px;
+        }
+
+        .e03-pricing-card--featured .e03-pricing-card__period {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .e03-pricing-card__features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .e03-pricing-card__feature {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-gray-300);
+            font-size: 15px;
+        }
+
+        .e03-pricing-card--featured .e03-pricing-card__feature {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .e03-pricing-card__button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: var(--color-black);
+            color: var(--color-white);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-black);
+        }
+
+        .e03-pricing-card--featured .e03-pricing-card__button {
+            background: var(--color-white);
+            color: var(--color-accent);
+            border-color: var(--color-white);
+        }
+
+        .e03-pricing-card__button:hover {
+            background: transparent;
+            color: var(--color-black);
+        }
+
+        .e03-pricing-card--featured .e03-pricing-card__button:hover {
+            background: transparent;
+            color: var(--color-white);
+        }
+
+        /* ==============================================
+           [E04] CTA ボタン
+           ============================================== */
+
+        .e04-cta-section {
+            padding: 100px 0;
+            background: var(--color-accent);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .e04-cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(45deg);
+        }
+
+        .e04-cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .e04-cta__title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .e04-cta__description {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 48px;
+            opacity: 0.95;
+        }
+
+        .e04-cta__buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .e04-cta__button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 48px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 3px solid var(--color-white);
+        }
+
+        .e04-cta__button--primary {
+            background: var(--color-white);
+            color: var(--color-accent);
+        }
+
+        .e04-cta__button--secondary {
+            background: transparent;
+            color: var(--color-white);
+        }
+
+        .e04-cta__button--primary:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+            border-color: var(--color-black);
+            transform: translateY(-4px);
+        }
+
+        .e04-cta__button--secondary:hover {
+            background: var(--color-white);
+            color: var(--color-accent);
+            transform: translateY(-4px);
+        }
+
+        /* ==============================================
+           [E05] テスティモニアル（口コミ）
+           ============================================== */
+
+        .e05-testimonials {
+            padding: 120px 0;
+            background: var(--color-gray-100);
+        }
+
+        .e05-testimonials__header {
+            max-width: 600px;
+            margin-bottom: 80px;
+        }
+
+        .e05-testimonials__title {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5vw, 72px);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .e05-testimonials__subtitle {
+            font-size: 20px;
+            color: var(--color-gray-600);
+        }
+
+        .e05-testimonials__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .e05-testimonial-card {
+            background: var(--color-white);
+            padding: 48px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .e05-testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            font-family: var(--font-display);
+            font-size: 120px;
+            line-height: 1;
+            color: var(--color-accent);
+            opacity: 0.2;
+        }
+
+        .e05-testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .e05-testimonial-card__quote {
+            position: relative;
+            z-index: 2;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .e05-testimonial-card__author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .e05-testimonial-card__avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .e05-testimonial-card__info {
+            flex: 1;
+        }
+
+        .e05-testimonial-card__name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .e05-testimonial-card__position {
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .e05-testimonial-card__rating {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .e05-testimonial-card__star {
+            color: var(--color-accent);
+            font-size: 16px;
+        }
+
+        /* ==============================================
+           [E06] FAQ アコーディオン
+           ============================================== */
+
+        .e06-faq {
+            padding: 120px 0;
+            background: var(--color-white);
+        }
+
+        .e06-faq__container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .e06-faq__header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .e06-faq__title {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5vw, 72px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .e06-faq__subtitle {
+            font-size: 20px;
+            color: var(--color-gray-600);
+        }
+
+        .e06-faq__list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .e06-faq-item {
+            background: var(--color-gray-100);
+            overflow: hidden;
+        }
+
+        .e06-faq-item__question {
+            width: 100%;
+            padding: 32px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .e06-faq-item__question:hover {
+            background: var(--color-white);
+        }
+
+        .e06-faq-item__icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--color-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .e06-faq-item__icon::before {
+            content: '+';
+            font-size: 24px;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+
+        .e06-faq-item.active .e06-faq-item__icon::before {
+            transform: rotate(45deg);
+        }
+
+        .e06-faq-item.active .e06-faq-item__question {
+            background: var(--color-white);
+        }
+
+        .e06-faq-item__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: var(--color-white);
+        }
+
+        .e06-faq-item.active .e06-faq-item__answer {
+            max-height: 500px;
+            padding: 0 32px 32px 32px;
+        }
+
+        .e06-faq-item__answer-content {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-gray-600);
+        }
+
+        /* ==============================================
+           [E07] フッター
+           ============================================== */
+
+        .e07-footer {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 80px 0 40px;
+        }
+
+        .e07-footer__main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .e07-footer__brand {
+            max-width: 400px;
+        }
+
+        .e07-footer__logo {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .e07-footer__description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-gray-300);
+            margin-bottom: 32px;
+        }
+
+        .e07-footer__social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .e07-footer__social-link {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .e07-footer__social-link:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+        }
+
+        .e07-footer__column-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .e07-footer__links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .e07-footer__link {
+            color: var(--color-gray-300);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .e07-footer__link:hover {
+            color: var(--color-accent);
+            transform: translateX(4px);
+        }
+
+        .e07-footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .e07-footer__copyright {
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .e07-footer__legal {
+            display: flex;
+            gap: 32px;
+        }
+
+        .e07-footer__legal-link {
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .e07-footer__legal-link:hover {
+            color: var(--color-white);
+        }
+
+        @media (max-width: 968px) {
+            .e07-footer__main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .e07-footer__bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ==============================================
+           [E08] ナビゲーションバー
+           ============================================== */
+
+        .e08-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--color-white);
+            border-bottom: 2px solid var(--color-black);
+        }
+
+        .e08-nav__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .e08-nav__logo {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            text-decoration: none;
+        }
+
+        .e08-nav__menu {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .e08-nav__link {
+            color: var(--color-black);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .e08-nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .e08-nav__link:hover::after,
+        .e08-nav__link--active::after {
+            width: 100%;
+        }
+
+        .e08-nav__cta {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 12px 32px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-black);
+        }
+
+        .e08-nav__cta:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .e08-nav__toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .e08-nav__toggle-bar {
+            width: 28px;
+            height: 3px;
+            background: var(--color-black);
+            transition: all 0.3s ease;
+        }
+
+        .e08-nav__toggle.active .e08-nav__toggle-bar:nth-child(1) {
+            transform: rotate(45deg) translateY(9px);
+        }
+
+        .e08-nav__toggle.active .e08-nav__toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .e08-nav__toggle.active .e08-nav__toggle-bar:nth-child(3) {
+            transform: rotate(-45deg) translateY(-9px);
+        }
+
+        @media (max-width: 968px) {
+            .e08-nav__menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-white);
+                flex-direction: column;
+                padding: 32px;
+                gap: 24px;
+                border-bottom: 2px solid var(--color-black);
+                display: none;
+            }
+
+            .e08-nav__menu.active {
+                display: flex;
+            }
+
+            .e08-nav__toggle {
+                display: flex;
+            }
+
+            .e08-nav__cta {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* ==============================================
+           [E09] ステップガイド（使い方説明）
+           ============================================== */
+
+        .e09-steps {
+            padding: 120px 0;
+            background: var(--color-white);
+        }
+
+        .e09-steps__header {
+            max-width: 700px;
+            margin-bottom: 80px;
+        }
+
+        .e09-steps__title {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .e09-steps__subtitle {
+            font-size: 20px;
+            color: var(--color-gray-600);
+        }
+
+        .e09-steps__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            position: relative;
+        }
+
+        .e09-step {
+            position: relative;
+        }
+
+        .e09-step__number {
+            font-family: var(--font-display);
+            font-size: 120px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-gray-300);
+            position: absolute;
+            top: -40px;
+            left: -20px;
+            z-index: 1;
+        }
+
+        .e09-step__content {
+            position: relative;
+            z-index: 2;
+            padding-top: 60px;
+        }
+
+        .e09-step__icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .e09-step__icon::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid var(--color-accent);
+        }
+
+        .e09-step__icon-text {
+            color: var(--color-white);
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .e09-step__title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .e09-step__description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-gray-600);
+        }
+
+        .e09-step__arrow {
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            transform: translateY(-50%);
+            font-size: 32px;
+            color: var(--color-accent);
+            display: none;
+        }
+
+        @media (min-width: 969px) {
+            .e09-step:not(:last-child) .e09-step__arrow {
+                display: block;
+            }
+        }
+
+        /* ==============================================
+           [E10] ニュースレター登録フォーム
+           ============================================== */
+
+        .e10-newsletter {
+            padding: 100px 0;
+            background: var(--color-black);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .e10-newsletter::before {
+            content: 'NEWSLETTER';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-size: 200px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.03);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .e10-newsletter__container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .e10-newsletter__content {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .e10-newsletter__title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .e10-newsletter__description {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--color-gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .e10-newsletter__form {
+            display: flex;
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .e10-newsletter__input {
+            flex: 1;
+            padding: 24px 32px;
+            border: 3px solid var(--color-white);
+            background: transparent;
+            color: var(--color-white);
+            font-size: 16px;
+            font-family: var(--font-sans);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .e10-newsletter__input::placeholder {
+            color: var(--color-gray-600);
+        }
+
+        .e10-newsletter__input:focus {
+            border-color: var(--color-accent);
+        }
+
+        .e10-newsletter__submit {
+            padding: 24px 48px;
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: 3px solid var(--color-accent);
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .e10-newsletter__submit:hover {
+            background: transparent;
+            color: var(--color-accent);
+        }
+
+        .e10-newsletter__note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        @media (max-width: 768px) {
+            .e10-newsletter__form {
+                flex-direction: column;
+            }
+
+            .e10-newsletter__submit {
+                width: 100%;
+            }
+        }
+
+        /* ==============================================
+           Demo Section Spacing
+           ============================================== */
+
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- [E01] ヒーローセクション - エディトリアル -->
+    <section class="e01-hero">
+        <div class="e01-hero__content">
+            <div class="e01-hero__eyebrow">New Collection 2026</div>
+            <h1 class="e01-hero__title">Bold Stories, Big Ideas</h1>
+            <p class="e01-hero__subtitle">
+                エディトリアルデザインの力で、あなたのブランドストーリーを印象的に伝えます。
+            </p>
+            <a href="#" class="e01-hero__cta">
+                始める
+                <span>→</span>
+            </a>
+        </div>
+        <div class="e01-hero__visual">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200"
+                 alt="Editorial Design"
+                 class="e01-hero__image">
+            <div class="e01-hero__label">Limited Edition</div>
+        </div>
+    </section>
+
+    <!-- [E02] 特徴カード -->
+    <section class="e02-features">
+        <div class="container">
+            <div class="e02-features__grid">
+                <div class="e02-feature-card">
+                    <div class="e02-feature-card__number">01</div>
+                    <h3 class="e02-feature-card__title">大胆なタイポグラフィ</h3>
+                    <p class="e02-feature-card__description">
+                        読者の目を引く強力な文字組みで、メッセージを明確に伝えます。
+                    </p>
+                </div>
+                <div class="e02-feature-card">
+                    <div class="e02-feature-card__number">02</div>
+                    <h3 class="e02-feature-card__title">非対称レイアウト</h3>
+                    <p class="e02-feature-card__description">
+                        従来の枠を超えた動的な構成で、視覚的なインパクトを最大化。
+                    </p>
+                </div>
+                <div class="e02-feature-card">
+                    <div class="e02-feature-card__number">03</div>
+                    <h3 class="e02-feature-card__title">モノクローム＋差し色</h3>
+                    <p class="e02-feature-card__description">
+                        洗練された白黒ベースに、戦略的な差し色でブランドを強調。
+                    </p>
+                </div>
+                <div class="e02-feature-card">
+                    <div class="e02-feature-card__number">04</div>
+                    <h3 class="e02-feature-card__title">高速パフォーマンス</h3>
+                    <p class="e02-feature-card__description">
+                        最適化されたコードで、美しいデザインと高速表示を両立。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [E03] 料金表 -->
+    <section class="e03-pricing">
+        <div class="container">
+            <div class="e03-pricing__header">
+                <h2 class="e03-pricing__title">Pricing Plans</h2>
+                <p class="e03-pricing__subtitle">あなたのビジネスに最適なプランを選択</p>
+            </div>
+            <div class="e03-pricing__grid">
+                <div class="e03-pricing-card">
+                    <div class="e03-pricing-card__name">Starter</div>
+                    <div class="e03-pricing-card__price">¥9,800</div>
+                    <div class="e03-pricing-card__period">/月額</div>
+                    <ul class="e03-pricing-card__features">
+                        <li class="e03-pricing-card__feature">5つのプロジェクト</li>
+                        <li class="e03-pricing-card__feature">10GBストレージ</li>
+                        <li class="e03-pricing-card__feature">基本サポート</li>
+                        <li class="e03-pricing-card__feature">月次レポート</li>
+                    </ul>
+                    <a href="#" class="e03-pricing-card__button">選択する</a>
+                </div>
+
+                <div class="e03-pricing-card e03-pricing-card--featured">
+                    <div class="e03-pricing-card__name">Professional</div>
+                    <div class="e03-pricing-card__price">¥29,800</div>
+                    <div class="e03-pricing-card__period">/月額</div>
+                    <ul class="e03-pricing-card__features">
+                        <li class="e03-pricing-card__feature">無制限プロジェクト</li>
+                        <li class="e03-pricing-card__feature">100GBストレージ</li>
+                        <li class="e03-pricing-card__feature">優先サポート</li>
+                        <li class="e03-pricing-card__feature">週次レポート</li>
+                        <li class="e03-pricing-card__feature">カスタムブランディング</li>
+                    </ul>
+                    <a href="#" class="e03-pricing-card__button">選択する</a>
+                </div>
+
+                <div class="e03-pricing-card">
+                    <div class="e03-pricing-card__name">Enterprise</div>
+                    <div class="e03-pricing-card__price">¥99,800</div>
+                    <div class="e03-pricing-card__period">/月額</div>
+                    <ul class="e03-pricing-card__features">
+                        <li class="e03-pricing-card__feature">無制限プロジェクト</li>
+                        <li class="e03-pricing-card__feature">無制限ストレージ</li>
+                        <li class="e03-pricing-card__feature">24/7専任サポート</li>
+                        <li class="e03-pricing-card__feature">リアルタイム分析</li>
+                        <li class="e03-pricing-card__feature">専用アカウント管理</li>
+                        <li class="e03-pricing-card__feature">SLA保証</li>
+                    </ul>
+                    <a href="#" class="e03-pricing-card__button">選択する</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [E04] CTA ボタン -->
+    <section class="e04-cta-section">
+        <div class="container">
+            <div class="e04-cta-content">
+                <h2 class="e04-cta__title">今すぐ始めよう</h2>
+                <p class="e04-cta__description">
+                    14日間の無料トライアルで、すべての機能をお試しいただけます。クレジットカード不要。
+                </p>
+                <div class="e04-cta__buttons">
+                    <a href="#" class="e04-cta__button e04-cta__button--primary">
+                        無料で始める
+                    </a>
+                    <a href="#" class="e04-cta__button e04-cta__button--secondary">
+                        詳細を見る
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [E05] テスティモニアル（口コミ） -->
+    <section class="e05-testimonials">
+        <div class="container">
+            <div class="e05-testimonials__header">
+                <h2 class="e05-testimonials__title">What Our Clients Say</h2>
+                <p class="e05-testimonials__subtitle">
+                    世界中のクリエイターやビジネスオーナーから信頼されています
+                </p>
+            </div>
+            <div class="e05-testimonials__grid">
+                <div class="e05-testimonial-card">
+                    <p class="e05-testimonial-card__quote">
+                        このプラットフォームのおかげで、私たちのブランドは新しい次元に到達しました。
+                        エディトリアルなデザインが、顧客エンゲージメントを300%向上させました。
+                    </p>
+                    <div class="e05-testimonial-card__author">
+                        <div class="e05-testimonial-card__avatar">山</div>
+                        <div class="e05-testimonial-card__info">
+                            <div class="e05-testimonial-card__name">山田 太郎</div>
+                            <div class="e05-testimonial-card__position">CEO, デザインスタジオ</div>
+                            <div class="e05-testimonial-card__rating">
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="e05-testimonial-card">
+                    <p class="e05-testimonial-card__quote">
+                        直感的なインターフェースと強力なデザインツールのおかげで、制作時間が半分になりました。
+                        本当に革新的なサービスです。
+                    </p>
+                    <div class="e05-testimonial-card__author">
+                        <div class="e05-testimonial-card__avatar">佐</div>
+                        <div class="e05-testimonial-card__info">
+                            <div class="e05-testimonial-card__name">佐藤 花子</div>
+                            <div class="e05-testimonial-card__position">アートディレクター</div>
+                            <div class="e05-testimonial-card__rating">
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="e05-testimonial-card">
+                    <p class="e05-testimonial-card__quote">
+                        クライアントからの評価が劇的に向上しました。このツールなしでは、
+                        もう仕事ができないと思います。
+                    </p>
+                    <div class="e05-testimonial-card__author">
+                        <div class="e05-testimonial-card__avatar">田</div>
+                        <div class="e05-testimonial-card__info">
+                            <div class="e05-testimonial-card__name">田中 一郎</div>
+                            <div class="e05-testimonial-card__position">フリーランスデザイナー</div>
+                            <div class="e05-testimonial-card__rating">
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                                <span class="e05-testimonial-card__star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [E06] FAQ アコーディオン -->
+    <section class="e06-faq">
+        <div class="container">
+            <div class="e06-faq__container">
+                <div class="e06-faq__header">
+                    <h2 class="e06-faq__title">FAQ</h2>
+                    <p class="e06-faq__subtitle">よくあるご質問</p>
+                </div>
+                <div class="e06-faq__list">
+                    <div class="e06-faq-item">
+                        <button class="e06-faq-item__question">
+                            <span>無料トライアル期間中にキャンセルできますか？</span>
+                            <span class="e06-faq-item__icon"></span>
+                        </button>
+                        <div class="e06-faq-item__answer">
+                            <div class="e06-faq-item__answer-content">
+                                はい、14日間の無料トライアル期間中はいつでもキャンセルできます。
+                                料金は一切発生しません。クレジットカード情報の登録も不要です。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="e06-faq-item">
+                        <button class="e06-faq-item__question">
+                            <span>プランのアップグレード・ダウングレードはできますか？</span>
+                            <span class="e06-faq-item__icon"></span>
+                        </button>
+                        <div class="e06-faq-item__answer">
+                            <div class="e06-faq-item__answer-content">
+                                はい、いつでも自由にプランを変更できます。アップグレードは即座に反映され、
+                                ダウングレードは次回の請求サイクルから適用されます。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="e06-faq-item">
+                        <button class="e06-faq-item__question">
+                            <span>どのような支払い方法が利用できますか？</span>
+                            <span class="e06-faq-item__icon"></span>
+                        </button>
+                        <div class="e06-faq-item__answer">
+                            <div class="e06-faq-item__answer-content">
+                                クレジットカード（Visa、MasterCard、American Express）、デビットカード、
+                                および銀行振込による支払いに対応しています。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="e06-faq-item">
+                        <button class="e06-faq-item__question">
+                            <span>データのバックアップは自動で行われますか？</span>
+                            <span class="e06-faq-item__icon"></span>
+                        </button>
+                        <div class="e06-faq-item__answer">
+                            <div class="e06-faq-item__answer-content">
+                                はい、すべてのデータは毎日自動的にバックアップされます。
+                                また、いつでも手動でエクスポートすることも可能です。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="e06-faq-item">
+                        <button class="e06-faq-item__question">
+                            <span>サポートはどのように受けられますか？</span>
+                            <span class="e06-faq-item__icon"></span>
+                        </button>
+                        <div class="e06-faq-item__answer">
+                            <div class="e06-faq-item__answer-content">
+                                メール、チャット、電話でのサポートを提供しています。
+                                Professionalプラン以上では、優先サポートをご利用いただけます。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [E07] フッター -->
+    <footer class="e07-footer">
+        <div class="container">
+            <div class="e07-footer__main">
+                <div class="e07-footer__brand">
+                    <div class="e07-footer__logo">Editorial</div>
+                    <p class="e07-footer__description">
+                        大胆なタイポグラフィと革新的なレイアウトで、あなたのブランドストーリーを世界に届けます。
+                    </p>
+                    <div class="e07-footer__social">
+                        <a href="#" class="e07-footer__social-link" aria-label="Twitter">𝕏</a>
+                        <a href="#" class="e07-footer__social-link" aria-label="Facebook">f</a>
+                        <a href="#" class="e07-footer__social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="e07-footer__social-link" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+
+                <div class="e07-footer__column">
+                    <h3 class="e07-footer__column-title">製品</h3>
+                    <ul class="e07-footer__links">
+                        <li><a href="#" class="e07-footer__link">機能</a></li>
+                        <li><a href="#" class="e07-footer__link">料金</a></li>
+                        <li><a href="#" class="e07-footer__link">事例</a></li>
+                        <li><a href="#" class="e07-footer__link">アップデート</a></li>
+                    </ul>
+                </div>
+
+                <div class="e07-footer__column">
+                    <h3 class="e07-footer__column-title">会社</h3>
+                    <ul class="e07-footer__links">
+                        <li><a href="#" class="e07-footer__link">会社概要</a></li>
+                        <li><a href="#" class="e07-footer__link">採用情報</a></li>
+                        <li><a href="#" class="e07-footer__link">ブログ</a></li>
+                        <li><a href="#" class="e07-footer__link">お問い合わせ</a></li>
+                    </ul>
+                </div>
+
+                <div class="e07-footer__column">
+                    <h3 class="e07-footer__column-title">リソース</h3>
+                    <ul class="e07-footer__links">
+                        <li><a href="#" class="e07-footer__link">ドキュメント</a></li>
+                        <li><a href="#" class="e07-footer__link">ヘルプセンター</a></li>
+                        <li><a href="#" class="e07-footer__link">コミュニティ</a></li>
+                        <li><a href="#" class="e07-footer__link">API</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="e07-footer__bottom">
+                <div class="e07-footer__copyright">
+                    © 2026 Editorial. All rights reserved.
+                </div>
+                <div class="e07-footer__legal">
+                    <a href="#" class="e07-footer__legal-link">プライバシーポリシー</a>
+                    <a href="#" class="e07-footer__legal-link">利用規約</a>
+                    <a href="#" class="e07-footer__legal-link">Cookie設定</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- [E08] ナビゲーションバー -->
+    <nav class="e08-nav">
+        <div class="e08-nav__container">
+            <a href="#" class="e08-nav__logo">Editorial</a>
+            <ul class="e08-nav__menu">
+                <li><a href="#" class="e08-nav__link e08-nav__link--active">Home</a></li>
+                <li><a href="#" class="e08-nav__link">Features</a></li>
+                <li><a href="#" class="e08-nav__link">Pricing</a></li>
+                <li><a href="#" class="e08-nav__link">About</a></li>
+                <li><a href="#" class="e08-nav__cta">Get Started</a></li>
+            </ul>
+            <button class="e08-nav__toggle" aria-label="Toggle menu">
+                <span class="e08-nav__toggle-bar"></span>
+                <span class="e08-nav__toggle-bar"></span>
+                <span class="e08-nav__toggle-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- [E09] ステップガイド（使い方説明） -->
+    <section class="e09-steps">
+        <div class="container">
+            <div class="e09-steps__header">
+                <h2 class="e09-steps__title">How It Works</h2>
+                <p class="e09-steps__subtitle">
+                    シンプルな3ステップで、プロフェッショナルなデザインを実現
+                </p>
+            </div>
+            <div class="e09-steps__list">
+                <div class="e09-step">
+                    <div class="e09-step__number">01</div>
+                    <div class="e09-step__content">
+                        <div class="e09-step__icon">
+                            <span class="e09-step__icon-text">✎</span>
+                        </div>
+                        <h3 class="e09-step__title">アカウント作成</h3>
+                        <p class="e09-step__description">
+                            メールアドレスだけで、わずか30秒で登録完了。
+                            クレジットカード情報は不要です。
+                        </p>
+                    </div>
+                    <div class="e09-step__arrow">→</div>
+                </div>
+
+                <div class="e09-step">
+                    <div class="e09-step__number">02</div>
+                    <div class="e09-step__content">
+                        <div class="e09-step__icon">
+                            <span class="e09-step__icon-text">⚡</span>
+                        </div>
+                        <h3 class="e09-step__title">テンプレート選択</h3>
+                        <p class="e09-step__description">
+                            100種類以上のプロフェッショナルなテンプレートから選択。
+                            カスタマイズも自由自在。
+                        </p>
+                    </div>
+                    <div class="e09-step__arrow">→</div>
+                </div>
+
+                <div class="e09-step">
+                    <div class="e09-step__number">03</div>
+                    <div class="e09-step__content">
+                        <div class="e09-step__icon">
+                            <span class="e09-step__icon-text">★</span>
+                        </div>
+                        <h3 class="e09-step__title">公開・共有</h3>
+                        <p class="e09-step__description">
+                            ワンクリックで世界中に公開。
+                            SNS連携で簡単にシェアできます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [E10] ニュースレター登録フォーム -->
+    <section class="e10-newsletter">
+        <div class="container">
+            <div class="e10-newsletter__container">
+                <div class="e10-newsletter__content">
+                    <h2 class="e10-newsletter__title">Stay Updated</h2>
+                    <p class="e10-newsletter__description">
+                        最新のデザイントレンド、機能アップデート、限定オファーを受け取りましょう。
+                    </p>
+                </div>
+                <form class="e10-newsletter__form">
+                    <input
+                        type="email"
+                        placeholder="あなたのメールアドレス"
+                        class="e10-newsletter__input"
+                        required
+                    >
+                    <button type="submit" class="e10-newsletter__submit">
+                        Subscribe
+                    </button>
+                </form>
+                <p class="e10-newsletter__note">
+                    登録することで、プライバシーポリシーに同意したものとみなされます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // [E06] FAQ Accordion functionality
+        document.querySelectorAll('.e06-faq-item__question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.e06-faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // [E08] Mobile Navigation Toggle
+        document.querySelector('.e08-nav__toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.e08-nav__menu').classList.toggle('active');
+        });
+
+        // [E10] Newsletter Form Submission (demo)
+        document.querySelector('.e10-newsletter__form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('購読ありがとうございます！');
+            e.target.reset();
+        });
+    </script>
+
+</body>
+</html>

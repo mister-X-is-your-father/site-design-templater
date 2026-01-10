@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss International Components - LINE Ikemen Banana</title>
+    <style>
+        /* ============================================
+           Swiss International Design System
+           Grid System, Sans-Serif, Red-Black-White
+           ============================================ */
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            /* Swiss Colors - Pure Contrast */
+            --swiss-black: #000000;
+            --swiss-white: #ffffff;
+            --swiss-red: #ff0000;
+            --swiss-gray-100: #f5f5f5;
+            --swiss-gray-200: #e5e5e5;
+            --swiss-gray-300: #d4d4d4;
+            --swiss-gray-500: #737373;
+            --swiss-gray-700: #404040;
+            --swiss-gray-900: #171717;
+
+            /* Grid System */
+            --grid-unit: 8px;
+            --grid-gutter: 24px;
+            --grid-column: 80px;
+
+            /* Typography Scale - Modular */
+            --type-scale-xs: 0.75rem;    /* 12px */
+            --type-scale-sm: 0.875rem;   /* 14px */
+            --type-scale-base: 1rem;     /* 16px */
+            --type-scale-lg: 1.125rem;   /* 18px */
+            --type-scale-xl: 1.5rem;     /* 24px */
+            --type-scale-2xl: 2rem;      /* 32px */
+            --type-scale-3xl: 3rem;      /* 48px */
+            --type-scale-4xl: 4rem;      /* 64px */
+            --type-scale-5xl: 6rem;      /* 96px */
+
+            /* Spacing - Grid Based */
+            --space-1: calc(var(--grid-unit) * 1);   /* 8px */
+            --space-2: calc(var(--grid-unit) * 2);   /* 16px */
+            --space-3: calc(var(--grid-unit) * 3);   /* 24px */
+            --space-4: calc(var(--grid-unit) * 4);   /* 32px */
+            --space-5: calc(var(--grid-unit) * 5);   /* 40px */
+            --space-6: calc(var(--grid-unit) * 6);   /* 48px */
+            --space-8: calc(var(--grid-unit) * 8);   /* 64px */
+            --space-10: calc(var(--grid-unit) * 10); /* 80px */
+            --space-12: calc(var(--grid-unit) * 12); /* 96px */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--swiss-white);
+            color: var(--swiss-black);
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            padding: var(--space-6);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--swiss-black);
+            margin: var(--space-8) 0;
+        }
+
+        .component-label {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--swiss-gray-500);
+            margin-bottom: var(--space-3);
+            display: block;
+        }
+
+        /* ============================================
+           [S01] HERO SECTION - Swiss
+           ============================================ */
+
+        .swiss-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gutter);
+            min-height: 80vh;
+            background: var(--swiss-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swiss-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: var(--swiss-gray-200);
+        }
+
+        .swiss-hero__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--space-8);
+            padding-right: var(--space-6);
+        }
+
+        .swiss-hero__overline {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--swiss-red);
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-hero__title {
+            font-size: var(--type-scale-5xl);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: var(--swiss-black);
+            margin-bottom: var(--space-4);
+        }
+
+        .swiss-hero__subtitle {
+            font-size: var(--type-scale-lg);
+            font-weight: 400;
+            color: var(--swiss-gray-700);
+            max-width: 400px;
+            margin-bottom: var(--space-5);
+            line-height: 1.6;
+        }
+
+        .swiss-hero__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+            padding: var(--space-2) var(--space-4);
+            font-size: var(--type-scale-sm);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .swiss-hero__cta:hover {
+            background: var(--swiss-red);
+        }
+
+        .swiss-hero__cta-arrow {
+            font-size: var(--type-scale-lg);
+            transition: transform 0.2s ease;
+        }
+
+        .swiss-hero__cta:hover .swiss-hero__cta-arrow {
+            transform: translateX(4px);
+        }
+
+        .swiss-hero__visual {
+            position: relative;
+            background: var(--swiss-gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiss-hero__visual-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+        }
+
+        .swiss-hero__visual-grid span {
+            border: 1px solid var(--swiss-gray-200);
+        }
+
+        .swiss-hero__visual-accent {
+            width: 200px;
+            height: 200px;
+            background: var(--swiss-red);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           [S02] FEATURE CARD - Swiss
+           ============================================ */
+
+        .swiss-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--swiss-black);
+            border: 1px solid var(--swiss-black);
+        }
+
+        .swiss-feature {
+            background: var(--swiss-white);
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.2s ease;
+        }
+
+        .swiss-feature:hover {
+            background: var(--swiss-gray-100);
+        }
+
+        .swiss-feature__number {
+            font-size: var(--type-scale-4xl);
+            font-weight: 900;
+            color: var(--swiss-gray-200);
+            position: absolute;
+            top: var(--space-3);
+            right: var(--space-3);
+            line-height: 1;
+        }
+
+        .swiss-feature__icon {
+            width: var(--space-6);
+            height: var(--space-6);
+            background: var(--swiss-black);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--swiss-white);
+            font-size: var(--type-scale-xl);
+            font-weight: 700;
+        }
+
+        .swiss-feature__title {
+            font-size: var(--type-scale-xl);
+            font-weight: 700;
+            color: var(--swiss-black);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .swiss-feature__description {
+            font-size: var(--type-scale-sm);
+            color: var(--swiss-gray-700);
+            line-height: 1.7;
+            margin-bottom: auto;
+        }
+
+        .swiss-feature__link {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--swiss-black);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            margin-top: var(--space-4);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .swiss-feature__link:hover {
+            color: var(--swiss-red);
+        }
+
+        /* ============================================
+           [S03] PRICING TABLE - Swiss
+           ============================================ */
+
+        .swiss-pricing {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--grid-gutter);
+        }
+
+        .swiss-pricing-card {
+            border: 1px solid var(--swiss-black);
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: var(--swiss-white);
+        }
+
+        .swiss-pricing-card--featured {
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+        }
+
+        .swiss-pricing-card__badge {
+            position: absolute;
+            top: 0;
+            right: var(--space-3);
+            background: var(--swiss-red);
+            color: var(--swiss-white);
+            padding: var(--space-1) var(--space-2);
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .swiss-pricing-card__name {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
+            color: var(--swiss-gray-500);
+        }
+
+        .swiss-pricing-card--featured .swiss-pricing-card__name {
+            color: var(--swiss-gray-300);
+        }
+
+        .swiss-pricing-card__price {
+            font-size: var(--type-scale-4xl);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-1);
+        }
+
+        .swiss-pricing-card__period {
+            font-size: var(--type-scale-sm);
+            color: var(--swiss-gray-500);
+            margin-bottom: var(--space-4);
+        }
+
+        .swiss-pricing-card--featured .swiss-pricing-card__period {
+            color: var(--swiss-gray-300);
+        }
+
+        .swiss-pricing-card__divider {
+            height: 1px;
+            background: var(--swiss-gray-200);
+            margin: var(--space-3) 0;
+        }
+
+        .swiss-pricing-card--featured .swiss-pricing-card__divider {
+            background: var(--swiss-gray-700);
+        }
+
+        .swiss-pricing-card__features {
+            list-style: none;
+            margin-bottom: var(--space-5);
+            flex-grow: 1;
+        }
+
+        .swiss-pricing-card__feature {
+            font-size: var(--type-scale-sm);
+            padding: var(--space-1) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .swiss-pricing-card__feature::before {
+            content: '+';
+            font-weight: 700;
+            color: var(--swiss-red);
+        }
+
+        .swiss-pricing-card__cta {
+            width: 100%;
+            padding: var(--space-2);
+            font-size: var(--type-scale-sm);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid currentColor;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .swiss-pricing-card__cta:hover {
+            background: var(--swiss-red);
+            border-color: var(--swiss-red);
+            color: var(--swiss-white);
+        }
+
+        .swiss-pricing-card--featured .swiss-pricing-card__cta {
+            background: var(--swiss-white);
+            color: var(--swiss-black);
+            border-color: var(--swiss-white);
+        }
+
+        .swiss-pricing-card--featured .swiss-pricing-card__cta:hover {
+            background: var(--swiss-red);
+            border-color: var(--swiss-red);
+            color: var(--swiss-white);
+        }
+
+        /* ============================================
+           [S04] CTA BUTTON - Swiss
+           ============================================ */
+
+        .swiss-btn-group {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+        }
+
+        .swiss-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-1);
+            padding: var(--space-2) var(--space-4);
+            font-size: var(--type-scale-sm);
+            font-weight: 600;
+            font-family: inherit;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid var(--swiss-black);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swiss-btn--primary {
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+        }
+
+        .swiss-btn--primary:hover {
+            background: var(--swiss-red);
+            border-color: var(--swiss-red);
+        }
+
+        .swiss-btn--secondary {
+            background: var(--swiss-white);
+            color: var(--swiss-black);
+        }
+
+        .swiss-btn--secondary:hover {
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+        }
+
+        .swiss-btn--red {
+            background: var(--swiss-red);
+            color: var(--swiss-white);
+            border-color: var(--swiss-red);
+        }
+
+        .swiss-btn--red:hover {
+            background: var(--swiss-black);
+            border-color: var(--swiss-black);
+        }
+
+        .swiss-btn--large {
+            padding: var(--space-3) var(--space-6);
+            font-size: var(--type-scale-base);
+        }
+
+        .swiss-btn__arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .swiss-btn:hover .swiss-btn__arrow {
+            transform: translateX(4px);
+        }
+
+        /* ============================================
+           [S05] TESTIMONIAL - Swiss
+           ============================================ */
+
+        .swiss-testimonials {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--grid-gutter);
+        }
+
+        .swiss-testimonial {
+            border: 1px solid var(--swiss-black);
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .swiss-testimonial__rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-testimonial__star {
+            width: 16px;
+            height: 16px;
+            background: var(--swiss-red);
+        }
+
+        .swiss-testimonial__text {
+            font-size: var(--type-scale-lg);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--swiss-black);
+            margin-bottom: var(--space-4);
+            flex-grow: 1;
+        }
+
+        .swiss-testimonial__divider {
+            height: 1px;
+            background: var(--swiss-gray-200);
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-testimonial__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .swiss-testimonial__avatar {
+            width: var(--space-5);
+            height: var(--space-5);
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--type-scale-sm);
+            font-weight: 700;
+        }
+
+        .swiss-testimonial__info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .swiss-testimonial__name {
+            font-size: var(--type-scale-sm);
+            font-weight: 700;
+            color: var(--swiss-black);
+        }
+
+        .swiss-testimonial__role {
+            font-size: var(--type-scale-xs);
+            color: var(--swiss-gray-500);
+        }
+
+        /* ============================================
+           [S06] FAQ ACCORDION - Swiss
+           ============================================ */
+
+        .swiss-faq {
+            border: 1px solid var(--swiss-black);
+        }
+
+        .swiss-faq__header {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--swiss-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .swiss-faq__title {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--swiss-gray-500);
+        }
+
+        .swiss-faq__count {
+            font-size: var(--type-scale-xs);
+            font-weight: 600;
+            color: var(--swiss-red);
+        }
+
+        .swiss-faq-item {
+            border-bottom: 1px solid var(--swiss-gray-200);
+        }
+
+        .swiss-faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .swiss-faq-item__trigger {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) var(--space-4);
+            background: var(--swiss-white);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            text-align: left;
+            transition: background 0.2s ease;
+        }
+
+        .swiss-faq-item__trigger:hover {
+            background: var(--swiss-gray-100);
+        }
+
+        .swiss-faq-item__question {
+            font-size: var(--type-scale-base);
+            font-weight: 600;
+            color: var(--swiss-black);
+        }
+
+        .swiss-faq-item__icon {
+            width: var(--space-3);
+            height: var(--space-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--type-scale-lg);
+            font-weight: 300;
+            color: var(--swiss-black);
+            transition: transform 0.2s ease;
+        }
+
+        .swiss-faq-item.active .swiss-faq-item__icon {
+            transform: rotate(45deg);
+        }
+
+        .swiss-faq-item__content {
+            display: none;
+            padding: 0 var(--space-4) var(--space-4);
+        }
+
+        .swiss-faq-item.active .swiss-faq-item__content {
+            display: block;
+        }
+
+        .swiss-faq-item__answer {
+            font-size: var(--type-scale-sm);
+            color: var(--swiss-gray-700);
+            line-height: 1.7;
+            padding-left: var(--space-3);
+            border-left: 2px solid var(--swiss-red);
+        }
+
+        /* ============================================
+           [S07] FOOTER - Swiss
+           ============================================ */
+
+        .swiss-footer {
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+            padding: var(--space-8) var(--space-6);
+            margin-top: var(--space-8);
+        }
+
+        .swiss-footer__grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-6);
+            border-bottom: 1px solid var(--swiss-gray-700);
+        }
+
+        .swiss-footer__brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .swiss-footer__logo {
+            font-size: var(--type-scale-xl);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-2);
+        }
+
+        .swiss-footer__logo-accent {
+            color: var(--swiss-red);
+        }
+
+        .swiss-footer__tagline {
+            font-size: var(--type-scale-sm);
+            color: var(--swiss-gray-500);
+            max-width: 280px;
+            line-height: 1.6;
+        }
+
+        .swiss-footer__section-title {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--swiss-gray-500);
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-footer__links {
+            list-style: none;
+        }
+
+        .swiss-footer__link {
+            display: block;
+            font-size: var(--type-scale-sm);
+            color: var(--swiss-gray-300);
+            padding: var(--space-1) 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .swiss-footer__link:hover {
+            color: var(--swiss-white);
+        }
+
+        .swiss-footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .swiss-footer__copyright {
+            font-size: var(--type-scale-xs);
+            color: var(--swiss-gray-500);
+        }
+
+        .swiss-footer__legal {
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        .swiss-footer__legal-link {
+            font-size: var(--type-scale-xs);
+            color: var(--swiss-gray-500);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .swiss-footer__legal-link:hover {
+            color: var(--swiss-white);
+        }
+
+        /* ============================================
+           [S08] NAVIGATION BAR - Swiss
+           ============================================ */
+
+        .swiss-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--swiss-black);
+            margin-bottom: var(--space-6);
+        }
+
+        .swiss-nav__logo {
+            font-size: var(--type-scale-lg);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: var(--swiss-black);
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .swiss-nav__logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--swiss-red);
+        }
+
+        .swiss-nav__menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            list-style: none;
+        }
+
+        .swiss-nav__item {
+            font-size: var(--type-scale-sm);
+            font-weight: 500;
+            color: var(--swiss-gray-700);
+            cursor: pointer;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .swiss-nav__item:hover {
+            color: var(--swiss-black);
+        }
+
+        .swiss-nav__item::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--swiss-red);
+            transition: width 0.2s ease;
+        }
+
+        .swiss-nav__item:hover::after {
+            width: 100%;
+        }
+
+        .swiss-nav__item--active {
+            color: var(--swiss-black);
+            font-weight: 700;
+        }
+
+        .swiss-nav__item--active::after {
+            width: 100%;
+        }
+
+        .swiss-nav__cta {
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+            padding: var(--space-1) var(--space-3);
+            font-size: var(--type-scale-sm);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .swiss-nav__cta:hover {
+            background: var(--swiss-red);
+        }
+
+        /* ============================================
+           [S09] STEP GUIDE - Swiss
+           ============================================ */
+
+        .swiss-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--swiss-black);
+            border: 1px solid var(--swiss-black);
+        }
+
+        .swiss-step {
+            background: var(--swiss-white);
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 280px;
+        }
+
+        .swiss-step__number {
+            font-size: var(--type-scale-5xl);
+            font-weight: 900;
+            color: var(--swiss-gray-100);
+            line-height: 1;
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-step__indicator {
+            width: 100%;
+            height: 4px;
+            background: var(--swiss-gray-200);
+            margin-bottom: var(--space-3);
+            position: relative;
+        }
+
+        .swiss-step__indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--swiss-red);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .swiss-step:nth-child(1) .swiss-step__indicator::after { width: 25%; }
+        .swiss-step:nth-child(2) .swiss-step__indicator::after { width: 50%; }
+        .swiss-step:nth-child(3) .swiss-step__indicator::after { width: 75%; }
+        .swiss-step:nth-child(4) .swiss-step__indicator::after { width: 100%; }
+
+        .swiss-step__title {
+            font-size: var(--type-scale-lg);
+            font-weight: 700;
+            color: var(--swiss-black);
+            margin-bottom: var(--space-2);
+        }
+
+        .swiss-step__description {
+            font-size: var(--type-scale-sm);
+            color: var(--swiss-gray-700);
+            line-height: 1.6;
+        }
+
+        .swiss-step__arrow {
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: var(--type-scale-xl);
+            color: var(--swiss-black);
+            z-index: 1;
+        }
+
+        .swiss-step:last-child .swiss-step__arrow {
+            display: none;
+        }
+
+        /* ============================================
+           [S10] NEWSLETTER FORM - Swiss
+           ============================================ */
+
+        .swiss-newsletter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gutter);
+            border: 1px solid var(--swiss-black);
+        }
+
+        .swiss-newsletter__content {
+            padding: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .swiss-newsletter__overline {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--swiss-red);
+            margin-bottom: var(--space-2);
+        }
+
+        .swiss-newsletter__title {
+            font-size: var(--type-scale-3xl);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--swiss-black);
+            margin-bottom: var(--space-2);
+        }
+
+        .swiss-newsletter__description {
+            font-size: var(--type-scale-base);
+            color: var(--swiss-gray-700);
+            line-height: 1.6;
+        }
+
+        .swiss-newsletter__form {
+            background: var(--swiss-gray-100);
+            padding: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .swiss-newsletter__input-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-newsletter__label {
+            font-size: var(--type-scale-xs);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--swiss-gray-700);
+        }
+
+        .swiss-newsletter__input {
+            padding: var(--space-2);
+            border: 1px solid var(--swiss-black);
+            background: var(--swiss-white);
+            font-size: var(--type-scale-base);
+            font-family: inherit;
+            color: var(--swiss-black);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .swiss-newsletter__input:focus {
+            border-color: var(--swiss-red);
+        }
+
+        .swiss-newsletter__input::placeholder {
+            color: var(--swiss-gray-500);
+        }
+
+        .swiss-newsletter__checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+            font-size: var(--type-scale-xs);
+            color: var(--swiss-gray-700);
+            margin-bottom: var(--space-3);
+        }
+
+        .swiss-newsletter__checkbox input {
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+            accent-color: var(--swiss-red);
+        }
+
+        .swiss-newsletter__submit {
+            width: 100%;
+            padding: var(--space-2);
+            background: var(--swiss-black);
+            color: var(--swiss-white);
+            font-size: var(--type-scale-sm);
+            font-weight: 600;
+            font-family: inherit;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .swiss-newsletter__submit:hover {
+            background: var(--swiss-red);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+
+        @media (max-width: 1024px) {
+            .swiss-hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .swiss-hero::before {
+                display: none;
+            }
+
+            .swiss-hero__title {
+                font-size: var(--type-scale-4xl);
+            }
+
+            .swiss-hero__visual {
+                min-height: 300px;
+            }
+
+            .swiss-features {
+                grid-template-columns: 1fr;
+            }
+
+            .swiss-pricing {
+                grid-template-columns: 1fr;
+            }
+
+            .swiss-testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            .swiss-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .swiss-step__arrow {
+                display: none;
+            }
+
+            .swiss-newsletter {
+                grid-template-columns: 1fr;
+            }
+
+            .swiss-footer__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: var(--space-3);
+            }
+
+            .swiss-hero__title {
+                font-size: var(--type-scale-3xl);
+            }
+
+            .swiss-nav {
+                flex-direction: column;
+                gap: var(--space-3);
+                align-items: flex-start;
+            }
+
+            .swiss-nav__menu {
+                flex-wrap: wrap;
+                gap: var(--space-2);
+            }
+
+            .swiss-footer__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .swiss-footer__bottom {
+                flex-direction: column;
+                gap: var(--space-2);
+                text-align: center;
+            }
+
+            .swiss-newsletter__title {
+                font-size: var(--type-scale-2xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- [S08] NAVIGATION BAR - Swiss -->
+        <span class="component-label">[S08] Navigation Bar - Swiss International</span>
+        <nav class="swiss-nav">
+            <div class="swiss-nav__logo">
+                <span class="swiss-nav__logo-dot"></span>
+                IKEMEN
+            </div>
+            <ul class="swiss-nav__menu">
+                <li class="swiss-nav__item swiss-nav__item--active">Features</li>
+                <li class="swiss-nav__item">Pricing</li>
+                <li class="swiss-nav__item">Documentation</li>
+                <li class="swiss-nav__item">Contact</li>
+            </ul>
+            <button class="swiss-nav__cta">Get Started</button>
+        </nav>
+
+        <div class="section-divider"></div>
+
+        <!-- [S01] HERO SECTION - Swiss -->
+        <span class="component-label">[S01] Hero Section - Swiss International</span>
+        <section class="swiss-hero">
+            <div class="swiss-hero__content">
+                <span class="swiss-hero__overline">AI Image Transformation</span>
+                <h1 class="swiss-hero__title">Transform Reality</h1>
+                <p class="swiss-hero__subtitle">
+                    Precision-engineered image conversion powered by advanced AI.
+                    Clean interface, powerful results.
+                </p>
+                <button class="swiss-hero__cta">
+                    Start Now <span class="swiss-hero__cta-arrow">&#8594;</span>
+                </button>
+            </div>
+            <div class="swiss-hero__visual">
+                <div class="swiss-hero__visual-grid">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="swiss-hero__visual-accent"></div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- [S02] FEATURE CARD - Swiss -->
+        <span class="component-label">[S02] Feature Cards - Swiss International</span>
+        <div class="swiss-features">
+            <div class="swiss-feature">
+                <span class="swiss-feature__number">01</span>
+                <div class="swiss-feature__icon">&#9889;</div>
+                <h3 class="swiss-feature__title">Instant Processing</h3>
+                <p class="swiss-feature__description">
+                    Advanced AI transforms your images in seconds.
+                    No waiting, no compromise on quality.
+                </p>
+                <a class="swiss-feature__link">Learn More &#8594;</a>
+            </div>
+            <div class="swiss-feature">
+                <span class="swiss-feature__number">02</span>
+                <div class="swiss-feature__icon">&#9670;</div>
+                <h3 class="swiss-feature__title">Grid Precision</h3>
+                <p class="swiss-feature__description">
+                    Built on mathematical precision. Every pixel placed
+                    with intentional accuracy and purpose.
+                </p>
+                <a class="swiss-feature__link">Learn More &#8594;</a>
+            </div>
+            <div class="swiss-feature">
+                <span class="swiss-feature__number">03</span>
+                <div class="swiss-feature__icon">&#9673;</div>
+                <h3 class="swiss-feature__title">Clean Output</h3>
+                <p class="swiss-feature__description">
+                    Refined results without visual noise. Pure,
+                    focused imagery ready for any context.
+                </p>
+                <a class="swiss-feature__link">Learn More &#8594;</a>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- [S03] PRICING TABLE - Swiss -->
+        <span class="component-label">[S03] Pricing Table - Swiss International</span>
+        <div class="swiss-pricing">
+            <div class="swiss-pricing-card">
+                <span class="swiss-pricing-card__name">Free</span>
+                <div class="swiss-pricing-card__price">&#165;0</div>
+                <div class="swiss-pricing-card__period">Per month</div>
+                <div class="swiss-pricing-card__divider"></div>
+                <ul class="swiss-pricing-card__features">
+                    <li class="swiss-pricing-card__feature">10 transformations/month</li>
+                    <li class="swiss-pricing-card__feature">Standard quality</li>
+                    <li class="swiss-pricing-card__feature">Basic support</li>
+                </ul>
+                <button class="swiss-pricing-card__cta">Select Plan</button>
+            </div>
+            <div class="swiss-pricing-card swiss-pricing-card--featured">
+                <span class="swiss-pricing-card__badge">Popular</span>
+                <span class="swiss-pricing-card__name">Pro</span>
+                <div class="swiss-pricing-card__price">&#165;980</div>
+                <div class="swiss-pricing-card__period">Per month</div>
+                <div class="swiss-pricing-card__divider"></div>
+                <ul class="swiss-pricing-card__features">
+                    <li class="swiss-pricing-card__feature">500 transformations/month</li>
+                    <li class="swiss-pricing-card__feature">High quality output</li>
+                    <li class="swiss-pricing-card__feature">Priority support</li>
+                    <li class="swiss-pricing-card__feature">API access</li>
+                </ul>
+                <button class="swiss-pricing-card__cta">Select Plan</button>
+            </div>
+            <div class="swiss-pricing-card">
+                <span class="swiss-pricing-card__name">Enterprise</span>
+                <div class="swiss-pricing-card__price">Custom</div>
+                <div class="swiss-pricing-card__period">Contact us</div>
+                <div class="swiss-pricing-card__divider"></div>
+                <ul class="swiss-pricing-card__features">
+                    <li class="swiss-pricing-card__feature">Unlimited transformations</li>
+                    <li class="swiss-pricing-card__feature">Maximum quality</li>
+                    <li class="swiss-pricing-card__feature">Dedicated support</li>
+                    <li class="swiss-pricing-card__feature">Custom integration</li>
+                </ul>
+                <button class="swiss-pricing-card__cta">Contact Sales</button>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- [S04] CTA BUTTON - Swiss -->
+        <span class="component-label">[S04] CTA Buttons - Swiss International</span>
+        <div class="swiss-btn-group">
+            <button class="swiss-btn swiss-btn--primary">
+                Primary <span class="swiss-btn__arrow">&#8594;</span>
+            </button>
+            <button class="swiss-btn swiss-btn--secondary">
+                Secondary <span class="swiss-btn__arrow">&#8594;</span>
+            </button>
+            <button class="swiss-btn swiss-btn--red">
+                Accent <span class="swiss-btn__arrow">&#8594;</span>
+            </button>
+            <button class="swiss-btn swiss-btn--primary swiss-btn--large">
+                Large Button <span class="swiss-btn__arrow">&#8594;</span>
+            </button>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- [S05] TESTIMONIAL - Swiss -->
+        <span class="component-label">[S05] Testimonials - Swiss International</span>
+        <div class="swiss-testimonials">
+            <div class="swiss-testimonial">
+                <div class="swiss-testimonial__rating">
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                </div>
+                <p class="swiss-testimonial__text">
+                    "The precision and clarity of this service is remarkable.
+                    Clean interface, powerful results. Exactly what we needed."
+                </p>
+                <div class="swiss-testimonial__divider"></div>
+                <div class="swiss-testimonial__author">
+                    <div class="swiss-testimonial__avatar">YT</div>
+                    <div class="swiss-testimonial__info">
+                        <span class="swiss-testimonial__name">Yamamoto Takeshi</span>
+                        <span class="swiss-testimonial__role">Creative Director</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiss-testimonial">
+                <div class="swiss-testimonial__rating">
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                    <span class="swiss-testimonial__star"></span>
+                </div>
+                <p class="swiss-testimonial__text">
+                    "Functional design at its finest. No unnecessary elements,
+                    just pure efficiency. Our team productivity doubled."
+                </p>
+                <div class="swiss-testimonial__divider"></div>
+                <div class="swiss-testimonial__author">
+                    <div class="swiss-testimonial__avatar">SK</div>
+                    <div class="swiss-testimonial__info">
+                        <span class="swiss-testimonial__name">Suzuki Kenji</span>
+                        <span class="swiss-testimonial__role">Product Manager</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- [S06] FAQ ACCORDION - Swiss -->
+        <span class="component-label">[S06] FAQ Accordion - Swiss International</span>
+        <div class="swiss-faq">
+            <div class="swiss-faq__header">
+                <span class="swiss-faq__title">Frequently Asked Questions</span>
+                <span class="swiss-faq__count">4 Questions</span>
+            </div>
+            <div class="swiss-faq-item active">
+                <button class="swiss-faq-item__trigger">
+                    <span class="swiss-faq-item__question">What image formats are supported?</span>
+                    <span class="swiss-faq-item__icon">+</span>
+                </button>
+                <div class="swiss-faq-item__content">
+                    <p class="swiss-faq-item__answer">
+                        We support JPG, PNG, WebP, and HEIC formats. Maximum file size is 50MB.
+                        Output is delivered in your preferred format with optimized quality settings.
+                    </p>
+                </div>
+            </div>
+            <div class="swiss-faq-item">
+                <button class="swiss-faq-item__trigger">
+                    <span class="swiss-faq-item__question">How long does processing take?</span>
+                    <span class="swiss-faq-item__icon">+</span>
+                </button>
+                <div class="swiss-faq-item__content">
+                    <p class="swiss-faq-item__answer">
+                        Most transformations complete within 10-30 seconds. Complex images
+                        may take up to 60 seconds. Queue times vary based on server load.
+                    </p>
+                </div>
+            </div>
+            <div class="swiss-faq-item">
+                <button class="swiss-faq-item__trigger">
+                    <span class="swiss-faq-item__question">Can I cancel my subscription?</span>
+                    <span class="swiss-faq-item__icon">+</span>
+                </button>
+                <div class="swiss-faq-item__content">
+                    <p class="swiss-faq-item__answer">
+                        Yes. Cancel anytime from your account settings. No long-term contracts,
+                        no cancellation fees. Your access continues until the end of your billing period.
+                    </p>
+                </div>
+            </div>
+            <div class="swiss-faq-item">
+                <button class="swiss-faq-item__trigger">
+                    <span class="swiss-faq-item__question">Is my data secure?</span>
+                    <span class="swiss-faq-item__icon">+</span>
+                </button>
+                <div class="swiss-faq-item__content">
+                    <p class="swiss-faq-item__answer">
+                        All data is encrypted in transit and at rest. Images are processed
+                        in isolated environments and automatically deleted after 24 hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- [S09] STEP GUIDE - Swiss -->
+        <span class="component-label">[S09] Step Guide - Swiss International</span>
+        <div class="swiss-steps">
+            <div class="swiss-step">
+                <div class="swiss-step__number">01</div>
+                <div class="swiss-step__indicator"></div>
+                <h3 class="swiss-step__title">Upload</h3>
+                <p class="swiss-step__description">
+                    Send your image via LINE. Supports JPG, PNG, WebP up to 50MB.
+                </p>
+                <span class="swiss-step__arrow">&#8594;</span>
+            </div>
+            <div class="swiss-step">
+                <div class="swiss-step__number">02</div>
+                <div class="swiss-step__indicator"></div>
+                <h3 class="swiss-step__title">Process</h3>
+                <p class="swiss-step__description">
+                    AI analyzes and transforms your image with precision algorithms.
+                </p>
+                <span class="swiss-step__arrow">&#8594;</span>
+            </div>
+            <div class="swiss-step">
+                <div class="swiss-step__number">03</div>
+                <div class="swiss-step__indicator"></div>
+                <h3 class="swiss-step__title">Review</h3>
+                <p class="swiss-step__description">
+                    Preview the transformation. Request adjustments if needed.
+                </p>
+                <span class="swiss-step__arrow">&#8594;</span>
+            </div>
+            <div class="swiss-step">
+                <div class="swiss-step__number">04</div>
+                <div class="swiss-step__indicator"></div>
+                <h3 class="swiss-step__title">Download</h3>
+                <p class="swiss-step__description">
+                    Get your high-quality transformed image instantly via LINE.
+                </p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- [S10] NEWSLETTER FORM - Swiss -->
+        <span class="component-label">[S10] Newsletter Form - Swiss International</span>
+        <div class="swiss-newsletter">
+            <div class="swiss-newsletter__content">
+                <span class="swiss-newsletter__overline">Stay Updated</span>
+                <h2 class="swiss-newsletter__title">Subscribe to our newsletter</h2>
+                <p class="swiss-newsletter__description">
+                    Get the latest updates on new features, tips, and exclusive offers
+                    delivered directly to your inbox.
+                </p>
+            </div>
+            <form class="swiss-newsletter__form">
+                <div class="swiss-newsletter__input-group">
+                    <label class="swiss-newsletter__label">Email Address</label>
+                    <input type="email" class="swiss-newsletter__input" placeholder="your@email.com" required>
+                </div>
+                <label class="swiss-newsletter__checkbox">
+                    <input type="checkbox" checked>
+                    <span>I agree to receive marketing communications. You can unsubscribe at any time.</span>
+                </label>
+                <button type="submit" class="swiss-newsletter__submit">Subscribe Now</button>
+            </form>
+        </div>
+
+        <!-- [S07] FOOTER - Swiss -->
+        <footer class="swiss-footer">
+            <div class="swiss-footer__grid">
+                <div class="swiss-footer__brand">
+                    <div class="swiss-footer__logo">
+                        IKEMEN<span class="swiss-footer__logo-accent">.</span>
+                    </div>
+                    <p class="swiss-footer__tagline">
+                        Precision-engineered image transformation for the LINE platform.
+                        Clean design, powerful results.
+                    </p>
+                </div>
+                <div>
+                    <div class="swiss-footer__section-title">Product</div>
+                    <ul class="swiss-footer__links">
+                        <li class="swiss-footer__link">Features</li>
+                        <li class="swiss-footer__link">Pricing</li>
+                        <li class="swiss-footer__link">API</li>
+                        <li class="swiss-footer__link">Updates</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="swiss-footer__section-title">Company</div>
+                    <ul class="swiss-footer__links">
+                        <li class="swiss-footer__link">About</li>
+                        <li class="swiss-footer__link">Blog</li>
+                        <li class="swiss-footer__link">Careers</li>
+                        <li class="swiss-footer__link">Press</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="swiss-footer__section-title">Support</div>
+                    <ul class="swiss-footer__links">
+                        <li class="swiss-footer__link">Help Center</li>
+                        <li class="swiss-footer__link">Contact</li>
+                        <li class="swiss-footer__link">Status</li>
+                        <li class="swiss-footer__link">Feedback</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="swiss-footer__bottom">
+                <span class="swiss-footer__copyright">&copy; 2026 IKEMEN BOT. All rights reserved.</span>
+                <div class="swiss-footer__legal">
+                    <span class="swiss-footer__legal-link">Privacy Policy</span>
+                    <span class="swiss-footer__legal-link">Terms of Service</span>
+                    <span class="swiss-footer__legal-link">Cookie Policy</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Swiss FAQ Accordion
+        document.querySelectorAll('.swiss-faq-item__trigger').forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const parent = this.closest('.swiss-faq-item');
+                const isActive = parent.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.swiss-faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Toggle current
+                if (!isActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party & Celebration CSS Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f9fa;
+            padding: 40px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .illust-container {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* party-01: Balloon */
+        .balloon {
+            width: 40px;
+            height: 50px;
+            background: #ff6b6b;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #ff6b6b;
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            width: 1px;
+            height: 25px;
+            background: #999;
+        }
+        .balloon:hover {
+            transform: translateY(-8px) rotate(5deg);
+        }
+
+        /* party-02: Gift Box */
+        .gift-box {
+            width: 50px;
+            height: 45px;
+            background: #4ecdc4;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -3px;
+            width: 56px;
+            height: 12px;
+            background: #45b7aa;
+            border-radius: 2px;
+        }
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 55px;
+            background: #ff6b6b;
+        }
+        .gift-box:hover {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* party-03: Cake with Candles */
+        .cake {
+            width: 60px;
+            height: 40px;
+            background: #ffb6c1;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .cake::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 18px;
+            background: #fff;
+            border-radius: 2px;
+        }
+        .cake::after {
+            content: '';
+            position: absolute;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 10px;
+            background: #ffa500;
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.5s infinite alternate;
+        }
+        @keyframes flicker {
+            from { opacity: 1; }
+            to { opacity: 0.7; }
+        }
+        .cake:hover {
+            transform: scale(1.1);
+        }
+
+        /* party-04: Party Hat */
+        .party-hat {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 55px solid #9b59b6;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .party-hat::before {
+            content: '';
+            position: absolute;
+            top: 48px;
+            left: -35px;
+            width: 70px;
+            height: 10px;
+            background: #f1c40f;
+            border-radius: 0 0 5px 5px;
+        }
+        .party-hat::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -5px;
+            width: 10px;
+            height: 10px;
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+        .party-hat:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        /* party-05: Confetti */
+        .confetti {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .confetti::before,
+        .confetti::after {
+            content: '';
+            position: absolute;
+        }
+        .confetti::before {
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            top: 10px;
+            left: 10px;
+            transform: rotate(45deg);
+        }
+        .confetti::after {
+            width: 8px;
+            height: 8px;
+            background: #4ecdc4;
+            top: 30px;
+            left: 35px;
+            border-radius: 50%;
+        }
+        .confetti-piece1,
+        .confetti-piece2,
+        .confetti-piece3 {
+            position: absolute;
+        }
+        .confetti-piece1 {
+            width: 12px;
+            height: 6px;
+            background: #f1c40f;
+            top: 15px;
+            left: 40px;
+            transform: rotate(-20deg);
+        }
+        .confetti-piece2 {
+            width: 8px;
+            height: 8px;
+            background: #9b59b6;
+            top: 40px;
+            left: 15px;
+            transform: rotate(30deg);
+        }
+        .confetti-piece3 {
+            width: 6px;
+            height: 10px;
+            background: #3498db;
+            top: 45px;
+            left: 45px;
+            transform: rotate(-45deg);
+        }
+        .confetti:hover {
+            transform: rotate(15deg);
+        }
+
+        /* party-06: Fireworks */
+        .fireworks {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .fireworks::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #f1c40f;
+            border-radius: 50%;
+        }
+        .fireworks-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 20px;
+            background: #e74c3c;
+            transform-origin: center bottom;
+            border-radius: 2px;
+        }
+        .fireworks-ray:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+        .fireworks-ray:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); background: #ff6b6b; }
+        .fireworks-ray:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); background: #ffa500; }
+        .fireworks-ray:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); background: #f1c40f; }
+        .fireworks-ray:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
+        .fireworks-ray:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); background: #ff6b6b; }
+        .fireworks-ray:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); background: #ffa500; }
+        .fireworks-ray:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); background: #f1c40f; }
+        .fireworks:hover {
+            transform: scale(1.2);
+        }
+
+        /* party-07: Trophy Cup */
+        .trophy {
+            width: 40px;
+            height: 35px;
+            background: #f1c40f;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .trophy::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 12px;
+            background: #d4a506;
+        }
+        .trophy::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 6px;
+            background: #d4a506;
+            border-radius: 2px;
+        }
+        .trophy-handle-left,
+        .trophy-handle-right {
+            position: absolute;
+            top: 5px;
+            width: 10px;
+            height: 20px;
+            border: 4px solid #d4a506;
+            border-radius: 50%;
+            background: transparent;
+        }
+        .trophy-handle-left {
+            left: -12px;
+            border-right: none;
+        }
+        .trophy-handle-right {
+            right: -12px;
+            border-left: none;
+        }
+        .trophy:hover {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        /* party-08: Crown */
+        .crown {
+            width: 55px;
+            height: 35px;
+            background: #f1c40f;
+            position: relative;
+            clip-path: polygon(0% 100%, 10% 40%, 25% 70%, 50% 20%, 75% 70%, 90% 40%, 100% 100%);
+            transition: transform 0.3s ease;
+        }
+        .crown::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: #d4a506;
+        }
+        .crown-gem {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #e74c3c;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+        }
+        .crown:hover {
+            transform: translateY(-5px);
+        }
+
+        /* party-09: Ribbon Bow */
+        .ribbon-bow {
+            width: 60px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .ribbon-bow::before,
+        .ribbon-bow::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 50% 50% 50% 50%;
+            top: 5px;
+        }
+        .ribbon-bow::before {
+            left: 2px;
+            transform: rotate(-20deg);
+        }
+        .ribbon-bow::after {
+            right: 2px;
+            transform: rotate(20deg);
+        }
+        .ribbon-bow-center {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            background: #c0392b;
+            border-radius: 3px;
+            z-index: 1;
+        }
+        .ribbon-bow-tail1,
+        .ribbon-bow-tail2 {
+            position: absolute;
+            bottom: -5px;
+            width: 12px;
+            height: 25px;
+            background: #e74c3c;
+        }
+        .ribbon-bow-tail1 {
+            left: 15px;
+            transform: rotate(15deg);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .ribbon-bow-tail2 {
+            right: 15px;
+            transform: rotate(-15deg);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .ribbon-bow:hover {
+            transform: scale(1.15);
+        }
+
+        /* party-10: Champagne Bottle */
+        .champagne {
+            width: 25px;
+            height: 55px;
+            background: #2c3e50;
+            border-radius: 5px 5px 10px 10px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .champagne::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 18px;
+            background: #7f8c8d;
+            border-radius: 3px 3px 0 0;
+        }
+        .champagne::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #f1c40f;
+            border-radius: 3px;
+        }
+        .champagne:hover {
+            transform: rotate(-10deg);
+        }
+
+        /* party-11: Banner */
+        .banner {
+            width: 70px;
+            height: 30px;
+            background: #3498db;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .banner::before,
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+        .banner::before {
+            left: -10px;
+            border-right: 10px solid #3498db;
+        }
+        .banner::after {
+            right: -10px;
+            border-left: 10px solid #3498db;
+        }
+        .banner:hover {
+            transform: scale(1.1);
+        }
+
+        /* party-12: Pinwheel */
+        .pinwheel {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .pinwheel-blade {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+        }
+        .pinwheel-blade:nth-child(1) {
+            background: #e74c3c;
+            transform: translate(-100%, -100%);
+            border-radius: 100% 0 0 0;
+        }
+        .pinwheel-blade:nth-child(2) {
+            background: #3498db;
+            transform: translate(0, -100%);
+            border-radius: 0 100% 0 0;
+        }
+        .pinwheel-blade:nth-child(3) {
+            background: #f1c40f;
+            transform: translate(0, 0);
+            border-radius: 0 0 100% 0;
+        }
+        .pinwheel-blade:nth-child(4) {
+            background: #2ecc71;
+            transform: translate(-100%, 0);
+            border-radius: 0 0 0 100%;
+        }
+        .pinwheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .pinwheel:hover {
+            transform: rotate(180deg);
+        }
+
+        /* party-13: Sparkler */
+        .sparkler {
+            width: 8px;
+            height: 50px;
+            background: linear-gradient(to bottom, #f1c40f 40%, #7f8c8d 40%);
+            border-radius: 2px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .sparkler-spark {
+            position: absolute;
+            background: #f1c40f;
+            border-radius: 50%;
+        }
+        .sparkler-spark:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            top: -5px;
+            left: -8px;
+        }
+        .sparkler-spark:nth-child(2) {
+            width: 3px;
+            height: 3px;
+            top: -8px;
+            left: 6px;
+        }
+        .sparkler-spark:nth-child(3) {
+            width: 5px;
+            height: 5px;
+            top: 2px;
+            left: -10px;
+        }
+        .sparkler-spark:nth-child(4) {
+            width: 4px;
+            height: 4px;
+            top: 0;
+            left: 10px;
+        }
+        .sparkler-spark:nth-child(5) {
+            width: 3px;
+            height: 3px;
+            top: -10px;
+            left: 2px;
+        }
+        .sparkler:hover {
+            transform: rotate(10deg);
+        }
+        .sparkler:hover .sparkler-spark {
+            animation: sparkle 0.3s infinite alternate;
+        }
+        @keyframes sparkle {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        /* party-14: Party Popper */
+        .party-popper {
+            width: 25px;
+            height: 40px;
+            background: #9b59b6;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .party-popper::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 8px;
+            background: #8e44ad;
+            border-radius: 50% 50% 0 0;
+        }
+        .popper-confetti {
+            position: absolute;
+            border-radius: 2px;
+        }
+        .popper-confetti:nth-child(1) {
+            width: 8px;
+            height: 4px;
+            background: #f1c40f;
+            top: -20px;
+            left: -10px;
+            transform: rotate(-30deg);
+        }
+        .popper-confetti:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            background: #e74c3c;
+            top: -25px;
+            left: 10px;
+            border-radius: 50%;
+        }
+        .popper-confetti:nth-child(3) {
+            width: 10px;
+            height: 4px;
+            background: #3498db;
+            top: -15px;
+            left: 20px;
+            transform: rotate(20deg);
+        }
+        .party-popper:hover {
+            transform: rotate(-15deg);
+        }
+
+        /* party-15: Disco Ball */
+        .disco-ball {
+            width: 45px;
+            height: 45px;
+            background: #bdc3c7;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .disco-ball::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 12px;
+            background: #7f8c8d;
+        }
+        .disco-tile {
+            position: absolute;
+            background: #ecf0f1;
+            width: 8px;
+            height: 8px;
+        }
+        .disco-tile:nth-child(1) { top: 5px; left: 10px; }
+        .disco-tile:nth-child(2) { top: 5px; left: 25px; }
+        .disco-tile:nth-child(3) { top: 18px; left: 5px; }
+        .disco-tile:nth-child(4) { top: 18px; left: 18px; }
+        .disco-tile:nth-child(5) { top: 18px; left: 31px; }
+        .disco-tile:nth-child(6) { top: 31px; left: 10px; }
+        .disco-tile:nth-child(7) { top: 31px; left: 25px; }
+        .disco-ball:hover {
+            transform: rotate(20deg);
+        }
+
+        /* party-16: Streamer */
+        .streamer {
+            width: 60px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .streamer-curl {
+            position: absolute;
+            width: 50px;
+            height: 15px;
+            border: 4px solid;
+            border-color: transparent transparent #e74c3c transparent;
+            border-radius: 0 0 50% 50%;
+        }
+        .streamer-curl:nth-child(1) {
+            top: 0;
+            left: 0;
+            border-color: transparent transparent #e74c3c transparent;
+        }
+        .streamer-curl:nth-child(2) {
+            top: 12px;
+            left: 5px;
+            border-color: transparent transparent #f1c40f transparent;
+        }
+        .streamer-curl:nth-child(3) {
+            top: 24px;
+            left: 0;
+            border-color: transparent transparent #3498db transparent;
+        }
+        .streamer:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        /* party-17: Clapping Hands */
+        .clapping-hands {
+            width: 60px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .hand {
+            position: absolute;
+            width: 25px;
+            height: 30px;
+            background: #f5cba7;
+            border-radius: 8px 8px 5px 5px;
+        }
+        .hand-left {
+            left: 5px;
+            top: 10px;
+            transform: rotate(20deg);
+        }
+        .hand-right {
+            right: 5px;
+            top: 10px;
+            transform: rotate(-20deg);
+        }
+        .hand::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 3px;
+            width: 5px;
+            height: 12px;
+            background: #f5cba7;
+            border-radius: 3px;
+        }
+        .clapping-hands:hover .hand-left {
+            animation: clap-left 0.3s infinite alternate;
+        }
+        .clapping-hands:hover .hand-right {
+            animation: clap-right 0.3s infinite alternate;
+        }
+        @keyframes clap-left {
+            to { transform: rotate(5deg) translateX(5px); }
+        }
+        @keyframes clap-right {
+            to { transform: rotate(-5deg) translateX(-5px); }
+        }
+
+        /* party-18: Thumbs Up */
+        .thumbs-up {
+            width: 35px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .thumb-hand {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 25px;
+            height: 25px;
+            background: #f5cba7;
+            border-radius: 5px;
+        }
+        .thumb {
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            width: 12px;
+            height: 30px;
+            background: #f5cba7;
+            border-radius: 6px 6px 3px 3px;
+        }
+        .thumbs-up:hover {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        /* party-19: Star Burst */
+        .star-burst {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .star-burst::before,
+        .star-burst::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #f1c40f;
+        }
+        .star-burst::before {
+            width: 20px;
+            height: 50px;
+            clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+        }
+        .star-burst::after {
+            width: 50px;
+            height: 20px;
+            clip-path: polygon(0% 50%, 40% 40%, 50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%);
+        }
+        .star-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #f39c12;
+            border-radius: 50%;
+        }
+        .star-point:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+        .star-point:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .star-point:nth-child(3) { top: 50%; left: 0; transform: translateY(-50%); }
+        .star-point:nth-child(4) { top: 50%; right: 0; transform: translateY(-50%); }
+        .star-burst:hover {
+            transform: rotate(45deg) scale(1.2);
+        }
+
+        /* party-20: Heart */
+        .heart {
+            width: 50px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 26px;
+            height: 40px;
+            background: #e74c3c;
+            border-radius: 26px 26px 0 0;
+        }
+        .heart::before {
+            left: 25px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .heart:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Party & Celebration CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- party-01: Balloon -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="balloon"></div>
+            </div>
+            <span class="item-label">party-01: Balloon</span>
+        </div>
+
+        <!-- party-02: Gift Box -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="gift-box"></div>
+            </div>
+            <span class="item-label">party-02: Gift Box</span>
+        </div>
+
+        <!-- party-03: Cake with Candles -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="cake"></div>
+            </div>
+            <span class="item-label">party-03: Cake</span>
+        </div>
+
+        <!-- party-04: Party Hat -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="party-hat"></div>
+            </div>
+            <span class="item-label">party-04: Party Hat</span>
+        </div>
+
+        <!-- party-05: Confetti -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="confetti">
+                    <div class="confetti-piece1"></div>
+                    <div class="confetti-piece2"></div>
+                    <div class="confetti-piece3"></div>
+                </div>
+            </div>
+            <span class="item-label">party-05: Confetti</span>
+        </div>
+
+        <!-- party-06: Fireworks -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="fireworks">
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                    <div class="fireworks-ray"></div>
+                </div>
+            </div>
+            <span class="item-label">party-06: Fireworks</span>
+        </div>
+
+        <!-- party-07: Trophy Cup -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="trophy">
+                    <div class="trophy-handle-left"></div>
+                    <div class="trophy-handle-right"></div>
+                </div>
+            </div>
+            <span class="item-label">party-07: Trophy</span>
+        </div>
+
+        <!-- party-08: Crown -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="crown">
+                    <div class="crown-gem"></div>
+                </div>
+            </div>
+            <span class="item-label">party-08: Crown</span>
+        </div>
+
+        <!-- party-09: Ribbon Bow -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="ribbon-bow">
+                    <div class="ribbon-bow-center"></div>
+                    <div class="ribbon-bow-tail1"></div>
+                    <div class="ribbon-bow-tail2"></div>
+                </div>
+            </div>
+            <span class="item-label">party-09: Ribbon Bow</span>
+        </div>
+
+        <!-- party-10: Champagne Bottle -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="champagne"></div>
+            </div>
+            <span class="item-label">party-10: Champagne</span>
+        </div>
+
+        <!-- party-11: Banner -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="banner"></div>
+            </div>
+            <span class="item-label">party-11: Banner</span>
+        </div>
+
+        <!-- party-12: Pinwheel -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="pinwheel">
+                    <div class="pinwheel-blade"></div>
+                    <div class="pinwheel-blade"></div>
+                    <div class="pinwheel-blade"></div>
+                    <div class="pinwheel-blade"></div>
+                    <div class="pinwheel-center"></div>
+                </div>
+            </div>
+            <span class="item-label">party-12: Pinwheel</span>
+        </div>
+
+        <!-- party-13: Sparkler -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="sparkler">
+                    <div class="sparkler-spark"></div>
+                    <div class="sparkler-spark"></div>
+                    <div class="sparkler-spark"></div>
+                    <div class="sparkler-spark"></div>
+                    <div class="sparkler-spark"></div>
+                </div>
+            </div>
+            <span class="item-label">party-13: Sparkler</span>
+        </div>
+
+        <!-- party-14: Party Popper -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="party-popper">
+                    <div class="popper-confetti"></div>
+                    <div class="popper-confetti"></div>
+                    <div class="popper-confetti"></div>
+                </div>
+            </div>
+            <span class="item-label">party-14: Party Popper</span>
+        </div>
+
+        <!-- party-15: Disco Ball -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="disco-ball">
+                    <div class="disco-tile"></div>
+                    <div class="disco-tile"></div>
+                    <div class="disco-tile"></div>
+                    <div class="disco-tile"></div>
+                    <div class="disco-tile"></div>
+                    <div class="disco-tile"></div>
+                    <div class="disco-tile"></div>
+                </div>
+            </div>
+            <span class="item-label">party-15: Disco Ball</span>
+        </div>
+
+        <!-- party-16: Streamer -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="streamer">
+                    <div class="streamer-curl"></div>
+                    <div class="streamer-curl"></div>
+                    <div class="streamer-curl"></div>
+                </div>
+            </div>
+            <span class="item-label">party-16: Streamer</span>
+        </div>
+
+        <!-- party-17: Clapping Hands -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="clapping-hands">
+                    <div class="hand hand-left"></div>
+                    <div class="hand hand-right"></div>
+                </div>
+            </div>
+            <span class="item-label">party-17: Clapping Hands</span>
+        </div>
+
+        <!-- party-18: Thumbs Up -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="thumbs-up">
+                    <div class="thumb-hand"></div>
+                    <div class="thumb"></div>
+                </div>
+            </div>
+            <span class="item-label">party-18: Thumbs Up</span>
+        </div>
+
+        <!-- party-19: Star Burst -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="star-burst">
+                    <div class="star-point"></div>
+                    <div class="star-point"></div>
+                    <div class="star-point"></div>
+                    <div class="star-point"></div>
+                </div>
+            </div>
+            <span class="item-label">party-19: Star Burst</span>
+        </div>
+
+        <!-- party-20: Heart -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="heart"></div>
+            </div>
+            <span class="item-label">party-20: Heart</span>
+        </div>
+    </div>
+</body>
+</html>

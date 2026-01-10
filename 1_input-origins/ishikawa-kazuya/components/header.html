@@ -1,0 +1,293 @@
+{#
+    Ishikawa Header Component
+
+    Parameters:
+    - logo_icon: str (default: "IK") - Logo icon text
+    - logo_text: str (default: "Ishikawa Kazuya") - Logo text
+    - nav_links: list of dicts with 'href' and 'text' keys
+    - cta_text: str (default: "お問い合わせ") - CTA button text
+    - cta_href: str (default: "#contact") - CTA button link
+
+    Usage:
+    {% include "components/ishikawa/header.html" with context %}
+    {% include "components/ishikawa/header.html" %}
+
+    Example with custom nav:
+    {% set nav_links = [
+        {"href": "#about", "text": "About"},
+        {"href": "#services", "text": "Services"},
+        {"href": "#contact", "text": "Contact"}
+    ] %}
+    {% include "components/ishikawa/header.html" %}
+#}
+{% set logo_icon = logo_icon|default("IK") %}
+{% set logo_text = logo_text|default("Ishikawa Kazuya") %}
+{% set nav_links = nav_links|default([
+    {"href": "#about", "text": "About"},
+    {"href": "#skills", "text": "Skills"},
+    {"href": "#works", "text": "Works"},
+    {"href": "#contact", "text": "Contact"}
+]) %}
+{% set cta_text = cta_text|default("お問い合わせ") %}
+{% set cta_href = cta_href|default("#contact") %}
+
+<style>
+.ik-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ik-border-light);
+    z-index: 1000;
+    transition: all 0.3s var(--ik-ease);
+}
+
+.ik-header.scrolled {
+    height: 64px;
+    box-shadow: var(--ik-shadow-sm);
+}
+
+.ik-header__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ik-header__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ik-text);
+}
+
+.ik-header__logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--ik-primary), var(--ik-secondary));
+    border-radius: var(--ik-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--ik-font-latin);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.ik-header__logo-text {
+    font-family: var(--ik-font-display);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.ik-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ik-header__nav-link {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ik-text-light);
+    text-decoration: none;
+    border-radius: var(--ik-radius-sm);
+    transition: all 0.2s var(--ik-ease);
+}
+
+.ik-header__nav-link:hover {
+    color: var(--ik-text);
+    background: var(--ik-bg);
+}
+
+.ik-header__nav-link--active {
+    color: var(--ik-primary);
+    background: var(--ik-primary-light);
+}
+
+.ik-header__cta {
+    margin-left: 16px;
+}
+
+/* Mobile Menu Button */
+.ik-header__menu-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 8px;
+}
+
+.ik-header__menu-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ik-text);
+    position: relative;
+    transition: all 0.3s var(--ik-ease);
+}
+
+.ik-header__menu-icon::before,
+.ik-header__menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--ik-text);
+    left: 0;
+    transition: all 0.3s var(--ik-ease);
+}
+
+.ik-header__menu-icon::before {
+    top: -7px;
+}
+
+.ik-header__menu-icon::after {
+    top: 7px;
+}
+
+/* Mobile Menu Open State */
+.ik-header__menu-btn.active .ik-header__menu-icon {
+    background: transparent;
+}
+
+.ik-header__menu-btn.active .ik-header__menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.ik-header__menu-btn.active .ik-header__menu-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+/* Mobile Nav Drawer */
+.ik-header__mobile-nav {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--ik-white);
+    padding: 24px;
+    box-shadow: var(--ik-shadow-lg);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s var(--ik-ease);
+    z-index: 999;
+}
+
+.ik-header__mobile-nav.open {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.ik-header__mobile-nav-link {
+    display: block;
+    padding: 16px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ik-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ik-border-light);
+    transition: color 0.2s var(--ik-ease);
+}
+
+.ik-header__mobile-nav-link:hover {
+    color: var(--ik-primary);
+}
+
+.ik-header__mobile-cta {
+    margin-top: 24px;
+}
+
+.ik-header__mobile-cta .ik-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .ik-header__nav {
+        display: none;
+    }
+
+    .ik-header__cta {
+        display: none;
+    }
+
+    .ik-header__menu-btn {
+        display: block;
+    }
+
+    .ik-header__mobile-nav {
+        display: block;
+    }
+
+    .ik-header.scrolled + .ik-header__mobile-nav {
+        top: 64px;
+    }
+}
+</style>
+
+<header class="ik-header" id="header">
+    <div class="ik-container">
+        <div class="ik-header__inner">
+            <a href="#" class="ik-header__logo">
+                <span class="ik-header__logo-icon">{{ logo_icon }}</span>
+                <span class="ik-header__logo-text">{{ logo_text }}</span>
+            </a>
+            <nav class="ik-header__nav">
+                {% for link in nav_links %}
+                <a href="{{ link.href }}" class="ik-header__nav-link">{{ link.text }}</a>
+                {% endfor %}
+            </nav>
+            <div class="ik-header__cta">
+                <a href="{{ cta_href }}" class="ik-btn ik-btn--primary ik-btn--sm ik-btn--pill">{{ cta_text }}</a>
+            </div>
+            <button class="ik-header__menu-btn" id="menuBtn" aria-label="メニューを開く">
+                <span class="ik-header__menu-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<nav class="ik-header__mobile-nav" id="mobileNav">
+    {% for link in nav_links %}
+    <a href="{{ link.href }}" class="ik-header__mobile-nav-link">{{ link.text }}</a>
+    {% endfor %}
+    <div class="ik-header__mobile-cta">
+        <a href="{{ cta_href }}" class="ik-btn ik-btn--primary ik-btn--lg ik-btn--pill">{{ cta_text }}</a>
+    </div>
+</nav>
+
+<script>
+(function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', function() {
+            menuBtn.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+        });
+
+        // Close menu when clicking a link
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                menuBtn.classList.remove('active');
+                mobileNav.classList.remove('open');
+            });
+        });
+    }
+})();
+</script>

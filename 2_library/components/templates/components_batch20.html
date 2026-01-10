@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Mode LP Components [F01-F10]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-100: #f8f8f8;
+            --gray-200: #e8e8e8;
+            --gray-300: #d0d0d0;
+            --gray-400: #a0a0a0;
+            --gray-500: #707070;
+            --gray-600: #505050;
+            --gray-700: #303030;
+            --gray-800: #1a1a1a;
+            --gray-900: #0d0d0d;
+            --accent: #ff0000;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--black);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== F08: NAVIGATION ===== */
+
+        .f08-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .f08-nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .f08-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .f08-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .f08-nav.scrolled .f08-logo {
+            color: var(--black);
+        }
+
+        .f08-nav:not(.scrolled) .f08-logo {
+            color: var(--white);
+        }
+
+        .f08-logo:hover {
+            opacity: 0.7;
+        }
+
+        .f08-nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .f08-nav-links a {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .f08-nav:not(.scrolled) .f08-nav-links a {
+            color: var(--white);
+        }
+
+        .f08-nav.scrolled .f08-nav-links a {
+            color: var(--black);
+        }
+
+        .f08-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .f08-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .f08-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+        }
+
+        .f08-menu-btn span {
+            width: 24px;
+            height: 1px;
+            background: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .f08-nav:not(.scrolled) .f08-menu-btn span {
+            background: var(--white);
+        }
+
+        /* ===== F01: HERO SECTION ===== */
+
+        .f01-hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .f01-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.5) 100%
+            ), url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1920&q=80') center/cover no-repeat;
+            filter: grayscale(100%) contrast(1.1);
+            transform: scale(1.05);
+            animation: f01-zoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes f01-zoom {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15); }
+        }
+
+        .f01-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+        }
+
+        .f01-hero-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: f01-fadeUp 1s ease 0.3s forwards;
+        }
+
+        .f01-hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 300;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--white);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: f01-fadeUp 1s ease 0.5s forwards;
+        }
+
+        .f01-hero-title em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .f01-hero-subtitle {
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--gray-300);
+            max-width: 500px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: f01-fadeUp 1s ease 0.7s forwards;
+        }
+
+        @keyframes f01-fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .f01-scroll-indicator {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: f01-fadeUp 1s ease 1s forwards;
+        }
+
+        .f01-scroll-text {
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            writing-mode: vertical-lr;
+        }
+
+        .f01-scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--white), transparent);
+            animation: f01-scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes f01-scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ===== F02: FEATURE CARDS ===== */
+
+        .f02-features {
+            padding: 160px 60px;
+            background: var(--white);
+        }
+
+        .f02-features-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .f02-features-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .f02-features-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+
+        .f02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--gray-200);
+        }
+
+        .f02-feature-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .f02-feature-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .f02-feature-card:hover .f02-feature-img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .f02-feature-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.3) 50%,
+                transparent 100%
+            );
+            transition: opacity 0.4s ease;
+        }
+
+        .f02-feature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .f02-feature-card:hover .f02-feature-content {
+            transform: translateY(0);
+        }
+
+        .f02-feature-number {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+        }
+
+        .f02-feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .f02-feature-desc {
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--gray-400);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .f02-feature-card:hover .f02-feature-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== F03: PRICING TABLE ===== */
+
+        .f03-pricing {
+            padding: 160px 60px;
+            background: var(--gray-900);
+        }
+
+        .f03-pricing-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .f03-pricing-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .f03-pricing-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .f03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--gray-700);
+        }
+
+        .f03-pricing-card {
+            background: var(--gray-900);
+            padding: 60px 48px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .f03-pricing-card:hover {
+            background: var(--gray-800);
+        }
+
+        .f03-pricing-card.featured {
+            background: var(--black);
+        }
+
+        .f03-pricing-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--white);
+            background: var(--accent);
+            padding: 6px 12px;
+        }
+
+        .f03-pricing-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 20px;
+        }
+
+        .f03-pricing-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .f03-pricing-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 32px;
+        }
+
+        .f03-pricing-currency {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--gray-400);
+        }
+
+        .f03-pricing-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .f03-pricing-period {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--gray-500);
+        }
+
+        .f03-pricing-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gray-600);
+            margin-bottom: 32px;
+        }
+
+        .f03-pricing-features {
+            list-style: none;
+            margin-bottom: 48px;
+        }
+
+        .f03-pricing-features li {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--gray-400);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .f03-pricing-features li::before {
+            content: '+';
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .f03-pricing-btn {
+            width: 100%;
+            padding: 18px 32px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid var(--gray-600);
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .f03-pricing-btn:hover {
+            background: var(--white);
+            border-color: var(--white);
+            color: var(--black);
+        }
+
+        .f03-pricing-card.featured .f03-pricing-btn {
+            background: var(--white);
+            border-color: var(--white);
+            color: var(--black);
+        }
+
+        .f03-pricing-card.featured .f03-pricing-btn:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        /* ===== F04: CTA BUTTONS ===== */
+
+        .f04-buttons {
+            padding: 160px 60px;
+            background: var(--gray-100);
+        }
+
+        .f04-buttons-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .f04-buttons-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--black);
+        }
+
+        .f04-buttons-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .f04-btn-row {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Primary Button - Filled Black */
+        .f04-btn-primary {
+            padding: 20px 56px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .f04-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .f04-btn-primary:hover::before {
+            left: 0;
+        }
+
+        .f04-btn-primary span {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .f04-btn-primary:hover span {
+            color: var(--black);
+        }
+
+        /* Secondary Button - Outlined */
+        .f04-btn-secondary {
+            padding: 20px 56px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: transparent;
+            color: var(--black);
+            border: 1px solid var(--black);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .f04-btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .f04-btn-secondary:hover::before {
+            left: 0;
+        }
+
+        .f04-btn-secondary span {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .f04-btn-secondary:hover span {
+            color: var(--white);
+        }
+
+        /* Minimal Button - Underline */
+        .f04-btn-minimal {
+            padding: 12px 0;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: transparent;
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .f04-btn-minimal::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--black);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .f04-btn-minimal:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Icon Button */
+        .f04-btn-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .f04-btn-icon:hover {
+            background: var(--gray-800);
+            transform: translateY(-4px);
+        }
+
+        .f04-btn-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ===== F05: TESTIMONIALS ===== */
+
+        .f05-testimonials {
+            padding: 160px 60px;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .f05-testimonials-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .f05-testimonials-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .f05-testimonials-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--black);
+        }
+
+        .f05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .f05-testimonial {
+            position: relative;
+        }
+
+        .f05-testimonial-quote {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            line-height: 1;
+            color: var(--gray-200);
+            pointer-events: none;
+        }
+
+        .f05-testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--gray-700);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .f05-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .f05-author-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 0;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: filter 0.4s ease;
+        }
+
+        .f05-testimonial:hover .f05-author-img {
+            filter: grayscale(0%);
+        }
+
+        .f05-author-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .f05-author-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--black);
+        }
+
+        .f05-author-role {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--gray-500);
+        }
+
+        /* ===== F06: FAQ ===== */
+
+        .f06-faq {
+            padding: 160px 60px;
+            background: var(--gray-100);
+        }
+
+        .f06-faq-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .f06-faq-header {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .f06-faq-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .f06-faq-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--black);
+            margin-bottom: 24px;
+        }
+
+        .f06-faq-desc {
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--gray-600);
+        }
+
+        .f06-faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .f06-faq-item {
+            border-top: 1px solid var(--gray-300);
+        }
+
+        .f06-faq-item:last-child {
+            border-bottom: 1px solid var(--gray-300);
+        }
+
+        .f06-faq-question {
+            width: 100%;
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .f06-faq-question-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--black);
+            transition: color 0.3s ease;
+        }
+
+        .f06-faq-question:hover .f06-faq-question-text {
+            color: var(--gray-600);
+        }
+
+        .f06-faq-icon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .f06-faq-icon::before,
+        .f06-faq-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .f06-faq-icon::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+        }
+
+        .f06-faq-icon::after {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+        }
+
+        .f06-faq-item.active .f06-faq-icon::after {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+
+        .f06-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .f06-faq-item.active .f06-faq-answer {
+            max-height: 300px;
+        }
+
+        .f06-faq-answer-text {
+            padding-bottom: 32px;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--gray-600);
+        }
+
+        /* ===== F07: FOOTER ===== */
+
+        .f07-footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 100px 60px 40px;
+        }
+
+        .f07-footer-main {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto 80px;
+        }
+
+        .f07-footer-brand {
+            max-width: 300px;
+        }
+
+        .f07-footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .f07-footer-tagline {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--gray-500);
+        }
+
+        .f07-footer-column h4 {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 32px;
+        }
+
+        .f07-footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .f07-footer-column a {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .f07-footer-column a:hover {
+            color: var(--white);
+        }
+
+        .f07-footer-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--gray-800);
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .f07-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .f07-footer-copy {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--gray-600);
+        }
+
+        .f07-footer-socials {
+            display: flex;
+            gap: 24px;
+        }
+
+        .f07-footer-socials a {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .f07-footer-socials a:hover {
+            color: var(--white);
+        }
+
+        /* ===== F09: STEP GUIDE ===== */
+
+        .f09-steps {
+            padding: 160px 60px;
+            background: var(--white);
+        }
+
+        .f09-steps-header {
+            text-align: center;
+            margin-bottom: 120px;
+        }
+
+        .f09-steps-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .f09-steps-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--black);
+        }
+
+        .f09-steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .f09-step {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 60px;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--gray-200);
+            position: relative;
+        }
+
+        .f09-step:first-child {
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .f09-step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: var(--gray-200);
+            line-height: 0.9;
+            transition: color 0.4s ease;
+        }
+
+        .f09-step:hover .f09-step-number {
+            color: var(--black);
+        }
+
+        .f09-step-content {
+            padding-top: 10px;
+        }
+
+        .f09-step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .f09-step-desc {
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--gray-600);
+            max-width: 500px;
+        }
+
+        .f09-step-arrow {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .f09-step:hover .f09-step-arrow {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+        }
+
+        .f09-step-arrow svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--black);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        /* ===== F10: REGISTRATION FORM ===== */
+
+        .f10-form-section {
+            padding: 160px 60px;
+            background: var(--gray-900);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .f10-form-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&q=80') center/cover no-repeat;
+            filter: grayscale(100%);
+            opacity: 0.3;
+        }
+
+        .f10-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .f10-form-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .f10-form-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .f10-form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .f10-form-subtitle {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--gray-500);
+        }
+
+        .f10-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .f10-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .f10-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .f10-form-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .f10-form-input {
+            padding: 20px 0;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--gray-700);
+            color: var(--white);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .f10-form-input::placeholder {
+            color: var(--gray-600);
+        }
+
+        .f10-form-input:focus {
+            border-color: var(--white);
+        }
+
+        .f10-form-select {
+            padding: 20px 0;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--gray-700);
+            color: var(--white);
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23707070' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+
+        .f10-form-select option {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .f10-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .f10-form-checkbox input {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            accent-color: var(--white);
+            cursor: pointer;
+        }
+
+        .f10-form-checkbox-label {
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--gray-500);
+        }
+
+        .f10-form-checkbox-label a {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .f10-form-submit {
+            margin-top: 24px;
+            padding: 24px 48px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .f10-form-submit:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 1024px) {
+            .f08-nav-inner {
+                padding: 20px 40px;
+            }
+
+            .f08-nav-links {
+                display: none;
+            }
+
+            .f08-menu-btn {
+                display: flex;
+            }
+
+            .f02-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .f03-pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .f05-testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .f06-faq-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .f06-faq-header {
+                position: static;
+            }
+
+            .f07-footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
+
+            .f07-footer-brand {
+                grid-column: span 2;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .f01-hero-content {
+                padding: 20px;
+            }
+
+            .f02-features,
+            .f03-pricing,
+            .f04-buttons,
+            .f05-testimonials,
+            .f06-faq,
+            .f09-steps,
+            .f10-form-section {
+                padding: 100px 24px;
+            }
+
+            .f02-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .f02-feature-card {
+                aspect-ratio: 4/5;
+            }
+
+            .f04-btn-row {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .f04-btn-primary,
+            .f04-btn-secondary {
+                width: 100%;
+            }
+
+            .f07-footer {
+                padding: 80px 24px 40px;
+            }
+
+            .f07-footer-main {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .f07-footer-brand {
+                grid-column: span 1;
+            }
+
+            .f07-footer-bottom {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .f09-step {
+                grid-template-columns: 80px 1fr;
+                gap: 32px;
+                padding: 40px 0;
+            }
+
+            .f09-step-number {
+                font-size: 3.5rem;
+            }
+
+            .f10-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .f01-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .f01-scroll-indicator {
+                display: none;
+            }
+
+            .f02-features-header,
+            .f03-pricing-header,
+            .f05-testimonials-header,
+            .f09-steps-header,
+            .f10-form-header {
+                margin-bottom: 60px;
+            }
+
+            .f03-pricing-card {
+                padding: 40px 32px;
+            }
+
+            .f05-testimonial-text {
+                font-size: 1.3rem;
+            }
+
+            .f06-faq-question {
+                padding: 24px 0;
+            }
+
+            .f09-step {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .f09-step-number {
+                font-size: 2.5rem;
+            }
+
+            .f09-step-arrow {
+                display: none;
+            }
+        }
+
+        /* ===== DEMO PAGE STYLES ===== */
+
+        .demo-section {
+            padding: 40px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .demo-section:last-child {
+            border-bottom: none;
+        }
+
+        .demo-label {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            padding: 8px 16px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== F08: NAVIGATION [F08] ===== -->
+    <nav class="f08-nav scrolled">
+        <div class="f08-nav-inner">
+            <a href="#" class="f08-logo">MAISON</a>
+            <ul class="f08-nav-links">
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#lookbook">Lookbook</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="f08-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== F01: HERO SECTION [F01] ===== -->
+    <section class="f01-hero">
+        <div class="f01-hero-bg"></div>
+        <div class="f01-hero-content">
+            <p class="f01-hero-eyebrow">Spring/Summer 2026</p>
+            <h1 class="f01-hero-title">
+                The Art of<br><em>Understated</em><br>Elegance
+            </h1>
+            <p class="f01-hero-subtitle">
+                Where minimalism meets bold expression. Discover a collection that speaks volumes through silence.
+            </p>
+            <button class="f04-btn-primary"><span>Explore Collection</span></button>
+        </div>
+        <div class="f01-scroll-indicator">
+            <span class="f01-scroll-text">Scroll</span>
+            <div class="f01-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ===== F02: FEATURE CARDS [F02] ===== -->
+    <section class="f02-features">
+        <div class="f02-features-header">
+            <p class="f02-features-eyebrow">Our Philosophy</p>
+            <h2 class="f02-features-title">Defining Modern Luxury</h2>
+        </div>
+        <div class="f02-features-grid">
+            <div class="f02-feature-card">
+                <div class="f02-feature-img" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80')"></div>
+                <div class="f02-feature-overlay"></div>
+                <div class="f02-feature-content">
+                    <p class="f02-feature-number">01</p>
+                    <h3 class="f02-feature-title">Craftsmanship</h3>
+                    <p class="f02-feature-desc">Every piece is meticulously crafted by master artisans using time-honored techniques.</p>
+                </div>
+            </div>
+            <div class="f02-feature-card">
+                <div class="f02-feature-img" style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80')"></div>
+                <div class="f02-feature-overlay"></div>
+                <div class="f02-feature-content">
+                    <p class="f02-feature-number">02</p>
+                    <h3 class="f02-feature-title">Materials</h3>
+                    <p class="f02-feature-desc">Sourced from the finest mills and tanneries across Europe and Japan.</p>
+                </div>
+            </div>
+            <div class="f02-feature-card">
+                <div class="f02-feature-img" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80')"></div>
+                <div class="f02-feature-overlay"></div>
+                <div class="f02-feature-content">
+                    <p class="f02-feature-number">03</p>
+                    <h3 class="f02-feature-title">Sustainability</h3>
+                    <p class="f02-feature-desc">Committed to responsible practices without compromising on beauty or quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== F03: PRICING TABLE [F03] ===== -->
+    <section class="f03-pricing">
+        <div class="f03-pricing-header">
+            <p class="f03-pricing-eyebrow">Membership</p>
+            <h2 class="f03-pricing-title">Join the Atelier</h2>
+        </div>
+        <div class="f03-pricing-grid">
+            <div class="f03-pricing-card">
+                <p class="f03-pricing-label">Essential</p>
+                <h3 class="f03-pricing-name">Debut</h3>
+                <div class="f03-pricing-amount">
+                    <span class="f03-pricing-currency">$</span>
+                    <span class="f03-pricing-value">29</span>
+                    <span class="f03-pricing-period">/month</span>
+                </div>
+                <div class="f03-pricing-divider"></div>
+                <ul class="f03-pricing-features">
+                    <li>Early access to collections</li>
+                    <li>Member-only events</li>
+                    <li>Style consultation</li>
+                    <li>Free shipping</li>
+                </ul>
+                <button class="f03-pricing-btn">Select</button>
+            </div>
+            <div class="f03-pricing-card featured">
+                <p class="f03-pricing-label">Signature</p>
+                <h3 class="f03-pricing-name">Couture</h3>
+                <div class="f03-pricing-amount">
+                    <span class="f03-pricing-currency">$</span>
+                    <span class="f03-pricing-value">99</span>
+                    <span class="f03-pricing-period">/month</span>
+                </div>
+                <div class="f03-pricing-divider"></div>
+                <ul class="f03-pricing-features">
+                    <li>All Debut benefits</li>
+                    <li>Private showroom access</li>
+                    <li>Personal stylist</li>
+                    <li>Exclusive pieces</li>
+                    <li>Alterations included</li>
+                </ul>
+                <button class="f03-pricing-btn">Select</button>
+            </div>
+            <div class="f03-pricing-card">
+                <p class="f03-pricing-label">Prestige</p>
+                <h3 class="f03-pricing-name">Haute</h3>
+                <div class="f03-pricing-amount">
+                    <span class="f03-pricing-currency">$</span>
+                    <span class="f03-pricing-value">299</span>
+                    <span class="f03-pricing-period">/month</span>
+                </div>
+                <div class="f03-pricing-divider"></div>
+                <ul class="f03-pricing-features">
+                    <li>All Couture benefits</li>
+                    <li>Bespoke creations</li>
+                    <li>Global concierge</li>
+                    <li>Fashion week invitations</li>
+                    <li>Archive access</li>
+                </ul>
+                <button class="f03-pricing-btn">Select</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== F04: CTA BUTTONS [F04] ===== -->
+    <section class="f04-buttons">
+        <div class="f04-buttons-header">
+            <h2 class="f04-buttons-title">Button Styles</h2>
+        </div>
+        <div class="f04-buttons-showcase">
+            <div class="f04-btn-row">
+                <button class="f04-btn-primary"><span>Shop Collection</span></button>
+                <button class="f04-btn-secondary"><span>View Lookbook</span></button>
+            </div>
+            <div class="f04-btn-row">
+                <button class="f04-btn-minimal">Discover More</button>
+                <button class="f04-btn-minimal">Book Appointment</button>
+            </div>
+            <div class="f04-btn-row">
+                <button class="f04-btn-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="f04-btn-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+                <button class="f04-btn-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== F05: TESTIMONIALS [F05] ===== -->
+    <section class="f05-testimonials">
+        <div class="f05-testimonials-header">
+            <p class="f05-testimonials-eyebrow">Voices</p>
+            <h2 class="f05-testimonials-title">From Our Community</h2>
+        </div>
+        <div class="f05-testimonials-grid">
+            <div class="f05-testimonial">
+                <span class="f05-testimonial-quote">"</span>
+                <p class="f05-testimonial-text">
+                    The attention to detail is extraordinary. Each piece feels like it was made specifically for me. This is what true luxury should be.
+                </p>
+                <div class="f05-testimonial-author">
+                    <div class="f05-author-img" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80')"></div>
+                    <div class="f05-author-info">
+                        <h4 class="f05-author-name">Alexandra Chen</h4>
+                        <p class="f05-author-role">Creative Director</p>
+                    </div>
+                </div>
+            </div>
+            <div class="f05-testimonial">
+                <span class="f05-testimonial-quote">"</span>
+                <p class="f05-testimonial-text">
+                    Finding a brand that aligns with my values while delivering impeccable quality seemed impossible until I discovered this collection.
+                </p>
+                <div class="f05-testimonial-author">
+                    <div class="f05-author-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80')"></div>
+                    <div class="f05-author-info">
+                        <h4 class="f05-author-name">Marcus Webb</h4>
+                        <p class="f05-author-role">Architect</p>
+                    </div>
+                </div>
+            </div>
+            <div class="f05-testimonial">
+                <span class="f05-testimonial-quote">"</span>
+                <p class="f05-testimonial-text">
+                    The personal styling service transformed my wardrobe. I finally understand what it means to dress with intention.
+                </p>
+                <div class="f05-testimonial-author">
+                    <div class="f05-author-img" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80')"></div>
+                    <div class="f05-author-info">
+                        <h4 class="f05-author-name">Sophie Laurent</h4>
+                        <p class="f05-author-role">Art Curator</p>
+                    </div>
+                </div>
+            </div>
+            <div class="f05-testimonial">
+                <span class="f05-testimonial-quote">"</span>
+                <p class="f05-testimonial-text">
+                    The silhouettes are timeless yet modern. These are pieces I'll cherish for decades, not seasons.
+                </p>
+                <div class="f05-testimonial-author">
+                    <div class="f05-author-img" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80')"></div>
+                    <div class="f05-author-info">
+                        <h4 class="f05-author-name">James Okonkwo</h4>
+                        <p class="f05-author-role">Film Producer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== F06: FAQ [F06] ===== -->
+    <section class="f06-faq">
+        <div class="f06-faq-container">
+            <div class="f06-faq-header">
+                <p class="f06-faq-eyebrow">Support</p>
+                <h2 class="f06-faq-title">Frequently Asked Questions</h2>
+                <p class="f06-faq-desc">Everything you need to know about our collections, services, and membership programs.</p>
+            </div>
+            <div class="f06-faq-list">
+                <div class="f06-faq-item active">
+                    <button class="f06-faq-question">
+                        <span class="f06-faq-question-text">What makes your materials sustainable?</span>
+                        <span class="f06-faq-icon"></span>
+                    </button>
+                    <div class="f06-faq-answer">
+                        <p class="f06-faq-answer-text">We partner exclusively with certified mills and tanneries that meet rigorous environmental standards. Our fabrics are either organic, recycled, or produced using closed-loop systems that minimize water and chemical usage. Every material is fully traceable from source to finished garment.</p>
+                    </div>
+                </div>
+                <div class="f06-faq-item">
+                    <button class="f06-faq-question">
+                        <span class="f06-faq-question-text">How does the personal styling service work?</span>
+                        <span class="f06-faq-icon"></span>
+                    </button>
+                    <div class="f06-faq-answer">
+                        <p class="f06-faq-answer-text">After joining our membership, you'll be paired with a dedicated stylist who will learn your preferences, lifestyle, and goals. Sessions can be conducted in-person at our showrooms or virtually. Your stylist curates personalized selections each season and is available for ongoing consultation.</p>
+                    </div>
+                </div>
+                <div class="f06-faq-item">
+                    <button class="f06-faq-question">
+                        <span class="f06-faq-question-text">What is your return and exchange policy?</span>
+                        <span class="f06-faq-icon"></span>
+                    </button>
+                    <div class="f06-faq-answer">
+                        <p class="f06-faq-answer-text">We offer a 30-day return policy for all unworn items with original tags attached. Members enjoy extended 60-day returns and complimentary exchanges. All return shipping is prepaid, and refunds are processed within 5 business days of receiving your return.</p>
+                    </div>
+                </div>
+                <div class="f06-faq-item">
+                    <button class="f06-faq-question">
+                        <span class="f06-faq-question-text">Do you offer alterations?</span>
+                        <span class="f06-faq-icon"></span>
+                    </button>
+                    <div class="f06-faq-answer">
+                        <p class="f06-faq-answer-text">Yes, we believe in perfect fit. Couture and Haute members receive complimentary alterations. All other customers can access our alteration services at our showrooms for a nominal fee. Our in-house tailors ensure every piece fits flawlessly.</p>
+                    </div>
+                </div>
+                <div class="f06-faq-item">
+                    <button class="f06-faq-question">
+                        <span class="f06-faq-question-text">How can I visit your showroom?</span>
+                        <span class="f06-faq-icon"></span>
+                    </button>
+                    <div class="f06-faq-answer">
+                        <p class="f06-faq-answer-text">Our showrooms are located in New York, Paris, Tokyo, and London. Appointments can be booked directly through your member dashboard or by contacting our concierge. Walk-ins are welcome during select hours, though appointments are recommended for the full experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== F09: STEP GUIDE [F09] ===== -->
+    <section class="f09-steps">
+        <div class="f09-steps-header">
+            <p class="f09-steps-eyebrow">Process</p>
+            <h2 class="f09-steps-title">Your Journey Begins</h2>
+        </div>
+        <div class="f09-steps-container">
+            <div class="f09-step">
+                <span class="f09-step-number">01</span>
+                <div class="f09-step-content">
+                    <h3 class="f09-step-title">Create Your Profile</h3>
+                    <p class="f09-step-desc">Begin by sharing your style preferences, measurements, and lifestyle needs. This helps us curate a truly personalized experience.</p>
+                </div>
+                <div class="f09-step-arrow">
+                    <svg viewBox="0 0 32 32"><path d="M8 16h16M18 10l6 6-6 6"/></svg>
+                </div>
+            </div>
+            <div class="f09-step">
+                <span class="f09-step-number">02</span>
+                <div class="f09-step-content">
+                    <h3 class="f09-step-title">Meet Your Stylist</h3>
+                    <p class="f09-step-desc">Connect with your dedicated style consultant who will guide you through our collections and help define your signature look.</p>
+                </div>
+                <div class="f09-step-arrow">
+                    <svg viewBox="0 0 32 32"><path d="M8 16h16M18 10l6 6-6 6"/></svg>
+                </div>
+            </div>
+            <div class="f09-step">
+                <span class="f09-step-number">03</span>
+                <div class="f09-step-content">
+                    <h3 class="f09-step-title">Receive Your Selection</h3>
+                    <p class="f09-step-desc">Your curated pieces arrive beautifully packaged at your door. Try everything in the comfort of your home.</p>
+                </div>
+                <div class="f09-step-arrow">
+                    <svg viewBox="0 0 32 32"><path d="M8 16h16M18 10l6 6-6 6"/></svg>
+                </div>
+            </div>
+            <div class="f09-step">
+                <span class="f09-step-number">04</span>
+                <div class="f09-step-content">
+                    <h3 class="f09-step-title">Perfect Your Wardrobe</h3>
+                    <p class="f09-step-desc">Keep what you love, return the rest. With each selection, we refine our understanding of your evolving style.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== F10: REGISTRATION FORM [F10] ===== -->
+    <section class="f10-form-section">
+        <div class="f10-form-bg"></div>
+        <div class="f10-form-container">
+            <div class="f10-form-header">
+                <p class="f10-form-eyebrow">Join Us</p>
+                <h2 class="f10-form-title">Begin Your Story</h2>
+                <p class="f10-form-subtitle">Register to access exclusive collections and personalized services.</p>
+            </div>
+            <form class="f10-form">
+                <div class="f10-form-row">
+                    <div class="f10-form-group">
+                        <label class="f10-form-label">First Name</label>
+                        <input type="text" class="f10-form-input" placeholder="Enter your first name">
+                    </div>
+                    <div class="f10-form-group">
+                        <label class="f10-form-label">Last Name</label>
+                        <input type="text" class="f10-form-input" placeholder="Enter your last name">
+                    </div>
+                </div>
+                <div class="f10-form-group">
+                    <label class="f10-form-label">Email Address</label>
+                    <input type="email" class="f10-form-input" placeholder="your@email.com">
+                </div>
+                <div class="f10-form-group">
+                    <label class="f10-form-label">Phone Number</label>
+                    <input type="tel" class="f10-form-input" placeholder="+1 (000) 000-0000">
+                </div>
+                <div class="f10-form-group">
+                    <label class="f10-form-label">Preferred Showroom</label>
+                    <select class="f10-form-select">
+                        <option value="">Select a location</option>
+                        <option value="nyc">New York</option>
+                        <option value="paris">Paris</option>
+                        <option value="tokyo">Tokyo</option>
+                        <option value="london">London</option>
+                    </select>
+                </div>
+                <div class="f10-form-checkbox">
+                    <input type="checkbox" id="privacy">
+                    <label for="privacy" class="f10-form-checkbox-label">
+                        I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>. I understand that my information will be used to provide personalized services.
+                    </label>
+                </div>
+                <button type="submit" class="f10-form-submit">Create Account</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== F07: FOOTER [F07] ===== -->
+    <footer class="f07-footer">
+        <div class="f07-footer-main">
+            <div class="f07-footer-brand">
+                <span class="f07-footer-logo">MAISON</span>
+                <p class="f07-footer-tagline">Where minimalism meets bold expression. Crafting timeless pieces for the modern individual since 2015.</p>
+            </div>
+            <div class="f07-footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="#">Spring/Summer</a></li>
+                    <li><a href="#">Autumn/Winter</a></li>
+                    <li><a href="#">Essentials</a></li>
+                    <li><a href="#">Archive</a></li>
+                </ul>
+            </div>
+            <div class="f07-footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Personal Styling</a></li>
+                    <li><a href="#">Alterations</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Corporate</a></li>
+                </ul>
+            </div>
+            <div class="f07-footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="f07-footer-divider"></div>
+        <div class="f07-footer-bottom">
+            <p class="f07-footer-copy">&copy; 2026 MAISON. All rights reserved.</p>
+            <div class="f07-footer-socials">
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const nav = document.querySelector('.f08-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.f06-faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.f06-faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission prevention (demo)
+        document.querySelector('.f10-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Form submitted successfully!');
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.f08-nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

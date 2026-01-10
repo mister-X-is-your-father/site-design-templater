@@ -1,0 +1,2855 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Layouts - Position & Direction (位置・方向)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f8f9fa;
+            padding: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        .diagram-section {
+            margin-bottom: 80px;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #5b5bd6;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: attr(data-num);
+            background: #ff6b9d;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .section-desc {
+            color: #888;
+            margin-bottom: 30px;
+            padding-left: 42px;
+        }
+
+        /* ========================================
+           #position-1: Up/Down/Left/Right Arrows
+           ======================================== */
+        #position-1 .arrow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            justify-content: center;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        #position-1 .arrow-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #position-1 .arrow-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        #position-1 .arrow-up { background: #ff6b9d; grid-column: 2; grid-row: 1; }
+        #position-1 .arrow-left { background: #87ceeb; grid-column: 1; grid-row: 2; }
+        #position-1 .arrow-center { background: #ffd93d; grid-column: 2; grid-row: 2; color: #333; font-size: 1rem; font-weight: bold; }
+        #position-1 .arrow-right { background: #98d8aa; grid-column: 3; grid-row: 2; }
+        #position-1 .arrow-down { background: #c9b1ff; grid-column: 2; grid-row: 3; }
+
+        /* ========================================
+           #position-2: Compass (N/S/E/W)
+           ======================================== */
+        #position-2 .compass-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #position-2 .compass-ring {
+            width: 100%;
+            height: 100%;
+            border: 8px solid #ffd93d;
+            border-radius: 50%;
+            position: relative;
+            background: #fff9e6;
+        }
+
+        #position-2 .compass-direction {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        #position-2 .compass-direction:hover {
+            transform: scale(1.15);
+        }
+
+        #position-2 .dir-n { background: #ff6b9d; top: -30px; left: 50%; transform: translateX(-50%); }
+        #position-2 .dir-s { background: #87ceeb; bottom: -30px; left: 50%; transform: translateX(-50%); }
+        #position-2 .dir-e { background: #98d8aa; right: -30px; top: 50%; transform: translateY(-50%); }
+        #position-2 .dir-w { background: #c9b1ff; left: -30px; top: 50%; transform: translateY(-50%); }
+
+        #position-2 .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            width: 20px;
+            height: 120px;
+        }
+
+        #position-2 .needle-north {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 60px solid #ff6b9d;
+        }
+
+        #position-2 .needle-south {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 60px solid #87ceeb;
+        }
+
+        #position-2 .compass-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: #ffd93d;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+
+        /* ========================================
+           #position-3: Here/There Pointer
+           ======================================== */
+        #position-3 .pointer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #position-3 .pointer-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+
+        #position-3 .pointer-card:hover {
+            transform: translateY(-10px);
+        }
+
+        #position-3 .here-card {
+            background: #ff6b9d;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.4);
+        }
+
+        #position-3 .there-card {
+            background: #87ceeb;
+            color: white;
+        }
+
+        #position-3 .pointer-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        #position-3 .pointer-label {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #position-3 .pointer-arrow {
+            font-size: 3rem;
+            color: #ffd93d;
+            animation: bounce-right 1s infinite;
+        }
+
+        @keyframes bounce-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+
+        /* ========================================
+           #position-4: Inside/Outside Box
+           ======================================== */
+        #position-4 .box-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #position-4 .outer-box {
+            width: 250px;
+            height: 250px;
+            border: 6px dashed #c9b1ff;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #f8f4ff;
+        }
+
+        #position-4 .inner-content {
+            width: 120px;
+            height: 120px;
+            background: #ff6b9d;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        #position-4 .inner-content:hover {
+            transform: scale(1.1);
+        }
+
+        #position-4 .outside-items {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #position-4 .outside-dot {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #98d8aa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        #position-4 .outside-dot:hover {
+            transform: scale(1.2);
+        }
+
+        #position-4 .dot-1 { top: -25px; left: 50%; transform: translateX(-50%); }
+        #position-4 .dot-2 { bottom: -25px; right: -25px; }
+        #position-4 .dot-3 { top: 50%; left: -25px; transform: translateY(-50%); }
+
+        #position-4 .box-label {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* ========================================
+           #position-5: Above/Below Layers
+           ======================================== */
+        #position-5 .layers-container {
+            max-width: 400px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        #position-5 .layer {
+            padding: 25px 40px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: -10px;
+            transform: rotateX(10deg);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        #position-5 .layer:hover {
+            transform: rotateX(0deg) translateY(-10px);
+            z-index: 10;
+        }
+
+        #position-5 .layer-top { background: #ff6b9d; z-index: 4; }
+        #position-5 .layer-mid1 { background: #ffd93d; color: #333; z-index: 3; }
+        #position-5 .layer-mid2 { background: #98d8aa; z-index: 2; }
+        #position-5 .layer-bottom { background: #87ceeb; z-index: 1; }
+
+        #position-5 .layer-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        #position-5 .layer-name {
+            font-size: 1.3rem;
+        }
+
+        /* ========================================
+           #position-6: Front/Back View
+           ======================================== */
+        #position-6 .view-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #position-6 .view-card {
+            width: 280px;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        #position-6 .view-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        #position-6 .view-header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        #position-6 .front-view .view-header { background: #ff6b9d; }
+        #position-6 .back-view .view-header { background: #87ceeb; }
+
+        #position-6 .view-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        #position-6 .view-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+        }
+
+        #position-6 .view-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           #position-7: Top/Bottom Indicator
+           ======================================== */
+        #position-7 .indicator-container {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #position-7 .indicator-bar {
+            width: 80px;
+            height: 350px;
+            background: linear-gradient(to bottom, #ff6b9d 0%, #ffd93d 50%, #87ceeb 100%);
+            border-radius: 40px;
+            position: relative;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        #position-7 .indicator-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        #position-7 .indicator-marker:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        #position-7 .marker-top { top: 20px; color: #ff6b9d; }
+        #position-7 .marker-mid { top: 50%; margin-top: -30px; color: #ffd93d; }
+        #position-7 .marker-bottom { bottom: 20px; color: #87ceeb; }
+
+        #position-7 .indicator-labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 0;
+        }
+
+        #position-7 .label-item {
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #position-7 .label-top { background: #ff6b9d; }
+        #position-7 .label-mid { background: #ffd93d; color: #333; }
+        #position-7 .label-bottom { background: #87ceeb; }
+
+        /* ========================================
+           #position-8: Center/Corner Positions
+           ======================================== */
+        #position-8 .position-grid {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+            position: relative;
+            background: #f8f9fa;
+            border: 4px solid #e0e0e0;
+            border-radius: 20px;
+        }
+
+        #position-8 .pos-dot {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #position-8 .pos-dot:hover {
+            transform: scale(1.15);
+            z-index: 10;
+        }
+
+        #position-8 .pos-center {
+            background: #ff6b9d;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            font-size: 1rem;
+        }
+
+        #position-8 .pos-center:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #position-8 .pos-tl { background: #87ceeb; top: 10px; left: 10px; }
+        #position-8 .pos-tr { background: #98d8aa; top: 10px; right: 10px; }
+        #position-8 .pos-bl { background: #ffd93d; color: #333; bottom: 10px; left: 10px; }
+        #position-8 .pos-br { background: #c9b1ff; bottom: 10px; right: 10px; }
+
+        /* ========================================
+           #position-9: Near/Far Perspective
+           ======================================== */
+        #position-9 .perspective-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            perspective: 800px;
+        }
+
+        #position-9 .perspective-track {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: rotateX(30deg);
+        }
+
+        #position-9 .perspective-item {
+            padding: 20px 60px;
+            border-radius: 16px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #position-9 .perspective-item:hover {
+            transform: scale(1.1) translateZ(20px);
+        }
+
+        #position-9 .item-near {
+            background: #ff6b9d;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.5);
+        }
+
+        #position-9 .item-mid {
+            background: #ffd93d;
+            color: #333;
+            font-size: 1.3rem;
+            transform: scale(0.85);
+        }
+
+        #position-9 .item-far {
+            background: #87ceeb;
+            font-size: 1rem;
+            transform: scale(0.7);
+            opacity: 0.8;
+        }
+
+        #position-9 .distance-label {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+
+        #position-9 .distance-label span {
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* ========================================
+           #position-10: Start/End Path
+           ======================================== */
+        #position-10 .path-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        #position-10 .path-line {
+            height: 8px;
+            background: linear-gradient(to right, #ff6b9d, #ffd93d, #98d8aa, #87ceeb);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        #position-10 .path-point {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #position-10 .point-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        #position-10 .point-circle:hover {
+            transform: scale(1.15);
+        }
+
+        #position-10 .point-start { left: 0; transform: translate(-50%, -50%); }
+        #position-10 .point-start .point-circle { background: #ff6b9d; }
+
+        #position-10 .point-end { right: 0; transform: translate(50%, -50%); }
+        #position-10 .point-end .point-circle { background: #87ceeb; }
+
+        #position-10 .point-label {
+            font-weight: bold;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        #position-10 .path-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #ffd93d;
+        }
+
+        /* ========================================
+           #position-11: Entry/Exit Doors
+           ======================================== */
+        #position-11 .doors-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #position-11 .door-wrapper {
+            text-align: center;
+        }
+
+        #position-11 .door {
+            width: 140px;
+            height: 200px;
+            border-radius: 70px 70px 0 0;
+            position: relative;
+            margin: 0 auto 20px;
+            transition: all 0.3s;
+        }
+
+        #position-11 .door:hover {
+            transform: scale(1.05);
+        }
+
+        #position-11 .entry-door { background: #98d8aa; }
+        #position-11 .exit-door { background: #ff6b9d; }
+
+        #position-11 .door-handle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffd93d;
+            border-radius: 50%;
+            top: 55%;
+        }
+
+        #position-11 .entry-door .door-handle { right: 20px; }
+        #position-11 .exit-door .door-handle { left: 20px; }
+
+        #position-11 .door-arrow {
+            position: absolute;
+            top: 40%;
+            font-size: 2rem;
+            color: white;
+        }
+
+        #position-11 .entry-door .door-arrow { left: 50%; transform: translateX(-50%); }
+        #position-11 .exit-door .door-arrow { left: 50%; transform: translateX(-50%); }
+
+        #position-11 .door-label {
+            font-weight: bold;
+            font-size: 1.3rem;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+        }
+
+        #position-11 .entry-label { background: #98d8aa; }
+        #position-11 .exit-label { background: #ff6b9d; }
+
+        /* ========================================
+           #position-12: In/Out Arrows
+           ======================================== */
+        #position-12 .inout-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #position-12 .inout-box {
+            width: 200px;
+            height: 200px;
+            background: #f8f9fa;
+            border: 6px solid #5b5bd6;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #5b5bd6;
+        }
+
+        #position-12 .arrow-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #position-12 .arrow-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #position-12 .arrow-item:hover {
+            transform: translateX(10px);
+        }
+
+        #position-12 .arrow-in {
+            background: #98d8aa;
+            flex-direction: row-reverse;
+        }
+
+        #position-12 .arrow-in:hover {
+            transform: translateX(-10px);
+        }
+
+        #position-12 .arrow-out {
+            background: #ff6b9d;
+        }
+
+        #position-12 .arrow-icon {
+            font-size: 1.5rem;
+        }
+
+        /* ========================================
+           #position-13: Forward/Backward Movement
+           ======================================== */
+        #position-13 .movement-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #position-13 .movement-track {
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 50px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        #position-13 .movement-object {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.5s;
+        }
+
+        #position-13 .movement-object:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #position-13 .obj-forward {
+            left: 70%;
+            background: #98d8aa;
+        }
+
+        #position-13 .obj-backward {
+            left: 20%;
+            background: #ff6b9d;
+        }
+
+        #position-13 .movement-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        #position-13 .move-btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #position-13 .move-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #position-13 .btn-forward { background: #98d8aa; }
+        #position-13 .btn-backward { background: #ff6b9d; }
+
+        /* ========================================
+           #position-14: Clockwise/Counter-clockwise
+           ======================================== */
+        #position-14 .rotation-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #position-14 .rotation-item {
+            text-align: center;
+        }
+
+        #position-14 .rotation-circle {
+            width: 180px;
+            height: 180px;
+            border: 8px solid;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 20px;
+        }
+
+        #position-14 .clockwise .rotation-circle {
+            border-color: #87ceeb;
+            animation: rotate-cw 3s linear infinite;
+        }
+
+        #position-14 .counter .rotation-circle {
+            border-color: #ff6b9d;
+            animation: rotate-ccw 3s linear infinite;
+        }
+
+        @keyframes rotate-cw {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotate-ccw {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        #position-14 .rotation-arrow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        #position-14 .clockwise .rotation-arrow { background: #87ceeb; }
+        #position-14 .counter .rotation-arrow { background: #ff6b9d; }
+
+        #position-14 .rotation-label {
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 25px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        #position-14 .clockwise .rotation-label { background: #87ceeb; }
+        #position-14 .counter .rotation-label { background: #ff6b9d; }
+
+        /* ========================================
+           #position-15: Ascending/Descending Stairs
+           ======================================== */
+        #position-15 .stairs-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #position-15 .stairs-wrapper {
+            text-align: center;
+        }
+
+        #position-15 .stairs {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        #position-15 .stair-step {
+            width: 50px;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+        }
+
+        #position-15 .stair-step:hover {
+            transform: translateY(-5px);
+        }
+
+        #position-15 .ascending .stair-step { background: #98d8aa; }
+        #position-15 .descending .stair-step { background: #ff6b9d; }
+
+        #position-15 .ascending .stair-step:nth-child(1) { height: 40px; }
+        #position-15 .ascending .stair-step:nth-child(2) { height: 70px; }
+        #position-15 .ascending .stair-step:nth-child(3) { height: 100px; }
+        #position-15 .ascending .stair-step:nth-child(4) { height: 130px; }
+        #position-15 .ascending .stair-step:nth-child(5) { height: 160px; }
+
+        #position-15 .descending .stair-step:nth-child(1) { height: 160px; }
+        #position-15 .descending .stair-step:nth-child(2) { height: 130px; }
+        #position-15 .descending .stair-step:nth-child(3) { height: 100px; }
+        #position-15 .descending .stair-step:nth-child(4) { height: 70px; }
+        #position-15 .descending .stair-step:nth-child(5) { height: 40px; }
+
+        #position-15 .stairs-arrow {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        #position-15 .ascending .stairs-arrow { color: #98d8aa; }
+        #position-15 .descending .stairs-arrow { color: #ff6b9d; }
+
+        #position-15 .stairs-label {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ========================================
+           #position-16: Rising/Falling Arrows
+           ======================================== */
+        #position-16 .trend-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #position-16 .trend-card {
+            flex: 1;
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        #position-16 .trend-card:hover {
+            transform: translateY(-10px);
+        }
+
+        #position-16 .rising { background: #98d8aa; }
+        #position-16 .falling { background: #ff6b9d; }
+
+        #position-16 .trend-arrow {
+            font-size: 5rem;
+            margin-bottom: 15px;
+        }
+
+        #position-16 .rising .trend-arrow {
+            animation: float-up 1s ease-in-out infinite;
+        }
+
+        #position-16 .falling .trend-arrow {
+            animation: float-down 1s ease-in-out infinite;
+        }
+
+        @keyframes float-up {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float-down {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        #position-16 .trend-label {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #position-16 .trend-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* ========================================
+           #position-17: Expanding/Contracting Circles
+           ======================================== */
+        #position-17 .expand-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #position-17 .expand-item {
+            text-align: center;
+        }
+
+        #position-17 .expand-circles {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+        }
+
+        #position-17 .circle-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 4px solid;
+        }
+
+        #position-17 .expanding .circle-ring {
+            border-color: #87ceeb;
+            animation: expand 2s ease-out infinite;
+        }
+
+        #position-17 .contracting .circle-ring {
+            border-color: #ff6b9d;
+            animation: contract 2s ease-in infinite;
+        }
+
+        #position-17 .ring-1 { width: 50px; height: 50px; animation-delay: 0s; }
+        #position-17 .ring-2 { width: 100px; height: 100px; animation-delay: 0.3s; }
+        #position-17 .ring-3 { width: 150px; height: 150px; animation-delay: 0.6s; }
+        #position-17 .ring-4 { width: 200px; height: 200px; animation-delay: 0.9s; }
+
+        @keyframes expand {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes contract {
+            0% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+        }
+
+        #position-17 .expand-label {
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 25px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        #position-17 .expanding .expand-label { background: #87ceeb; }
+        #position-17 .contracting .expand-label { background: #ff6b9d; }
+
+        /* ========================================
+           #position-18: Push/Pull Indicators
+           ======================================== */
+        #position-18 .pushpull-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #position-18 .pushpull-item {
+            text-align: center;
+        }
+
+        #position-18 .pushpull-visual {
+            width: 180px;
+            height: 180px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        #position-18 .pushpull-visual:hover {
+            transform: scale(1.05);
+        }
+
+        #position-18 .push-item .pushpull-visual {
+            background: #98d8aa;
+        }
+
+        #position-18 .pull-item .pushpull-visual {
+            background: #c9b1ff;
+        }
+
+        #position-18 .hand-icon {
+            font-size: 4rem;
+        }
+
+        #position-18 .push-item .hand-icon {
+            animation: push-anim 1s ease-in-out infinite;
+        }
+
+        #position-18 .pull-item .hand-icon {
+            animation: pull-anim 1s ease-in-out infinite;
+        }
+
+        @keyframes push-anim {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+
+        @keyframes pull-anim {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-15px); }
+        }
+
+        #position-18 .pushpull-arrows {
+            position: absolute;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        #position-18 .push-item .pushpull-arrows { right: 15px; }
+        #position-18 .pull-item .pushpull-arrows { left: 15px; }
+
+        #position-18 .pushpull-label {
+            font-weight: bold;
+            font-size: 1.3rem;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+        }
+
+        #position-18 .push-item .pushpull-label { background: #98d8aa; }
+        #position-18 .pull-item .pushpull-label { background: #c9b1ff; }
+
+        /* ========================================
+           #position-19: Open/Close Door
+           ======================================== */
+        #position-19 .openclose-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #position-19 .door-item {
+            text-align: center;
+        }
+
+        #position-19 .door-frame {
+            width: 160px;
+            height: 220px;
+            background: #f0f0f0;
+            border: 6px solid #5b5bd6;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        #position-19 .door-panel {
+            position: absolute;
+            top: 10px;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            border-radius: 8px 8px 0 0;
+            transition: all 0.5s;
+        }
+
+        #position-19 .open-door .door-panel {
+            left: 10px;
+            background: #98d8aa;
+            transform: perspective(300px) rotateY(-70deg);
+            transform-origin: left;
+        }
+
+        #position-19 .close-door .door-panel {
+            left: 10px;
+            background: #ff6b9d;
+        }
+
+        #position-19 .door-handle-small {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background: #ffd93d;
+            border-radius: 50%;
+        }
+
+        #position-19 .door-status {
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 30px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        #position-19 .open-door .door-status { background: #98d8aa; }
+        #position-19 .close-door .door-status { background: #ff6b9d; }
+
+        /* ========================================
+           #position-20: On/Off Switch Position
+           ======================================== */
+        #position-20 .switch-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #position-20 .switch-item {
+            text-align: center;
+        }
+
+        #position-20 .switch-track {
+            width: 120px;
+            height: 60px;
+            border-radius: 30px;
+            position: relative;
+            margin: 0 auto 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #position-20 .switch-on .switch-track { background: #98d8aa; }
+        #position-20 .switch-off .switch-track { background: #e0e0e0; }
+
+        #position-20 .switch-thumb {
+            position: absolute;
+            top: 5px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        #position-20 .switch-on .switch-thumb { left: 65px; }
+        #position-20 .switch-off .switch-thumb { left: 5px; }
+
+        #position-20 .switch-track:hover .switch-thumb {
+            transform: scale(1.1);
+        }
+
+        #position-20 .switch-label {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        #position-20 .switch-on .switch-label { color: #98d8aa; }
+        #position-20 .switch-off .switch-label { color: #888; }
+
+        /* ========================================
+           #position-21: Left-side/Right-side
+           ======================================== */
+        #position-21 .sides-container {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        #position-21 .side-panel {
+            flex: 1;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        #position-21 .side-panel:hover {
+            flex: 1.1;
+        }
+
+        #position-21 .left-side { background: #87ceeb; color: white; }
+        #position-21 .right-side { background: #ff6b9d; color: white; }
+
+        #position-21 .side-divider {
+            width: 6px;
+            background: white;
+        }
+
+        #position-21 .side-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        #position-21 .side-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #position-21 .side-desc {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           #position-22: First/Last Position
+           ======================================== */
+        #position-22 .position-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #position-22 .position-item {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        #position-22 .position-item:hover {
+            transform: translateY(-10px);
+        }
+
+        #position-22 .pos-first {
+            background: #ff6b9d;
+            width: 100px;
+            height: 100px;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(255,107,157,0.4);
+        }
+
+        #position-22 .pos-last {
+            background: #87ceeb;
+            width: 100px;
+            height: 100px;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(135,206,235,0.4);
+        }
+
+        #position-22 .pos-mid {
+            background: #e0e0e0;
+            color: #888;
+        }
+
+        #position-22 .position-dots {
+            color: #ccc;
+            font-size: 1.5rem;
+        }
+
+        /* ========================================
+           #position-23: Beginning/End Markers
+           ======================================== */
+        #position-23 .markers-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #position-23 .markers-track {
+            height: 20px;
+            background: linear-gradient(to right, #ff6b9d, #ffd93d, #87ceeb);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #position-23 .marker {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #position-23 .marker-flag {
+            width: 60px;
+            text-align: center;
+        }
+
+        #position-23 .flag-pole {
+            width: 4px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        #position-23 .flag-top {
+            width: 50px;
+            height: 35px;
+            border-radius: 0 8px 8px 0;
+            margin-left: 4px;
+            margin-bottom: -2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #position-23 .begin-marker {
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        #position-23 .begin-marker .flag-pole { background: #ff6b9d; }
+        #position-23 .begin-marker .flag-top { background: #ff6b9d; }
+
+        #position-23 .end-marker {
+            right: 0;
+            transform: translate(50%, -50%);
+        }
+
+        #position-23 .end-marker .flag-pole { background: #87ceeb; }
+        #position-23 .end-marker .flag-top { background: #87ceeb; }
+
+        #position-23 .markers-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        #position-23 .marker-label {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #position-23 .begin-label { color: #ff6b9d; }
+        #position-23 .end-label { color: #87ceeb; }
+
+        /* ========================================
+           #position-24: Origin Point Indicator
+           ======================================== */
+        #position-24 .origin-container {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #position-24 .origin-grid {
+            width: 350px;
+            height: 350px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        #position-24 .axis-x {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #5b5bd6;
+        }
+
+        #position-24 .axis-y {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #5b5bd6;
+        }
+
+        #position-24 .origin-point {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 25px rgba(255,107,157,0.4);
+            z-index: 5;
+            transition: all 0.3s;
+        }
+
+        #position-24 .origin-point:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        #position-24 .quadrant {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        #position-24 .q1 { top: 0; right: 0; background: rgba(135,206,235,0.2); }
+        #position-24 .q2 { top: 0; left: 0; background: rgba(152,216,170,0.2); }
+        #position-24 .q3 { bottom: 0; left: 0; background: rgba(255,217,61,0.2); }
+        #position-24 .q4 { bottom: 0; right: 0; background: rgba(201,177,255,0.2); }
+
+        /* ========================================
+           #position-25: Destination Marker
+           ======================================== */
+        #position-25 .destination-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #position-25 .destination-map {
+            width: 100%;
+            height: 300px;
+            background: #e8f4ea;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #position-25 .map-path {
+            position: absolute;
+            top: 70%;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                #5b5bd6 0px,
+                #5b5bd6 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        #position-25 .current-pin {
+            position: absolute;
+            top: 60%;
+            left: 15%;
+            transform: translateY(-100%);
+        }
+
+        #position-25 .destination-pin {
+            position: absolute;
+            top: 60%;
+            right: 15%;
+            transform: translateY(-100%);
+        }
+
+        #position-25 .pin {
+            width: 50px;
+            text-align: center;
+        }
+
+        #position-25 .pin-head {
+            width: 50px;
+            height: 50px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        #position-25 .current-pin .pin-head {
+            background: #87ceeb;
+        }
+
+        #position-25 .destination-pin .pin-head {
+            background: #ff6b9d;
+            animation: pulse-pin 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse-pin {
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        #position-25 .pin-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        #position-25 .destination-text {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        /* ========================================
+           #position-26: Route Path with Turns
+           ======================================== */
+        #position-26 .route-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #position-26 .route-path {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #position-26 .route-segment {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 16px;
+            border-left: 6px solid;
+            transition: all 0.3s;
+        }
+
+        #position-26 .route-segment:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #position-26 .seg-1 { border-left-color: #ff6b9d; }
+        #position-26 .seg-2 { border-left-color: #ffd93d; }
+        #position-26 .seg-3 { border-left-color: #98d8aa; }
+        #position-26 .seg-4 { border-left-color: #87ceeb; }
+
+        #position-26 .route-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        #position-26 .seg-1 .route-icon { background: #ff6b9d; }
+        #position-26 .seg-2 .route-icon { background: #ffd93d; color: #333; }
+        #position-26 .seg-3 .route-icon { background: #98d8aa; }
+        #position-26 .seg-4 .route-icon { background: #87ceeb; }
+
+        #position-26 .route-text {
+            flex: 1;
+        }
+
+        #position-26 .route-direction {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        #position-26 .route-distance {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* ========================================
+           #position-27: Map Pin Locations
+           ======================================== */
+        #position-27 .map-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #position-27 .map-area {
+            width: 100%;
+            height: 350px;
+            background: #f0f4f8;
+            border-radius: 24px;
+            position: relative;
+            border: 4px solid #e0e0e0;
+        }
+
+        #position-27 .map-pin {
+            position: absolute;
+            transform: translate(-50%, -100%);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #position-27 .map-pin:hover {
+            transform: translate(-50%, -100%) scale(1.2);
+            z-index: 10;
+        }
+
+        #position-27 .pin-marker {
+            width: 40px;
+            height: 50px;
+            position: relative;
+        }
+
+        #position-27 .pin-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        #position-27 .pin-point {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #position-27 .pin-a { top: 25%; left: 30%; }
+        #position-27 .pin-a .pin-circle { background: #ff6b9d; }
+        #position-27 .pin-a .pin-point { border-top: 15px solid #ff6b9d; }
+
+        #position-27 .pin-b { top: 40%; left: 60%; }
+        #position-27 .pin-b .pin-circle { background: #87ceeb; }
+        #position-27 .pin-b .pin-point { border-top: 15px solid #87ceeb; }
+
+        #position-27 .pin-c { top: 70%; left: 45%; }
+        #position-27 .pin-c .pin-circle { background: #98d8aa; }
+        #position-27 .pin-c .pin-point { border-top: 15px solid #98d8aa; }
+
+        #position-27 .pin-d { top: 55%; left: 20%; }
+        #position-27 .pin-d .pin-circle { background: #ffd93d; color: #333; }
+        #position-27 .pin-d .pin-point { border-top: 15px solid #ffd93d; }
+
+        #position-27 .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        #position-27 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #position-27 .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        #position-27 .dot-a { background: #ff6b9d; }
+        #position-27 .dot-b { background: #87ceeb; }
+        #position-27 .dot-c { background: #98d8aa; }
+        #position-27 .dot-d { background: #ffd93d; }
+
+        /* ========================================
+           #position-28: Floor Indicator (1F/2F/3F)
+           ======================================== */
+        #position-28 .floors-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #position-28 .building {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #position-28 .floor {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        #position-28 .floor:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #position-28 .floor-3f { background: #ff6b9d; color: white; }
+        #position-28 .floor-2f { background: #ffd93d; color: #333; }
+        #position-28 .floor-1f { background: #98d8aa; color: white; }
+        #position-28 .floor-b1 { background: #87ceeb; color: white; }
+
+        #position-28 .floor-number {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        #position-28 .floor-1f .floor-number,
+        #position-28 .floor-3f .floor-number,
+        #position-28 .floor-b1 .floor-number {
+            background: rgba(255,255,255,0.3);
+        }
+
+        #position-28 .floor-2f .floor-number {
+            background: rgba(0,0,0,0.1);
+        }
+
+        #position-28 .floor-info {
+            flex: 1;
+        }
+
+        #position-28 .floor-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        #position-28 .floor-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        #position-28 .elevator-shaft {
+            position: absolute;
+            right: -60px;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: #e0e0e0;
+            border-radius: 8px;
+        }
+
+        /* ========================================
+           #position-29: Seat Arrangement
+           ======================================== */
+        #position-29 .seats-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #position-29 .stage {
+            background: #5b5bd6;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        #position-29 .seat-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #position-29 .seat-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #position-29 .seat {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px 10px 5px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #position-29 .seat:hover {
+            transform: translateY(-5px);
+        }
+
+        #position-29 .seat-available { background: #98d8aa; }
+        #position-29 .seat-taken { background: #e0e0e0; color: #999; }
+        #position-29 .seat-selected { background: #ff6b9d; box-shadow: 0 4px 15px rgba(255,107,157,0.4); }
+        #position-29 .seat-vip { background: #ffd93d; color: #333; }
+
+        #position-29 .seat-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        #position-29 .legend-seat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #position-29 .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        /* ========================================
+           #position-30: Parking Spot Layout
+           ======================================== */
+        #position-30 .parking-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #position-30 .parking-lot {
+            background: #3a3a3a;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        #position-30 .parking-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #position-30 .parking-spot {
+            flex: 1;
+            height: 100px;
+            border: 3px dashed #666;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #position-30 .parking-spot:hover {
+            border-color: #ffd93d;
+            transform: scale(1.02);
+        }
+
+        #position-30 .spot-empty {
+            background: rgba(152,216,170,0.3);
+            border-color: #98d8aa;
+        }
+
+        #position-30 .spot-occupied {
+            background: rgba(255,107,157,0.3);
+            border-color: #ff6b9d;
+        }
+
+        #position-30 .spot-reserved {
+            background: rgba(135,206,235,0.3);
+            border-color: #87ceeb;
+        }
+
+        #position-30 .spot-number {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        #position-30 .car-icon {
+            font-size: 2.5rem;
+        }
+
+        #position-30 .parking-legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        #position-30 .legend-spot {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+        }
+
+        #position-30 .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+        }
+
+        #position-30 .color-empty { background: #98d8aa; }
+        #position-30 .color-occupied { background: #ff6b9d; }
+        #position-30 .color-reserved { background: #87ceeb; }
+    </style>
+</head>
+<body>
+    <h1>Diagram Layouts - Position & Direction</h1>
+    <p class="subtitle">30 different position and direction layout patterns for SNS infographics and education</p>
+
+    <!-- #position-1: Up/Down/Left/Right Arrows -->
+    <div class="diagram-section" id="position-1">
+        <h2 class="section-title" data-num="1">Up/Down/Left/Right Arrows</h2>
+        <p class="section-desc">Basic directional control pad layout</p>
+
+        <div class="arrow-grid">
+            <div class="arrow-btn arrow-up">&#9650;</div>
+            <div class="arrow-btn arrow-left">&#9664;</div>
+            <div class="arrow-btn arrow-center">CENTER</div>
+            <div class="arrow-btn arrow-right">&#9654;</div>
+            <div class="arrow-btn arrow-down">&#9660;</div>
+        </div>
+    </div>
+
+    <!-- #position-2: Compass (N/S/E/W) -->
+    <div class="diagram-section" id="position-2">
+        <h2 class="section-title" data-num="2">Compass (N/S/E/W)</h2>
+        <p class="section-desc">Cardinal directions compass layout</p>
+
+        <div class="compass-container">
+            <div class="compass-ring">
+                <div class="compass-direction dir-n">N</div>
+                <div class="compass-direction dir-s">S</div>
+                <div class="compass-direction dir-e">E</div>
+                <div class="compass-direction dir-w">W</div>
+                <div class="compass-needle">
+                    <div class="needle-north"></div>
+                    <div class="needle-south"></div>
+                </div>
+                <div class="compass-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-3: Here/There Pointer -->
+    <div class="diagram-section" id="position-3">
+        <h2 class="section-title" data-num="3">Here/There Pointer</h2>
+        <p class="section-desc">Location indicator with direction pointer</p>
+
+        <div class="pointer-container">
+            <div class="pointer-card here-card">
+                <div class="pointer-icon">&#128205;</div>
+                <div class="pointer-label">HERE</div>
+            </div>
+            <div class="pointer-arrow">&#10132;</div>
+            <div class="pointer-card there-card">
+                <div class="pointer-icon">&#127919;</div>
+                <div class="pointer-label">THERE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-4: Inside/Outside Box -->
+    <div class="diagram-section" id="position-4">
+        <h2 class="section-title" data-num="4">Inside/Outside Box</h2>
+        <p class="section-desc">Spatial relationship visualization</p>
+
+        <div class="box-container">
+            <div style="text-align: center;">
+                <div class="outer-box">
+                    <div class="inner-content">INSIDE</div>
+                    <div class="outside-items">
+                        <div class="outside-dot dot-1">OUT</div>
+                        <div class="outside-dot dot-2">OUT</div>
+                        <div class="outside-dot dot-3">OUT</div>
+                    </div>
+                </div>
+                <div class="box-label">Inside vs Outside</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-5: Above/Below Layers -->
+    <div class="diagram-section" id="position-5">
+        <h2 class="section-title" data-num="5">Above/Below Layers</h2>
+        <p class="section-desc">Stacked layer visualization</p>
+
+        <div class="layers-container">
+            <div class="layer layer-top">
+                <div class="layer-label">Top Layer</div>
+                <div class="layer-name">ABOVE</div>
+            </div>
+            <div class="layer layer-mid1">
+                <div class="layer-label">Middle</div>
+                <div class="layer-name">Layer 2</div>
+            </div>
+            <div class="layer layer-mid2">
+                <div class="layer-label">Middle</div>
+                <div class="layer-name">Layer 3</div>
+            </div>
+            <div class="layer layer-bottom">
+                <div class="layer-label">Bottom Layer</div>
+                <div class="layer-name">BELOW</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-6: Front/Back View -->
+    <div class="diagram-section" id="position-6">
+        <h2 class="section-title" data-num="6">Front/Back View</h2>
+        <p class="section-desc">Front and back perspective cards</p>
+
+        <div class="view-container">
+            <div class="view-card front-view">
+                <div class="view-header">FRONT VIEW</div>
+                <div class="view-body">
+                    <div class="view-icon">&#128100;</div>
+                    <div class="view-desc">The front-facing perspective showing the main features and interface</div>
+                </div>
+            </div>
+            <div class="view-card back-view">
+                <div class="view-header">BACK VIEW</div>
+                <div class="view-body">
+                    <div class="view-icon">&#128101;</div>
+                    <div class="view-desc">The rear perspective showing connections and hidden components</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-7: Top/Bottom Indicator -->
+    <div class="diagram-section" id="position-7">
+        <h2 class="section-title" data-num="7">Top/Bottom Indicator</h2>
+        <p class="section-desc">Vertical position indicator with markers</p>
+
+        <div class="indicator-container">
+            <div class="indicator-bar">
+                <div class="indicator-marker marker-top">TOP</div>
+                <div class="indicator-marker marker-mid">MID</div>
+                <div class="indicator-marker marker-bottom">BTM</div>
+            </div>
+            <div class="indicator-labels">
+                <div class="label-item label-top">Highest</div>
+                <div class="label-item label-mid">Middle</div>
+                <div class="label-item label-bottom">Lowest</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-8: Center/Corner Positions -->
+    <div class="diagram-section" id="position-8">
+        <h2 class="section-title" data-num="8">Center/Corner Positions</h2>
+        <p class="section-desc">Grid positioning with center and corners</p>
+
+        <div class="position-grid">
+            <div class="pos-dot pos-tl">Top<br>Left</div>
+            <div class="pos-dot pos-tr">Top<br>Right</div>
+            <div class="pos-dot pos-center">CENTER</div>
+            <div class="pos-dot pos-bl">Bottom<br>Left</div>
+            <div class="pos-dot pos-br">Bottom<br>Right</div>
+        </div>
+    </div>
+
+    <!-- #position-9: Near/Far Perspective -->
+    <div class="diagram-section" id="position-9">
+        <h2 class="section-title" data-num="9">Near/Far Perspective</h2>
+        <p class="section-desc">Depth perception visualization</p>
+
+        <div class="perspective-container">
+            <div class="perspective-track">
+                <div class="perspective-item item-near">NEAR</div>
+                <div class="perspective-item item-mid">MIDDLE</div>
+                <div class="perspective-item item-far">FAR</div>
+            </div>
+            <div class="distance-label">
+                <span>Close</span>
+                <span>Distance</span>
+                <span>Far Away</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-10: Start/End Path -->
+    <div class="diagram-section" id="position-10">
+        <h2 class="section-title" data-num="10">Start/End Path</h2>
+        <p class="section-desc">Journey from start to finish</p>
+
+        <div class="path-container">
+            <div class="path-line">
+                <div class="path-point point-start">
+                    <div class="point-circle">S</div>
+                    <div class="point-label">START</div>
+                </div>
+                <div class="path-arrow">&#10132;</div>
+                <div class="path-point point-end">
+                    <div class="point-circle">E</div>
+                    <div class="point-label">END</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-11: Entry/Exit Doors -->
+    <div class="diagram-section" id="position-11">
+        <h2 class="section-title" data-num="11">Entry/Exit Doors</h2>
+        <p class="section-desc">Entry and exit point visualization</p>
+
+        <div class="doors-container">
+            <div class="door-wrapper">
+                <div class="door entry-door">
+                    <div class="door-handle"></div>
+                    <div class="door-arrow">&#8594;</div>
+                </div>
+                <div class="door-label entry-label">ENTRY</div>
+            </div>
+            <div class="door-wrapper">
+                <div class="door exit-door">
+                    <div class="door-handle"></div>
+                    <div class="door-arrow">&#8592;</div>
+                </div>
+                <div class="door-label exit-label">EXIT</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-12: In/Out Arrows -->
+    <div class="diagram-section" id="position-12">
+        <h2 class="section-title" data-num="12">In/Out Arrows</h2>
+        <p class="section-desc">Input and output flow visualization</p>
+
+        <div class="inout-container">
+            <div class="arrow-group">
+                <div class="arrow-item arrow-in">
+                    <span class="arrow-icon">&#10132;</span>
+                    <span>INPUT</span>
+                </div>
+            </div>
+            <div class="inout-box">SYSTEM</div>
+            <div class="arrow-group">
+                <div class="arrow-item arrow-out">
+                    <span>OUTPUT</span>
+                    <span class="arrow-icon">&#10132;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-13: Forward/Backward Movement -->
+    <div class="diagram-section" id="position-13">
+        <h2 class="section-title" data-num="13">Forward/Backward Movement</h2>
+        <p class="section-desc">Directional movement control</p>
+
+        <div class="movement-container">
+            <div class="movement-track">
+                <div class="movement-object obj-backward">&#8592;</div>
+                <div class="movement-object obj-forward">&#8594;</div>
+            </div>
+            <div class="movement-buttons">
+                <button class="move-btn btn-backward">
+                    <span>&#8592;</span>
+                    <span>BACKWARD</span>
+                </button>
+                <button class="move-btn btn-forward">
+                    <span>FORWARD</span>
+                    <span>&#8594;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-14: Clockwise/Counter-clockwise -->
+    <div class="diagram-section" id="position-14">
+        <h2 class="section-title" data-num="14">Clockwise/Counter-clockwise</h2>
+        <p class="section-desc">Rotation direction indicators</p>
+
+        <div class="rotation-container">
+            <div class="rotation-item clockwise">
+                <div class="rotation-circle">
+                    <div class="rotation-arrow">&#8635;</div>
+                </div>
+                <div class="rotation-label">CLOCKWISE</div>
+            </div>
+            <div class="rotation-item counter">
+                <div class="rotation-circle">
+                    <div class="rotation-arrow">&#8634;</div>
+                </div>
+                <div class="rotation-label">COUNTER</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-15: Ascending/Descending Stairs -->
+    <div class="diagram-section" id="position-15">
+        <h2 class="section-title" data-num="15">Ascending/Descending Stairs</h2>
+        <p class="section-desc">Step-based progression visualization</p>
+
+        <div class="stairs-container">
+            <div class="stairs-wrapper ascending">
+                <div class="stairs">
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                </div>
+                <div class="stairs-arrow">&#8593;</div>
+                <div class="stairs-label">ASCENDING</div>
+            </div>
+            <div class="stairs-wrapper descending">
+                <div class="stairs">
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                    <div class="stair-step"></div>
+                </div>
+                <div class="stairs-arrow">&#8595;</div>
+                <div class="stairs-label">DESCENDING</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-16: Rising/Falling Arrows -->
+    <div class="diagram-section" id="position-16">
+        <h2 class="section-title" data-num="16">Rising/Falling Arrows</h2>
+        <p class="section-desc">Trend direction indicators</p>
+
+        <div class="trend-container">
+            <div class="trend-card rising">
+                <div class="trend-arrow">&#8593;</div>
+                <div class="trend-label">RISING</div>
+                <div class="trend-value">+25%</div>
+            </div>
+            <div class="trend-card falling">
+                <div class="trend-arrow">&#8595;</div>
+                <div class="trend-label">FALLING</div>
+                <div class="trend-value">-15%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-17: Expanding/Contracting Circles -->
+    <div class="diagram-section" id="position-17">
+        <h2 class="section-title" data-num="17">Expanding/Contracting Circles</h2>
+        <p class="section-desc">Radial expansion and contraction</p>
+
+        <div class="expand-container">
+            <div class="expand-item expanding">
+                <div class="expand-circles">
+                    <div class="circle-ring ring-1"></div>
+                    <div class="circle-ring ring-2"></div>
+                    <div class="circle-ring ring-3"></div>
+                    <div class="circle-ring ring-4"></div>
+                </div>
+                <div class="expand-label">EXPANDING</div>
+            </div>
+            <div class="expand-item contracting">
+                <div class="expand-circles">
+                    <div class="circle-ring ring-4"></div>
+                    <div class="circle-ring ring-3"></div>
+                    <div class="circle-ring ring-2"></div>
+                    <div class="circle-ring ring-1"></div>
+                </div>
+                <div class="expand-label">CONTRACTING</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-18: Push/Pull Indicators -->
+    <div class="diagram-section" id="position-18">
+        <h2 class="section-title" data-num="18">Push/Pull Indicators</h2>
+        <p class="section-desc">Force direction visualization</p>
+
+        <div class="pushpull-container">
+            <div class="pushpull-item push-item">
+                <div class="pushpull-visual">
+                    <div class="hand-icon">&#128070;</div>
+                    <div class="pushpull-arrows">&#10132;</div>
+                </div>
+                <div class="pushpull-label">PUSH</div>
+            </div>
+            <div class="pushpull-item pull-item">
+                <div class="pushpull-visual">
+                    <div class="hand-icon">&#128071;</div>
+                    <div class="pushpull-arrows">&#10132;</div>
+                </div>
+                <div class="pushpull-label">PULL</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-19: Open/Close Door -->
+    <div class="diagram-section" id="position-19">
+        <h2 class="section-title" data-num="19">Open/Close Door</h2>
+        <p class="section-desc">Door state visualization</p>
+
+        <div class="openclose-container">
+            <div class="door-item open-door">
+                <div class="door-frame">
+                    <div class="door-panel">
+                        <div class="door-handle-small"></div>
+                    </div>
+                </div>
+                <div class="door-status">OPEN</div>
+            </div>
+            <div class="door-item close-door">
+                <div class="door-frame">
+                    <div class="door-panel">
+                        <div class="door-handle-small"></div>
+                    </div>
+                </div>
+                <div class="door-status">CLOSED</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-20: On/Off Switch Position -->
+    <div class="diagram-section" id="position-20">
+        <h2 class="section-title" data-num="20">On/Off Switch Position</h2>
+        <p class="section-desc">Toggle switch states</p>
+
+        <div class="switch-container">
+            <div class="switch-item switch-on">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+                <div class="switch-label">ON</div>
+            </div>
+            <div class="switch-item switch-off">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+                <div class="switch-label">OFF</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-21: Left-side/Right-side Comparison -->
+    <div class="diagram-section" id="position-21">
+        <h2 class="section-title" data-num="21">Left-side/Right-side Comparison</h2>
+        <p class="section-desc">Horizontal side comparison</p>
+
+        <div class="sides-container">
+            <div class="side-panel left-side">
+                <div class="side-icon">&#8592;</div>
+                <div class="side-title">LEFT SIDE</div>
+                <div class="side-desc">Content positioned on the left side of the layout</div>
+            </div>
+            <div class="side-divider"></div>
+            <div class="side-panel right-side">
+                <div class="side-icon">&#8594;</div>
+                <div class="side-title">RIGHT SIDE</div>
+                <div class="side-desc">Content positioned on the right side of the layout</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-22: First/Last Position -->
+    <div class="diagram-section" id="position-22">
+        <h2 class="section-title" data-num="22">First/Last Position</h2>
+        <p class="section-desc">Sequential position indicator</p>
+
+        <div class="position-row">
+            <div class="position-item pos-first">1st</div>
+            <div class="position-item pos-mid">2</div>
+            <div class="position-item pos-mid">3</div>
+            <div class="position-dots">...</div>
+            <div class="position-item pos-mid">N-1</div>
+            <div class="position-item pos-last">Last</div>
+        </div>
+    </div>
+
+    <!-- #position-23: Beginning/End Markers -->
+    <div class="diagram-section" id="position-23">
+        <h2 class="section-title" data-num="23">Beginning/End Markers</h2>
+        <p class="section-desc">Flag markers for start and finish</p>
+
+        <div class="markers-container">
+            <div class="markers-track">
+                <div class="marker begin-marker">
+                    <div class="marker-flag">
+                        <div class="flag-top">BEGIN</div>
+                        <div class="flag-pole"></div>
+                    </div>
+                </div>
+                <div class="marker end-marker">
+                    <div class="marker-flag">
+                        <div class="flag-top">END</div>
+                        <div class="flag-pole"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="markers-labels">
+                <span class="marker-label begin-label">Starting Point</span>
+                <span class="marker-label end-label">Finish Line</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-24: Origin Point Indicator -->
+    <div class="diagram-section" id="position-24">
+        <h2 class="section-title" data-num="24">Origin Point Indicator</h2>
+        <p class="section-desc">Coordinate system origin visualization</p>
+
+        <div class="origin-container">
+            <div class="origin-grid">
+                <div class="quadrant q1">Q1 (+,+)</div>
+                <div class="quadrant q2">Q2 (-,+)</div>
+                <div class="quadrant q3">Q3 (-,-)</div>
+                <div class="quadrant q4">Q4 (+,-)</div>
+                <div class="axis-x"></div>
+                <div class="axis-y"></div>
+                <div class="origin-point">ORIGIN<br>(0,0)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-25: Destination Marker -->
+    <div class="diagram-section" id="position-25">
+        <h2 class="section-title" data-num="25">Destination Marker</h2>
+        <p class="section-desc">Map with current location and destination</p>
+
+        <div class="destination-container">
+            <div class="destination-map">
+                <div class="map-path"></div>
+                <div class="current-pin">
+                    <div class="pin">
+                        <div class="pin-head">&#9679;</div>
+                        <div class="pin-label">You</div>
+                    </div>
+                </div>
+                <div class="destination-pin">
+                    <div class="pin">
+                        <div class="pin-head">&#9733;</div>
+                        <div class="pin-label">Goal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="destination-text">Navigate to your destination</div>
+        </div>
+    </div>
+
+    <!-- #position-26: Route Path with Turns -->
+    <div class="diagram-section" id="position-26">
+        <h2 class="section-title" data-num="26">Route Path with Turns</h2>
+        <p class="section-desc">Step-by-step navigation directions</p>
+
+        <div class="route-container">
+            <div class="route-path">
+                <div class="route-segment seg-1">
+                    <div class="route-icon">&#8593;</div>
+                    <div class="route-text">
+                        <div class="route-direction">Go Straight</div>
+                        <div class="route-distance">500m ahead</div>
+                    </div>
+                </div>
+                <div class="route-segment seg-2">
+                    <div class="route-icon">&#8594;</div>
+                    <div class="route-text">
+                        <div class="route-direction">Turn Right</div>
+                        <div class="route-distance">At the intersection</div>
+                    </div>
+                </div>
+                <div class="route-segment seg-3">
+                    <div class="route-icon">&#8592;</div>
+                    <div class="route-text">
+                        <div class="route-direction">Turn Left</div>
+                        <div class="route-distance">After 200m</div>
+                    </div>
+                </div>
+                <div class="route-segment seg-4">
+                    <div class="route-icon">&#9873;</div>
+                    <div class="route-text">
+                        <div class="route-direction">Destination</div>
+                        <div class="route-distance">On your right</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-27: Map Pin Locations -->
+    <div class="diagram-section" id="position-27">
+        <h2 class="section-title" data-num="27">Map Pin Locations</h2>
+        <p class="section-desc">Multiple location markers on a map</p>
+
+        <div class="map-container">
+            <div class="map-area">
+                <div class="map-pin pin-a">
+                    <div class="pin-marker">
+                        <div class="pin-circle">A</div>
+                        <div class="pin-point"></div>
+                    </div>
+                </div>
+                <div class="map-pin pin-b">
+                    <div class="pin-marker">
+                        <div class="pin-circle">B</div>
+                        <div class="pin-point"></div>
+                    </div>
+                </div>
+                <div class="map-pin pin-c">
+                    <div class="pin-marker">
+                        <div class="pin-circle">C</div>
+                        <div class="pin-point"></div>
+                    </div>
+                </div>
+                <div class="map-pin pin-d">
+                    <div class="pin-marker">
+                        <div class="pin-circle">D</div>
+                        <div class="pin-point"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-dot dot-a"></div>
+                    <span>Location A</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-b"></div>
+                    <span>Location B</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-c"></div>
+                    <span>Location C</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-d"></div>
+                    <span>Location D</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-28: Floor Indicator (1F/2F/3F) -->
+    <div class="diagram-section" id="position-28">
+        <h2 class="section-title" data-num="28">Floor Indicator (1F/2F/3F)</h2>
+        <p class="section-desc">Building floor level navigation</p>
+
+        <div class="floors-container">
+            <div class="building">
+                <div class="floor floor-3f">
+                    <div class="floor-number">3F</div>
+                    <div class="floor-info">
+                        <div class="floor-name">Rooftop</div>
+                        <div class="floor-desc">Restaurant & View Deck</div>
+                    </div>
+                </div>
+                <div class="floor floor-2f">
+                    <div class="floor-number">2F</div>
+                    <div class="floor-info">
+                        <div class="floor-name">Office</div>
+                        <div class="floor-desc">Meeting Rooms & Work Space</div>
+                    </div>
+                </div>
+                <div class="floor floor-1f">
+                    <div class="floor-number">1F</div>
+                    <div class="floor-info">
+                        <div class="floor-name">Lobby</div>
+                        <div class="floor-desc">Reception & Cafe</div>
+                    </div>
+                </div>
+                <div class="floor floor-b1">
+                    <div class="floor-number">B1</div>
+                    <div class="floor-info">
+                        <div class="floor-name">Parking</div>
+                        <div class="floor-desc">Underground Garage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-29: Seat Arrangement -->
+    <div class="diagram-section" id="position-29">
+        <h2 class="section-title" data-num="29">Seat Arrangement</h2>
+        <p class="section-desc">Theater or event seating layout</p>
+
+        <div class="seats-container">
+            <div class="stage">STAGE</div>
+            <div class="seat-rows">
+                <div class="seat-row">
+                    <div class="seat seat-vip">V1</div>
+                    <div class="seat seat-vip">V2</div>
+                    <div class="seat seat-vip">V3</div>
+                    <div class="seat seat-vip">V4</div>
+                    <div class="seat seat-vip">V5</div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat seat-selected">A1</div>
+                    <div class="seat seat-taken">A2</div>
+                    <div class="seat seat-available">A3</div>
+                    <div class="seat seat-available">A4</div>
+                    <div class="seat seat-taken">A5</div>
+                    <div class="seat seat-available">A6</div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat seat-available">B1</div>
+                    <div class="seat seat-available">B2</div>
+                    <div class="seat seat-taken">B3</div>
+                    <div class="seat seat-taken">B4</div>
+                    <div class="seat seat-available">B5</div>
+                    <div class="seat seat-available">B6</div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat seat-available">C1</div>
+                    <div class="seat seat-available">C2</div>
+                    <div class="seat seat-available">C3</div>
+                    <div class="seat seat-available">C4</div>
+                    <div class="seat seat-available">C5</div>
+                    <div class="seat seat-available">C6</div>
+                </div>
+            </div>
+            <div class="seat-legend">
+                <div class="legend-seat">
+                    <div class="legend-box" style="background: #98d8aa;"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-seat">
+                    <div class="legend-box" style="background: #e0e0e0;"></div>
+                    <span>Taken</span>
+                </div>
+                <div class="legend-seat">
+                    <div class="legend-box" style="background: #ff6b9d;"></div>
+                    <span>Selected</span>
+                </div>
+                <div class="legend-seat">
+                    <div class="legend-box" style="background: #ffd93d;"></div>
+                    <span>VIP</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- #position-30: Parking Spot Layout -->
+    <div class="diagram-section" id="position-30">
+        <h2 class="section-title" data-num="30">Parking Spot Layout</h2>
+        <p class="section-desc">Parking lot availability visualization</p>
+
+        <div class="parking-container">
+            <div class="parking-lot">
+                <div class="parking-row">
+                    <div class="parking-spot spot-empty">
+                        <span class="spot-number">P1</span>
+                    </div>
+                    <div class="parking-spot spot-occupied">
+                        <span class="car-icon">&#128663;</span>
+                    </div>
+                    <div class="parking-spot spot-empty">
+                        <span class="spot-number">P3</span>
+                    </div>
+                    <div class="parking-spot spot-reserved">
+                        <span class="spot-number">R</span>
+                    </div>
+                </div>
+                <div class="parking-row">
+                    <div class="parking-spot spot-occupied">
+                        <span class="car-icon">&#128663;</span>
+                    </div>
+                    <div class="parking-spot spot-empty">
+                        <span class="spot-number">P6</span>
+                    </div>
+                    <div class="parking-spot spot-occupied">
+                        <span class="car-icon">&#128663;</span>
+                    </div>
+                    <div class="parking-spot spot-empty">
+                        <span class="spot-number">P8</span>
+                    </div>
+                </div>
+            </div>
+            <div class="parking-legend">
+                <div class="legend-spot">
+                    <div class="legend-color color-empty"></div>
+                    <span>Empty</span>
+                </div>
+                <div class="legend-spot">
+                    <div class="legend-color color-occupied"></div>
+                    <span>Occupied</span>
+                </div>
+                <div class="legend-spot">
+                    <div class="legend-color color-reserved"></div>
+                    <span>Reserved</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

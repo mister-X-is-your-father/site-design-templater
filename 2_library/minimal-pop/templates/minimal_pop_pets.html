@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Pets - Minimal Pop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pastel-pink: #FFE4E6;
+            --pastel-blue: #E0F2FE;
+            --pastel-yellow: #FEF9C3;
+            --pastel-green: #DCFCE7;
+            --pastel-orange: #FFEDD5;
+            --pastel-purple: #F3E8FF;
+            --warm-cream: #FFFBEB;
+            --warm-beige: #FDF4E3;
+            --soft-brown: #A8896C;
+            --text-dark: #4A4A4A;
+            --text-light: #7A7A7A;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+            background: linear-gradient(135deg, var(--warm-cream) 0%, var(--pastel-pink) 50%, var(--pastel-blue) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Decorative Background Paw Prints */
+        .bg-paws {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .paw {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        .paw::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 35px;
+            background: var(--soft-brown);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .paw::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background:
+                radial-gradient(circle at 20% 50%, var(--soft-brown) 8px, transparent 8px),
+                radial-gradient(circle at 50% 30%, var(--soft-brown) 8px, transparent 8px),
+                radial-gradient(circle at 80% 50%, var(--soft-brown) 8px, transparent 8px);
+        }
+
+        .paw:nth-child(1) { top: 10%; left: 5%; transform: rotate(-20deg); }
+        .paw:nth-child(2) { top: 25%; right: 10%; transform: rotate(15deg); }
+        .paw:nth-child(3) { top: 50%; left: 8%; transform: rotate(-30deg); }
+        .paw:nth-child(4) { top: 70%; right: 5%; transform: rotate(25deg); }
+        .paw:nth-child(5) { bottom: 10%; left: 15%; transform: rotate(-10deg); }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* CSS Cat Face */
+        .cat-logo {
+            width: 60px;
+            height: 50px;
+            background: var(--pastel-orange);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .cat-logo::before,
+        .cat-logo::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 20px solid var(--pastel-orange);
+        }
+
+        .cat-logo::before { left: 5px; transform: rotate(-10deg); }
+        .cat-logo::after { right: 5px; transform: rotate(10deg); }
+
+        .cat-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cat-eye {
+            width: 8px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            animation: blink 3s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+
+        .cat-nose {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 6px;
+            background: #FFB6C1;
+            border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+        }
+
+        .cat-mouth {
+            position: absolute;
+            top: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--soft-brown);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Speech Bubbles */
+        .speech-bubble {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 20px 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: white;
+            border-bottom: 0;
+        }
+
+        .speech-bubble.right::after {
+            left: auto;
+            right: 30px;
+        }
+
+        .speech-bubble.pink { background: var(--pastel-pink); }
+        .speech-bubble.pink::after { border-top-color: var(--pastel-pink); }
+
+        .speech-bubble.blue { background: var(--pastel-blue); }
+        .speech-bubble.blue::after { border-top-color: var(--pastel-blue); }
+
+        .speech-bubble.yellow { background: var(--pastel-yellow); }
+        .speech-bubble.yellow::after { border-top-color: var(--pastel-yellow); }
+
+        .speech-bubble.green { background: var(--pastel-green); }
+        .speech-bubble.green::after { border-top-color: var(--pastel-green); }
+
+        .speech-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .speech-text-jp {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Pet Cards Section */
+        .pets-section {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--soft-brown);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 3px;
+            background: var(--pastel-pink);
+            vertical-align: middle;
+            margin: 0 15px;
+            border-radius: 2px;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .pet-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+        }
+
+        .pet-card.dog::before { background: var(--pastel-orange); }
+        .pet-card.cat::before { background: var(--pastel-pink); }
+        .pet-card.fish::before { background: var(--pastel-blue); }
+
+        /* CSS Dog Face */
+        .dog-face {
+            width: 100px;
+            height: 90px;
+            background: #D4A574;
+            border-radius: 50% 50% 45% 45%;
+            margin: 0 auto 20px;
+            position: relative;
+            animation: happyBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes happyBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-3deg); }
+            75% { transform: translateY(-5px) rotate(3deg); }
+        }
+
+        .dog-face::before,
+        .dog-face::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            width: 35px;
+            height: 45px;
+            background: #C49A6C;
+            border-radius: 50% 50% 30% 30%;
+        }
+
+        .dog-face::before { left: -10px; transform: rotate(-20deg); }
+        .dog-face::after { right: -10px; transform: rotate(20deg); }
+
+        .dog-eyes {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dog-eye {
+            width: 15px;
+            height: 15px;
+            background: #333;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .dog-eye::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .dog-nose {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            background: #333;
+            border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+        }
+
+        .dog-tongue {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 20px;
+            background: #FF9999;
+            border-radius: 0 0 10px 10px;
+            animation: tongueWag 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes tongueWag {
+            0% { transform: translateX(-50%) rotate(-5deg); }
+            100% { transform: translateX(-50%) rotate(5deg); }
+        }
+
+        /* CSS Cat Face (Card Version) */
+        .cat-face {
+            width: 90px;
+            height: 80px;
+            background: #FFA07A;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
+            animation: catPurr 2s ease-in-out infinite;
+        }
+
+        @keyframes catPurr {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .cat-face::before,
+        .cat-face::after {
+            content: '';
+            position: absolute;
+            top: -18px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #FFA07A;
+        }
+
+        .cat-face::before { left: 8px; transform: rotate(-10deg); }
+        .cat-face::after { right: 8px; transform: rotate(10deg); }
+
+        .cat-face .cat-eyes {
+            top: 25px;
+            width: 50px;
+        }
+
+        .cat-face .cat-eye {
+            width: 12px;
+            height: 18px;
+        }
+
+        .cat-face .cat-nose {
+            top: 45px;
+            width: 10px;
+            height: 8px;
+        }
+
+        .cat-whiskers {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+        }
+
+        .whisker {
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background: #333;
+        }
+
+        .whisker:nth-child(1) { left: 0; top: 0; transform: rotate(-10deg); }
+        .whisker:nth-child(2) { left: 0; top: 8px; transform: rotate(5deg); }
+        .whisker:nth-child(3) { right: 0; top: 0; transform: rotate(10deg); }
+        .whisker:nth-child(4) { right: 0; top: 8px; transform: rotate(-5deg); }
+
+        /* CSS Fish */
+        .fish-face {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #87CEEB, #4682B4);
+            border-radius: 50% 20% 50% 20%;
+            margin: 20px auto;
+            position: relative;
+            animation: fishSwim 2s ease-in-out infinite;
+        }
+
+        @keyframes fishSwim {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(10px) rotate(5deg); }
+            75% { transform: translateX(-10px) rotate(-5deg); }
+        }
+
+        .fish-face::before {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 25px solid #4682B4;
+        }
+
+        .fish-eye {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .fish-eye::after {
+            content: '';
+            position: absolute;
+            right: 2px;
+            top: 5px;
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .fish-fin {
+            position: absolute;
+            top: -15px;
+            left: 40px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #5F9EA0;
+        }
+
+        .pet-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .pet-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Decorative Items Section */
+        .decorations {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        /* CSS Bone */
+        .bone {
+            width: 80px;
+            height: 25px;
+            background: #F5DEB3;
+            border-radius: 5px;
+            position: relative;
+            animation: boneSpin 4s ease-in-out infinite;
+        }
+
+        @keyframes boneSpin {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .bone::before,
+        .bone::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #F5DEB3;
+            border-radius: 50%;
+            top: 0;
+        }
+
+        .bone::before {
+            left: -10px;
+            box-shadow: 0 -15px 0 #F5DEB3, 0 15px 0 #F5DEB3;
+        }
+
+        .bone::after {
+            right: -10px;
+            box-shadow: 0 -15px 0 #F5DEB3, 0 15px 0 #F5DEB3;
+        }
+
+        /* CSS Yarn Ball */
+        .yarn {
+            width: 60px;
+            height: 60px;
+            background: var(--pastel-pink);
+            border-radius: 50%;
+            position: relative;
+            animation: yarnRoll 3s ease-in-out infinite;
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes yarnRoll {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(360deg); }
+        }
+
+        .yarn::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+        }
+
+        .yarn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 50%;
+        }
+
+        /* CSS Fish Icon */
+        .fish-icon {
+            width: 50px;
+            height: 30px;
+            background: #87CEEB;
+            border-radius: 50% 20% 50% 20%;
+            position: relative;
+            animation: fishFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes fishFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .fish-icon::before {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 15px solid #87CEEB;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .info-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--pastel-yellow);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .info-icon.pink { background: var(--pastel-pink); }
+        .info-icon.blue { background: var(--pastel-blue); }
+        .info-icon.green { background: var(--pastel-green); }
+
+        /* CSS Heart */
+        .heart {
+            width: 30px;
+            height: 30px;
+            background: #FF6B6B;
+            position: relative;
+            transform: rotate(-45deg);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #FF6B6B;
+            border-radius: 50%;
+        }
+
+        .heart::before { top: -15px; left: 0; }
+        .heart::after { top: 0; left: 15px; }
+
+        /* CSS Star */
+        .star {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #FFD700;
+            position: relative;
+        }
+
+        .star::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: -15px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #FFD700;
+        }
+
+        /* CSS Paw Icon */
+        .paw-icon {
+            width: 25px;
+            height: 30px;
+            background: var(--soft-brown);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+        }
+
+        .paw-icon::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 15px;
+            background:
+                radial-gradient(circle at 20% 50%, var(--soft-brown) 6px, transparent 6px),
+                radial-gradient(circle at 50% 30%, var(--soft-brown) 6px, transparent 6px),
+                radial-gradient(circle at 80% 50%, var(--soft-brown) 6px, transparent 6px);
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .info-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+
+        .footer-pets {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .mini-paw {
+            width: 20px;
+            height: 24px;
+            background: var(--soft-brown);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.5;
+            position: relative;
+        }
+
+        .mini-paw::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 12px;
+            background:
+                radial-gradient(circle at 20% 50%, var(--soft-brown) 5px, transparent 5px),
+                radial-gradient(circle at 50% 30%, var(--soft-brown) 5px, transparent 5px),
+                radial-gradient(circle at 80% 50%, var(--soft-brown) 5px, transparent 5px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .section-title::before,
+            .section-title::after {
+                width: 20px;
+                margin: 0 10px;
+            }
+
+            .speech-bubble {
+                padding: 15px 20px;
+            }
+
+            .speech-text {
+                font-size: 1.1rem;
+            }
+
+            .pet-card {
+                padding: 25px 20px;
+            }
+
+            .decorations {
+                gap: 25px;
+            }
+
+            .info-section {
+                padding: 25px 20px;
+            }
+
+            .cat-logo {
+                width: 50px;
+                height: 42px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                padding: 30px 15px;
+            }
+
+            .logo {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .pets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Paw Prints -->
+    <div class="bg-paws">
+        <div class="paw"></div>
+        <div class="paw"></div>
+        <div class="paw"></div>
+        <div class="paw"></div>
+        <div class="paw"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="cat-logo">
+                    <div class="cat-eyes">
+                        <div class="cat-eye"></div>
+                        <div class="cat-eye"></div>
+                    </div>
+                    <div class="cat-nose"></div>
+                    <div class="cat-mouth"></div>
+                </div>
+                <h1>Happy Pets</h1>
+            </div>
+            <p class="subtitle">Your furry friends are waiting for you</p>
+        </header>
+
+        <!-- Speech Bubbles Section -->
+        <section>
+            <div class="speech-bubble pink">
+                <p class="speech-text">Woof woof! Let's play!</p>
+                <p class="speech-text-jp">ワンワン！一緒に遊ぼう！</p>
+            </div>
+
+            <div class="speech-bubble blue right" style="animation-delay: 0.5s;">
+                <p class="speech-text">Meow~ Time for cuddles</p>
+                <p class="speech-text-jp">にゃーん～ もふもふタイムだよ</p>
+            </div>
+
+            <div class="speech-bubble yellow" style="animation-delay: 1s;">
+                <p class="speech-text">Blub blub! Feed me please!</p>
+                <p class="speech-text-jp">ブクブク！ごはんちょうだい！</p>
+            </div>
+        </section>
+
+        <!-- Pets Section -->
+        <section class="pets-section">
+            <h2 class="section-title">Meet Our Friends</h2>
+
+            <div class="pets-grid">
+                <!-- Dog Card -->
+                <div class="pet-card dog">
+                    <div class="dog-face">
+                        <div class="dog-eyes">
+                            <div class="dog-eye"></div>
+                            <div class="dog-eye"></div>
+                        </div>
+                        <div class="dog-nose"></div>
+                        <div class="dog-tongue"></div>
+                    </div>
+                    <h3 class="pet-name">Pochi</h3>
+                    <p class="pet-description">Always happy, always wagging! Loves belly rubs and long walks in the park.</p>
+                </div>
+
+                <!-- Cat Card -->
+                <div class="pet-card cat">
+                    <div class="cat-face">
+                        <div class="cat-eyes">
+                            <div class="cat-eye"></div>
+                            <div class="cat-eye"></div>
+                        </div>
+                        <div class="cat-nose"></div>
+                        <div class="cat-whiskers">
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                        </div>
+                    </div>
+                    <h3 class="pet-name">Mikan</h3>
+                    <p class="pet-description">Queen of the house! Enjoys sunny spots and knocking things off tables.</p>
+                </div>
+
+                <!-- Fish Card -->
+                <div class="pet-card fish">
+                    <div class="fish-face">
+                        <div class="fish-eye"></div>
+                        <div class="fish-fin"></div>
+                    </div>
+                    <h3 class="pet-name">Bubble</h3>
+                    <p class="pet-description">Swimming gracefully all day! The most peaceful friend you could ask for.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decorative Items -->
+        <div class="decorations">
+            <div class="bone"></div>
+            <div class="yarn"></div>
+            <div class="fish-icon"></div>
+        </div>
+
+        <!-- Info Section -->
+        <section class="info-section">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon pink">
+                        <div class="heart"></div>
+                    </div>
+                    <h3 class="info-title">Unconditional Love</h3>
+                    <p class="info-text">Pets give us pure, unconditional love every single day. They're always there waiting for us.</p>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <div class="star"></div>
+                    </div>
+                    <h3 class="info-title">Daily Joy</h3>
+                    <p class="info-text">From silly antics to gentle purrs, our furry friends bring endless happiness to our lives.</p>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon green">
+                        <div class="paw-icon"></div>
+                    </div>
+                    <h3 class="info-title">Best Friends</h3>
+                    <p class="info-text">They listen without judgment, comfort us when we're sad, and celebrate with us when we're happy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Speech Bubbles -->
+        <section style="margin-top: 40px;">
+            <div class="speech-bubble green">
+                <p class="speech-text">Purr purr... I love you!</p>
+                <p class="speech-text-jp">ゴロゴロ... 大好きだよ！</p>
+            </div>
+
+            <div class="speech-bubble pink right" style="animation-delay: 0.3s;">
+                <p class="speech-text">*tail wagging intensifies*</p>
+                <p class="speech-text-jp">*しっぽブンブン*</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-pets">
+                <div class="mini-paw"></div>
+                <div class="mini-paw"></div>
+                <div class="mini-paw"></div>
+            </div>
+            <p>Made with love for all pet lovers</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Happy Pets - Minimal Pop Design</p>
+        </footer>
+    </div>
+</body>
+</html>

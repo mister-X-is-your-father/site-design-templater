@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking Diagram Layouts - 20 Patterns</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h2 {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .diagram-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .diagram-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .diagram-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .diagram-desc {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        /* ============================================
+           COLOR PALETTE - Ranking Theme
+           ============================================ */
+
+        /* Medal colors */
+        .color-gold { background: #FFD700; color: #333; }
+        .color-silver { background: #C0C0C0; color: #333; }
+        .color-bronze { background: #CD7F32; color: #fff; }
+
+        /* Accent colors */
+        .color-pink { background: #FF6B9D; color: #fff; }
+        .color-sky { background: #4ECDC4; color: #fff; }
+        .color-mint { background: #7ED6A5; color: #fff; }
+        .color-yellow { background: #FFD93D; color: #333; }
+        .color-orange { background: #FF9F43; color: #fff; }
+        .color-purple { background: #A55EEA; color: #fff; }
+        .color-coral { background: #FF7675; color: #fff; }
+        .color-blue { background: #54A0FF; color: #fff; }
+
+        /* ============================================
+           COMMON RANKING STYLES
+           ============================================ */
+
+        .ranking {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-height: 300px;
+        }
+
+        /* ============================================
+           #ranking-1: Simple Numbered List (1-5)
+           ============================================ */
+        #ranking-1 .ranking {
+            align-items: stretch;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #ranking-1 .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 6px 0;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-1 .rank-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #ranking-1 .rank-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        #ranking-1 .rank-item:nth-child(1) .rank-num { background: #FFD700; color: #333; }
+        #ranking-1 .rank-item:nth-child(2) .rank-num { background: #C0C0C0; color: #333; }
+        #ranking-1 .rank-item:nth-child(3) .rank-num { background: #CD7F32; color: #fff; }
+        #ranking-1 .rank-item:nth-child(4) .rank-num { background: #FF6B9D; color: #fff; }
+        #ranking-1 .rank-item:nth-child(5) .rank-num { background: #4ECDC4; color: #fff; }
+
+        #ranking-1 .rank-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #ranking-1 .rank-score {
+            font-weight: 700;
+            color: #666;
+        }
+
+        /* ============================================
+           #ranking-2: Medal Podium (Gold/Silver/Bronze)
+           ============================================ */
+        #ranking-2 .ranking {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 20px;
+            padding-top: 60px;
+        }
+
+        #ranking-2 .podium {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-2 .podium:hover {
+            transform: translateY(-10px);
+        }
+
+        #ranking-2 .podium-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        #ranking-2 .podium-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        #ranking-2 .podium-stand {
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            color: #fff;
+            border-radius: 12px 12px 0 0;
+        }
+
+        #ranking-2 .podium.first .podium-stand { height: 120px; background: #FFD700; color: #333; }
+        #ranking-2 .podium.second .podium-stand { height: 90px; background: #C0C0C0; color: #333; }
+        #ranking-2 .podium.third .podium-stand { height: 60px; background: #CD7F32; }
+
+        #ranking-2 .podium.first .podium-avatar { background: #FFD700; }
+        #ranking-2 .podium.second .podium-avatar { background: #C0C0C0; }
+        #ranking-2 .podium.third .podium-avatar { background: #CD7F32; }
+
+        /* ============================================
+           #ranking-3: Star Rating List
+           ============================================ */
+        #ranking-3 .ranking {
+            align-items: stretch;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        #ranking-3 .star-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            margin: 8px 0;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-3 .star-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #ranking-3 .star-rank {
+            font-weight: 700;
+            font-size: 18px;
+            color: #FF6B9D;
+            width: 30px;
+        }
+
+        #ranking-3 .star-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+            margin-left: 10px;
+        }
+
+        #ranking-3 .stars {
+            display: flex;
+            gap: 4px;
+        }
+
+        #ranking-3 .star {
+            font-size: 20px;
+            color: #FFD700;
+        }
+
+        #ranking-3 .star.empty {
+            color: #ddd;
+        }
+
+        /* ============================================
+           #ranking-4: Progress Bar Ranking
+           ============================================ */
+        #ranking-4 .ranking {
+            align-items: stretch;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #ranking-4 .progress-item {
+            margin: 12px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-4 .progress-item:hover {
+            transform: translateX(5px);
+        }
+
+        #ranking-4 .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        #ranking-4 .progress-name {
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #ranking-4 .progress-rank {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        #ranking-4 .progress-value {
+            font-weight: 700;
+            color: #666;
+        }
+
+        #ranking-4 .progress-bar {
+            height: 16px;
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #ranking-4 .progress-fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.5s ease;
+        }
+
+        #ranking-4 .progress-item:nth-child(1) .progress-fill { width: 100%; background: #FFD700; }
+        #ranking-4 .progress-item:nth-child(2) .progress-fill { width: 85%; background: #C0C0C0; }
+        #ranking-4 .progress-item:nth-child(3) .progress-fill { width: 70%; background: #CD7F32; }
+        #ranking-4 .progress-item:nth-child(4) .progress-fill { width: 55%; background: #FF6B9D; }
+        #ranking-4 .progress-item:nth-child(5) .progress-fill { width: 40%; background: #4ECDC4; }
+
+        #ranking-4 .progress-item:nth-child(1) .progress-rank { background: #FFD700; color: #333; }
+        #ranking-4 .progress-item:nth-child(2) .progress-rank { background: #C0C0C0; color: #333; }
+        #ranking-4 .progress-item:nth-child(3) .progress-rank { background: #CD7F32; color: #fff; }
+        #ranking-4 .progress-item:nth-child(4) .progress-rank { background: #FF6B9D; color: #fff; }
+        #ranking-4 .progress-item:nth-child(5) .progress-rank { background: #4ECDC4; color: #fff; }
+
+        /* ============================================
+           #ranking-5: Card Stack Ranking
+           ============================================ */
+        #ranking-5 .ranking {
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #ranking-5 .card {
+            width: 140px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #ranking-5 .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        #ranking-5 .card-rank {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        #ranking-5 .card:nth-child(1) .card-rank { background: #FFD700; color: #333; }
+        #ranking-5 .card:nth-child(2) .card-rank { background: #C0C0C0; color: #333; }
+        #ranking-5 .card:nth-child(3) .card-rank { background: #CD7F32; color: #fff; }
+        #ranking-5 .card:nth-child(4) .card-rank { background: #FF6B9D; color: #fff; }
+        #ranking-5 .card:nth-child(5) .card-rank { background: #4ECDC4; color: #fff; }
+
+        #ranking-5 .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 12px;
+        }
+
+        #ranking-5 .card-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        #ranking-5 .card-score {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ============================================
+           #ranking-6: Crown Ranking (King Style)
+           ============================================ */
+        #ranking-6 .ranking {
+            align-items: stretch;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #ranking-6 .crown-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #ranking-6 .crown-item:hover {
+            transform: scale(1.03);
+        }
+
+        #ranking-6 .crown-item:nth-child(1) { background: linear-gradient(135deg, #fff9e6 0%, #fff4cc 100%); border: 3px solid #FFD700; }
+        #ranking-6 .crown-item:nth-child(2) { background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%); border: 3px solid #C0C0C0; }
+        #ranking-6 .crown-item:nth-child(3) { background: linear-gradient(135deg, #fff0e6 0%, #ffe0cc 100%); border: 3px solid #CD7F32; }
+        #ranking-6 .crown-item:nth-child(4) { background: #fff; border: 3px solid #FF6B9D; }
+        #ranking-6 .crown-item:nth-child(5) { background: #fff; border: 3px solid #4ECDC4; }
+
+        #ranking-6 .crown-icon {
+            font-size: 32px;
+            margin-right: 16px;
+        }
+
+        #ranking-6 .crown-item:nth-child(1) .crown-icon::before { content: '\1F451'; }
+        #ranking-6 .crown-item:nth-child(2) .crown-icon::before { content: '\1F948'; }
+        #ranking-6 .crown-item:nth-child(3) .crown-icon::before { content: '\1F949'; }
+        #ranking-6 .crown-item:nth-child(4) .crown-icon::before { content: '\1F3C5'; }
+        #ranking-6 .crown-item:nth-child(5) .crown-icon::before { content: '\1F396'; }
+
+        #ranking-6 .crown-name {
+            flex: 1;
+            font-weight: 700;
+            color: #333;
+            font-size: 16px;
+        }
+
+        #ranking-6 .crown-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        #ranking-6 .crown-item:nth-child(1) .crown-badge { background: #FFD700; color: #333; }
+        #ranking-6 .crown-item:nth-child(2) .crown-badge { background: #C0C0C0; color: #333; }
+        #ranking-6 .crown-item:nth-child(3) .crown-badge { background: #CD7F32; color: #fff; }
+        #ranking-6 .crown-item:nth-child(4) .crown-badge { background: #FF6B9D; color: #fff; }
+        #ranking-6 .crown-item:nth-child(5) .crown-badge { background: #4ECDC4; color: #fff; }
+
+        /* ============================================
+           #ranking-7: Trophy Display
+           ============================================ */
+        #ranking-7 .ranking {
+            flex-direction: row;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #ranking-7 .trophy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-7 .trophy:hover {
+            transform: scale(1.1);
+        }
+
+        #ranking-7 .trophy-cup {
+            width: 80px;
+            height: 100px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #ranking-7 .trophy-cup::before {
+            content: '\1F3C6';
+            font-size: 60px;
+        }
+
+        #ranking-7 .trophy.gold .trophy-cup::before { filter: sepia(100%) saturate(300%) hue-rotate(10deg); }
+        #ranking-7 .trophy.silver .trophy-cup::before { filter: grayscale(100%) brightness(120%); }
+        #ranking-7 .trophy.bronze .trophy-cup::before { filter: sepia(100%) saturate(200%) hue-rotate(-10deg); }
+
+        #ranking-7 .trophy-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        #ranking-7 .trophy.gold .trophy-rank { background: #FFD700; color: #333; }
+        #ranking-7 .trophy.silver .trophy-rank { background: #C0C0C0; color: #333; }
+        #ranking-7 .trophy.bronze .trophy-rank { background: #CD7F32; color: #fff; }
+
+        #ranking-7 .trophy-label {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        #ranking-7 .trophy-score {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ============================================
+           #ranking-8: Leaderboard
+           ============================================ */
+        #ranking-8 .ranking {
+            align-items: stretch;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #ranking-8 .leaderboard-header {
+            display: flex;
+            padding: 12px 20px;
+            background: #333;
+            color: #fff;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        #ranking-8 .leaderboard-header span:nth-child(1) { width: 50px; }
+        #ranking-8 .leaderboard-header span:nth-child(2) { flex: 1; }
+        #ranking-8 .leaderboard-header span:nth-child(3) { width: 80px; text-align: right; }
+        #ranking-8 .leaderboard-header span:nth-child(4) { width: 60px; text-align: right; }
+
+        #ranking-8 .leaderboard-row {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-8 .leaderboard-row:last-child {
+            border-radius: 0 0 12px 12px;
+            border-bottom: none;
+        }
+
+        #ranking-8 .leaderboard-row:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        #ranking-8 .lb-rank {
+            width: 50px;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        #ranking-8 .leaderboard-row:nth-child(2) .lb-rank { color: #FFD700; }
+        #ranking-8 .leaderboard-row:nth-child(3) .lb-rank { color: #C0C0C0; }
+        #ranking-8 .leaderboard-row:nth-child(4) .lb-rank { color: #CD7F32; }
+        #ranking-8 .leaderboard-row:nth-child(n+5) .lb-rank { color: #888; }
+
+        #ranking-8 .lb-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #ranking-8 .lb-score {
+            width: 80px;
+            text-align: right;
+            font-weight: 700;
+            color: #FF6B9D;
+        }
+
+        #ranking-8 .lb-change {
+            width: 60px;
+            text-align: right;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        #ranking-8 .lb-change.up { color: #7ED6A5; }
+        #ranking-8 .lb-change.down { color: #FF7675; }
+        #ranking-8 .lb-change.same { color: #888; }
+
+        /* ============================================
+           #ranking-9: Top 10 List
+           ============================================ */
+        #ranking-9 .ranking {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #ranking-9 .top10-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-9 .top10-item:hover {
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        #ranking-9 .top10-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 12px;
+        }
+
+        #ranking-9 .top10-item:nth-child(1) .top10-num { background: #FFD700; color: #333; }
+        #ranking-9 .top10-item:nth-child(2) .top10-num { background: #C0C0C0; color: #333; }
+        #ranking-9 .top10-item:nth-child(3) .top10-num { background: #CD7F32; color: #fff; }
+        #ranking-9 .top10-item:nth-child(n+4) .top10-num { background: #FF6B9D; color: #fff; }
+        #ranking-9 .top10-item:nth-child(n+7) .top10-num { background: #4ECDC4; color: #fff; }
+
+        #ranking-9 .top10-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           #ranking-10: Horizontal Bars Ranking
+           ============================================ */
+        #ranking-10 .ranking {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 16px;
+            padding: 40px 20px 20px;
+        }
+
+        #ranking-10 .hbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-10 .hbar:hover {
+            transform: scale(1.05);
+        }
+
+        #ranking-10 .hbar-value {
+            font-weight: 700;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        #ranking-10 .hbar-bar {
+            width: 50px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        #ranking-10 .hbar:nth-child(1) .hbar-bar { height: 180px; background: #FFD700; color: #333; }
+        #ranking-10 .hbar:nth-child(2) .hbar-bar { height: 150px; background: #C0C0C0; color: #333; }
+        #ranking-10 .hbar:nth-child(3) .hbar-bar { height: 120px; background: #CD7F32; }
+        #ranking-10 .hbar:nth-child(4) .hbar-bar { height: 90px; background: #FF6B9D; }
+        #ranking-10 .hbar:nth-child(5) .hbar-bar { height: 60px; background: #4ECDC4; }
+
+        #ranking-10 .hbar-label {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        /* ============================================
+           #ranking-11: Bubble Size Ranking
+           ============================================ */
+        #ranking-11 .ranking {
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #ranking-11 .bubble {
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        #ranking-11 .bubble:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #ranking-11 .bubble:nth-child(1) { width: 140px; height: 140px; background: #FFD700; color: #333; }
+        #ranking-11 .bubble:nth-child(2) { width: 120px; height: 120px; background: #C0C0C0; color: #333; }
+        #ranking-11 .bubble:nth-child(3) { width: 100px; height: 100px; background: #CD7F32; }
+        #ranking-11 .bubble:nth-child(4) { width: 80px; height: 80px; background: #FF6B9D; }
+        #ranking-11 .bubble:nth-child(5) { width: 60px; height: 60px; background: #4ECDC4; }
+
+        #ranking-11 .bubble-rank {
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        #ranking-11 .bubble:nth-child(4) .bubble-rank,
+        #ranking-11 .bubble:nth-child(5) .bubble-rank { font-size: 18px; }
+
+        #ranking-11 .bubble-name {
+            font-weight: 600;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        #ranking-11 .bubble:nth-child(5) .bubble-name { display: none; }
+
+        /* ============================================
+           #ranking-12: Numbered Badges
+           ============================================ */
+        #ranking-12 .ranking {
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #ranking-12 .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-12 .badge:hover {
+            transform: translateY(-8px);
+        }
+
+        #ranking-12 .badge-shape {
+            width: 70px;
+            height: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #ranking-12 .badge-shape::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50% 50% 50% 50%;
+            top: 0;
+        }
+
+        #ranking-12 .badge-shape::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+        }
+
+        #ranking-12 .badge:nth-child(1) .badge-shape::before { background: #FFD700; }
+        #ranking-12 .badge:nth-child(1) .badge-shape::after { border-top: 25px solid #FFD700; }
+        #ranking-12 .badge:nth-child(2) .badge-shape::before { background: #C0C0C0; }
+        #ranking-12 .badge:nth-child(2) .badge-shape::after { border-top: 25px solid #C0C0C0; }
+        #ranking-12 .badge:nth-child(3) .badge-shape::before { background: #CD7F32; }
+        #ranking-12 .badge:nth-child(3) .badge-shape::after { border-top: 25px solid #CD7F32; }
+        #ranking-12 .badge:nth-child(4) .badge-shape::before { background: #FF6B9D; }
+        #ranking-12 .badge:nth-child(4) .badge-shape::after { border-top: 25px solid #FF6B9D; }
+        #ranking-12 .badge:nth-child(5) .badge-shape::before { background: #4ECDC4; }
+        #ranking-12 .badge:nth-child(5) .badge-shape::after { border-top: 25px solid #4ECDC4; }
+
+        #ranking-12 .badge-num {
+            position: relative;
+            z-index: 1;
+            font-weight: 800;
+            font-size: 28px;
+            color: #fff;
+            margin-top: -10px;
+        }
+
+        #ranking-12 .badge:nth-child(1) .badge-num,
+        #ranking-12 .badge:nth-child(2) .badge-num { color: #333; }
+
+        #ranking-12 .badge-label {
+            margin-top: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        /* ============================================
+           #ranking-13: Tier Ranking (S/A/B/C)
+           ============================================ */
+        #ranking-13 .ranking {
+            align-items: stretch;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #ranking-13 .tier-row {
+            display: flex;
+            align-items: stretch;
+            margin: 6px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #ranking-13 .tier-row:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #ranking-13 .tier-label {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        #ranking-13 .tier-row:nth-child(1) .tier-label { background: #FFD700; color: #333; }
+        #ranking-13 .tier-row:nth-child(2) .tier-label { background: #FF6B9D; }
+        #ranking-13 .tier-row:nth-child(3) .tier-label { background: #4ECDC4; }
+        #ranking-13 .tier-row:nth-child(4) .tier-label { background: #A55EEA; }
+
+        #ranking-13 .tier-items {
+            flex: 1;
+            display: flex;
+            gap: 10px;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+
+        #ranking-13 .tier-item {
+            padding: 8px 16px;
+            background: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #ranking-13 .tier-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============================================
+           #ranking-14: Countdown Style
+           ============================================ */
+        #ranking-14 .ranking {
+            align-items: stretch;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #ranking-14 .countdown-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-14 .countdown-item:hover {
+            transform: translateX(10px);
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #ranking-14 .countdown-num {
+            font-weight: 900;
+            font-size: 36px;
+            margin-right: 20px;
+            font-style: italic;
+            min-width: 60px;
+        }
+
+        #ranking-14 .countdown-item:nth-child(1) .countdown-num { color: #4ECDC4; }
+        #ranking-14 .countdown-item:nth-child(2) .countdown-num { color: #FF6B9D; }
+        #ranking-14 .countdown-item:nth-child(3) .countdown-num { color: #CD7F32; }
+        #ranking-14 .countdown-item:nth-child(4) .countdown-num { color: #C0C0C0; }
+        #ranking-14 .countdown-item:nth-child(5) .countdown-num { color: #FFD700; }
+
+        #ranking-14 .countdown-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        #ranking-14 .countdown-arrow {
+            font-size: 24px;
+            color: #ddd;
+        }
+
+        /* ============================================
+           #ranking-15: Photo Ranking Grid
+           ============================================ */
+        #ranking-15 .ranking {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #ranking-15 .photo-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #ranking-15 .photo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        #ranking-15 .photo-card:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+        }
+
+        #ranking-15 .photo-img {
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        #ranking-15 .photo-card:nth-child(1) .photo-img { background: #FFE4B5; font-size: 80px; }
+        #ranking-15 .photo-card:nth-child(2) .photo-img { background: #E0E0E0; }
+        #ranking-15 .photo-card:nth-child(3) .photo-img { background: #DEB887; }
+        #ranking-15 .photo-card:nth-child(4) .photo-img { background: #FFB6C1; }
+        #ranking-15 .photo-card:nth-child(5) .photo-img { background: #B0E0E6; }
+
+        #ranking-15 .photo-rank {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        #ranking-15 .photo-card:nth-child(1) .photo-rank { width: 48px; height: 48px; font-size: 20px; background: #FFD700; color: #333; }
+        #ranking-15 .photo-card:nth-child(2) .photo-rank { background: #C0C0C0; color: #333; }
+        #ranking-15 .photo-card:nth-child(3) .photo-rank { background: #CD7F32; color: #fff; }
+        #ranking-15 .photo-card:nth-child(4) .photo-rank { background: #FF6B9D; color: #fff; }
+        #ranking-15 .photo-card:nth-child(5) .photo-rank { background: #4ECDC4; color: #fff; }
+
+        #ranking-15 .photo-info {
+            padding: 10px 12px;
+        }
+
+        #ranking-15 .photo-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        /* ============================================
+           #ranking-16: Icon + Score Ranking
+           ============================================ */
+        #ranking-16 .ranking {
+            align-items: stretch;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        #ranking-16 .icon-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-16 .icon-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        #ranking-16 .icon-emoji {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-right: 16px;
+        }
+
+        #ranking-16 .icon-item:nth-child(1) .icon-emoji { background: #FFF3CD; }
+        #ranking-16 .icon-item:nth-child(2) .icon-emoji { background: #E8E8E8; }
+        #ranking-16 .icon-item:nth-child(3) .icon-emoji { background: #FDEBD0; }
+        #ranking-16 .icon-item:nth-child(4) .icon-emoji { background: #FCE4EC; }
+        #ranking-16 .icon-item:nth-child(5) .icon-emoji { background: #E0F7FA; }
+
+        #ranking-16 .icon-details {
+            flex: 1;
+        }
+
+        #ranking-16 .icon-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        #ranking-16 .icon-subtitle {
+            font-size: 12px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        #ranking-16 .icon-score {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        #ranking-16 .icon-score-value {
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        #ranking-16 .icon-item:nth-child(1) .icon-score-value { color: #FFD700; }
+        #ranking-16 .icon-item:nth-child(2) .icon-score-value { color: #C0C0C0; }
+        #ranking-16 .icon-item:nth-child(3) .icon-score-value { color: #CD7F32; }
+        #ranking-16 .icon-item:nth-child(4) .icon-score-value { color: #FF6B9D; }
+        #ranking-16 .icon-item:nth-child(5) .icon-score-value { color: #4ECDC4; }
+
+        #ranking-16 .icon-score-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* ============================================
+           #ranking-17: Position Indicator
+           ============================================ */
+        #ranking-17 .ranking {
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 350px;
+        }
+
+        #ranking-17 .position-track {
+            width: 80%;
+            height: 12px;
+            background: #eee;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        #ranking-17 .position-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #ranking-17 .position-marker:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        #ranking-17 .position-marker:nth-child(1) { left: 10%; }
+        #ranking-17 .position-marker:nth-child(2) { left: 30%; }
+        #ranking-17 .position-marker:nth-child(3) { left: 50%; }
+        #ranking-17 .position-marker:nth-child(4) { left: 70%; }
+        #ranking-17 .position-marker:nth-child(5) { left: 90%; }
+
+        #ranking-17 .marker-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #ranking-17 .position-marker:nth-child(1) .marker-dot { background: #4ECDC4; }
+        #ranking-17 .position-marker:nth-child(2) .marker-dot { background: #FF6B9D; }
+        #ranking-17 .position-marker:nth-child(3) .marker-dot { background: #CD7F32; color: #fff; }
+        #ranking-17 .position-marker:nth-child(4) .marker-dot { background: #C0C0C0; color: #333; }
+        #ranking-17 .position-marker:nth-child(5) .marker-dot { background: #FFD700; color: #333; }
+
+        #ranking-17 .marker-label {
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 12px;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        #ranking-17 .marker-score {
+            font-size: 11px;
+            color: #888;
+        }
+
+        #ranking-17 .position-labels {
+            position: absolute;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            top: 60%;
+            margin-top: 80px;
+        }
+
+        #ranking-17 .position-labels span {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* ============================================
+           #ranking-18: Rising/Falling Arrows
+           ============================================ */
+        #ranking-18 .ranking {
+            align-items: stretch;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        #ranking-18 .arrow-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-18 .arrow-item:hover {
+            transform: translateX(8px);
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #ranking-18 .arrow-rank {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 14px;
+        }
+
+        #ranking-18 .arrow-item:nth-child(1) .arrow-rank { background: #FFD700; color: #333; }
+        #ranking-18 .arrow-item:nth-child(2) .arrow-rank { background: #C0C0C0; color: #333; }
+        #ranking-18 .arrow-item:nth-child(3) .arrow-rank { background: #CD7F32; color: #fff; }
+        #ranking-18 .arrow-item:nth-child(4) .arrow-rank { background: #FF6B9D; color: #fff; }
+        #ranking-18 .arrow-item:nth-child(5) .arrow-rank { background: #4ECDC4; color: #fff; }
+
+        #ranking-18 .arrow-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #ranking-18 .arrow-trend {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        #ranking-18 .arrow-trend.up {
+            background: #E8F5E9;
+            color: #4CAF50;
+        }
+
+        #ranking-18 .arrow-trend.down {
+            background: #FFEBEE;
+            color: #F44336;
+        }
+
+        #ranking-18 .arrow-trend.same {
+            background: #ECEFF1;
+            color: #607D8B;
+        }
+
+        #ranking-18 .trend-arrow {
+            font-size: 16px;
+        }
+
+        /* ============================================
+           #ranking-19: Heat Map Ranking
+           ============================================ */
+        #ranking-19 .ranking {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #ranking-19 .heat-cell {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-19 .heat-cell:hover {
+            transform: scale(1.1);
+            z-index: 1;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Heat intensity from hot (1st) to cool (25th) */
+        #ranking-19 .heat-cell:nth-child(1) { background: #FF4500; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(2) { background: #FF6B35; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(3) { background: #FF8C69; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(4) { background: #FFAD9E; color: #333; }
+        #ranking-19 .heat-cell:nth-child(5) { background: #FFCEC4; color: #333; }
+        #ranking-19 .heat-cell:nth-child(6) { background: #FFE4B5; color: #333; }
+        #ranking-19 .heat-cell:nth-child(7) { background: #FFFACD; color: #333; }
+        #ranking-19 .heat-cell:nth-child(8) { background: #E6FFE6; color: #333; }
+        #ranking-19 .heat-cell:nth-child(9) { background: #CCFFCC; color: #333; }
+        #ranking-19 .heat-cell:nth-child(10) { background: #98FB98; color: #333; }
+        #ranking-19 .heat-cell:nth-child(11) { background: #7ED6A5; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(12) { background: #66CDAA; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(13) { background: #4ECDC4; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(14) { background: #40E0D0; color: #333; }
+        #ranking-19 .heat-cell:nth-child(15) { background: #87CEEB; color: #333; }
+        #ranking-19 .heat-cell:nth-child(16) { background: #ADD8E6; color: #333; }
+        #ranking-19 .heat-cell:nth-child(17) { background: #B0C4DE; color: #333; }
+        #ranking-19 .heat-cell:nth-child(18) { background: #A9C4D9; color: #333; }
+        #ranking-19 .heat-cell:nth-child(19) { background: #9BB8CD; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(20) { background: #8DACC0; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(21) { background: #7FA0B4; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(22) { background: #7194A8; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(23) { background: #63889C; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(24) { background: #557C90; color: #fff; }
+        #ranking-19 .heat-cell:nth-child(25) { background: #4A708B; color: #fff; }
+
+        #ranking-19 .heat-rank {
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        #ranking-19 .heat-label {
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           #ranking-20: Achievement Unlock Ranking
+           ============================================ */
+        #ranking-20 .ranking {
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #ranking-20 .achievement {
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #ranking-20 .achievement:hover {
+            transform: translateY(-10px);
+        }
+
+        #ranking-20 .achievement-badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        #ranking-20 .achievement:nth-child(1) .achievement-badge { background: #FFD700; }
+        #ranking-20 .achievement:nth-child(2) .achievement-badge { background: #C0C0C0; }
+        #ranking-20 .achievement:nth-child(3) .achievement-badge { background: #CD7F32; }
+        #ranking-20 .achievement:nth-child(4) .achievement-badge { background: #FF6B9D; }
+        #ranking-20 .achievement:nth-child(5) .achievement-badge { background: #4ECDC4; }
+
+        #ranking-20 .achievement-rank {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            border: 3px solid #fff;
+        }
+
+        #ranking-20 .achievement-title {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        #ranking-20 .achievement-desc {
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        #ranking-20 .achievement.locked .achievement-badge {
+            background: #ddd;
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+
+        #ranking-20 .achievement.locked .achievement-badge::before {
+            content: '\1F512';
+            font-size: 28px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .ranking {
+                transform: scale(0.9);
+                transform-origin: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Ranking Diagram Layouts</h1>
+    <h2>20 Cute & Colorful Patterns for SNS Infographics</h2>
+
+    <div class="diagram-grid">
+
+        <!-- ============================================
+             #ranking-1: Simple Numbered List (1-5)
+             ============================================ -->
+        <div id="ranking-1" class="diagram-section">
+            <div class="diagram-title">ranking-1: Simple Numbered List (1-5)</div>
+            <div class="diagram-desc">Classic numbered list with colorful rank indicators</div>
+            <div class="ranking">
+                <div class="rank-item">
+                    <div class="rank-num">1</div>
+                    <div class="rank-name">First Place Item</div>
+                    <div class="rank-score">980 pts</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-num">2</div>
+                    <div class="rank-name">Second Place Item</div>
+                    <div class="rank-score">850 pts</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-num">3</div>
+                    <div class="rank-name">Third Place Item</div>
+                    <div class="rank-score">720 pts</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-num">4</div>
+                    <div class="rank-name">Fourth Place Item</div>
+                    <div class="rank-score">650 pts</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-num">5</div>
+                    <div class="rank-name">Fifth Place Item</div>
+                    <div class="rank-score">580 pts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-2: Medal Podium (Gold/Silver/Bronze)
+             ============================================ -->
+        <div id="ranking-2" class="diagram-section">
+            <div class="diagram-title">ranking-2: Medal Podium (Gold/Silver/Bronze)</div>
+            <div class="diagram-desc">Olympic-style podium with medal colors</div>
+            <div class="ranking">
+                <div class="podium second">
+                    <div class="podium-avatar">B</div>
+                    <div class="podium-name">Runner Up</div>
+                    <div class="podium-stand">2</div>
+                </div>
+                <div class="podium first">
+                    <div class="podium-avatar">A</div>
+                    <div class="podium-name">Champion</div>
+                    <div class="podium-stand">1</div>
+                </div>
+                <div class="podium third">
+                    <div class="podium-avatar">C</div>
+                    <div class="podium-name">Third</div>
+                    <div class="podium-stand">3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-3: Star Rating List
+             ============================================ -->
+        <div id="ranking-3" class="diagram-section">
+            <div class="diagram-title">ranking-3: Star Rating List</div>
+            <div class="diagram-desc">Ranked items with star ratings</div>
+            <div class="ranking">
+                <div class="star-item">
+                    <div class="star-rank">#1</div>
+                    <div class="star-name">Top Rated Item</div>
+                    <div class="stars">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+                <div class="star-item">
+                    <div class="star-rank">#2</div>
+                    <div class="star-name">Second Best Item</div>
+                    <div class="stars">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star empty">&#9733;</span>
+                    </div>
+                </div>
+                <div class="star-item">
+                    <div class="star-rank">#3</div>
+                    <div class="star-name">Third Best Item</div>
+                    <div class="stars">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star empty">&#9733;</span>
+                    </div>
+                </div>
+                <div class="star-item">
+                    <div class="star-rank">#4</div>
+                    <div class="star-name">Fourth Item</div>
+                    <div class="stars">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star empty">&#9733;</span>
+                        <span class="star empty">&#9733;</span>
+                    </div>
+                </div>
+                <div class="star-item">
+                    <div class="star-rank">#5</div>
+                    <div class="star-name">Fifth Item</div>
+                    <div class="stars">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star empty">&#9733;</span>
+                        <span class="star empty">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-4: Progress Bar Ranking
+             ============================================ -->
+        <div id="ranking-4" class="diagram-section">
+            <div class="diagram-title">ranking-4: Progress Bar Ranking</div>
+            <div class="diagram-desc">Visual comparison with progress bars</div>
+            <div class="ranking">
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <div class="progress-name">
+                            <div class="progress-rank">1</div>
+                            Leader Item
+                        </div>
+                        <div class="progress-value">100%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <div class="progress-name">
+                            <div class="progress-rank">2</div>
+                            Runner Up
+                        </div>
+                        <div class="progress-value">85%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <div class="progress-name">
+                            <div class="progress-rank">3</div>
+                            Third Place
+                        </div>
+                        <div class="progress-value">70%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <div class="progress-name">
+                            <div class="progress-rank">4</div>
+                            Fourth Place
+                        </div>
+                        <div class="progress-value">55%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <div class="progress-name">
+                            <div class="progress-rank">5</div>
+                            Fifth Place
+                        </div>
+                        <div class="progress-value">40%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-5: Card Stack Ranking
+             ============================================ -->
+        <div id="ranking-5" class="diagram-section">
+            <div class="diagram-title">ranking-5: Card Stack Ranking</div>
+            <div class="diagram-desc">Ranking displayed as individual cards</div>
+            <div class="ranking">
+                <div class="card">
+                    <div class="card-rank">1</div>
+                    <div class="card-icon">&#127942;</div>
+                    <div class="card-name">Champion</div>
+                    <div class="card-score">1,250 pts</div>
+                </div>
+                <div class="card">
+                    <div class="card-rank">2</div>
+                    <div class="card-icon">&#127941;</div>
+                    <div class="card-name">Silver</div>
+                    <div class="card-score">1,100 pts</div>
+                </div>
+                <div class="card">
+                    <div class="card-rank">3</div>
+                    <div class="card-icon">&#129352;</div>
+                    <div class="card-name">Bronze</div>
+                    <div class="card-score">950 pts</div>
+                </div>
+                <div class="card">
+                    <div class="card-rank">4</div>
+                    <div class="card-icon">&#11088;</div>
+                    <div class="card-name">Fourth</div>
+                    <div class="card-score">820 pts</div>
+                </div>
+                <div class="card">
+                    <div class="card-rank">5</div>
+                    <div class="card-icon">&#128171;</div>
+                    <div class="card-name">Fifth</div>
+                    <div class="card-score">700 pts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-6: Crown Ranking (King Style)
+             ============================================ -->
+        <div id="ranking-6" class="diagram-section">
+            <div class="diagram-title">ranking-6: Crown Ranking (King Style)</div>
+            <div class="diagram-desc">Royal theme with crowns and medals</div>
+            <div class="ranking">
+                <div class="crown-item">
+                    <div class="crown-icon"></div>
+                    <div class="crown-name">King of the Hill</div>
+                    <div class="crown-badge">GOLD</div>
+                </div>
+                <div class="crown-item">
+                    <div class="crown-icon"></div>
+                    <div class="crown-name">Silver Knight</div>
+                    <div class="crown-badge">SILVER</div>
+                </div>
+                <div class="crown-item">
+                    <div class="crown-icon"></div>
+                    <div class="crown-name">Bronze Warrior</div>
+                    <div class="crown-badge">BRONZE</div>
+                </div>
+                <div class="crown-item">
+                    <div class="crown-icon"></div>
+                    <div class="crown-name">Rising Star</div>
+                    <div class="crown-badge">4TH</div>
+                </div>
+                <div class="crown-item">
+                    <div class="crown-icon"></div>
+                    <div class="crown-name">Honorable</div>
+                    <div class="crown-badge">5TH</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-7: Trophy Display
+             ============================================ -->
+        <div id="ranking-7" class="diagram-section">
+            <div class="diagram-title">ranking-7: Trophy Display</div>
+            <div class="diagram-desc">Trophy collection with rankings</div>
+            <div class="ranking">
+                <div class="trophy gold">
+                    <div class="trophy-cup">
+                        <div class="trophy-rank">1</div>
+                    </div>
+                    <div class="trophy-label">Champion</div>
+                    <div class="trophy-score">500 pts</div>
+                </div>
+                <div class="trophy silver">
+                    <div class="trophy-cup">
+                        <div class="trophy-rank">2</div>
+                    </div>
+                    <div class="trophy-label">Runner Up</div>
+                    <div class="trophy-score">420 pts</div>
+                </div>
+                <div class="trophy bronze">
+                    <div class="trophy-cup">
+                        <div class="trophy-rank">3</div>
+                    </div>
+                    <div class="trophy-label">Third</div>
+                    <div class="trophy-score">380 pts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-8: Leaderboard
+             ============================================ -->
+        <div id="ranking-8" class="diagram-section">
+            <div class="diagram-title">ranking-8: Leaderboard</div>
+            <div class="diagram-desc">Game-style leaderboard with scores and changes</div>
+            <div class="ranking">
+                <div class="leaderboard-header">
+                    <span>Rank</span>
+                    <span>Player</span>
+                    <span>Score</span>
+                    <span>Change</span>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="lb-rank">#1</div>
+                    <div class="lb-name">ProPlayer99</div>
+                    <div class="lb-score">12,450</div>
+                    <div class="lb-change up">&#9650; 2</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="lb-rank">#2</div>
+                    <div class="lb-name">GameMaster</div>
+                    <div class="lb-score">11,200</div>
+                    <div class="lb-change down">&#9660; 1</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="lb-rank">#3</div>
+                    <div class="lb-name">SpeedRunner</div>
+                    <div class="lb-score">10,800</div>
+                    <div class="lb-change same">&#8212;</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="lb-rank">#4</div>
+                    <div class="lb-name">NightOwl</div>
+                    <div class="lb-score">9,500</div>
+                    <div class="lb-change up">&#9650; 5</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="lb-rank">#5</div>
+                    <div class="lb-name">CasualGamer</div>
+                    <div class="lb-score">8,900</div>
+                    <div class="lb-change down">&#9660; 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-9: Top 10 List
+             ============================================ -->
+        <div id="ranking-9" class="diagram-section">
+            <div class="diagram-title">ranking-9: Top 10 List</div>
+            <div class="diagram-desc">Compact two-column top 10 layout</div>
+            <div class="ranking">
+                <div class="top10-item">
+                    <div class="top10-num">1</div>
+                    <div class="top10-name">First Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">2</div>
+                    <div class="top10-name">Second Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">3</div>
+                    <div class="top10-name">Third Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">4</div>
+                    <div class="top10-name">Fourth Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">5</div>
+                    <div class="top10-name">Fifth Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">6</div>
+                    <div class="top10-name">Sixth Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">7</div>
+                    <div class="top10-name">Seventh Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">8</div>
+                    <div class="top10-name">Eighth Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">9</div>
+                    <div class="top10-name">Ninth Item</div>
+                </div>
+                <div class="top10-item">
+                    <div class="top10-num">10</div>
+                    <div class="top10-name">Tenth Item</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-10: Horizontal Bars Ranking
+             ============================================ -->
+        <div id="ranking-10" class="diagram-section">
+            <div class="diagram-title">ranking-10: Horizontal Bars Ranking</div>
+            <div class="diagram-desc">Bar chart style ranking comparison</div>
+            <div class="ranking">
+                <div class="hbar">
+                    <div class="hbar-value">180</div>
+                    <div class="hbar-bar">1</div>
+                    <div class="hbar-label">Gold</div>
+                </div>
+                <div class="hbar">
+                    <div class="hbar-value">150</div>
+                    <div class="hbar-bar">2</div>
+                    <div class="hbar-label">Silver</div>
+                </div>
+                <div class="hbar">
+                    <div class="hbar-value">120</div>
+                    <div class="hbar-bar">3</div>
+                    <div class="hbar-label">Bronze</div>
+                </div>
+                <div class="hbar">
+                    <div class="hbar-value">90</div>
+                    <div class="hbar-bar">4</div>
+                    <div class="hbar-label">Fourth</div>
+                </div>
+                <div class="hbar">
+                    <div class="hbar-value">60</div>
+                    <div class="hbar-bar">5</div>
+                    <div class="hbar-label">Fifth</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-11: Bubble Size Ranking
+             ============================================ -->
+        <div id="ranking-11" class="diagram-section">
+            <div class="diagram-title">ranking-11: Bubble Size Ranking</div>
+            <div class="diagram-desc">Size indicates rank importance</div>
+            <div class="ranking">
+                <div class="bubble">
+                    <div class="bubble-rank">1st</div>
+                    <div class="bubble-name">Leader</div>
+                </div>
+                <div class="bubble">
+                    <div class="bubble-rank">2nd</div>
+                    <div class="bubble-name">Runner</div>
+                </div>
+                <div class="bubble">
+                    <div class="bubble-rank">3rd</div>
+                    <div class="bubble-name">Third</div>
+                </div>
+                <div class="bubble">
+                    <div class="bubble-rank">4th</div>
+                    <div class="bubble-name">Fourth</div>
+                </div>
+                <div class="bubble">
+                    <div class="bubble-rank">5th</div>
+                    <div class="bubble-name">Fifth</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-12: Numbered Badges
+             ============================================ -->
+        <div id="ranking-12" class="diagram-section">
+            <div class="diagram-title">ranking-12: Numbered Badges</div>
+            <div class="diagram-desc">Award ribbon style badges</div>
+            <div class="ranking">
+                <div class="badge">
+                    <div class="badge-shape">
+                        <div class="badge-num">1</div>
+                    </div>
+                    <div class="badge-label">Champion</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-shape">
+                        <div class="badge-num">2</div>
+                    </div>
+                    <div class="badge-label">Runner Up</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-shape">
+                        <div class="badge-num">3</div>
+                    </div>
+                    <div class="badge-label">Third</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-shape">
+                        <div class="badge-num">4</div>
+                    </div>
+                    <div class="badge-label">Fourth</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-shape">
+                        <div class="badge-num">5</div>
+                    </div>
+                    <div class="badge-label">Fifth</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-13: Tier Ranking (S/A/B/C)
+             ============================================ -->
+        <div id="ranking-13" class="diagram-section">
+            <div class="diagram-title">ranking-13: Tier Ranking (S/A/B/C)</div>
+            <div class="diagram-desc">Game-style tier list with categories</div>
+            <div class="ranking">
+                <div class="tier-row">
+                    <div class="tier-label">S</div>
+                    <div class="tier-items">
+                        <div class="tier-item">Alpha</div>
+                        <div class="tier-item">Omega</div>
+                    </div>
+                </div>
+                <div class="tier-row">
+                    <div class="tier-label">A</div>
+                    <div class="tier-items">
+                        <div class="tier-item">Beta</div>
+                        <div class="tier-item">Gamma</div>
+                        <div class="tier-item">Delta</div>
+                    </div>
+                </div>
+                <div class="tier-row">
+                    <div class="tier-label">B</div>
+                    <div class="tier-items">
+                        <div class="tier-item">Epsilon</div>
+                        <div class="tier-item">Zeta</div>
+                    </div>
+                </div>
+                <div class="tier-row">
+                    <div class="tier-label">C</div>
+                    <div class="tier-items">
+                        <div class="tier-item">Eta</div>
+                        <div class="tier-item">Theta</div>
+                        <div class="tier-item">Iota</div>
+                        <div class="tier-item">Kappa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-14: Countdown Style
+             ============================================ -->
+        <div id="ranking-14" class="diagram-section">
+            <div class="diagram-title">ranking-14: Countdown Style</div>
+            <div class="diagram-desc">Reverse countdown from 5 to 1</div>
+            <div class="ranking">
+                <div class="countdown-item">
+                    <div class="countdown-num">#5</div>
+                    <div class="countdown-name">Starting Entry</div>
+                    <div class="countdown-arrow">&#8250;</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num">#4</div>
+                    <div class="countdown-name">Rising Star</div>
+                    <div class="countdown-arrow">&#8250;</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num">#3</div>
+                    <div class="countdown-name">Bronze Position</div>
+                    <div class="countdown-arrow">&#8250;</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num">#2</div>
+                    <div class="countdown-name">Runner Up</div>
+                    <div class="countdown-arrow">&#8250;</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num">#1</div>
+                    <div class="countdown-name">The Winner!</div>
+                    <div class="countdown-arrow">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-15: Photo Ranking Grid
+             ============================================ -->
+        <div id="ranking-15" class="diagram-section">
+            <div class="diagram-title">ranking-15: Photo Ranking Grid</div>
+            <div class="diagram-desc">Photo gallery with rank indicators</div>
+            <div class="ranking">
+                <div class="photo-card">
+                    <div class="photo-rank">1</div>
+                    <div class="photo-img">&#127912;</div>
+                    <div class="photo-info">
+                        <div class="photo-name">Best Photo</div>
+                    </div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-rank">2</div>
+                    <div class="photo-img">&#127748;</div>
+                    <div class="photo-info">
+                        <div class="photo-name">Runner Up</div>
+                    </div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-rank">3</div>
+                    <div class="photo-img">&#127749;</div>
+                    <div class="photo-info">
+                        <div class="photo-name">Third Place</div>
+                    </div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-rank">4</div>
+                    <div class="photo-img">&#127796;</div>
+                    <div class="photo-info">
+                        <div class="photo-name">Fourth</div>
+                    </div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-rank">5</div>
+                    <div class="photo-img">&#127754;</div>
+                    <div class="photo-info">
+                        <div class="photo-name">Fifth</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-16: Icon + Score Ranking
+             ============================================ -->
+        <div id="ranking-16" class="diagram-section">
+            <div class="diagram-title">ranking-16: Icon + Score Ranking</div>
+            <div class="diagram-desc">Emoji icons with detailed scores</div>
+            <div class="ranking">
+                <div class="icon-item">
+                    <div class="icon-emoji">&#128293;</div>
+                    <div class="icon-details">
+                        <div class="icon-name">Fire Champion</div>
+                        <div class="icon-subtitle">Undefeated streak</div>
+                    </div>
+                    <div class="icon-score">
+                        <div class="icon-score-value">9.8</div>
+                        <div class="icon-score-label">Rating</div>
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-emoji">&#9889;</div>
+                    <div class="icon-details">
+                        <div class="icon-name">Speed Demon</div>
+                        <div class="icon-subtitle">Fastest time</div>
+                    </div>
+                    <div class="icon-score">
+                        <div class="icon-score-value">9.5</div>
+                        <div class="icon-score-label">Rating</div>
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-emoji">&#127775;</div>
+                    <div class="icon-details">
+                        <div class="icon-name">Star Player</div>
+                        <div class="icon-subtitle">Fan favorite</div>
+                    </div>
+                    <div class="icon-score">
+                        <div class="icon-score-value">9.2</div>
+                        <div class="icon-score-label">Rating</div>
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-emoji">&#128142;</div>
+                    <div class="icon-details">
+                        <div class="icon-name">Gem Hunter</div>
+                        <div class="icon-subtitle">Rare finds</div>
+                    </div>
+                    <div class="icon-score">
+                        <div class="icon-score-value">8.9</div>
+                        <div class="icon-score-label">Rating</div>
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-emoji">&#127752;</div>
+                    <div class="icon-details">
+                        <div class="icon-name">Rainbow Rider</div>
+                        <div class="icon-subtitle">Versatile</div>
+                    </div>
+                    <div class="icon-score">
+                        <div class="icon-score-value">8.6</div>
+                        <div class="icon-score-label">Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-17: Position Indicator
+             ============================================ -->
+        <div id="ranking-17" class="diagram-section">
+            <div class="diagram-title">ranking-17: Position Indicator</div>
+            <div class="diagram-desc">Timeline-style position markers</div>
+            <div class="ranking">
+                <div class="position-track">
+                    <div class="position-marker">
+                        <div class="marker-dot">5</div>
+                        <div class="marker-label">Entry</div>
+                        <div class="marker-score">200 pts</div>
+                    </div>
+                    <div class="position-marker">
+                        <div class="marker-dot">4</div>
+                        <div class="marker-label">Fourth</div>
+                        <div class="marker-score">350 pts</div>
+                    </div>
+                    <div class="position-marker">
+                        <div class="marker-dot">3</div>
+                        <div class="marker-label">Bronze</div>
+                        <div class="marker-score">500 pts</div>
+                    </div>
+                    <div class="position-marker">
+                        <div class="marker-dot">2</div>
+                        <div class="marker-label">Silver</div>
+                        <div class="marker-score">650 pts</div>
+                    </div>
+                    <div class="position-marker">
+                        <div class="marker-dot">1</div>
+                        <div class="marker-label">Gold</div>
+                        <div class="marker-score">800 pts</div>
+                    </div>
+                </div>
+                <div class="position-labels">
+                    <span>Start</span>
+                    <span>Finish</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-18: Rising/Falling Arrows
+             ============================================ -->
+        <div id="ranking-18" class="diagram-section">
+            <div class="diagram-title">ranking-18: Rising/Falling Arrows</div>
+            <div class="diagram-desc">Ranking with trend indicators</div>
+            <div class="ranking">
+                <div class="arrow-item">
+                    <div class="arrow-rank">1</div>
+                    <div class="arrow-name">Trending Champion</div>
+                    <div class="arrow-trend up">
+                        <span class="trend-arrow">&#8593;</span>
+                        <span>+3</span>
+                    </div>
+                </div>
+                <div class="arrow-item">
+                    <div class="arrow-rank">2</div>
+                    <div class="arrow-name">Stable Runner</div>
+                    <div class="arrow-trend same">
+                        <span class="trend-arrow">&#8212;</span>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="arrow-item">
+                    <div class="arrow-rank">3</div>
+                    <div class="arrow-name">Rising Star</div>
+                    <div class="arrow-trend up">
+                        <span class="trend-arrow">&#8593;</span>
+                        <span>+5</span>
+                    </div>
+                </div>
+                <div class="arrow-item">
+                    <div class="arrow-rank">4</div>
+                    <div class="arrow-name">Falling Back</div>
+                    <div class="arrow-trend down">
+                        <span class="trend-arrow">&#8595;</span>
+                        <span>-2</span>
+                    </div>
+                </div>
+                <div class="arrow-item">
+                    <div class="arrow-rank">5</div>
+                    <div class="arrow-name">New Entry</div>
+                    <div class="arrow-trend up">
+                        <span class="trend-arrow">&#8593;</span>
+                        <span>NEW</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-19: Heat Map Ranking
+             ============================================ -->
+        <div id="ranking-19" class="diagram-section">
+            <div class="diagram-title">ranking-19: Heat Map Ranking</div>
+            <div class="diagram-desc">Color intensity shows rank position</div>
+            <div class="ranking">
+                <div class="heat-cell"><div class="heat-rank">1</div><div class="heat-label">HOT</div></div>
+                <div class="heat-cell"><div class="heat-rank">2</div></div>
+                <div class="heat-cell"><div class="heat-rank">3</div></div>
+                <div class="heat-cell"><div class="heat-rank">4</div></div>
+                <div class="heat-cell"><div class="heat-rank">5</div></div>
+                <div class="heat-cell"><div class="heat-rank">6</div></div>
+                <div class="heat-cell"><div class="heat-rank">7</div></div>
+                <div class="heat-cell"><div class="heat-rank">8</div></div>
+                <div class="heat-cell"><div class="heat-rank">9</div></div>
+                <div class="heat-cell"><div class="heat-rank">10</div></div>
+                <div class="heat-cell"><div class="heat-rank">11</div></div>
+                <div class="heat-cell"><div class="heat-rank">12</div></div>
+                <div class="heat-cell"><div class="heat-rank">13</div></div>
+                <div class="heat-cell"><div class="heat-rank">14</div></div>
+                <div class="heat-cell"><div class="heat-rank">15</div></div>
+                <div class="heat-cell"><div class="heat-rank">16</div></div>
+                <div class="heat-cell"><div class="heat-rank">17</div></div>
+                <div class="heat-cell"><div class="heat-rank">18</div></div>
+                <div class="heat-cell"><div class="heat-rank">19</div></div>
+                <div class="heat-cell"><div class="heat-rank">20</div></div>
+                <div class="heat-cell"><div class="heat-rank">21</div></div>
+                <div class="heat-cell"><div class="heat-rank">22</div></div>
+                <div class="heat-cell"><div class="heat-rank">23</div></div>
+                <div class="heat-cell"><div class="heat-rank">24</div></div>
+                <div class="heat-cell"><div class="heat-rank">25</div><div class="heat-label">COOL</div></div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #ranking-20: Achievement Unlock Ranking
+             ============================================ -->
+        <div id="ranking-20" class="diagram-section">
+            <div class="diagram-title">ranking-20: Achievement Unlock Ranking</div>
+            <div class="diagram-desc">Game-style achievement badges</div>
+            <div class="ranking">
+                <div class="achievement">
+                    <div class="achievement-badge">
+                        &#127942;
+                        <div class="achievement-rank">1</div>
+                    </div>
+                    <div class="achievement-title">Champion</div>
+                    <div class="achievement-desc">Top of the world</div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-badge">
+                        &#127775;
+                        <div class="achievement-rank">2</div>
+                    </div>
+                    <div class="achievement-title">Star Player</div>
+                    <div class="achievement-desc">Shine bright</div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-badge">
+                        &#128293;
+                        <div class="achievement-rank">3</div>
+                    </div>
+                    <div class="achievement-title">On Fire</div>
+                    <div class="achievement-desc">Hot streak</div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-badge">
+                        &#9889;
+                        <div class="achievement-rank">4</div>
+                    </div>
+                    <div class="achievement-title">Lightning</div>
+                    <div class="achievement-desc">Fast learner</div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-badge">
+                        &#128142;
+                        <div class="achievement-rank">5</div>
+                    </div>
+                    <div class="achievement-title">Gem</div>
+                    <div class="achievement-desc">Rare talent</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

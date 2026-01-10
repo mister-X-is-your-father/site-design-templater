@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>いしかわかずやのHP</title>
+    <meta name="description" content="日常の「課題」を「そんな手があったのか!?」という方法で解決するアイデアクリエイター。SNSフォロワー55万人以上。発想本2冊出版、商品化実績多数。">
+    <meta property="og:title" content="いしかわかずやのHP">
+    <meta property="og:description" content="日常の「課題」を「そんな手があったのか!?」という方法で解決するアイデアクリエイター。">
+    <meta property="og:image" content="/design-assets/ishikawa/images/og-image.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/design-assets/ishikawa/images/og-image.jpg">
+    <link rel="icon" type="image/png" href="/design-assets/ishikawa/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Mochiy+Pop+One&family=Poppins:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Variables (Design Tokens)
+           ======================================== */
+        :root {
+            --ik-primary: #FFC107;
+            --ik-primary-dark: #FFA000;
+            --ik-primary-light: #FFF8E1;
+            --ik-secondary: #FFD54F;
+            --ik-accent: #FF6F00;
+            --ik-yellow: #FFEB3B;
+            --ik-gold: #FFC107;
+            --ik-white: #ffffff;
+            --ik-bg: #f5f5f5;
+            --ik-bg-dark: #333333;
+            --ik-text: #333333;
+            --ik-text-light: #666666;
+            --ik-text-muted: #999999;
+            --ik-border: #e0e0e0;
+            --ik-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --ik-shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --ik-shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+            --ik-radius-sm: 8px;
+            --ik-radius-md: 16px;
+            --ik-radius-lg: 32px;
+            --ik-radius-xl: 32px;
+            --ik-ease: cubic-bezier(0.4, 0.4, 0, 1);
+            --ik-font-display: 'Mochiy Pop One', 'Zen Maru Gothic', sans-serif;
+            --ik-font-body: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+            --ik-font-latin: 'Poppins', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--ik-font-body);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--ik-text);
+            background: var(--ik-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================
+           Component: Container
+           ======================================== */
+        .ik-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========================================
+           Component: Header
+           ======================================== */
+        .ik-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 72px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-header.scrolled {
+            box-shadow: var(--ik-shadow-sm);
+        }
+
+        .ik-header__inner {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ik-header__logo {
+            font-family: var(--ik-font-display);
+            font-size: 20px;
+            color: var(--ik-text);
+            text-decoration: none;
+        }
+
+        .ik-header__nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .ik-header__nav-link {
+            font-family: var(--ik-font-latin);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--ik-text);
+            text-decoration: none;
+            transition: color 0.3s var(--ik-ease);
+        }
+
+        .ik-header__nav-link:hover {
+            color: var(--ik-primary);
+        }
+
+        .ik-header__menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .ik-header__menu-icon {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--ik-text);
+            position: relative;
+        }
+
+        .ik-header__menu-icon::before,
+        .ik-header__menu-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--ik-text);
+            left: 0;
+            transition: 0.3s var(--ik-ease);
+        }
+
+        .ik-header__menu-icon::before { top: -7px; }
+        .ik-header__menu-icon::after { top: 7px; }
+
+        /* ========================================
+           Component: Hero (Yellow Diagonal Stripes)
+           ======================================== */
+        .ik-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    #FFE082,
+                    #FFE082 10px,
+                    #FFCA28 10px,
+                    #FFCA28 20px
+                );
+            position: relative;
+        }
+
+        .ik-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255,255,255,0.1) 10px,
+                    rgba(255,255,255,0.1) 20px
+                );
+            pointer-events: none;
+        }
+
+        .ik-hero__inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ik-hero__image {
+            margin-bottom: 24px;
+        }
+
+        .ik-hero__avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--ik-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            overflow: hidden;
+            border: 4px solid var(--ik-white);
+        }
+
+        .ik-hero__avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ik-hero__label {
+            font-family: var(--ik-font-body);
+            font-size: 14px;
+            color: var(--ik-text);
+            margin-bottom: 8px;
+            letter-spacing: 0.1em;
+        }
+
+        .ik-hero__title {
+            font-family: var(--ik-font-display);
+            font-size: 42px;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: var(--ik-text);
+        }
+
+        .ik-hero__title-accent {
+            color: var(--ik-text);
+        }
+
+        .ik-hero__desc {
+            font-size: 14px;
+            color: var(--ik-text);
+            margin-bottom: 24px;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .ik-hero__sns {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .ik-hero__sns-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--ik-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ik-text);
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s var(--ik-ease), box-shadow 0.3s var(--ik-ease);
+        }
+
+        .ik-hero__sns-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .ik-hero__cta {
+            margin-top: 16px;
+        }
+
+        .ik-hero__stats {
+            display: none;
+        }
+
+        .ik-hero__stat-number {
+            font-family: var(--ik-font-latin);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--ik-text);
+        }
+
+        .ik-hero__stat-label {
+            font-size: 14px;
+            color: var(--ik-text-muted);
+        }
+
+        .ik-hero__content {
+            max-width: 700px;
+        }
+
+        /* ========================================
+           Component: Section
+           ======================================== */
+        .ik-section {
+            padding: 100px 0;
+        }
+
+        .ik-section--alt {
+            background: var(--ik-bg);
+        }
+
+        .ik-section--dark {
+            background: var(--ik-bg-dark);
+            color: var(--ik-white);
+        }
+
+        .ik-section__header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .ik-section__label {
+            font-family: var(--ik-font-latin);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--ik-primary);
+            margin-bottom: 12px;
+        }
+
+        .ik-section__title {
+            font-family: var(--ik-font-display);
+            font-size: 36px;
+        }
+
+        /* ========================================
+           Component: IDEA Grid
+           ======================================== */
+        .ik-idea-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .ik-idea-card {
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s var(--ik-ease), box-shadow 0.3s var(--ik-ease);
+        }
+
+        .ik-idea-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--ik-shadow-md);
+        }
+
+        .ik-idea-card__image {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .ik-idea-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s var(--ik-ease);
+        }
+
+        .ik-idea-card:hover .ik-idea-card__image img {
+            transform: scale(1.05);
+        }
+
+        .ik-idea-card__content {
+            padding: 16px;
+        }
+
+        .ik-idea-card__title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ik-text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .ik-idea-card__link {
+            font-size: 12px;
+            color: var(--ik-text-muted);
+            text-decoration: none;
+        }
+
+        .ik-idea-card__link:hover {
+            color: var(--ik-primary);
+        }
+
+        .ik-idea-link {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--ik-primary);
+            color: var(--ik-text);
+            font-weight: 600;
+            border-radius: var(--ik-radius-xl);
+            text-decoration: none;
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-idea-link:hover {
+            background: var(--ik-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           Component: Product Card
+           ======================================== */
+        .ik-products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .ik-product-card {
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--ik-shadow-sm);
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--ik-shadow-lg);
+        }
+
+        .ik-product-card__image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--ik-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--ik-radius-lg);
+            overflow: hidden;
+        }
+
+        .ik-product-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ik-product-card__content {
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .ik-product-card__title {
+            font-family: var(--ik-font-display);
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .ik-product-card__desc {
+            display: none;
+        }
+
+        /* ========================================
+           Component: Collaboration Card
+           ======================================== */
+        .ik-collabs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .ik-collab-card {
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-lg);
+            padding: 32px;
+            box-shadow: var(--ik-shadow-sm);
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-collab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--ik-shadow-md);
+        }
+
+        .ik-collab-card__icon {
+            width: 60px;
+            height: 60px;
+            background: var(--ik-primary-light);
+            border-radius: var(--ik-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .ik-collab-card__icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ik-collab-card__image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: var(--ik-radius-md);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .ik-collab-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ik-collab-card__title {
+            font-family: var(--ik-font-display);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .ik-collab-card__desc {
+            font-size: 14px;
+            color: var(--ik-text-light);
+            margin-bottom: 16px;
+        }
+
+        .ik-collab-card__link {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ik-text);
+            background: var(--ik-primary);
+            border-radius: var(--ik-radius-xl);
+            text-decoration: none;
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-collab-card__link:hover {
+            background: var(--ik-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           Component: Award Card
+           ======================================== */
+        .ik-awards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .ik-award-card {
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-lg);
+            padding: 28px;
+            display: flex;
+            gap: 20px;
+            box-shadow: var(--ik-shadow-sm);
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-award-card:hover {
+            box-shadow: var(--ik-shadow-md);
+        }
+
+        .ik-award-card__trophy {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .ik-award-card__content {
+            flex: 1;
+        }
+
+        .ik-award-card__title {
+            font-family: var(--ik-font-display);
+            font-size: 16px;
+            color: var(--ik-primary);
+            margin-bottom: 8px;
+        }
+
+        .ik-award-card__desc {
+            font-size: 14px;
+            color: var(--ik-text-light);
+        }
+
+        /* ========================================
+           Component: SNS Stats
+           ======================================== */
+        .ik-sns-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .ik-sns-card {
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-lg);
+            padding: 32px;
+            text-align: center;
+            box-shadow: var(--ik-shadow-sm);
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-sns-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--ik-shadow-md);
+        }
+
+        .ik-sns-card__icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .ik-sns-card__number {
+            font-family: var(--ik-font-latin);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--ik-text);
+            margin-bottom: 4px;
+        }
+
+        .ik-sns-card__label {
+            font-size: 14px;
+            color: var(--ik-text-muted);
+        }
+
+        /* ========================================
+           Component: Service Card
+           ======================================== */
+        .ik-services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .ik-service-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--ik-radius-lg);
+            padding: 32px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-service-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-4px);
+        }
+
+        .ik-service-card__icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .ik-service-card__title {
+            font-family: var(--ik-font-display);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .ik-service-card__desc {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* ========================================
+           Component: Contact Form
+           ======================================== */
+        .ik-contact {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ik-contact__title {
+            font-family: var(--ik-font-display);
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .ik-form-group {
+            margin-bottom: 24px;
+        }
+
+        .ik-form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .ik-form-input {
+            width: 100%;
+            padding: 16px;
+            font-family: var(--ik-font-body);
+            font-size: 16px;
+            border: 2px solid var(--ik-border);
+            border-radius: var(--ik-radius-sm);
+            transition: border-color 0.3s var(--ik-ease);
+        }
+
+        .ik-form-input:focus {
+            outline: none;
+            border-color: var(--ik-primary);
+        }
+
+        .ik-form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .ik-form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .ik-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 40px;
+            font-family: var(--ik-font-body);
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--ik-radius-xl);
+            cursor: pointer;
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-btn--primary {
+            background: var(--ik-primary);
+            color: var(--ik-white);
+        }
+
+        .ik-btn--primary:hover {
+            background: var(--ik-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,193,7,0.4);
+        }
+
+        .ik-hero__link {
+            display: inline-block;
+            color: var(--ik-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s var(--ik-ease);
+        }
+
+        .ik-hero__link:hover {
+            border-bottom-color: var(--ik-text);
+        }
+
+        .ik-btn--full {
+            width: 100%;
+        }
+
+        .ik-btn--outline {
+            background: transparent;
+            color: var(--ik-primary);
+            border: 2px solid var(--ik-primary);
+        }
+
+        .ik-btn--outline:hover {
+            background: var(--ik-primary);
+            color: var(--ik-white);
+        }
+
+        .ik-btn--sm {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        /* ========================================
+           Component: Books Slider
+           ======================================== */
+        .ik-books-slider {
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .ik-books-slider__wrapper {
+            display: flex;
+            gap: 32px;
+            min-width: min-content;
+        }
+
+        .ik-book-card {
+            flex: 0 0 400px;
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-lg);
+            padding: 32px;
+            box-shadow: var(--ik-shadow-md);
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .ik-book-card__cover {
+            min-width: 150px;
+            max-width: 150px;
+            border-radius: var(--ik-radius-md);
+            overflow: hidden;
+        }
+
+        .ik-book-card__cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ik-book-card__title {
+            font-family: var(--ik-font-display);
+            font-size: 18px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .ik-book-card__desc {
+            font-size: 14px;
+            color: var(--ik-text-light);
+            margin-bottom: 16px;
+        }
+
+        .ik-books-slider__hint {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--ik-text-muted);
+        }
+
+        /* ========================================
+           Component: Community
+           ======================================== */
+        .ik-community-card {
+            background: linear-gradient(135deg, var(--ik-primary), var(--ik-secondary));
+            color: var(--ik-white);
+            padding: 48px;
+            border-radius: var(--ik-radius-lg);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ik-community-card__badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 32px;
+            border-radius: var(--ik-radius-xl);
+            font-family: var(--ik-font-latin);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .ik-community-card__desc {
+            font-size: 16px;
+            line-height: 2;
+            margin-bottom: 32px;
+        }
+
+        .ik-community-card .ik-btn--primary {
+            background: var(--ik-white);
+            color: var(--ik-primary);
+        }
+
+        .ik-community-card .ik-btn--primary:hover {
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        /* ========================================
+           Component: Media Timeline
+           ======================================== */
+        .ik-media-timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .ik-media-item {
+            background: var(--ik-white);
+            border-radius: var(--ik-radius-md);
+            padding: 24px 32px;
+            box-shadow: var(--ik-shadow-sm);
+            min-width: 180px;
+            text-align: center;
+            transition: transform 0.3s var(--ik-ease), box-shadow 0.3s var(--ik-ease);
+        }
+
+        .ik-media-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--ik-shadow-md);
+        }
+
+        .ik-media-item__date {
+            font-size: 12px;
+            color: var(--ik-text-muted);
+            margin-bottom: 8px;
+        }
+
+        .ik-media-item__title {
+            font-family: var(--ik-font-display);
+            font-size: 18px;
+            color: var(--ik-text);
+        }
+
+        .ik-media-item__note {
+            font-size: 12px;
+            color: var(--ik-text-light);
+            margin-top: 4px;
+        }
+
+        .ik-section__subtitle {
+            font-size: 16px;
+            color: var(--ik-text-light);
+            margin-top: 12px;
+        }
+
+        /* ========================================
+           Component: Footer
+           ======================================== */
+        .ik-footer {
+            background: var(--ik-bg-dark);
+            color: var(--ik-white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .ik-footer__email {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .ik-footer__email a {
+            color: var(--ik-primary);
+            text-decoration: none;
+        }
+
+        .ik-footer__copyright {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* ========================================
+           Utilities
+           ======================================== */
+        .ik-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s var(--ik-ease), transform 0.6s var(--ik-ease);
+        }
+
+        .ik-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           Responsive
+           ======================================== */
+        @media (max-width: 1024px) {
+            .ik-hero__inner { grid-template-columns: 1fr; text-align: center; }
+            .ik-hero__content { max-width: 100%; }
+            .ik-hero__stats { justify-content: center; }
+            .ik-hero__image { order: -1; }
+            .ik-hero__avatar { width: 280px; height: 280px; font-size: 140px; }
+            .ik-products-grid { grid-template-columns: repeat(2, 1fr); }
+            .ik-collabs-grid { grid-template-columns: repeat(2, 1fr); }
+            .ik-awards-grid { grid-template-columns: 1fr; }
+            .ik-sns-grid { grid-template-columns: repeat(2, 1fr); }
+            .ik-services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .ik-header__nav { display: none; }
+            .ik-header__menu-btn { display: block; }
+            .ik-hero__title { font-size: 32px; }
+            .ik-section { padding: 60px 0; }
+            .ik-section__title { font-size: 28px; }
+            .ik-products-grid { grid-template-columns: 1fr; }
+            .ik-collabs-grid { grid-template-columns: 1fr; }
+            .ik-sns-grid { grid-template-columns: 1fr; }
+            .ik-services-grid { grid-template-columns: 1fr; }
+            .ik-book-card { flex: 0 0 300px; padding: 24px; flex-direction: column; align-items: center; text-align: center; }
+            .ik-community-card { padding: 32px 24px; }
+            .ik-media-item { min-width: 140px; padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         Component: Header
+         ======================================== -->
+    <header class="ik-header" id="header">
+        <div class="ik-container">
+            <div class="ik-header__inner">
+                <a href="#" class="ik-header__logo">
+                    <img src="/design-assets/ishikawa/images/logo.webp" alt="いしかわかずやのHP" style="height: 32px; width: auto;">
+                </a>
+                <nav class="ik-header__nav">
+                    <a href="#idea" class="ik-header__nav-link">IDEA</a>
+                    <a href="#content" class="ik-header__nav-link">CONTENT</a>
+                    <a href="#about" class="ik-header__nav-link">ABOUT</a>
+                    <a href="#contact" class="ik-header__nav-link">CONTACT</a>
+                </nav>
+                <button class="ik-header__menu-btn" aria-label="メニュー">
+                    <span class="ik-header__menu-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================
+         Component: Hero
+         ======================================== -->
+    <section class="ik-hero" id="idea">
+        <div class="ik-container">
+            <div class="ik-hero__inner">
+                <div class="ik-hero__image">
+                    <div class="ik-hero__avatar">
+                        <img src="/design-assets/ishikawa/images/profile.webp" alt="いしかわかずや" loading="lazy">
+                    </div>
+                </div>
+                <div class="ik-hero__content">
+                    <div class="ik-hero__label">アイデアクリエイター</div>
+                    <h1 class="ik-hero__title">いしかわかずや</h1>
+                    <p class="ik-hero__desc">
+                        日常の「課題」を「そんな手があったのか!?」という方法で解決するアイデアクリエイター。
+                        思いついた雑貨アイデアを日々SNSで発信し、フォロワーは50万人以上/発想本2冊出版/商品化実績多数/デザインコンペの受賞率は9割を超える。
+                    </p>
+                    <div class="ik-hero__sns">
+                        <a href="https://twitter.com/issikazu20" target="_blank" class="ik-hero__sns-link" aria-label="X (Twitter)">𝕏</a>
+                        <a href="https://www.instagram.com/issikazu/" target="_blank" class="ik-hero__sns-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@issikazu" target="_blank" class="ik-hero__sns-link" aria-label="YouTube">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@issikazu" target="_blank" class="ik-hero__sns-link" aria-label="TikTok">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                        </a>
+                    </div>
+                    <a href="#content" class="ik-hero__link">詳細を見る→</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: IDEA Grid Section
+         ======================================== -->
+    <section class="ik-section">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">IDEA</div>
+            </div>
+            <div class="ik-idea-grid">
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea1.webp" alt="目指しかれちゃう" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">目指しかれちゃう</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea2.webp" alt="顔隠し付きだけ机" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">顔隠し付きだけ机</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea3.webp" alt="イルカがシャチになる靴磨き" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">イルカがシャチになる靴磨き</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea4.webp" alt="ペリカンの鎮痛剤入れ" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">ペリカンの鎮痛剤入れ</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea5.webp" alt="真んやに乗れるふりかけ" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">真んやに乗れるふりかけ</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea6.webp" alt="シンペイくんのあらし箱" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">シンペイくんのあらし箱</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea7.webp" alt="鼻ざらしの鼻こし" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">鼻ざらしの鼻こし</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea8.webp" alt="野手の谷地紙飲料" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">野手の谷地紙飲料</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea9.webp" alt="紫陽を収納したそんワゴン" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">紫陽を収納したそんワゴン</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea10.webp" alt="おゆくしになる色鉛筆" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">おゆくしになる色鉛筆</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea11.webp" alt="紙がわかる付箋の情報" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">紙がわかる付箋の情報</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+                <div class="ik-idea-card">
+                    <div class="ik-idea-card__image"><img src="/design-assets/ishikawa/images/idea12.webp" alt="あくいしになる伝説組" loading="lazy"></div>
+                    <div class="ik-idea-card__content">
+                        <div class="ik-idea-card__title">あくいしになる伝説組</div>
+                        <a href="#" class="ik-idea-card__link">詳細を見る→</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <a href="https://twitter.com/issikazu20" target="_blank" class="ik-idea-link">他のアイデアはXで見られます</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Products Section (CONTENT)
+         ======================================== -->
+    <section class="ik-section ik-section--alt" id="content">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">CONTENT</div>
+                <h2 class="ik-section__title">いしかわかずや商品</h2>
+            </div>
+            <div class="ik-products-grid">
+                <div class="ik-product-card ik-fade-in">
+                    <div class="ik-product-card__image">
+                        <img src="/design-assets/ishikawa/images/content1.webp" alt="カステラスポンジ" loading="lazy">
+                    </div>
+                    <div class="ik-product-card__content">
+                        <h3 class="ik-product-card__title">カステラスポンジ</h3>
+                        <p class="ik-product-card__desc">株式会社アイセンとコラボしたカステラに見えるスポンジ</p>
+                        <a href="#" class="ik-btn ik-btn--primary ik-btn--sm">商品ページ</a>
+                    </div>
+                </div>
+                <div class="ik-product-card ik-fade-in">
+                    <div class="ik-product-card__image">
+                        <img src="/design-assets/ishikawa/images/content2.webp" alt="アニマルマグボトル" loading="lazy">
+                    </div>
+                    <div class="ik-product-card__content">
+                        <h3 class="ik-product-card__title">アニマルマグボトル</h3>
+                        <p class="ik-product-card__desc">株式会社ドウシシャとコラボしたアニマルマグボトル</p>
+                        <a href="#" class="ik-btn ik-btn--primary ik-btn--sm">商品ページ</a>
+                    </div>
+                </div>
+                <div class="ik-product-card ik-fade-in">
+                    <div class="ik-product-card__image">
+                        <img src="/design-assets/ishikawa/images/content3.webp" alt="プチネーム Animalegg" loading="lazy">
+                    </div>
+                    <div class="ik-product-card__content">
+                        <h3 class="ik-product-card__title">プチネーム「Animalegg」</h3>
+                        <p class="ik-product-card__desc">シヤチハタ株式会社とコラボした可愛い動物プチネーム</p>
+                        <a href="#" class="ik-btn ik-btn--primary ik-btn--sm">商品ページ</a>
+                    </div>
+                </div>
+                <div class="ik-product-card ik-fade-in">
+                    <div class="ik-product-card__image">
+                        <img src="/design-assets/ishikawa/images/content4.webp" alt="優先順位がわかる付箋" loading="lazy">
+                    </div>
+                    <div class="ik-product-card__content">
+                        <h3 class="ik-product-card__title">優先順位がわかる付箋</h3>
+                        <p class="ik-product-card__desc">飛び出す長さで重要度や優先順位がわかる付箋</p>
+                        <a href="#" class="ik-btn ik-btn--primary ik-btn--sm">商品ページ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Collaborations Section
+         ======================================== -->
+    <section class="ik-section">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">COLLABORATION</div>
+                <h2 class="ik-section__title">企業コラボ事例</h2>
+            </div>
+            <div class="ik-collabs-grid">
+                <div class="ik-collab-card ik-fade-in">
+                    <div class="ik-collab-card__image">
+                        <img src="/design-assets/ishikawa/images/collab1.webp" alt="文明堂×カステラスポンジ" loading="lazy">
+                    </div>
+                    <h3 class="ik-collab-card__title">文明堂×カステラスポンジ</h3>
+                    <p class="ik-collab-card__desc">文明堂東京様とカステラスポンジのコラボが実現！全国のロフトや文明堂カフェで発売</p>
+                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                </div>
+                <div class="ik-collab-card ik-fade-in">
+                    <div class="ik-collab-card__image">
+                        <img src="/design-assets/ishikawa/images/collab2.webp" alt="クライナーグッズ" loading="lazy">
+                    </div>
+                    <h3 class="ik-collab-card__title">クライナーグッズ</h3>
+                    <p class="ik-collab-card__desc">クライナーの雑貨アイデアを提案しポーチを制作。制作物をXに投稿し話題に</p>
+                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                </div>
+                <div class="ik-collab-card ik-fade-in">
+                    <div class="ik-collab-card__image">
+                        <img src="/design-assets/ishikawa/images/collab3.webp" alt="ハッピーターングッズ" loading="lazy">
+                    </div>
+                    <h3 class="ik-collab-card__title">ハッピーターングッズ</h3>
+                    <p class="ik-collab-card__desc">ハッピーターングッズを提案し実際に制作。東京駅で行われたイベントで実際に展示</p>
+                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                </div>
+                <div class="ik-collab-card ik-fade-in">
+                    <div class="ik-collab-card__image">
+                        <img src="/design-assets/ishikawa/images/collab4.webp" alt="クイックペイ促進" loading="lazy">
+                    </div>
+                    <h3 class="ik-collab-card__title">クイックペイ促進</h3>
+                    <p class="ik-collab-card__desc">9のつく日にクイックペイを使いたくなるアイデアを提案しSNSでの盛り上がりを演出</p>
+                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                </div>
+                <div class="ik-collab-card ik-fade-in">
+                    <div class="ik-collab-card__image">
+                        <img src="/design-assets/ishikawa/images/collab5.webp" alt="クイックペイとPR" loading="lazy">
+                    </div>
+                    <h3 class="ik-collab-card__title">クイックペイとPR</h3>
+                    <p class="ik-collab-card__desc">アイデア提供&制作</p>
+                    <a href="#" class="ik-collab-card__link">アイデア提供内容 →</a>
+                </div>
+                <div class="ik-collab-card ik-fade-in">
+                    <div class="ik-collab-card__image">
+                        <img src="/design-assets/ishikawa/images/collab6.webp" alt="「自動車ほけん」のプロモーション" loading="lazy">
+                    </div>
+                    <h3 class="ik-collab-card__title">「自動車ほけん」のプロモーション</h3>
+                    <p class="ik-collab-card__desc">×</p>
+                    <a href="#" class="ik-collab-card__link">詳細について →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Awards Section
+         ======================================== -->
+    <section class="ik-section ik-section--alt" id="about">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">AWARDS</div>
+                <h2 class="ik-section__title">デザインコンペ受賞実績</h2>
+            </div>
+            <div class="ik-awards-grid">
+                <div class="ik-award-card ik-fade-in">
+                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__content">
+                        <h3 class="ik-award-card__title">第24回 サンスター文具アイデアコンテスト 審査員特別賞</h3>
+                        <p class="ik-award-card__desc">指に貼り付けるお米の両面テープ。指１本で本をめくることができるスマート文具。</p>
+                    </div>
+                </div>
+                <div class="ik-award-card ik-fade-in">
+                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__content">
+                        <h3 class="ik-award-card__title">第25回 サンスター文具アイデアコンテスト グランプリ受賞</h3>
+                        <p class="ik-award-card__desc">梱包テープに挟むしおり紐。切れ目の位置をわかりやすくし剥がしやすくした。</p>
+                    </div>
+                </div>
+                <div class="ik-award-card ik-fade-in">
+                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__content">
+                        <h3 class="ik-award-card__title">KOKUYO DESIGN AWARD 2020 ファイナリスト</h3>
+                        <p class="ik-award-card__desc">貼るほど炎上する付箋。勉強すべきページに貼ることで焦らせて勉強させる。</p>
+                    </div>
+                </div>
+                <div class="ik-award-card ik-fade-in">
+                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__content">
+                        <h3 class="ik-award-card__title">12th SHACHIHATA New Product Design Competition 準グランプリ</h3>
+                        <p class="ik-award-card__desc">手書きサインの印鑑が作れるアイデア。佐藤や鈴木でも自分だけの印鑑が作れる。</p>
+                    </div>
+                </div>
+                <div class="ik-award-card ik-fade-in">
+                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__content">
+                        <h3 class="ik-award-card__title">13th SHACHIHATA New Product Design Competition</h3>
+                        <p class="ik-award-card__desc">名前を模様にするアイデア。自分の名前を柄にすることで様々なアイテムが作れる。</p>
+                    </div>
+                </div>
+                <div class="ik-award-card ik-fade-in">
+                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__content">
+                        <h3 class="ik-award-card__title">16th SHACHIHATA New Product Design Competition</h3>
+                        <p class="ik-award-card__desc">卒業証書入れのデザインシャチハタ。卒業式の記念品として贈ることで思い出になる。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Books Section
+         ======================================== -->
+    <section class="ik-section">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">BOOKS</div>
+                <h2 class="ik-section__title">アイデア発想本著書</h2>
+            </div>
+            <div class="ik-books-slider">
+                <div class="ik-books-slider__wrapper">
+                    <div class="ik-book-card ik-fade-in">
+                        <div class="ik-book-card__cover">
+                            <img src="/design-assets/ishikawa/images/book1.webp" alt="「ありそうでなかった」アイデアのつくりかた" loading="lazy">
+                        </div>
+                        <div class="ik-book-card__content">
+                            <h3 class="ik-book-card__title">「ありそうでなかった」<br>アイデアのつくりかた</h3>
+                            <p class="ik-book-card__desc">日常の不便を解決するアイデア発想術を体系化した一冊。コンペ受賞の秘訣を公開。</p>
+                            <a href="https://www.amazon.co.jp/dp/4046060689" target="_blank" class="ik-btn ik-btn--outline">Amazonページ</a>
+                        </div>
+                    </div>
+                    <div class="ik-book-card ik-fade-in">
+                        <div class="ik-book-card__cover">
+                            <img src="/design-assets/ishikawa/images/book2.webp" alt="なんとかするアイデア" loading="lazy">
+                        </div>
+                        <div class="ik-book-card__content">
+                            <h3 class="ik-book-card__title">なんとかするアイデア</h3>
+                            <p class="ik-book-card__desc">どんな課題も「なんとかする」思考法で解決するための実践的メソッド集。</p>
+                            <a href="https://www.amazon.co.jp" target="_blank" class="ik-btn ik-btn--outline">Amazonページ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ik-books-slider__hint">← スライドしてチラ見する →</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Community Section
+         ======================================== -->
+    <section class="ik-section ik-section--alt">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">COMMUNITY</div>
+                <h2 class="ik-section__title">コミュニティ</h2>
+            </div>
+            <div class="ik-community-card ik-fade-in">
+                <div class="ik-community-card__badge">IDEA CREATORS CLUB</div>
+                <p class="ik-community-card__desc">
+                    毎月90分のオンラインミーティングを実施し、いしかわかずやがアイデア発想術を教えたり、SNSでのバズらせ方などを伝授します。
+                    不定期でご飯会や展示会に一緒に行ったりアイデアを一緒に考えて形にすることも！
+                </p>
+                <a href="#" class="ik-btn ik-btn--primary">コミュニティ詳細を見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Media Section
+         ======================================== -->
+    <section class="ik-section">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">MEDIA</div>
+                <h2 class="ik-section__title">メディア出演</h2>
+            </div>
+            <div class="ik-media-timeline">
+                <div class="ik-media-item ik-fade-in">
+                    <div class="ik-media-item__date">2022年1月</div>
+                    <div class="ik-media-item__content">
+                        <div class="ik-media-item__title">スッキリ</div>
+                        <div class="ik-media-item__note">THEグレートアンサー</div>
+                    </div>
+                </div>
+                <div class="ik-media-item ik-fade-in">
+                    <div class="ik-media-item__date">2022年3月</div>
+                    <div class="ik-media-item__content">
+                        <div class="ik-media-item__title">ABEMA NEWS</div>
+                    </div>
+                </div>
+                <div class="ik-media-item ik-fade-in">
+                    <div class="ik-media-item__date">2022年11月</div>
+                    <div class="ik-media-item__content">
+                        <div class="ik-media-item__title">ゴゴスマ</div>
+                    </div>
+                </div>
+                <div class="ik-media-item ik-fade-in">
+                    <div class="ik-media-item__date">2024年3月</div>
+                    <div class="ik-media-item__content">
+                        <div class="ik-media-item__title">DayDay.</div>
+                    </div>
+                </div>
+                <div class="ik-media-item ik-fade-in">
+                    <div class="ik-media-item__date">2025年4月</div>
+                    <div class="ik-media-item__content">
+                        <div class="ik-media-item__title">ZIP!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: SNS Section
+         ======================================== -->
+    <section class="ik-section ik-section--alt">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label">SNS</div>
+                <h2 class="ik-section__title">SNSフォロワー55万人</h2>
+                <p class="ik-section__subtitle">日々思いついたアイデアをSNSに投稿していますのでぜひチェックしてみてください！</p>
+            </div>
+            <div class="ik-sns-grid">
+                <div class="ik-sns-card ik-fade-in">
+                    <div class="ik-sns-card__icon">𝕏</div>
+                    <div class="ik-sns-card__number">15万</div>
+                    <div class="ik-sns-card__label">Xフォロワー</div>
+                </div>
+                <div class="ik-sns-card ik-fade-in">
+                    <div class="ik-sns-card__icon">📸</div>
+                    <div class="ik-sns-card__number">3万</div>
+                    <div class="ik-sns-card__label">インスタフォロワー</div>
+                </div>
+                <div class="ik-sns-card ik-fade-in">
+                    <div class="ik-sns-card__icon">▶️</div>
+                    <div class="ik-sns-card__number">25万</div>
+                    <div class="ik-sns-card__label">YouTube登録者</div>
+                </div>
+                <div class="ik-sns-card ik-fade-in">
+                    <div class="ik-sns-card__icon">🎵</div>
+                    <div class="ik-sns-card__number">10万</div>
+                    <div class="ik-sns-card__label">TikTokフォロワー</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Services Section
+         ======================================== -->
+    <section class="ik-section ik-section--dark">
+        <div class="ik-container">
+            <div class="ik-section__header">
+                <div class="ik-section__label" style="color: var(--ik-primary-light);">SERVICES</div>
+                <h2 class="ik-section__title">仕事のご依頼</h2>
+            </div>
+            <div class="ik-services-grid">
+                <div class="ik-service-card ik-fade-in">
+                    <div class="ik-service-card__icon">💡</div>
+                    <h3 class="ik-service-card__title">商品企画</h3>
+                    <p class="ik-service-card__desc">メーカー様の新商品や話題性を狙う商品までご要望に合わせて商品提案します。</p>
+                </div>
+                <div class="ik-service-card ik-fade-in">
+                    <div class="ik-service-card__icon">🤝</div>
+                    <h3 class="ik-service-card__title">コラボレーション</h3>
+                    <p class="ik-service-card__desc">いしかわかずやとのコラボ商品を考案し、発売から販促まで伴走して進めます。</p>
+                </div>
+                <div class="ik-service-card ik-fade-in">
+                    <div class="ik-service-card__icon">📱</div>
+                    <h3 class="ik-service-card__title">SNSでの話題作り</h3>
+                    <p class="ik-service-card__desc">SNSでバズらせるお手伝いを行います。商品PRや雑貨アイデアの提案まで対応します。</p>
+                </div>
+                <div class="ik-service-card ik-fade-in">
+                    <div class="ik-service-card__icon">🎤</div>
+                    <h3 class="ik-service-card__title">講演 / ワークショップ</h3>
+                    <p class="ik-service-card__desc">メーカー様や大学向けにアイデアの生み出し方やバズらせ方に関する講演やWSを行います。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Contact Section
+         ======================================== -->
+    <section class="ik-section" id="contact">
+        <div class="ik-container">
+            <div class="ik-contact">
+                <h2 class="ik-contact__title">お仕事のご依頼・ご相談</h2>
+                <form>
+                    <div class="ik-form-group">
+                        <label class="ik-form-label">お名前</label>
+                        <input type="text" class="ik-form-input" placeholder="お名前を入力">
+                    </div>
+                    <div class="ik-form-group">
+                        <label class="ik-form-label">Email</label>
+                        <input type="email" class="ik-form-input" placeholder="メールアドレスを入力">
+                    </div>
+                    <div class="ik-form-group">
+                        <label class="ik-form-label">お問い合わせ内容</label>
+                        <textarea class="ik-form-input ik-form-textarea" placeholder="お問い合わせ内容を入力"></textarea>
+                    </div>
+                    <div class="ik-form-group">
+                        <label class="ik-form-checkbox">
+                            <input type="checkbox">
+                            プライバシーポリシーに同意する
+                        </label>
+                    </div>
+                    <button type="submit" class="ik-btn ik-btn--primary ik-btn--full">送信</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Component: Footer
+         ======================================== -->
+    <footer class="ik-footer">
+        <div class="ik-container">
+            <p class="ik-footer__email">
+                <a href="mailto:issikazu20design@gmail.com">issikazu20design@gmail.com</a>
+            </p>
+            <p class="ik-footer__copyright">© 2024 いしかわかずや. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Fade in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.ik-fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = header.offsetHeight;
+                    window.scrollTo({
+                        top: target.offsetTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{#
+    Ishikawa Design System - Base Template
+
+    Usage:
+    {% extends "components/ishikawa/_base.html" %}
+    {% block title %}Page Title{% endblock %}
+    {% block content %}...{% endblock %}
+#}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ishikawa{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Mochiy+Pop+One&family=Poppins:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/ishikawa-design-system.css">
+    {% block head %}{% endblock %}
+    <style>
+        {% include "components/ishikawa/_variables.css" %}
+        {% include "components/ishikawa/_base.css" %}
+        {% block styles %}{% endblock %}
+    </style>
+</head>
+<body>
+    {% block body %}
+        {% block header %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block footer %}{% endblock %}
+    {% endblock %}
+
+    <script>
+        {% include "components/ishikawa/_scripts.js" %}
+        {% block scripts %}{% endblock %}
+    </script>
+</body>
+</html>

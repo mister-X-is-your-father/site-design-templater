@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth/Progress Diagram Templates - 成長・進捗図</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .template-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed #eee;
+        }
+
+        .template-card h3 span {
+            background: #ff6b9d;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+
+        /* ==========================================
+           #growth-1: Simple Progress Bar
+           ========================================== */
+        #growth-1 .progress-container {
+            text-align: center;
+        }
+
+        #growth-1 .progress-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        #growth-1 .progress-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        #growth-1 .progress-bar-wrap {
+            background: #e8e8e8;
+            border-radius: 20px;
+            height: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #growth-1 .progress-bar-fill {
+            background: linear-gradient(90deg, #ff6b9d, #ff8fab);
+            background: #ff6b9d;
+            height: 100%;
+            width: 75%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            transition: width 0.5s ease;
+        }
+
+        #growth-1:hover .progress-bar-fill {
+            width: 85%;
+        }
+
+        #growth-1 .progress-percent {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #growth-1 .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ==========================================
+           #growth-2: Step Ladder (Stairs)
+           ========================================== */
+        #growth-2 .stairs-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 200px;
+            gap: 4px;
+        }
+
+        #growth-2 .stair {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-2 .stair-block {
+            width: 50px;
+            background: #7dd3fc;
+            border-radius: 6px 6px 0 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #growth-2 .stair:nth-child(1) .stair-block { height: 40px; background: #fcd34d; }
+        #growth-2 .stair:nth-child(2) .stair-block { height: 70px; background: #a5f3a3; }
+        #growth-2 .stair:nth-child(3) .stair-block { height: 100px; background: #7dd3fc; }
+        #growth-2 .stair:nth-child(4) .stair-block { height: 130px; background: #c4b5fd; }
+        #growth-2 .stair:nth-child(5) .stair-block { height: 160px; background: #ff6b9d; }
+
+        #growth-2 .stair:hover .stair-block {
+            transform: translateY(-8px);
+        }
+
+        #growth-2 .stair-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #growth-2 .stair-name {
+            font-size: 11px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        #growth-2 .stair-icon {
+            position: absolute;
+            top: -30px;
+            font-size: 20px;
+        }
+
+        #growth-2 .stair:last-child {
+            position: relative;
+        }
+
+        #growth-2 .goal-flag {
+            position: absolute;
+            top: -20px;
+            font-size: 24px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ==========================================
+           #growth-3: Mountain Climb Progress
+           ========================================== */
+        #growth-3 .mountain-container {
+            position: relative;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        #growth-3 .mountain {
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-bottom: 180px solid #a5f3a3;
+            position: relative;
+        }
+
+        #growth-3 .mountain-snow {
+            position: absolute;
+            top: -180px;
+            left: -40px;
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 50px solid white;
+        }
+
+        #growth-3 .climber {
+            position: absolute;
+            font-size: 24px;
+            transition: all 0.5s ease;
+        }
+
+        #growth-3 .climber-1 { bottom: 20px; left: -100px; }
+        #growth-3 .climber-2 { bottom: 60px; left: -60px; }
+        #growth-3 .climber-3 { bottom: 100px; left: -20px; opacity: 0.7; }
+        #growth-3 .climber-4 { bottom: 140px; left: 10px; opacity: 0.5; }
+
+        #growth-3:hover .climber {
+            transform: translateY(-10px);
+        }
+
+        #growth-3 .progress-labels {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #888;
+            padding: 0 20px;
+        }
+
+        #growth-3 .goal-marker {
+            position: absolute;
+            top: 10px;
+            font-size: 20px;
+        }
+
+        /* ==========================================
+           #growth-4: Plant Growing Stages
+           ========================================== */
+        #growth-4 .plant-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 180px;
+            padding: 0 10px;
+        }
+
+        #growth-4 .plant-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-4 .plant-stage:hover {
+            transform: scale(1.1);
+        }
+
+        #growth-4 .pot {
+            width: 40px;
+            height: 30px;
+            background: #f97316;
+            border-radius: 0 0 8px 8px;
+            position: relative;
+        }
+
+        #growth-4 .pot::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -3px;
+            width: 46px;
+            height: 8px;
+            background: #ea580c;
+            border-radius: 4px;
+        }
+
+        #growth-4 .soil {
+            width: 34px;
+            height: 8px;
+            background: #92400e;
+            border-radius: 50%;
+            margin-bottom: -4px;
+            z-index: 1;
+        }
+
+        #growth-4 .seed {
+            width: 12px;
+            height: 8px;
+            background: #a5f3a3;
+            border-radius: 50%;
+            margin-bottom: 4px;
+        }
+
+        #growth-4 .sprout {
+            width: 4px;
+            height: 20px;
+            background: #22c55e;
+            position: relative;
+            margin-bottom: -4px;
+        }
+
+        #growth-4 .sprout::before,
+        #growth-4 .sprout::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 12px;
+            background: #22c55e;
+            border-radius: 50% 50% 50% 0;
+        }
+
+        #growth-4 .sprout::before {
+            top: 0;
+            left: 4px;
+            transform: rotate(45deg);
+        }
+
+        #growth-4 .sprout::after {
+            top: 8px;
+            right: 4px;
+            transform: rotate(-135deg);
+        }
+
+        #growth-4 .small-plant {
+            width: 4px;
+            height: 40px;
+            background: #22c55e;
+            position: relative;
+            margin-bottom: -4px;
+        }
+
+        #growth-4 .small-plant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 4px;
+            width: 24px;
+            height: 18px;
+            background: #22c55e;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(30deg);
+        }
+
+        #growth-4 .small-plant::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 4px;
+            width: 20px;
+            height: 14px;
+            background: #4ade80;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-150deg);
+        }
+
+        #growth-4 .big-plant {
+            width: 6px;
+            height: 60px;
+            background: #16a34a;
+            position: relative;
+            margin-bottom: -4px;
+        }
+
+        #growth-4 .flower {
+            position: absolute;
+            top: -20px;
+            left: -12px;
+            width: 30px;
+            height: 30px;
+            background: #ff6b9d;
+            border-radius: 50%;
+        }
+
+        #growth-4 .flower::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #fcd34d;
+            border-radius: 50%;
+        }
+
+        #growth-4 .stage-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ==========================================
+           #growth-5: Rocket Launch Progress
+           ========================================== */
+        #growth-5 .rocket-container {
+            position: relative;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-5 .launch-track {
+            width: 6px;
+            height: 160px;
+            background: #e8e8e8;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        #growth-5 .launch-progress {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+            background: #7dd3fc;
+            border-radius: 3px;
+            transition: height 0.5s ease;
+        }
+
+        #growth-5:hover .launch-progress {
+            height: 80%;
+        }
+
+        #growth-5 .rocket {
+            position: absolute;
+            bottom: 55%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            transition: bottom 0.5s ease;
+            animation: rocketShake 0.1s ease infinite;
+        }
+
+        #growth-5:hover .rocket {
+            bottom: 75%;
+        }
+
+        @keyframes rocketShake {
+            0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+            50% { transform: translateX(-50%) rotate(2deg); }
+        }
+
+        #growth-5 .launch-flames {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        #growth-5 .milestone-markers {
+            position: absolute;
+            left: 20px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #growth-5 .milestone {
+            font-size: 10px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #growth-5 .milestone-dot {
+            width: 8px;
+            height: 8px;
+            background: #c4b5fd;
+            border-radius: 50%;
+        }
+
+        #growth-5 .milestone.active .milestone-dot {
+            background: #ff6b9d;
+        }
+
+        #growth-5 .launch-pad {
+            width: 60px;
+            height: 12px;
+            background: #666;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        /* ==========================================
+           #growth-6: Level Up Badges
+           ========================================== */
+        #growth-6 .badges-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #growth-6 .badge {
+            width: 60px;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-6 .badge:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        #growth-6 .badge-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            position: relative;
+        }
+
+        #growth-6 .badge:nth-child(1) .badge-icon { background: #e8e8e8; }
+        #growth-6 .badge:nth-child(2) .badge-icon { background: #fcd34d; }
+        #growth-6 .badge:nth-child(3) .badge-icon { background: #a5f3a3; }
+        #growth-6 .badge:nth-child(4) .badge-icon { background: #7dd3fc; }
+        #growth-6 .badge:nth-child(5) .badge-icon { background: #ff6b9d; }
+
+        #growth-6 .badge.locked .badge-icon {
+            background: #e8e8e8;
+            filter: grayscale(100%);
+        }
+
+        #growth-6 .badge.locked .badge-icon::after {
+            content: '🔒';
+            position: absolute;
+            font-size: 14px;
+        }
+
+        #growth-6 .badge-label {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        #growth-6 .badge-ribbon {
+            position: absolute;
+            bottom: -6px;
+            width: 30px;
+            height: 12px;
+            background: inherit;
+            filter: brightness(0.85);
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 50% 70%, 20% 100%);
+        }
+
+        /* ==========================================
+           #growth-7: Milestone Markers
+           ========================================== */
+        #growth-7 .milestone-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        #growth-7 .milestone-line {
+            height: 6px;
+            background: #e8e8e8;
+            border-radius: 3px;
+            position: relative;
+            margin: 30px 20px;
+        }
+
+        #growth-7 .milestone-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 65%;
+            background: #a5f3a3;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        #growth-7:hover .milestone-progress {
+            width: 80%;
+        }
+
+        #growth-7 .milestone-points {
+            position: absolute;
+            top: -12px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #growth-7 .milestone-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-7 .milestone-dot {
+            width: 28px;
+            height: 28px;
+            background: #e8e8e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            border: 3px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        #growth-7 .milestone-point.completed .milestone-dot {
+            background: #22c55e;
+            color: white;
+        }
+
+        #growth-7 .milestone-point.current .milestone-dot {
+            background: #ff6b9d;
+            color: white;
+            transform: scale(1.2);
+        }
+
+        #growth-7 .milestone-point:hover .milestone-dot {
+            transform: scale(1.3);
+        }
+
+        #growth-7 .milestone-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ==========================================
+           #growth-8: Thermometer Progress
+           ========================================== */
+        #growth-8 .thermo-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 200px;
+            gap: 40px;
+        }
+
+        #growth-8 .thermometer {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-8 .thermo-tube {
+            width: 30px;
+            height: 140px;
+            background: #e8e8e8;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #growth-8 .thermo-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70%;
+            background: #ff6b9d;
+            border-radius: 0 0 15px 15px;
+            transition: height 0.5s ease;
+        }
+
+        #growth-8:hover .thermo-fill {
+            height: 85%;
+        }
+
+        #growth-8 .thermo-bulb {
+            width: 50px;
+            height: 50px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            margin-top: -10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        #growth-8 .thermo-scale {
+            position: absolute;
+            right: -30px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #888;
+        }
+
+        #growth-8 .goal-label {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        #growth-8 .goal-label .amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        #growth-8 .goal-label .text {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* ==========================================
+           #growth-9: Circular Progress Ring
+           ========================================== */
+        #growth-9 .ring-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #growth-9 .progress-ring {
+            position: relative;
+            width: 90px;
+            height: 90px;
+        }
+
+        #growth-9 .ring-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 10px solid #e8e8e8;
+            position: absolute;
+        }
+
+        #growth-9 .ring-progress {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%);
+        }
+
+        #growth-9 .ring-1 .ring-progress {
+            border: 10px solid #ff6b9d;
+            transform: rotate(100deg);
+        }
+
+        #growth-9 .ring-2 .ring-progress {
+            border: 10px solid #7dd3fc;
+            transform: rotate(200deg);
+        }
+
+        #growth-9 .ring-3 .ring-progress {
+            border: 10px solid #a5f3a3;
+            transform: rotate(300deg);
+        }
+
+        #growth-9 .ring-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #growth-9 .ring-percent {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #growth-9 .ring-label {
+            font-size: 9px;
+            color: #888;
+        }
+
+        #growth-9 .progress-ring:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        /* ==========================================
+           #growth-10: Star Collection Progress
+           ========================================== */
+        #growth-10 .stars-container {
+            text-align: center;
+        }
+
+        #growth-10 .stars-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        #growth-10 .stars-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        #growth-10 .star {
+            font-size: 32px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #growth-10 .star.filled {
+            color: #fcd34d;
+            text-shadow: 0 0 10px rgba(252, 211, 77, 0.5);
+        }
+
+        #growth-10 .star.empty {
+            color: #e8e8e8;
+        }
+
+        #growth-10 .star:hover {
+            transform: scale(1.3) rotate(15deg);
+        }
+
+        #growth-10 .stars-count {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fcd34d;
+        }
+
+        #growth-10 .stars-count span {
+            color: #888;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        #growth-10 .stars-message {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* ==========================================
+           #growth-11: Building Blocks Stack
+           ========================================== */
+        #growth-11 .blocks-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 200px;
+            gap: 8px;
+        }
+
+        #growth-11 .block-stack {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 4px;
+        }
+
+        #growth-11 .block {
+            width: 50px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-11 .block:hover {
+            transform: translateX(8px);
+        }
+
+        #growth-11 .stack-1 .block:nth-child(1) { background: #ff6b9d; }
+        #growth-11 .stack-1 .block:nth-child(2) { background: #f97316; }
+        #growth-11 .stack-1 .block:nth-child(3) { background: #fcd34d; }
+
+        #growth-11 .stack-2 .block:nth-child(1) { background: #a5f3a3; }
+        #growth-11 .stack-2 .block:nth-child(2) { background: #22c55e; }
+        #growth-11 .stack-2 .block:nth-child(3) { background: #16a34a; }
+        #growth-11 .stack-2 .block:nth-child(4) { background: #15803d; }
+
+        #growth-11 .stack-3 .block:nth-child(1) { background: #7dd3fc; }
+        #growth-11 .stack-3 .block:nth-child(2) { background: #38bdf8; }
+        #growth-11 .stack-3 .block:nth-child(3) { background: #0ea5e9; }
+        #growth-11 .stack-3 .block:nth-child(4) { background: #0284c7; }
+        #growth-11 .stack-3 .block:nth-child(5) { background: #0369a1; }
+
+        #growth-11 .stack-label {
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* ==========================================
+           #growth-12: Tree Growth Stages
+           ========================================== */
+        #growth-12 .tree-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 180px;
+        }
+
+        #growth-12 .tree-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-12 .tree-stage:hover {
+            transform: scale(1.1);
+        }
+
+        #growth-12 .ground {
+            width: 50px;
+            height: 10px;
+            background: #92400e;
+            border-radius: 50%;
+        }
+
+        #growth-12 .sapling {
+            width: 4px;
+            height: 20px;
+            background: #92400e;
+            position: relative;
+        }
+
+        #growth-12 .sapling::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        #growth-12 .young-tree {
+            width: 8px;
+            height: 40px;
+            background: #92400e;
+            position: relative;
+        }
+
+        #growth-12 .young-tree::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -16px;
+            width: 40px;
+            height: 40px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        #growth-12 .medium-tree {
+            width: 12px;
+            height: 50px;
+            background: #92400e;
+            position: relative;
+        }
+
+        #growth-12 .medium-tree::before {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: -24px;
+            width: 60px;
+            height: 60px;
+            background: #16a34a;
+            border-radius: 50%;
+        }
+
+        #growth-12 .full-tree {
+            width: 16px;
+            height: 60px;
+            background: #78350f;
+            position: relative;
+        }
+
+        #growth-12 .full-tree::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -32px;
+            width: 80px;
+            height: 80px;
+            background: #15803d;
+            border-radius: 50%;
+        }
+
+        #growth-12 .full-tree::after {
+            content: '🍎';
+            position: absolute;
+            top: -30px;
+            left: 10px;
+            font-size: 16px;
+        }
+
+        #growth-12 .stage-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* ==========================================
+           #growth-13: Battery Charging Progress
+           ========================================== */
+        #growth-13 .battery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #growth-13 .battery-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        #growth-13 .battery {
+            position: relative;
+            width: 70px;
+            height: 35px;
+            border: 3px solid #333;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            gap: 3px;
+        }
+
+        #growth-13 .battery::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 14px;
+            background: #333;
+            border-radius: 0 3px 3px 0;
+        }
+
+        #growth-13 .battery-bar {
+            width: 12px;
+            height: 100%;
+            border-radius: 2px;
+            transition: opacity 0.3s ease;
+        }
+
+        #growth-13 .battery.low .battery-bar:nth-child(1) { background: #ef4444; }
+        #growth-13 .battery.low .battery-bar:nth-child(n+2) { opacity: 0.2; background: #e8e8e8; }
+
+        #growth-13 .battery.medium .battery-bar:nth-child(-n+2) { background: #fcd34d; }
+        #growth-13 .battery.medium .battery-bar:nth-child(n+3) { opacity: 0.2; background: #e8e8e8; }
+
+        #growth-13 .battery.high .battery-bar:nth-child(-n+3) { background: #a5f3a3; }
+        #growth-13 .battery.high .battery-bar:nth-child(4) { opacity: 0.2; background: #e8e8e8; }
+
+        #growth-13 .battery.full .battery-bar { background: #22c55e; }
+
+        #growth-13 .battery:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        #growth-13 .battery-label {
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+        }
+
+        /* ==========================================
+           #growth-14: Path/Road Journey
+           ========================================== */
+        #growth-14 .journey-container {
+            position: relative;
+            height: 180px;
+            padding: 20px;
+        }
+
+        #growth-14 .road {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 20px;
+            background: #666;
+            border-radius: 10px;
+            transform: translateY(-50%);
+        }
+
+        #growth-14 .road-line {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                #fcd34d 0px,
+                #fcd34d 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            transform: translateY(-50%);
+        }
+
+        #growth-14 .checkpoint {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-14 .checkpoint-icon {
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        #growth-14 .checkpoint:hover .checkpoint-icon {
+            transform: scale(1.2);
+        }
+
+        #growth-14 .checkpoint.completed .checkpoint-icon {
+            background: #22c55e;
+        }
+
+        #growth-14 .checkpoint:nth-child(2) { left: 15%; }
+        #growth-14 .checkpoint:nth-child(3) { left: 40%; }
+        #growth-14 .checkpoint:nth-child(4) { left: 65%; }
+        #growth-14 .checkpoint:nth-child(5) { left: 90%; }
+
+        #growth-14 .checkpoint-label {
+            position: absolute;
+            top: 40px;
+            font-size: 10px;
+            color: #888;
+            white-space: nowrap;
+        }
+
+        #growth-14 .traveler {
+            position: absolute;
+            left: 55%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            animation: drive 2s ease-in-out infinite;
+        }
+
+        @keyframes drive {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-4px); }
+        }
+
+        /* ==========================================
+           #growth-15: Bubble Size Growth
+           ========================================== */
+        #growth-15 .bubble-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            height: 180px;
+        }
+
+        #growth-15 .bubble-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-15 .bubble {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #growth-15 .bubble:hover {
+            transform: scale(1.15);
+        }
+
+        #growth-15 .bubble.size-1 { width: 40px; height: 40px; font-size: 12px; background: #fcd34d; }
+        #growth-15 .bubble.size-2 { width: 55px; height: 55px; font-size: 14px; background: #f97316; }
+        #growth-15 .bubble.size-3 { width: 70px; height: 70px; font-size: 16px; background: #ff6b9d; }
+        #growth-15 .bubble.size-4 { width: 85px; height: 85px; font-size: 18px; background: #c4b5fd; }
+        #growth-15 .bubble.size-5 { width: 100px; height: 100px; font-size: 20px; background: #7dd3fc; }
+
+        #growth-15 .bubble-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* ==========================================
+           #growth-16: Arrow Pointing Up Stages
+           ========================================== */
+        #growth-16 .arrow-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 8px;
+            height: 180px;
+        }
+
+        #growth-16 .arrow-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-16 .arrow {
+            width: 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-16 .arrow:hover {
+            transform: translateY(-10px);
+        }
+
+        #growth-16 .arrow-head {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 25px solid currentColor;
+        }
+
+        #growth-16 .arrow-body {
+            width: 20px;
+            background: currentColor;
+            border-radius: 0 0 4px 4px;
+        }
+
+        #growth-16 .arrow-stage:nth-child(1) .arrow { color: #fcd34d; }
+        #growth-16 .arrow-stage:nth-child(1) .arrow-body { height: 30px; }
+
+        #growth-16 .arrow-stage:nth-child(2) .arrow { color: #f97316; }
+        #growth-16 .arrow-stage:nth-child(2) .arrow-body { height: 50px; }
+
+        #growth-16 .arrow-stage:nth-child(3) .arrow { color: #ff6b9d; }
+        #growth-16 .arrow-stage:nth-child(3) .arrow-body { height: 70px; }
+
+        #growth-16 .arrow-stage:nth-child(4) .arrow { color: #c4b5fd; }
+        #growth-16 .arrow-stage:nth-child(4) .arrow-body { height: 90px; }
+
+        #growth-16 .arrow-stage:nth-child(5) .arrow { color: #7dd3fc; }
+        #growth-16 .arrow-stage:nth-child(5) .arrow-body { height: 110px; }
+
+        #growth-16 .arrow-value {
+            font-size: 11px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 8px;
+        }
+
+        /* ==========================================
+           #growth-17: Trophy Collection
+           ========================================== */
+        #growth-17 .trophy-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        #growth-17 .trophy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-17 .trophy:hover {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        #growth-17 .trophy-cup {
+            font-size: 40px;
+            position: relative;
+        }
+
+        #growth-17 .trophy-base {
+            width: 40px;
+            height: 8px;
+            background: #78350f;
+            border-radius: 4px;
+            margin-top: -4px;
+        }
+
+        #growth-17 .trophy:nth-child(1) .trophy-cup { color: #d4d4d4; }
+        #growth-17 .trophy:nth-child(2) .trophy-cup { color: #fcd34d; }
+        #growth-17 .trophy:nth-child(3) .trophy-cup { color: #a5f3a3; }
+        #growth-17 .trophy:nth-child(4) .trophy-cup { color: #7dd3fc; }
+        #growth-17 .trophy:nth-child(5) .trophy-cup { color: #ff6b9d; }
+
+        #growth-17 .trophy.locked {
+            filter: grayscale(100%);
+            opacity: 0.4;
+        }
+
+        #growth-17 .trophy-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        #growth-17 .trophy-stars {
+            display: flex;
+            gap: 2px;
+            font-size: 10px;
+            color: #fcd34d;
+            margin-top: 4px;
+        }
+
+        /* ==========================================
+           #growth-18: Experience Bar (Game Style)
+           ========================================== */
+        #growth-18 .exp-container {
+            padding: 10px;
+        }
+
+        #growth-18 .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        #growth-18 .exp-level {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #growth-18 .level-badge {
+            width: 45px;
+            height: 45px;
+            background: #c4b5fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 3px 0 #8b5cf6;
+        }
+
+        #growth-18 .level-info .label {
+            font-size: 10px;
+            color: #888;
+        }
+
+        #growth-18 .level-info .name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #growth-18 .exp-next {
+            text-align: right;
+        }
+
+        #growth-18 .exp-next .label {
+            font-size: 10px;
+            color: #888;
+        }
+
+        #growth-18 .exp-next .points {
+            font-size: 14px;
+            font-weight: bold;
+            color: #c4b5fd;
+        }
+
+        #growth-18 .exp-bar-wrap {
+            background: #e8e8e8;
+            border-radius: 12px;
+            height: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #growth-18 .exp-bar-fill {
+            height: 100%;
+            width: 65%;
+            background: #c4b5fd;
+            border-radius: 12px;
+            position: relative;
+            transition: width 0.5s ease;
+        }
+
+        #growth-18:hover .exp-bar-fill {
+            width: 75%;
+        }
+
+        #growth-18 .exp-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            right: 8px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+
+        #growth-18 .exp-text {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        #growth-18 .exp-rewards {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        #growth-18 .reward {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: #888;
+        }
+
+        #growth-18 .reward-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        /* ==========================================
+           #growth-19: Seedling to Tree
+           ========================================== */
+        #growth-19 .seedling-container {
+            position: relative;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        #growth-19 .timeline {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        #growth-19 .growth-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        #growth-19 .growth-stage:hover {
+            transform: scale(1.1);
+        }
+
+        #growth-19 .stage-visual {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Seed */
+        #growth-19 .seed-icon {
+            width: 16px;
+            height: 12px;
+            background: #92400e;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+
+        /* Sprout */
+        #growth-19 .sprout-icon {
+            width: 4px;
+            height: 25px;
+            background: #22c55e;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        #growth-19 .sprout-icon::before,
+        #growth-19 .sprout-icon::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        #growth-19 .sprout-icon::before {
+            top: 0;
+            left: 4px;
+        }
+
+        #growth-19 .sprout-icon::after {
+            top: 8px;
+            right: 4px;
+        }
+
+        /* Small plant */
+        #growth-19 .small-icon {
+            width: 6px;
+            height: 40px;
+            background: #16a34a;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        #growth-19 .small-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -12px;
+            width: 30px;
+            height: 25px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        /* Medium plant */
+        #growth-19 .medium-icon {
+            width: 10px;
+            height: 60px;
+            background: #15803d;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        #growth-19 .medium-icon::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -20px;
+            width: 50px;
+            height: 40px;
+            background: #16a34a;
+            border-radius: 50%;
+        }
+
+        /* Full tree */
+        #growth-19 .tree-icon {
+            width: 14px;
+            height: 80px;
+            background: #78350f;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        #growth-19 .tree-icon::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -33px;
+            width: 80px;
+            height: 70px;
+            background: #15803d;
+            border-radius: 50%;
+        }
+
+        #growth-19 .tree-icon::after {
+            content: '🍎🍎🍎';
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            font-size: 12px;
+        }
+
+        #growth-19 .stage-time {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        #growth-19 .progress-arrow {
+            font-size: 20px;
+            color: #a5f3a3;
+            margin: 0 4px 50px;
+        }
+
+        /* ==========================================
+           #growth-20: Counter/Number Animation
+           ========================================== */
+        #growth-20 .counter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #growth-20 .counter-row {
+            display: flex;
+            gap: 24px;
+        }
+
+        #growth-20 .counter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #growth-20 .counter-value {
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #growth-20 .counter-1 .counter-value { color: #ff6b9d; }
+        #growth-20 .counter-2 .counter-value { color: #7dd3fc; }
+        #growth-20 .counter-3 .counter-value { color: #a5f3a3; }
+        #growth-20 .counter-4 .counter-value { color: #fcd34d; }
+
+        #growth-20 .counter-label {
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        #growth-20 .counter:hover .counter-value {
+            animation: countUp 0.5s ease;
+        }
+
+        @keyframes countUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        #growth-20 .counter-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        #growth-20 .counter-change {
+            font-size: 11px;
+            color: #22c55e;
+            margin-top: 2px;
+        }
+
+        #growth-20 .counter-change.negative {
+            color: #ef4444;
+        }
+
+        #growth-20 .big-counter {
+            text-align: center;
+            padding: 16px 32px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        #growth-20 .big-counter .counter-value {
+            font-size: 48px;
+            color: #c4b5fd;
+        }
+
+        #growth-20 .big-counter .counter-label {
+            font-size: 13px;
+        }
+
+        #growth-20 .big-counter .progress-mini {
+            width: 150px;
+            height: 6px;
+            background: #e8e8e8;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        #growth-20 .big-counter .progress-mini-fill {
+            height: 100%;
+            width: 78%;
+            background: #c4b5fd;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Growth/Progress Diagram Templates - 成長・進捗図</h1>
+
+    <div class="template-grid">
+        <!-- #growth-1: Simple Progress Bar -->
+        <div class="template-card" id="growth-1">
+            <h3><span>#growth-1</span>Simple Progress Bar - シンプル進捗バー</h3>
+            <div class="progress-container">
+                <div class="progress-title">プロジェクト進捗</div>
+                <div class="progress-subtitle">2024年1月の目標達成率</div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill">
+                        <span class="progress-percent">75%</span>
+                    </div>
+                </div>
+                <div class="progress-labels">
+                    <span>開始</span>
+                    <span>目標達成！</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-2: Step Ladder (Stairs) -->
+        <div class="template-card" id="growth-2">
+            <h3><span>#growth-2</span>Step Ladder - ステップ階段</h3>
+            <div class="stairs-container">
+                <div class="stair">
+                    <div class="stair-block"><span class="stair-label">Lv1</span></div>
+                    <span class="stair-name">初級</span>
+                </div>
+                <div class="stair">
+                    <div class="stair-block"><span class="stair-label">Lv2</span></div>
+                    <span class="stair-name">基礎</span>
+                </div>
+                <div class="stair">
+                    <div class="stair-block"><span class="stair-label">Lv3</span></div>
+                    <span class="stair-name">中級</span>
+                </div>
+                <div class="stair">
+                    <div class="stair-block"><span class="stair-label">Lv4</span></div>
+                    <span class="stair-name">上級</span>
+                </div>
+                <div class="stair">
+                    <div class="stair-block">
+                        <span class="stair-label">Lv5</span>
+                    </div>
+                    <span class="goal-flag">🚩</span>
+                    <span class="stair-name">達人</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-3: Mountain Climb Progress -->
+        <div class="template-card" id="growth-3">
+            <h3><span>#growth-3</span>Mountain Climb - 山登り進捗</h3>
+            <div class="mountain-container">
+                <div class="mountain">
+                    <div class="mountain-snow"></div>
+                    <span class="goal-marker">⛳</span>
+                </div>
+                <span class="climber climber-1">🧗</span>
+                <span class="climber climber-2">🧗</span>
+                <span class="climber climber-3">🧗</span>
+                <span class="climber climber-4">🧗</span>
+                <div class="progress-labels">
+                    <span>スタート</span>
+                    <span>山頂</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-4: Plant Growing Stages -->
+        <div class="template-card" id="growth-4">
+            <h3><span>#growth-4</span>Plant Growing - 植物の成長</h3>
+            <div class="plant-container">
+                <div class="plant-stage">
+                    <div class="soil"></div>
+                    <div class="seed"></div>
+                    <div class="pot"></div>
+                    <span class="stage-label">種まき</span>
+                </div>
+                <div class="plant-stage">
+                    <div class="sprout"></div>
+                    <div class="pot"></div>
+                    <span class="stage-label">発芽</span>
+                </div>
+                <div class="plant-stage">
+                    <div class="small-plant"></div>
+                    <div class="pot"></div>
+                    <span class="stage-label">成長</span>
+                </div>
+                <div class="plant-stage">
+                    <div class="big-plant">
+                        <div class="flower"></div>
+                    </div>
+                    <div class="pot"></div>
+                    <span class="stage-label">開花！</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-5: Rocket Launch Progress -->
+        <div class="template-card" id="growth-5">
+            <h3><span>#growth-5</span>Rocket Launch - ロケット発射</h3>
+            <div class="rocket-container">
+                <div class="milestone-markers">
+                    <div class="milestone active"><div class="milestone-dot"></div>目標達成</div>
+                    <div class="milestone active"><div class="milestone-dot"></div>80%</div>
+                    <div class="milestone active"><div class="milestone-dot"></div>50%</div>
+                    <div class="milestone"><div class="milestone-dot"></div>開始</div>
+                </div>
+                <div class="launch-track">
+                    <div class="launch-progress"></div>
+                </div>
+                <span class="rocket">🚀</span>
+                <div class="launch-pad"></div>
+            </div>
+        </div>
+
+        <!-- #growth-6: Level Up Badges -->
+        <div class="template-card" id="growth-6">
+            <h3><span>#growth-6</span>Level Up Badges - レベルアップバッジ</h3>
+            <div class="badges-container">
+                <div class="badge">
+                    <div class="badge-icon">
+                        ⭐
+                        <div class="badge-ribbon"></div>
+                    </div>
+                    <span class="badge-label">ビギナー</span>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">
+                        🌟
+                        <div class="badge-ribbon"></div>
+                    </div>
+                    <span class="badge-label">ブロンズ</span>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">
+                        💫
+                        <div class="badge-ribbon"></div>
+                    </div>
+                    <span class="badge-label">シルバー</span>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">
+                        ✨
+                        <div class="badge-ribbon"></div>
+                    </div>
+                    <span class="badge-label">ゴールド</span>
+                </div>
+                <div class="badge locked">
+                    <div class="badge-icon">
+                        👑
+                        <div class="badge-ribbon"></div>
+                    </div>
+                    <span class="badge-label">マスター</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-7: Milestone Markers -->
+        <div class="template-card" id="growth-7">
+            <h3><span>#growth-7</span>Milestone Markers - マイルストーン</h3>
+            <div class="milestone-container">
+                <div class="milestone-line">
+                    <div class="milestone-progress"></div>
+                    <div class="milestone-points">
+                        <div class="milestone-point completed">
+                            <div class="milestone-dot">✓</div>
+                            <span class="milestone-label">企画</span>
+                        </div>
+                        <div class="milestone-point completed">
+                            <div class="milestone-dot">✓</div>
+                            <span class="milestone-label">設計</span>
+                        </div>
+                        <div class="milestone-point current">
+                            <div class="milestone-dot">3</div>
+                            <span class="milestone-label">開発</span>
+                        </div>
+                        <div class="milestone-point">
+                            <div class="milestone-dot">4</div>
+                            <span class="milestone-label">テスト</span>
+                        </div>
+                        <div class="milestone-point">
+                            <div class="milestone-dot">🎯</div>
+                            <span class="milestone-label">完了</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-8: Thermometer Progress -->
+        <div class="template-card" id="growth-8">
+            <h3><span>#growth-8</span>Thermometer - 温度計プログレス</h3>
+            <div class="thermo-container">
+                <div class="thermometer">
+                    <div class="thermo-tube">
+                        <div class="thermo-fill"></div>
+                    </div>
+                    <div class="thermo-bulb">🔥</div>
+                    <div class="thermo-scale">
+                        <span>100%</span>
+                        <span>75%</span>
+                        <span>50%</span>
+                        <span>25%</span>
+                        <span>0%</span>
+                    </div>
+                </div>
+                <div class="goal-label">
+                    <div class="amount">¥70,000</div>
+                    <div class="text">目標¥100,000</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-9: Circular Progress Ring -->
+        <div class="template-card" id="growth-9">
+            <h3><span>#growth-9</span>Progress Ring - 円形プログレス</h3>
+            <div class="ring-container">
+                <div class="progress-ring ring-1">
+                    <div class="ring-bg"></div>
+                    <div class="ring-progress"></div>
+                    <div class="ring-center">
+                        <div class="ring-percent">28%</div>
+                        <div class="ring-label">タスク</div>
+                    </div>
+                </div>
+                <div class="progress-ring ring-2">
+                    <div class="ring-bg"></div>
+                    <div class="ring-progress"></div>
+                    <div class="ring-center">
+                        <div class="ring-percent">56%</div>
+                        <div class="ring-label">進捗</div>
+                    </div>
+                </div>
+                <div class="progress-ring ring-3">
+                    <div class="ring-bg"></div>
+                    <div class="ring-progress"></div>
+                    <div class="ring-center">
+                        <div class="ring-percent">83%</div>
+                        <div class="ring-label">目標</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-10: Star Collection Progress -->
+        <div class="template-card" id="growth-10">
+            <h3><span>#growth-10</span>Star Collection - スター集め</h3>
+            <div class="stars-container">
+                <div class="stars-title">今週のスターを集めよう！</div>
+                <div class="stars-row">
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star empty">★</span>
+                    <span class="star empty">★</span>
+                    <span class="star empty">★</span>
+                </div>
+                <div class="stars-count">4 <span>/ 7 スター</span></div>
+                <div class="stars-message">あと3つでコンプリート！</div>
+            </div>
+        </div>
+
+        <!-- #growth-11: Building Blocks Stack -->
+        <div class="template-card" id="growth-11">
+            <h3><span>#growth-11</span>Building Blocks - ブロック積み上げ</h3>
+            <div class="blocks-container">
+                <div class="block-stack stack-1">
+                    <div class="block">1月</div>
+                    <div class="block">2月</div>
+                    <div class="block">3月</div>
+                    <span class="stack-label">Q1</span>
+                </div>
+                <div class="block-stack stack-2">
+                    <div class="block">4月</div>
+                    <div class="block">5月</div>
+                    <div class="block">6月</div>
+                    <div class="block">7月</div>
+                    <span class="stack-label">Q2</span>
+                </div>
+                <div class="block-stack stack-3">
+                    <div class="block">8月</div>
+                    <div class="block">9月</div>
+                    <div class="block">10月</div>
+                    <div class="block">11月</div>
+                    <div class="block">12月</div>
+                    <span class="stack-label">Q3-Q4</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-12: Tree Growth Stages -->
+        <div class="template-card" id="growth-12">
+            <h3><span>#growth-12</span>Tree Growth - 木の成長</h3>
+            <div class="tree-container">
+                <div class="tree-stage">
+                    <div class="sapling"></div>
+                    <div class="ground"></div>
+                    <span class="stage-label">苗木</span>
+                </div>
+                <div class="tree-stage">
+                    <div class="young-tree"></div>
+                    <div class="ground"></div>
+                    <span class="stage-label">若木</span>
+                </div>
+                <div class="tree-stage">
+                    <div class="medium-tree"></div>
+                    <div class="ground"></div>
+                    <span class="stage-label">成木</span>
+                </div>
+                <div class="tree-stage">
+                    <div class="full-tree"></div>
+                    <div class="ground"></div>
+                    <span class="stage-label">大木</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-13: Battery Charging Progress -->
+        <div class="template-card" id="growth-13">
+            <h3><span>#growth-13</span>Battery Charging - バッテリー充電</h3>
+            <div class="battery-container">
+                <div class="battery-row">
+                    <div>
+                        <div class="battery low">
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                        </div>
+                        <div class="battery-label">25%</div>
+                    </div>
+                    <div>
+                        <div class="battery medium">
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                        </div>
+                        <div class="battery-label">50%</div>
+                    </div>
+                </div>
+                <div class="battery-row">
+                    <div>
+                        <div class="battery high">
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                        </div>
+                        <div class="battery-label">75%</div>
+                    </div>
+                    <div>
+                        <div class="battery full">
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                            <div class="battery-bar"></div>
+                        </div>
+                        <div class="battery-label">100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-14: Path/Road Journey -->
+        <div class="template-card" id="growth-14">
+            <h3><span>#growth-14</span>Road Journey - 道のり</h3>
+            <div class="journey-container">
+                <div class="road"></div>
+                <div class="road-line"></div>
+                <div class="checkpoint completed">
+                    <div class="checkpoint-icon">🏠</div>
+                    <span class="checkpoint-label">スタート</span>
+                </div>
+                <div class="checkpoint completed">
+                    <div class="checkpoint-icon">📍</div>
+                    <span class="checkpoint-label">中継点1</span>
+                </div>
+                <div class="checkpoint completed">
+                    <div class="checkpoint-icon">📍</div>
+                    <span class="checkpoint-label">中継点2</span>
+                </div>
+                <div class="checkpoint">
+                    <div class="checkpoint-icon">🏁</div>
+                    <span class="checkpoint-label">ゴール</span>
+                </div>
+                <span class="traveler">🚗</span>
+            </div>
+        </div>
+
+        <!-- #growth-15: Bubble Size Growth -->
+        <div class="template-card" id="growth-15">
+            <h3><span>#growth-15</span>Bubble Growth - バブルサイズ</h3>
+            <div class="bubble-container">
+                <div class="bubble-group">
+                    <div class="bubble size-1">10</div>
+                    <span class="bubble-label">Week1</span>
+                </div>
+                <div class="bubble-group">
+                    <div class="bubble size-2">25</div>
+                    <span class="bubble-label">Week2</span>
+                </div>
+                <div class="bubble-group">
+                    <div class="bubble size-3">45</div>
+                    <span class="bubble-label">Week3</span>
+                </div>
+                <div class="bubble-group">
+                    <div class="bubble size-4">70</div>
+                    <span class="bubble-label">Week4</span>
+                </div>
+                <div class="bubble-group">
+                    <div class="bubble size-5">100</div>
+                    <span class="bubble-label">Goal!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-16: Arrow Pointing Up Stages -->
+        <div class="template-card" id="growth-16">
+            <h3><span>#growth-16</span>Arrow Up - 上昇矢印</h3>
+            <div class="arrow-container">
+                <div class="arrow-stage">
+                    <div class="arrow">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-body"></div>
+                    </div>
+                    <span class="arrow-value">100</span>
+                </div>
+                <div class="arrow-stage">
+                    <div class="arrow">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-body"></div>
+                    </div>
+                    <span class="arrow-value">250</span>
+                </div>
+                <div class="arrow-stage">
+                    <div class="arrow">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-body"></div>
+                    </div>
+                    <span class="arrow-value">450</span>
+                </div>
+                <div class="arrow-stage">
+                    <div class="arrow">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-body"></div>
+                    </div>
+                    <span class="arrow-value">700</span>
+                </div>
+                <div class="arrow-stage">
+                    <div class="arrow">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-body"></div>
+                    </div>
+                    <span class="arrow-value">1000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-17: Trophy Collection -->
+        <div class="template-card" id="growth-17">
+            <h3><span>#growth-17</span>Trophy Collection - トロフィー集め</h3>
+            <div class="trophy-container">
+                <div class="trophy">
+                    <div class="trophy-cup">🏆</div>
+                    <div class="trophy-base"></div>
+                    <span class="trophy-label">ブロンズ</span>
+                    <div class="trophy-stars">★★★</div>
+                </div>
+                <div class="trophy">
+                    <div class="trophy-cup">🏆</div>
+                    <div class="trophy-base"></div>
+                    <span class="trophy-label">シルバー</span>
+                    <div class="trophy-stars">★★★</div>
+                </div>
+                <div class="trophy">
+                    <div class="trophy-cup">🏆</div>
+                    <div class="trophy-base"></div>
+                    <span class="trophy-label">ゴールド</span>
+                    <div class="trophy-stars">★★★</div>
+                </div>
+                <div class="trophy">
+                    <div class="trophy-cup">🏆</div>
+                    <div class="trophy-base"></div>
+                    <span class="trophy-label">プラチナ</span>
+                    <div class="trophy-stars">★★★</div>
+                </div>
+                <div class="trophy locked">
+                    <div class="trophy-cup">🏆</div>
+                    <div class="trophy-base"></div>
+                    <span class="trophy-label">ダイヤ</span>
+                    <div class="trophy-stars">☆☆☆</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-18: Experience Bar (Game Style) -->
+        <div class="template-card" id="growth-18">
+            <h3><span>#growth-18</span>Experience Bar - 経験値バー</h3>
+            <div class="exp-container">
+                <div class="exp-header">
+                    <div class="exp-level">
+                        <div class="level-badge">12</div>
+                        <div class="level-info">
+                            <div class="label">LEVEL</div>
+                            <div class="name">アドベンチャラー</div>
+                        </div>
+                    </div>
+                    <div class="exp-next">
+                        <div class="label">次のレベルまで</div>
+                        <div class="points">350 XP</div>
+                    </div>
+                </div>
+                <div class="exp-bar-wrap">
+                    <div class="exp-bar-fill"></div>
+                    <span class="exp-text">650 / 1000</span>
+                </div>
+                <div class="exp-rewards">
+                    <div class="reward">
+                        <span class="reward-icon">🎁</span>
+                        Lv13報酬
+                    </div>
+                    <div class="reward">
+                        <span class="reward-icon">⚔️</span>
+                        新スキル
+                    </div>
+                    <div class="reward">
+                        <span class="reward-icon">👑</span>
+                        称号獲得
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-19: Seedling to Tree -->
+        <div class="template-card" id="growth-19">
+            <h3><span>#growth-19</span>Seedling to Tree - 種から木へ</h3>
+            <div class="seedling-container">
+                <div class="timeline">
+                    <div class="growth-stage">
+                        <div class="stage-visual">
+                            <div class="seed-icon"></div>
+                        </div>
+                        <span class="stage-time">Day 0</span>
+                    </div>
+                    <span class="progress-arrow">→</span>
+                    <div class="growth-stage">
+                        <div class="stage-visual">
+                            <div class="sprout-icon"></div>
+                        </div>
+                        <span class="stage-time">Day 7</span>
+                    </div>
+                    <span class="progress-arrow">→</span>
+                    <div class="growth-stage">
+                        <div class="stage-visual">
+                            <div class="small-icon"></div>
+                        </div>
+                        <span class="stage-time">Day 30</span>
+                    </div>
+                    <span class="progress-arrow">→</span>
+                    <div class="growth-stage">
+                        <div class="stage-visual">
+                            <div class="medium-icon"></div>
+                        </div>
+                        <span class="stage-time">Day 90</span>
+                    </div>
+                    <span class="progress-arrow">→</span>
+                    <div class="growth-stage">
+                        <div class="stage-visual">
+                            <div class="tree-icon"></div>
+                        </div>
+                        <span class="stage-time">Day 365</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #growth-20: Counter/Number Animation -->
+        <div class="template-card" id="growth-20">
+            <h3><span>#growth-20</span>Counter Animation - カウンター</h3>
+            <div class="counter-container">
+                <div class="counter-row">
+                    <div class="counter counter-1">
+                        <span class="counter-icon">👥</span>
+                        <div class="counter-value">1,234</div>
+                        <span class="counter-label">フォロワー</span>
+                        <span class="counter-change">+123 今週</span>
+                    </div>
+                    <div class="counter counter-2">
+                        <span class="counter-icon">❤️</span>
+                        <div class="counter-value">5,678</div>
+                        <span class="counter-label">いいね</span>
+                        <span class="counter-change">+456 今週</span>
+                    </div>
+                    <div class="counter counter-3">
+                        <span class="counter-icon">👁️</span>
+                        <div class="counter-value">12.3K</div>
+                        <span class="counter-label">ビュー</span>
+                        <span class="counter-change">+2.1K 今週</span>
+                    </div>
+                </div>
+                <div class="big-counter">
+                    <span class="counter-icon">🎯</span>
+                    <div class="counter-value">78%</div>
+                    <span class="counter-label">目標達成率</span>
+                    <div class="progress-mini">
+                        <div class="progress-mini-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

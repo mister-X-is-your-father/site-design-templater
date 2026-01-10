@@ -1,0 +1,27 @@
+{# Ishikawa Design System - CSS Variables #}
+:root {
+    --ik-primary: #4b9cfb;
+    --ik-primary-dark: #3a8de8;
+    --ik-primary-light: #e8f2ff;
+    --ik-secondary: #7b61ff;
+    --ik-accent: #f84f65;
+    --ik-white: #ffffff;
+    --ik-bg: #f5f5f5;
+    --ik-bg-alt: #fafafa;
+    --ik-text: #333333;
+    --ik-text-light: #666666;
+    --ik-text-muted: #999999;
+    --ik-border: #e0e0e0;
+    --ik-border-light: #f0f0f0;
+    --ik-shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --ik-shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+    --ik-shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --ik-radius-sm: 6px;
+    --ik-radius-md: 12px;
+    --ik-radius-lg: 20px;
+    --ik-radius-xl: 32px;
+    --ik-ease: cubic-bezier(0.4, 0.4, 0, 1);
+    --ik-font-display: 'Mochiy Pop One', 'Zen Maru Gothic', sans-serif;
+    --ik-font-body: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+    --ik-font-latin: 'Poppins', 'Lato', sans-serif;
+}

@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People & Roles Diagram Templates - 人物・役割図テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* Person Icon - Basic */
+        .person {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .person:hover {
+            transform: translateY(-5px);
+        }
+
+        .person-head {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .person-body {
+            width: 30px;
+            height: 3px;
+            margin-bottom: 5px;
+        }
+
+        .person-legs {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .leg {
+            width: 3px;
+            height: 20px;
+        }
+
+        .person-label {
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* ============================================
+           #people-1: Single Person (Leader)
+           ============================================ */
+        #people-1 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-1 .person-head {
+            background: #ff6b9d;
+            color: white;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+
+        #people-1 .person-body {
+            background: #ff6b9d;
+            width: 40px;
+        }
+
+        #people-1 .leg {
+            background: #ff6b9d;
+        }
+
+        #people-1 .person-label {
+            color: #ff6b9d;
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           #people-2: Teacher Role
+           ============================================ */
+        #people-2 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-2 .person-head {
+            background: #87ceeb;
+            color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-2 .person-body {
+            background: #87ceeb;
+            width: 35px;
+        }
+
+        #people-2 .leg {
+            background: #87ceeb;
+        }
+
+        #people-2 .person-label {
+            color: #87ceeb;
+        }
+
+        /* ============================================
+           #people-3: Doctor Role
+           ============================================ */
+        #people-3 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-3 .person-head {
+            background: #98d8aa;
+            color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-3 .person-body {
+            background: #98d8aa;
+            width: 35px;
+        }
+
+        #people-3 .leg {
+            background: #98d8aa;
+        }
+
+        #people-3 .person-label {
+            color: #98d8aa;
+        }
+
+        /* ============================================
+           #people-4: Worker Role
+           ============================================ */
+        #people-4 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-4 .person-head {
+            background: #ffb347;
+            color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-4 .person-body {
+            background: #ffb347;
+            width: 35px;
+        }
+
+        #people-4 .leg {
+            background: #ffb347;
+        }
+
+        #people-4 .person-label {
+            color: #ffb347;
+        }
+
+        /* ============================================
+           #people-5: Student Role
+           ============================================ */
+        #people-5 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-5 .person-head {
+            background: #dda0dd;
+            color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-5 .person-body {
+            background: #dda0dd;
+            width: 35px;
+        }
+
+        #people-5 .leg {
+            background: #dda0dd;
+        }
+
+        #people-5 .person-label {
+            color: #dda0dd;
+        }
+
+        /* ============================================
+           #people-6: Expert Role
+           ============================================ */
+        #people-6 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-6 .person-head {
+            background: #ffe66d;
+            color: #333;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-6 .person-body {
+            background: #ffe66d;
+            width: 35px;
+        }
+
+        #people-6 .leg {
+            background: #ffe66d;
+        }
+
+        #people-6 .person-label {
+            color: #ffe66d;
+        }
+
+        /* ============================================
+           #people-7: Parent Role
+           ============================================ */
+        #people-7 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-7 .person-head {
+            background: #ff9999;
+            color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-7 .person-body {
+            background: #ff9999;
+            width: 35px;
+        }
+
+        #people-7 .leg {
+            background: #ff9999;
+        }
+
+        #people-7 .person-label {
+            color: #ff9999;
+        }
+
+        /* ============================================
+           #people-8: Child Role
+           ============================================ */
+        #people-8 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-8 .person-head {
+            background: #99ccff;
+            color: white;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+
+        #people-8 .person-body {
+            background: #99ccff;
+            width: 28px;
+        }
+
+        #people-8 .leg {
+            background: #99ccff;
+        }
+
+        #people-8 .person-label {
+            color: #99ccff;
+        }
+
+        /* ============================================
+           #people-9: Friend Role
+           ============================================ */
+        #people-9 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-9 .person-head {
+            background: #99ff99;
+            color: #333;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-9 .person-body {
+            background: #99ff99;
+            width: 35px;
+        }
+
+        #people-9 .leg {
+            background: #99ff99;
+        }
+
+        #people-9 .person-label {
+            color: #99ff99;
+        }
+
+        /* ============================================
+           #people-10: Customer Role
+           ============================================ */
+        #people-10 .person-showcase {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-10 .person-head {
+            background: #ffcccc;
+            color: #333;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+
+        #people-10 .person-body {
+            background: #ffcccc;
+            width: 35px;
+        }
+
+        #people-10 .leg {
+            background: #ffcccc;
+        }
+
+        #people-10 .person-label {
+            color: #ff6b9d;
+        }
+
+        /* ============================================
+           #people-11: Two People Talking
+           ============================================ */
+        #people-11 .conversation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        #people-11 .person {
+            flex: 1;
+            max-width: 80px;
+        }
+
+        #people-11 .person:first-child .person-head { background: #ff6b9d; }
+        #people-11 .person:first-child .person-body { background: #ff6b9d; }
+        #people-11 .person:first-child .leg { background: #ff6b9d; }
+
+        #people-11 .person:last-child .person-head { background: #87ceeb; }
+        #people-11 .person:last-child .person-body { background: #87ceeb; }
+        #people-11 .person:last-child .leg { background: #87ceeb; }
+
+        #people-11 .chat-bubble {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ffe66d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* ============================================
+           #people-12: Group of People (4)
+           ============================================ */
+        #people-12 .group-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        #people-12 .person {
+            max-width: 70px;
+        }
+
+        #people-12 .person:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-12 .person:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-12 .person:nth-child(1) .leg { background: #ff6b9d; }
+
+        #people-12 .person:nth-child(2) .person-head { background: #87ceeb; }
+        #people-12 .person:nth-child(2) .person-body { background: #87ceeb; }
+        #people-12 .person:nth-child(2) .leg { background: #87ceeb; }
+
+        #people-12 .person:nth-child(3) .person-head { background: #98d8aa; }
+        #people-12 .person:nth-child(3) .person-body { background: #98d8aa; }
+        #people-12 .person:nth-child(3) .leg { background: #98d8aa; }
+
+        #people-12 .person:nth-child(4) .person-head { background: #ffb347; }
+        #people-12 .person:nth-child(4) .person-body { background: #ffb347; }
+        #people-12 .person:nth-child(4) .leg { background: #ffb347; }
+
+        /* ============================================
+           #people-13: Team Formation
+           ============================================ */
+        #people-13 .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        #people-13 .person {
+            max-width: 60px;
+        }
+
+        #people-13 .person:nth-child(odd) .person-head { background: #ff6b9d; }
+        #people-13 .person:nth-child(odd) .person-body { background: #ff6b9d; }
+        #people-13 .person:nth-child(odd) .leg { background: #ff6b9d; }
+
+        #people-13 .person:nth-child(even) .person-head { background: #87ceeb; }
+        #people-13 .person:nth-child(even) .person-body { background: #87ceeb; }
+        #people-13 .person:nth-child(even) .leg { background: #87ceeb; }
+
+        /* ============================================
+           #people-14: Family Structure
+           ============================================ */
+        #people-14 .family-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        #people-14 .family-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #people-14 .parent .person-head { background: #ff6b9d; }
+        #people-14 .parent .person-body { background: #ff6b9d; }
+        #people-14 .parent .leg { background: #ff6b9d; }
+
+        #people-14 .child .person-head { background: #99ccff; width: 35px; height: 35px; }
+        #people-14 .child .person-body { background: #99ccff; width: 25px; }
+        #people-14 .child .leg { background: #99ccff; }
+
+        #people-14 .connector {
+            width: 100%;
+            height: 15px;
+            border-top: 2px solid #ddd;
+        }
+
+        /* ============================================
+           #people-15: Meeting Circle
+           ============================================ */
+        #people-15 .meeting-circle {
+            position: relative;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-15 .circle-person {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #people-15 .circle-person:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+        #people-15 .circle-person:nth-child(2) { top: 30px; right: 30px; }
+        #people-15 .circle-person:nth-child(3) { bottom: 30px; right: 30px; }
+        #people-15 .circle-person:nth-child(4) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        #people-15 .circle-person:nth-child(5) { bottom: 30px; left: 30px; }
+        #people-15 .circle-person:nth-child(6) { top: 30px; left: 30px; }
+
+        #people-15 .circle-person .person-head {
+            width: 40px;
+            height: 40px;
+            font-size: 0.9rem;
+        }
+
+        #people-15 .circle-person:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-15 .circle-person:nth-child(2) .person-head { background: #87ceeb; }
+        #people-15 .circle-person:nth-child(3) .person-head { background: #98d8aa; }
+        #people-15 .circle-person:nth-child(4) .person-head { background: #ffb347; }
+        #people-15 .circle-person:nth-child(5) .person-head { background: #dda0dd; }
+        #people-15 .circle-person:nth-child(6) .person-head { background: #ffe66d; }
+
+        #people-15 .circle-table {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+        }
+
+        /* ============================================
+           #people-16: Interview (Interviewer & Candidate)
+           ============================================ */
+        #people-16 .interview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        #people-16 .interviewer .person-head { background: #ff6b9d; }
+        #people-16 .interviewer .person-body { background: #ff6b9d; }
+        #people-16 .interviewer .leg { background: #ff6b9d; }
+
+        #people-16 .candidate .person-head { background: #87ceeb; }
+        #people-16 .candidate .person-body { background: #87ceeb; }
+        #people-16 .candidate .leg { background: #87ceeb; }
+
+        #people-16 .interview-desk {
+            width: 60px;
+            height: 30px;
+            border: 2px solid #ffb347;
+            border-radius: 5px;
+            background: rgba(255, 179, 71, 0.2);
+        }
+
+        /* ============================================
+           #people-17: Collaboration (Handshake)
+           ============================================ */
+        #people-17 .collaboration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 20px;
+        }
+
+        #people-17 .person:first-child {
+            transform: scaleX(-1);
+        }
+
+        #people-17 .person:first-child .person-head { background: #ff6b9d; }
+        #people-17 .person:first-child .person-body { background: #ff6b9d; }
+        #people-17 .person:first-child .leg { background: #ff6b9d; }
+
+        #people-17 .person:last-child .person-head { background: #98d8aa; }
+        #people-17 .person:last-child .person-body { background: #98d8aa; }
+        #people-17 .person:last-child .leg { background: #98d8aa; }
+
+        #people-17 .handshake {
+            width: 30px;
+            height: 20px;
+            background: #ffb347;
+            border-radius: 10px;
+            margin: 0 5px;
+        }
+
+        /* ============================================
+           #people-18: Competition (VS)
+           ============================================ */
+        #people-18 .competition {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        #people-18 .competitor {
+            max-width: 80px;
+        }
+
+        #people-18 .competitor:first-child .person-head { background: #ff6b9d; }
+        #people-18 .competitor:first-child .person-body { background: #ff6b9d; }
+        #people-18 .competitor:first-child .leg { background: #ff6b9d; }
+
+        #people-18 .competitor:last-child .person-head { background: #87ceeb; }
+        #people-18 .competitor:last-child .person-body { background: #87ceeb; }
+        #people-18 .competitor:last-child .leg { background: #87ceeb; }
+
+        #people-18 .vs-badge {
+            width: 40px;
+            height: 40px;
+            background: #ffe66d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           #people-19: Mentor-Mentee Relationship
+           ============================================ */
+        #people-19 .mentor-mentee {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        #people-19 .mentor .person-head { background: #ff6b9d; }
+        #people-19 .mentor .person-body { background: #ff6b9d; }
+        #people-19 .mentor .leg { background: #ff6b9d; }
+
+        #people-19 .arrow-down {
+            width: 3px;
+            height: 30px;
+            background: #ddd;
+            position: relative;
+        }
+
+        #people-19 .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 8px solid #ddd;
+        }
+
+        #people-19 .mentee .person-head { background: #87ceeb; }
+        #people-19 .mentee .person-body { background: #87ceeb; }
+        #people-19 .mentee .leg { background: #87ceeb; }
+
+        /* ============================================
+           #people-20: Customer-Seller Relationship
+           ============================================ */
+        #people-20 .transaction {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        #people-20 .customer .person-head { background: #98d8aa; }
+        #people-20 .customer .person-body { background: #98d8aa; }
+        #people-20 .customer .leg { background: #98d8aa; }
+
+        #people-20 .seller .person-head { background: #ffb347; }
+        #people-20 .seller .person-body { background: #ffb347; }
+        #people-20 .seller .leg { background: #ffb347; }
+
+        #people-20 .transaction-arrow {
+            width: 30px;
+            height: 3px;
+            background: #ddd;
+            position: relative;
+        }
+
+        #people-20 .transaction-arrow::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #ddd;
+        }
+
+        /* ============================================
+           #people-21: Organizational Chart (5 people)
+           ============================================ */
+        #people-21 .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        #people-21 .org-level {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #people-21 .leader .person-head { background: #ff6b9d; }
+        #people-21 .leader .person-body { background: #ff6b9d; }
+        #people-21 .leader .leg { background: #ff6b9d; }
+
+        #people-21 .member .person-head { background: #87ceeb; }
+        #people-21 .member .person-body { background: #87ceeb; }
+        #people-21 .member .leg { background: #87ceeb; }
+
+        /* ============================================
+           #people-22: Skills Matrix (People with Badges)
+           ============================================ */
+        #people-22 .skills-matrix {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        #people-22 .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #people-22 .person {
+            flex-shrink: 0;
+        }
+
+        #people-22 .person:nth-child(odd) .person-head { background: #ff6b9d; }
+        #people-22 .person:nth-child(odd) .person-body { background: #ff6b9d; }
+        #people-22 .person:nth-child(odd) .leg { background: #ff6b9d; }
+
+        #people-22 .person:nth-child(even) .person-head { background: #87ceeb; }
+        #people-22 .person:nth-child(even) .person-body { background: #87ceeb; }
+        #people-22 .person:nth-child(even) .leg { background: #87ceeb; }
+
+        #people-22 .skill-badges {
+            display: flex;
+            gap: 5px;
+        }
+
+        #people-22 .badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ffe66d;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           #people-23: Stakeholder Map
+           ============================================ */
+        #people-23 .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        #people-23 .stakeholder {
+            text-align: center;
+        }
+
+        #people-23 .stakeholder .person {
+            margin-bottom: 10px;
+        }
+
+        #people-23 .stakeholder:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-23 .stakeholder:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-23 .stakeholder:nth-child(1) .leg { background: #ff6b9d; }
+
+        #people-23 .stakeholder:nth-child(2) .person-head { background: #87ceeb; }
+        #people-23 .stakeholder:nth-child(2) .person-body { background: #87ceeb; }
+        #people-23 .stakeholder:nth-child(2) .leg { background: #87ceeb; }
+
+        #people-23 .stakeholder:nth-child(3) .person-head { background: #98d8aa; }
+        #people-23 .stakeholder:nth-child(3) .person-body { background: #98d8aa; }
+        #people-23 .stakeholder:nth-child(3) .leg { background: #98d8aa; }
+
+        #people-23 .stakeholder:nth-child(4) .person-head { background: #ffb347; }
+        #people-23 .stakeholder:nth-child(4) .person-body { background: #ffb347; }
+        #people-23 .stakeholder:nth-child(4) .leg { background: #ffb347; }
+
+        #people-23 .stake-label {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* ============================================
+           #people-24: User Personas
+           ============================================ */
+        #people-24 .personas {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        #people-24 .persona-card {
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f5f5f5;
+        }
+
+        #people-24 .persona-card:nth-child(1) { background: #ffe6ee; }
+        #people-24 .persona-card:nth-child(2) { background: #e3f2fd; }
+        #people-24 .persona-card:nth-child(3) { background: #e8f5e9; }
+
+        #people-24 .persona-card .person { margin-bottom: 5px; }
+
+        #people-24 .persona-card:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-24 .persona-card:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-24 .persona-card:nth-child(1) .leg { background: #ff6b9d; }
+
+        #people-24 .persona-card:nth-child(2) .person-head { background: #87ceeb; }
+        #people-24 .persona-card:nth-child(2) .person-body { background: #87ceeb; }
+        #people-24 .persona-card:nth-child(2) .leg { background: #87ceeb; }
+
+        #people-24 .persona-card:nth-child(3) .person-head { background: #98d8aa; }
+        #people-24 .persona-card:nth-child(3) .person-body { background: #98d8aa; }
+        #people-24 .persona-card:nth-child(3) .leg { background: #98d8aa; }
+
+        #people-24 .persona-name {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           #people-25: Cast of Characters
+           ============================================ */
+        #people-25 .cast-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        #people-25 .cast-member {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            background: #f5f5f5;
+        }
+
+        #people-25 .cast-member:nth-child(1) { background: #ffe6ee; }
+        #people-25 .cast-member:nth-child(2) { background: #e3f2fd; }
+        #people-25 .cast-member:nth-child(3) { background: #e8f5e9; }
+
+        #people-25 .cast-member .person {
+            max-width: 50px;
+            flex-shrink: 0;
+        }
+
+        #people-25 .cast-member:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-25 .cast-member:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-25 .cast-member:nth-child(1) .leg { background: #ff6b9d; }
+
+        #people-25 .cast-member:nth-child(2) .person-head { background: #87ceeb; }
+        #people-25 .cast-member:nth-child(2) .person-body { background: #87ceeb; }
+        #people-25 .cast-member:nth-child(2) .leg { background: #87ceeb; }
+
+        #people-25 .cast-member:nth-child(3) .person-head { background: #98d8aa; }
+        #people-25 .cast-member:nth-child(3) .person-body { background: #98d8aa; }
+        #people-25 .cast-member:nth-child(3) .leg { background: #98d8aa; }
+
+        #people-25 .cast-info {
+            flex: 1;
+        }
+
+        #people-25 .cast-name {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        #people-25 .cast-role {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        /* ============================================
+           #people-26: Band Members (5 musicians)
+           ============================================ */
+        #people-26 .band {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        #people-26 .musician {
+            text-align: center;
+        }
+
+        #people-26 .musician .person-head {
+            width: 45px;
+            height: 45px;
+            font-size: 1rem;
+        }
+
+        #people-26 .musician:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-26 .musician:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-26 .musician:nth-child(1) .leg { background: #ff6b9d; }
+
+        #people-26 .musician:nth-child(2) .person-head { background: #87ceeb; }
+        #people-26 .musician:nth-child(2) .person-body { background: #87ceeb; }
+        #people-26 .musician:nth-child(2) .leg { background: #87ceeb; }
+
+        #people-26 .musician:nth-child(3) .person-head { background: #98d8aa; }
+        #people-26 .musician:nth-child(3) .person-body { background: #98d8aa; }
+        #people-26 .musician:nth-child(3) .leg { background: #98d8aa; }
+
+        #people-26 .musician:nth-child(4) .person-head { background: #ffb347; }
+        #people-26 .musician:nth-child(4) .person-body { background: #ffb347; }
+        #people-26 .musician:nth-child(4) .leg { background: #ffb347; }
+
+        #people-26 .musician:nth-child(5) .person-head { background: #dda0dd; }
+        #people-26 .musician:nth-child(5) .person-body { background: #dda0dd; }
+        #people-26 .musician:nth-child(5) .leg { background: #dda0dd; }
+
+        #people-26 .instrument {
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        /* ============================================
+           #people-27: Sports Team (5 players)
+           ============================================ */
+        #people-27 .team-formation {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        #people-27 .player {
+            max-width: 60px;
+        }
+
+        #people-27 .player:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-27 .player:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-27 .player:nth-child(1) .leg { background: #ff6b9d; }
+
+        #people-27 .player:nth-child(2) .person-head { background: #87ceeb; }
+        #people-27 .player:nth-child(2) .person-body { background: #87ceeb; }
+        #people-27 .player:nth-child(2) .leg { background: #87ceeb; }
+
+        #people-27 .player:nth-child(3) .person-head { background: #98d8aa; }
+        #people-27 .player:nth-child(3) .person-body { background: #98d8aa; }
+        #people-27 .player:nth-child(3) .leg { background: #98d8aa; }
+
+        #people-27 .player:nth-child(4) .person-head { background: #ffb347; }
+        #people-27 .player:nth-child(4) .person-body { background: #ffb347; }
+        #people-27 .player:nth-child(4) .leg { background: #ffb347; }
+
+        #people-27 .player:nth-child(5) .person-head { background: #dda0dd; }
+        #people-27 .player:nth-child(5) .person-body { background: #dda0dd; }
+        #people-27 .player:nth-child(5) .leg { background: #dda0dd; }
+
+        /* ============================================
+           #people-28: Responsibility Assignment
+           ============================================ */
+        #people-28 .responsibility-matrix {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 20px;
+        }
+
+        #people-28 .task-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #people-28 .task-name {
+            min-width: 100px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        #people-28 .assignees {
+            display: flex;
+            gap: 5px;
+        }
+
+        #people-28 .person-small {
+            max-width: 35px;
+        }
+
+        #people-28 .person-small .person-head {
+            width: 30px;
+            height: 30px;
+            font-size: 0.7rem;
+        }
+
+        #people-28 .person-small .person-body {
+            width: 20px;
+        }
+
+        #people-28 .person-small:nth-child(odd) .person-head { background: #ff6b9d; }
+        #people-28 .person-small:nth-child(odd) .person-body { background: #ff6b9d; }
+        #people-28 .person-small:nth-child(odd) .leg { background: #ff6b9d; }
+
+        #people-28 .person-small:nth-child(even) .person-head { background: #87ceeb; }
+        #people-28 .person-small:nth-child(even) .person-body { background: #87ceeb; }
+        #people-28 .person-small:nth-child(even) .leg { background: #87ceeb; }
+
+        /* ============================================
+           #people-29: Influence Diagram
+           ============================================ */
+        #people-29 .influence-map {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        #people-29 .central-person .person-head {
+            background: #ff6b9d;
+            width: 60px;
+            height: 60px;
+            font-size: 1.3rem;
+        }
+
+        #people-29 .central-person .person-body {
+            background: #ff6b9d;
+            width: 40px;
+        }
+
+        #people-29 .central-person .leg {
+            background: #ff6b9d;
+        }
+
+        #people-29 .influenced-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #people-29 .influenced .person-head {
+            background: #87ceeb;
+            width: 40px;
+            height: 40px;
+            font-size: 0.9rem;
+        }
+
+        #people-29 .influenced .person-body {
+            background: #87ceeb;
+            width: 28px;
+        }
+
+        #people-29 .influenced .leg {
+            background: #87ceeb;
+        }
+
+        #people-29 .influence-line {
+            width: 30px;
+            height: 2px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #people-30: Communication Network
+           ============================================ */
+        #people-30 .network {
+            position: relative;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #people-30 .network-node {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #people-30 .network-node:nth-child(1) { top: 20px; left: 50%; transform: translateX(-50%); }
+        #people-30 .network-node:nth-child(2) { top: 80px; left: 20px; }
+        #people-30 .network-node:nth-child(3) { top: 80px; right: 20px; }
+        #people-30 .network-node:nth-child(4) { bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+        #people-30 .network-node .person-head {
+            width: 40px;
+            height: 40px;
+            font-size: 0.9rem;
+        }
+
+        #people-30 .network-node:nth-child(1) .person-head { background: #ff6b9d; }
+        #people-30 .network-node:nth-child(2) .person-head { background: #87ceeb; }
+        #people-30 .network-node:nth-child(3) .person-head { background: #98d8aa; }
+        #people-30 .network-node:nth-child(4) .person-head { background: #ffb347; }
+
+        #people-30 .network-node .person-body {
+            width: 28px;
+        }
+
+        #people-30 .network-node:nth-child(1) .person-body { background: #ff6b9d; }
+        #people-30 .network-node:nth-child(2) .person-body { background: #87ceeb; }
+        #people-30 .network-node:nth-child(3) .person-body { background: #98d8aa; }
+        #people-30 .network-node:nth-child(4) .person-body { background: #ffb347; }
+
+        #people-30 .network-node .leg {
+            background: currentColor;
+        }
+
+        #people-30 .network-node:nth-child(1) .leg { background: #ff6b9d; }
+        #people-30 .network-node:nth-child(2) .leg { background: #87ceeb; }
+        #people-30 .network-node:nth-child(3) .leg { background: #98d8aa; }
+        #people-30 .network-node:nth-child(4) .leg { background: #ffb347; }
+
+        #people-30 .network-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        #people-30 svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>People & Roles Diagram Templates - 人物・役割図テンプレート</h1>
+
+    <div class="template-grid">
+
+        <!-- #people-1: Single Person (Leader) -->
+        <div class="template-card" id="people-1">
+            <h2>#1 Single Leader (リーダー)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">👑</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Leader</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-2: Teacher -->
+        <div class="template-card" id="people-2">
+            <h2>#2 Teacher (先生)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">📚</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Teacher</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-3: Doctor -->
+        <div class="template-card" id="people-3">
+            <h2>#3 Doctor (医者)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">🏥</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Doctor</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-4: Worker -->
+        <div class="template-card" id="people-4">
+            <h2>#4 Worker (労働者)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">🔧</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Worker</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-5: Student -->
+        <div class="template-card" id="people-5">
+            <h2>#5 Student (生徒)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">✏️</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Student</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-6: Expert -->
+        <div class="template-card" id="people-6">
+            <h2>#6 Expert (専門家)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">⭐</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Expert</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-7: Parent -->
+        <div class="template-card" id="people-7">
+            <h2>#7 Parent (親)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">👨</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Parent</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-8: Child -->
+        <div class="template-card" id="people-8">
+            <h2>#8 Child (子ども)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">👧</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Child</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-9: Friend -->
+        <div class="template-card" id="people-9">
+            <h2>#9 Friend (友達)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">😊</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Friend</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-10: Customer -->
+        <div class="template-card" id="people-10">
+            <h2>#10 Customer (顧客)</h2>
+            <div class="person-showcase">
+                <div class="person">
+                    <div class="person-head">🛒</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Customer</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-11: Two People Talking -->
+        <div class="template-card" id="people-11">
+            <h2>#11 Two People Talking (会話)</h2>
+            <div class="conversation">
+                <div class="person">
+                    <div class="person-head">😊</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="chat-bubble">💬</div>
+                <div class="person">
+                    <div class="person-head">😊</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-12: Group of Four -->
+        <div class="template-card" id="people-12">
+            <h2>#12 Group of Four (グループ)</h2>
+            <div class="group-circle">
+                <div class="person">
+                    <div class="person-head">A</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">B</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">C</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">D</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-13: Team Formation -->
+        <div class="template-card" id="people-13">
+            <h2>#13 Team Formation (チーム)</h2>
+            <div class="team-grid">
+                <div class="person">
+                    <div class="person-head">1</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">2</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">3</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">4</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">5</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-head">6</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-14: Family Structure -->
+        <div class="template-card" id="people-14">
+            <h2>#14 Family Structure (家族)</h2>
+            <div class="family-tree">
+                <div class="family-row">
+                    <div class="person parent">
+                        <div class="person-head">👨</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                        <div class="person-label">Parent</div>
+                    </div>
+                    <div class="person parent">
+                        <div class="person-head">👩</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                        <div class="person-label">Parent</div>
+                    </div>
+                </div>
+                <div class="connector"></div>
+                <div class="family-row">
+                    <div class="person child">
+                        <div class="person-head">👦</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person child">
+                        <div class="person-head">👧</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-15: Meeting Circle -->
+        <div class="template-card" id="people-15">
+            <h2>#15 Meeting Circle (会議)</h2>
+            <div class="meeting-circle">
+                <div class="circle-table"></div>
+                <div class="circle-person">
+                    <div class="person-head">1</div>
+                </div>
+                <div class="circle-person">
+                    <div class="person-head">2</div>
+                </div>
+                <div class="circle-person">
+                    <div class="person-head">3</div>
+                </div>
+                <div class="circle-person">
+                    <div class="person-head">4</div>
+                </div>
+                <div class="circle-person">
+                    <div class="person-head">5</div>
+                </div>
+                <div class="circle-person">
+                    <div class="person-head">6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-16: Interview -->
+        <div class="template-card" id="people-16">
+            <h2>#16 Interview (面接)</h2>
+            <div class="interview">
+                <div class="person interviewer">
+                    <div class="person-head">👔</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="interview-desk"></div>
+                <div class="person candidate">
+                    <div class="person-head">😊</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-17: Collaboration -->
+        <div class="template-card" id="people-17">
+            <h2>#17 Collaboration (協働)</h2>
+            <div class="collaboration">
+                <div class="person">
+                    <div class="person-head">A</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="handshake"></div>
+                <div class="person">
+                    <div class="person-head">B</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-18: Competition -->
+        <div class="template-card" id="people-18">
+            <h2>#18 Competition (競争)</h2>
+            <div class="competition">
+                <div class="person competitor">
+                    <div class="person-head">A</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="vs-badge">VS</div>
+                <div class="person competitor">
+                    <div class="person-head">B</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-19: Mentor-Mentee -->
+        <div class="template-card" id="people-19">
+            <h2>#19 Mentor-Mentee (師弟)</h2>
+            <div class="mentor-mentee">
+                <div class="person mentor">
+                    <div class="person-head">師</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="arrow-down"></div>
+                <div class="person mentee">
+                    <div class="person-head">弟</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-20: Customer-Seller -->
+        <div class="template-card" id="people-20">
+            <h2>#20 Transaction (取引)</h2>
+            <div class="transaction">
+                <div class="person customer">
+                    <div class="person-head">客</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="transaction-arrow"></div>
+                <div class="person seller">
+                    <div class="person-head">売</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-21: Organizational Chart -->
+        <div class="template-card" id="people-21">
+            <h2>#21 Org Chart (組織図)</h2>
+            <div class="org-chart">
+                <div class="org-level">
+                    <div class="person leader">
+                        <div class="person-head">CEO</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="org-level">
+                    <div class="person member">
+                        <div class="person-head">M1</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person member">
+                        <div class="person-head">M2</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person member">
+                        <div class="person-head">M3</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person member">
+                        <div class="person-head">M4</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-22: Skills Matrix -->
+        <div class="template-card" id="people-22">
+            <h2>#22 Skills Matrix (スキル)</h2>
+            <div class="skills-matrix">
+                <div class="skill-row">
+                    <div class="person">
+                        <div class="person-head">太</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="skill-badges">
+                        <div class="badge">A</div>
+                        <div class="badge">B</div>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <div class="person">
+                        <div class="person-head">花</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="skill-badges">
+                        <div class="badge">B</div>
+                        <div class="badge">C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-23: Stakeholder Map -->
+        <div class="template-card" id="people-23">
+            <h2>#23 Stakeholder Map (利害関係者)</h2>
+            <div class="stakeholder-grid">
+                <div class="stakeholder">
+                    <div class="person">
+                        <div class="person-head">S1</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="stake-label">Stakeholder</div>
+                </div>
+                <div class="stakeholder">
+                    <div class="person">
+                        <div class="person-head">S2</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="stake-label">Stakeholder</div>
+                </div>
+                <div class="stakeholder">
+                    <div class="person">
+                        <div class="person-head">S3</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="stake-label">Stakeholder</div>
+                </div>
+                <div class="stakeholder">
+                    <div class="person">
+                        <div class="person-head">S4</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="stake-label">Stakeholder</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-24: User Personas -->
+        <div class="template-card" id="people-24">
+            <h2>#24 User Personas (ペルソナ)</h2>
+            <div class="personas">
+                <div class="persona-card">
+                    <div class="person">
+                        <div class="person-head">👨</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="persona-name">田中太郎</div>
+                </div>
+                <div class="persona-card">
+                    <div class="person">
+                        <div class="person-head">👩</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="persona-name">山田花子</div>
+                </div>
+                <div class="persona-card">
+                    <div class="person">
+                        <div class="person-head">👨</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="persona-name">佐藤次郎</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-25: Cast of Characters -->
+        <div class="template-card" id="people-25">
+            <h2>#25 Cast List (キャスト)</h2>
+            <div class="cast-list">
+                <div class="cast-member">
+                    <div class="person">
+                        <div class="person-head">主</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="cast-info">
+                        <div class="cast-name">主人公</div>
+                        <div class="cast-role">主役</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <div class="person">
+                        <div class="person-head">相</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="cast-info">
+                        <div class="cast-name">相方</div>
+                        <div class="cast-role">脇役</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <div class="person">
+                        <div class="person-head">敵</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="cast-info">
+                        <div class="cast-name">敵キャラ</div>
+                        <div class="cast-role">対立者</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-26: Band Members -->
+        <div class="template-card" id="people-26">
+            <h2>#26 Band Members (バンド)</h2>
+            <div class="band">
+                <div class="musician">
+                    <div class="person-head">🎸</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="instrument">Guitar</div>
+                </div>
+                <div class="musician">
+                    <div class="person-head">🎤</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="instrument">Vocal</div>
+                </div>
+                <div class="musician">
+                    <div class="person-head">🥁</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="instrument">Drums</div>
+                </div>
+                <div class="musician">
+                    <div class="person-head">🎹</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="instrument">Piano</div>
+                </div>
+                <div class="musician">
+                    <div class="person-head">🎺</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="instrument">Brass</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-27: Sports Team -->
+        <div class="template-card" id="people-27">
+            <h2>#27 Sports Team (スポーツチーム)</h2>
+            <div class="team-formation">
+                <div class="player">
+                    <div class="person-head">P1</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="player">
+                    <div class="person-head">P2</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="player">
+                    <div class="person-head">P3</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="player">
+                    <div class="person-head">P4</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+                <div class="player">
+                    <div class="person-head">P5</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-28: Responsibility Assignment -->
+        <div class="template-card" id="people-28">
+            <h2>#28 Responsibility (責任割当)</h2>
+            <div class="responsibility-matrix">
+                <div class="task-row">
+                    <div class="task-name">Task A</div>
+                    <div class="assignees">
+                        <div class="person person-small">
+                            <div class="person-head">👤</div>
+                            <div class="person-body"></div>
+                            <div class="person-legs">
+                                <div class="leg"></div>
+                                <div class="leg"></div>
+                            </div>
+                        </div>
+                        <div class="person person-small">
+                            <div class="person-head">👤</div>
+                            <div class="person-body"></div>
+                            <div class="person-legs">
+                                <div class="leg"></div>
+                                <div class="leg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-row">
+                    <div class="task-name">Task B</div>
+                    <div class="assignees">
+                        <div class="person person-small">
+                            <div class="person-head">👤</div>
+                            <div class="person-body"></div>
+                            <div class="person-legs">
+                                <div class="leg"></div>
+                                <div class="leg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-row">
+                    <div class="task-name">Task C</div>
+                    <div class="assignees">
+                        <div class="person person-small">
+                            <div class="person-head">👤</div>
+                            <div class="person-body"></div>
+                            <div class="person-legs">
+                                <div class="leg"></div>
+                                <div class="leg"></div>
+                            </div>
+                        </div>
+                        <div class="person person-small">
+                            <div class="person-head">👤</div>
+                            <div class="person-body"></div>
+                            <div class="person-legs">
+                                <div class="leg"></div>
+                                <div class="leg"></div>
+                            </div>
+                        </div>
+                        <div class="person person-small">
+                            <div class="person-head">👤</div>
+                            <div class="person-body"></div>
+                            <div class="person-legs">
+                                <div class="leg"></div>
+                                <div class="leg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-29: Influence Diagram -->
+        <div class="template-card" id="people-29">
+            <h2>#29 Influence Diagram (影響図)</h2>
+            <div class="influence-map">
+                <div class="person central-person">
+                    <div class="person-head">🎯</div>
+                    <div class="person-body"></div>
+                    <div class="person-legs">
+                        <div class="leg"></div>
+                        <div class="leg"></div>
+                    </div>
+                    <div class="person-label">Central</div>
+                </div>
+                <div class="influenced-group">
+                    <div class="person influenced">
+                        <div class="person-head">1</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person influenced">
+                        <div class="person-head">2</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person influenced">
+                        <div class="person-head">3</div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #people-30: Communication Network -->
+        <div class="template-card" id="people-30">
+            <h2>#30 Communication Network (ネットワーク)</h2>
+            <div class="network">
+                <svg class="network-lines">
+                    <line x1="50%" y1="20px" x2="20%" y2="80px" stroke="#ddd" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="50%" y1="20px" x2="80%" y2="80px" stroke="#ddd" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="20%" y1="80px" x2="50%" y2="160px" stroke="#ddd" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="80%" y1="80px" x2="50%" y2="160px" stroke="#ddd" stroke-width="2" stroke-dasharray="5,5"/>
+                </svg>
+                <div class="network-node">
+                    <div class="person-head">A</div>
+                </div>
+                <div class="network-node">
+                    <div class="person-head">B</div>
+                </div>
+                <div class="network-node">
+                    <div class="person-head">C</div>
+                </div>
+                <div class="network-node">
+                    <div class="person-head">D</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

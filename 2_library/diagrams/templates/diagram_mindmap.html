@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Map Diagram Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #666;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #FF6B9D;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .template-card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .diagram-container {
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* ============================
+           #mindmap-1: Simple Radial Mind Map
+           ============================ */
+        #mindmap-1 .radial-map {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        #mindmap-1 .center-node {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: #FF6B9D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-1 .center-node:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #mindmap-1 .branch-node {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-1 .branch-node:hover {
+            transform: scale(1.15);
+        }
+
+        #mindmap-1 .branch-1 { top: 0; left: 50%; transform: translateX(-50%); background: #87CEEB; }
+        #mindmap-1 .branch-2 { top: 25%; right: 0; background: #98D8AA; }
+        #mindmap-1 .branch-3 { bottom: 25%; right: 0; background: #FFD93D; }
+        #mindmap-1 .branch-4 { bottom: 0; left: 50%; transform: translateX(-50%); background: #FF9F45; }
+        #mindmap-1 .branch-5 { bottom: 25%; left: 0; background: #C9B1FF; }
+        #mindmap-1 .branch-6 { top: 25%; left: 0; background: #FFB6C1; }
+
+        #mindmap-1 .branch-1:hover { transform: translateX(-50%) scale(1.15); }
+        #mindmap-1 .branch-4:hover { transform: translateX(-50%) scale(1.15); }
+
+        #mindmap-1 .connector {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 3px;
+            background: #ddd;
+            transform-origin: left center;
+            z-index: 1;
+        }
+
+        #mindmap-1 .conn-1 { transform: rotate(-90deg) translateY(-1.5px); }
+        #mindmap-1 .conn-2 { transform: rotate(-30deg) translateY(-1.5px); }
+        #mindmap-1 .conn-3 { transform: rotate(30deg) translateY(-1.5px); }
+        #mindmap-1 .conn-4 { transform: rotate(90deg) translateY(-1.5px); }
+        #mindmap-1 .conn-5 { transform: rotate(150deg) translateY(-1.5px); }
+        #mindmap-1 .conn-6 { transform: rotate(-150deg) translateY(-1.5px); }
+
+        /* ============================
+           #mindmap-2: Horizontal Tree Mind Map
+           ============================ */
+        #mindmap-2 .h-tree {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #mindmap-2 .h-center {
+            background: #FF6B9D;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        #mindmap-2 .h-branches {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        #mindmap-2 .h-branches::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            bottom: 20px;
+            width: 3px;
+            background: #ddd;
+        }
+
+        #mindmap-2 .h-branch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #mindmap-2 .h-connector {
+            width: 20px;
+            height: 3px;
+            background: #ddd;
+        }
+
+        #mindmap-2 .h-node {
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-2 .h-node:hover {
+            transform: translateX(5px);
+        }
+
+        #mindmap-2 .h-node-1 { background: #87CEEB; }
+        #mindmap-2 .h-node-2 { background: #98D8AA; }
+        #mindmap-2 .h-node-3 { background: #FFD93D; }
+        #mindmap-2 .h-node-4 { background: #FF9F45; }
+        #mindmap-2 .h-node-5 { background: #C9B1FF; }
+
+        /* ============================
+           #mindmap-3: Vertical Tree Mind Map
+           ============================ */
+        #mindmap-3 .v-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #mindmap-3 .v-center {
+            background: #87CEEB;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #mindmap-3 .v-connector-main {
+            width: 3px;
+            height: 20px;
+            background: #ddd;
+        }
+
+        #mindmap-3 .v-branches {
+            display: flex;
+            gap: 15px;
+            position: relative;
+        }
+
+        #mindmap-3 .v-branches::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            right: 30px;
+            height: 3px;
+            background: #ddd;
+        }
+
+        #mindmap-3 .v-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #mindmap-3 .v-conn {
+            width: 3px;
+            height: 15px;
+            background: #ddd;
+        }
+
+        #mindmap-3 .v-node {
+            padding: 12px 20px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-3 .v-node:hover {
+            transform: translateY(-5px);
+        }
+
+        #mindmap-3 .v-node-1 { background: #FF6B9D; }
+        #mindmap-3 .v-node-2 { background: #98D8AA; }
+        #mindmap-3 .v-node-3 { background: #FFD93D; }
+        #mindmap-3 .v-node-4 { background: #C9B1FF; }
+
+        /* ============================
+           #mindmap-4: Bubble Cluster Mind Map
+           ============================ */
+        #mindmap-4 .bubble-cluster {
+            position: relative;
+            width: 350px;
+            height: 280px;
+        }
+
+        #mindmap-4 .bubble {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-4 .bubble:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-4 .bubble-main {
+            width: 120px;
+            height: 120px;
+            background: #FF6B9D;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            z-index: 5;
+        }
+
+        #mindmap-4 .bubble-main:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        #mindmap-4 .bubble-1 { width: 80px; height: 80px; background: #87CEEB; top: 10px; left: 20px; font-size: 11px; }
+        #mindmap-4 .bubble-2 { width: 70px; height: 70px; background: #98D8AA; top: 5px; right: 40px; font-size: 11px; }
+        #mindmap-4 .bubble-3 { width: 75px; height: 75px; background: #FFD93D; top: 100px; right: 10px; font-size: 11px; }
+        #mindmap-4 .bubble-4 { width: 65px; height: 65px; background: #FF9F45; bottom: 20px; right: 60px; font-size: 10px; }
+        #mindmap-4 .bubble-5 { width: 70px; height: 70px; background: #C9B1FF; bottom: 10px; left: 80px; font-size: 11px; }
+        #mindmap-4 .bubble-6 { width: 60px; height: 60px; background: #FFB6C1; top: 120px; left: 10px; font-size: 10px; }
+
+        /* ============================
+           #mindmap-5: Organic/Curved Branches
+           ============================ */
+        #mindmap-5 .organic-map {
+            position: relative;
+            width: 380px;
+            height: 300px;
+        }
+
+        #mindmap-5 .org-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: #98D8AA;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-5 .org-branch {
+            position: absolute;
+            padding: 10px 18px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-5 .org-branch:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-5 .org-1 { top: 20px; left: 50%; transform: translateX(-50%); background: #FF6B9D; }
+        #mindmap-5 .org-2 { top: 60px; right: 20px; background: #87CEEB; }
+        #mindmap-5 .org-3 { bottom: 80px; right: 30px; background: #FFD93D; }
+        #mindmap-5 .org-4 { bottom: 20px; left: 50%; transform: translateX(-50%); background: #FF9F45; }
+        #mindmap-5 .org-5 { bottom: 80px; left: 30px; background: #C9B1FF; }
+        #mindmap-5 .org-6 { top: 60px; left: 20px; background: #FFB6C1; }
+
+        #mindmap-5 .org-1:hover { transform: translateX(-50%) scale(1.1); }
+        #mindmap-5 .org-4:hover { transform: translateX(-50%) scale(1.1); }
+
+        #mindmap-5 .curve-line {
+            position: absolute;
+            border: 3px solid #ddd;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        #mindmap-5 .curve-1 { width: 80px; height: 60px; top: 55px; left: 50%; transform: translateX(-50%); border-bottom: none; border-left: none; border-right: none; border-radius: 50% 50% 0 0; }
+        #mindmap-5 .curve-2 { width: 60px; height: 80px; top: 80px; right: 95px; border-bottom: none; border-left: none; border-top: none; }
+        #mindmap-5 .curve-3 { width: 60px; height: 60px; bottom: 115px; right: 105px; border-top: none; border-left: none; }
+        #mindmap-5 .curve-4 { width: 80px; height: 60px; bottom: 55px; left: 50%; transform: translateX(-50%); border-top: none; border-left: none; border-right: none; border-radius: 0 0 50% 50%; }
+        #mindmap-5 .curve-5 { width: 60px; height: 60px; bottom: 115px; left: 105px; border-top: none; border-right: none; }
+        #mindmap-5 .curve-6 { width: 60px; height: 80px; top: 80px; left: 95px; border-bottom: none; border-right: none; border-top: none; }
+
+        /* ============================
+           #mindmap-6: Rectangular Nodes
+           ============================ */
+        #mindmap-6 .rect-map {
+            position: relative;
+            width: 380px;
+            height: 300px;
+        }
+
+        #mindmap-6 .rect-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF9F45;
+            color: white;
+            padding: 20px 35px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-6 .rect-node {
+            position: absolute;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #mindmap-6 .rect-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #mindmap-6 .rect-1 { top: 20px; left: 20px; background: #FF6B9D; }
+        #mindmap-6 .rect-2 { top: 20px; right: 20px; background: #87CEEB; }
+        #mindmap-6 .rect-3 { top: 50%; right: 10px; transform: translateY(-50%); background: #98D8AA; }
+        #mindmap-6 .rect-4 { bottom: 20px; right: 20px; background: #FFD93D; }
+        #mindmap-6 .rect-5 { bottom: 20px; left: 20px; background: #C9B1FF; }
+        #mindmap-6 .rect-6 { top: 50%; left: 10px; transform: translateY(-50%); background: #FFB6C1; }
+
+        #mindmap-6 .rect-line {
+            position: absolute;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        #mindmap-6 .line-h { height: 3px; }
+        #mindmap-6 .line-v { width: 3px; }
+        #mindmap-6 .line-1 { width: 40px; height: 3px; top: 35px; left: 100px; }
+        #mindmap-6 .line-2 { width: 40px; height: 3px; top: 35px; right: 100px; }
+        #mindmap-6 .line-3 { width: 40px; height: 3px; top: 50%; right: 90px; }
+        #mindmap-6 .line-4 { width: 40px; height: 3px; bottom: 35px; right: 100px; }
+        #mindmap-6 .line-5 { width: 40px; height: 3px; bottom: 35px; left: 100px; }
+        #mindmap-6 .line-6 { width: 40px; height: 3px; top: 50%; left: 90px; }
+
+        /* ============================
+           #mindmap-7: Circular Nodes
+           ============================ */
+        #mindmap-7 .circle-map {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
+
+        #mindmap-7 .circle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: #C9B1FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-7 .circle-node {
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-7 .circle-node:hover {
+            transform: scale(1.15);
+        }
+
+        #mindmap-7 .c-1 { top: 10px; left: 50%; transform: translateX(-50%); background: #FF6B9D; }
+        #mindmap-7 .c-2 { top: 60px; right: 20px; background: #87CEEB; }
+        #mindmap-7 .c-3 { bottom: 60px; right: 20px; background: #98D8AA; }
+        #mindmap-7 .c-4 { bottom: 10px; left: 50%; transform: translateX(-50%); background: #FFD93D; }
+        #mindmap-7 .c-5 { bottom: 60px; left: 20px; background: #FF9F45; }
+        #mindmap-7 .c-6 { top: 60px; left: 20px; background: #FFB6C1; }
+
+        #mindmap-7 .c-1:hover, #mindmap-7 .c-4:hover {
+            transform: translateX(-50%) scale(1.15);
+        }
+
+        #mindmap-7 .circle-conn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 3px;
+            background: #ddd;
+            transform-origin: left center;
+        }
+
+        #mindmap-7 .cc-1 { transform: rotate(-90deg); }
+        #mindmap-7 .cc-2 { transform: rotate(-35deg); }
+        #mindmap-7 .cc-3 { transform: rotate(35deg); }
+        #mindmap-7 .cc-4 { transform: rotate(90deg); }
+        #mindmap-7 .cc-5 { transform: rotate(145deg); }
+        #mindmap-7 .cc-6 { transform: rotate(-145deg); }
+
+        /* ============================
+           #mindmap-8: Color-Coded Branches
+           ============================ */
+        #mindmap-8 .color-map {
+            position: relative;
+            width: 400px;
+            height: 300px;
+        }
+
+        #mindmap-8 .color-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-8 .color-group {
+            position: absolute;
+        }
+
+        #mindmap-8 .color-main {
+            padding: 12px 20px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        #mindmap-8 .color-sub {
+            padding: 8px 15px;
+            border-radius: 15px;
+            color: white;
+            font-size: 10px;
+            margin: 4px 0;
+            margin-left: 20px;
+            opacity: 0.85;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        #mindmap-8 .color-sub:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        #mindmap-8 .group-pink { top: 20px; left: 20px; }
+        #mindmap-8 .group-pink .color-main { background: #FF6B9D; }
+        #mindmap-8 .group-pink .color-sub { background: #FF6B9D; }
+
+        #mindmap-8 .group-blue { top: 20px; right: 20px; }
+        #mindmap-8 .group-blue .color-main { background: #87CEEB; }
+        #mindmap-8 .group-blue .color-sub { background: #87CEEB; }
+
+        #mindmap-8 .group-green { bottom: 20px; left: 20px; }
+        #mindmap-8 .group-green .color-main { background: #98D8AA; }
+        #mindmap-8 .group-green .color-sub { background: #98D8AA; }
+
+        #mindmap-8 .group-orange { bottom: 20px; right: 20px; }
+        #mindmap-8 .group-orange .color-main { background: #FF9F45; }
+        #mindmap-8 .group-orange .color-sub { background: #FF9F45; }
+
+        #mindmap-8 .color-line {
+            position: absolute;
+            height: 3px;
+            z-index: 1;
+        }
+
+        #mindmap-8 .cl-1 { width: 50px; background: #FF6B9D; top: 40px; left: 130px; }
+        #mindmap-8 .cl-2 { width: 50px; background: #87CEEB; top: 40px; right: 130px; }
+        #mindmap-8 .cl-3 { width: 50px; background: #98D8AA; bottom: 40px; left: 130px; }
+        #mindmap-8 .cl-4 { width: 50px; background: #FF9F45; bottom: 40px; right: 130px; }
+
+        /* ============================
+           #mindmap-9: Icon Mind Map
+           ============================ */
+        #mindmap-9 .icon-map {
+            position: relative;
+            width: 380px;
+            height: 320px;
+        }
+
+        #mindmap-9 .icon-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: #FFD93D;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        #mindmap-9 .icon-center .icon {
+            font-size: 28px;
+        }
+
+        #mindmap-9 .icon-center .label {
+            font-weight: bold;
+            font-size: 12px;
+            color: #333;
+        }
+
+        #mindmap-9 .icon-node {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-9 .icon-node:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-9 .icon-node .icon-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        #mindmap-9 .icon-node .icon-label {
+            font-size: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #mindmap-9 .i-1 { top: 15px; left: 50%; transform: translateX(-50%); }
+        #mindmap-9 .i-1 .icon-circle { background: #FF6B9D; }
+        #mindmap-9 .i-2 { top: 70px; right: 30px; }
+        #mindmap-9 .i-2 .icon-circle { background: #87CEEB; }
+        #mindmap-9 .i-3 { bottom: 70px; right: 30px; }
+        #mindmap-9 .i-3 .icon-circle { background: #98D8AA; }
+        #mindmap-9 .i-4 { bottom: 15px; left: 50%; transform: translateX(-50%); }
+        #mindmap-9 .i-4 .icon-circle { background: #FF9F45; }
+        #mindmap-9 .i-5 { bottom: 70px; left: 30px; }
+        #mindmap-9 .i-5 .icon-circle { background: #C9B1FF; }
+        #mindmap-9 .i-6 { top: 70px; left: 30px; }
+        #mindmap-9 .i-6 .icon-circle { background: #FFB6C1; }
+
+        #mindmap-9 .i-1:hover, #mindmap-9 .i-4:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        #mindmap-9 .icon-conn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 55px;
+            height: 3px;
+            background: #ddd;
+            transform-origin: left center;
+        }
+
+        #mindmap-9 .ic-1 { transform: rotate(-90deg); }
+        #mindmap-9 .ic-2 { transform: rotate(-35deg); }
+        #mindmap-9 .ic-3 { transform: rotate(35deg); }
+        #mindmap-9 .ic-4 { transform: rotate(90deg); }
+        #mindmap-9 .ic-5 { transform: rotate(145deg); }
+        #mindmap-9 .ic-6 { transform: rotate(-145deg); }
+
+        /* ============================
+           #mindmap-10: Numbered Mind Map
+           ============================ */
+        #mindmap-10 .num-map {
+            position: relative;
+            width: 380px;
+            height: 320px;
+        }
+
+        #mindmap-10 .num-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF6B9D;
+            color: white;
+            padding: 25px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-10 .num-node {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-10 .num-node:hover {
+            transform: scale(1.05);
+        }
+
+        #mindmap-10 .num-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        #mindmap-10 .num-text {
+            padding: 10px 18px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        #mindmap-10 .n-1 { top: 25px; left: 50%; transform: translateX(-50%); }
+        #mindmap-10 .n-1 .num-badge { background: #87CEEB; }
+        #mindmap-10 .n-1 .num-text { background: #87CEEB; }
+
+        #mindmap-10 .n-2 { top: 80px; right: 15px; }
+        #mindmap-10 .n-2 .num-badge { background: #98D8AA; }
+        #mindmap-10 .n-2 .num-text { background: #98D8AA; }
+
+        #mindmap-10 .n-3 { bottom: 80px; right: 15px; }
+        #mindmap-10 .n-3 .num-badge { background: #FFD93D; }
+        #mindmap-10 .n-3 .num-text { background: #FFD93D; }
+
+        #mindmap-10 .n-4 { bottom: 25px; left: 50%; transform: translateX(-50%); }
+        #mindmap-10 .n-4 .num-badge { background: #FF9F45; }
+        #mindmap-10 .n-4 .num-text { background: #FF9F45; }
+
+        #mindmap-10 .n-5 { bottom: 80px; left: 15px; }
+        #mindmap-10 .n-5 .num-badge { background: #C9B1FF; }
+        #mindmap-10 .n-5 .num-text { background: #C9B1FF; }
+
+        #mindmap-10 .n-6 { top: 80px; left: 15px; }
+        #mindmap-10 .n-6 .num-badge { background: #FFB6C1; }
+        #mindmap-10 .n-6 .num-text { background: #FFB6C1; }
+
+        #mindmap-10 .n-1:hover, #mindmap-10 .n-4:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        #mindmap-10 .num-conn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background: #ddd;
+            transform-origin: left center;
+        }
+
+        #mindmap-10 .nc-1 { transform: rotate(-90deg); }
+        #mindmap-10 .nc-2 { transform: rotate(-35deg); }
+        #mindmap-10 .nc-3 { transform: rotate(35deg); }
+        #mindmap-10 .nc-4 { transform: rotate(90deg); }
+        #mindmap-10 .nc-5 { transform: rotate(145deg); }
+        #mindmap-10 .nc-6 { transform: rotate(-145deg); }
+
+        /* ============================
+           #mindmap-11: Compact Mind Map
+           ============================ */
+        #mindmap-11 .compact-map {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 15px;
+        }
+
+        #mindmap-11 .compact-center {
+            background: #FF6B9D;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            align-self: center;
+        }
+
+        #mindmap-11 .compact-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        #mindmap-11 .compact-node {
+            padding: 8px 16px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-11 .compact-node:hover {
+            transform: scale(1.05);
+        }
+
+        #mindmap-11 .cm-1 { background: #87CEEB; }
+        #mindmap-11 .cm-2 { background: #98D8AA; }
+        #mindmap-11 .cm-3 { background: #FFD93D; }
+        #mindmap-11 .cm-4 { background: #FF9F45; }
+        #mindmap-11 .cm-5 { background: #C9B1FF; }
+        #mindmap-11 .cm-6 { background: #FFB6C1; }
+
+        /* ============================
+           #mindmap-12: Expanded Mind Map
+           ============================ */
+        #mindmap-12 .expanded-map {
+            position: relative;
+            width: 450px;
+            height: 350px;
+        }
+
+        #mindmap-12 .exp-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #87CEEB;
+            color: white;
+            padding: 25px 35px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 10;
+        }
+
+        #mindmap-12 .exp-branch {
+            position: absolute;
+        }
+
+        #mindmap-12 .exp-main {
+            padding: 10px 18px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        #mindmap-12 .exp-subs {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        #mindmap-12 .exp-sub {
+            padding: 6px 12px;
+            border-radius: 12px;
+            color: white;
+            font-size: 9px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-12 .exp-sub:hover {
+            transform: translateX(5px);
+        }
+
+        #mindmap-12 .branch-1 { top: 10px; left: 30px; }
+        #mindmap-12 .branch-1 .exp-main { background: #FF6B9D; }
+        #mindmap-12 .branch-1 .exp-sub { background: #FF6B9D; opacity: 0.8; }
+
+        #mindmap-12 .branch-2 { top: 10px; right: 30px; }
+        #mindmap-12 .branch-2 .exp-main { background: #98D8AA; }
+        #mindmap-12 .branch-2 .exp-sub { background: #98D8AA; opacity: 0.8; }
+
+        #mindmap-12 .branch-3 { bottom: 10px; left: 30px; }
+        #mindmap-12 .branch-3 .exp-main { background: #FFD93D; }
+        #mindmap-12 .branch-3 .exp-sub { background: #FFD93D; opacity: 0.8; }
+
+        #mindmap-12 .branch-4 { bottom: 10px; right: 30px; }
+        #mindmap-12 .branch-4 .exp-main { background: #C9B1FF; }
+        #mindmap-12 .branch-4 .exp-sub { background: #C9B1FF; opacity: 0.8; }
+
+        #mindmap-12 .exp-line {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+        }
+
+        #mindmap-12 .el-1 { width: 60px; top: 30px; left: 140px; transform: rotate(-30deg); }
+        #mindmap-12 .el-2 { width: 60px; top: 30px; right: 140px; transform: rotate(30deg); }
+        #mindmap-12 .el-3 { width: 60px; bottom: 30px; left: 140px; transform: rotate(30deg); }
+        #mindmap-12 .el-4 { width: 60px; bottom: 30px; right: 140px; transform: rotate(-30deg); }
+
+        /* ============================
+           #mindmap-13: Two-Sided Mind Map
+           ============================ */
+        #mindmap-13 .two-sided {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #mindmap-13 .side-left, #mindmap-13 .side-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #mindmap-13 .side-left {
+            align-items: flex-end;
+        }
+
+        #mindmap-13 .side-right {
+            align-items: flex-start;
+        }
+
+        #mindmap-13 .ts-center {
+            background: #FF9F45;
+            color: white;
+            padding: 30px 25px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        #mindmap-13 .ts-node {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #mindmap-13 .ts-conn {
+            width: 25px;
+            height: 3px;
+            background: #ddd;
+        }
+
+        #mindmap-13 .ts-text {
+            padding: 10px 18px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-13 .ts-text:hover {
+            transform: scale(1.05);
+        }
+
+        #mindmap-13 .side-left .ts-1 .ts-text { background: #FF6B9D; }
+        #mindmap-13 .side-left .ts-2 .ts-text { background: #87CEEB; }
+        #mindmap-13 .side-left .ts-3 .ts-text { background: #98D8AA; }
+
+        #mindmap-13 .side-right .ts-1 .ts-text { background: #FFD93D; }
+        #mindmap-13 .side-right .ts-2 .ts-text { background: #C9B1FF; }
+        #mindmap-13 .side-right .ts-3 .ts-text { background: #FFB6C1; }
+
+        /* ============================
+           #mindmap-14: Hierarchical Mind Map
+           ============================ */
+        #mindmap-14 .hierarchy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #mindmap-14 .h-level {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            position: relative;
+        }
+
+        #mindmap-14 .h-level-1 .h-item {
+            background: #FF6B9D;
+            padding: 15px 30px;
+            border-radius: 25px;
+        }
+
+        #mindmap-14 .h-level-2 .h-item {
+            background: #87CEEB;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        #mindmap-14 .h-level-3 .h-item {
+            background: #98D8AA;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 10px;
+        }
+
+        #mindmap-14 .h-item {
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-14 .h-item:hover {
+            transform: scale(1.05);
+        }
+
+        #mindmap-14 .h-conn {
+            width: 3px;
+            height: 15px;
+            background: #ddd;
+        }
+
+        #mindmap-14 .h-conn-h {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+            top: -12px;
+        }
+
+        #mindmap-14 .h-level-2 .h-conn-h {
+            width: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #mindmap-14 .h-level-3 .h-conn-h {
+            width: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ============================
+           #mindmap-15: Spider Diagram
+           ============================ */
+        #mindmap-15 .spider {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
+
+        #mindmap-15 .spider-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        #mindmap-15 .spider-leg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 3px;
+            transform-origin: left center;
+        }
+
+        #mindmap-15 .leg-1 { background: #FF6B9D; transform: rotate(0deg); }
+        #mindmap-15 .leg-2 { background: #87CEEB; transform: rotate(45deg); }
+        #mindmap-15 .leg-3 { background: #98D8AA; transform: rotate(90deg); }
+        #mindmap-15 .leg-4 { background: #FFD93D; transform: rotate(135deg); }
+        #mindmap-15 .leg-5 { background: #FF9F45; transform: rotate(180deg); }
+        #mindmap-15 .leg-6 { background: #C9B1FF; transform: rotate(225deg); }
+        #mindmap-15 .leg-7 { background: #FFB6C1; transform: rotate(270deg); }
+        #mindmap-15 .leg-8 { background: #FF6B9D; transform: rotate(315deg); }
+
+        #mindmap-15 .spider-node {
+            position: absolute;
+            padding: 8px 15px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-15 .spider-node:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-15 .sp-1 { right: 20px; top: 50%; transform: translateY(-50%); background: #FF6B9D; }
+        #mindmap-15 .sp-2 { right: 40px; top: 70px; background: #87CEEB; }
+        #mindmap-15 .sp-3 { top: 20px; left: 50%; transform: translateX(-50%); background: #98D8AA; }
+        #mindmap-15 .sp-4 { left: 40px; top: 70px; background: #FFD93D; }
+        #mindmap-15 .sp-5 { left: 20px; top: 50%; transform: translateY(-50%); background: #FF9F45; }
+        #mindmap-15 .sp-6 { left: 40px; bottom: 70px; background: #C9B1FF; }
+        #mindmap-15 .sp-7 { bottom: 20px; left: 50%; transform: translateX(-50%); background: #FFB6C1; }
+        #mindmap-15 .sp-8 { right: 40px; bottom: 70px; background: #FF6B9D; }
+
+        #mindmap-15 .sp-1:hover, #mindmap-15 .sp-5:hover { transform: translateY(-50%) scale(1.1); }
+        #mindmap-15 .sp-3:hover, #mindmap-15 .sp-7:hover { transform: translateX(-50%) scale(1.1); }
+
+        /* ============================
+           #mindmap-16: Fishbone/Ishikawa
+           ============================ */
+        #mindmap-16 .fishbone {
+            position: relative;
+            width: 450px;
+            height: 280px;
+        }
+
+        #mindmap-16 .fish-spine {
+            position: absolute;
+            top: 50%;
+            left: 30px;
+            right: 30px;
+            height: 4px;
+            background: #333;
+        }
+
+        #mindmap-16 .fish-head {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: #FF6B9D;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 0 30px 30px 0;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 5;
+        }
+
+        #mindmap-16 .fish-bone {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            transform-origin: bottom center;
+        }
+
+        #mindmap-16 .bone-top {
+            top: 50%;
+            transform: translateY(-100%) rotate(-30deg);
+        }
+
+        #mindmap-16 .bone-bottom {
+            top: 50%;
+            transform: rotate(30deg);
+        }
+
+        #mindmap-16 .b1 { left: 80px; background: #87CEEB; }
+        #mindmap-16 .b2 { left: 150px; background: #98D8AA; }
+        #mindmap-16 .b3 { left: 220px; background: #FFD93D; }
+        #mindmap-16 .b4 { left: 290px; background: #C9B1FF; }
+
+        #mindmap-16 .fish-label {
+            position: absolute;
+            padding: 6px 12px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 9px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-16 .fish-label:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-16 .fl-1t { top: 30px; left: 50px; background: #87CEEB; }
+        #mindmap-16 .fl-1b { bottom: 30px; left: 50px; background: #87CEEB; }
+        #mindmap-16 .fl-2t { top: 40px; left: 120px; background: #98D8AA; }
+        #mindmap-16 .fl-2b { bottom: 40px; left: 120px; background: #98D8AA; }
+        #mindmap-16 .fl-3t { top: 30px; left: 190px; background: #FFD93D; }
+        #mindmap-16 .fl-3b { bottom: 30px; left: 190px; background: #FFD93D; }
+        #mindmap-16 .fl-4t { top: 40px; left: 260px; background: #C9B1FF; }
+        #mindmap-16 .fl-4b { bottom: 40px; left: 260px; background: #C9B1FF; }
+
+        /* ============================
+           #mindmap-17: Sunburst Mind Map
+           ============================ */
+        #mindmap-17 .sunburst {
+            position: relative;
+            width: 340px;
+            height: 340px;
+        }
+
+        #mindmap-17 .sun-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #FFD93D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        #mindmap-17 .sun-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 25px solid;
+        }
+
+        #mindmap-17 .ring-1 {
+            width: 160px;
+            height: 160px;
+            border-color: #FF6B9D #87CEEB #98D8AA #FF9F45;
+            opacity: 0.9;
+        }
+
+        #mindmap-17 .ring-2 {
+            width: 240px;
+            height: 240px;
+            border-color: #C9B1FF #FFB6C1 #87CEEB #98D8AA;
+            opacity: 0.7;
+        }
+
+        #mindmap-17 .ring-3 {
+            width: 320px;
+            height: 320px;
+            border-color: #FFD93D #FF6B9D #C9B1FF #FFB6C1;
+            opacity: 0.5;
+        }
+
+        #mindmap-17 .sun-label {
+            position: absolute;
+            padding: 5px 10px;
+            background: white;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        #mindmap-17 .sun-label:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-17 .sl-1 { top: 60px; right: 50px; }
+        #mindmap-17 .sl-2 { top: 60px; left: 50px; }
+        #mindmap-17 .sl-3 { bottom: 60px; left: 50px; }
+        #mindmap-17 .sl-4 { bottom: 60px; right: 50px; }
+
+        /* ============================
+           #mindmap-18: Flow Mind Map
+           ============================ */
+        #mindmap-18 .flow-map {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #mindmap-18 .flow-center {
+            background: #FF6B9D;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #mindmap-18 .flow-arrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #ddd;
+        }
+
+        #mindmap-18 .flow-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        #mindmap-18 .flow-node {
+            padding: 12px 20px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-18 .flow-node:hover {
+            transform: translateY(-3px);
+        }
+
+        #mindmap-18 .fn-1 { background: #87CEEB; }
+        #mindmap-18 .fn-2 { background: #98D8AA; }
+        #mindmap-18 .fn-3 { background: #FFD93D; }
+        #mindmap-18 .fn-4 { background: #FF9F45; }
+        #mindmap-18 .fn-5 { background: #C9B1FF; }
+        #mindmap-18 .fn-6 { background: #FFB6C1; }
+
+        #mindmap-18 .flow-connector {
+            width: 3px;
+            height: 20px;
+            background: #ddd;
+        }
+
+        /* ============================
+           #mindmap-19: Brainstorm Layout
+           ============================ */
+        #mindmap-19 .brainstorm {
+            position: relative;
+            width: 400px;
+            height: 320px;
+        }
+
+        #mindmap-19 .brain-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF9F45;
+            color: white;
+            padding: 20px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-19 .brain-cloud {
+            position: absolute;
+            padding: 12px 18px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-19 .brain-cloud:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-19 .brain-cloud::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        #mindmap-19 .bc-1 { top: 20px; left: 30px; background: #FF6B9D; }
+        #mindmap-19 .bc-1::before { bottom: -5px; right: 10px; }
+        #mindmap-19 .bc-2 { top: 30px; right: 50px; background: #87CEEB; }
+        #mindmap-19 .bc-2::before { bottom: -5px; left: 10px; }
+        #mindmap-19 .bc-3 { top: 100px; right: 20px; background: #98D8AA; }
+        #mindmap-19 .bc-3::before { left: -5px; top: 10px; }
+        #mindmap-19 .bc-4 { bottom: 100px; right: 30px; background: #FFD93D; }
+        #mindmap-19 .bc-4::before { left: -5px; bottom: 5px; }
+        #mindmap-19 .bc-5 { bottom: 20px; right: 80px; background: #C9B1FF; }
+        #mindmap-19 .bc-5::before { top: -5px; left: 15px; }
+        #mindmap-19 .bc-6 { bottom: 30px; left: 60px; background: #FFB6C1; }
+        #mindmap-19 .bc-6::before { top: -5px; right: 10px; }
+        #mindmap-19 .bc-7 { bottom: 100px; left: 20px; background: #FF6B9D; }
+        #mindmap-19 .bc-7::before { right: -5px; bottom: 5px; }
+        #mindmap-19 .bc-8 { top: 100px; left: 20px; background: #87CEEB; }
+        #mindmap-19 .bc-8::before { right: -5px; top: 5px; }
+
+        #mindmap-19 .brain-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 50%;
+        }
+
+        #mindmap-19 .bd-1 { top: 70px; left: 100px; }
+        #mindmap-19 .bd-2 { top: 50px; right: 120px; }
+        #mindmap-19 .bd-3 { top: 130px; right: 100px; }
+        #mindmap-19 .bd-4 { bottom: 130px; right: 100px; }
+        #mindmap-19 .bd-5 { bottom: 70px; right: 150px; }
+        #mindmap-19 .bd-6 { bottom: 60px; left: 130px; }
+        #mindmap-19 .bd-7 { bottom: 130px; left: 90px; }
+        #mindmap-19 .bd-8 { top: 130px; left: 90px; }
+
+        /* ============================
+           #mindmap-20: Topic Cluster
+           ============================ */
+        #mindmap-20 .topic-cluster {
+            position: relative;
+            width: 420px;
+            height: 340px;
+        }
+
+        #mindmap-20 .cluster-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #C9B1FF;
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        #mindmap-20 .cluster-group {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        #mindmap-20 .cluster-title {
+            padding: 10px 18px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        #mindmap-20 .cluster-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            max-width: 150px;
+        }
+
+        #mindmap-20 .cluster-item {
+            padding: 5px 10px;
+            border-radius: 10px;
+            color: white;
+            font-size: 9px;
+            transition: transform 0.3s;
+        }
+
+        #mindmap-20 .cluster-item:hover {
+            transform: scale(1.1);
+        }
+
+        #mindmap-20 .cg-1 { top: 15px; left: 20px; }
+        #mindmap-20 .cg-1 .cluster-title { background: #FF6B9D; }
+        #mindmap-20 .cg-1 .cluster-item { background: #FF6B9D; opacity: 0.8; }
+
+        #mindmap-20 .cg-2 { top: 15px; right: 20px; }
+        #mindmap-20 .cg-2 .cluster-title { background: #87CEEB; }
+        #mindmap-20 .cg-2 .cluster-item { background: #87CEEB; opacity: 0.8; }
+
+        #mindmap-20 .cg-3 { bottom: 15px; left: 20px; }
+        #mindmap-20 .cg-3 .cluster-title { background: #98D8AA; }
+        #mindmap-20 .cg-3 .cluster-item { background: #98D8AA; opacity: 0.8; }
+
+        #mindmap-20 .cg-4 { bottom: 15px; right: 20px; }
+        #mindmap-20 .cg-4 .cluster-title { background: #FFD93D; }
+        #mindmap-20 .cg-4 .cluster-item { background: #FFD93D; opacity: 0.8; }
+
+        #mindmap-20 .cluster-line {
+            position: absolute;
+            height: 3px;
+            background: #ddd;
+        }
+
+        #mindmap-20 .cline-1 { width: 40px; top: 50px; left: 170px; transform: rotate(-30deg); }
+        #mindmap-20 .cline-2 { width: 40px; top: 50px; right: 170px; transform: rotate(30deg); }
+        #mindmap-20 .cline-3 { width: 40px; bottom: 50px; left: 170px; transform: rotate(30deg); }
+        #mindmap-20 .cline-4 { width: 40px; bottom: 50px; right: 170px; transform: rotate(-30deg); }
+    </style>
+</head>
+<body>
+    <h1>Mind Map Diagram Templates</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 40px;">20 different mind map layout patterns for SNS infographics and education</p>
+
+    <div class="template-grid">
+        <!-- #mindmap-1: Simple Radial Mind Map -->
+        <div class="template-card" id="mindmap-1">
+            <h3>#mindmap-1: Simple Radial Mind Map</h3>
+            <div class="diagram-container">
+                <div class="radial-map">
+                    <div class="connector conn-1"></div>
+                    <div class="connector conn-2"></div>
+                    <div class="connector conn-3"></div>
+                    <div class="connector conn-4"></div>
+                    <div class="connector conn-5"></div>
+                    <div class="connector conn-6"></div>
+                    <div class="center-node">Main Topic</div>
+                    <div class="branch-node branch-1">Topic 1</div>
+                    <div class="branch-node branch-2">Topic 2</div>
+                    <div class="branch-node branch-3">Topic 3</div>
+                    <div class="branch-node branch-4">Topic 4</div>
+                    <div class="branch-node branch-5">Topic 5</div>
+                    <div class="branch-node branch-6">Topic 6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-2: Horizontal Tree Mind Map -->
+        <div class="template-card" id="mindmap-2">
+            <h3>#mindmap-2: Horizontal Tree Mind Map</h3>
+            <div class="diagram-container">
+                <div class="h-tree">
+                    <div class="h-center">Central Idea</div>
+                    <div class="h-branches">
+                        <div class="h-branch">
+                            <div class="h-connector"></div>
+                            <div class="h-node h-node-1">Branch A</div>
+                        </div>
+                        <div class="h-branch">
+                            <div class="h-connector"></div>
+                            <div class="h-node h-node-2">Branch B</div>
+                        </div>
+                        <div class="h-branch">
+                            <div class="h-connector"></div>
+                            <div class="h-node h-node-3">Branch C</div>
+                        </div>
+                        <div class="h-branch">
+                            <div class="h-connector"></div>
+                            <div class="h-node h-node-4">Branch D</div>
+                        </div>
+                        <div class="h-branch">
+                            <div class="h-connector"></div>
+                            <div class="h-node h-node-5">Branch E</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-3: Vertical Tree Mind Map -->
+        <div class="template-card" id="mindmap-3">
+            <h3>#mindmap-3: Vertical Tree Mind Map</h3>
+            <div class="diagram-container">
+                <div class="v-tree">
+                    <div class="v-center">Main Concept</div>
+                    <div class="v-connector-main"></div>
+                    <div class="v-branches">
+                        <div class="v-branch">
+                            <div class="v-conn"></div>
+                            <div class="v-node v-node-1">Sub 1</div>
+                        </div>
+                        <div class="v-branch">
+                            <div class="v-conn"></div>
+                            <div class="v-node v-node-2">Sub 2</div>
+                        </div>
+                        <div class="v-branch">
+                            <div class="v-conn"></div>
+                            <div class="v-node v-node-3">Sub 3</div>
+                        </div>
+                        <div class="v-branch">
+                            <div class="v-conn"></div>
+                            <div class="v-node v-node-4">Sub 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-4: Bubble Cluster Mind Map -->
+        <div class="template-card" id="mindmap-4">
+            <h3>#mindmap-4: Bubble Cluster Mind Map</h3>
+            <div class="diagram-container">
+                <div class="bubble-cluster">
+                    <div class="bubble bubble-main">Core Idea</div>
+                    <div class="bubble bubble-1">Idea A</div>
+                    <div class="bubble bubble-2">Idea B</div>
+                    <div class="bubble bubble-3">Idea C</div>
+                    <div class="bubble bubble-4">Idea D</div>
+                    <div class="bubble bubble-5">Idea E</div>
+                    <div class="bubble bubble-6">Idea F</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-5: Organic/Curved Branches -->
+        <div class="template-card" id="mindmap-5">
+            <h3>#mindmap-5: Organic/Curved Branches</h3>
+            <div class="diagram-container">
+                <div class="organic-map">
+                    <div class="curve-line curve-1"></div>
+                    <div class="curve-line curve-2"></div>
+                    <div class="curve-line curve-3"></div>
+                    <div class="curve-line curve-4"></div>
+                    <div class="curve-line curve-5"></div>
+                    <div class="curve-line curve-6"></div>
+                    <div class="org-center">Central</div>
+                    <div class="org-branch org-1">Growth</div>
+                    <div class="org-branch org-2">Nature</div>
+                    <div class="org-branch org-3">Flow</div>
+                    <div class="org-branch org-4">Organic</div>
+                    <div class="org-branch org-5">Life</div>
+                    <div class="org-branch org-6">Beauty</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-6: Rectangular Nodes -->
+        <div class="template-card" id="mindmap-6">
+            <h3>#mindmap-6: Rectangular Nodes</h3>
+            <div class="diagram-container">
+                <div class="rect-map">
+                    <div class="rect-line line-1"></div>
+                    <div class="rect-line line-2"></div>
+                    <div class="rect-line line-3"></div>
+                    <div class="rect-line line-4"></div>
+                    <div class="rect-line line-5"></div>
+                    <div class="rect-line line-6"></div>
+                    <div class="rect-center">Project Plan</div>
+                    <div class="rect-node rect-1">Research</div>
+                    <div class="rect-node rect-2">Design</div>
+                    <div class="rect-node rect-3">Develop</div>
+                    <div class="rect-node rect-4">Test</div>
+                    <div class="rect-node rect-5">Deploy</div>
+                    <div class="rect-node rect-6">Monitor</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-7: Circular Nodes -->
+        <div class="template-card" id="mindmap-7">
+            <h3>#mindmap-7: Circular Nodes</h3>
+            <div class="diagram-container">
+                <div class="circle-map">
+                    <div class="circle-conn cc-1"></div>
+                    <div class="circle-conn cc-2"></div>
+                    <div class="circle-conn cc-3"></div>
+                    <div class="circle-conn cc-4"></div>
+                    <div class="circle-conn cc-5"></div>
+                    <div class="circle-conn cc-6"></div>
+                    <div class="circle-center">Theme</div>
+                    <div class="circle-node c-1">Point 1</div>
+                    <div class="circle-node c-2">Point 2</div>
+                    <div class="circle-node c-3">Point 3</div>
+                    <div class="circle-node c-4">Point 4</div>
+                    <div class="circle-node c-5">Point 5</div>
+                    <div class="circle-node c-6">Point 6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-8: Color-Coded Branches -->
+        <div class="template-card" id="mindmap-8">
+            <h3>#mindmap-8: Color-Coded Branches</h3>
+            <div class="diagram-container">
+                <div class="color-map">
+                    <div class="color-line cl-1"></div>
+                    <div class="color-line cl-2"></div>
+                    <div class="color-line cl-3"></div>
+                    <div class="color-line cl-4"></div>
+                    <div class="color-center">Topics</div>
+                    <div class="color-group group-pink">
+                        <div class="color-main">Category A</div>
+                        <div class="color-sub">Detail 1</div>
+                        <div class="color-sub">Detail 2</div>
+                    </div>
+                    <div class="color-group group-blue">
+                        <div class="color-main">Category B</div>
+                        <div class="color-sub">Detail 1</div>
+                        <div class="color-sub">Detail 2</div>
+                    </div>
+                    <div class="color-group group-green">
+                        <div class="color-main">Category C</div>
+                        <div class="color-sub">Detail 1</div>
+                        <div class="color-sub">Detail 2</div>
+                    </div>
+                    <div class="color-group group-orange">
+                        <div class="color-main">Category D</div>
+                        <div class="color-sub">Detail 1</div>
+                        <div class="color-sub">Detail 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-9: Icon Mind Map -->
+        <div class="template-card" id="mindmap-9">
+            <h3>#mindmap-9: Icon Mind Map</h3>
+            <div class="diagram-container">
+                <div class="icon-map">
+                    <div class="icon-conn ic-1"></div>
+                    <div class="icon-conn ic-2"></div>
+                    <div class="icon-conn ic-3"></div>
+                    <div class="icon-conn ic-4"></div>
+                    <div class="icon-conn ic-5"></div>
+                    <div class="icon-conn ic-6"></div>
+                    <div class="icon-center">
+                        <span class="icon">💡</span>
+                        <span class="label">Ideas</span>
+                    </div>
+                    <div class="icon-node i-1">
+                        <div class="icon-circle">🎯</div>
+                        <span class="icon-label">Goals</span>
+                    </div>
+                    <div class="icon-node i-2">
+                        <div class="icon-circle">📚</div>
+                        <span class="icon-label">Learn</span>
+                    </div>
+                    <div class="icon-node i-3">
+                        <div class="icon-circle">🚀</div>
+                        <span class="icon-label">Launch</span>
+                    </div>
+                    <div class="icon-node i-4">
+                        <div class="icon-circle">💪</div>
+                        <span class="icon-label">Action</span>
+                    </div>
+                    <div class="icon-node i-5">
+                        <div class="icon-circle">🎨</div>
+                        <span class="icon-label">Create</span>
+                    </div>
+                    <div class="icon-node i-6">
+                        <div class="icon-circle">❤️</div>
+                        <span class="icon-label">Passion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-10: Numbered Mind Map -->
+        <div class="template-card" id="mindmap-10">
+            <h3>#mindmap-10: Numbered Mind Map</h3>
+            <div class="diagram-container">
+                <div class="num-map">
+                    <div class="num-conn nc-1"></div>
+                    <div class="num-conn nc-2"></div>
+                    <div class="num-conn nc-3"></div>
+                    <div class="num-conn nc-4"></div>
+                    <div class="num-conn nc-5"></div>
+                    <div class="num-conn nc-6"></div>
+                    <div class="num-center">Steps</div>
+                    <div class="num-node n-1">
+                        <div class="num-badge">1</div>
+                        <div class="num-text">Planning</div>
+                    </div>
+                    <div class="num-node n-2">
+                        <div class="num-badge">2</div>
+                        <div class="num-text">Research</div>
+                    </div>
+                    <div class="num-node n-3">
+                        <div class="num-badge">3</div>
+                        <div class="num-text">Design</div>
+                    </div>
+                    <div class="num-node n-4">
+                        <div class="num-badge">4</div>
+                        <div class="num-text">Build</div>
+                    </div>
+                    <div class="num-node n-5">
+                        <div class="num-badge">5</div>
+                        <div class="num-text">Test</div>
+                    </div>
+                    <div class="num-node n-6">
+                        <div class="num-badge">6</div>
+                        <div class="num-text">Launch</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-11: Compact Mind Map -->
+        <div class="template-card" id="mindmap-11">
+            <h3>#mindmap-11: Compact Mind Map</h3>
+            <div class="diagram-container">
+                <div class="compact-map">
+                    <div class="compact-center">Quick Summary</div>
+                    <div class="compact-row">
+                        <div class="compact-node cm-1">Point A</div>
+                        <div class="compact-node cm-2">Point B</div>
+                        <div class="compact-node cm-3">Point C</div>
+                    </div>
+                    <div class="compact-row">
+                        <div class="compact-node cm-4">Point D</div>
+                        <div class="compact-node cm-5">Point E</div>
+                        <div class="compact-node cm-6">Point F</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-12: Expanded Mind Map -->
+        <div class="template-card" id="mindmap-12">
+            <h3>#mindmap-12: Expanded Mind Map</h3>
+            <div class="diagram-container">
+                <div class="expanded-map">
+                    <div class="exp-line el-1"></div>
+                    <div class="exp-line el-2"></div>
+                    <div class="exp-line el-3"></div>
+                    <div class="exp-line el-4"></div>
+                    <div class="exp-center">Big Idea</div>
+                    <div class="exp-branch branch-1">
+                        <div class="exp-main">Section A</div>
+                        <div class="exp-subs">
+                            <div class="exp-sub">Detail 1</div>
+                            <div class="exp-sub">Detail 2</div>
+                        </div>
+                    </div>
+                    <div class="exp-branch branch-2">
+                        <div class="exp-main">Section B</div>
+                        <div class="exp-subs">
+                            <div class="exp-sub">Detail 1</div>
+                            <div class="exp-sub">Detail 2</div>
+                        </div>
+                    </div>
+                    <div class="exp-branch branch-3">
+                        <div class="exp-main">Section C</div>
+                        <div class="exp-subs">
+                            <div class="exp-sub">Detail 1</div>
+                            <div class="exp-sub">Detail 2</div>
+                        </div>
+                    </div>
+                    <div class="exp-branch branch-4">
+                        <div class="exp-main">Section D</div>
+                        <div class="exp-subs">
+                            <div class="exp-sub">Detail 1</div>
+                            <div class="exp-sub">Detail 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-13: Two-Sided Mind Map -->
+        <div class="template-card" id="mindmap-13">
+            <h3>#mindmap-13: Two-Sided Mind Map</h3>
+            <div class="diagram-container">
+                <div class="two-sided">
+                    <div class="side-left">
+                        <div class="ts-node ts-1">
+                            <div class="ts-text">Pro 1</div>
+                            <div class="ts-conn"></div>
+                        </div>
+                        <div class="ts-node ts-2">
+                            <div class="ts-text">Pro 2</div>
+                            <div class="ts-conn"></div>
+                        </div>
+                        <div class="ts-node ts-3">
+                            <div class="ts-text">Pro 3</div>
+                            <div class="ts-conn"></div>
+                        </div>
+                    </div>
+                    <div class="ts-center">Compare</div>
+                    <div class="side-right">
+                        <div class="ts-node ts-1">
+                            <div class="ts-conn"></div>
+                            <div class="ts-text">Con 1</div>
+                        </div>
+                        <div class="ts-node ts-2">
+                            <div class="ts-conn"></div>
+                            <div class="ts-text">Con 2</div>
+                        </div>
+                        <div class="ts-node ts-3">
+                            <div class="ts-conn"></div>
+                            <div class="ts-text">Con 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-14: Hierarchical Mind Map -->
+        <div class="template-card" id="mindmap-14">
+            <h3>#mindmap-14: Hierarchical Mind Map</h3>
+            <div class="diagram-container">
+                <div class="hierarchy">
+                    <div class="h-level h-level-1">
+                        <div class="h-item">Main Topic</div>
+                    </div>
+                    <div class="h-conn"></div>
+                    <div class="h-level h-level-2">
+                        <div class="h-conn-h"></div>
+                        <div class="h-item">Sub A</div>
+                        <div class="h-item">Sub B</div>
+                    </div>
+                    <div class="h-conn"></div>
+                    <div class="h-level h-level-3">
+                        <div class="h-conn-h"></div>
+                        <div class="h-item">Detail 1</div>
+                        <div class="h-item">Detail 2</div>
+                        <div class="h-item">Detail 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-15: Spider Diagram -->
+        <div class="template-card" id="mindmap-15">
+            <h3>#mindmap-15: Spider Diagram</h3>
+            <div class="diagram-container">
+                <div class="spider">
+                    <div class="spider-leg leg-1"></div>
+                    <div class="spider-leg leg-2"></div>
+                    <div class="spider-leg leg-3"></div>
+                    <div class="spider-leg leg-4"></div>
+                    <div class="spider-leg leg-5"></div>
+                    <div class="spider-leg leg-6"></div>
+                    <div class="spider-leg leg-7"></div>
+                    <div class="spider-leg leg-8"></div>
+                    <div class="spider-center">Center</div>
+                    <div class="spider-node sp-1">Topic 1</div>
+                    <div class="spider-node sp-2">Topic 2</div>
+                    <div class="spider-node sp-3">Topic 3</div>
+                    <div class="spider-node sp-4">Topic 4</div>
+                    <div class="spider-node sp-5">Topic 5</div>
+                    <div class="spider-node sp-6">Topic 6</div>
+                    <div class="spider-node sp-7">Topic 7</div>
+                    <div class="spider-node sp-8">Topic 8</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-16: Fishbone/Ishikawa -->
+        <div class="template-card" id="mindmap-16">
+            <h3>#mindmap-16: Fishbone/Ishikawa Diagram</h3>
+            <div class="diagram-container">
+                <div class="fishbone">
+                    <div class="fish-spine"></div>
+                    <div class="fish-head">Effect</div>
+                    <div class="fish-bone bone-top b1"></div>
+                    <div class="fish-bone bone-bottom b1"></div>
+                    <div class="fish-bone bone-top b2"></div>
+                    <div class="fish-bone bone-bottom b2"></div>
+                    <div class="fish-bone bone-top b3"></div>
+                    <div class="fish-bone bone-bottom b3"></div>
+                    <div class="fish-bone bone-top b4"></div>
+                    <div class="fish-bone bone-bottom b4"></div>
+                    <div class="fish-label fl-1t">Cause 1</div>
+                    <div class="fish-label fl-1b">Cause 2</div>
+                    <div class="fish-label fl-2t">Cause 3</div>
+                    <div class="fish-label fl-2b">Cause 4</div>
+                    <div class="fish-label fl-3t">Cause 5</div>
+                    <div class="fish-label fl-3b">Cause 6</div>
+                    <div class="fish-label fl-4t">Cause 7</div>
+                    <div class="fish-label fl-4b">Cause 8</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-17: Sunburst Mind Map -->
+        <div class="template-card" id="mindmap-17">
+            <h3>#mindmap-17: Sunburst Mind Map</h3>
+            <div class="diagram-container">
+                <div class="sunburst">
+                    <div class="sun-ring ring-3"></div>
+                    <div class="sun-ring ring-2"></div>
+                    <div class="sun-ring ring-1"></div>
+                    <div class="sun-center">Core</div>
+                    <div class="sun-label sl-1">Layer 1</div>
+                    <div class="sun-label sl-2">Layer 2</div>
+                    <div class="sun-label sl-3">Layer 3</div>
+                    <div class="sun-label sl-4">Layer 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-18: Flow Mind Map -->
+        <div class="template-card" id="mindmap-18">
+            <h3>#mindmap-18: Flow Mind Map</h3>
+            <div class="diagram-container">
+                <div class="flow-map">
+                    <div class="flow-center">Start Here</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-row">
+                        <div class="flow-node fn-1">Step 1</div>
+                        <div class="flow-node fn-2">Step 2</div>
+                    </div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-row">
+                        <div class="flow-node fn-3">Step 3</div>
+                        <div class="flow-node fn-4">Step 4</div>
+                    </div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-row">
+                        <div class="flow-node fn-5">Step 5</div>
+                        <div class="flow-node fn-6">Step 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-19: Brainstorm Layout -->
+        <div class="template-card" id="mindmap-19">
+            <h3>#mindmap-19: Brainstorm Layout</h3>
+            <div class="diagram-container">
+                <div class="brainstorm">
+                    <div class="brain-dot bd-1"></div>
+                    <div class="brain-dot bd-2"></div>
+                    <div class="brain-dot bd-3"></div>
+                    <div class="brain-dot bd-4"></div>
+                    <div class="brain-dot bd-5"></div>
+                    <div class="brain-dot bd-6"></div>
+                    <div class="brain-dot bd-7"></div>
+                    <div class="brain-dot bd-8"></div>
+                    <div class="brain-center">Brainstorm</div>
+                    <div class="brain-cloud bc-1">Idea A</div>
+                    <div class="brain-cloud bc-2">Idea B</div>
+                    <div class="brain-cloud bc-3">Idea C</div>
+                    <div class="brain-cloud bc-4">Idea D</div>
+                    <div class="brain-cloud bc-5">Idea E</div>
+                    <div class="brain-cloud bc-6">Idea F</div>
+                    <div class="brain-cloud bc-7">Idea G</div>
+                    <div class="brain-cloud bc-8">Idea H</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #mindmap-20: Topic Cluster -->
+        <div class="template-card" id="mindmap-20">
+            <h3>#mindmap-20: Topic Cluster</h3>
+            <div class="diagram-container">
+                <div class="topic-cluster">
+                    <div class="cluster-line cline-1"></div>
+                    <div class="cluster-line cline-2"></div>
+                    <div class="cluster-line cline-3"></div>
+                    <div class="cluster-line cline-4"></div>
+                    <div class="cluster-main">Main Keyword</div>
+                    <div class="cluster-group cg-1">
+                        <div class="cluster-title">Cluster A</div>
+                        <div class="cluster-items">
+                            <div class="cluster-item">Tag 1</div>
+                            <div class="cluster-item">Tag 2</div>
+                            <div class="cluster-item">Tag 3</div>
+                        </div>
+                    </div>
+                    <div class="cluster-group cg-2">
+                        <div class="cluster-title">Cluster B</div>
+                        <div class="cluster-items">
+                            <div class="cluster-item">Tag 1</div>
+                            <div class="cluster-item">Tag 2</div>
+                            <div class="cluster-item">Tag 3</div>
+                        </div>
+                    </div>
+                    <div class="cluster-group cg-3">
+                        <div class="cluster-title">Cluster C</div>
+                        <div class="cluster-items">
+                            <div class="cluster-item">Tag 1</div>
+                            <div class="cluster-item">Tag 2</div>
+                            <div class="cluster-item">Tag 3</div>
+                        </div>
+                    </div>
+                    <div class="cluster-group cg-4">
+                        <div class="cluster-title">Cluster D</div>
+                        <div class="cluster-items">
+                            <div class="cluster-item">Tag 1</div>
+                            <div class="cluster-item">Tag 2</div>
+                            <div class="cluster-item">Tag 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

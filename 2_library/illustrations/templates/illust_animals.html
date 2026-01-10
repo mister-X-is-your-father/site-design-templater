@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Illustrations - CSS Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Base animal container */
+        .animal {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* ========== animal-01: Cat ========== */
+        #animal-01 .cat {
+            position: relative;
+            width: 60px;
+            height: 50px;
+            background: #FFB347;
+            border-radius: 50% 50% 45% 45%;
+            margin: 15px auto 0;
+        }
+
+        #animal-01 .cat::before,
+        #animal-01 .cat::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 15px solid #FFB347;
+            top: -12px;
+        }
+
+        #animal-01 .cat::before {
+            left: 5px;
+        }
+
+        #animal-01 .cat::after {
+            right: 5px;
+        }
+
+        #animal-01 .cat-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        #animal-01 .cat-eye {
+            width: 8px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-01 .cat-nose {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid #FF6B6B;
+        }
+
+        #animal-01 .cat-mouth {
+            position: absolute;
+            top: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 6px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+
+        #animal-01:hover .animal {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        /* ========== animal-02: Dog ========== */
+        #animal-02 .dog {
+            position: relative;
+            width: 55px;
+            height: 50px;
+            background: #D4A574;
+            border-radius: 50% 50% 40% 40%;
+            margin: 15px auto 0;
+        }
+
+        #animal-02 .dog-ear {
+            position: absolute;
+            width: 18px;
+            height: 25px;
+            background: #8B6914;
+            border-radius: 50% 50% 50% 50%;
+            top: -5px;
+        }
+
+        #animal-02 .dog-ear.left {
+            left: -5px;
+            transform: rotate(-20deg);
+        }
+
+        #animal-02 .dog-ear.right {
+            right: -5px;
+            transform: rotate(20deg);
+        }
+
+        #animal-02 .dog-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        #animal-02 .dog-eye {
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-02 .dog-nose {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-02 .dog-tongue {
+            position: absolute;
+            top: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 12px;
+            background: #FF6B6B;
+            border-radius: 0 0 50% 50%;
+        }
+
+        #animal-02:hover .animal {
+            transform: scale(1.1);
+            animation: wag 0.3s ease infinite;
+        }
+
+        @keyframes wag {
+            0%, 100% { transform: rotate(-5deg) scale(1.1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        /* ========== animal-03: Bird ========== */
+        #animal-03 .bird {
+            position: relative;
+            width: 50px;
+            height: 45px;
+            background: #87CEEB;
+            border-radius: 50%;
+            margin: 20px auto 0;
+        }
+
+        #animal-03 .bird-wing {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: #5DADE2;
+            border-radius: 50% 0 50% 50%;
+            right: -5px;
+            top: 10px;
+            transform: rotate(-20deg);
+            transition: transform 0.3s ease;
+        }
+
+        #animal-03 .bird-beak {
+            position: absolute;
+            left: -8px;
+            top: 18px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-right: 12px solid #FFB347;
+        }
+
+        #animal-03 .bird-eye {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            left: 12px;
+            top: 15px;
+        }
+
+        #animal-03 .bird-belly {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: #FFF5EE;
+            border-radius: 50%;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-03:hover .animal {
+            transform: translateY(-10px);
+        }
+
+        #animal-03:hover .bird-wing {
+            transform: rotate(-40deg);
+        }
+
+        /* ========== animal-04: Fish ========== */
+        #animal-04 .fish {
+            position: relative;
+            width: 60px;
+            height: 35px;
+            background: #FF6B6B;
+            border-radius: 50% 30% 30% 50%;
+            margin: 25px auto 0;
+        }
+
+        #animal-04 .fish-tail {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 20px solid #FF6B6B;
+        }
+
+        #animal-04 .fish-eye {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            left: 10px;
+            top: 10px;
+        }
+
+        #animal-04 .fish-eye::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #333;
+            border-radius: 50%;
+            left: 3px;
+            top: 3px;
+        }
+
+        #animal-04 .fish-fin {
+            position: absolute;
+            width: 15px;
+            height: 12px;
+            background: #E74C3C;
+            border-radius: 50% 50% 0 0;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-04:hover .animal {
+            animation: swim 0.5s ease infinite;
+        }
+
+        @keyframes swim {
+            0%, 100% { transform: translateX(-3px) rotate(-3deg); }
+            50% { transform: translateX(3px) rotate(3deg); }
+        }
+
+        /* ========== animal-05: Rabbit ========== */
+        #animal-05 .rabbit {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: #FFF5EE;
+            border-radius: 50%;
+            margin: 25px auto 0;
+        }
+
+        #animal-05 .rabbit-ear {
+            position: absolute;
+            width: 15px;
+            height: 35px;
+            background: #FFF5EE;
+            border-radius: 50%;
+            top: -30px;
+        }
+
+        #animal-05 .rabbit-ear::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-05 .rabbit-ear.left {
+            left: 8px;
+            transform: rotate(-10deg);
+        }
+
+        #animal-05 .rabbit-ear.right {
+            right: 8px;
+            transform: rotate(10deg);
+        }
+
+        #animal-05 .rabbit-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        #animal-05 .rabbit-eye {
+            width: 6px;
+            height: 8px;
+            background: #E74C3C;
+            border-radius: 50%;
+        }
+
+        #animal-05 .rabbit-nose {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 6px;
+            background: #FFB6C1;
+            border-radius: 50%;
+        }
+
+        #animal-05:hover .animal {
+            transform: translateY(-8px);
+        }
+
+        #animal-05:hover .rabbit-ear.left {
+            transform: rotate(-20deg);
+        }
+
+        #animal-05:hover .rabbit-ear.right {
+            transform: rotate(20deg);
+        }
+
+        /* ========== animal-06: Bear ========== */
+        #animal-06 .bear {
+            position: relative;
+            width: 55px;
+            height: 50px;
+            background: #8B4513;
+            border-radius: 50% 50% 45% 45%;
+            margin: 15px auto 0;
+        }
+
+        #animal-06 .bear-ear {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #8B4513;
+            border-radius: 50%;
+            top: -8px;
+        }
+
+        #animal-06 .bear-ear.left {
+            left: 2px;
+        }
+
+        #animal-06 .bear-ear.right {
+            right: 2px;
+        }
+
+        #animal-06 .bear-ear::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #D2691E;
+            border-radius: 50%;
+            top: 4px;
+            left: 4px;
+        }
+
+        #animal-06 .bear-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        #animal-06 .bear-eye {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-06 .bear-snout {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            background: #D2691E;
+            border-radius: 50%;
+        }
+
+        #animal-06 .bear-nose {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-06:hover .animal {
+            transform: scale(1.15);
+        }
+
+        /* ========== animal-07: Elephant ========== */
+        #animal-07 .elephant {
+            position: relative;
+            width: 55px;
+            height: 50px;
+            background: #A0A0A0;
+            border-radius: 50%;
+            margin: 15px auto 0;
+        }
+
+        #animal-07 .elephant-ear {
+            position: absolute;
+            width: 25px;
+            height: 30px;
+            background: #808080;
+            border-radius: 50%;
+            top: 5px;
+        }
+
+        #animal-07 .elephant-ear.left {
+            left: -15px;
+        }
+
+        #animal-07 .elephant-ear.right {
+            right: -15px;
+        }
+
+        #animal-07 .elephant-trunk {
+            position: absolute;
+            width: 12px;
+            height: 30px;
+            background: #A0A0A0;
+            border-radius: 0 0 10px 10px;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-07 .elephant-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 18px;
+        }
+
+        #animal-07 .elephant-eye {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-07:hover .animal {
+            transform: scale(1.1);
+        }
+
+        #animal-07:hover .elephant-trunk {
+            animation: trunk 0.4s ease infinite;
+        }
+
+        @keyframes trunk {
+            0%, 100% { transform: translateX(-50%) rotate(-5deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
+        }
+
+        /* ========== animal-08: Lion ========== */
+        #animal-08 .lion-mane {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            background: #D4A574;
+            border-radius: 50%;
+            margin: 10px auto 0;
+        }
+
+        #animal-08 .lion {
+            position: absolute;
+            width: 45px;
+            height: 40px;
+            background: #FFB347;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #animal-08 .lion-eyes {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        #animal-08 .lion-eye {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-08 .lion-nose {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 6px;
+            background: #8B4513;
+            border-radius: 50%;
+        }
+
+        #animal-08 .lion-mouth {
+            position: absolute;
+            top: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 6px;
+            border-left: 2px solid #333;
+            border-right: 2px solid #333;
+        }
+
+        #animal-08:hover .animal {
+            transform: scale(1.15);
+        }
+
+        /* ========== animal-09: Penguin ========== */
+        #animal-09 .penguin {
+            position: relative;
+            width: 45px;
+            height: 55px;
+            background: #333;
+            border-radius: 45% 45% 40% 40%;
+            margin: 15px auto 0;
+        }
+
+        #animal-09 .penguin-belly {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-09 .penguin-eyes {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        #animal-09 .penguin-eye {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-09 .penguin-beak {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #FFB347;
+        }
+
+        #animal-09 .penguin-feet {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        #animal-09 .penguin-foot {
+            width: 12px;
+            height: 6px;
+            background: #FFB347;
+            border-radius: 50%;
+        }
+
+        #animal-09:hover .animal {
+            animation: waddle 0.4s ease infinite;
+        }
+
+        @keyframes waddle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* ========== animal-10: Duck ========== */
+        #animal-10 .duck {
+            position: relative;
+            width: 50px;
+            height: 45px;
+            background: #FFD700;
+            border-radius: 50%;
+            margin: 20px auto 0;
+        }
+
+        #animal-10 .duck-beak {
+            position: absolute;
+            left: -12px;
+            top: 18px;
+            width: 18px;
+            height: 10px;
+            background: #FF8C00;
+            border-radius: 50% 0 0 50%;
+        }
+
+        #animal-10 .duck-eye {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            left: 12px;
+            top: 12px;
+        }
+
+        #animal-10 .duck-wing {
+            position: absolute;
+            width: 20px;
+            height: 15px;
+            background: #DAA520;
+            border-radius: 0 50% 50% 0;
+            right: 5px;
+            top: 18px;
+        }
+
+        #animal-10 .duck-tuft {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid #FFD700;
+        }
+
+        #animal-10:hover .animal {
+            transform: translateY(-5px) rotate(-5deg);
+        }
+
+        /* ========== animal-11: Frog ========== */
+        #animal-11 .frog {
+            position: relative;
+            width: 55px;
+            height: 45px;
+            background: #32CD32;
+            border-radius: 50%;
+            margin: 20px auto 0;
+        }
+
+        #animal-11 .frog-eye-bump {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #32CD32;
+            border-radius: 50%;
+            top: -10px;
+        }
+
+        #animal-11 .frog-eye-bump.left {
+            left: 8px;
+        }
+
+        #animal-11 .frog-eye-bump.right {
+            right: 8px;
+        }
+
+        #animal-11 .frog-eye {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 4px;
+        }
+
+        #animal-11 .frog-eye::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #333;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+        }
+
+        #animal-11 .frog-mouth {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 8px;
+            border: 3px solid #228B22;
+            border-top: none;
+            border-radius: 0 0 50% 50%;
+        }
+
+        #animal-11:hover .animal {
+            transform: translateY(-10px);
+        }
+
+        /* ========== animal-12: Butterfly ========== */
+        #animal-12 .butterfly-body {
+            position: absolute;
+            width: 8px;
+            height: 35px;
+            background: #333;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #animal-12 .butterfly-wing {
+            position: absolute;
+            width: 28px;
+            height: 35px;
+            border-radius: 50% 50% 50% 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #animal-12 .butterfly-wing.top-left {
+            background: #FF69B4;
+            left: 5px;
+            border-radius: 50% 10% 50% 50%;
+        }
+
+        #animal-12 .butterfly-wing.top-right {
+            background: #FF69B4;
+            right: 5px;
+            border-radius: 10% 50% 50% 50%;
+        }
+
+        #animal-12 .butterfly-wing.bottom-left {
+            background: #FFB6C1;
+            left: 10px;
+            width: 20px;
+            height: 25px;
+            top: 55%;
+            border-radius: 50%;
+        }
+
+        #animal-12 .butterfly-wing.bottom-right {
+            background: #FFB6C1;
+            right: 10px;
+            width: 20px;
+            height: 25px;
+            top: 55%;
+            border-radius: 50%;
+        }
+
+        #animal-12 .butterfly-antenna {
+            position: absolute;
+            width: 2px;
+            height: 12px;
+            background: #333;
+            top: 10px;
+        }
+
+        #animal-12 .butterfly-antenna.left {
+            left: 35px;
+            transform: rotate(-30deg);
+        }
+
+        #animal-12 .butterfly-antenna.right {
+            right: 35px;
+            transform: rotate(30deg);
+        }
+
+        #animal-12 .butterfly-antenna::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            top: -2px;
+            left: -1px;
+        }
+
+        #animal-12:hover .animal {
+            animation: flutter 0.3s ease infinite;
+        }
+
+        @keyframes flutter {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1) translateY(-3px); }
+        }
+
+        /* ========== animal-13: Bee ========== */
+        #animal-13 .bee {
+            position: relative;
+            width: 45px;
+            height: 35px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FFD700 0px,
+                #FFD700 8px,
+                #333 8px,
+                #333 16px
+            );
+            border-radius: 50%;
+            margin: 25px auto 0;
+        }
+
+        #animal-13 .bee-head {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FFD700;
+            border-radius: 50%;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #animal-13 .bee-eye {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #333;
+            border-radius: 50%;
+            left: 5px;
+            top: 6px;
+        }
+
+        #animal-13 .bee-wing {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: -15px;
+        }
+
+        #animal-13 .bee-wing.left {
+            left: 8px;
+            transform: rotate(-20deg);
+        }
+
+        #animal-13 .bee-wing.right {
+            right: 8px;
+            transform: rotate(20deg);
+        }
+
+        #animal-13 .bee-stinger {
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+            border-left: 10px solid #333;
+        }
+
+        #animal-13:hover .animal {
+            animation: buzz 0.1s ease infinite;
+        }
+
+        @keyframes buzz {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, 1px); }
+        }
+
+        /* ========== animal-14: Ladybug ========== */
+        #animal-14 .ladybug {
+            position: relative;
+            width: 50px;
+            height: 45px;
+            background: #E74C3C;
+            border-radius: 50% 50% 50% 50%;
+            margin: 20px auto 0;
+        }
+
+        #animal-14 .ladybug-head {
+            position: absolute;
+            width: 20px;
+            height: 18px;
+            background: #333;
+            border-radius: 50%;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-14 .ladybug-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: #333;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-14 .ladybug-spot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-14 .ladybug-spot:nth-child(2) { top: 12px; left: 8px; }
+        #animal-14 .ladybug-spot:nth-child(3) { top: 12px; right: 8px; }
+        #animal-14 .ladybug-spot:nth-child(4) { top: 25px; left: 12px; }
+        #animal-14 .ladybug-spot:nth-child(5) { top: 25px; right: 12px; }
+
+        #animal-14 .ladybug-antenna {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: #333;
+            top: -15px;
+        }
+
+        #animal-14 .ladybug-antenna.left {
+            left: 18px;
+            transform: rotate(-30deg);
+        }
+
+        #animal-14 .ladybug-antenna.right {
+            right: 18px;
+            transform: rotate(30deg);
+        }
+
+        #animal-14:hover .animal {
+            transform: scale(1.15);
+        }
+
+        /* ========== animal-15: Snail ========== */
+        #animal-15 .snail-shell {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: #D2691E;
+            border-radius: 50%;
+            margin: 20px auto 0;
+            margin-left: 30px;
+        }
+
+        #animal-15 .snail-shell-inner {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #8B4513;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #animal-15 .snail-shell-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #D2691E;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #animal-15 .snail-body {
+            position: absolute;
+            width: 35px;
+            height: 18px;
+            background: #98D8AA;
+            border-radius: 50% 20% 20% 50%;
+            bottom: 0;
+            left: -25px;
+        }
+
+        #animal-15 .snail-eye-stalk {
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: #98D8AA;
+            left: -20px;
+            top: 5px;
+        }
+
+        #animal-15 .snail-eye-stalk.right {
+            left: -12px;
+        }
+
+        #animal-15 .snail-eye {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            top: -3px;
+            left: -1px;
+        }
+
+        #animal-15:hover .animal {
+            transform: translateX(10px);
+        }
+
+        /* ========== animal-16: Turtle ========== */
+        #animal-16 .turtle-shell {
+            position: relative;
+            width: 55px;
+            height: 40px;
+            background: #228B22;
+            border-radius: 50% 50% 40% 40%;
+            margin: 20px auto 0;
+        }
+
+        #animal-16 .turtle-pattern {
+            position: absolute;
+            width: 20px;
+            height: 15px;
+            background: #32CD32;
+            border-radius: 30%;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-16 .turtle-head {
+            position: absolute;
+            width: 18px;
+            height: 15px;
+            background: #98D8AA;
+            border-radius: 50%;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #animal-16 .turtle-eye {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            left: 3px;
+            top: 4px;
+        }
+
+        #animal-16 .turtle-leg {
+            position: absolute;
+            width: 12px;
+            height: 10px;
+            background: #98D8AA;
+            border-radius: 50%;
+        }
+
+        #animal-16 .turtle-leg.front-left { bottom: -5px; left: 5px; }
+        #animal-16 .turtle-leg.front-right { bottom: -5px; right: 5px; }
+        #animal-16 .turtle-leg.back-left { bottom: -3px; left: 15px; }
+        #animal-16 .turtle-leg.back-right { bottom: -3px; right: 15px; }
+
+        #animal-16 .turtle-tail {
+            position: absolute;
+            width: 8px;
+            height: 6px;
+            background: #98D8AA;
+            border-radius: 50%;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #animal-16:hover .animal {
+            transform: translateX(5px);
+            transition: transform 1s ease;
+        }
+
+        /* ========== animal-17: Whale ========== */
+        #animal-17 .whale {
+            position: relative;
+            width: 70px;
+            height: 40px;
+            background: #4169E1;
+            border-radius: 50% 30% 30% 50%;
+            margin: 20px auto 0;
+        }
+
+        #animal-17 .whale-tail {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #animal-17 .whale-tail-fin {
+            width: 0;
+            height: 0;
+            border-left: 15px solid #4169E1;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+
+        #animal-17 .whale-eye {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            left: 12px;
+            top: 12px;
+        }
+
+        #animal-17 .whale-eye::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            left: 2px;
+            top: 2px;
+        }
+
+        #animal-17 .whale-belly {
+            position: absolute;
+            width: 40px;
+            height: 15px;
+            background: #87CEEB;
+            border-radius: 50%;
+            bottom: 5px;
+            left: 10px;
+        }
+
+        #animal-17 .whale-spout {
+            position: absolute;
+            top: -20px;
+            left: 15px;
+            width: 4px;
+            height: 15px;
+            background: #87CEEB;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #animal-17 .whale-spout::before,
+        #animal-17 .whale-spout::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 12px;
+            background: #87CEEB;
+            border-radius: 50%;
+            top: -5px;
+        }
+
+        #animal-17 .whale-spout::before {
+            left: -6px;
+            transform: rotate(-20deg);
+        }
+
+        #animal-17 .whale-spout::after {
+            right: -6px;
+            transform: rotate(20deg);
+        }
+
+        #animal-17:hover .whale-spout {
+            opacity: 1;
+        }
+
+        #animal-17:hover .animal {
+            transform: translateY(-3px);
+        }
+
+        /* ========== animal-18: Dolphin ========== */
+        #animal-18 .dolphin {
+            position: relative;
+            width: 65px;
+            height: 35px;
+            background: #708090;
+            border-radius: 60% 40% 40% 60%;
+            margin: 25px auto 0;
+        }
+
+        #animal-18 .dolphin-snout {
+            position: absolute;
+            width: 20px;
+            height: 12px;
+            background: #708090;
+            border-radius: 50% 0 0 50%;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #animal-18 .dolphin-fin {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #708090;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-18 .dolphin-tail {
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 15px solid #708090;
+        }
+
+        #animal-18 .dolphin-eye {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            left: 8px;
+            top: 12px;
+        }
+
+        #animal-18 .dolphin-belly {
+            position: absolute;
+            width: 35px;
+            height: 12px;
+            background: #B0C4DE;
+            border-radius: 50%;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-18:hover .animal {
+            animation: jump 0.5s ease;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(-10deg); }
+        }
+
+        /* ========== animal-19: Owl ========== */
+        #animal-19 .owl {
+            position: relative;
+            width: 50px;
+            height: 55px;
+            background: #8B4513;
+            border-radius: 50% 50% 45% 45%;
+            margin: 15px auto 0;
+        }
+
+        #animal-19 .owl-ear {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 15px solid #8B4513;
+            top: -12px;
+        }
+
+        #animal-19 .owl-ear.left {
+            left: 3px;
+        }
+
+        #animal-19 .owl-ear.right {
+            right: 3px;
+        }
+
+        #animal-19 .owl-face {
+            position: absolute;
+            width: 40px;
+            height: 35px;
+            background: #DEB887;
+            border-radius: 50%;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-19 .owl-eyes {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        #animal-19 .owl-eye {
+            width: 14px;
+            height: 14px;
+            background: #FFD700;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #animal-19 .owl-eye::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #animal-19 .owl-beak {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #FF8C00;
+        }
+
+        #animal-19 .owl-belly {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: #DEB887;
+            border-radius: 50%;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #animal-19:hover .animal {
+            transform: rotate(-15deg) scale(1.1);
+        }
+
+        /* ========== animal-20: Pig ========== */
+        #animal-20 .pig {
+            position: relative;
+            width: 55px;
+            height: 50px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            margin: 15px auto 0;
+        }
+
+        #animal-20 .pig-ear {
+            position: absolute;
+            width: 18px;
+            height: 15px;
+            background: #FFB6C1;
+            border-radius: 50% 50% 0 0;
+            top: -8px;
+        }
+
+        #animal-20 .pig-ear.left {
+            left: 5px;
+            transform: rotate(-30deg);
+        }
+
+        #animal-20 .pig-ear.right {
+            right: 5px;
+            transform: rotate(30deg);
+        }
+
+        #animal-20 .pig-eyes {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        #animal-20 .pig-eye {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        #animal-20 .pig-snout {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 16px;
+            background: #FF69B4;
+            border-radius: 50%;
+        }
+
+        #animal-20 .pig-nostril {
+            position: absolute;
+            width: 5px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            top: 5px;
+        }
+
+        #animal-20 .pig-nostril.left {
+            left: 4px;
+        }
+
+        #animal-20 .pig-nostril.right {
+            right: 4px;
+        }
+
+        #animal-20:hover .animal {
+            transform: scale(1.15);
+            animation: oink 0.2s ease 2;
+        }
+
+        @keyframes oink {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Animal Illustrations - CSS Components</h1>
+
+    <div class="grid">
+        <!-- animal-01: Cat -->
+        <div class="item" id="animal-01">
+            <span class="item-label">animal-01</span>
+            <div class="animal">
+                <div class="cat">
+                    <div class="cat-eyes">
+                        <div class="cat-eye"></div>
+                        <div class="cat-eye"></div>
+                    </div>
+                    <div class="cat-nose"></div>
+                    <div class="cat-mouth"></div>
+                </div>
+            </div>
+            <span class="item-name">Cat</span>
+        </div>
+
+        <!-- animal-02: Dog -->
+        <div class="item" id="animal-02">
+            <span class="item-label">animal-02</span>
+            <div class="animal">
+                <div class="dog">
+                    <div class="dog-ear left"></div>
+                    <div class="dog-ear right"></div>
+                    <div class="dog-eyes">
+                        <div class="dog-eye"></div>
+                        <div class="dog-eye"></div>
+                    </div>
+                    <div class="dog-nose"></div>
+                    <div class="dog-tongue"></div>
+                </div>
+            </div>
+            <span class="item-name">Dog</span>
+        </div>
+
+        <!-- animal-03: Bird -->
+        <div class="item" id="animal-03">
+            <span class="item-label">animal-03</span>
+            <div class="animal">
+                <div class="bird">
+                    <div class="bird-wing"></div>
+                    <div class="bird-beak"></div>
+                    <div class="bird-eye"></div>
+                    <div class="bird-belly"></div>
+                </div>
+            </div>
+            <span class="item-name">Bird</span>
+        </div>
+
+        <!-- animal-04: Fish -->
+        <div class="item" id="animal-04">
+            <span class="item-label">animal-04</span>
+            <div class="animal">
+                <div class="fish">
+                    <div class="fish-tail"></div>
+                    <div class="fish-eye"></div>
+                    <div class="fish-fin"></div>
+                </div>
+            </div>
+            <span class="item-name">Fish</span>
+        </div>
+
+        <!-- animal-05: Rabbit -->
+        <div class="item" id="animal-05">
+            <span class="item-label">animal-05</span>
+            <div class="animal">
+                <div class="rabbit">
+                    <div class="rabbit-ear left"></div>
+                    <div class="rabbit-ear right"></div>
+                    <div class="rabbit-eyes">
+                        <div class="rabbit-eye"></div>
+                        <div class="rabbit-eye"></div>
+                    </div>
+                    <div class="rabbit-nose"></div>
+                </div>
+            </div>
+            <span class="item-name">Rabbit</span>
+        </div>
+
+        <!-- animal-06: Bear -->
+        <div class="item" id="animal-06">
+            <span class="item-label">animal-06</span>
+            <div class="animal">
+                <div class="bear">
+                    <div class="bear-ear left"></div>
+                    <div class="bear-ear right"></div>
+                    <div class="bear-eyes">
+                        <div class="bear-eye"></div>
+                        <div class="bear-eye"></div>
+                    </div>
+                    <div class="bear-snout"></div>
+                    <div class="bear-nose"></div>
+                </div>
+            </div>
+            <span class="item-name">Bear</span>
+        </div>
+
+        <!-- animal-07: Elephant -->
+        <div class="item" id="animal-07">
+            <span class="item-label">animal-07</span>
+            <div class="animal">
+                <div class="elephant">
+                    <div class="elephant-ear left"></div>
+                    <div class="elephant-ear right"></div>
+                    <div class="elephant-trunk"></div>
+                    <div class="elephant-eyes">
+                        <div class="elephant-eye"></div>
+                        <div class="elephant-eye"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Elephant</span>
+        </div>
+
+        <!-- animal-08: Lion -->
+        <div class="item" id="animal-08">
+            <span class="item-label">animal-08</span>
+            <div class="animal">
+                <div class="lion-mane">
+                    <div class="lion">
+                        <div class="lion-eyes">
+                            <div class="lion-eye"></div>
+                            <div class="lion-eye"></div>
+                        </div>
+                        <div class="lion-nose"></div>
+                        <div class="lion-mouth"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Lion</span>
+        </div>
+
+        <!-- animal-09: Penguin -->
+        <div class="item" id="animal-09">
+            <span class="item-label">animal-09</span>
+            <div class="animal">
+                <div class="penguin">
+                    <div class="penguin-belly"></div>
+                    <div class="penguin-eyes">
+                        <div class="penguin-eye"></div>
+                        <div class="penguin-eye"></div>
+                    </div>
+                    <div class="penguin-beak"></div>
+                    <div class="penguin-feet">
+                        <div class="penguin-foot"></div>
+                        <div class="penguin-foot"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Penguin</span>
+        </div>
+
+        <!-- animal-10: Duck -->
+        <div class="item" id="animal-10">
+            <span class="item-label">animal-10</span>
+            <div class="animal">
+                <div class="duck">
+                    <div class="duck-beak"></div>
+                    <div class="duck-eye"></div>
+                    <div class="duck-wing"></div>
+                    <div class="duck-tuft"></div>
+                </div>
+            </div>
+            <span class="item-name">Duck</span>
+        </div>
+
+        <!-- animal-11: Frog -->
+        <div class="item" id="animal-11">
+            <span class="item-label">animal-11</span>
+            <div class="animal">
+                <div class="frog">
+                    <div class="frog-eye-bump left">
+                        <div class="frog-eye"></div>
+                    </div>
+                    <div class="frog-eye-bump right">
+                        <div class="frog-eye"></div>
+                    </div>
+                    <div class="frog-mouth"></div>
+                </div>
+            </div>
+            <span class="item-name">Frog</span>
+        </div>
+
+        <!-- animal-12: Butterfly -->
+        <div class="item" id="animal-12">
+            <span class="item-label">animal-12</span>
+            <div class="animal">
+                <div class="butterfly-wing top-left"></div>
+                <div class="butterfly-wing top-right"></div>
+                <div class="butterfly-wing bottom-left"></div>
+                <div class="butterfly-wing bottom-right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            <span class="item-name">Butterfly</span>
+        </div>
+
+        <!-- animal-13: Bee -->
+        <div class="item" id="animal-13">
+            <span class="item-label">animal-13</span>
+            <div class="animal">
+                <div class="bee">
+                    <div class="bee-head">
+                        <div class="bee-eye"></div>
+                    </div>
+                    <div class="bee-wing left"></div>
+                    <div class="bee-wing right"></div>
+                    <div class="bee-stinger"></div>
+                </div>
+            </div>
+            <span class="item-name">Bee</span>
+        </div>
+
+        <!-- animal-14: Ladybug -->
+        <div class="item" id="animal-14">
+            <span class="item-label">animal-14</span>
+            <div class="animal">
+                <div class="ladybug">
+                    <div class="ladybug-head"></div>
+                    <div class="ladybug-line"></div>
+                    <div class="ladybug-spot"></div>
+                    <div class="ladybug-spot"></div>
+                    <div class="ladybug-spot"></div>
+                    <div class="ladybug-spot"></div>
+                    <div class="ladybug-antenna left"></div>
+                    <div class="ladybug-antenna right"></div>
+                </div>
+            </div>
+            <span class="item-name">Ladybug</span>
+        </div>
+
+        <!-- animal-15: Snail -->
+        <div class="item" id="animal-15">
+            <span class="item-label">animal-15</span>
+            <div class="animal">
+                <div class="snail-shell">
+                    <div class="snail-shell-inner">
+                        <div class="snail-shell-center"></div>
+                    </div>
+                    <div class="snail-body"></div>
+                    <div class="snail-eye-stalk">
+                        <div class="snail-eye"></div>
+                    </div>
+                    <div class="snail-eye-stalk right">
+                        <div class="snail-eye"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Snail</span>
+        </div>
+
+        <!-- animal-16: Turtle -->
+        <div class="item" id="animal-16">
+            <span class="item-label">animal-16</span>
+            <div class="animal">
+                <div class="turtle-shell">
+                    <div class="turtle-pattern"></div>
+                    <div class="turtle-head">
+                        <div class="turtle-eye"></div>
+                    </div>
+                    <div class="turtle-leg front-left"></div>
+                    <div class="turtle-leg front-right"></div>
+                    <div class="turtle-leg back-left"></div>
+                    <div class="turtle-leg back-right"></div>
+                    <div class="turtle-tail"></div>
+                </div>
+            </div>
+            <span class="item-name">Turtle</span>
+        </div>
+
+        <!-- animal-17: Whale -->
+        <div class="item" id="animal-17">
+            <span class="item-label">animal-17</span>
+            <div class="animal">
+                <div class="whale">
+                    <div class="whale-tail">
+                        <div class="whale-tail-fin"></div>
+                    </div>
+                    <div class="whale-eye"></div>
+                    <div class="whale-belly"></div>
+                    <div class="whale-spout"></div>
+                </div>
+            </div>
+            <span class="item-name">Whale</span>
+        </div>
+
+        <!-- animal-18: Dolphin -->
+        <div class="item" id="animal-18">
+            <span class="item-label">animal-18</span>
+            <div class="animal">
+                <div class="dolphin">
+                    <div class="dolphin-snout"></div>
+                    <div class="dolphin-fin"></div>
+                    <div class="dolphin-tail"></div>
+                    <div class="dolphin-eye"></div>
+                    <div class="dolphin-belly"></div>
+                </div>
+            </div>
+            <span class="item-name">Dolphin</span>
+        </div>
+
+        <!-- animal-19: Owl -->
+        <div class="item" id="animal-19">
+            <span class="item-label">animal-19</span>
+            <div class="animal">
+                <div class="owl">
+                    <div class="owl-ear left"></div>
+                    <div class="owl-ear right"></div>
+                    <div class="owl-face">
+                        <div class="owl-eyes">
+                            <div class="owl-eye"></div>
+                            <div class="owl-eye"></div>
+                        </div>
+                        <div class="owl-beak"></div>
+                    </div>
+                    <div class="owl-belly"></div>
+                </div>
+            </div>
+            <span class="item-name">Owl</span>
+        </div>
+
+        <!-- animal-20: Pig -->
+        <div class="item" id="animal-20">
+            <span class="item-label">animal-20</span>
+            <div class="animal">
+                <div class="pig">
+                    <div class="pig-ear left"></div>
+                    <div class="pig-ear right"></div>
+                    <div class="pig-eyes">
+                        <div class="pig-eye"></div>
+                        <div class="pig-eye"></div>
+                    </div>
+                    <div class="pig-snout">
+                        <div class="pig-nostril left"></div>
+                        <div class="pig-nostril right"></div>
+                    </div>
+                </div>
+            </div>
+            <span class="item-name">Pig</span>
+        </div>
+    </div>
+</body>
+</html>

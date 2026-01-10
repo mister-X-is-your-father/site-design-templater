@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid Diagram Templates - ピラミッド図テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2d3748;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .template-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #e2e8f0;
+        }
+
+        .template-title span {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 8px;
+        }
+
+        .diagram-container {
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* ========================================
+           #pyramid-1: Simple 3-tier pyramid
+           ======================================== */
+        #pyramid-1 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pyramid-1 .tier {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: transform 0.3s, filter 0.3s;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-1 .tier:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        #pyramid-1 .tier-1 { width: 100px; background: #ff6b9d; }
+        #pyramid-1 .tier-2 { width: 160px; background: #ffd93d; }
+        #pyramid-1 .tier-3 { width: 220px; background: #6bcb77; }
+
+        /* ========================================
+           #pyramid-2: 4-tier pyramid
+           ======================================== */
+        #pyramid-2 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        #pyramid-2 .tier {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-2 .tier:hover {
+            transform: translateX(5px);
+        }
+
+        #pyramid-2 .tier-1 { width: 80px; background: #a855f7; }
+        #pyramid-2 .tier-2 { width: 130px; background: #3b82f6; }
+        #pyramid-2 .tier-3 { width: 180px; background: #22d3ee; }
+        #pyramid-2 .tier-4 { width: 230px; background: #4ade80; }
+
+        /* ========================================
+           #pyramid-3: 5-tier pyramid
+           ======================================== */
+        #pyramid-3 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        #pyramid-3 .tier {
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            clip-path: polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-3 .tier:hover {
+            filter: saturate(1.3);
+        }
+
+        #pyramid-3 .tier-1 { width: 60px; background: #f472b6; }
+        #pyramid-3 .tier-2 { width: 100px; background: #fb923c; }
+        #pyramid-3 .tier-3 { width: 140px; background: #facc15; }
+        #pyramid-3 .tier-4 { width: 180px; background: #4ade80; }
+        #pyramid-3 .tier-5 { width: 220px; background: #60a5fa; }
+
+        /* ========================================
+           #pyramid-4: Maslow's hierarchy style
+           ======================================== */
+        #pyramid-4 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #pyramid-4 .tier {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-align: center;
+            transition: all 0.3s;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        #pyramid-4 .tier:hover {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        #pyramid-4 .tier-1 {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 44px solid #ec4899;
+        }
+        #pyramid-4 .tier-2 { width: 120px; background: #f97316; clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); }
+        #pyramid-4 .tier-3 { width: 160px; background: #eab308; clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%); }
+        #pyramid-4 .tier-4 { width: 200px; background: #22c55e; clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); }
+        #pyramid-4 .tier-5 { width: 240px; background: #3b82f6; clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%); }
+
+        /* ========================================
+           #pyramid-5: Inverted pyramid
+           ======================================== */
+        #pyramid-5 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pyramid-5 .tier {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%);
+        }
+
+        #pyramid-5 .tier:hover {
+            transform: scale(1.03);
+        }
+
+        #pyramid-5 .tier-1 { width: 220px; background: #06b6d4; }
+        #pyramid-5 .tier-2 { width: 160px; background: #8b5cf6; }
+        #pyramid-5 .tier-3 { width: 100px; background: #f43f5e; }
+
+        /* ========================================
+           #pyramid-6: 3D effect pyramid
+           ======================================== */
+        #pyramid-6 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: perspective(500px) rotateX(5deg);
+        }
+
+        #pyramid-6 .tier {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        #pyramid-6 .tier::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 15px;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
+        }
+
+        #pyramid-6 .tier:hover {
+            transform: translateZ(10px);
+        }
+
+        #pyramid-6 .tier-1 {
+            width: 80px;
+            background: #fb7185;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-6 .tier-2 {
+            width: 140px;
+            background: #fbbf24;
+            clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-6 .tier-3 {
+            width: 200px;
+            background: #34d399;
+            clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+        }
+
+        /* ========================================
+           #pyramid-7: Stepped pyramid
+           ======================================== */
+        #pyramid-7 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        #pyramid-7 .tier {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            border-radius: 4px;
+            margin-bottom: 2px;
+        }
+
+        #pyramid-7 .tier:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #pyramid-7 .tier-1 { width: 70px; background: #c084fc; }
+        #pyramid-7 .tier-2 { width: 110px; background: #818cf8; }
+        #pyramid-7 .tier-3 { width: 150px; background: #38bdf8; }
+        #pyramid-7 .tier-4 { width: 190px; background: #2dd4bf; }
+        #pyramid-7 .tier-5 { width: 230px; background: #a3e635; }
+
+        /* ========================================
+           #pyramid-8: Layered pyramid
+           ======================================== */
+        #pyramid-8 .pyramid {
+            position: relative;
+            width: 240px;
+            height: 200px;
+        }
+
+        #pyramid-8 .tier {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-8 .tier:hover {
+            filter: brightness(1.15);
+        }
+
+        #pyramid-8 .tier-1 {
+            width: 240px;
+            height: 200px;
+            background: #67e8f9;
+            z-index: 1;
+        }
+        #pyramid-8 .tier-2 {
+            width: 180px;
+            height: 150px;
+            background: #fcd34d;
+            bottom: 0;
+            z-index: 2;
+        }
+        #pyramid-8 .tier-3 {
+            width: 120px;
+            height: 100px;
+            background: #fb923c;
+            bottom: 0;
+            z-index: 3;
+        }
+        #pyramid-8 .tier-4 {
+            width: 60px;
+            height: 50px;
+            background: #f87171;
+            bottom: 0;
+            z-index: 4;
+        }
+
+        /* ========================================
+           #pyramid-9: Numbered pyramid
+           ======================================== */
+        #pyramid-9 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pyramid-9 .tier {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-9 .tier:hover {
+            transform: scale(1.05);
+        }
+
+        #pyramid-9 .number {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        #pyramid-9 .tier-1 { width: 90px; background: #f472b6; }
+        #pyramid-9 .tier-2 { width: 140px; background: #a78bfa; }
+        #pyramid-9 .tier-3 { width: 190px; background: #60a5fa; }
+        #pyramid-9 .tier-4 { width: 240px; background: #4ade80; }
+
+        /* ========================================
+           #pyramid-10: Icon pyramid
+           ======================================== */
+        #pyramid-10 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pyramid-10 .tier {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-10 .tier:hover .icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        #pyramid-10 .icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        #pyramid-10 .tier-1 { width: 100px; background: #fbbf24; }
+        #pyramid-10 .tier-2 { width: 160px; background: #fb7185; }
+        #pyramid-10 .tier-3 { width: 220px; background: #a78bfa; }
+
+        /* ========================================
+           #pyramid-11: Text label pyramid
+           ======================================== */
+        #pyramid-11 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #pyramid-11 .tier-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #pyramid-11 .tier {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-11 .label {
+            font-size: 0.7rem;
+            color: #64748b;
+            font-weight: 600;
+            min-width: 60px;
+        }
+
+        #pyramid-11 .tier-wrapper:hover .tier {
+            transform: scale(1.05);
+        }
+
+        #pyramid-11 .tier-1 { width: 80px; background: #f43f5e; }
+        #pyramid-11 .tier-2 { width: 130px; background: #8b5cf6; }
+        #pyramid-11 .tier-3 { width: 180px; background: #06b6d4; }
+
+        /* ========================================
+           #pyramid-12: Percentage pyramid
+           ======================================== */
+        #pyramid-12 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        #pyramid-12 .tier {
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-12 .tier:hover {
+            filter: brightness(1.1);
+        }
+
+        #pyramid-12 .percent {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        #pyramid-12 .tier-1 { width: 100px; background: #ec4899; }
+        #pyramid-12 .tier-2 { width: 150px; background: #f59e0b; }
+        #pyramid-12 .tier-3 { width: 200px; background: #10b981; }
+        #pyramid-12 .tier-4 { width: 250px; background: #6366f1; }
+
+        /* ========================================
+           #pyramid-13: Color-coded pyramid
+           ======================================== */
+        #pyramid-13 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        #pyramid-13 .tier {
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        #pyramid-13 .tier::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 3px;
+        }
+
+        #pyramid-13 .tier:hover {
+            padding-left: 15px;
+        }
+
+        #pyramid-13 .tier-1 {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 42px solid #ef4444;
+        }
+        #pyramid-13 .tier-1::before { display: none; }
+        #pyramid-13 .tier-2 { width: 140px; background: #f97316; clip-path: polygon(14% 0%, 86% 0%, 100% 100%, 0% 100%); }
+        #pyramid-13 .tier-3 { width: 180px; background: #eab308; clip-path: polygon(11% 0%, 89% 0%, 100% 100%, 0% 100%); }
+        #pyramid-13 .tier-4 { width: 220px; background: #22c55e; clip-path: polygon(9% 0%, 91% 0%, 100% 100%, 0% 100%); }
+
+        /* ========================================
+           #pyramid-14: Split pyramid
+           ======================================== */
+        #pyramid-14 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pyramid-14 .tier {
+            display: flex;
+            gap: 4px;
+            transition: all 0.3s;
+        }
+
+        #pyramid-14 .tier:hover {
+            gap: 12px;
+        }
+
+        #pyramid-14 .half {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        #pyramid-14 .half-left {
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-14 .half-right {
+            clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-14 .tier-1 .half { width: 50px; }
+        #pyramid-14 .tier-2 .half { width: 75px; }
+        #pyramid-14 .tier-3 .half { width: 100px; }
+
+        #pyramid-14 .tier-1 .half-left { background: #f472b6; }
+        #pyramid-14 .tier-1 .half-right { background: #fb7185; }
+        #pyramid-14 .tier-2 .half-left { background: #a78bfa; }
+        #pyramid-14 .tier-2 .half-right { background: #818cf8; }
+        #pyramid-14 .tier-3 .half-left { background: #34d399; }
+        #pyramid-14 .tier-3 .half-right { background: #2dd4bf; }
+
+        /* ========================================
+           #pyramid-15: Dotted pyramid
+           ======================================== */
+        #pyramid-15 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #pyramid-15 .tier {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+            border: 3px dashed rgba(255,255,255,0.5);
+            background-clip: padding-box;
+        }
+
+        #pyramid-15 .tier:hover {
+            border-style: solid;
+        }
+
+        #pyramid-15 .tier-1 { width: 90px; background: #fbbf24; }
+        #pyramid-15 .tier-2 { width: 145px; background: #fb923c; }
+        #pyramid-15 .tier-3 { width: 200px; background: #f87171; }
+
+        /* ========================================
+           #pyramid-16: Building block pyramid
+           ======================================== */
+        #pyramid-16 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pyramid-16 .tier {
+            display: flex;
+            gap: 4px;
+        }
+
+        #pyramid-16 .block {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        #pyramid-16 .block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #pyramid-16 .tier-1 .block { background: #ec4899; }
+        #pyramid-16 .tier-2 .block { background: #a855f7; }
+        #pyramid-16 .tier-3 .block { background: #3b82f6; }
+        #pyramid-16 .tier-4 .block { background: #14b8a6; }
+        #pyramid-16 .tier-5 .block { background: #84cc16; }
+
+        /* ========================================
+           #pyramid-17: Triangle sections
+           ======================================== */
+        #pyramid-17 .pyramid {
+            position: relative;
+            width: 220px;
+            height: 190px;
+        }
+
+        #pyramid-17 .section {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #pyramid-17 .section:hover {
+            filter: brightness(1.2);
+            z-index: 10;
+        }
+
+        #pyramid-17 .section-1 {
+            width: 0;
+            height: 0;
+            border-left: 110px solid transparent;
+            border-right: 110px solid transparent;
+            border-bottom: 63px solid #f472b6;
+            top: 0;
+            left: 0;
+        }
+
+        #pyramid-17 .section-2 {
+            width: 0;
+            height: 0;
+            border-left: 73px solid transparent;
+            border-right: 73px solid transparent;
+            border-bottom: 63px solid #a78bfa;
+            top: 63px;
+            left: 37px;
+        }
+
+        #pyramid-17 .section-3 {
+            width: 0;
+            height: 0;
+            border-left: 37px solid transparent;
+            border-right: 37px solid transparent;
+            border-bottom: 63px solid #60a5fa;
+            top: 126px;
+            left: 73px;
+        }
+
+        #pyramid-17 .section-label {
+            position: absolute;
+            font-size: 0.65rem;
+        }
+
+        #pyramid-17 .section-1 .section-label { top: 30px; left: -15px; }
+        #pyramid-17 .section-2 .section-label { top: 30px; left: -10px; }
+        #pyramid-17 .section-3 .section-label { top: 30px; left: -10px; }
+
+        /* ========================================
+           #pyramid-18: Egyptian style
+           ======================================== */
+        #pyramid-18 .pyramid {
+            position: relative;
+            width: 200px;
+            height: 180px;
+        }
+
+        #pyramid-18 .pyramid-body {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 180px solid #fbbf24;
+            position: relative;
+        }
+
+        #pyramid-18 .stripe {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 4px;
+            background: #f59e0b;
+            transition: all 0.3s;
+        }
+
+        #pyramid-18 .stripe:hover {
+            height: 8px;
+            background: #d97706;
+        }
+
+        #pyramid-18 .stripe-1 { width: 40px; top: 30px; }
+        #pyramid-18 .stripe-2 { width: 80px; top: 60px; }
+        #pyramid-18 .stripe-3 { width: 120px; top: 90px; }
+        #pyramid-18 .stripe-4 { width: 160px; top: 120px; }
+        #pyramid-18 .stripe-5 { width: 200px; top: 150px; }
+
+        #pyramid-18 .eye {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 20px;
+            background: #78350f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #pyramid-18 .eye::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #fef3c7;
+            border-radius: 50%;
+        }
+
+        /* ========================================
+           #pyramid-19: Modern flat pyramid
+           ======================================== */
+        #pyramid-19 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        #pyramid-19 .tier {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        #pyramid-19 .tier::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        #pyramid-19 .tier:hover {
+            letter-spacing: 2px;
+        }
+
+        #pyramid-19 .tier-1 {
+            width: 0;
+            height: 0;
+            border-left: 55px solid transparent;
+            border-right: 55px solid transparent;
+            border-bottom: 50px solid #06b6d4;
+        }
+        #pyramid-19 .tier-1::after { display: none; }
+
+        #pyramid-19 .tier-2 {
+            width: 150px;
+            background: #8b5cf6;
+            clip-path: polygon(13% 0%, 87% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-19 .tier-3 {
+            width: 210px;
+            background: #ec4899;
+            clip-path: polygon(9% 0%, 91% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-19 .tier-4 {
+            width: 270px;
+            background: #f97316;
+            clip-path: polygon(7% 0%, 93% 0%, 100% 100%, 0% 100%);
+        }
+
+        /* ========================================
+           #pyramid-20: Segmented pyramid
+           ======================================== */
+        #pyramid-20 .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #pyramid-20 .tier {
+            display: flex;
+            gap: 3px;
+            transition: all 0.3s;
+        }
+
+        #pyramid-20 .tier:hover {
+            gap: 8px;
+        }
+
+        #pyramid-20 .segment {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.65rem;
+            transition: all 0.3s;
+        }
+
+        #pyramid-20 .segment:hover {
+            transform: scale(1.1);
+        }
+
+        #pyramid-20 .tier-1 .segment {
+            width: 60px;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-20 .tier-2 .segment {
+            width: 55px;
+        }
+        #pyramid-20 .tier-2 .segment:first-child {
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-20 .tier-2 .segment:last-child {
+            clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-20 .tier-3 .segment {
+            width: 50px;
+        }
+        #pyramid-20 .tier-3 .segment:first-child {
+            clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-20 .tier-3 .segment:last-child {
+            clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-20 .tier-4 .segment {
+            width: 45px;
+        }
+        #pyramid-20 .tier-4 .segment:first-child {
+            clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        #pyramid-20 .tier-4 .segment:last-child {
+            clip-path: polygon(0% 0%, 88% 0%, 100% 100%, 0% 100%);
+        }
+
+        #pyramid-20 .seg-pink { background: #f472b6; }
+        #pyramid-20 .seg-purple { background: #a78bfa; }
+        #pyramid-20 .seg-blue { background: #60a5fa; }
+        #pyramid-20 .seg-cyan { background: #22d3ee; }
+        #pyramid-20 .seg-green { background: #4ade80; }
+        #pyramid-20 .seg-yellow { background: #fbbf24; }
+        #pyramid-20 .seg-orange { background: #fb923c; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pyramid Diagram Templates</h1>
+    <p class="subtitle">ピラミッド図テンプレート - 20種類のレイアウト</p>
+
+    <div class="template-grid">
+        <!-- #pyramid-1: Simple 3-tier pyramid -->
+        <div class="template-card" id="pyramid-1">
+            <div class="template-title">
+                <span>#1</span> Simple 3-tier Pyramid / シンプル3段
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">Top</div>
+                    <div class="tier tier-2">Middle</div>
+                    <div class="tier tier-3">Bottom</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-2: 4-tier pyramid -->
+        <div class="template-card" id="pyramid-2">
+            <div class="template-title">
+                <span>#2</span> 4-tier Pyramid / 4段ピラミッド
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">Level 1</div>
+                    <div class="tier tier-2">Level 2</div>
+                    <div class="tier tier-3">Level 3</div>
+                    <div class="tier tier-4">Level 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-3: 5-tier pyramid -->
+        <div class="template-card" id="pyramid-3">
+            <div class="template-title">
+                <span>#3</span> 5-tier Pyramid / 5段ピラミッド
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">1</div>
+                    <div class="tier tier-2">2</div>
+                    <div class="tier tier-3">3</div>
+                    <div class="tier tier-4">4</div>
+                    <div class="tier tier-5">5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-4: Maslow's hierarchy style -->
+        <div class="template-card" id="pyramid-4">
+            <div class="template-title">
+                <span>#4</span> Maslow Style / マズロー風
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"></div>
+                    <div class="tier tier-2">自己実現</div>
+                    <div class="tier tier-3">承認欲求</div>
+                    <div class="tier tier-4">社会的欲求</div>
+                    <div class="tier tier-5">安全欲求</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-5: Inverted pyramid -->
+        <div class="template-card" id="pyramid-5">
+            <div class="template-title">
+                <span>#5</span> Inverted Pyramid / 逆ピラミッド
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">Wide Top</div>
+                    <div class="tier tier-2">Middle</div>
+                    <div class="tier tier-3">Narrow</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-6: 3D effect pyramid -->
+        <div class="template-card" id="pyramid-6">
+            <div class="template-title">
+                <span>#6</span> 3D Effect / 3D効果
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">Top</div>
+                    <div class="tier tier-2">Middle</div>
+                    <div class="tier tier-3">Base</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-7: Stepped pyramid -->
+        <div class="template-card" id="pyramid-7">
+            <div class="template-title">
+                <span>#7</span> Stepped Pyramid / 階段ピラミッド
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">Step 1</div>
+                    <div class="tier tier-2">Step 2</div>
+                    <div class="tier tier-3">Step 3</div>
+                    <div class="tier tier-4">Step 4</div>
+                    <div class="tier tier-5">Step 5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-8: Layered pyramid -->
+        <div class="template-card" id="pyramid-8">
+            <div class="template-title">
+                <span>#8</span> Layered Pyramid / 重ね三角形
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"></div>
+                    <div class="tier tier-2"></div>
+                    <div class="tier tier-3"></div>
+                    <div class="tier tier-4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-9: Numbered pyramid -->
+        <div class="template-card" id="pyramid-9">
+            <div class="template-title">
+                <span>#9</span> Numbered Pyramid / ナンバリング
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"><span class="number">1</span></div>
+                    <div class="tier tier-2"><span class="number">2</span> Level</div>
+                    <div class="tier tier-3"><span class="number">3</span> Level</div>
+                    <div class="tier tier-4"><span class="number">4</span> Base Level</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-10: Icon pyramid -->
+        <div class="template-card" id="pyramid-10">
+            <div class="template-title">
+                <span>#10</span> Icon Pyramid / アイコン付き
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"><span class="icon">⭐</span></div>
+                    <div class="tier tier-2"><span class="icon">❤️</span> Love</div>
+                    <div class="tier tier-3"><span class="icon">🎯</span> Goals</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-11: Text label pyramid -->
+        <div class="template-card" id="pyramid-11">
+            <div class="template-title">
+                <span>#11</span> Text Label / ラベル付き
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier-wrapper">
+                        <span class="label">重要度 高</span>
+                        <div class="tier tier-1">Top</div>
+                    </div>
+                    <div class="tier-wrapper">
+                        <span class="label">重要度 中</span>
+                        <div class="tier tier-2">Middle</div>
+                    </div>
+                    <div class="tier-wrapper">
+                        <span class="label">重要度 低</span>
+                        <div class="tier tier-3">Base</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-12: Percentage pyramid -->
+        <div class="template-card" id="pyramid-12">
+            <div class="template-title">
+                <span>#12</span> Percentage / パーセンテージ
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"><span class="percent">5%</span></div>
+                    <div class="tier tier-2">中間層 <span class="percent">15%</span></div>
+                    <div class="tier tier-3">一般層 <span class="percent">30%</span></div>
+                    <div class="tier tier-4">基盤層 <span class="percent">50%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-13: Color-coded pyramid -->
+        <div class="template-card" id="pyramid-13">
+            <div class="template-title">
+                <span>#13</span> Color-coded / カラーコード
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"></div>
+                    <div class="tier tier-2">Warning</div>
+                    <div class="tier tier-3">Caution</div>
+                    <div class="tier tier-4">Safe</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-14: Split pyramid -->
+        <div class="template-card" id="pyramid-14">
+            <div class="template-title">
+                <span>#14</span> Split Pyramid / 分割ピラミッド
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">
+                        <div class="half half-left">A</div>
+                        <div class="half half-right">B</div>
+                    </div>
+                    <div class="tier tier-2">
+                        <div class="half half-left">Left</div>
+                        <div class="half half-right">Right</div>
+                    </div>
+                    <div class="tier tier-3">
+                        <div class="half half-left">左側</div>
+                        <div class="half half-right">右側</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-15: Dotted pyramid -->
+        <div class="template-card" id="pyramid-15">
+            <div class="template-title">
+                <span>#15</span> Dotted Pyramid / 点線ピラミッド
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">Top</div>
+                    <div class="tier tier-2">Middle</div>
+                    <div class="tier tier-3">Base</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-16: Building block pyramid -->
+        <div class="template-card" id="pyramid-16">
+            <div class="template-title">
+                <span>#16</span> Building Blocks / ブロック積み
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">
+                        <div class="block">1</div>
+                    </div>
+                    <div class="tier tier-2">
+                        <div class="block">2</div>
+                        <div class="block">3</div>
+                    </div>
+                    <div class="tier tier-3">
+                        <div class="block">4</div>
+                        <div class="block">5</div>
+                        <div class="block">6</div>
+                    </div>
+                    <div class="tier tier-4">
+                        <div class="block">7</div>
+                        <div class="block">8</div>
+                        <div class="block">9</div>
+                        <div class="block">10</div>
+                    </div>
+                    <div class="tier tier-5">
+                        <div class="block">11</div>
+                        <div class="block">12</div>
+                        <div class="block">13</div>
+                        <div class="block">14</div>
+                        <div class="block">15</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-17: Triangle sections -->
+        <div class="template-card" id="pyramid-17">
+            <div class="template-title">
+                <span>#17</span> Triangle Sections / 三角セクション
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="section section-1">
+                        <span class="section-label">Section 1</span>
+                    </div>
+                    <div class="section section-2">
+                        <span class="section-label">Section 2</span>
+                    </div>
+                    <div class="section section-3">
+                        <span class="section-label">Section 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-18: Egyptian style -->
+        <div class="template-card" id="pyramid-18">
+            <div class="template-title">
+                <span>#18</span> Egyptian Style / エジプト風
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="pyramid-body">
+                        <div class="eye"></div>
+                        <div class="stripe stripe-1"></div>
+                        <div class="stripe stripe-2"></div>
+                        <div class="stripe stripe-3"></div>
+                        <div class="stripe stripe-4"></div>
+                        <div class="stripe stripe-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-19: Modern flat pyramid -->
+        <div class="template-card" id="pyramid-19">
+            <div class="template-title">
+                <span>#19</span> Modern Flat / モダンフラット
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1"></div>
+                    <div class="tier tier-2">Strategy</div>
+                    <div class="tier tier-3">Planning</div>
+                    <div class="tier tier-4">Execution</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #pyramid-20: Segmented pyramid -->
+        <div class="template-card" id="pyramid-20">
+            <div class="template-title">
+                <span>#20</span> Segmented / セグメント分割
+            </div>
+            <div class="diagram-container">
+                <div class="pyramid">
+                    <div class="tier tier-1">
+                        <div class="segment seg-pink">Top</div>
+                    </div>
+                    <div class="tier tier-2">
+                        <div class="segment seg-purple">A</div>
+                        <div class="segment seg-blue">B</div>
+                    </div>
+                    <div class="tier tier-3">
+                        <div class="segment seg-cyan">C</div>
+                        <div class="segment seg-green">D</div>
+                        <div class="segment seg-yellow">E</div>
+                    </div>
+                    <div class="tier tier-4">
+                        <div class="segment seg-orange">F</div>
+                        <div class="segment seg-pink">G</div>
+                        <div class="segment seg-purple">H</div>
+                        <div class="segment seg-blue">I</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Pyramid Diagram Templates - 20 Patterns</p>
+        <p>CSS-only with hover animations | For SNS infographics & education</p>
+    </div>
+</body>
+</html>

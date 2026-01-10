@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手書き風吹き出し - Hand-drawn Speech Bubbles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .demo-area {
+            height: 200px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #e0e0e0;
+        }
+
+        .demo-text {
+            padding: 20px;
+            text-align: center;
+            max-width: 100%;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        /* ===== BUBBLE STYLES ===== */
+
+        /* 1. Wobbly Speech Bubble */
+        #handbubble-1 {
+            position: relative;
+            background: #FF6B6B;
+            color: white;
+            border-radius: 20px 20px 20px 5px;
+            padding: 15px 20px;
+            box-shadow:
+                -2px 1px 0 rgba(0,0,0,0.1),
+                2px -1px 0 rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+            animation: wobble-1 3s ease-in-out infinite;
+        }
+
+        #handbubble-1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 0 solid transparent;
+            border-top: 15px solid #FF6B6B;
+            filter: drop-shadow(-1px 1px 0 rgba(0,0,0,0.1));
+        }
+
+        @keyframes wobble-1 {
+            0%, 100% { transform: rotate(-1deg) translateX(0); }
+            25% { transform: rotate(0.5deg) translateX(1px); }
+            50% { transform: rotate(-1.5deg) translateX(-1px); }
+            75% { transform: rotate(0deg) translateX(1px); }
+        }
+
+        /* 2. Hand-drawn Thought Cloud */
+        #handbubble-2 {
+            position: relative;
+            background: #4ECDC4;
+            color: white;
+            border-radius: 50% 50% 50% 50%;
+            padding: 20px 25px;
+            box-shadow:
+                inset -2px -2px 5px rgba(0,0,0,0.1),
+                3px 3px 8px rgba(0,0,0,0.15);
+            transform: rotate(2deg);
+            clip-path: polygon(
+                0% 0%, 5% 2%, 10% 0%, 15% 1%, 20% 0%, 25% 2%, 30% 0%, 35% 1%,
+                40% 0%, 45% 1%, 50% 0%, 55% 1%, 60% 0%, 65% 2%, 70% 0%, 75% 1%,
+                80% 0%, 85% 1%, 90% 0%, 95% 2%, 100% 0%,
+                100% 5%, 99% 10%, 100% 15%, 99% 20%, 100% 25%, 99% 30%, 100% 35%,
+                100% 40%, 99% 45%, 100% 50%, 99% 55%, 100% 60%, 99% 65%, 100% 70%,
+                100% 75%, 99% 80%, 100% 85%, 99% 90%, 100% 95%, 100% 100%,
+                95% 100%, 90% 99%, 85% 100%, 80% 99%, 75% 100%, 70% 99%, 65% 100%,
+                60% 99%, 55% 100%, 50% 99%, 45% 100%, 40% 99%, 35% 100%, 30% 99%,
+                25% 100%, 20% 99%, 15% 100%, 10% 99%, 5% 100%, 0% 100%,
+                0% 95%, 1% 90%, 0% 85%, 1% 80%, 0% 75%, 1% 70%, 0% 65%,
+                0% 60%, 1% 55%, 0% 50%, 1% 45%, 0% 40%, 1% 35%, 0% 30%,
+                1% 25%, 0% 20%, 1% 15%, 0% 10%, 1% 5%, 0% 0%
+            );
+        }
+
+        #handbubble-2::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 15%;
+            width: 12px;
+            height: 12px;
+            background: #4ECDC4;
+            border-radius: 50%;
+            box-shadow:
+                0 -18px 0 -8px #4ECDC4,
+                0 -35px 0 -14px #4ECDC4,
+                -15px -48px 0 -10px #4ECDC4;
+            filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.15));
+        }
+
+        /* 3. Sketchy Shout Bubble (Spiky) */
+        #handbubble-3 {
+            position: relative;
+            background: #FFD93D;
+            color: #333;
+            padding: 20px 25px;
+            border-radius: 15px;
+            transform: rotate(-2deg) scaleY(0.98);
+            box-shadow:
+                -3px 3px 0 rgba(0,0,0,0.15),
+                -6px 6px 0 rgba(0,0,0,0.08);
+            clip-path: polygon(
+                10% 0%, 20% 5%, 30% 0%, 40% 3%, 50% 0%, 60% 4%, 70% 0%, 80% 3%, 90% 0%, 100% 10%,
+                95% 20%, 100% 30%, 96% 40%, 100% 50%, 97% 60%, 100% 70%, 95% 80%, 100% 90%, 90% 100%, 80% 95%,
+                70% 100%, 60% 96%, 50% 100%, 40% 97%, 30% 100%, 20% 96%, 10% 100%, 0% 90%,
+                5% 80%, 0% 70%, 4% 60%, 0% 50%, 3% 40%, 0% 30%, 5% 20%, 0% 10%
+            );
+        }
+
+        #handbubble-3::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 25%;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 20px solid #FFD93D;
+            transform: rotate(-20deg);
+            filter: drop-shadow(-2px 3px 2px rgba(0,0,0,0.15));
+        }
+
+        /* 4. Doodle Whisper Bubble */
+        #handbubble-4 {
+            position: relative;
+            background: #B19CD9;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow:
+                inset -1px -1px 3px rgba(0,0,0,0.1),
+                2px 2px 5px rgba(0,0,0,0.15);
+            border: 2px dashed rgba(255,255,255,0.3);
+            transform: rotate(3deg) scaleX(1.1);
+            animation: float-4 4s ease-in-out infinite;
+        }
+
+        @keyframes float-4 {
+            0%, 100% { transform: rotate(3deg) scaleX(1.1) translateY(0); }
+            50% { transform: rotate(3deg) scaleX(1.1) translateY(-5px); }
+        }
+
+        #handbubble-4::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 20px;
+            width: 8px;
+            height: 8px;
+            background: #B19CD9;
+            border-radius: 50%;
+            box-shadow:
+                -15px -8px 0 -4px #B19CD9,
+                -28px -12px 0 -6px #B19CD9;
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* 5. Rough Dialogue Pair */
+        #handbubble-5 {
+            position: relative;
+            background: #FF8C42;
+            color: white;
+            padding: 18px 22px;
+            border-radius: 18px 18px 5px 18px;
+            box-shadow:
+                -2px 2px 0 rgba(0,0,0,0.12),
+                -4px 4px 8px rgba(0,0,0,0.1);
+            transform: rotate(1deg);
+        }
+
+        #handbubble-5::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 15px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 0 solid transparent;
+            border-top: 12px solid #FF8C42;
+            filter: drop-shadow(-1px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* 6. Hand-drawn Quote Bubble */
+        #handbubble-6 {
+            position: relative;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            padding: 20px 25px;
+            border-radius: 15px 15px 15px 2px;
+            border-left: 4px solid #fed6e3;
+            box-shadow:
+                inset -1px -1px 3px rgba(0,0,0,0.05),
+                3px 3px 8px rgba(0,0,0,0.12);
+            transform: rotate(-1.5deg);
+        }
+
+        #handbubble-6::before {
+            content: '"';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 2.5em;
+            color: rgba(254, 214, 227, 0.3);
+            font-weight: bold;
+        }
+
+        #handbubble-6::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 15px solid #a8edea;
+            filter: drop-shadow(-1px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* 7. Scribble Narration Box */
+        #handbubble-7 {
+            position: relative;
+            background: #2C3E50;
+            color: #FFE66D;
+            padding: 18px 22px;
+            border-radius: 8px;
+            border: 2px solid #FFE66D;
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 230, 109, 0.3),
+                4px 4px 0 rgba(0,0,0,0.2),
+                8px 8px 0 rgba(0,0,0,0.1);
+            transform: rotate(-2deg) skewY(-1deg);
+            font-style: italic;
+        }
+
+        #handbubble-7::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FFE66D 0px,
+                #FFE66D 3px,
+                transparent 3px,
+                transparent 6px
+            );
+            bottom: -8px;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        /* 8. Wavy Emphasis Bubble */
+        #handbubble-8 {
+            position: relative;
+            background: #E8B4B8;
+            color: white;
+            padding: 20px 25px;
+            border-radius: 20px;
+            box-shadow:
+                0 0 0 3px #fff,
+                0 0 0 4px #E8B4B8,
+                3px 3px 10px rgba(0,0,0,0.15);
+            transform: rotate(2deg);
+            animation: pulse-8 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-8 {
+            0%, 100% { transform: rotate(2deg) scale(1); }
+            50% { transform: rotate(2deg) scale(1.02); }
+        }
+
+        #handbubble-8::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 18px solid #E8B4B8;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+        }
+
+        /* 9. Hand-drawn Exclamation */
+        #handbubble-9 {
+            position: relative;
+            background: #F97316;
+            color: white;
+            padding: 22px 24px;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.8em;
+            box-shadow:
+                0 0 0 3px #fff,
+                0 0 0 4px #F97316,
+                -4px 4px 12px rgba(0,0,0,0.2);
+            transform: rotate(-3deg);
+            line-height: 1;
+        }
+
+        #handbubble-9::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #F97316;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #fff, 0 0 0 4px #F97316;
+        }
+
+        /* 10. Sketchy Question Bubble */
+        #handbubble-10 {
+            position: relative;
+            background: #00BCD4;
+            color: white;
+            padding: 18px 22px;
+            border-radius: 15px 15px 0 15px;
+            box-shadow:
+                -3px 3px 0 rgba(0,0,0,0.15),
+                0 0 0 2px rgba(255,255,255,0.3),
+                inset -1px -1px 3px rgba(0,0,0,0.1);
+            transform: rotate(1.5deg) skewX(-1deg);
+        }
+
+        #handbubble-10::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background: #00BCD4;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+        }
+
+        /* 11. Doodle Info Callout */
+        #handbubble-11 {
+            position: relative;
+            background: #95E1D3;
+            color: #333;
+            padding: 18px 22px;
+            border-radius: 12px;
+            border: 2px solid #38B6A8;
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,0.5),
+                3px 3px 8px rgba(0,0,0,0.12);
+            transform: rotate(-1deg) scaleX(1.05);
+        }
+
+        #handbubble-11::before {
+            content: 'ℹ';
+            position: absolute;
+            top: -25px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #38B6A8;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        #handbubble-11::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 25%;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #95E1D3;
+        }
+
+        /* 12. Rough Tip/Hint Bubble */
+        #handbubble-12 {
+            position: relative;
+            background: linear-gradient(135deg, #F6A751 0%, #F97316 100%);
+            color: white;
+            padding: 18px 22px;
+            border-radius: 15px 2px 15px 15px;
+            box-shadow:
+                -2px 2px 5px rgba(0,0,0,0.15),
+                inset -1px -1px 3px rgba(0,0,0,0.1);
+            transform: rotate(2deg);
+        }
+
+        #handbubble-12::before {
+            content: '💡';
+            position: absolute;
+            top: -18px;
+            left: 15px;
+            font-size: 1.8em;
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+        }
+
+        #handbubble-12::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid #F97316;
+        }
+
+        /* 13. Hand-drawn Warning Bubble */
+        #handbubble-13 {
+            position: relative;
+            background: #FF6B6B;
+            color: white;
+            padding: 18px 22px;
+            border-radius: 15px;
+            border: 2px dashed #fff;
+            box-shadow:
+                0 0 0 2px #FF6B6B,
+                inset 0 0 0 1px rgba(255,255,255,0.3),
+                3px 3px 10px rgba(255, 107, 107, 0.3);
+            transform: rotate(-2deg);
+            animation: shake-13 0.5s ease-in-out 0.1s 2;
+        }
+
+        @keyframes shake-13 {
+            0%, 100% { transform: rotate(-2deg) translateX(0); }
+            25% { transform: rotate(-2deg) translateX(-2px); }
+            75% { transform: rotate(-2deg) translateX(2px); }
+        }
+
+        #handbubble-13::before {
+            content: '⚠';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8em;
+        }
+
+        #handbubble-13::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            border: 2px dashed #fff;
+        }
+
+        /* 14. Sketchy Success Bubble */
+        #handbubble-14 {
+            position: relative;
+            background: #06D6A0;
+            color: white;
+            padding: 20px 25px;
+            border-radius: 20px 0 20px 20px;
+            box-shadow:
+                -3px 3px 0 rgba(0,0,0,0.12),
+                inset -1px -1px 3px rgba(0,0,0,0.08);
+            transform: rotate(1deg);
+            animation: bounce-14 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce-14 {
+            0%, 100% { transform: rotate(1deg) translateY(0); }
+            50% { transform: rotate(1deg) translateY(-3px); }
+        }
+
+        #handbubble-14::before {
+            content: '✓';
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #06D6A0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #handbubble-14::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 30%;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 0 solid transparent;
+            border-top: 12px solid #06D6A0;
+        }
+
+        /* 15. Doodle Error Bubble */
+        #handbubble-15 {
+            position: relative;
+            background: #EF5350;
+            color: white;
+            padding: 18px 22px;
+            border-radius: 15px;
+            border: 2px solid #fff;
+            box-shadow:
+                0 0 0 2px #EF5350,
+                inset 0 0 0 1px rgba(255,255,255,0.4),
+                3px 3px 8px rgba(0,0,0,0.15);
+            transform: rotate(-1.5deg) skewX(1deg);
+        }
+
+        #handbubble-15::before {
+            content: '✕';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #EF5350;
+        }
+
+        #handbubble-15::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 20%;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #EF5350;
+        }
+
+        /* 16. Hand-drawn Note Bubble */
+        #handbubble-16 {
+            position: relative;
+            background: #FFF9E6;
+            color: #333;
+            padding: 18px 22px;
+            border-radius: 5px;
+            border: 2px solid #FFD700;
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 215, 0, 0.3),
+                4px 4px 0 rgba(0,0,0,0.1),
+                8px 8px 8px rgba(0,0,0,0.1);
+            transform: rotate(-3deg) skewY(1deg);
+        }
+
+        #handbubble-16::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 30px;
+            height: 30px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: inset -1px -1px 2px rgba(0,0,0,0.1);
+        }
+
+        #handbubble-16::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 15px;
+            width: 2px;
+            height: 15px;
+            background: #FFD700;
+            transform: rotate(-15deg);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 17. Rough Comment Bubble */
+        #handbubble-17 {
+            position: relative;
+            background: #B8E6F5;
+            color: #333;
+            padding: 18px 22px;
+            border-radius: 15px 15px 2px 15px;
+            border: 2px solid #56CCF2;
+            box-shadow:
+                inset -1px -1px 3px rgba(0,0,0,0.05),
+                -2px 2px 5px rgba(0,0,0,0.1);
+            transform: rotate(0.5deg);
+        }
+
+        #handbubble-17::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 15px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 0 solid transparent;
+            border-top: 15px solid #B8E6F5;
+            filter: drop-shadow(-1px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* 18. Sketchy Label Bubble */
+        #handbubble-18 {
+            position: relative;
+            background: #F4A460;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 20px 5px 20px 5px;
+            box-shadow:
+                -2px 2px 0 rgba(0,0,0,0.15),
+                inset -1px -1px 3px rgba(0,0,0,0.1);
+            transform: rotate(-1deg) scale(0.95);
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        #handbubble-18::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #F4A460;
+        }
+
+        /* 19. Doodle Caption Box */
+        #handbubble-19 {
+            position: relative;
+            background: linear-gradient(135deg, #E8D5F2 0%, #D4E8F7 100%);
+            color: #333;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 2px dotted #9b7fbf;
+            box-shadow:
+                inset 0 0 0 1px rgba(155, 127, 191, 0.3),
+                0 4px 8px rgba(0,0,0,0.1);
+            transform: rotate(2deg);
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        #handbubble-19::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: #9b7fbf;
+            border-radius: 50%;
+            box-shadow:
+                inset -1px -1px 2px rgba(0,0,0,0.1),
+                -8px 0 0 -4px #9b7fbf;
+        }
+
+        #handbubble-19::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: #9b7fbf;
+            border-radius: 50%;
+            box-shadow:
+                inset -1px -1px 2px rgba(0,0,0,0.1),
+                8px 0 0 -4px #9b7fbf;
+        }
+
+        /* 20. Hand-drawn Announcement */
+        #handbubble-20 {
+            position: relative;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FFC75F 100%);
+            color: white;
+            padding: 22px 26px;
+            border-radius: 20px 20px 5px 20px;
+            box-shadow:
+                0 0 0 3px #fff,
+                0 0 0 4px #FF6B9D,
+                -4px 4px 15px rgba(0,0,0,0.2);
+            transform: rotate(-2deg) scale(1.02);
+            animation: wiggle-20 3s ease-in-out infinite;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes wiggle-20 {
+            0%, 100% { transform: rotate(-2deg) scale(1.02); }
+            25% { transform: rotate(-1deg) scale(1.03); }
+            50% { transform: rotate(-3deg) scale(1.02); }
+            75% { transform: rotate(-1.5deg) scale(1.02); }
+        }
+
+        #handbubble-20::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #FF6B9D;
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 3px #fff,
+                0 0 0 4px #FF6B9D,
+                -20px -15px 0 -8px #FFC75F,
+                20px -15px 0 -8px #FFC75F;
+        }
+
+        #handbubble-20::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 30%;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 18px solid #FF6B9D;
+            filter: drop-shadow(-2px 2px 3px rgba(0,0,0,0.2));
+        }
+
+        /* Hover effect for all bubbles */
+        .demo-area:hover #handbubble-1,
+        .demo-area:hover #handbubble-2,
+        .demo-area:hover #handbubble-3,
+        .demo-area:hover #handbubble-4,
+        .demo-area:hover #handbubble-5,
+        .demo-area:hover #handbubble-6,
+        .demo-area:hover #handbubble-7,
+        .demo-area:hover #handbubble-8,
+        .demo-area:hover #handbubble-9,
+        .demo-area:hover #handbubble-10,
+        .demo-area:hover #handbubble-11,
+        .demo-area:hover #handbubble-12,
+        .demo-area:hover #handbubble-13,
+        .demo-area:hover #handbubble-14,
+        .demo-area:hover #handbubble-15,
+        .demo-area:hover #handbubble-16,
+        .demo-area:hover #handbubble-17,
+        .demo-area:hover #handbubble-18,
+        .demo-area:hover #handbubble-19,
+        .demo-area:hover #handbubble-20 {
+            filter: brightness(1.1) drop-shadow(0 0 8px rgba(0,0,0,0.25));
+        }
+
+        .code-section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .code-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-item strong {
+            color: #2c3e50;
+        }
+
+        .feature-item p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #7f8c8d;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .demo-area {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 手書き風吹き出し</h1>
+        <p class="subtitle">Hand-drawn Speech Bubbles - 20 Unique CSS-Only Designs</p>
+
+        <div class="grid">
+            <!-- 1. Wobbly Speech Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">1</span>
+                    Wobbly Speech Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-1" class="demo-text">こんにちは！</div>
+                </div>
+            </div>
+
+            <!-- 2. Hand-drawn Thought Cloud -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">2</span>
+                    Thought Cloud
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-2" class="demo-text">🤔</div>
+                </div>
+            </div>
+
+            <!-- 3. Sketchy Shout Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">3</span>
+                    Shout Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-3" class="demo-text">やった！</div>
+                </div>
+            </div>
+
+            <!-- 4. Doodle Whisper Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">4</span>
+                    Whisper Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-4" class="demo-text">ふぅ...</div>
+                </div>
+            </div>
+
+            <!-- 5. Rough Dialogue Pair -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">5</span>
+                    Dialogue Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-5" class="demo-text">そうだね</div>
+                </div>
+            </div>
+
+            <!-- 6. Hand-drawn Quote Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">6</span>
+                    Quote Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-6" class="demo-text">これは素晴らしい</div>
+                </div>
+            </div>
+
+            <!-- 7. Scribble Narration Box -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">7</span>
+                    Narration Box
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-7" class="demo-text">物語は始まる...</div>
+                </div>
+            </div>
+
+            <!-- 8. Wavy Emphasis Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">8</span>
+                    Emphasis Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-8" class="demo-text">これだ！</div>
+                </div>
+            </div>
+
+            <!-- 9. Hand-drawn Exclamation -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">9</span>
+                    Exclamation
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-9" class="demo-text">!</div>
+                </div>
+            </div>
+
+            <!-- 10. Sketchy Question Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">10</span>
+                    Question Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-10" class="demo-text">本当？</div>
+                </div>
+            </div>
+
+            <!-- 11. Doodle Info Callout -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">11</span>
+                    Info Callout
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-11" class="demo-text">情報をご確認ください</div>
+                </div>
+            </div>
+
+            <!-- 12. Rough Tip/Hint Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">12</span>
+                    Tip/Hint Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-12" class="demo-text">ヒント: 試してみよう</div>
+                </div>
+            </div>
+
+            <!-- 13. Hand-drawn Warning Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">13</span>
+                    Warning Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-13" class="demo-text">注意してください</div>
+                </div>
+            </div>
+
+            <!-- 14. Sketchy Success Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">14</span>
+                    Success Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-14" class="demo-text">完了しました！</div>
+                </div>
+            </div>
+
+            <!-- 15. Doodle Error Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">15</span>
+                    Error Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-15" class="demo-text">エラーが発生</div>
+                </div>
+            </div>
+
+            <!-- 16. Hand-drawn Note Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">16</span>
+                    Note Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-16" class="demo-text">📌 メモ帳</div>
+                </div>
+            </div>
+
+            <!-- 17. Rough Comment Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">17</span>
+                    Comment Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-17" class="demo-text">コメントです</div>
+                </div>
+            </div>
+
+            <!-- 18. Sketchy Label Bubble -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">18</span>
+                    Label Bubble
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-18" class="demo-text">ラベル</div>
+                </div>
+            </div>
+
+            <!-- 19. Doodle Caption Box -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">19</span>
+                    Caption Box
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-19" class="demo-text">キャプション</div>
+                </div>
+            </div>
+
+            <!-- 20. Hand-drawn Announcement -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-number">20</span>
+                    Announcement
+                </div>
+                <div class="demo-area">
+                    <div id="handbubble-20" class="demo-text">お知らせ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Examples Section -->
+        <div class="code-section">
+            <h2>使用方法 (How to Use)</h2>
+
+            <h3>HTML 例</h3>
+            <div class="code-block">
+                <code>&lt;!-- 基本的な使用方法 --&gt;
+&lt;div id="handbubble-1"&gt;
+    メッセージテキスト
+&lt;/div&gt;
+
+&lt;!-- カスタムテキスト付き --&gt;
+&lt;div id="handbubble-2"&gt;
+    複数行のテキストも
+    サポートしています
+&lt;/div&gt;</code>
+            </div>
+
+            <h3>CSS クラス (Optional)</h3>
+            <div class="code-block">
+                <code>/* 高度なカスタマイズ用クラス */
+.demo-text {
+    padding: 20px;
+    text-align: center;
+    max-width: 100%;
+    font-size: 0.95em;
+    line-height: 1.4;
+}</code>
+            </div>
+
+            <h3>複数の吹き出しを組み合わせる</h3>
+            <div class="code-block">
+                <code>&lt;!-- 会話シーン例 --&gt;
+&lt;div style="margin: 20px; text-align: left;"&gt;
+    &lt;div id="handbubble-1" style="max-width: 250px;"&gt;
+        こんにちは！
+    &lt;/div&gt;
+    &lt;div id="handbubble-5" style="max-width: 250px; margin-left: 50px; margin-top: 20px;"&gt;
+        こんにちは、元気ですか？
+    &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <h2>特徴 (Features)</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <strong>CSS Only</strong>
+                    <p>JavaScriptなしで完全に実装</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Hand-drawn Style</strong>
+                    <p>手書き風の不完全な線と質感</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Responsive</strong>
+                    <p>すべてのデバイスに対応</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Animations</strong>
+                    <p>各吹き出しにユニークなアニメーション</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Warm Colors</strong>
+                    <p>コーラル、ティール、マスタード他</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Hover Effects</strong>
+                    <p>インタラクティブなホバー効果</p>
+                </div>
+            </div>
+
+            <h2>カラーパレット (Color Palette)</h2>
+            <div class="features-grid">
+                <div class="feature-item" style="background: #FF6B6B; color: white; border-left-color: #FF6B6B;">
+                    <strong>Coral Red</strong>
+                    <p>#FF6B6B</p>
+                </div>
+                <div class="feature-item" style="background: #4ECDC4; color: white; border-left-color: #4ECDC4;">
+                    <strong>Teal</strong>
+                    <p>#4ECDC4</p>
+                </div>
+                <div class="feature-item" style="background: #FFD93D; border-left-color: #FFD93D;">
+                    <strong>Mustard</strong>
+                    <p>#FFD93D</p>
+                </div>
+                <div class="feature-item" style="background: #B19CD9; color: white; border-left-color: #B19CD9;">
+                    <strong>Lavender</strong>
+                    <p>#B19CD9</p>
+                </div>
+                <div class="feature-item" style="background: #95E1D3; border-left-color: #95E1D3;">
+                    <strong>Mint</strong>
+                    <p>#95E1D3</p>
+                </div>
+                <div class="feature-item" style="background: #FF8C42; color: white; border-left-color: #FF8C42;">
+                    <strong>Orange</strong>
+                    <p>#FF8C42</p>
+                </div>
+            </div>
+
+            <h2>アニメーション種類 (Animation Types)</h2>
+            <div class="code-block">
+                <code>// 各吹き出しのユニークなアニメーション:
+#handbubble-1 - wobble (ふらふら)
+#handbubble-4 - float (浮く)
+#handbubble-8 - pulse (パルス)
+#handbubble-13 - shake (揺れ)
+#handbubble-14 - bounce (バウンス)
+#handbubble-20 - wiggle (ウィグル)</code>
+            </div>
+
+            <h2>カスタマイズ例 (Customization)</h2>
+            <div class="code-block">
+                <code>/* 吹き出しのサイズ変更 */
+#handbubble-1 {
+    font-size: 1.2em;
+    padding: 25px 30px;
+}
+
+/* 吹き出しの色変更 */
+#handbubble-1 {
+    background: #your-color;
+}
+
+/* アニメーション無効化 */
+#handbubble-1 {
+    animation: none !important;
+}</code>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ 手書き風吹き出し - Hand-drawn Speech Bubbles Template</p>
+            <p>CSS-Only | Responsive | Hand-drawn Aesthetic | 20 Unique Designs</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">Created for an interactive doodle-style UI experience</p>
+        </footer>
+    </div>
+</body>
+</html>

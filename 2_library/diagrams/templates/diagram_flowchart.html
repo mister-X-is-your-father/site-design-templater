@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart Diagram Layouts - 20 Patterns</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h2 {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .diagram-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .diagram-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .diagram-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .diagram-desc {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        /* ============================================
+           COMMON FLOWCHART STYLES
+           ============================================ */
+
+        .flowchart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        /* Node base styles */
+        .node {
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            min-width: 100px;
+        }
+
+        .node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Node colors */
+        .node-pink { background: #FF6B9D; color: #fff; }
+        .node-sky { background: #4ECDC4; color: #fff; }
+        .node-mint { background: #7ED6A5; color: #fff; }
+        .node-yellow { background: #FFD93D; color: #333; }
+        .node-orange { background: #FF9F43; color: #fff; }
+        .node-purple { background: #A55EEA; color: #fff; }
+        .node-coral { background: #FF7675; color: #fff; }
+        .node-blue { background: #54A0FF; color: #fff; }
+        .node-lime { background: #C6F91F; color: #333; }
+        .node-peach { background: #FFEAA7; color: #333; }
+
+        /* Start/End nodes (rounded pill) */
+        .node-start, .node-end {
+            border-radius: 50px;
+            padding: 12px 30px;
+        }
+        .node-start { background: #7ED6A5; color: #fff; }
+        .node-end { background: #FF6B9D; color: #fff; }
+
+        /* Decision diamond */
+        .node-decision {
+            width: 100px;
+            height: 100px;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border-radius: 8px;
+        }
+        .node-decision span {
+            transform: rotate(-45deg);
+            font-size: 13px;
+        }
+        .node-decision:hover {
+            transform: rotate(45deg) scale(1.05);
+        }
+
+        /* Process box */
+        .node-process {
+            border-radius: 8px;
+        }
+
+        /* Input/Output parallelogram */
+        .node-io {
+            transform: skewX(-10deg);
+            border-radius: 6px;
+        }
+        .node-io span {
+            display: block;
+            transform: skewX(10deg);
+        }
+        .node-io:hover {
+            transform: skewX(-10deg) translateY(-4px);
+        }
+
+        /* Arrow connectors */
+        .arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 24px;
+            padding: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .arrow-right::after { content: '\2192'; }
+        .arrow-left::after { content: '\2190'; }
+        .arrow-down::after { content: '\2193'; }
+        .arrow-up::after { content: '\2191'; }
+
+        /* Line connectors */
+        .line-h {
+            width: 40px;
+            height: 3px;
+            background: #ddd;
+        }
+
+        .line-v {
+            width: 3px;
+            height: 30px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-1: Simple Linear Flow (3 steps)
+           ============================================ */
+        #flowchart-1 .flowchart {
+            flex-direction: row;
+            gap: 0;
+        }
+
+        /* ============================================
+           #flowchart-2: Linear Flow (5 steps)
+           ============================================ */
+        #flowchart-2 .flowchart {
+            flex-direction: row;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           #flowchart-3: Yes/No Decision Tree
+           ============================================ */
+        #flowchart-3 .flowchart {
+            flex-direction: column;
+            gap: 16px;
+        }
+        #flowchart-3 .decision-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        #flowchart-3 .branch-row {
+            display: flex;
+            gap: 80px;
+            position: relative;
+        }
+        #flowchart-3 .branch-row::before {
+            content: '';
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-3 .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        #flowchart-3 .branch-label {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        #flowchart-3 .branch-label.yes { background: #7ED6A5; color: #fff; }
+        #flowchart-3 .branch-label.no { background: #FF7675; color: #fff; }
+
+        /* ============================================
+           #flowchart-4: Branching Flowchart
+           ============================================ */
+        #flowchart-4 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-4 .multi-branch {
+            display: flex;
+            gap: 30px;
+            position: relative;
+        }
+        #flowchart-4 .multi-branch::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-4 .multi-branch .branch-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #flowchart-4 .branch-connector {
+            width: 3px;
+            height: 20px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-5: Circular Flow
+           ============================================ */
+        #flowchart-5 .flowchart {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+        #flowchart-5 .circle-node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        #flowchart-5 .circle-node:nth-child(1) { top: 10%; left: 50%; }
+        #flowchart-5 .circle-node:nth-child(2) { top: 35%; left: 85%; }
+        #flowchart-5 .circle-node:nth-child(3) { top: 75%; left: 75%; }
+        #flowchart-5 .circle-node:nth-child(4) { top: 75%; left: 25%; }
+        #flowchart-5 .circle-node:nth-child(5) { top: 35%; left: 15%; }
+        #flowchart-5 .circle-arrows {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 260px;
+            height: 260px;
+            border: 3px dashed #ddd;
+            border-radius: 50%;
+        }
+        #flowchart-5 .circle-arrows::after {
+            content: '\27F3';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #aaa;
+        }
+
+        /* ============================================
+           #flowchart-6: Zigzag Flow
+           ============================================ */
+        #flowchart-6 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-6 .zigzag-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        #flowchart-6 .zigzag-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        #flowchart-6 .zigzag-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #flowchart-6 .corner-line {
+            width: 60px;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-6 .down-line {
+            width: 3px;
+            height: 20px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-7: Waterfall Flow
+           ============================================ */
+        #flowchart-7 .flowchart {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            padding-left: 40px;
+        }
+        #flowchart-7 .waterfall-step {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        #flowchart-7 .waterfall-step:nth-child(2) { margin-left: 60px; }
+        #flowchart-7 .waterfall-step:nth-child(3) { margin-left: 120px; }
+        #flowchart-7 .waterfall-step:nth-child(4) { margin-left: 180px; }
+        #flowchart-7 .waterfall-step:nth-child(5) { margin-left: 240px; }
+        #flowchart-7 .waterfall-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: -30px;
+            margin-top: -10px;
+        }
+        #flowchart-7 .wf-corner {
+            width: 30px;
+            height: 30px;
+            border-left: 3px solid #ddd;
+            border-bottom: 3px solid #ddd;
+            border-radius: 0 0 0 10px;
+        }
+
+        /* ============================================
+           #flowchart-8: Parallel Process Flow
+           ============================================ */
+        #flowchart-8 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-8 .parallel-split {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        #flowchart-8 .parallel-bar {
+            width: 8px;
+            height: 120px;
+            background: #333;
+            border-radius: 4px;
+        }
+        #flowchart-8 .parallel-processes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        #flowchart-8 .parallel-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* ============================================
+           #flowchart-9: Merge Flow
+           ============================================ */
+        #flowchart-9 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-9 .merge-sources {
+            display: flex;
+            gap: 40px;
+        }
+        #flowchart-9 .merge-lines {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            height: 40px;
+        }
+        #flowchart-9 .merge-lines::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-9 .merge-lines::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-10: Split and Merge Flow
+           ============================================ */
+        #flowchart-10 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-10 .split-merge-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #flowchart-10 .split-lines {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+        }
+        #flowchart-10 .split-lines::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 250px;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-10 .split-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 40px;
+        }
+        #flowchart-10 .split-vline {
+            width: 3px;
+            height: 30px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-11: Loop/Cycle Flow
+           ============================================ */
+        #flowchart-11 .flowchart {
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+        #flowchart-11 .loop-main {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        #flowchart-11 .loop-back {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #flowchart-11 .loop-arrow-container {
+            width: 80px;
+            height: 150px;
+            border: 3px solid #ddd;
+            border-left: none;
+            border-radius: 0 20px 20px 0;
+            position: relative;
+        }
+        #flowchart-11 .loop-arrow-container::after {
+            content: '\2191';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #aaa;
+        }
+        #flowchart-11 .loop-label {
+            background: #FFD93D;
+            color: #333;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           #flowchart-12: Conditional Branches
+           ============================================ */
+        #flowchart-12 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-12 .condition-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        #flowchart-12 .condition-branches {
+            display: flex;
+            gap: 100px;
+            position: relative;
+        }
+        #flowchart-12 .condition-branches::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-12 .cond-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #flowchart-12 .cond-label {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+        #flowchart-12 .cond-a { background: #4ECDC4; color: #fff; }
+        #flowchart-12 .cond-b { background: #FF9F43; color: #fff; }
+        #flowchart-12 .cond-c { background: #A55EEA; color: #fff; }
+
+        /* ============================================
+           #flowchart-13: Start to End Flow
+           ============================================ */
+        #flowchart-13 .flowchart {
+            flex-direction: row;
+            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #flowchart-13 .step-group {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* ============================================
+           #flowchart-14: Multi-path Flow
+           ============================================ */
+        #flowchart-14 .flowchart {
+            flex-direction: column;
+            gap: 25px;
+        }
+        #flowchart-14 .multi-path-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        #flowchart-14 .path-group {
+            display: flex;
+            gap: 60px;
+            position: relative;
+        }
+        #flowchart-14 .path-group::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-14 .path-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        #flowchart-14 .path-vline {
+            width: 3px;
+            height: 20px;
+            background: #ddd;
+        }
+        #flowchart-14 .converge-lines {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            height: 30px;
+        }
+        #flowchart-14 .converge-lines::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: #ddd;
+        }
+        #flowchart-14 .converge-lines::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 30px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-15: Nested Process Flow
+           ============================================ */
+        #flowchart-15 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-15 .nested-container {
+            border: 3px dashed #ddd;
+            border-radius: 20px;
+            padding: 25px;
+            background: #fafafa;
+        }
+        #flowchart-15 .nested-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #flowchart-15 .nested-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        #flowchart-15 .outer-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* ============================================
+           #flowchart-16: Swimlane Flow (2 lanes)
+           ============================================ */
+        #flowchart-16 .flowchart {
+            flex-direction: column;
+            gap: 0;
+            padding: 0;
+        }
+        #flowchart-16 .swimlane {
+            display: flex;
+            border: 2px solid #ddd;
+            min-height: 120px;
+        }
+        #flowchart-16 .swimlane:first-of-type {
+            border-radius: 15px 15px 0 0;
+        }
+        #flowchart-16 .swimlane:last-of-type {
+            border-radius: 0 0 15px 15px;
+            border-top: none;
+        }
+        #flowchart-16 .lane-label {
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+        #flowchart-16 .lane-a .lane-label { background: #FF6B9D; }
+        #flowchart-16 .lane-b .lane-label { background: #4ECDC4; }
+        #flowchart-16 .lane-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap: 0;
+        }
+
+        /* ============================================
+           #flowchart-17: Vertical Cascade Flow
+           ============================================ */
+        #flowchart-17 .flowchart {
+            flex-direction: column;
+            gap: 0;
+        }
+        #flowchart-17 .cascade-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        #flowchart-17 .cascade-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 18px;
+        }
+        #flowchart-17 .cascade-connector {
+            display: flex;
+            align-items: center;
+            margin-left: 17px;
+        }
+        #flowchart-17 .cascade-vline {
+            width: 6px;
+            height: 30px;
+            background: #ddd;
+            border-radius: 3px;
+        }
+
+        /* ============================================
+           #flowchart-18: Horizontal Scroll Flow
+           ============================================ */
+        #flowchart-18 .flowchart {
+            overflow-x: auto;
+            padding: 20px 10px;
+        }
+        #flowchart-18 .scroll-track {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            min-width: max-content;
+        }
+        #flowchart-18 .scroll-node {
+            position: relative;
+        }
+        #flowchart-18 .scroll-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        #flowchart-18 .progress-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #7ED6A5 0%, #4ECDC4 25%, #FFD93D 50%, #FF9F43 75%, #FF6B9D 100%);
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        /* ============================================
+           #flowchart-19: Decision Diamond Flow
+           ============================================ */
+        #flowchart-19 .flowchart {
+            flex-direction: column;
+            gap: 20px;
+        }
+        #flowchart-19 .diamond-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        #flowchart-19 .diamond-branches {
+            display: flex;
+            gap: 120px;
+        }
+        #flowchart-19 .diamond-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #flowchart-19 .branch-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        #flowchart-19 .tag-yes { background: #7ED6A5; color: #fff; }
+        #flowchart-19 .tag-no { background: #FF7675; color: #fff; }
+        #flowchart-19 .diamond-vline {
+            width: 3px;
+            height: 25px;
+            background: #ddd;
+        }
+
+        /* ============================================
+           #flowchart-20: Input/Output Flow
+           ============================================ */
+        #flowchart-20 .flowchart {
+            flex-direction: row;
+            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #flowchart-20 .io-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        #flowchart-20 .io-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .flowchart {
+                transform: scale(0.8);
+                transform-origin: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Flowchart Diagram Layouts</h1>
+    <h2>20 Cute & Colorful Patterns for SNS Infographics</h2>
+
+    <div class="diagram-grid">
+
+        <!-- ============================================
+             #flowchart-1: Simple Linear Flow (3 steps)
+             ============================================ -->
+        <div id="flowchart-1" class="diagram-section">
+            <div class="diagram-title">flowchart-1: Simple Linear Flow (3 steps)</div>
+            <div class="diagram-desc">Basic left-to-right flow with 3 process steps</div>
+            <div class="flowchart">
+                <div class="node node-pink">Step 1</div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-sky">Step 2</div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-mint">Step 3</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-2: Linear Flow (5 steps)
+             ============================================ -->
+        <div id="flowchart-2" class="diagram-section">
+            <div class="diagram-title">flowchart-2: Linear Flow (5 steps)</div>
+            <div class="diagram-desc">Extended linear flow with 5 sequential steps</div>
+            <div class="flowchart">
+                <div class="node node-purple">Plan</div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-pink">Design</div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-yellow">Build</div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-sky">Test</div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-mint">Deploy</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-3: Yes/No Decision Tree
+             ============================================ -->
+        <div id="flowchart-3" class="diagram-section">
+            <div class="diagram-title">flowchart-3: Yes/No Decision Tree</div>
+            <div class="diagram-desc">Binary decision with Yes and No branches</div>
+            <div class="flowchart">
+                <div class="decision-row">
+                    <div class="node node-start">Start</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-decision node-yellow"><span>Check?</span></div>
+                </div>
+                <div class="line-v"></div>
+                <div class="branch-row">
+                    <div class="branch">
+                        <span class="branch-label yes">YES</span>
+                        <div class="node node-mint">Success</div>
+                    </div>
+                    <div class="branch">
+                        <span class="branch-label no">NO</span>
+                        <div class="node node-coral">Retry</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-4: Branching Flowchart
+             ============================================ -->
+        <div id="flowchart-4" class="diagram-section">
+            <div class="diagram-title">flowchart-4: Branching Flowchart</div>
+            <div class="diagram-desc">One input branching to multiple outputs</div>
+            <div class="flowchart">
+                <div class="node node-purple">Input</div>
+                <div class="arrow arrow-down" style="transform: rotate(90deg);"></div>
+                <div class="line-v"></div>
+                <div class="multi-branch">
+                    <div class="branch-item">
+                        <div class="branch-connector"></div>
+                        <div class="node node-pink">Path A</div>
+                    </div>
+                    <div class="branch-item">
+                        <div class="branch-connector"></div>
+                        <div class="node node-sky">Path B</div>
+                    </div>
+                    <div class="branch-item">
+                        <div class="branch-connector"></div>
+                        <div class="node node-mint">Path C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-5: Circular Flow
+             ============================================ -->
+        <div id="flowchart-5" class="diagram-section">
+            <div class="diagram-title">flowchart-5: Circular Flow</div>
+            <div class="diagram-desc">Continuous cycle with 5 interconnected steps</div>
+            <div class="flowchart">
+                <div class="circle-arrows"></div>
+                <div class="circle-node node node-pink">Plan</div>
+                <div class="circle-node node node-orange">Do</div>
+                <div class="circle-node node node-yellow">Check</div>
+                <div class="circle-node node node-mint">Act</div>
+                <div class="circle-node node node-sky">Review</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-6: Zigzag Flow
+             ============================================ -->
+        <div id="flowchart-6" class="diagram-section">
+            <div class="diagram-title">flowchart-6: Zigzag Flow</div>
+            <div class="diagram-desc">Alternating direction flow pattern</div>
+            <div class="flowchart">
+                <div class="zigzag-row">
+                    <div class="node node-purple">Start</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-pink">Step 1</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-sky">Step 2</div>
+                </div>
+                <div class="zigzag-connector">
+                    <div class="corner-line"></div>
+                    <div class="down-line"></div>
+                </div>
+                <div class="zigzag-row">
+                    <div class="node node-orange">Step 5</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-yellow">Step 4</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-mint">Step 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-7: Waterfall Flow
+             ============================================ -->
+        <div id="flowchart-7" class="diagram-section">
+            <div class="diagram-title">flowchart-7: Waterfall Flow</div>
+            <div class="diagram-desc">Cascading steps with progressive indentation</div>
+            <div class="flowchart">
+                <div class="waterfall-step">
+                    <div class="node node-purple">Requirements</div>
+                </div>
+                <div class="waterfall-step">
+                    <div class="waterfall-connector"><div class="wf-corner"></div></div>
+                    <div class="node node-pink">Design</div>
+                </div>
+                <div class="waterfall-step">
+                    <div class="waterfall-connector"><div class="wf-corner"></div></div>
+                    <div class="node node-sky">Implementation</div>
+                </div>
+                <div class="waterfall-step">
+                    <div class="waterfall-connector"><div class="wf-corner"></div></div>
+                    <div class="node node-yellow">Testing</div>
+                </div>
+                <div class="waterfall-step">
+                    <div class="waterfall-connector"><div class="wf-corner"></div></div>
+                    <div class="node node-mint">Deployment</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-8: Parallel Process Flow
+             ============================================ -->
+        <div id="flowchart-8" class="diagram-section">
+            <div class="diagram-title">flowchart-8: Parallel Process Flow</div>
+            <div class="diagram-desc">Multiple processes running simultaneously</div>
+            <div class="flowchart">
+                <div class="node node-start">Start</div>
+                <div class="arrow arrow-right"></div>
+                <div class="parallel-split">
+                    <div class="parallel-bar"></div>
+                    <div class="parallel-processes">
+                        <div class="parallel-row">
+                            <div class="node node-pink">Task A</div>
+                            <div class="arrow arrow-right"></div>
+                            <div class="node node-coral">Process A</div>
+                        </div>
+                        <div class="parallel-row">
+                            <div class="node node-sky">Task B</div>
+                            <div class="arrow arrow-right"></div>
+                            <div class="node node-blue">Process B</div>
+                        </div>
+                        <div class="parallel-row">
+                            <div class="node node-mint">Task C</div>
+                            <div class="arrow arrow-right"></div>
+                            <div class="node node-lime">Process C</div>
+                        </div>
+                    </div>
+                    <div class="parallel-bar"></div>
+                </div>
+                <div class="arrow arrow-right"></div>
+                <div class="node node-end">End</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-9: Merge Flow
+             ============================================ -->
+        <div id="flowchart-9" class="diagram-section">
+            <div class="diagram-title">flowchart-9: Merge Flow</div>
+            <div class="diagram-desc">Multiple inputs converging to single output</div>
+            <div class="flowchart">
+                <div class="merge-sources">
+                    <div class="node node-pink">Source A</div>
+                    <div class="node node-sky">Source B</div>
+                    <div class="node node-mint">Source C</div>
+                </div>
+                <div class="merge-lines"></div>
+                <div class="node node-purple">Combined Output</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-10: Split and Merge Flow
+             ============================================ -->
+        <div id="flowchart-10" class="diagram-section">
+            <div class="diagram-title">flowchart-10: Split and Merge Flow</div>
+            <div class="diagram-desc">Process splits then reunites</div>
+            <div class="flowchart">
+                <div class="node node-purple">Start</div>
+                <div class="split-merge-connector">
+                    <div class="line-v"></div>
+                </div>
+                <div class="split-lines">
+                    <div class="split-branch">
+                        <div class="split-vline"></div>
+                        <div class="node node-pink">Branch A</div>
+                        <div class="split-vline"></div>
+                    </div>
+                    <div class="split-branch">
+                        <div class="split-vline"></div>
+                        <div class="node node-sky">Branch B</div>
+                        <div class="split-vline"></div>
+                    </div>
+                    <div class="split-branch">
+                        <div class="split-vline"></div>
+                        <div class="node node-mint">Branch C</div>
+                        <div class="split-vline"></div>
+                    </div>
+                </div>
+                <div class="split-merge-connector">
+                    <div class="line-v"></div>
+                </div>
+                <div class="node node-orange">Merge</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-11: Loop/Cycle Flow
+             ============================================ -->
+        <div id="flowchart-11" class="diagram-section">
+            <div class="diagram-title">flowchart-11: Loop/Cycle Flow</div>
+            <div class="diagram-desc">Iterative process with feedback loop</div>
+            <div class="flowchart" style="padding-right: 100px;">
+                <div class="loop-main">
+                    <div class="node node-start">Start</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-pink">Process</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-decision node-yellow"><span>Done?</span></div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-end">End</div>
+                </div>
+                <div class="loop-back">
+                    <div class="loop-arrow-container"></div>
+                    <span class="loop-label">Repeat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-12: Conditional Branches
+             ============================================ -->
+        <div id="flowchart-12" class="diagram-section">
+            <div class="diagram-title">flowchart-12: Conditional Branches</div>
+            <div class="diagram-desc">Multiple conditions with labeled outcomes</div>
+            <div class="flowchart">
+                <div class="condition-row">
+                    <div class="node node-start">Input</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-decision node-purple"><span>Type?</span></div>
+                </div>
+                <div class="line-v"></div>
+                <div class="condition-branches">
+                    <div class="cond-branch">
+                        <span class="cond-label cond-a">Type A</span>
+                        <div class="node node-sky">Handler A</div>
+                    </div>
+                    <div class="cond-branch">
+                        <span class="cond-label cond-b">Type B</span>
+                        <div class="node node-orange">Handler B</div>
+                    </div>
+                    <div class="cond-branch">
+                        <span class="cond-label cond-c">Type C</span>
+                        <div class="node node-purple">Handler C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-13: Start to End Flow
+             ============================================ -->
+        <div id="flowchart-13" class="diagram-section">
+            <div class="diagram-title">flowchart-13: Start to End Flow</div>
+            <div class="diagram-desc">Complete process with explicit start/end nodes</div>
+            <div class="flowchart">
+                <div class="step-group">
+                    <div class="node node-start">Start</div>
+                    <div class="arrow arrow-right"></div>
+                </div>
+                <div class="step-group">
+                    <div class="node node-pink">Initialize</div>
+                    <div class="arrow arrow-right"></div>
+                </div>
+                <div class="step-group">
+                    <div class="node node-sky">Process</div>
+                    <div class="arrow arrow-right"></div>
+                </div>
+                <div class="step-group">
+                    <div class="node node-yellow">Validate</div>
+                    <div class="arrow arrow-right"></div>
+                </div>
+                <div class="step-group">
+                    <div class="node node-mint">Finalize</div>
+                    <div class="arrow arrow-right"></div>
+                </div>
+                <div class="step-group">
+                    <div class="node node-end">End</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-14: Multi-path Flow
+             ============================================ -->
+        <div id="flowchart-14" class="diagram-section">
+            <div class="diagram-title">flowchart-14: Multi-path Flow</div>
+            <div class="diagram-desc">Diverging paths that reconverge</div>
+            <div class="flowchart">
+                <div class="multi-path-row">
+                    <div class="node node-purple">Entry</div>
+                </div>
+                <div class="line-v"></div>
+                <div class="path-group">
+                    <div class="path-item">
+                        <div class="path-vline"></div>
+                        <div class="node node-pink">Route 1</div>
+                    </div>
+                    <div class="path-item">
+                        <div class="path-vline"></div>
+                        <div class="node node-sky">Route 2</div>
+                    </div>
+                    <div class="path-item">
+                        <div class="path-vline"></div>
+                        <div class="node node-mint">Route 3</div>
+                    </div>
+                    <div class="path-item">
+                        <div class="path-vline"></div>
+                        <div class="node node-yellow">Route 4</div>
+                    </div>
+                </div>
+                <div class="converge-lines"></div>
+                <div class="multi-path-row">
+                    <div class="node node-orange">Exit</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-15: Nested Process Flow
+             ============================================ -->
+        <div id="flowchart-15" class="diagram-section">
+            <div class="diagram-title">flowchart-15: Nested Process Flow</div>
+            <div class="diagram-desc">Sub-process contained within main flow</div>
+            <div class="flowchart">
+                <div class="outer-row">
+                    <div class="node node-start">Start</div>
+                    <div class="arrow arrow-right"></div>
+                </div>
+                <div class="nested-container">
+                    <div class="nested-label">Sub-process</div>
+                    <div class="nested-row">
+                        <div class="node node-pink">Init</div>
+                        <div class="arrow arrow-right"></div>
+                        <div class="node node-sky">Execute</div>
+                        <div class="arrow arrow-right"></div>
+                        <div class="node node-mint">Cleanup</div>
+                    </div>
+                </div>
+                <div class="outer-row">
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-end">End</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-16: Swimlane Flow (2 lanes)
+             ============================================ -->
+        <div id="flowchart-16" class="diagram-section">
+            <div class="diagram-title">flowchart-16: Swimlane Flow (2 lanes)</div>
+            <div class="diagram-desc">Process responsibilities across two teams/roles</div>
+            <div class="flowchart">
+                <div class="swimlane lane-a">
+                    <div class="lane-label">Team A</div>
+                    <div class="lane-content">
+                        <div class="node node-pink">Request</div>
+                        <div class="arrow arrow-right"></div>
+                        <div class="node node-coral">Review</div>
+                        <div class="arrow arrow-right"></div>
+                        <div class="node node-peach">Approve</div>
+                    </div>
+                </div>
+                <div class="swimlane lane-b">
+                    <div class="lane-label">Team B</div>
+                    <div class="lane-content">
+                        <div class="node node-sky">Receive</div>
+                        <div class="arrow arrow-right"></div>
+                        <div class="node node-blue">Process</div>
+                        <div class="arrow arrow-right"></div>
+                        <div class="node node-mint">Complete</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-17: Vertical Cascade Flow
+             ============================================ -->
+        <div id="flowchart-17" class="diagram-section">
+            <div class="diagram-title">flowchart-17: Vertical Cascade Flow</div>
+            <div class="diagram-desc">Top-to-bottom numbered steps</div>
+            <div class="flowchart">
+                <div class="cascade-step">
+                    <div class="cascade-num" style="background: #FF6B9D;">1</div>
+                    <div class="node node-pink">Planning Phase</div>
+                </div>
+                <div class="cascade-connector"><div class="cascade-vline"></div></div>
+                <div class="cascade-step">
+                    <div class="cascade-num" style="background: #4ECDC4;">2</div>
+                    <div class="node node-sky">Design Phase</div>
+                </div>
+                <div class="cascade-connector"><div class="cascade-vline"></div></div>
+                <div class="cascade-step">
+                    <div class="cascade-num" style="background: #FFD93D;">3</div>
+                    <div class="node node-yellow">Build Phase</div>
+                </div>
+                <div class="cascade-connector"><div class="cascade-vline"></div></div>
+                <div class="cascade-step">
+                    <div class="cascade-num" style="background: #7ED6A5;">4</div>
+                    <div class="node node-mint">Launch Phase</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-18: Horizontal Scroll Flow
+             ============================================ -->
+        <div id="flowchart-18" class="diagram-section">
+            <div class="diagram-title">flowchart-18: Horizontal Scroll Flow</div>
+            <div class="diagram-desc">Timeline-style horizontal progress</div>
+            <div class="flowchart">
+                <div class="scroll-track">
+                    <div class="scroll-node">
+                        <span class="scroll-badge">Week 1</span>
+                        <div class="node node-purple">Kickoff</div>
+                    </div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="scroll-node">
+                        <span class="scroll-badge">Week 2</span>
+                        <div class="node node-pink">Research</div>
+                    </div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="scroll-node">
+                        <span class="scroll-badge">Week 3</span>
+                        <div class="node node-sky">Prototype</div>
+                    </div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="scroll-node">
+                        <span class="scroll-badge">Week 4</span>
+                        <div class="node node-yellow">Review</div>
+                    </div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="scroll-node">
+                        <span class="scroll-badge">Week 5</span>
+                        <div class="node node-mint">Iterate</div>
+                    </div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="scroll-node">
+                        <span class="scroll-badge">Week 6</span>
+                        <div class="node node-orange">Launch</div>
+                    </div>
+                </div>
+                <div class="progress-bar" style="width: 100%; margin-top: 25px;"></div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-19: Decision Diamond Flow
+             ============================================ -->
+        <div id="flowchart-19" class="diagram-section">
+            <div class="diagram-title">flowchart-19: Decision Diamond Flow</div>
+            <div class="diagram-desc">Classic diamond decision with dual outcomes</div>
+            <div class="flowchart">
+                <div class="diamond-row">
+                    <div class="node node-start">Begin</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-sky">Prepare</div>
+                    <div class="arrow arrow-right"></div>
+                    <div class="node node-decision node-orange"><span>Valid?</span></div>
+                </div>
+                <div class="line-v"></div>
+                <div class="diamond-branches">
+                    <div class="diamond-branch">
+                        <span class="branch-tag tag-yes">YES</span>
+                        <div class="diamond-vline"></div>
+                        <div class="node node-mint">Continue</div>
+                        <div class="diamond-vline"></div>
+                        <div class="node node-end">Finish</div>
+                    </div>
+                    <div class="diamond-branch">
+                        <span class="branch-tag tag-no">NO</span>
+                        <div class="diamond-vline"></div>
+                        <div class="node node-coral">Error</div>
+                        <div class="diamond-vline"></div>
+                        <div class="node node-purple">Retry</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             #flowchart-20: Input/Output Flow
+             ============================================ -->
+        <div id="flowchart-20" class="diagram-section">
+            <div class="diagram-title">flowchart-20: Input/Output Flow</div>
+            <div class="diagram-desc">Data flow with parallelogram I/O symbols</div>
+            <div class="flowchart">
+                <div class="io-group">
+                    <span class="io-label">Input</span>
+                    <div class="node node-io node-sky"><span>User Data</span></div>
+                </div>
+                <div class="arrow arrow-right"></div>
+                <div class="io-group">
+                    <span class="io-label">Process</span>
+                    <div class="node node-process node-pink">Validate</div>
+                </div>
+                <div class="arrow arrow-right"></div>
+                <div class="io-group">
+                    <span class="io-label">Process</span>
+                    <div class="node node-process node-yellow">Transform</div>
+                </div>
+                <div class="arrow arrow-right"></div>
+                <div class="io-group">
+                    <span class="io-label">Process</span>
+                    <div class="node node-process node-purple">Store</div>
+                </div>
+                <div class="arrow arrow-right"></div>
+                <div class="io-group">
+                    <span class="io-label">Output</span>
+                    <div class="node node-io node-mint"><span>Result</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

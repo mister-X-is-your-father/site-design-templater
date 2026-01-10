@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature & Weather Illustrations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .illust-container {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* ========================================
+           nature-01: Sun
+        ======================================== */
+        .sun {
+            width: 60px;
+            height: 60px;
+            background: #fbbf24;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .sun::before,
+        .sun::after {
+            content: '';
+            position: absolute;
+            background: #fbbf24;
+        }
+
+        .sun::before {
+            width: 80px;
+            height: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 4px;
+        }
+
+        .sun::after {
+            width: 8px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 4px;
+        }
+
+        .sun:hover {
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        /* ========================================
+           nature-02: Moon
+        ======================================== */
+        .moon {
+            width: 60px;
+            height: 60px;
+            background: #fde68a;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .moon::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #fcd34d;
+            border-radius: 50%;
+            top: 12px;
+            left: 10px;
+            opacity: 0.5;
+        }
+
+        .moon::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fcd34d;
+            border-radius: 50%;
+            top: 35px;
+            left: 30px;
+            opacity: 0.4;
+        }
+
+        .moon:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(253, 230, 138, 0.6);
+        }
+
+        /* ========================================
+           nature-03: Star
+        ======================================== */
+        .star {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .star::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 40px solid #facc15;
+        }
+
+        .star::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 40px solid #facc15;
+        }
+
+        .star:hover {
+            transform: rotate(72deg) scale(1.2);
+        }
+
+        /* ========================================
+           nature-04: Cloud
+        ======================================== */
+        .cloud {
+            width: 80px;
+            height: 40px;
+            background: #e2e8f0;
+            border-radius: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .cloud::before {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            top: -18px;
+            left: 12px;
+        }
+
+        .cloud::after {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            top: -12px;
+            left: 38px;
+        }
+
+        .cloud:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ========================================
+           nature-05: Rain Cloud
+        ======================================== */
+        .rain-cloud {
+            width: 80px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .rain-cloud-body {
+            width: 70px;
+            height: 35px;
+            background: #94a3b8;
+            border-radius: 35px;
+            position: absolute;
+            top: 0;
+        }
+
+        .rain-cloud-body::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #94a3b8;
+            border-radius: 50%;
+            top: -15px;
+            left: 10px;
+        }
+
+        .rain-cloud-body::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #94a3b8;
+            border-radius: 50%;
+            top: -10px;
+            left: 32px;
+        }
+
+        .rain-drop {
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            background: #60a5fa;
+            border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+            bottom: 5px;
+        }
+
+        .rain-drop:nth-child(2) { left: 15px; }
+        .rain-drop:nth-child(3) { left: 32px; }
+        .rain-drop:nth-child(4) { left: 49px; }
+
+        .rain-cloud:hover {
+            transform: translateY(-3px);
+        }
+
+        .rain-cloud:hover .rain-drop {
+            animation: rain 0.5s ease-in-out infinite;
+        }
+
+        .rain-cloud:hover .rain-drop:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .rain-cloud:hover .rain-drop:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes rain {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+
+        /* ========================================
+           nature-06: Rainbow
+        ======================================== */
+        .rainbow {
+            width: 80px;
+            height: 40px;
+            border-radius: 80px 80px 0 0;
+            border: 8px solid #ef4444;
+            border-bottom: none;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .rainbow::before {
+            content: '';
+            position: absolute;
+            width: 64px;
+            height: 32px;
+            border-radius: 64px 64px 0 0;
+            border: 8px solid #fbbf24;
+            border-bottom: none;
+            top: 0;
+            left: 0;
+        }
+
+        .rainbow::after {
+            content: '';
+            position: absolute;
+            width: 48px;
+            height: 24px;
+            border-radius: 48px 48px 0 0;
+            border: 8px solid #22c55e;
+            border-bottom: none;
+            top: 8px;
+            left: 8px;
+        }
+
+        .rainbow:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           nature-07: Tree
+        ======================================== */
+        .tree {
+            width: 60px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 25px;
+            background: #92400e;
+            border-radius: 2px;
+        }
+
+        .tree-top {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 28px solid transparent;
+            border-right: 28px solid transparent;
+            border-bottom: 50px solid #22c55e;
+        }
+
+        .tree-top::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: -22px;
+            width: 0;
+            height: 0;
+            border-left: 22px solid transparent;
+            border-right: 22px solid transparent;
+            border-bottom: 40px solid #16a34a;
+        }
+
+        .tree:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           nature-08: Flower
+        ======================================== */
+        .flower {
+            width: 60px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .flower-stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 30px;
+            background: #16a34a;
+            border-radius: 3px;
+        }
+
+        .flower-center {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 18px;
+            background: #fbbf24;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .flower-petal {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #f472b6;
+            border-radius: 50%;
+        }
+
+        .flower-petal:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); }
+        .flower-petal:nth-child(3) { top: 8px; left: 8px; }
+        .flower-petal:nth-child(4) { top: 8px; right: 8px; }
+        .flower-petal:nth-child(5) { top: 24px; left: 8px; }
+        .flower-petal:nth-child(6) { top: 24px; right: 8px; }
+
+        .flower:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* ========================================
+           nature-09: Leaf
+        ======================================== */
+        .leaf {
+            width: 50px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .leaf-body {
+            width: 40px;
+            height: 50px;
+            background: #22c55e;
+            border-radius: 50% 0 50% 0;
+            transform: rotate(-30deg);
+            position: relative;
+        }
+
+        .leaf-body::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 40px;
+            background: #16a34a;
+            top: 5px;
+            left: 18px;
+            transform: rotate(0deg);
+            border-radius: 2px;
+        }
+
+        .leaf:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        /* ========================================
+           nature-10: Mountain
+        ======================================== */
+        .mountain {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .mountain-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 55px solid #6b7280;
+        }
+
+        .mountain-snow {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 18px solid #f1f5f9;
+        }
+
+        .mountain:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           nature-11: Wave
+        ======================================== */
+        .wave {
+            width: 80px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .wave-line {
+            position: absolute;
+            width: 80px;
+            height: 20px;
+            background: #38bdf8;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .wave-line:nth-child(1) {
+            top: 5px;
+            left: -10px;
+        }
+
+        .wave-line:nth-child(2) {
+            top: 15px;
+            left: 10px;
+            background: #0ea5e9;
+        }
+
+        .wave-line:nth-child(3) {
+            top: 25px;
+            left: -5px;
+            background: #0284c7;
+        }
+
+        .wave:hover {
+            transform: scaleX(1.1);
+        }
+
+        .wave:hover .wave-line {
+            animation: waveMove 0.6s ease-in-out infinite;
+        }
+
+        .wave:hover .wave-line:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .wave:hover .wave-line:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes waveMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* ========================================
+           nature-12: Lightning
+        ======================================== */
+        .lightning {
+            width: 40px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .lightning-bolt {
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 0 solid transparent;
+            border-top: 35px solid #fbbf24;
+        }
+
+        .lightning-bolt::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -15px;
+            width: 0;
+            height: 0;
+            border-left: 0 solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid #fbbf24;
+        }
+
+        .lightning:hover {
+            transform: scale(1.15);
+            animation: flash 0.2s ease-in-out;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ========================================
+           nature-13: Snowflake
+        ======================================== */
+        .snowflake {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.6s ease;
+        }
+
+        .snowflake-line {
+            position: absolute;
+            width: 6px;
+            height: 60px;
+            background: #bfdbfe;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .snowflake-line:nth-child(2) {
+            transform: translateX(-50%) rotate(60deg);
+        }
+
+        .snowflake-line:nth-child(3) {
+            transform: translateX(-50%) rotate(120deg);
+        }
+
+        .snowflake-center {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #93c5fd;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .snowflake:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* ========================================
+           nature-14: Wind
+        ======================================== */
+        .wind {
+            width: 70px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .wind-line {
+            position: absolute;
+            height: 6px;
+            background: #94a3b8;
+            border-radius: 3px;
+        }
+
+        .wind-line:nth-child(1) {
+            width: 50px;
+            top: 8px;
+            left: 0;
+        }
+
+        .wind-line:nth-child(2) {
+            width: 65px;
+            top: 22px;
+            left: 5px;
+        }
+
+        .wind-line:nth-child(3) {
+            width: 40px;
+            top: 36px;
+            left: 10px;
+        }
+
+        .wind-curl {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 6px solid #94a3b8;
+            border-radius: 50%;
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        .wind-curl:nth-child(4) {
+            top: 2px;
+            right: 10px;
+        }
+
+        .wind-curl:nth-child(5) {
+            top: 16px;
+            right: 0;
+        }
+
+        .wind:hover .wind-line,
+        .wind:hover .wind-curl {
+            animation: blow 0.4s ease-in-out infinite;
+        }
+
+        .wind:hover .wind-line:nth-child(2),
+        .wind:hover .wind-curl:nth-child(5) {
+            animation-delay: 0.1s;
+        }
+
+        .wind:hover .wind-line:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes blow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* ========================================
+           nature-15: Sunrise
+        ======================================== */
+        .sunrise {
+            width: 80px;
+            height: 60px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .sunrise-sun {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: #fb923c;
+            border-radius: 50%;
+            transition: transform 0.4s ease;
+        }
+
+        .sunrise-horizon {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 25px;
+            background: #fde68a;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .sunrise-ray {
+            position: absolute;
+            width: 4px;
+            height: 15px;
+            background: #fdba74;
+            border-radius: 2px;
+            bottom: 35px;
+        }
+
+        .sunrise-ray:nth-child(3) { left: 20px; transform: rotate(-30deg); }
+        .sunrise-ray:nth-child(4) { left: 38px; }
+        .sunrise-ray:nth-child(5) { right: 20px; transform: rotate(30deg); }
+
+        .sunrise:hover .sunrise-sun {
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        /* ========================================
+           nature-16: Crescent Moon
+        ======================================== */
+        .crescent {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .crescent-body {
+            width: 50px;
+            height: 50px;
+            background: #fde68a;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .crescent-body::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #f0f4f8;
+            border-radius: 50%;
+            top: -5px;
+            left: 15px;
+        }
+
+        .crescent:hover {
+            transform: rotate(-15deg) scale(1.1);
+        }
+
+        /* ========================================
+           nature-17: Planet
+        ======================================== */
+        .planet {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .planet-body {
+            width: 45px;
+            height: 45px;
+            background: #a78bfa;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .planet-ring {
+            position: absolute;
+            width: 60px;
+            height: 20px;
+            border: 4px solid #c4b5fd;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            border-top-color: transparent;
+        }
+
+        .planet:hover {
+            transform: rotate(360deg);
+        }
+
+        /* ========================================
+           nature-18: Cactus
+        ======================================== */
+        .cactus {
+            width: 50px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .cactus-body {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 55px;
+            background: #22c55e;
+            border-radius: 11px 11px 4px 4px;
+        }
+
+        .cactus-arm {
+            position: absolute;
+            width: 14px;
+            height: 25px;
+            background: #22c55e;
+            border-radius: 7px 7px 0 0;
+        }
+
+        .cactus-arm-left {
+            bottom: 25px;
+            left: 0;
+        }
+
+        .cactus-arm-left::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 14px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 0 0 7px 0;
+        }
+
+        .cactus-arm-right {
+            bottom: 35px;
+            right: 0;
+        }
+
+        .cactus-arm-right::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 14px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 0 0 0 7px;
+        }
+
+        .cactus-pot {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 15px;
+            background: #dc8a6b;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .cactus:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           nature-19: Mushroom
+        ======================================== */
+        .mushroom {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .mushroom-cap {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 30px;
+            background: #ef4444;
+            border-radius: 55px 55px 0 0;
+        }
+
+        .mushroom-spot {
+            position: absolute;
+            background: #fef2f2;
+            border-radius: 50%;
+        }
+
+        .mushroom-spot:nth-child(1) {
+            width: 10px;
+            height: 10px;
+            top: 5px;
+            left: 12px;
+        }
+
+        .mushroom-spot:nth-child(2) {
+            width: 8px;
+            height: 8px;
+            top: 8px;
+            right: 10px;
+        }
+
+        .mushroom-spot:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            top: 18px;
+            left: 22px;
+        }
+
+        .mushroom-stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 30px;
+            background: #fef3c7;
+            border-radius: 4px 4px 8px 8px;
+        }
+
+        .mushroom:hover {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        /* ========================================
+           nature-20: Clover
+        ======================================== */
+        .clover {
+            width: 60px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .clover-leaf {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: #22c55e;
+            border-radius: 50% 50% 50% 0;
+        }
+
+        .clover-leaf:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .clover-leaf:nth-child(2) {
+            top: 15px;
+            left: 5px;
+            transform: rotate(-45deg);
+        }
+
+        .clover-leaf:nth-child(3) {
+            top: 15px;
+            right: 5px;
+            transform: rotate(135deg);
+        }
+
+        .clover-leaf:nth-child(4) {
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-135deg);
+        }
+
+        .clover-stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 25px;
+            background: #16a34a;
+            border-radius: 2px;
+        }
+
+        .clover:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Nature & Weather Illustrations</h1>
+
+    <div class="grid">
+        <!-- nature-01: Sun -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="sun"></div>
+            </div>
+            <span class="item-label">nature-01: Sun</span>
+        </div>
+
+        <!-- nature-02: Moon -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="moon"></div>
+            </div>
+            <span class="item-label">nature-02: Moon</span>
+        </div>
+
+        <!-- nature-03: Star -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="star"></div>
+            </div>
+            <span class="item-label">nature-03: Star</span>
+        </div>
+
+        <!-- nature-04: Cloud -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="cloud"></div>
+            </div>
+            <span class="item-label">nature-04: Cloud</span>
+        </div>
+
+        <!-- nature-05: Rain Cloud -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="rain-cloud">
+                    <div class="rain-cloud-body"></div>
+                    <div class="rain-drop"></div>
+                    <div class="rain-drop"></div>
+                    <div class="rain-drop"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-05: Rain Cloud</span>
+        </div>
+
+        <!-- nature-06: Rainbow -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="rainbow"></div>
+            </div>
+            <span class="item-label">nature-06: Rainbow</span>
+        </div>
+
+        <!-- nature-07: Tree -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="tree">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-top"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-07: Tree</span>
+        </div>
+
+        <!-- nature-08: Flower -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="flower">
+                    <div class="flower-stem"></div>
+                    <div class="flower-petal"></div>
+                    <div class="flower-petal"></div>
+                    <div class="flower-petal"></div>
+                    <div class="flower-petal"></div>
+                    <div class="flower-center"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-08: Flower</span>
+        </div>
+
+        <!-- nature-09: Leaf -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="leaf">
+                    <div class="leaf-body"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-09: Leaf</span>
+        </div>
+
+        <!-- nature-10: Mountain -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="mountain">
+                    <div class="mountain-body"></div>
+                    <div class="mountain-snow"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-10: Mountain</span>
+        </div>
+
+        <!-- nature-11: Wave -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="wave">
+                    <div class="wave-line"></div>
+                    <div class="wave-line"></div>
+                    <div class="wave-line"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-11: Wave</span>
+        </div>
+
+        <!-- nature-12: Lightning -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="lightning">
+                    <div class="lightning-bolt"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-12: Lightning</span>
+        </div>
+
+        <!-- nature-13: Snowflake -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="snowflake">
+                    <div class="snowflake-line"></div>
+                    <div class="snowflake-line"></div>
+                    <div class="snowflake-line"></div>
+                    <div class="snowflake-center"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-13: Snowflake</span>
+        </div>
+
+        <!-- nature-14: Wind -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="wind">
+                    <div class="wind-line"></div>
+                    <div class="wind-line"></div>
+                    <div class="wind-line"></div>
+                    <div class="wind-curl"></div>
+                    <div class="wind-curl"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-14: Wind</span>
+        </div>
+
+        <!-- nature-15: Sunrise -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="sunrise">
+                    <div class="sunrise-sun"></div>
+                    <div class="sunrise-horizon"></div>
+                    <div class="sunrise-ray"></div>
+                    <div class="sunrise-ray"></div>
+                    <div class="sunrise-ray"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-15: Sunrise</span>
+        </div>
+
+        <!-- nature-16: Crescent Moon -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="crescent">
+                    <div class="crescent-body"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-16: Crescent</span>
+        </div>
+
+        <!-- nature-17: Planet -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="planet">
+                    <div class="planet-body"></div>
+                    <div class="planet-ring"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-17: Planet</span>
+        </div>
+
+        <!-- nature-18: Cactus -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="cactus">
+                    <div class="cactus-body"></div>
+                    <div class="cactus-arm cactus-arm-left"></div>
+                    <div class="cactus-arm cactus-arm-right"></div>
+                    <div class="cactus-pot"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-18: Cactus</span>
+        </div>
+
+        <!-- nature-19: Mushroom -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="mushroom">
+                    <div class="mushroom-cap">
+                        <div class="mushroom-spot"></div>
+                        <div class="mushroom-spot"></div>
+                        <div class="mushroom-spot"></div>
+                    </div>
+                    <div class="mushroom-stem"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-19: Mushroom</span>
+        </div>
+
+        <!-- nature-20: Clover -->
+        <div class="item">
+            <div class="illust-container">
+                <div class="clover">
+                    <div class="clover-leaf"></div>
+                    <div class="clover-leaf"></div>
+                    <div class="clover-leaf"></div>
+                    <div class="clover-leaf"></div>
+                    <div class="clover-stem"></div>
+                </div>
+            </div>
+            <span class="item-label">nature-20: Clover</span>
+        </div>
+    </div>
+</body>
+</html>

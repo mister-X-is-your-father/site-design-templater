@@ -1,0 +1,2727 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People & Characters - Flat Illustration CSS Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .item-name {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* ========================================
+           people-01: Standing Person (Happy)
+           ======================================== */
+        .people-01 {
+            width: 60px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .people-01:hover {
+            transform: scale(1.1);
+        }
+
+        .people-01 .head {
+            width: 30px;
+            height: 30px;
+            background: #FFD93D;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-01 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-01 .eye.left { left: 8px; }
+        .people-01 .eye.right { right: 8px; }
+
+        .people-01 .mouth {
+            width: 10px;
+            height: 5px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-01 .body {
+            width: 20px;
+            height: 30px;
+            background: #4ECDC4;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-01 .arm {
+            width: 6px;
+            height: 25px;
+            background: #FFD93D;
+            border-radius: 3px;
+            position: absolute;
+            top: 35px;
+        }
+
+        .people-01 .arm.left { left: 12px; }
+        .people-01 .arm.right { right: 12px; }
+
+        .people-01 .leg {
+            width: 8px;
+            height: 30px;
+            background: #333;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-01 .leg.left { left: 18px; }
+        .people-01 .leg.right { right: 18px; }
+
+        /* ========================================
+           people-02: Thinking Person
+           ======================================== */
+        .people-02 {
+            width: 70px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-02:hover .thought {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .people-02 .head {
+            width: 30px;
+            height: 30px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 10px;
+        }
+
+        .people-02 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-02 .eye.left { left: 8px; }
+        .people-02 .eye.right { right: 8px; }
+
+        .people-02 .mouth {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 7px;
+            left: 12px;
+        }
+
+        .people-02 .body {
+            width: 20px;
+            height: 30px;
+            background: #74B9FF;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 47px;
+            left: 15px;
+        }
+
+        .people-02 .arm-think {
+            width: 6px;
+            height: 20px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            transform: rotate(-30deg);
+        }
+
+        .people-02 .hand {
+            width: 8px;
+            height: 8px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+            left: 38px;
+        }
+
+        .people-02 .leg {
+            width: 8px;
+            height: 25px;
+            background: #636E72;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-02 .leg.left { left: 12px; }
+        .people-02 .leg.right { left: 24px; }
+
+        .people-02 .thought {
+            width: 20px;
+            height: 20px;
+            background: #DFE6E9;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            right: 5px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .people-02 .thought::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #DFE6E9;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+        }
+
+        /* ========================================
+           people-03: Pointing Person
+           ======================================== */
+        .people-03 {
+            width: 80px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-03:hover .arm-point {
+            animation: point 0.5s ease infinite;
+        }
+
+        @keyframes point {
+            0%, 100% { transform: rotate(-45deg); }
+            50% { transform: rotate(-35deg); }
+        }
+
+        .people-03 .head {
+            width: 30px;
+            height: 30px;
+            background: #FDCB6E;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .people-03 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-03 .eye.left { left: 8px; }
+        .people-03 .eye.right { right: 8px; }
+
+        .people-03 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-03 .body {
+            width: 22px;
+            height: 32px;
+            background: #E17055;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 42px;
+            left: 14px;
+        }
+
+        .people-03 .arm-point {
+            width: 30px;
+            height: 6px;
+            background: #FDCB6E;
+            border-radius: 3px;
+            position: absolute;
+            top: 48px;
+            left: 35px;
+            transform: rotate(-45deg);
+            transform-origin: left center;
+        }
+
+        .people-03 .arm-point::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 8px solid #FDCB6E;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+            position: absolute;
+            right: -6px;
+            top: -1px;
+        }
+
+        .people-03 .arm-down {
+            width: 6px;
+            height: 22px;
+            background: #FDCB6E;
+            border-radius: 3px;
+            position: absolute;
+            top: 48px;
+            left: 8px;
+        }
+
+        .people-03 .leg {
+            width: 8px;
+            height: 25px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-03 .leg.left { left: 12px; }
+        .people-03 .leg.right { left: 26px; }
+
+        /* ========================================
+           people-04: Sad Person
+           ======================================== */
+        .people-04 {
+            width: 60px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .people-04:hover {
+            transform: translateY(-5px);
+        }
+
+        .people-04:hover .tear {
+            opacity: 1;
+            animation: tear-drop 1s ease infinite;
+        }
+
+        @keyframes tear-drop {
+            0% { top: 18px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+
+        .people-04 .head {
+            width: 30px;
+            height: 30px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-04 .eye {
+            width: 4px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            top: 12px;
+        }
+
+        .people-04 .eye.left { left: 8px; }
+        .people-04 .eye.right { right: 8px; }
+
+        .people-04 .tear {
+            width: 4px;
+            height: 6px;
+            background: #74B9FF;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            top: 18px;
+            left: 10px;
+            opacity: 0;
+        }
+
+        .people-04 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-04 .body {
+            width: 20px;
+            height: 30px;
+            background: #636E72;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 37px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-04 .arm {
+            width: 6px;
+            height: 20px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 40px;
+        }
+
+        .people-04 .arm.left { left: 12px; transform: rotate(10deg); }
+        .people-04 .arm.right { right: 12px; transform: rotate(-10deg); }
+
+        .people-04 .leg {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-04 .leg.left { left: 18px; }
+        .people-04 .leg.right { right: 18px; }
+
+        /* ========================================
+           people-05: Waving Person
+           ======================================== */
+        .people-05 {
+            width: 70px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-05:hover .arm-wave {
+            animation: wave 0.4s ease infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(-60deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        .people-05 .head {
+            width: 30px;
+            height: 30px;
+            background: #E8A87C;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+
+        .people-05 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-05 .eye.left { left: 8px; }
+        .people-05 .eye.right { right: 8px; }
+
+        .people-05 .eye.right::after {
+            content: '';
+            width: 6px;
+            height: 2px;
+            background: #333;
+            position: absolute;
+            top: -4px;
+            left: -1px;
+            transform: rotate(-10deg);
+        }
+
+        .people-05 .mouth {
+            width: 10px;
+            height: 5px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+            bottom: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-05 .body {
+            width: 22px;
+            height: 30px;
+            background: #A29BFE;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 42px;
+            left: 19px;
+        }
+
+        .people-05 .arm-wave {
+            width: 6px;
+            height: 25px;
+            background: #E8A87C;
+            border-radius: 3px;
+            position: absolute;
+            top: 42px;
+            right: 10px;
+            transform: rotate(-60deg);
+            transform-origin: bottom center;
+        }
+
+        .people-05 .arm-wave::after {
+            content: '';
+            width: 10px;
+            height: 8px;
+            background: #E8A87C;
+            border-radius: 4px;
+            position: absolute;
+            top: -5px;
+            left: -2px;
+        }
+
+        .people-05 .arm-down {
+            width: 6px;
+            height: 22px;
+            background: #E8A87C;
+            border-radius: 3px;
+            position: absolute;
+            top: 45px;
+            left: 12px;
+        }
+
+        .people-05 .leg {
+            width: 8px;
+            height: 25px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-05 .leg.left { left: 18px; }
+        .people-05 .leg.right { left: 32px; }
+
+        /* ========================================
+           people-06: Running Person
+           ======================================== */
+        .people-06 {
+            width: 80px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-06:hover {
+            animation: run-bounce 0.3s ease infinite;
+        }
+
+        .people-06:hover .leg-back {
+            animation: run-leg-back 0.3s ease infinite;
+        }
+
+        .people-06:hover .leg-front {
+            animation: run-leg-front 0.3s ease infinite;
+        }
+
+        @keyframes run-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes run-leg-back {
+            0%, 100% { transform: rotate(-30deg); }
+            50% { transform: rotate(-50deg); }
+        }
+
+        @keyframes run-leg-front {
+            0%, 100% { transform: rotate(30deg); }
+            50% { transform: rotate(50deg); }
+        }
+
+        .people-06 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 30px;
+        }
+
+        .people-06 .eye {
+            width: 3px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 6px;
+        }
+
+        .people-06 .mouth {
+            width: 6px;
+            height: 3px;
+            background: #333;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 8px;
+            right: 6px;
+        }
+
+        .people-06 .body {
+            width: 20px;
+            height: 28px;
+            background: #FF7675;
+            border-radius: 10px;
+            position: absolute;
+            top: 35px;
+            left: 28px;
+            transform: rotate(15deg);
+        }
+
+        .people-06 .arm-back {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 38px;
+            left: 20px;
+            transform: rotate(30deg);
+        }
+
+        .people-06 .arm-front {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 38px;
+            left: 48px;
+            transform: rotate(-30deg);
+        }
+
+        .people-06 .leg-back {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 5px;
+            left: 22px;
+            transform: rotate(-30deg);
+            transform-origin: top center;
+        }
+
+        .people-06 .leg-front {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 5px;
+            left: 42px;
+            transform: rotate(30deg);
+            transform-origin: top center;
+        }
+
+        /* ========================================
+           people-07: Sitting Person
+           ======================================== */
+        .people-07 {
+            width: 70px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .people-07:hover {
+            transform: scale(1.05);
+        }
+
+        .people-07 .head {
+            width: 28px;
+            height: 28px;
+            background: #FDCB6E;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 21px;
+        }
+
+        .people-07 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-07 .eye.left { left: 7px; }
+        .people-07 .eye.right { right: 7px; }
+
+        .people-07 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-07 .body {
+            width: 22px;
+            height: 25px;
+            background: #00B894;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 30px;
+            left: 24px;
+        }
+
+        .people-07 .arm {
+            width: 6px;
+            height: 18px;
+            background: #FDCB6E;
+            border-radius: 3px;
+            position: absolute;
+            top: 32px;
+        }
+
+        .people-07 .arm.left { left: 18px; }
+        .people-07 .arm.right { right: 18px; }
+
+        .people-07 .leg-sitting {
+            width: 28px;
+            height: 8px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 15px;
+            left: 21px;
+        }
+
+        .people-07 .leg-down {
+            width: 8px;
+            height: 15px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-07 .leg-down.left { left: 21px; }
+        .people-07 .leg-down.right { right: 21px; }
+
+        .people-07 .chair {
+            width: 50px;
+            height: 8px;
+            background: #B2BEC3;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 12px;
+            left: 10px;
+        }
+
+        /* ========================================
+           people-08: Reading Person
+           ======================================== */
+        .people-08 {
+            width: 70px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-08:hover .book {
+            animation: read 0.5s ease infinite;
+        }
+
+        @keyframes read {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .people-08 .head {
+            width: 28px;
+            height: 28px;
+            background: #DFE6E9;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+        }
+
+        .people-08 .eye {
+            width: 3px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-08 .eye.left { left: 8px; }
+        .people-08 .eye.right { right: 8px; }
+
+        .people-08 .glasses {
+            width: 20px;
+            height: 8px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            position: absolute;
+            top: 8px;
+            left: 4px;
+        }
+
+        .people-08 .mouth {
+            width: 6px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 7px;
+            left: 11px;
+        }
+
+        .people-08 .body {
+            width: 20px;
+            height: 28px;
+            background: #6C5CE7;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 14px;
+        }
+
+        .people-08 .arm-hold {
+            width: 6px;
+            height: 20px;
+            background: #DFE6E9;
+            border-radius: 3px;
+            position: absolute;
+            top: 38px;
+            left: 35px;
+            transform: rotate(-20deg);
+        }
+
+        .people-08 .book {
+            width: 22px;
+            height: 28px;
+            background: #FDCB6E;
+            border-radius: 2px;
+            position: absolute;
+            top: 35px;
+            right: 5px;
+        }
+
+        .people-08 .book::before {
+            content: '';
+            width: 2px;
+            height: 28px;
+            background: #E17055;
+            position: absolute;
+            left: 0;
+        }
+
+        .people-08 .book::after {
+            content: '';
+            width: 14px;
+            height: 2px;
+            background: #B2BEC3;
+            position: absolute;
+            top: 8px;
+            left: 4px;
+            box-shadow: 0 5px 0 #B2BEC3, 0 10px 0 #B2BEC3;
+        }
+
+        .people-08 .leg {
+            width: 8px;
+            height: 25px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-08 .leg.left { left: 12px; }
+        .people-08 .leg.right { left: 24px; }
+
+        /* ========================================
+           people-09: Talking Person
+           ======================================== */
+        .people-09 {
+            width: 80px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-09:hover .speech {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .people-09 .head {
+            width: 30px;
+            height: 30px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 5px;
+        }
+
+        .people-09 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-09 .eye.left { left: 8px; }
+        .people-09 .eye.right { right: 8px; }
+
+        .people-09 .mouth-open {
+            width: 8px;
+            height: 6px;
+            background: #333;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-09 .body {
+            width: 22px;
+            height: 30px;
+            background: #FD79A8;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 47px;
+            left: 9px;
+        }
+
+        .people-09 .arm {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 50px;
+        }
+
+        .people-09 .arm.left { left: 2px; transform: rotate(15deg); }
+        .people-09 .arm.right { left: 28px; transform: rotate(-15deg); }
+
+        .people-09 .leg {
+            width: 8px;
+            height: 22px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-09 .leg.left { left: 8px; }
+        .people-09 .leg.right { left: 22px; }
+
+        .people-09 .speech {
+            width: 30px;
+            height: 22px;
+            background: #DFE6E9;
+            border-radius: 10px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .people-09 .speech::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 8px solid #DFE6E9;
+            border-right: 8px solid transparent;
+            position: absolute;
+            bottom: -6px;
+            left: 5px;
+        }
+
+        .people-09 .speech-dots {
+            position: absolute;
+            top: 8px;
+            left: 6px;
+            display: flex;
+            gap: 3px;
+        }
+
+        .people-09 .speech-dots span {
+            width: 4px;
+            height: 4px;
+            background: #636E72;
+            border-radius: 50%;
+        }
+
+        /* ========================================
+           people-10: Sleeping Person
+           ======================================== */
+        .people-10 {
+            width: 90px;
+            height: 60px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-10:hover .zzz {
+            animation: zzz 1s ease infinite;
+        }
+
+        @keyframes zzz {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-5px); }
+            100% { opacity: 0.3; transform: translateY(0); }
+        }
+
+        .people-10 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 5px;
+        }
+
+        .people-10 .eye-closed {
+            width: 6px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            top: 12px;
+        }
+
+        .people-10 .eye-closed.left { left: 6px; }
+        .people-10 .eye-closed.right { right: 6px; }
+
+        .people-10 .mouth {
+            width: 6px;
+            height: 3px;
+            background: #333;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 8px;
+            left: 11px;
+        }
+
+        .people-10 .body {
+            width: 35px;
+            height: 18px;
+            background: #81ECEC;
+            border-radius: 9px;
+            position: absolute;
+            top: 30px;
+            left: 25px;
+        }
+
+        .people-10 .blanket {
+            width: 50px;
+            height: 20px;
+            background: #74B9FF;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 5px;
+            left: 20px;
+        }
+
+        .people-10 .pillow {
+            width: 20px;
+            height: 15px;
+            background: #DFE6E9;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            left: 0;
+        }
+
+        .people-10 .zzz {
+            font-size: 14px;
+            font-weight: bold;
+            color: #636E72;
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+
+        /* ========================================
+           people-11: Jumping Person
+           ======================================== */
+        .people-11 {
+            width: 60px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-11:hover {
+            animation: jump 0.4s ease infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .people-11 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-11 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+        }
+
+        .people-11 .eye.left { left: 7px; }
+        .people-11 .eye.right { right: 7px; }
+
+        .people-11 .mouth {
+            width: 12px;
+            height: 6px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-11 .body {
+            width: 20px;
+            height: 28px;
+            background: #FF6B6B;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-11 .arm {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 30px;
+        }
+
+        .people-11 .arm.left { left: 10px; transform: rotate(45deg); }
+        .people-11 .arm.right { right: 10px; transform: rotate(-45deg); }
+
+        .people-11 .leg {
+            width: 8px;
+            height: 25px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .people-11 .leg.left { left: 18px; transform: rotate(-15deg); }
+        .people-11 .leg.right { right: 18px; transform: rotate(15deg); }
+
+        /* ========================================
+           people-12: Working at Desk
+           ======================================== */
+        .people-12 {
+            width: 80px;
+            height: 85px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-12:hover .hand {
+            animation: type 0.2s ease infinite;
+        }
+
+        @keyframes type {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(2px); }
+        }
+
+        .people-12 .head {
+            width: 26px;
+            height: 26px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 15px;
+        }
+
+        .people-12 .eye {
+            width: 3px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 9px;
+        }
+
+        .people-12 .eye.left { left: 7px; }
+        .people-12 .eye.right { right: 7px; }
+
+        .people-12 .mouth {
+            width: 6px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 7px;
+            left: 10px;
+        }
+
+        .people-12 .body {
+            width: 20px;
+            height: 22px;
+            background: #00CEC9;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 28px;
+            left: 18px;
+        }
+
+        .people-12 .arm {
+            width: 18px;
+            height: 5px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 35px;
+        }
+
+        .people-12 .arm.left { left: 38px; }
+        .people-12 .arm.right { left: 0px; }
+
+        .people-12 .hand {
+            width: 6px;
+            height: 6px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 33px;
+        }
+
+        .people-12 .hand.left { left: 55px; }
+        .people-12 .hand.right { left: 0; }
+
+        .people-12 .desk {
+            width: 75px;
+            height: 6px;
+            background: #B2BEC3;
+            border-radius: 3px;
+            position: absolute;
+            top: 45px;
+            left: 2px;
+        }
+
+        .people-12 .computer {
+            width: 20px;
+            height: 15px;
+            background: #636E72;
+            border-radius: 2px;
+            position: absolute;
+            top: 30px;
+            right: 8px;
+        }
+
+        .people-12 .computer::after {
+            content: '';
+            width: 16px;
+            height: 10px;
+            background: #74B9FF;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+
+        .people-12 .leg {
+            width: 7px;
+            height: 30px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-12 .leg.left { left: 18px; }
+        .people-12 .leg.right { left: 30px; }
+
+        /* ========================================
+           people-13: Dancing Person
+           ======================================== */
+        .people-13 {
+            width: 70px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-13:hover {
+            animation: dance 0.3s ease infinite;
+        }
+
+        .people-13:hover .arm.left {
+            animation: dance-arm-l 0.3s ease infinite;
+        }
+
+        .people-13:hover .arm.right {
+            animation: dance-arm-r 0.3s ease infinite;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes dance-arm-l {
+            0%, 100% { transform: rotate(30deg); }
+            50% { transform: rotate(60deg); }
+        }
+
+        @keyframes dance-arm-r {
+            0%, 100% { transform: rotate(-60deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        .people-13 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 21px;
+        }
+
+        .people-13 .eye {
+            width: 4px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-13 .eye.left { left: 6px; }
+        .people-13 .eye.right { right: 6px; }
+
+        .people-13 .mouth {
+            width: 10px;
+            height: 5px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-13 .body {
+            width: 22px;
+            height: 28px;
+            background: #E84393;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 24px;
+        }
+
+        .people-13 .arm {
+            width: 6px;
+            height: 24px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 35px;
+            transform-origin: top center;
+        }
+
+        .people-13 .arm.left { left: 18px; transform: rotate(30deg); }
+        .people-13 .arm.right { right: 18px; transform: rotate(-60deg); }
+
+        .people-13 .leg {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-13 .leg.left { left: 22px; transform: rotate(-10deg); }
+        .people-13 .leg.right { right: 22px; transform: rotate(10deg); }
+
+        /* ========================================
+           people-14: Chef/Cooking Person
+           ======================================== */
+        .people-14 {
+            width: 70px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-14:hover .pan {
+            animation: cook 0.3s ease infinite;
+        }
+
+        @keyframes cook {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-3px); }
+        }
+
+        .people-14 .hat {
+            width: 26px;
+            height: 18px;
+            background: white;
+            border-radius: 13px 13px 0 0;
+            position: absolute;
+            top: 0;
+            left: 17px;
+            border: 2px solid #DFE6E9;
+        }
+
+        .people-14 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 16px;
+        }
+
+        .people-14 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-14 .eye.left { left: 7px; }
+        .people-14 .eye.right { right: 7px; }
+
+        .people-14 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-14 .body {
+            width: 22px;
+            height: 28px;
+            background: white;
+            border: 2px solid #DFE6E9;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 45px;
+            left: 19px;
+        }
+
+        .people-14 .arm {
+            width: 6px;
+            height: 20px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 48px;
+        }
+
+        .people-14 .arm.left { left: 12px; }
+        .people-14 .arm.right { right: 5px; transform: rotate(-30deg); }
+
+        .people-14 .pan {
+            width: 22px;
+            height: 10px;
+            background: #636E72;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            top: 55px;
+            right: 0;
+        }
+
+        .people-14 .pan::after {
+            content: '';
+            width: 12px;
+            height: 4px;
+            background: #636E72;
+            position: absolute;
+            right: -10px;
+            top: 3px;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .people-14 .leg {
+            width: 8px;
+            height: 24px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-14 .leg.left { left: 18px; }
+        .people-14 .leg.right { left: 32px; }
+
+        /* ========================================
+           people-15: Doctor/Nurse
+           ======================================== */
+        .people-15 {
+            width: 60px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .people-15:hover {
+            transform: scale(1.05);
+        }
+
+        .people-15 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-15 .cross {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-15 .cross::before {
+            content: '';
+            width: 10px;
+            height: 4px;
+            background: #FF6B6B;
+            position: absolute;
+            top: 3px;
+        }
+
+        .people-15 .cross::after {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background: #FF6B6B;
+            position: absolute;
+            left: 3px;
+        }
+
+        .people-15 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-15 .eye.left { left: 7px; }
+        .people-15 .eye.right { right: 7px; }
+
+        .people-15 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-15 .body {
+            width: 22px;
+            height: 32px;
+            background: white;
+            border: 2px solid #DFE6E9;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-15 .arm {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 38px;
+        }
+
+        .people-15 .arm.left { left: 10px; }
+        .people-15 .arm.right { right: 10px; }
+
+        .people-15 .clipboard {
+            width: 12px;
+            height: 16px;
+            background: #DFE6E9;
+            border-radius: 2px;
+            position: absolute;
+            top: 50px;
+            right: 5px;
+        }
+
+        .people-15 .leg {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-15 .leg.left { left: 18px; }
+        .people-15 .leg.right { right: 18px; }
+
+        /* ========================================
+           people-16: Student with Backpack
+           ======================================== */
+        .people-16 {
+            width: 60px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-16:hover {
+            animation: walk 0.4s ease infinite;
+        }
+
+        @keyframes walk {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+        }
+
+        .people-16 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+        }
+
+        .people-16 .hair {
+            width: 30px;
+            height: 15px;
+            background: #2D3436;
+            border-radius: 15px 15px 0 0;
+            position: absolute;
+            top: 3px;
+            left: 9px;
+        }
+
+        .people-16 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+        }
+
+        .people-16 .eye.left { left: 7px; }
+        .people-16 .eye.right { right: 7px; }
+
+        .people-16 .mouth {
+            width: 6px;
+            height: 3px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            position: absolute;
+            bottom: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-16 .body {
+            width: 20px;
+            height: 28px;
+            background: #74B9FF;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 14px;
+        }
+
+        .people-16 .backpack {
+            width: 16px;
+            height: 22px;
+            background: #E17055;
+            border-radius: 3px;
+            position: absolute;
+            top: 38px;
+            right: 5px;
+        }
+
+        .people-16 .arm {
+            width: 6px;
+            height: 20px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 38px;
+        }
+
+        .people-16 .arm.left { left: 8px; }
+        .people-16 .arm.right { left: 32px; }
+
+        .people-16 .leg {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-16 .leg.left { left: 12px; }
+        .people-16 .leg.right { left: 26px; }
+
+        /* ========================================
+           people-17: Artist with Brush
+           ======================================== */
+        .people-17 {
+            width: 75px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-17:hover .brush {
+            animation: paint 0.3s ease infinite;
+        }
+
+        @keyframes paint {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(-10deg); }
+        }
+
+        .people-17 .beret {
+            width: 28px;
+            height: 12px;
+            background: #E84393;
+            border-radius: 14px 14px 0 0;
+            position: absolute;
+            top: 2px;
+            left: 8px;
+        }
+
+        .people-17 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 8px;
+        }
+
+        .people-17 .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-17 .eye.left { left: 7px; }
+        .people-17 .eye.right { right: 7px; }
+
+        .people-17 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-17 .body {
+            width: 22px;
+            height: 28px;
+            background: #6C5CE7;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 40px;
+            left: 11px;
+        }
+
+        .people-17 .arm-brush {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 42px;
+            right: 15px;
+            transform: rotate(-20deg);
+        }
+
+        .people-17 .brush {
+            width: 4px;
+            height: 20px;
+            background: #B2BEC3;
+            border-radius: 2px;
+            position: absolute;
+            top: 35px;
+            right: 5px;
+            transform: rotate(-20deg);
+        }
+
+        .people-17 .brush::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #E17055;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            bottom: -6px;
+            left: -2px;
+        }
+
+        .people-17 .palette {
+            width: 18px;
+            height: 14px;
+            background: #DFE6E9;
+            border-radius: 9px 9px 5px 5px;
+            position: absolute;
+            top: 55px;
+            left: 0;
+        }
+
+        .people-17 .palette::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            box-shadow: 6px 0 0 #FDCB6E, 3px 5px 0 #00B894;
+        }
+
+        .people-17 .leg {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-17 .leg.left { left: 10px; }
+        .people-17 .leg.right { left: 24px; }
+
+        /* ========================================
+           people-18: Superhero
+           ======================================== */
+        .people-18 {
+            width: 65px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-18:hover {
+            animation: fly 0.3s ease infinite;
+        }
+
+        .people-18:hover .cape {
+            animation: cape-wave 0.3s ease infinite;
+        }
+
+        @keyframes fly {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes cape-wave {
+            0%, 100% { transform: skewX(0deg); }
+            50% { transform: skewX(10deg); }
+        }
+
+        .people-18 .head {
+            width: 28px;
+            height: 28px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 18px;
+        }
+
+        .people-18 .mask {
+            width: 20px;
+            height: 8px;
+            background: #E84393;
+            border-radius: 4px;
+            position: absolute;
+            top: 9px;
+            left: 4px;
+        }
+
+        .people-18 .eye {
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+        }
+
+        .people-18 .eye.left { left: 3px; }
+        .people-18 .eye.right { right: 3px; }
+
+        .people-18 .mouth {
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-18 .cape {
+            width: 30px;
+            height: 45px;
+            background: #E84393;
+            border-radius: 0 0 15px 15px;
+            position: absolute;
+            top: 30px;
+            left: 5px;
+        }
+
+        .people-18 .body {
+            width: 22px;
+            height: 30px;
+            background: #6C5CE7;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 35px;
+            left: 21px;
+        }
+
+        .people-18 .body::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #FDCB6E;
+            position: absolute;
+            top: 5px;
+            left: 6px;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .people-18 .arm {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 30px;
+        }
+
+        .people-18 .arm.left { left: 15px; transform: rotate(45deg); }
+        .people-18 .arm.right { right: 8px; transform: rotate(-45deg); }
+
+        .people-18 .leg {
+            width: 8px;
+            height: 28px;
+            background: #6C5CE7;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-18 .leg.left { left: 20px; }
+        .people-18 .leg.right { left: 34px; }
+
+        /* ========================================
+           people-19: Baby/Toddler
+           ======================================== */
+        .people-19 {
+            width: 50px;
+            height: 70px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-19:hover {
+            animation: baby-bounce 0.3s ease infinite;
+        }
+
+        @keyframes baby-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .people-19 .head {
+            width: 32px;
+            height: 32px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-19 .hair-tuft {
+            width: 8px;
+            height: 10px;
+            background: #2D3436;
+            border-radius: 4px 4px 0 0;
+            position: absolute;
+            top: -5px;
+            left: 12px;
+        }
+
+        .people-19 .eye {
+            width: 5px;
+            height: 5px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+        }
+
+        .people-19 .eye.left { left: 8px; }
+        .people-19 .eye.right { right: 8px; }
+
+        .people-19 .cheek {
+            width: 6px;
+            height: 4px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            position: absolute;
+            top: 17px;
+        }
+
+        .people-19 .cheek.left { left: 4px; }
+        .people-19 .cheek.right { right: 4px; }
+
+        .people-19 .mouth {
+            width: 8px;
+            height: 5px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-19 .body {
+            width: 24px;
+            height: 20px;
+            background: #81ECEC;
+            border-radius: 12px;
+            position: absolute;
+            top: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-19 .arm {
+            width: 6px;
+            height: 12px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 36px;
+        }
+
+        .people-19 .arm.left { left: 8px; transform: rotate(20deg); }
+        .people-19 .arm.right { right: 8px; transform: rotate(-20deg); }
+
+        .people-19 .leg {
+            width: 8px;
+            height: 15px;
+            background: #81ECEC;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-19 .leg.left { left: 14px; }
+        .people-19 .leg.right { right: 14px; }
+
+        /* ========================================
+           people-20: Elderly Person with Cane
+           ======================================== */
+        .people-20 {
+            width: 60px;
+            height: 95px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .people-20:hover {
+            animation: elderly-walk 0.5s ease infinite;
+        }
+
+        @keyframes elderly-walk {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+
+        .people-20 .head {
+            width: 26px;
+            height: 26px;
+            background: #FFEAA7;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 12px;
+        }
+
+        .people-20 .hair {
+            width: 28px;
+            height: 12px;
+            background: #B2BEC3;
+            border-radius: 14px 14px 0 0;
+            position: absolute;
+            top: 3px;
+            left: 11px;
+        }
+
+        .people-20 .eye {
+            width: 3px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .people-20 .eye.left { left: 7px; }
+        .people-20 .eye.right { right: 7px; }
+
+        .people-20 .glasses {
+            width: 18px;
+            height: 6px;
+            border: 2px solid #636E72;
+            border-radius: 3px;
+            position: absolute;
+            top: 8px;
+            left: 4px;
+        }
+
+        .people-20 .mouth {
+            width: 6px;
+            height: 3px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .people-20 .body {
+            width: 22px;
+            height: 30px;
+            background: #636E72;
+            border-radius: 11px 11px 5px 5px;
+            position: absolute;
+            top: 33px;
+            left: 14px;
+        }
+
+        .people-20 .arm {
+            width: 6px;
+            height: 22px;
+            background: #FFEAA7;
+            border-radius: 3px;
+            position: absolute;
+            top: 36px;
+        }
+
+        .people-20 .arm.left { left: 8px; }
+        .people-20 .arm.right { right: 5px; transform: rotate(-30deg); }
+
+        .people-20 .cane {
+            width: 4px;
+            height: 40px;
+            background: #5D4E37;
+            border-radius: 2px;
+            position: absolute;
+            top: 45px;
+            right: 0;
+        }
+
+        .people-20 .cane::before {
+            content: '';
+            width: 10px;
+            height: 4px;
+            background: #5D4E37;
+            border-radius: 2px 2px 0 0;
+            position: absolute;
+            top: 0;
+            left: -3px;
+        }
+
+        .people-20 .leg {
+            width: 8px;
+            height: 28px;
+            background: #2D3436;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .people-20 .leg.left { left: 12px; }
+        .people-20 .leg.right { left: 26px; }
+    </style>
+</head>
+<body>
+    <h1>People & Characters - Flat Illustration CSS Components</h1>
+
+    <div class="grid">
+        <!-- people-01: Standing Person (Happy) -->
+        <div class="item">
+            <div class="people-01">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-01</span>
+            <span class="item-name">Happy Standing</span>
+        </div>
+
+        <!-- people-02: Thinking Person -->
+        <div class="item">
+            <div class="people-02">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm-think"></div>
+                <div class="hand"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+                <div class="thought"></div>
+            </div>
+            <span class="item-label">people-02</span>
+            <span class="item-name">Thinking</span>
+        </div>
+
+        <!-- people-03: Pointing Person -->
+        <div class="item">
+            <div class="people-03">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm-point"></div>
+                <div class="arm-down"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-03</span>
+            <span class="item-name">Pointing</span>
+        </div>
+
+        <!-- people-04: Sad Person -->
+        <div class="item">
+            <div class="people-04">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="tear"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-04</span>
+            <span class="item-name">Sad</span>
+        </div>
+
+        <!-- people-05: Waving Person -->
+        <div class="item">
+            <div class="people-05">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm-wave"></div>
+                <div class="arm-down"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-05</span>
+            <span class="item-name">Waving</span>
+        </div>
+
+        <!-- people-06: Running Person -->
+        <div class="item">
+            <div class="people-06">
+                <div class="head">
+                    <div class="eye"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm-back"></div>
+                <div class="arm-front"></div>
+                <div class="leg-back"></div>
+                <div class="leg-front"></div>
+            </div>
+            <span class="item-label">people-06</span>
+            <span class="item-name">Running</span>
+        </div>
+
+        <!-- people-07: Sitting Person -->
+        <div class="item">
+            <div class="people-07">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg-sitting"></div>
+                <div class="leg-down left"></div>
+                <div class="leg-down right"></div>
+                <div class="chair"></div>
+            </div>
+            <span class="item-label">people-07</span>
+            <span class="item-name">Sitting</span>
+        </div>
+
+        <!-- people-08: Reading Person -->
+        <div class="item">
+            <div class="people-08">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="glasses"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm-hold"></div>
+                <div class="book"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-08</span>
+            <span class="item-name">Reading</span>
+        </div>
+
+        <!-- people-09: Talking Person -->
+        <div class="item">
+            <div class="people-09">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth-open"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+                <div class="speech">
+                    <div class="speech-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <span class="item-label">people-09</span>
+            <span class="item-name">Talking</span>
+        </div>
+
+        <!-- people-10: Sleeping Person -->
+        <div class="item">
+            <div class="people-10">
+                <div class="pillow"></div>
+                <div class="head">
+                    <div class="eye-closed left"></div>
+                    <div class="eye-closed right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="blanket"></div>
+                <div class="zzz">Zzz</div>
+            </div>
+            <span class="item-label">people-10</span>
+            <span class="item-name">Sleeping</span>
+        </div>
+
+        <!-- people-11: Jumping Person -->
+        <div class="item">
+            <div class="people-11">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-11</span>
+            <span class="item-name">Jumping</span>
+        </div>
+
+        <!-- people-12: Working at Desk -->
+        <div class="item">
+            <div class="people-12">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="hand left"></div>
+                <div class="hand right"></div>
+                <div class="desk"></div>
+                <div class="computer"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-12</span>
+            <span class="item-name">Working</span>
+        </div>
+
+        <!-- people-13: Dancing Person -->
+        <div class="item">
+            <div class="people-13">
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-13</span>
+            <span class="item-name">Dancing</span>
+        </div>
+
+        <!-- people-14: Chef/Cooking Person -->
+        <div class="item">
+            <div class="people-14">
+                <div class="hat"></div>
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="pan"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-14</span>
+            <span class="item-name">Chef</span>
+        </div>
+
+        <!-- people-15: Doctor/Nurse -->
+        <div class="item">
+            <div class="people-15">
+                <div class="cross"></div>
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="clipboard"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-15</span>
+            <span class="item-name">Doctor</span>
+        </div>
+
+        <!-- people-16: Student with Backpack -->
+        <div class="item">
+            <div class="people-16">
+                <div class="hair"></div>
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="backpack"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-16</span>
+            <span class="item-name">Student</span>
+        </div>
+
+        <!-- people-17: Artist with Brush -->
+        <div class="item">
+            <div class="people-17">
+                <div class="beret"></div>
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm-brush"></div>
+                <div class="brush"></div>
+                <div class="palette"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-17</span>
+            <span class="item-name">Artist</span>
+        </div>
+
+        <!-- people-18: Superhero -->
+        <div class="item">
+            <div class="people-18">
+                <div class="cape"></div>
+                <div class="head">
+                    <div class="mask">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-18</span>
+            <span class="item-name">Superhero</span>
+        </div>
+
+        <!-- people-19: Baby/Toddler -->
+        <div class="item">
+            <div class="people-19">
+                <div class="head">
+                    <div class="hair-tuft"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="cheek left"></div>
+                    <div class="cheek right"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-19</span>
+            <span class="item-name">Baby</span>
+        </div>
+
+        <!-- people-20: Elderly Person with Cane -->
+        <div class="item">
+            <div class="people-20">
+                <div class="hair"></div>
+                <div class="head">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="glasses"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="cane"></div>
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
+            <span class="item-label">people-20</span>
+            <span class="item-name">Elderly</span>
+        </div>
+    </div>
+</body>
+</html>

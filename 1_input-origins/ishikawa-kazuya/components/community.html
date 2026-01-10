@@ -1,0 +1,69 @@
+<!-- ========================================
+     Component: Community Section
+     Ishikawa Design System
+     ======================================== -->
+{% macro community_section(
+    name='IDEA CREATORS CLUB',
+    description='毎月90分のオンラインミーティングを実施し、いしかわかずやがアイデア発想術を教えたり、SNSでのバズらせ方などを伝授します。不定期でご飯会や展示会に一緒に行ったりアイデアを一緒に考えて形にすることも！',
+    link='#'
+) %}
+
+<style>
+.ik-community-card {
+    background: linear-gradient(135deg, var(--ik-primary), var(--ik-secondary));
+    color: var(--ik-white);
+    padding: 48px;
+    border-radius: var(--ik-radius-lg);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ik-community-card__badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 12px 32px;
+    border-radius: var(--ik-radius-xl);
+    font-family: var(--ik-font-latin);
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.ik-community-card__desc {
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 32px;
+}
+
+.ik-community-card .ik-btn--primary {
+    background: var(--ik-white);
+    color: var(--ik-primary);
+}
+
+.ik-community-card .ik-btn--primary:hover {
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 640px) {
+    .ik-community-card {
+        padding: 32px 24px;
+    }
+}
+</style>
+
+<section class="ik-section ik-section--alt">
+    <div class="ik-container">
+        <div class="ik-section__header">
+            <div class="ik-section__label">COMMUNITY</div>
+            <h2 class="ik-section__title">コミュニティ</h2>
+        </div>
+        <div class="ik-community-card ik-fade-in">
+            <div class="ik-community-card__badge">{{ name }}</div>
+            <p class="ik-community-card__desc">{{ description }}</p>
+            <a href="{{ link }}" class="ik-btn ik-btn--primary">コミュニティ詳細を見る</a>
+        </div>
+    </div>
+</section>
+{% endmacro %}

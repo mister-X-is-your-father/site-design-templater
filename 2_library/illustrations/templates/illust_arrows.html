@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrows & Pointers - Flat Illustration Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* arrow-01: Right Arrow */
+        .right-arrow {
+            width: 70px;
+            height: 30px;
+            background: #3498db;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .right-arrow::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 25px solid #3498db;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+        .right-arrow:hover {
+            transform: translateX(10px);
+        }
+
+        /* arrow-02: Left Arrow */
+        .left-arrow {
+            width: 70px;
+            height: 30px;
+            background: #e74c3c;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .left-arrow::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right: 25px solid #e74c3c;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+        .left-arrow:hover {
+            transform: translateX(-10px);
+        }
+
+        /* arrow-03: Up Arrow */
+        .up-arrow {
+            width: 30px;
+            height: 70px;
+            background: #2ecc71;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .up-arrow::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom: 25px solid #2ecc71;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+        }
+        .up-arrow:hover {
+            transform: translateY(-10px);
+        }
+
+        /* arrow-04: Down Arrow */
+        .down-arrow {
+            width: 30px;
+            height: 70px;
+            background: #9b59b6;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .down-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top: 25px solid #9b59b6;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+        }
+        .down-arrow:hover {
+            transform: translateY(10px);
+        }
+
+        /* arrow-05: Curved Arrow */
+        .curved-arrow {
+            width: 60px;
+            height: 60px;
+            border: 8px solid transparent;
+            border-top: 8px solid #f39c12;
+            border-right: 8px solid #f39c12;
+            border-radius: 0 50px 0 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .curved-arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            bottom: 8px;
+            border-left: 15px solid #f39c12;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        .curved-arrow:hover {
+            transform: rotate(15deg);
+        }
+
+        /* arrow-06: Circular Arrow */
+        .circular-arrow {
+            width: 60px;
+            height: 60px;
+            border: 8px solid #1abc9c;
+            border-radius: 50%;
+            border-right-color: transparent;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .circular-arrow::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 5px;
+            border-bottom: 15px solid #1abc9c;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            transform: rotate(45deg);
+        }
+        .circular-arrow:hover {
+            transform: rotate(360deg);
+        }
+
+        /* arrow-07: Double Arrow */
+        .double-arrow {
+            width: 80px;
+            height: 20px;
+            background: #e67e22;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .double-arrow::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right: 18px solid #e67e22;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+        .double-arrow::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 18px solid #e67e22;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+        .double-arrow:hover {
+            transform: scaleX(1.2);
+        }
+
+        /* arrow-08: Thick Arrow */
+        .thick-arrow {
+            width: 50px;
+            height: 50px;
+            background: #c0392b;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .thick-arrow::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 35px solid #c0392b;
+            border-top: 30px solid transparent;
+            border-bottom: 30px solid transparent;
+        }
+        .thick-arrow:hover {
+            transform: scale(1.1);
+        }
+
+        /* arrow-09: Thin Arrow */
+        .thin-arrow {
+            width: 80px;
+            height: 6px;
+            background: #34495e;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .thin-arrow::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 15px solid #34495e;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .thin-arrow:hover {
+            transform: translateX(8px);
+        }
+
+        /* arrow-10: Dotted Arrow */
+        .dotted-arrow {
+            width: 70px;
+            height: 6px;
+            background: repeating-linear-gradient(
+                90deg,
+                #8e44ad 0px,
+                #8e44ad 8px,
+                transparent 8px,
+                transparent 16px
+            );
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .dotted-arrow::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 15px solid #8e44ad;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .dotted-arrow:hover {
+            transform: translateX(8px);
+        }
+
+        /* arrow-11: Chevron */
+        .chevron {
+            width: 30px;
+            height: 30px;
+            border-top: 10px solid #16a085;
+            border-right: 10px solid #16a085;
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+        .chevron:hover {
+            transform: rotate(45deg) translateX(8px) translateY(-8px);
+        }
+
+        /* arrow-12: Hand Pointing */
+        .hand-pointing {
+            width: 70px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .hand-pointing::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 35px;
+            height: 25px;
+            background: #f1c40f;
+            border-radius: 5px 0 0 5px;
+        }
+        .hand-pointing::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: 40px;
+            height: 12px;
+            background: #f1c40f;
+            border-radius: 6px;
+        }
+        .hand-pointing:hover {
+            transform: translateX(10px);
+        }
+
+        /* arrow-13: Finger Pointing */
+        .finger-pointing {
+            width: 60px;
+            height: 20px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .finger-pointing::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 20px;
+            background: #d35400;
+            border-radius: 10px 0 0 10px;
+        }
+        .finger-pointing::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 40px;
+            height: 10px;
+            background: #d35400;
+            border-radius: 5px;
+        }
+        .finger-pointing:hover {
+            transform: translateX(8px);
+        }
+
+        /* arrow-14: Compass */
+        .compass {
+            width: 70px;
+            height: 70px;
+            border: 6px solid #2c3e50;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .compass::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 20px solid #e74c3c;
+        }
+        .compass::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 20px solid #3498db;
+        }
+        .compass:hover {
+            transform: rotate(45deg);
+        }
+
+        /* arrow-15: Direction Sign */
+        .direction-sign {
+            width: 80px;
+            height: 25px;
+            background: #27ae60;
+            position: relative;
+            transition: transform 0.3s ease;
+            border-radius: 3px 0 0 3px;
+        }
+        .direction-sign::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            border-left: 15px solid #27ae60;
+            border-top: 12.5px solid transparent;
+            border-bottom: 12.5px solid transparent;
+        }
+        .direction-sign::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -20px;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 25px;
+            background: #7f8c8d;
+            border-radius: 2px;
+        }
+        .direction-sign:hover {
+            transform: rotate(-5deg);
+        }
+
+        /* arrow-16: Path Arrow */
+        .path-arrow {
+            width: 80px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .path-arrow::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 8px;
+            background: #95a5a6;
+            border-radius: 4px;
+        }
+        .path-arrow::after {
+            content: '';
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 20px solid #3498db;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+        .path-arrow:hover {
+            transform: translateX(8px);
+        }
+
+        /* arrow-17: Bounce Arrow */
+        .bounce-arrow {
+            width: 30px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .bounce-arrow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 35px;
+            background: #e91e63;
+        }
+        .bounce-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top: 20px solid #e91e63;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+        }
+        .bounce-arrow:hover {
+            animation: bounce 0.5s ease infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* arrow-18: Zigzag Arrow */
+        .zigzag-arrow {
+            width: 70px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .zigzag-arrow::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 55px;
+            height: 6px;
+            background: repeating-linear-gradient(
+                90deg,
+                #ff5722 0px,
+                #ff5722 10px,
+                transparent 10px,
+                transparent 11px
+            );
+            clip-path: polygon(0% 100%, 10% 0%, 20% 100%, 30% 0%, 40% 100%, 50% 0%, 60% 100%, 70% 0%, 80% 100%, 90% 0%, 100% 100%);
+            transform: translateY(-50%) scaleY(3);
+        }
+        .zigzag-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 18px solid #ff5722;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+        .zigzag-arrow:hover {
+            transform: translateX(8px);
+        }
+
+        /* arrow-19: Split Arrow */
+        .split-arrow {
+            width: 70px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .split-arrow::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 10px;
+            background: #673ab7;
+        }
+        .split-arrow .branch-up,
+        .split-arrow .branch-down {
+            position: absolute;
+            right: 10px;
+            width: 25px;
+            height: 6px;
+            background: #673ab7;
+        }
+        .split-arrow .branch-up {
+            top: 10px;
+            transform: rotate(-30deg);
+        }
+        .split-arrow .branch-up::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 12px solid #673ab7;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .split-arrow .branch-down {
+            bottom: 10px;
+            transform: rotate(30deg);
+        }
+        .split-arrow .branch-down::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 12px solid #673ab7;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .split-arrow:hover {
+            transform: scale(1.1);
+        }
+
+        /* arrow-20: Merge Arrow */
+        .merge-arrow {
+            width: 70px;
+            height: 60px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .merge-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 10px;
+            background: #009688;
+        }
+        .merge-arrow .input-up,
+        .merge-arrow .input-down {
+            position: absolute;
+            left: 5px;
+            width: 25px;
+            height: 6px;
+            background: #009688;
+        }
+        .merge-arrow .input-up {
+            top: 10px;
+            transform: rotate(30deg);
+        }
+        .merge-arrow .input-up::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: #009688;
+            border-radius: 50%;
+        }
+        .merge-arrow .input-down {
+            bottom: 10px;
+            transform: rotate(-30deg);
+        }
+        .merge-arrow .input-down::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: #009688;
+            border-radius: 50%;
+        }
+        .merge-arrow .output::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 15px solid #009688;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        .merge-arrow:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Arrows & Pointers - Flat Illustration Components</h1>
+
+    <div class="grid">
+        <!-- arrow-01: Right Arrow -->
+        <div class="item" id="arrow-01">
+            <div class="icon-wrapper">
+                <div class="right-arrow"></div>
+            </div>
+            <span class="item-label">arrow-01: Right Arrow</span>
+        </div>
+
+        <!-- arrow-02: Left Arrow -->
+        <div class="item" id="arrow-02">
+            <div class="icon-wrapper">
+                <div class="left-arrow"></div>
+            </div>
+            <span class="item-label">arrow-02: Left Arrow</span>
+        </div>
+
+        <!-- arrow-03: Up Arrow -->
+        <div class="item" id="arrow-03">
+            <div class="icon-wrapper">
+                <div class="up-arrow"></div>
+            </div>
+            <span class="item-label">arrow-03: Up Arrow</span>
+        </div>
+
+        <!-- arrow-04: Down Arrow -->
+        <div class="item" id="arrow-04">
+            <div class="icon-wrapper">
+                <div class="down-arrow"></div>
+            </div>
+            <span class="item-label">arrow-04: Down Arrow</span>
+        </div>
+
+        <!-- arrow-05: Curved Arrow -->
+        <div class="item" id="arrow-05">
+            <div class="icon-wrapper">
+                <div class="curved-arrow"></div>
+            </div>
+            <span class="item-label">arrow-05: Curved Arrow</span>
+        </div>
+
+        <!-- arrow-06: Circular Arrow -->
+        <div class="item" id="arrow-06">
+            <div class="icon-wrapper">
+                <div class="circular-arrow"></div>
+            </div>
+            <span class="item-label">arrow-06: Circular Arrow</span>
+        </div>
+
+        <!-- arrow-07: Double Arrow -->
+        <div class="item" id="arrow-07">
+            <div class="icon-wrapper">
+                <div class="double-arrow"></div>
+            </div>
+            <span class="item-label">arrow-07: Double Arrow</span>
+        </div>
+
+        <!-- arrow-08: Thick Arrow -->
+        <div class="item" id="arrow-08">
+            <div class="icon-wrapper">
+                <div class="thick-arrow"></div>
+            </div>
+            <span class="item-label">arrow-08: Thick Arrow</span>
+        </div>
+
+        <!-- arrow-09: Thin Arrow -->
+        <div class="item" id="arrow-09">
+            <div class="icon-wrapper">
+                <div class="thin-arrow"></div>
+            </div>
+            <span class="item-label">arrow-09: Thin Arrow</span>
+        </div>
+
+        <!-- arrow-10: Dotted Arrow -->
+        <div class="item" id="arrow-10">
+            <div class="icon-wrapper">
+                <div class="dotted-arrow"></div>
+            </div>
+            <span class="item-label">arrow-10: Dotted Arrow</span>
+        </div>
+
+        <!-- arrow-11: Chevron -->
+        <div class="item" id="arrow-11">
+            <div class="icon-wrapper">
+                <div class="chevron"></div>
+            </div>
+            <span class="item-label">arrow-11: Chevron</span>
+        </div>
+
+        <!-- arrow-12: Hand Pointing -->
+        <div class="item" id="arrow-12">
+            <div class="icon-wrapper">
+                <div class="hand-pointing"></div>
+            </div>
+            <span class="item-label">arrow-12: Hand Pointing</span>
+        </div>
+
+        <!-- arrow-13: Finger Pointing -->
+        <div class="item" id="arrow-13">
+            <div class="icon-wrapper">
+                <div class="finger-pointing"></div>
+            </div>
+            <span class="item-label">arrow-13: Finger Pointing</span>
+        </div>
+
+        <!-- arrow-14: Compass -->
+        <div class="item" id="arrow-14">
+            <div class="icon-wrapper">
+                <div class="compass"></div>
+            </div>
+            <span class="item-label">arrow-14: Compass</span>
+        </div>
+
+        <!-- arrow-15: Direction Sign -->
+        <div class="item" id="arrow-15">
+            <div class="icon-wrapper">
+                <div class="direction-sign"></div>
+            </div>
+            <span class="item-label">arrow-15: Direction Sign</span>
+        </div>
+
+        <!-- arrow-16: Path Arrow -->
+        <div class="item" id="arrow-16">
+            <div class="icon-wrapper">
+                <div class="path-arrow"></div>
+            </div>
+            <span class="item-label">arrow-16: Path Arrow</span>
+        </div>
+
+        <!-- arrow-17: Bounce Arrow -->
+        <div class="item" id="arrow-17">
+            <div class="icon-wrapper">
+                <div class="bounce-arrow"></div>
+            </div>
+            <span class="item-label">arrow-17: Bounce Arrow</span>
+        </div>
+
+        <!-- arrow-18: Zigzag Arrow -->
+        <div class="item" id="arrow-18">
+            <div class="icon-wrapper">
+                <div class="zigzag-arrow"></div>
+            </div>
+            <span class="item-label">arrow-18: Zigzag Arrow</span>
+        </div>
+
+        <!-- arrow-19: Split Arrow -->
+        <div class="item" id="arrow-19">
+            <div class="icon-wrapper">
+                <div class="split-arrow">
+                    <div class="branch-up"></div>
+                    <div class="branch-down"></div>
+                </div>
+            </div>
+            <span class="item-label">arrow-19: Split Arrow</span>
+        </div>
+
+        <!-- arrow-20: Merge Arrow -->
+        <div class="item" id="arrow-20">
+            <div class="icon-wrapper">
+                <div class="merge-arrow">
+                    <div class="input-up"></div>
+                    <div class="input-down"></div>
+                    <div class="output"></div>
+                </div>
+            </div>
+            <span class="item-label">arrow-20: Merge Arrow</span>
+        </div>
+    </div>
+</body>
+</html>

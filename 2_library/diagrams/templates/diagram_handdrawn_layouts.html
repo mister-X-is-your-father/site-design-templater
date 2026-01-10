@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手書き風レイアウト - Hand-Drawn Diagram Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Hiragino Kaku Gothic Pro', sans-serif;
+            background: linear-gradient(135deg, #fef9e7 0%, #fdf6e3 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .diagrams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .diagram-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: rgba(210, 105, 30, 0.4);
+        }
+
+        .diagram-title {
+            font-size: 1.3em;
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 2px dashed #D2691E;
+            padding-bottom: 10px;
+        }
+
+        /* Hand-drawn SVG styling */
+        svg {
+            width: 100%;
+            height: auto;
+            min-height: 300px;
+        }
+
+        /* Wobbly line effect using stroke-dasharray */
+        .wobbly {
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .rough-rect {
+            fill: none;
+            stroke: #333;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .rough-circle {
+            fill: none;
+            stroke: #333;
+            stroke-width: 2;
+        }
+
+        .sketch-text {
+            font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+            font-size: 14px;
+            fill: #2c2c2c;
+        }
+
+        .label-text {
+            font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+            font-size: 12px;
+            fill: #666;
+            font-weight: bold;
+        }
+
+        .small-text {
+            font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+            font-size: 11px;
+            fill: #888;
+        }
+
+        /* Color palette - warm and friendly */
+        .color1 { fill: #FFB6C1; }
+        .color2 { fill: #FFD700; }
+        .color3 { fill: #90EE90; }
+        .color4 { fill: #87CEEB; }
+        .color5 { fill: #FFB347; }
+        .color6 { fill: #DDA0DD; }
+
+        .stroke1 { stroke: #FF69B4; }
+        .stroke2 { stroke: #FFD700; }
+        .stroke3 { stroke: #32CD32; }
+        .stroke4 { stroke: #4169E1; }
+        .stroke5 { stroke: #FF8C00; }
+        .stroke6 { stroke: #8B008B; }
+
+        /* Sketchy rectangle (multiple overlapping strokes) */
+        .sketch-rect {
+            fill: none;
+            stroke: #333;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Sketchy circle */
+        .sketch-circle {
+            fill: none;
+            stroke: #333;
+            stroke-width: 2.5;
+        }
+
+        /* Doodle arrows */
+        .doodle-arrow {
+            stroke: #FF6B6B;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .arrow-head {
+            fill: #FF6B6B;
+        }
+
+        /* Hover effects */
+        .diagram-card:hover .sketch-rect,
+        .diagram-card:hover .sketch-circle,
+        .diagram-card:hover .wobbly {
+            stroke-width: 3;
+            opacity: 0.9;
+        }
+
+        .diagram-card:hover .sketch-text {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .diagrams-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Description text */
+        .diagram-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Pattern fills */
+        defs pattern {
+            patternUnits: userSpaceOnUse;
+        }
+
+        .pattern-line {
+            stroke: #ddd;
+            stroke-width: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✏️ 手書き風レイアウト</h1>
+            <p>Hand-Drawn Diagram Templates - 20 Unique Sketchy Layouts</p>
+        </div>
+
+        <div class="diagrams-grid">
+            <!-- 1. Hand-drawn Comparison (A vs B) -->
+            <div class="diagram-card" id="handlayout-1">
+                <div class="diagram-title">1. A vs B 比較図</div>
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="2" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Left box A -->
+                    <rect x="20" y="40" width="150" height="200" class="color1" filter="url(#rough)" rx="8" />
+                    <path d="M 20 40 Q 25 42 30 40 T 170 40 L 170 240 Q 165 238 160 240 L 20 240 Z" class="sketch-rect" filter="url(#rough)" />
+                    <text x="97" y="70" class="sketch-text" text-anchor="middle" font-size="18" font-weight="bold">A</text>
+                    <text x="97" y="100" class="small-text" text-anchor="middle">メリット</text>
+                    <text x="97" y="120" class="small-text" text-anchor="middle">・高速</text>
+                    <text x="97" y="135" class="small-text" text-anchor="middle">・安い</text>
+                    <text x="97" y="150" class="small-text" text-anchor="middle">・簡単</text>
+                    <text x="97" y="175" class="small-text" text-anchor="middle" font-style="italic">デメリット</text>
+                    <text x="97" y="195" class="small-text" text-anchor="middle">・制限多い</text>
+
+                    <!-- Right box B -->
+                    <rect x="230" y="40" width="150" height="200" class="color4" filter="url(#rough)" rx="8" />
+                    <path d="M 230 40 Q 235 42 240 40 T 380 40 L 380 240 Q 375 238 370 240 L 230 240 Z" class="sketch-rect" filter="url(#rough)" />
+                    <text x="307" y="70" class="sketch-text" text-anchor="middle" font-size="18" font-weight="bold">B</text>
+                    <text x="307" y="100" class="small-text" text-anchor="middle">メリット</text>
+                    <text x="307" y="120" class="small-text" text-anchor="middle">・柔軟</text>
+                    <text x="307" y="135" class="small-text" text-anchor="middle">・機能豊富</text>
+                    <text x="307" y="150" class="small-text" text-anchor="middle">・高品質</text>
+                    <text x="307" y="175" class="small-text" text-anchor="middle" font-style="italic">デメリット</text>
+                    <text x="307" y="195" class="small-text" text-anchor="middle">・複雑・高い</text>
+
+                    <!-- VS -->
+                    <circle cx="200" cy="140" r="20" class="color2" filter="url(#rough)" />
+                    <path d="M 200 140 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0" class="sketch-circle" filter="url(#rough)" />
+                    <text x="200" y="145" class="sketch-text" text-anchor="middle" font-size="16" font-weight="bold">vs</text>
+                </svg>
+                <p class="diagram-description">2つの選択肢を比較するレイアウト</p>
+            </div>
+
+            <!-- 2. Sketchy 3-Step Process -->
+            <div class="diagram-card" id="handlayout-2">
+                <div class="diagram-title">2. 3ステップ プロセス</div>
+                <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough2">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="3" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Step 1 -->
+                    <rect x="20" y="100" width="100" height="100" class="color5" filter="url(#rough2)" rx="8" />
+                    <path d="M 20 100 L 120 100 L 120 200 L 20 200 Z" class="sketch-rect" filter="url(#rough2)" stroke-width="2.5" />
+                    <text x="70" y="130" class="sketch-text" text-anchor="middle" font-size="14" font-weight="bold">ステップ1</text>
+                    <text x="70" y="155" class="small-text" text-anchor="middle">準備・計画</text>
+                    <circle cx="70" cy="185" r="6" class="stroke2" />
+
+                    <!-- Arrow 1 -->
+                    <path d="M 130 150 L 160 150" class="doodle-arrow" />
+                    <polygon points="160,150 155,145 155,155" class="arrow-head" />
+
+                    <!-- Step 2 -->
+                    <rect x="170" y="100" width="100" height="100" class="color3" filter="url(#rough2)" rx="8" />
+                    <path d="M 170 100 L 270 100 L 270 200 L 170 200 Z" class="sketch-rect" filter="url(#rough2)" stroke-width="2.5" />
+                    <text x="220" y="130" class="sketch-text" text-anchor="middle" font-size="14" font-weight="bold">ステップ2</text>
+                    <text x="220" y="155" class="small-text" text-anchor="middle">実行・実装</text>
+                    <circle cx="220" cy="185" r="6" class="stroke3" />
+
+                    <!-- Arrow 2 -->
+                    <path d="M 280 150 L 310 150" class="doodle-arrow" />
+                    <polygon points="310,150 305,145 305,155" class="arrow-head" />
+
+                    <!-- Step 3 -->
+                    <rect x="320" y="100" width="60" height="100" class="color6" filter="url(#rough2)" rx="8" />
+                    <path d="M 320 100 L 380 100 L 380 200 L 320 200 Z" class="sketch-rect" filter="url(#rough2)" stroke-width="2.5" />
+                    <text x="350" y="130" class="sketch-text" text-anchor="middle" font-size="13" font-weight="bold">ステップ3</text>
+                    <text x="350" y="160" class="small-text" text-anchor="middle" font-size="10">確認</text>
+                    <circle cx="350" cy="185" r="6" class="stroke6" />
+
+                    <!-- Timeline -->
+                    <path d="M 30 70 L 370 70" class="wobbly" stroke="#999" stroke-width="2" />
+                </svg>
+                <p class="diagram-description">3段階のプロセスを表現</p>
+            </div>
+
+            <!-- 3. Doodle Pros/Cons List -->
+            <div class="diagram-card" id="handlayout-3">
+                <div class="diagram-title">3. メリット・デメリット</div>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough3">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="4" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Title -->
+                    <text x="200" y="30" class="sketch-text" text-anchor="middle" font-size="16" font-weight="bold">プロジェクト評価</text>
+
+                    <!-- Pros section -->
+                    <rect x="20" y="50" width="160" height="240" class="color3" filter="url(#rough3)" rx="8" opacity="0.3" />
+                    <path d="M 20 50 Q 25 52 30 50 T 180 50 L 180 290 Q 175 288 170 290 L 20 290 Z" class="sketch-rect" filter="url(#rough3)" stroke="#32CD32" stroke-width="2.5" />
+                    <text x="100" y="75" class="sketch-text" text-anchor="middle" font-size="14" font-weight="bold" fill="#228B22">✓ メリット</text>
+
+                    <!-- Pros items -->
+                    <circle cx="40" cy="105" r="4" fill="#32CD32" />
+                    <text x="55" y="110" class="small-text" font-size="11">簡単に始められる</text>
+
+                    <circle cx="40" cy="135" r="4" fill="#32CD32" />
+                    <text x="55" y="140" class="small-text" font-size="11">コスト削減できる</text>
+
+                    <circle cx="40" cy="165" r="4" fill="#32CD32" />
+                    <text x="55" y="170" class="small-text" font-size="11">スピードアップ</text>
+
+                    <circle cx="40" cy="195" r="4" fill="#32CD32" />
+                    <text x="55" y="200" class="small-text" font-size="11">カスタマイズ可能</text>
+
+                    <circle cx="40" cy="225" r="4" fill="#32CD32" />
+                    <text x="55" y="230" class="small-text" font-size="11">ユーザー満足度</text>
+
+                    <!-- Cons section -->
+                    <rect x="220" y="50" width="160" height="240" class="color1" filter="url(#rough3)" rx="8" opacity="0.3" />
+                    <path d="M 220 50 Q 225 52 230 50 T 380 50 L 380 290 Q 375 288 370 290 L 220 290 Z" class="sketch-rect" filter="url(#rough3)" stroke="#FF6B6B" stroke-width="2.5" />
+                    <text x="300" y="75" class="sketch-text" text-anchor="middle" font-size="14" font-weight="bold" fill="#DC143C">✗ デメリット</text>
+
+                    <!-- Cons items -->
+                    <circle cx="240" cy="105" r="4" fill="#FF6B6B" />
+                    <text x="255" y="110" class="small-text" font-size="11">品質の低下リスク</text>
+
+                    <circle cx="240" cy="135" r="4" fill="#FF6B6B" />
+                    <text x="255" y="140" class="small-text" font-size="11">保守が困難</text>
+
+                    <circle cx="240" cy="165" r="4" fill="#FF6B6B" />
+                    <text x="255" y="170" class="small-text" font-size="11">スケール困難</text>
+
+                    <circle cx="240" cy="195" r="4" fill="#FF6B6B" />
+                    <text x="255" y="200" class="small-text" font-size="11">技術負債増加</text>
+
+                    <circle cx="240" cy="225" r="4" fill="#FF6B6B" />
+                    <text x="255" y="230" class="small-text" font-size="11">長期的な課題</text>
+                </svg>
+                <p class="diagram-description">メリット・デメリットのリスト表示</p>
+            </div>
+
+            <!-- 4. Rough Timeline (3 Points) -->
+            <div class="diagram-card" id="handlayout-4">
+                <div class="diagram-title">4. 3ポイント タイムライン</div>
+                <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough4">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="5" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Timeline line -->
+                    <path d="M 50 130 Q 100 125 150 130 T 350 130" class="wobbly" stroke="#8B4513" stroke-width="3" filter="url(#rough4)" />
+
+                    <!-- Point 1 -->
+                    <circle cx="70" cy="130" r="15" class="color2" filter="url(#rough4)" />
+                    <path d="M 70 130 m -15 0 a 15 15 0 1 0 30 0 a 15 15 0 1 0 -30 0" class="sketch-circle" filter="url(#rough4)" stroke="#FFD700" />
+                    <text x="70" y="160" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">2024年</text>
+                    <text x="70" y="178" class="small-text" text-anchor="middle">スタート</text>
+                    <path d="M 70 100 L 70 75" class="wobbly" stroke="#999" stroke-width="1" stroke-dasharray="3,3" />
+
+                    <!-- Point 2 -->
+                    <circle cx="200" cy="130" r="15" class="color5" filter="url(#rough4)" />
+                    <path d="M 200 130 m -15 0 a 15 15 0 1 0 30 0 a 15 15 0 1 0 -30 0" class="sketch-circle" filter="url(#rough4)" stroke="#FF8C00" />
+                    <text x="200" y="160" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">2025年</text>
+                    <text x="200" y="178" class="small-text" text-anchor="middle">成長期</text>
+                    <path d="M 200 100 L 200 50" class="wobbly" stroke="#999" stroke-width="1" stroke-dasharray="3,3" />
+
+                    <!-- Point 3 -->
+                    <circle cx="330" cy="130" r="15" class="color3" filter="url(#rough4)" />
+                    <path d="M 330 130 m -15 0 a 15 15 0 1 0 30 0 a 15 15 0 1 0 -30 0" class="sketch-circle" filter="url(#rough4)" stroke="#32CD32" />
+                    <text x="330" y="160" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">2026年</text>
+                    <text x="330" y="178" class="small-text" text-anchor="middle">完成期</text>
+                    <path d="M 330 100 L 330 75" class="wobbly" stroke="#999" stroke-width="1" stroke-dasharray="3,3" />
+
+                    <!-- Milestones on top -->
+                    <text x="70" y="65" class="small-text" text-anchor="middle" font-size="10" font-style="italic">準備完了</text>
+                    <text x="200" y="40" class="small-text" text-anchor="middle" font-size="10" font-style="italic">ベータ版</text>
+                    <text x="330" y="65" class="small-text" text-anchor="middle" font-size="10" font-style="italic">リリース</text>
+                </svg>
+                <p class="diagram-description">3つの重要な時点を表示</p>
+            </div>
+
+            <!-- 5. Hand-drawn Mind Map -->
+            <div class="diagram-card" id="handlayout-5">
+                <div class="diagram-title">5. マインドマップ</div>
+                <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough5">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="6" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Center -->
+                    <circle cx="200" cy="170" r="40" class="color2" filter="url(#rough5)" />
+                    <path d="M 200 170 m -40 0 a 40 40 0 1 0 80 0 a 40 40 0 1 0 -80 0" class="sketch-circle" filter="url(#rough5)" stroke="#FFD700" stroke-width="2.5" />
+                    <text x="200" y="175" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">テーマ</text>
+
+                    <!-- Branch 1 (Top) -->
+                    <path d="M 200 130 Q 180 90 140 60" class="wobbly" stroke="#FF6B6B" stroke-width="2.5" filter="url(#rough5)" />
+                    <circle cx="140" cy="60" r="30" class="color1" filter="url(#rough5)" />
+                    <path d="M 140 60 m -30 0 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0" class="sketch-circle" filter="url(#rough5)" stroke="#FF6B6B" stroke-width="2" />
+                    <text x="140" y="65" class="sketch-text" text-anchor="middle" font-size="11">要素A</text>
+
+                    <!-- Branch 2 (Right) -->
+                    <path d="M 240 170 Q 300 180 320 130" class="wobbly" stroke="#32CD32" stroke-width="2.5" filter="url(#rough5)" />
+                    <circle cx="320" cy="130" r="30" class="color3" filter="url(#rough5)" />
+                    <path d="M 320 130 m -30 0 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0" class="sketch-circle" filter="url(#rough5)" stroke="#32CD32" stroke-width="2" />
+                    <text x="320" y="135" class="sketch-text" text-anchor="middle" font-size="11">要素B</text>
+
+                    <!-- Branch 3 (Bottom) -->
+                    <path d="M 200 210 Q 180 280 140 310" class="wobbly" stroke="#4169E1" stroke-width="2.5" filter="url(#rough5)" />
+                    <circle cx="140" cy="310" r="30" class="color4" filter="url(#rough5)" />
+                    <path d="M 140 310 m -30 0 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0" class="sketch-circle" filter="url(#rough5)" stroke="#4169E1" stroke-width="2" />
+                    <text x="140" y="315" class="sketch-text" text-anchor="middle" font-size="11">要素C</text>
+
+                    <!-- Branch 4 (Left) -->
+                    <path d="M 160 170 Q 100 150 80 110" class="wobbly" stroke="#FF8C00" stroke-width="2.5" filter="url(#rough5)" />
+                    <circle cx="80" cy="110" r="30" class="color5" filter="url(#rough5)" />
+                    <path d="M 80 110 m -30 0 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0" class="sketch-circle" filter="url(#rough5)" stroke="#FF8C00" stroke-width="2" />
+                    <text x="80" y="115" class="sketch-text" text-anchor="middle" font-size="11">要素D</text>
+                </svg>
+                <p class="diagram-description">中央のテーマから4つの要素へ</p>
+            </div>
+
+            <!-- 6. Sketchy Pyramid (3 Tiers) -->
+            <div class="diagram-card" id="handlayout-6">
+                <div class="diagram-title">6. ピラミッド 3層</div>
+                <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough6">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="7" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Top tier (1) -->
+                    <polygon points="200,40 240,110 160,110" class="color2" filter="url(#rough6)" />
+                    <path d="M 200 40 L 240 110 L 160 110 Z" class="sketch-rect" filter="url(#rough6)" stroke="#FFD700" stroke-width="2.5" fill="none" />
+                    <text x="200" y="90" class="sketch-text" text-anchor="middle" font-size="13" font-weight="bold">Tier 1</text>
+                    <text x="200" y="105" class="small-text" text-anchor="middle" font-size="10">最重要</text>
+
+                    <!-- Middle tier (2) -->
+                    <polygon points="200,110 280,200 120,200" class="color4" filter="url(#rough6)" />
+                    <path d="M 200 110 L 280 200 L 120 200 Z" class="sketch-rect" filter="url(#rough6)" stroke="#4169E1" stroke-width="2.5" fill="none" />
+                    <text x="200" y="160" class="sketch-text" text-anchor="middle" font-size="13" font-weight="bold">Tier 2</text>
+                    <text x="200" y="175" class="small-text" text-anchor="middle" font-size="10">中程度</text>
+
+                    <!-- Bottom tier (3) -->
+                    <polygon points="200,200 360,290 40,290" class="color3" filter="url(#rough6)" />
+                    <path d="M 200 200 L 360 290 L 40 290 Z" class="sketch-rect" filter="url(#rough6)" stroke="#32CD32" stroke-width="2.5" fill="none" />
+                    <text x="200" y="250" class="sketch-text" text-anchor="middle" font-size="13" font-weight="bold">Tier 3</text>
+                    <text x="200" y="265" class="small-text" text-anchor="middle" font-size="10">基盤・サポート</text>
+                </svg>
+                <p class="diagram-description">3層構造のピラミッド</p>
+            </div>
+
+            <!-- 7. Doodle Cycle Diagram -->
+            <div class="diagram-card" id="handlayout-7">
+                <div class="diagram-title">7. サイクル図</div>
+                <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough7">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="8" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#FF6B6B" />
+                        </marker>
+                    </defs>
+                    <!-- Center circle -->
+                    <circle cx="200" cy="170" r="50" class="color2" filter="url(#rough7)" opacity="0.2" />
+
+                    <!-- Top -->
+                    <circle cx="200" cy="60" r="35" class="color1" filter="url(#rough7)" />
+                    <path d="M 200 60 m -35 0 a 35 35 0 1 0 70 0 a 35 35 0 1 0 -70 0" class="sketch-circle" filter="url(#rough7)" stroke="#FF6B6B" />
+                    <text x="200" y="65" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">計画</text>
+
+                    <!-- Right -->
+                    <circle cx="310" cy="170" r="35" class="color3" filter="url(#rough7)" />
+                    <path d="M 310 170 m -35 0 a 35 35 0 1 0 70 0 a 35 35 0 1 0 -70 0" class="sketch-circle" filter="url(#rough7)" stroke="#32CD32" />
+                    <text x="310" y="175" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">実行</text>
+
+                    <!-- Bottom -->
+                    <circle cx="200" cy="280" r="35" class="color4" filter="url(#rough7)" />
+                    <path d="M 200 280 m -35 0 a 35 35 0 1 0 70 0 a 35 35 0 1 0 -70 0" class="sketch-circle" filter="url(#rough7)" stroke="#4169E1" />
+                    <text x="200" y="285" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">評価</text>
+
+                    <!-- Left -->
+                    <circle cx="90" cy="170" r="35" class="color5" filter="url(#rough7)" />
+                    <path d="M 90 170 m -35 0 a 35 35 0 1 0 70 0 a 35 35 0 1 0 -70 0" class="sketch-circle" filter="url(#rough7)" stroke="#FF8C00" />
+                    <text x="90" y="175" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">改善</text>
+
+                    <!-- Arrows -->
+                    <path d="M 200 95 Q 240 120 280 150" class="wobbly" stroke="#FF6B6B" stroke-width="2.5" fill="none" filter="url(#rough7)" marker-end="url(#arrowhead)" />
+                    <path d="M 305 205 Q 280 240 220 265" class="wobbly" stroke="#32CD32" stroke-width="2.5" fill="none" filter="url(#rough7)" marker-end="url(#arrowhead)" />
+                    <path d="M 155 280 Q 120 240 100 205" class="wobbly" stroke="#4169E1" stroke-width="2.5" fill="none" filter="url(#rough7)" marker-end="url(#arrowhead)" />
+                    <path d="M 95 135 Q 130 100 170 85" class="wobbly" stroke="#FF8C00" stroke-width="2.5" fill="none" filter="url(#rough7)" marker-end="url(#arrowhead)" />
+                </svg>
+                <p class="diagram-description">4段階のサイクル</p>
+            </div>
+
+            <!-- 8. Rough Flowchart (Simple) -->
+            <div class="diagram-card" id="handlayout-8">
+                <div class="diagram-title">8. シンプル フローチャート</div>
+                <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough8">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="9" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Start -->
+                    <ellipse cx="200" cy="40" rx="35" ry="25" class="color2" filter="url(#rough8)" />
+                    <path d="M 200 40 m -35 0 a 35 25 0 1 0 70 0 a 35 25 0 1 0 -70 0" class="sketch-circle" filter="url(#rough8)" stroke="#FFD700" stroke-width="2" />
+                    <text x="200" y="45" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">開始</text>
+
+                    <!-- Arrow -->
+                    <path d="M 200 65 L 200 95" class="wobbly" stroke="#333" stroke-width="2.5" filter="url(#rough8)" />
+
+                    <!-- Process 1 -->
+                    <rect x="130" y="95" width="140" height="60" class="color3" filter="url(#rough8)" rx="4" />
+                    <path d="M 130 95 L 270 95 L 270 155 L 130 155 Z" class="sketch-rect" filter="url(#rough8)" stroke="#32CD32" stroke-width="2" />
+                    <text x="200" y="125" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">データ入力</text>
+
+                    <!-- Arrow -->
+                    <path d="M 200 155 L 200 185" class="wobbly" stroke="#333" stroke-width="2.5" filter="url(#rough8)" />
+
+                    <!-- Decision Diamond -->
+                    <polygon points="200,185 260,225 200,265 140,225" class="color4" filter="url(#rough8)" />
+                    <path d="M 200 185 L 260 225 L 200 265 L 140 225 Z" class="sketch-rect" filter="url(#rough8)" stroke="#4169E1" stroke-width="2" fill="none" />
+                    <text x="200" y="230" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">OK?</text>
+
+                    <!-- Yes Arrow -->
+                    <path d="M 260 225 L 310 225" class="wobbly" stroke="#32CD32" stroke-width="2.5" filter="url(#rough8)" />
+                    <text x="290" y="220" class="small-text" font-size="9" fill="#32CD32">YES</text>
+
+                    <!-- No Arrow -->
+                    <path d="M 200 265 L 200 300" class="wobbly" stroke="#FF6B6B" stroke-width="2.5" filter="url(#rough8)" />
+                    <text x="185" y="290" class="small-text" font-size="9" fill="#FF6B6B">NO</text>
+
+                    <!-- Process 2 (Yes) -->
+                    <rect x="310" y="195" width="80" height="60" class="color1" filter="url(#rough8)" rx="4" />
+                    <path d="M 310 195 L 390 195 L 390 255 L 310 255 Z" class="sketch-rect" filter="url(#rough8)" stroke="#FF6B6B" stroke-width="2" />
+                    <text x="350" y="225" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">完成</text>
+
+                    <!-- Process 3 (No) -->
+                    <rect x="130" y="300" width="140" height="60" class="color5" filter="url(#rough8)" rx="4" />
+                    <path d="M 130 300 L 270 300 L 270 360 L 130 360 Z" class="sketch-rect" filter="url(#rough8)" stroke="#FF8C00" stroke-width="2" />
+                    <text x="200" y="330" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">修正</text>
+                </svg>
+                <p class="diagram-description">意思決定を含むシンプルなフロー</p>
+            </div>
+
+            <!-- 9. Hand-drawn Hierarchy (2 Levels) -->
+            <div class="diagram-card" id="handlayout-9">
+                <div class="diagram-title">9. 階層図 2段階</div>
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough9">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="10" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Top level -->
+                    <rect x="130" y="20" width="140" height="60" class="color2" filter="url(#rough9)" rx="4" />
+                    <path d="M 130 20 L 270 20 L 270 80 L 130 80 Z" class="sketch-rect" filter="url(#rough9)" stroke="#FFD700" stroke-width="2.5" />
+                    <text x="200" y="55" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">責任者</text>
+
+                    <!-- Vertical connectors -->
+                    <path d="M 200 80 L 200 110" class="wobbly" stroke="#999" stroke-width="2" filter="url(#rough9)" />
+                    <path d="M 100 110 L 300 110" class="wobbly" stroke="#999" stroke-width="2" filter="url(#rough9)" />
+
+                    <!-- Connectors to children -->
+                    <path d="M 100 110 L 100 130" class="wobbly" stroke="#999" stroke-width="2" filter="url(#rough9)" />
+                    <path d="M 200 110 L 200 130" class="wobbly" stroke="#999" stroke-width="2" filter="url(#rough9)" />
+                    <path d="M 300 110 L 300 130" class="wobbly" stroke="#999" stroke-width="2" filter="url(#rough9)" />
+
+                    <!-- Second level - Left -->
+                    <rect x="40" y="130" width="120" height="60" class="color1" filter="url(#rough9)" rx="4" />
+                    <path d="M 40 130 L 160 130 L 160 190 L 40 190 Z" class="sketch-rect" filter="url(#rough9)" stroke="#FF6B6B" stroke-width="2" />
+                    <text x="100" y="155" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">チームA</text>
+                    <text x="100" y="175" class="small-text" text-anchor="middle" font-size="9">企画・設計</text>
+
+                    <!-- Second level - Middle -->
+                    <rect x="160" y="130" width="80" height="60" class="color3" filter="url(#rough9)" rx="4" />
+                    <path d="M 160 130 L 240 130 L 240 190 L 160 190 Z" class="sketch-rect" filter="url(#rough9)" stroke="#32CD32" stroke-width="2" />
+                    <text x="200" y="155" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">チームB</text>
+                    <text x="200" y="175" class="small-text" text-anchor="middle" font-size="9">開発</text>
+
+                    <!-- Second level - Right -->
+                    <rect x="240" y="130" width="120" height="60" class="color4" filter="url(#rough9)" rx="4" />
+                    <path d="M 240 130 L 360 130 L 360 190 L 240 190 Z" class="sketch-rect" filter="url(#rough9)" stroke="#4169E1" stroke-width="2" />
+                    <text x="300" y="155" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">チームC</text>
+                    <text x="300" y="175" class="small-text" text-anchor="middle" font-size="9">テスト・QA</text>
+                </svg>
+                <p class="diagram-description">1つのトップから3つのグループへの階層</p>
+            </div>
+
+            <!-- 10. Sketchy Before/After -->
+            <div class="diagram-card" id="handlayout-10">
+                <div class="diagram-title">10. ビフォー・アフター</div>
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough10">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="11" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Before section -->
+                    <rect x="20" y="50" width="150" height="180" class="color1" filter="url(#rough10)" rx="8" opacity="0.3" />
+                    <path d="M 20 50 L 170 50 L 170 230 L 20 230 Z" class="sketch-rect" filter="url(#rough10)" stroke="#FF6B6B" stroke-width="2.5" />
+                    <text x="95" y="75" class="sketch-text" text-anchor="middle" font-size="14" font-weight="bold" fill="#CC0000">BEFORE</text>
+
+                    <!-- Before items -->
+                    <text x="35" y="110" class="small-text" font-size="10">✗ 遅い</text>
+                    <text x="35" y="130" class="small-text" font-size="10">✗ 複雑</text>
+                    <text x="35" y="150" class="small-text" font-size="10">✗ エラー多い</text>
+                    <text x="35" y="170" class="small-text" font-size="10">✗ 保守困難</text>
+                    <text x="35" y="190" class="small-text" font-size="10">✗ ユーザー不満</text>
+                    <text x="35" y="210" class="small-text" font-size="10">✗ スケール不可</text>
+
+                    <!-- Arrow -->
+                    <path d="M 180 150 L 220 150" class="wobbly" stroke="#FFD700" stroke-width="3" filter="url(#rough10)" />
+                    <polygon points="220,150 215,145 215,155" fill="#FFD700" />
+                    <text x="200" y="140" class="small-text" text-anchor="middle" font-size="10" fill="#FFD700" font-weight="bold">改革!</text>
+
+                    <!-- After section -->
+                    <rect x="230" y="50" width="150" height="180" class="color3" filter="url(#rough10)" rx="8" opacity="0.3" />
+                    <path d="M 230 50 L 380 50 L 380 230 L 230 230 Z" class="sketch-rect" filter="url(#rough10)" stroke="#32CD32" stroke-width="2.5" />
+                    <text x="305" y="75" class="sketch-text" text-anchor="middle" font-size="14" font-weight="bold" fill="#008000">AFTER</text>
+
+                    <!-- After items -->
+                    <text x="245" y="110" class="small-text" font-size="10">✓ 高速</text>
+                    <text x="245" y="130" class="small-text" font-size="10">✓ シンプル</text>
+                    <text x="245" y="150" class="small-text" font-size="10">✓ 信頼性向上</text>
+                    <text x="245" y="170" class="small-text" font-size="10">✓ 簡単保守</text>
+                    <text x="245" y="190" class="small-text" font-size="10">✓ 満足度UP</text>
+                    <text x="245" y="210" class="small-text" font-size="10">✓ スケーラブル</text>
+                </svg>
+                <p class="diagram-description">変革前後の対比表示</p>
+            </div>
+
+            <!-- 11. Doodle Checklist -->
+            <div class="diagram-card" id="handlayout-11">
+                <div class="diagram-title">11. チェックリスト</div>
+                <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough11">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="12" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Title -->
+                    <text x="200" y="30" class="sketch-text" text-anchor="middle" font-size="15" font-weight="bold">実装チェック</text>
+
+                    <!-- Item 1 -->
+                    <rect x="30" y="50" width="340" height="40" class="color3" filter="url(#rough11)" rx="4" opacity="0.5" />
+                    <path d="M 30 50 L 370 50 L 370 90 L 30 90 Z" class="sketch-rect" filter="url(#rough11)" stroke="#32CD32" stroke-width="2" />
+                    <circle cx="50" cy="70" r="8" fill="none" stroke="#32CD32" stroke-width="2" />
+                    <path d="M 45 70 L 52 77 L 60 60" fill="none" stroke="#32CD32" stroke-width="2.5" stroke-linecap="round" />
+                    <text x="80" y="75" class="sketch-text" font-size="12">要件定義書の完成</text>
+
+                    <!-- Item 2 -->
+                    <rect x="30" y="105" width="340" height="40" class="color3" filter="url(#rough11)" rx="4" opacity="0.5" />
+                    <path d="M 30 105 L 370 105 L 370 145 L 30 145 Z" class="sketch-rect" filter="url(#rough11)" stroke="#32CD32" stroke-width="2" />
+                    <circle cx="50" cy="125" r="8" fill="none" stroke="#32CD32" stroke-width="2" />
+                    <path d="M 45 125 L 52 132 L 60 115" fill="none" stroke="#32CD32" stroke-width="2.5" stroke-linecap="round" />
+                    <text x="80" y="130" class="sketch-text" font-size="12">詳細設計の承認</text>
+
+                    <!-- Item 3 -->
+                    <rect x="30" y="160" width="340" height="40" class="color1" filter="url(#rough11)" rx="4" opacity="0.3" />
+                    <path d="M 30 160 L 370 160 L 370 200 L 30 200 Z" class="sketch-rect" filter="url(#rough11)" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5" />
+                    <circle cx="50" cy="180" r="8" fill="none" stroke="#FF6B6B" stroke-width="2" />
+                    <text x="80" y="185" class="sketch-text" font-size="12" fill="#FF6B6B">コード実装（進行中）</text>
+
+                    <!-- Item 4 -->
+                    <rect x="30" y="215" width="340" height="40" class="color4" filter="url(#rough11)" rx="4" opacity="0.2" />
+                    <path d="M 30 215 L 370 215 L 370 255 L 30 255 Z" class="sketch-rect" filter="url(#rough11)" stroke="#4169E1" stroke-width="2" stroke-dasharray="5,5" />
+                    <circle cx="50" cy="235" r="8" fill="none" stroke="#4169E1" stroke-width="2" />
+                    <text x="80" y="240" class="sketch-text" font-size="12" fill="#4169E1">テストの実施</text>
+
+                    <!-- Item 5 -->
+                    <rect x="30" y="270" width="340" height="40" class="color5" filter="url(#rough11)" rx="4" opacity="0.2" />
+                    <path d="M 30 270 L 370 270 L 370 310 L 30 310 Z" class="sketch-rect" filter="url(#rough11)" stroke="#FF8C00" stroke-width="2" stroke-dasharray="5,5" />
+                    <circle cx="50" cy="290" r="8" fill="none" stroke="#FF8C00" stroke-width="2" />
+                    <text x="80" y="295" class="sketch-text" font-size="12" fill="#FF8C00">デプロイ・リリース</text>
+
+                    <!-- Progress bar -->
+                    <rect x="30" y="330" width="340" height="10" fill="none" stroke="#999" stroke-width="1" rx="5" />
+                    <rect x="30" y="330" width="136" height="10" class="color3" rx="5" opacity="0.7" />
+                    <text x="200" y="345" class="small-text" text-anchor="middle" font-size="10">40% Complete</text>
+                </svg>
+                <p class="diagram-description">進捗状況付きチェックリスト</p>
+            </div>
+
+            <!-- 12. Rough Ranking (1-2-3) -->
+            <div class="diagram-card" id="handlayout-12">
+                <div class="diagram-title">12. ランキング TOP 3</div>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough12">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="13" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- 1st Place (tallest) -->
+                    <rect x="130" y="120" width="100" height="140" class="color2" filter="url(#rough12)" rx="8" />
+                    <path d="M 130 120 L 230 120 L 230 260 L 130 260 Z" class="sketch-rect" filter="url(#rough12)" stroke="#FFD700" stroke-width="2.5" />
+                    <text x="180" y="180" class="sketch-text" text-anchor="middle" font-size="24" font-weight="bold">🥇</text>
+                    <text x="180" y="210" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">1位</text>
+                    <text x="180" y="235" class="small-text" text-anchor="middle" font-size="10">最優秀</text>
+
+                    <!-- 2nd Place (medium) -->
+                    <rect x="240" y="160" width="100" height="100" class="color4" filter="url(#rough12)" rx="8" />
+                    <path d="M 240 160 L 340 160 L 340 260 L 240 260 Z" class="sketch-rect" filter="url(#rough12)" stroke="#4169E1" stroke-width="2.5" />
+                    <text x="290" y="200" class="sketch-text" text-anchor="middle" font-size="20" font-weight="bold">🥈</text>
+                    <text x="290" y="225" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">2位</text>
+
+                    <!-- 3rd Place (shortest) -->
+                    <rect x="20" y="200" width="100" height="60" class="color1" filter="url(#rough12)" rx="8" />
+                    <path d="M 20 200 L 120 200 L 120 260 L 20 260 Z" class="sketch-rect" filter="url(#rough12)" stroke="#FF6B6B" stroke-width="2.5" />
+                    <text x="70" y="225" class="sketch-text" text-anchor="middle" font-size="18" font-weight="bold">🥉</text>
+                    <text x="70" y="250" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">3位</text>
+
+                    <!-- Base line -->
+                    <path d="M 10 265 L 360 265" class="wobbly" stroke="#999" stroke-width="3" filter="url(#rough12)" />
+                    <path d="M 10 268 L 360 268" class="wobbly" stroke="#999" stroke-width="2" filter="url(#rough12)" />
+                </svg>
+                <p class="diagram-description">上位3つの結果を表示</p>
+            </div>
+
+            <!-- 13. Hand-drawn Pie Chart -->
+            <div class="diagram-card" id="handlayout-13">
+                <div class="diagram-title">13. パイチャート</div>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough13">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="14" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Pie -->
+                    <circle cx="140" cy="140" r="110" class="color2" filter="url(#rough13)" />
+
+                    <!-- Segment 1 (40%) -->
+                    <path d="M 140 140 L 140 30 A 110 110 0 0 1 236 71 Z" class="color1" filter="url(#rough13)" />
+                    <path d="M 140 140 L 140 30 A 110 110 0 0 1 236 71 Z" class="sketch-rect" filter="url(#rough13)" stroke="#FF6B6B" stroke-width="2" fill="none" />
+
+                    <!-- Segment 2 (35%) -->
+                    <path d="M 140 140 L 236 71 A 110 110 0 0 1 215 240 Z" class="color4" filter="url(#rough13)" />
+                    <path d="M 140 140 L 236 71 A 110 110 0 0 1 215 240 Z" class="sketch-rect" filter="url(#rough13)" stroke="#4169E1" stroke-width="2" fill="none" />
+
+                    <!-- Segment 3 (25%) -->
+                    <path d="M 140 140 L 215 240 A 110 110 0 0 1 140 250 Z" class="color3" filter="url(#rough13)" />
+                    <path d="M 140 140 L 215 240 A 110 110 0 0 1 140 250 Z" class="sketch-rect" filter="url(#rough13)" stroke="#32CD32" stroke-width="2" fill="none" />
+
+                    <!-- Legend -->
+                    <rect x="270" y="50" width="15" height="15" class="color1" filter="url(#rough13)" />
+                    <text x="295" y="62" class="sketch-text" font-size="11">カテゴリA (40%)</text>
+
+                    <rect x="270" y="80" width="15" height="15" class="color4" filter="url(#rough13)" />
+                    <text x="295" y="92" class="sketch-text" font-size="11">カテゴリB (35%)</text>
+
+                    <rect x="270" y="110" width="15" height="15" class="color3" filter="url(#rough13)" />
+                    <text x="295" y="122" class="sketch-text" font-size="11">カテゴリC (25%)</text>
+                </svg>
+                <p class="diagram-description">割合を示すパイチャート</p>
+            </div>
+
+            <!-- 14. Sketchy Bar Graph -->
+            <div class="diagram-card" id="handlayout-14">
+                <div class="diagram-title">14. 棒グラフ</div>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough14">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="15" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Axes -->
+                    <path d="M 50 250 L 50 40" class="wobbly" stroke="#333" stroke-width="2.5" filter="url(#rough14)" />
+                    <path d="M 50 250 L 380 250" class="wobbly" stroke="#333" stroke-width="2.5" filter="url(#rough14)" />
+
+                    <!-- Y-axis labels -->
+                    <text x="35" y="260" class="small-text" text-anchor="end" font-size="10">0</text>
+                    <text x="35" y="205" class="small-text" text-anchor="end" font-size="10">50</text>
+                    <text x="35" y="150" class="small-text" text-anchor="end" font-size="10">100</text>
+
+                    <!-- Bar 1 -->
+                    <rect x="70" y="150" width="50" height="100" class="color1" filter="url(#rough14)" />
+                    <path d="M 70 150 L 120 150 L 120 250 L 70 250 Z" class="sketch-rect" filter="url(#rough14)" stroke="#FF6B6B" stroke-width="2" />
+                    <text x="95" y="275" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">Q1</text>
+
+                    <!-- Bar 2 -->
+                    <rect x="135" y="110" width="50" height="140" class="color3" filter="url(#rough14)" />
+                    <path d="M 135 110 L 185 110 L 185 250 L 135 250 Z" class="sketch-rect" filter="url(#rough14)" stroke="#32CD32" stroke-width="2" />
+                    <text x="160" y="275" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">Q2</text>
+
+                    <!-- Bar 3 -->
+                    <rect x="200" y="80" width="50" height="170" class="color4" filter="url(#rough14)" />
+                    <path d="M 200 80 L 250 80 L 250 250 L 200 250 Z" class="sketch-rect" filter="url(#rough14)" stroke="#4169E1" stroke-width="2" />
+                    <text x="225" y="275" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">Q3</text>
+
+                    <!-- Bar 4 -->
+                    <rect x="265" y="120" width="50" height="130" class="color5" filter="url(#rough14)" />
+                    <path d="M 265 120 L 315 120 L 315 250 L 265 250 Z" class="sketch-rect" filter="url(#rough14)" stroke="#FF8C00" stroke-width="2" />
+                    <text x="290" y="275" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">Q4</text>
+
+                    <!-- Title -->
+                    <text x="200" y="25" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">四半期別売上</text>
+                </svg>
+                <p class="diagram-description">4つのカテゴリの値を比較</p>
+            </div>
+
+            <!-- 15. Doodle Venn Diagram (2 Circles) -->
+            <div class="diagram-card" id="handlayout-15">
+                <div class="diagram-title">15. ベン図 2つの円</div>
+                <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough15">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="16" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Left circle -->
+                    <circle cx="120" cy="140" r="80" class="color1" filter="url(#rough15)" opacity="0.4" />
+                    <path d="M 120 140 m -80 0 a 80 80 0 1 0 160 0 a 80 80 0 1 0 -160 0" class="sketch-circle" filter="url(#rough15)" stroke="#FF6B6B" stroke-width="2.5" />
+                    <text x="90" y="120" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">グループA</text>
+                    <text x="90" y="140" class="small-text" text-anchor="middle" font-size="10">特有特性</text>
+
+                    <!-- Right circle -->
+                    <circle cx="280" cy="140" r="80" class="color3" filter="url(#rough15)" opacity="0.4" />
+                    <path d="M 280 140 m -80 0 a 80 80 0 1 0 160 0 a 80 80 0 1 0 -160 0" class="sketch-circle" filter="url(#rough15)" stroke="#32CD32" stroke-width="2.5" />
+                    <text x="310" y="120" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">グループB</text>
+                    <text x="310" y="140" class="small-text" text-anchor="middle" font-size="10">特有特性</text>
+
+                    <!-- Intersection -->
+                    <text x="200" y="145" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">共通</text>
+                    <text x="200" y="160" class="small-text" text-anchor="middle" font-size="9">要素</text>
+
+                    <!-- Bottom text -->
+                    <text x="200" y="240" class="small-text" text-anchor="middle" font-size="10" font-style="italic">2つのグループの関係性を表示</text>
+                </svg>
+                <p class="diagram-description">2つの集合の共通部分と差</p>
+            </div>
+
+            <!-- 16. Rough Cause-Effect -->
+            <div class="diagram-card" id="handlayout-16">
+                <div class="diagram-title">16. 原因と結果</div>
+                <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough16">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="17" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Cause 1 -->
+                    <rect x="20" y="30" width="110" height="60" class="color1" filter="url(#rough16)" rx="4" />
+                    <path d="M 20 30 L 130 30 L 130 90 L 20 90 Z" class="sketch-rect" filter="url(#rough16)" stroke="#FF6B6B" stroke-width="2" />
+                    <text x="75" y="65" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">原因1</text>
+
+                    <!-- Cause 2 -->
+                    <rect x="20" y="120" width="110" height="60" class="color4" filter="url(#rough16)" rx="4" />
+                    <path d="M 20 120 L 130 120 L 130 180 L 20 180 Z" class="sketch-rect" filter="url(#rough16)" stroke="#4169E1" stroke-width="2" />
+                    <text x="75" y="155" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">原因2</text>
+
+                    <!-- Cause 3 -->
+                    <rect x="20" y="210" width="110" height="30" class="color5" filter="url(#rough16)" rx="4" />
+                    <path d="M 20 210 L 130 210 L 130 240 L 20 240 Z" class="sketch-rect" filter="url(#rough16)" stroke="#FF8C00" stroke-width="2" />
+                    <text x="75" y="230" class="sketch-text" text-anchor="middle" font-size="10" font-weight="bold">原因3</text>
+
+                    <!-- Arrows -->
+                    <path d="M 140 60 L 190 120" class="wobbly" stroke="#FF6B6B" stroke-width="2.5" filter="url(#rough16)" />
+                    <path d="M 140 150 L 190 150" class="wobbly" stroke="#4169E1" stroke-width="2.5" filter="url(#rough16)" />
+                    <path d="M 140 225 L 190 170" class="wobbly" stroke="#FF8C00" stroke-width="2.5" filter="url(#rough16)" />
+
+                    <!-- Result -->
+                    <circle cx="320" cy="145" r="60" class="color2" filter="url(#rough16)" />
+                    <path d="M 320 145 m -60 0 a 60 60 0 1 0 120 0 a 60 60 0 1 0 -120 0" class="sketch-circle" filter="url(#rough16)" stroke="#FFD700" stroke-width="2.5" />
+                    <text x="320" y="140" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">結果</text>
+                    <text x="320" y="160" class="small-text" text-anchor="middle" font-size="9">効果</text>
+                </svg>
+                <p class="diagram-description">複数の原因から1つの結果へ</p>
+            </div>
+
+            <!-- 17. Hand-drawn Recipe Steps -->
+            <div class="diagram-card" id="handlayout-17">
+                <div class="diagram-title">17. レシピステップス</div>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough17">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="18" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Ingredients box -->
+                    <rect x="20" y="20" width="160" height="140" class="color3" filter="url(#rough17)" rx="4" opacity="0.3" />
+                    <path d="M 20 20 L 180 20 L 180 160 L 20 160 Z" class="sketch-rect" filter="url(#rough17)" stroke="#32CD32" stroke-width="2" />
+                    <text x="100" y="40" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">材料</text>
+                    <text x="30" y="65" class="small-text" font-size="10">• 材料A</text>
+                    <text x="30" y="85" class="small-text" font-size="10">• 材料B</text>
+                    <text x="30" y="105" class="small-text" font-size="10">• 材料C</text>
+                    <text x="30" y="125" class="small-text" font-size="10">• 材料D</text>
+                    <text x="30" y="145" class="small-text" font-size="10">• 調味料</text>
+
+                    <!-- Arrow -->
+                    <path d="M 190 90 L 220 90" class="wobbly" stroke="#FF6B6B" stroke-width="2.5" filter="url(#rough17)" />
+
+                    <!-- Steps -->
+                    <!-- Step 1 -->
+                    <rect x="230" y="20" width="150" height="50" class="color1" filter="url(#rough17)" rx="4" />
+                    <path d="M 230 20 L 380 20 L 380 70 L 230 70 Z" class="sketch-rect" filter="url(#rough17)" stroke="#FF6B6B" stroke-width="2" />
+                    <circle cx="245" cy="45" r="10" class="color2" filter="url(#rough17)" />
+                    <text x="245" y="50" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">1</text>
+                    <text x="310" y="50" class="sketch-text" text-anchor="middle" font-size="10">準備</text>
+
+                    <!-- Step 2 -->
+                    <rect x="230" y="85" width="150" height="50" class="color4" filter="url(#rough17)" rx="4" />
+                    <path d="M 230 85 L 380 85 L 380 135 L 230 135 Z" class="sketch-rect" filter="url(#rough17)" stroke="#4169E1" stroke-width="2" />
+                    <circle cx="245" cy="110" r="10" class="color2" filter="url(#rough17)" />
+                    <text x="245" y="115" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">2</text>
+                    <text x="310" y="115" class="sketch-text" text-anchor="middle" font-size="10">混ぜる</text>
+
+                    <!-- Step 3 -->
+                    <rect x="230" y="150" width="150" height="50" class="color5" filter="url(#rough17)" rx="4" />
+                    <path d="M 230 150 L 380 150 L 380 200 L 230 200 Z" class="sketch-rect" filter="url(#rough17)" stroke="#FF8C00" stroke-width="2" />
+                    <circle cx="245" cy="175" r="10" class="color2" filter="url(#rough17)" />
+                    <text x="245" y="180" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">3</text>
+                    <text x="310" y="180" class="sketch-text" text-anchor="middle" font-size="10">加熱</text>
+
+                    <!-- Step 4 -->
+                    <rect x="230" y="215" width="150" height="50" class="color6" filter="url(#rough17)" rx="4" />
+                    <path d="M 230 215 L 380 215 L 380 265 L 230 265 Z" class="sketch-rect" filter="url(#rough17)" stroke="#DDA0DD" stroke-width="2" />
+                    <circle cx="245" cy="240" r="10" class="color2" filter="url(#rough17)" />
+                    <text x="245" y="245" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">4</text>
+                    <text x="310" y="245" class="sketch-text" text-anchor="middle" font-size="10">完成</text>
+                </svg>
+                <p class="diagram-description">材料から完成までの工程</p>
+            </div>
+
+            <!-- 18. Sketchy Schedule/Timetable -->
+            <div class="diagram-card" id="handlayout-18">
+                <div class="diagram-title">18. スケジュール表</div>
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough18">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="19" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Header -->
+                    <text x="50" y="25" class="sketch-text" font-size="11" font-weight="bold">時間</text>
+                    <text x="130" y="25" class="sketch-text" font-size="11" font-weight="bold">業務</text>
+                    <text x="320" y="25" class="sketch-text" font-size="11" font-weight="bold">場所</text>
+
+                    <!-- 9:00-10:30 -->
+                    <rect x="20" y="35" width="360" height="35" class="color1" filter="url(#rough18)" rx="3" opacity="0.4" />
+                    <path d="M 20 35 L 380 35 L 380 70 L 20 70 Z" class="sketch-rect" filter="url(#rough18)" stroke="#FF6B6B" stroke-width="1.5" />
+                    <text x="50" y="56" class="sketch-text" font-size="10">09:00-10:30</text>
+                    <text x="130" y="56" class="sketch-text" font-size="10">朝礼・定例会議</text>
+                    <text x="320" y="56" class="sketch-text" font-size="9">会議室A</text>
+
+                    <!-- 10:30-12:00 -->
+                    <rect x="20" y="75" width="360" height="35" class="color3" filter="url(#rough18)" rx="3" opacity="0.4" />
+                    <path d="M 20 75 L 380 75 L 380 110 L 20 110 Z" class="sketch-rect" filter="url(#rough18)" stroke="#32CD32" stroke-width="1.5" />
+                    <text x="50" y="96" class="sketch-text" font-size="10">10:30-12:00</text>
+                    <text x="130" y="96" class="sketch-text" font-size="10">開発タイム</text>
+                    <text x="320" y="96" class="sketch-text" font-size="9">デスク</text>
+
+                    <!-- 12:00-13:00 -->
+                    <rect x="20" y="115" width="360" height="35" class="color4" filter="url(#rough18)" rx="3" opacity="0.4" />
+                    <path d="M 20 115 L 380 115 L 380 150 L 20 150 Z" class="sketch-rect" filter="url(#rough18)" stroke="#4169E1" stroke-width="1.5" />
+                    <text x="50" y="136" class="sketch-text" font-size="10">12:00-13:00</text>
+                    <text x="130" y="136" class="sketch-text" font-size="10">昼食休憩</text>
+                    <text x="320" y="136" class="sketch-text" font-size="9">カフェ</text>
+
+                    <!-- 13:00-15:00 -->
+                    <rect x="20" y="155" width="360" height="35" class="color5" filter="url(#rough18)" rx="3" opacity="0.4" />
+                    <path d="M 20 155 L 380 155 L 380 190 L 20 190 Z" class="sketch-rect" filter="url(#rough18)" stroke="#FF8C00" stroke-width="1.5" />
+                    <text x="50" y="176" class="sketch-text" font-size="10">13:00-15:00</text>
+                    <text x="130" y="176" class="sketch-text" font-size="10">テスト・レビュー</text>
+                    <text x="320" y="176" class="sketch-text" font-size="9">会議室B</text>
+
+                    <!-- 15:00-17:00 -->
+                    <rect x="20" y="195" width="360" height="35" class="color6" filter="url(#rough18)" rx="3" opacity="0.4" />
+                    <path d="M 20 195 L 380 195 L 380 230 L 20 230 Z" class="sketch-rect" filter="url(#rough18)" stroke="#DDA0DD" stroke-width="1.5" />
+                    <text x="50" y="216" class="sketch-text" font-size="10">15:00-17:00</text>
+                    <text x="130" y="216" class="sketch-text" font-size="10">ドキュメント作成</text>
+                    <text x="320" y="216" class="sketch-text" font-size="9">デスク</text>
+
+                    <!-- 17:00 -->
+                    <rect x="20" y="235" width="360" height="30" class="color2" filter="url(#rough18)" rx="3" opacity="0.3" />
+                    <path d="M 20 235 L 380 235 L 380 265 L 20 265 Z" class="sketch-rect" filter="url(#rough18)" stroke="#FFD700" stroke-width="1.5" />
+                    <text x="50" y="255" class="sketch-text" font-size="10">17:00-</text>
+                    <text x="130" y="255" class="sketch-text" font-size="10">退社</text>
+                </svg>
+                <p class="diagram-description">1日のスケジュール表示</p>
+            </div>
+
+            <!-- 19. Doodle Goal Tracker -->
+            <div class="diagram-card" id="handlayout-19">
+                <div class="diagram-title">19. 目標トラッカー</div>
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough19">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="20" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Goal label -->
+                    <text x="20" y="30" class="sketch-text" font-size="11" font-weight="bold">目標1：売上50%UP</text>
+                    <rect x="20" y="35" width="360" height="15" fill="none" stroke="#999" stroke-width="1" rx="7" />
+                    <rect x="20" y="35" width="180" height="15" class="color2" rx="7" />
+                    <text x="215" y="47" class="small-text" font-size="9">50% 達成</text>
+
+                    <!-- Goal label 2 -->
+                    <text x="20" y="80" class="sketch-text" font-size="11" font-weight="bold">目標2：チーム拡大</text>
+                    <rect x="20" y="85" width="360" height="15" fill="none" stroke="#999" stroke-width="1" rx="7" />
+                    <rect x="20" y="85" width="288" height="15" class="color3" rx="7" />
+                    <text x="320" y="97" class="small-text" font-size="9">80% 達成</text>
+
+                    <!-- Goal label 3 -->
+                    <text x="20" y="130" class="sketch-text" font-size="11" font-weight="bold">目標3：顧客満足度</text>
+                    <rect x="20" y="135" width="360" height="15" fill="none" stroke="#999" stroke-width="1" rx="7" />
+                    <rect x="20" y="135" width="108" height="15" class="color4" rx="7" />
+                    <text x="140" y="147" class="small-text" font-size="9">30% 達成</text>
+
+                    <!-- Goal label 4 -->
+                    <text x="20" y="180" class="sketch-text" font-size="11" font-weight="bold">目標4：スキルアップ</text>
+                    <rect x="20" y="185" width="360" height="15" fill="none" stroke="#999" stroke-width="1" rx="7" />
+                    <rect x="20" y="185" width="324" height="15" class="color5" rx="7" />
+                    <text x="360" y="197" class="small-text" font-size="9">90%</text>
+
+                    <!-- Goal label 5 -->
+                    <text x="20" y="230" class="sketch-text" font-size="11" font-weight="bold">目標5：プロジェクト完成</text>
+                    <rect x="20" y="235" width="360" height="15" fill="none" stroke="#999" stroke-width="1" rx="7" />
+                    <rect x="20" y="235" width="144" height="15" class="color1" rx="7" />
+                    <text x="175" y="247" class="small-text" font-size="9">40% 達成</text>
+
+                    <!-- Summary -->
+                    <rect x="20" y="270" width="360" height="35" class="color6" filter="url(#rough19)" rx="4" opacity="0.3" />
+                    <text x="200" y="285" class="sketch-text" text-anchor="middle" font-size="11" font-weight="bold">全体進捗: 58%</text>
+                    <text x="200" y="300" class="small-text" text-anchor="middle" font-size="10">順調に進行中！</text>
+                </svg>
+                <p class="diagram-description">複数目標の達成率追跡</p>
+            </div>
+
+            <!-- 20. Rough Story Structure -->
+            <div class="diagram-card" id="handlayout-20">
+                <div class="diagram-title">20. ストーリー構成</div>
+                <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="rough20">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" seed="21" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+                        </filter>
+                    </defs>
+                    <!-- Beginning -->
+                    <rect x="20" y="60" width="100" height="140" class="color1" filter="url(#rough20)" rx="6" />
+                    <path d="M 20 60 L 120 60 L 120 200 L 20 200 Z" class="sketch-rect" filter="url(#rough20)" stroke="#FF6B6B" stroke-width="2.5" />
+                    <text x="70" y="85" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">起</text>
+                    <text x="70" y="105" class="small-text" text-anchor="middle" font-size="9">導入・設定</text>
+                    <text x="70" y="125" class="small-text" text-anchor="middle" font-size="8">キャラクター</text>
+                    <text x="70" y="140" class="small-text" text-anchor="middle" font-size="8">背景紹介</text>
+                    <text x="70" y="180" class="small-text" text-anchor="middle" font-size="8" font-style="italic">問題発生</text>
+
+                    <!-- Arrow -->
+                    <path d="M 130 130 L 160 130" class="wobbly" stroke="#FF6B6B" stroke-width="3" filter="url(#rough20)" />
+
+                    <!-- Middle -->
+                    <rect x="170" y="30" width="100" height="200" class="color4" filter="url(#rough20)" rx="6" />
+                    <path d="M 170 30 L 270 30 L 270 230 L 170 230 Z" class="sketch-rect" filter="url(#rough20)" stroke="#4169E1" stroke-width="2.5" />
+                    <text x="220" y="70" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">承</text>
+                    <text x="220" y="90" class="small-text" text-anchor="middle" font-size="9">展開・衝突</text>
+                    <text x="220" y="110" class="small-text" text-anchor="middle" font-size="8">アクション</text>
+                    <text x="220" y="130" class="small-text" text-anchor="middle" font-size="8">複雑化</text>
+                    <text x="220" y="150" class="small-text" text-anchor="middle" font-size="8">ターニング</text>
+                    <text x="220" y="170" class="small-text" text-anchor="middle" font-size="8">ポイント</text>
+                    <text x="220" y="210" class="small-text" text-anchor="middle" font-size="8" font-style="italic">クライマックス</text>
+
+                    <!-- Arrow -->
+                    <path d="M 280 130 L 310 130" class="wobbly" stroke="#4169E1" stroke-width="3" filter="url(#rough20)" />
+
+                    <!-- End -->
+                    <rect x="320" y="60" width="60" height="140" class="color3" filter="url(#rough20)" rx="6" />
+                    <path d="M 320 60 L 380 60 L 380 200 L 320 200 Z" class="sketch-rect" filter="url(#rough20)" stroke="#32CD32" stroke-width="2.5" />
+                    <text x="350" y="85" class="sketch-text" text-anchor="middle" font-size="12" font-weight="bold">結</text>
+                    <text x="350" y="105" class="small-text" text-anchor="middle" font-size="8">解決</text>
+                    <text x="350" y="120" class="small-text" text-anchor="middle" font-size="8">結末</text>
+                    <text x="350" y="140" class="small-text" text-anchor="middle" font-size="8">反省</text>
+                    <text x="350" y="180" class="small-text" text-anchor="middle" font-size="8" font-style="italic">完結</text>
+                </svg>
+                <p class="diagram-description">起・承・転・結のストーリー構成</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 60px; padding: 30px; border-top: 2px dashed #D2691E; color: #8B4513;">
+            <p style="font-size: 1.1em; margin-bottom: 10px;">✨ 20 Hand-Drawn Diagram Templates ✨</p>
+            <p style="font-size: 0.95em; color: #999;">Each diagram is CSS-only, fully responsive, and ready to customize</p>
+        </div>
+    </div>
+</body>
+</html>

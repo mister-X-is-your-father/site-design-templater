@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk LP Components</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-cyan: #00f0ff;
+            --primary-magenta: #ff006e;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050812;
+            --accent-purple: #9d4edd;
+            --accent-lime: #39ff14;
+            --text-primary: #e0e0ff;
+            --text-secondary: #a0a0cc;
+            --border-glow: rgba(0, 240, 255, 0.3);
+            --border-glow-strong: rgba(0, 240, 255, 0.8);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, #1a1f3a 50%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 240, 255, 0.03) 0px,
+                    rgba(0, 240, 255, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+            animation: scanlines 8s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(10px);
+            }
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch::before {
+            animation: glitch-animation-1 0.3s infinite;
+            color: var(--primary-cyan);
+            z-index: -1;
+            text-shadow: -2px 0 var(--primary-magenta);
+        }
+
+        .glitch::after {
+            animation: glitch-animation-2 0.3s infinite;
+            color: var(--primary-magenta);
+            z-index: -2;
+            text-shadow: 2px 0 var(--primary-cyan);
+        }
+
+        @keyframes glitch-animation-1 {
+            0% {
+                clip-path: inset(40% 0 61% 0);
+                transform: translate(-2px, -2px);
+            }
+            20% {
+                clip-path: inset(92% 0 1% 0);
+                transform: translate(2px, 2px);
+            }
+            40% {
+                clip-path: inset(43% 0 1% 0);
+                transform: translate(-2px, 2px);
+            }
+            60% {
+                clip-path: inset(25% 0 58% 0);
+                transform: translate(2px, -2px);
+            }
+            80% {
+                clip-path: inset(54% 0 7% 0);
+                transform: translate(-2px, -2px);
+            }
+            100% {
+                clip-path: inset(58% 0 43% 0);
+                transform: translate(2px, 2px);
+            }
+        }
+
+        @keyframes glitch-animation-2 {
+            0% {
+                clip-path: inset(27% 0 58% 0);
+                transform: translate(2px, 2px);
+            }
+            20% {
+                clip-path: inset(98% 0 1% 0);
+                transform: translate(-2px, -2px);
+            }
+            40% {
+                clip-path: inset(40% 0 59% 0);
+                transform: translate(2px, -2px);
+            }
+            60% {
+                clip-path: inset(88% 0 11% 0);
+                transform: translate(-2px, 2px);
+            }
+            80% {
+                clip-path: inset(61% 0 37% 0);
+                transform: translate(2px, 2px);
+            }
+            100% {
+                clip-path: inset(17% 0 58% 0);
+                transform: translate(-2px, -2px);
+            }
+        }
+
+        /* ===== C01: HERO SECTION ===== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 20% 50%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 10%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+            filter: blur(40px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 0, 110, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 10%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite reverse;
+            filter: blur(40px);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            50% {
+                transform: translateY(-30px) translateX(20px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            animation: titleFadeIn 1s ease-out;
+        }
+
+        .hero-title span {
+            display: block;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-magenta), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+
+        @keyframes titleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: subtitleFadeIn 1s ease-out 0.2s both;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes subtitleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: ctaFadeIn 1s ease-out 0.4s both;
+        }
+
+        @keyframes ctaFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== C04: CTA BUTTON ===== */
+
+        .btn-primary {
+            padding: 16px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--primary-cyan);
+            background: transparent;
+            color: var(--primary-cyan);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.8), inset 0 0 40px rgba(0, 240, 255, 0.2);
+            transform: translateY(-3px);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            padding: 16px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--primary-magenta);
+            background: transparent;
+            color: var(--primary-magenta);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), inset 0 0 20px rgba(255, 0, 110, 0.1);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.8), inset 0 0 40px rgba(255, 0, 110, 0.2);
+            transform: translateY(-3px);
+            background: rgba(255, 0, 110, 0.1);
+        }
+
+        /* ===== C02: FEATURE CARDS ===== */
+
+        .features {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(13, 18, 45, 0.5);
+            border: 2px solid var(--border-glow);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6), inset 0 0 20px rgba(0, 240, 255, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 2px solid var(--primary-cyan);
+            border-radius: 8px;
+            color: var(--primary-cyan);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .feature-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-magenta);
+            text-transform: uppercase;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* ===== C03: PRICING TABLE ===== */
+
+        .pricing-section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(13, 18, 45, 0.6);
+            border: 2px solid var(--border-glow);
+            padding: 40px 30px;
+            position: relative;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-magenta);
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.4), inset 0 0 20px rgba(255, 0, 110, 0.1);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured:hover {
+            box-shadow: 0 0 50px rgba(255, 0, 110, 0.6), inset 0 0 30px rgba(255, 0, 110, 0.15);
+        }
+
+        .pricing-label {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .pricing-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .pricing-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+            margin-bottom: 10px;
+        }
+
+        .pricing-currency {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-period {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .pricing-features li::before {
+            content: '▶ ';
+            color: var(--primary-cyan);
+            margin-right: 10px;
+        }
+
+        /* ===== C05: TESTIMONIALS ===== */
+
+        .testimonials-section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonials-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-magenta);
+            text-transform: uppercase;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(13, 18, 45, 0.5);
+            border-left: 4px solid var(--primary-cyan);
+            border-top: 2px solid var(--primary-magenta);
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-card:hover {
+            border-left-color: var(--primary-magenta);
+            border-top-color: var(--primary-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--primary-cyan);
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-magenta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark-bg);
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            color: var(--primary-cyan);
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* ===== C06: FAQ ACCORDION ===== */
+
+        .faq-section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--accent-lime);
+            text-transform: uppercase;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: rgba(13, 18, 45, 0.5);
+            border: 2px solid var(--border-glow);
+            border-radius: 4px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px;
+            background: transparent;
+            border: none;
+            color: var(--primary-cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-magenta);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--primary-cyan);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+            color: var(--primary-magenta);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 20px;
+            border-top: 1px solid var(--border-glow);
+        }
+
+        /* ===== C08: NAVBAR ===== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 8, 18, 0.95);
+            border-bottom: 2px solid var(--border-glow);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-magenta);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-magenta));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Adjust hero section margin for fixed navbar */
+        .hero {
+            margin-top: 60px;
+        }
+
+        /* ===== C09: STEP GUIDE ===== */
+
+        .steps-section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .steps-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-magenta);
+            text-transform: uppercase;
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            position: relative;
+            align-items: start;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            width: 0;
+            height: 60px;
+            border-left: 2px dashed var(--primary-cyan);
+            opacity: 0.5;
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--primary-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+            position: relative;
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 2px solid var(--primary-magenta);
+            border-radius: 50%;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .step-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-lime);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== C10: NEWSLETTER FORM ===== */
+
+        .newsletter-section {
+            padding: 80px 40px;
+            position: relative;
+            z-index: 2;
+            background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.1) 0%, transparent 70%);
+            border-top: 2px solid var(--border-glow);
+            border-bottom: 2px solid var(--border-glow);
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+        }
+
+        .newsletter-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        @media (min-width: 600px) {
+            .newsletter-form {
+                flex-direction: row;
+            }
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: rgba(13, 18, 45, 0.8);
+            border: 2px solid var(--border-glow);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .newsletter-submit {
+            padding: 16px 30px;
+            background: transparent;
+            border: 2px solid var(--primary-magenta);
+            color: var(--primary-magenta);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+            white-space: nowrap;
+        }
+
+        .newsletter-submit:hover {
+            background: rgba(255, 0, 110, 0.1);
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+            transform: translateY(-3px);
+        }
+
+        /* ===== C07: FOOTER ===== */
+
+        footer {
+            background: var(--darker-bg);
+            border-top: 2px solid var(--border-glow);
+            padding: 60px 40px 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul a:hover {
+            color: var(--primary-magenta);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-glow);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-socials a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .footer-socials a:hover {
+            color: var(--primary-cyan);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .pricing-title,
+            .testimonials-title,
+            .steps-title,
+            .faq-title,
+            .newsletter-title {
+                font-size: 2rem;
+            }
+
+            .step {
+                grid-template-columns: 80px 1fr;
+                gap: 20px;
+            }
+
+            .step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 0.8rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input,
+            .newsletter-submit {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 20px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 80vh;
+                padding: 20px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .features,
+            .pricing-section,
+            .testimonials-section,
+            .faq-section,
+            .steps-section,
+            .newsletter-section {
+                padding: 60px 20px;
+            }
+
+            .feature-card,
+            .pricing-card,
+            .testimonial-card {
+                padding: 20px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== C08: NAVBAR ===== -->
+    <nav>
+        <a href="#" class="logo">NEO<span>SYNC</span></a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== C01: HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" data-text="EXPERIENCE THE FUTURE">
+                <span class="glitch" data-text="EXPERIENCE THE FUTURE">EXPERIENCE THE FUTURE</span>
+            </h1>
+            <p class="hero-subtitle">Harness the power of next-gen technology. Cyberpunk innovation at your fingertips.</p>
+            <div class="hero-cta">
+                <button class="btn-primary">Start Free Trial</button>
+                <button class="btn-secondary">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== C02: FEATURE CARDS ===== -->
+    <section id="features" class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Lightning Speed</h3>
+                <p class="feature-description">Optimized algorithms process data at quantum speeds, delivering instant results.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3 class="feature-title">Unbreakable Security</h3>
+                <p class="feature-description">Military-grade encryption protects your data from the darkest corners of the net.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3 class="feature-title">Global Network</h3>
+                <p class="feature-description">Connect across the globe with zero-latency distributed infrastructure.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI-Powered</h3>
+                <p class="feature-description">Advanced machine learning adapts to your needs in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Deep Analytics</h3>
+                <p class="feature-description">Comprehensive insights reveal patterns hidden in mountains of data.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">♾️</div>
+                <h3 class="feature-title">Infinite Scale</h3>
+                <p class="feature-description">Grow without limits. Our infrastructure scales with your ambition.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== C03: PRICING TABLE ===== -->
+    <section id="pricing" class="pricing-section">
+        <h2 class="pricing-title">Pricing Matrix</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-label">Entry Level</div>
+                <h3 class="pricing-name">Starter</h3>
+                <div class="pricing-amount"><span class="pricing-currency">$</span>29</div>
+                <p class="pricing-period">per month</p>
+                <ul class="pricing-features">
+                    <li>Up to 10,000 requests</li>
+                    <li>Basic analytics</li>
+                    <li>Email support</li>
+                    <li>1 team member</li>
+                </ul>
+                <button class="btn-primary">Choose Plan</button>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-label">Popular</div>
+                <h3 class="pricing-name">Professional</h3>
+                <div class="pricing-amount"><span class="pricing-currency">$</span>99</div>
+                <p class="pricing-period">per month</p>
+                <ul class="pricing-features">
+                    <li>Unlimited requests</li>
+                    <li>Advanced analytics</li>
+                    <li>Priority support</li>
+                    <li>Up to 10 team members</li>
+                    <li>Custom integrations</li>
+                </ul>
+                <button class="btn-primary">Choose Plan</button>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-label">Enterprise</div>
+                <h3 class="pricing-name">Unlimited</h3>
+                <div class="pricing-amount"><span class="pricing-currency">$</span>299</div>
+                <p class="pricing-period">per month</p>
+                <ul class="pricing-features">
+                    <li>Everything in Pro</li>
+                    <li>Dedicated account manager</li>
+                    <li>24/7 phone support</li>
+                    <li>Unlimited team members</li>
+                    <li>Custom SLA</li>
+                </ul>
+                <button class="btn-primary">Choose Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== C05: TESTIMONIALS ===== -->
+    <section id="testimonials" class="testimonials-section">
+        <h2 class="testimonials-title">Voice From The Grid</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">This platform transformed how we operate. The efficiency gains are absolutely insane.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AK</div>
+                    <div class="author-info">
+                        <h4>Alex Chen</h4>
+                        <p>Tech CEO, SyncCorp</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">We cut our infrastructure costs by 60% in the first month. Mind-blowing results.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SR</div>
+                    <div class="author-info">
+                        <h4>Sarah Rodriguez</h4>
+                        <p>CTO, DataFlow Systems</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">The support team is incredible. They solved our most complex challenges in hours.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MJ</div>
+                    <div class="author-info">
+                        <h4>Marcus Johnson</h4>
+                        <p>Founder, QuantumTech</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== C06: FAQ ACCORDION ===== -->
+    <section id="faq" class="faq-section">
+        <h2 class="faq-title">System FAQ</h2>
+        <div class="faq-item active">
+            <button class="faq-question">
+                What is NeoSync?
+                <span class="faq-toggle">▼</span>
+            </button>
+            <div class="faq-answer">
+                NeoSync is a next-generation platform built for the future. We combine cutting-edge AI, advanced analytics, and unbreakable security to deliver unprecedented performance and scale. Whether you're a startup or an enterprise, NeoSync adapts to your needs.
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">
+                How secure is my data?
+                <span class="faq-toggle">▼</span>
+            </button>
+            <div class="faq-answer">
+                Your data is protected by military-grade AES-256 encryption at rest and in transit. We maintain multiple geographic backups, conduct regular security audits, and comply with GDPR, HIPAA, and SOC 2 standards. Your privacy is our obsession.
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I integrate with existing tools?
+                <span class="faq-toggle">▼</span>
+            </button>
+            <div class="faq-answer">
+                Absolutely. NeoSync offers extensive API support and pre-built integrations with 500+ popular platforms including Slack, Salesforce, Stripe, and more. Our integration marketplace makes it trivial to connect your entire tech stack.
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">
+                What's the uptime guarantee?
+                <span class="faq-toggle">▼</span>
+            </button>
+            <div class="faq-answer">
+                We guarantee 99.99% uptime with our Pro and Enterprise plans. That's a maximum of 4 minutes of downtime per month. We monitor our infrastructure 24/7 and have automated failover systems protecting your service.
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I get started?
+                <span class="faq-toggle">▼</span>
+            </button>
+            <div class="faq-answer">
+                Getting started is simple. Sign up for a free account, connect your first data source, and you'll have access to basic analytics within minutes. Our onboarding team can guide you through advanced setup if needed. No credit card required for the trial.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== C09: STEP GUIDE ===== -->
+    <section class="steps-section">
+        <h2 class="steps-title">Get Started In 4 Steps</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Create Your Account</h3>
+                    <p>Sign up in seconds. No credit card needed. Choose your starter plan and set up your first workspace in minutes.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Connect Your Data</h3>
+                    <p>Link your existing data sources via API, CSV import, or direct database connection. We support all major platforms and formats.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Configure & Customize</h3>
+                    <p>Set up custom workflows, create dashboards, and configure alerts. Our visual builder makes it intuitive—no coding required.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>Launch & Scale</h3>
+                    <p>Go live and start transforming your data into actionable insights. Scale seamlessly as your needs grow with our infinite infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== C10: NEWSLETTER FORM ===== -->
+    <section id="contact" class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 class="newsletter-title">Stay Connected</h2>
+            <p class="newsletter-subtitle">Get the latest updates on new features, security patches, and exclusive cyberpunk insights delivered to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="your@email.com" required>
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== C07: FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">API Docs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Compliance</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NeoSync. Engineered for the future.</p>
+            <div class="footer-socials">
+                <a href="#">𝕏</a>
+                <a href="#">◈</a>
+                <a href="#">⧉</a>
+                <a href="#">∞</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            alert(`Subscribed: ${email}`);
+            this.reset();
+        });
+
+        // Add glow effect on mouse movement
+        document.addEventListener('mousemove', function(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Subtle glow follow effect
+            document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = rect.left + rect.width / 2;
+                const cardY = rect.top + rect.height / 2;
+                
+                const distance = Math.sqrt(Math.pow(x - cardX, 2) + Math.pow(y - cardY, 2));
+                
+                if (distance < 200) {
+                    const intensity = (1 - distance / 200) * 0.3;
+                    card.style.boxShadow = `0 0 ${30 + intensity * 20}px rgba(0, 240, 255, ${0.3 + intensity})`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

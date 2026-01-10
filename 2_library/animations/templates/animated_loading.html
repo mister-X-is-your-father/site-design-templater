@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON GENESIS // Loading Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-yellow: #ffff00;
+            --neon-green: #00ff88;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --grid-color: rgba(0, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ========================================
+           LOADING SCREEN
+        ======================================== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker-bg);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .loading-screen.fade-out {
+            animation: screenFadeOut 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes screenFadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.1);
+                pointer-events: none;
+            }
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            perspective: 500px;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Horizon Line Effect */
+        .horizon {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(255, 0, 255, 0.05) 50%,
+                rgba(0, 255, 255, 0.1) 100%
+            );
+            transform: perspective(300px) rotateX(60deg);
+            transform-origin: bottom;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Glitch Scanlines */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            animation: scanlineFlicker 0.1s infinite;
+        }
+
+        @keyframes scanlineFlicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Logo Container */
+        .logo-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        /* Main Logo */
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            position: relative;
+            animation: logoEntrance 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(2) translateY(-50px);
+                filter: blur(20px);
+            }
+            50% {
+                filter: blur(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .logo-text {
+            background: linear-gradient(
+                135deg,
+                var(--neon-pink) 0%,
+                var(--neon-cyan) 50%,
+                var(--neon-yellow) 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 255, 0.5));
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Glitch Effect on Logo */
+        .logo::before,
+        .logo::after {
+            content: 'NEON';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo::before {
+            animation: glitchLeft 2s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .logo::after {
+            animation: glitchRight 2s infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitchLeft {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(3px, -2px); }
+            60% { transform: translate(-2px, 1px); }
+            80% { transform: translate(2px, -1px); }
+        }
+
+        @keyframes glitchRight {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(3px, -2px); }
+            40% { transform: translate(-3px, 2px); }
+            60% { transform: translate(2px, -1px); }
+            80% { transform: translate(-2px, 1px); }
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            font-weight: 300;
+            letter-spacing: 1em;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            margin-top: 1rem;
+            opacity: 0;
+            animation: subtitleFade 0.8s ease-out 0.5s forwards;
+        }
+
+        @keyframes subtitleFade {
+            0% {
+                opacity: 0;
+                letter-spacing: 2em;
+            }
+            100% {
+                opacity: 1;
+                letter-spacing: 1em;
+            }
+        }
+
+        /* Progress Container */
+        .progress-container {
+            position: relative;
+            width: min(80%, 500px);
+            margin-top: 4rem;
+            z-index: 10;
+        }
+
+        /* Progress Bar Track */
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-track::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            bottom: -10px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent
+            );
+            animation: trackGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes trackGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Progress Bar Fill */
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(
+                90deg,
+                var(--neon-pink),
+                var(--neon-cyan),
+                var(--neon-green)
+            );
+            background-size: 200% 100%;
+            animation: progressGradient 1s linear infinite;
+            border-radius: 2px;
+            position: relative;
+            transition: width 0.1s linear;
+            box-shadow:
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan),
+                0 0 30px var(--neon-pink);
+        }
+
+        @keyframes progressGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Progress Percentage */
+        .progress-text {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            text-shadow:
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan);
+        }
+
+        .progress-text span {
+            display: inline-block;
+            min-width: 4ch;
+        }
+
+        /* Loading Status Text */
+        .status-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-top: 1.5rem;
+            overflow: hidden;
+        }
+
+        .status-text span {
+            display: inline-block;
+            animation: textPulse 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes textPulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Corner Decorations */
+        .corner {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--neon-pink);
+            opacity: 0;
+            animation: cornerFade 0.5s ease-out 0.3s forwards;
+        }
+
+        @keyframes cornerFade {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+        }
+
+        .corner-tl {
+            top: 30px;
+            left: 30px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: 30px;
+            right: 30px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: 30px;
+            left: 30px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: 30px;
+            right: 30px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Cyber Lines */
+        .cyber-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            height: 1px;
+            animation: lineExpand 1s ease-out forwards;
+        }
+
+        .cyber-line-top {
+            top: 80px;
+            left: 10%;
+            right: 10%;
+            animation-delay: 0.5s;
+        }
+
+        .cyber-line-bottom {
+            bottom: 80px;
+            left: 10%;
+            right: 10%;
+            animation-delay: 0.7s;
+        }
+
+        @keyframes lineExpand {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 0.5;
+            }
+        }
+
+        /* ========================================
+           MAIN CONTENT
+        ======================================== */
+        .main-content {
+            min-height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            background: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content Background */
+        .main-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 70%),
+                var(--dark-bg);
+            z-index: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 8vw, 7rem);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .main-content.visible .hero-title {
+            animation: heroTitleReveal 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes heroTitleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-20deg);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+                filter: blur(0);
+            }
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line:nth-child(1) span {
+            color: var(--neon-pink);
+            text-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .hero-title .line:nth-child(2) span {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 30px var(--neon-cyan);
+        }
+
+        .hero-title .line:nth-child(3) span {
+            color: var(--neon-yellow);
+            text-shadow: 0 0 30px var(--neon-yellow);
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .main-content.visible .hero-title .line span {
+            animation: lineReveal 0.8s ease-out forwards;
+        }
+
+        .main-content.visible .hero-title .line:nth-child(1) span {
+            animation-delay: 0.4s;
+        }
+
+        .main-content.visible .hero-title .line:nth-child(2) span {
+            animation-delay: 0.6s;
+        }
+
+        .main-content.visible .hero-title .line:nth-child(3) span {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes lineReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Subtitle */
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            opacity: 0;
+        }
+
+        .main-content.visible .hero-subtitle {
+            animation: subtitleReveal 1s ease-out 1s forwards;
+        }
+
+        @keyframes subtitleReveal {
+            0% {
+                opacity: 0;
+                letter-spacing: 1em;
+            }
+            100% {
+                opacity: 1;
+                letter-spacing: 0.5em;
+            }
+        }
+
+        /* Floating Shapes */
+        .shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .main-content.visible .shape {
+            animation: shapeFloat 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            top: 20%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--neon-pink);
+            animation-delay: 0s !important;
+        }
+
+        .main-content.visible .shape-1 {
+            animation: shapeFloat 20s ease-in-out infinite, shapeFadeIn 1s ease-out 1.2s forwards;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 15%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-cyan), transparent);
+            animation-delay: 2s !important;
+        }
+
+        .main-content.visible .shape-2 {
+            animation: shapeFloat 18s ease-in-out 2s infinite, shapeFadeIn 1s ease-out 1.4s forwards;
+        }
+
+        .shape-3 {
+            bottom: 30%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-yellow);
+            animation-delay: 4s !important;
+        }
+
+        .main-content.visible .shape-3 {
+            animation: shapeFloat 22s ease-in-out 4s infinite, shapeFadeIn 1s ease-out 1.6s forwards;
+        }
+
+        @keyframes shapeFloat {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, -30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, -50px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-30px, -20px) rotate(270deg);
+            }
+        }
+
+        @keyframes shapeFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+        }
+
+        /* Cards Section */
+        .cards-section {
+            padding: 100px 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .main-content.visible .section-title {
+            animation: fadeInUp 0.8s ease-out 1.2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.4s ease;
+        }
+
+        .main-content.visible .card {
+            animation: cardReveal 0.8s ease-out forwards;
+        }
+
+        .main-content.visible .card:nth-child(1) { animation-delay: 1.4s; }
+        .main-content.visible .card:nth-child(2) { animation-delay: 1.6s; }
+        .main-content.visible .card:nth-child(3) { animation-delay: 1.8s; }
+
+        @keyframes cardReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--neon-pink);
+            stroke-width: 1.5;
+            fill: none;
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+        }
+
+        .card:nth-child(2) .card-icon svg {
+            stroke: var(--neon-cyan);
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+        }
+
+        .card:nth-child(3) .card-icon svg {
+            stroke: var(--neon-yellow);
+            filter: drop-shadow(0 0 10px var(--neon-yellow));
+        }
+
+        .card-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* CTA Button */
+        .cta-container {
+            text-align: center;
+            padding: 4rem 2rem 6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .main-content.visible .cta-button {
+            animation: fadeInUp 0.8s ease-out 2s forwards;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: #000;
+            border-color: var(--neon-cyan);
+            box-shadow:
+                0 0 20px var(--neon-pink),
+                0 0 40px var(--neon-cyan);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Glitch Overlay (appears randomly) */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+        }
+
+        .glitch-overlay.active {
+            animation: glitchOverlay 0.2s steps(2) forwards;
+        }
+
+        @keyframes glitchOverlay {
+            0% {
+                opacity: 0.8;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(255, 0, 255, 0.3) 50%,
+                    transparent 100%
+                );
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .corner {
+                width: 40px;
+                height: 40px;
+            }
+
+            .corner-tl, .corner-tr, .corner-bl, .corner-br {
+                top: 15px;
+                left: 15px;
+            }
+
+            .corner-tr { left: auto; right: 15px; }
+            .corner-bl { top: auto; bottom: 15px; }
+            .corner-br { top: auto; bottom: 15px; left: auto; right: 15px; }
+
+            .cyber-line-top { top: 50px; }
+            .cyber-line-bottom { bottom: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="grid-bg"></div>
+        <div class="horizon"></div>
+        <div class="particles" id="particles"></div>
+        <div class="scanlines"></div>
+
+        <!-- Corner Decorations -->
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- Cyber Lines -->
+        <div class="cyber-line cyber-line-top"></div>
+        <div class="cyber-line cyber-line-bottom"></div>
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <h1 class="logo">
+                <span class="logo-text">NEON</span>
+            </h1>
+            <p class="subtitle">Digital Experience</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text"><span id="progressText">0</span>%</div>
+            <div class="status-text">
+                <span id="statusText">Initializing...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glitch Overlay -->
+    <div class="glitch-overlay" id="glitchOverlay"></div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="main-bg"></div>
+
+        <!-- Floating Shapes -->
+        <div class="shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">
+                <span class="line"><span>Welcome to</span></span>
+                <span class="line"><span>The Future</span></span>
+                <span class="line"><span>Of Design</span></span>
+            </h1>
+            <p class="hero-subtitle">Crafting Digital Experiences</p>
+        </section>
+
+        <!-- Cards Section -->
+        <section class="cards-section">
+            <h2 class="section-title">// Features</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Layered Design</h3>
+                    <p class="card-text">Multi-dimensional interfaces that create depth and immersion through carefully crafted visual hierarchies.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a10 10 0 0 1 0 20"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="12" x2="16" y2="14"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Real-time Motion</h3>
+                    <p class="card-text">Fluid animations powered by modern CSS that bring interfaces to life with seamless transitions.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Modular System</h3>
+                    <p class="card-text">Flexible components that adapt to any context while maintaining visual consistency and brand integrity.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta-container">
+            <button class="cta-button" onclick="location.reload()">
+                Restart Experience
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Loading Screen Logic
+        const loadingScreen = document.getElementById('loadingScreen');
+        const mainContent = document.getElementById('mainContent');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const statusText = document.getElementById('statusText');
+        const glitchOverlay = document.getElementById('glitchOverlay');
+
+        // Status messages
+        const statusMessages = [
+            'Initializing...',
+            'Loading assets...',
+            'Compiling shaders...',
+            'Rendering graphics...',
+            'Optimizing performance...',
+            'Finalizing...',
+            'Almost ready...',
+            'Complete!'
+        ];
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 4}s`;
+                particle.style.animationDuration = `${3 + Math.random() * 2}s`;
+
+                // Random colors
+                const colors = ['var(--neon-cyan)', 'var(--neon-pink)', 'var(--neon-yellow)', 'var(--neon-green)'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Trigger glitch effect
+        function triggerGlitch() {
+            glitchOverlay.classList.add('active');
+            setTimeout(() => {
+                glitchOverlay.classList.remove('active');
+            }, 200);
+        }
+
+        // Progress animation
+        let progress = 0;
+        const totalDuration = 3500; // 3.5 seconds
+        const interval = 50; // Update every 50ms
+        const increment = 100 / (totalDuration / interval);
+
+        function updateProgress() {
+            progress += increment * (0.5 + Math.random() * 1);
+
+            if (progress >= 100) {
+                progress = 100;
+                progressFill.style.width = '100%';
+                progressText.textContent = '100';
+                statusText.textContent = statusMessages[statusMessages.length - 1];
+
+                // Complete loading
+                setTimeout(() => {
+                    loadingScreen.classList.add('fade-out');
+                    triggerGlitch();
+
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        mainContent.classList.add('visible');
+                    }, 1000);
+                }, 300);
+
+                return;
+            }
+
+            const displayProgress = Math.floor(progress);
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = displayProgress;
+
+            // Update status message
+            const messageIndex = Math.min(
+                Math.floor(progress / (100 / (statusMessages.length - 1))),
+                statusMessages.length - 2
+            );
+            statusText.textContent = statusMessages[messageIndex];
+
+            // Random glitch effects
+            if (Math.random() < 0.03) {
+                triggerGlitch();
+            }
+
+            setTimeout(updateProgress, interval + Math.random() * 30);
+        }
+
+        // Initialize
+        createParticles();
+        setTimeout(updateProgress, 500);
+
+        // Random glitch effect on main content
+        setInterval(() => {
+            if (mainContent.classList.contains('visible') && Math.random() < 0.1) {
+                triggerGlitch();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Diagram Templates - プロセス図テンプレート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .template-card h2 {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #eee;
+        }
+
+        .template-card h2 span {
+            color: #ff6b9d;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #process-1: Linear Process (arrows)
+           ======================================== */
+        #process-1 .process-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        #process-1 .step {
+            background: #ff6b9d;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 100px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #process-1 .step:nth-child(3) { background: #87ceeb; }
+        #process-1 .step:nth-child(5) { background: #98d8aa; }
+        #process-1 .step:nth-child(7) { background: #ffd93d; }
+
+        #process-1 .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        #process-1 .arrow {
+            font-size: 2rem;
+            color: #ddd;
+        }
+
+        /* ========================================
+           #process-2: Conveyor Belt Process
+           ======================================== */
+        #process-2 .conveyor-container {
+            position: relative;
+            padding: 40px 20px 60px;
+        }
+
+        #process-2 .belt {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                #666 0px,
+                #666 20px,
+                #888 20px,
+                #888 40px
+            );
+            border-radius: 10px;
+        }
+
+        #process-2 .belt::before,
+        #process-2 .belt::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #444;
+            border-radius: 50%;
+            top: -10px;
+            border: 4px solid #666;
+        }
+
+        #process-2 .belt::before { left: -10px; }
+        #process-2 .belt::after { right: -10px; }
+
+        #process-2 .items {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        #process-2 .item {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9rem;
+            animation: conveyorBounce 2s ease-in-out infinite;
+        }
+
+        #process-2 .item:nth-child(1) { background: #ff6b9d; animation-delay: 0s; }
+        #process-2 .item:nth-child(2) { background: #87ceeb; animation-delay: 0.3s; }
+        #process-2 .item:nth-child(3) { background: #98d8aa; animation-delay: 0.6s; }
+        #process-2 .item:nth-child(4) { background: #ffd93d; color: #333; animation-delay: 0.9s; }
+        #process-2 .item:nth-child(5) { background: #b19cd9; animation-delay: 1.2s; }
+
+        @keyframes conveyorBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ========================================
+           #process-3: Pipeline Process
+           ======================================== */
+        #process-3 .pipeline-container {
+            display: flex;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        #process-3 .pipe-segment {
+            flex: 1;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        #process-3 .pipe-segment:nth-child(1) {
+            background: #ff6b9d;
+            border-radius: 25px 0 0 25px;
+        }
+        #process-3 .pipe-segment:nth-child(2) { background: #ff9a5c; }
+        #process-3 .pipe-segment:nth-child(3) { background: #ffd93d; color: #333; }
+        #process-3 .pipe-segment:nth-child(4) { background: #98d8aa; }
+        #process-3 .pipe-segment:nth-child(5) {
+            background: #87ceeb;
+            border-radius: 0 25px 25px 0;
+        }
+
+        #process-3 .pipe-segment::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-left: 10px solid currentColor;
+            z-index: 1;
+        }
+
+        #process-3 .pipe-segment:nth-child(1)::after { border-left-color: #ff6b9d; }
+        #process-3 .pipe-segment:nth-child(2)::after { border-left-color: #ff9a5c; }
+        #process-3 .pipe-segment:nth-child(3)::after { border-left-color: #ffd93d; }
+        #process-3 .pipe-segment:nth-child(4)::after { border-left-color: #98d8aa; }
+        #process-3 .pipe-segment:last-child::after { display: none; }
+
+        #process-3 .pipe-segment:hover {
+            filter: brightness(1.1);
+        }
+
+        /* ========================================
+           #process-4: Assembly Line
+           ======================================== */
+        #process-4 .assembly-container {
+            padding: 20px;
+        }
+
+        #process-4 .assembly-line {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        #process-4 .station {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #process-4 .worker {
+            width: 50px;
+            height: 50px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #process-4 .worker::before {
+            content: '👷';
+            font-size: 1.8rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #process-4 .workbench {
+            width: 80px;
+            height: 40px;
+            background: #87ceeb;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        #process-4 .conveyor-track {
+            height: 15px;
+            background: #ddd;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #process-4 .moving-items {
+            display: flex;
+            gap: 30px;
+            animation: assemblyMove 4s linear infinite;
+        }
+
+        #process-4 .moving-item {
+            width: 25px;
+            height: 25px;
+            background: #ffd93d;
+            border-radius: 4px;
+            margin-top: -5px;
+        }
+
+        @keyframes assemblyMove {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ========================================
+           #process-5: Input → Process → Output
+           ======================================== */
+        #process-5 .ipo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 20px;
+        }
+
+        #process-5 .ipo-box {
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 120px;
+            transition: transform 0.3s;
+        }
+
+        #process-5 .ipo-box:hover {
+            transform: scale(1.05);
+        }
+
+        #process-5 .input-box {
+            background: #87ceeb;
+            color: white;
+        }
+
+        #process-5 .process-box {
+            background: #ff6b9d;
+            color: white;
+            min-width: 150px;
+            position: relative;
+        }
+
+        #process-5 .process-box .gear {
+            font-size: 2rem;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        #process-5 .output-box {
+            background: #98d8aa;
+            color: white;
+        }
+
+        #process-5 .ipo-arrow {
+            font-size: 2rem;
+            color: #ffd93d;
+        }
+
+        #process-5 .ipo-label {
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* ========================================
+           #process-6: Multi-stage Process
+           ======================================== */
+        #process-6 .multistage-container {
+            padding: 20px;
+        }
+
+        #process-6 .stage-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        #process-6 .stage-label {
+            width: 80px;
+            font-weight: bold;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        #process-6 .stage-bar {
+            flex: 1;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        #process-6 .stage-bar:hover {
+            transform: translateX(10px);
+        }
+
+        #process-6 .stage-row:nth-child(1) .stage-bar { background: #ff6b9d; width: 60%; }
+        #process-6 .stage-row:nth-child(2) .stage-bar { background: #ff9a5c; width: 75%; }
+        #process-6 .stage-row:nth-child(3) .stage-bar { background: #ffd93d; width: 90%; color: #333; }
+        #process-6 .stage-row:nth-child(4) .stage-bar { background: #98d8aa; width: 100%; }
+
+        #process-6 .stage-bar::after {
+            content: '→';
+            position: absolute;
+            right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* ========================================
+           #process-7: Parallel Processes
+           ======================================== */
+        #process-7 .parallel-container {
+            padding: 20px;
+        }
+
+        #process-7 .parallel-start,
+        #process-7 .parallel-end {
+            width: 80px;
+            height: 80px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        #process-7 .parallel-end {
+            background: #98d8aa;
+            margin: 20px auto 0;
+        }
+
+        #process-7 .parallel-tracks {
+            display: flex;
+            gap: 15px;
+            position: relative;
+        }
+
+        #process-7 .parallel-tracks::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #ddd;
+        }
+
+        #process-7 .parallel-tracks::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #ddd;
+        }
+
+        #process-7 .track {
+            flex: 1;
+            background: #f0f0f0;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #process-7 .track-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-left: 4px solid #87ceeb;
+            transition: transform 0.3s;
+        }
+
+        #process-7 .track-item:hover {
+            transform: translateX(5px);
+        }
+
+        #process-7 .track:nth-child(2) .track-item { border-left-color: #b19cd9; }
+        #process-7 .track:nth-child(3) .track-item { border-left-color: #ffd93d; }
+
+        /* ========================================
+           #process-8: Sequential Tasks
+           ======================================== */
+        #process-8 .sequential-container {
+            padding: 20px;
+        }
+
+        #process-8 .task-sequence {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #process-8 .task-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #process-8 .task-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff6b9d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        #process-8 .task-item:nth-child(2) .task-number { background: #87ceeb; }
+        #process-8 .task-item:nth-child(3) .task-number { background: #98d8aa; }
+        #process-8 .task-item:nth-child(4) .task-number { background: #ffd93d; color: #333; }
+        #process-8 .task-item:nth-child(5) .task-number { background: #b19cd9; }
+
+        #process-8 .task-content {
+            flex: 1;
+            background: #f5f5f5;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #555;
+            transition: background 0.3s;
+        }
+
+        #process-8 .task-content:hover {
+            background: #eee;
+        }
+
+        #process-8 .task-connector {
+            width: 2px;
+            height: 20px;
+            background: #ddd;
+            margin-left: 19px;
+        }
+
+        /* ========================================
+           #process-9: Dependency Process
+           ======================================== */
+        #process-9 .dependency-container {
+            padding: 20px;
+        }
+
+        #process-9 .dep-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        #process-9 .dep-node {
+            background: #ff6b9d;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+        }
+
+        #process-9 .dep-node:hover {
+            transform: scale(1.05);
+        }
+
+        #process-9 .dep-node:nth-child(2) { background: #87ceeb; }
+        #process-9 .dep-node:nth-child(3) { background: #98d8aa; }
+        #process-9 .dep-node:nth-child(4) { background: #ffd93d; color: #333; }
+        #process-9 .dep-node:nth-child(5) { background: #b19cd9; }
+        #process-9 .dep-node:nth-child(6) { background: #ff9a5c; }
+
+        #process-9 .dep-arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        #process-9 .dep-arrows svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        #process-9 .dep-legend {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+
+        /* ========================================
+           #process-10: Batch Process
+           ======================================== */
+        #process-10 .batch-container {
+            padding: 20px;
+        }
+
+        #process-10 .batch-input {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #process-10 .batch-item {
+            width: 35px;
+            height: 35px;
+            background: #87ceeb;
+            border-radius: 8px;
+            animation: batchPulse 1.5s ease-in-out infinite;
+        }
+
+        #process-10 .batch-item:nth-child(2) { animation-delay: 0.1s; }
+        #process-10 .batch-item:nth-child(3) { animation-delay: 0.2s; }
+        #process-10 .batch-item:nth-child(4) { animation-delay: 0.3s; }
+        #process-10 .batch-item:nth-child(5) { animation-delay: 0.4s; }
+        #process-10 .batch-item:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes batchPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        #process-10 .batch-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #ddd;
+            margin: 10px 0;
+        }
+
+        #process-10 .batch-processor {
+            background: #ff6b9d;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+            margin: 0 auto;
+            max-width: 200px;
+        }
+
+        #process-10 .batch-output {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #process-10 .batch-result {
+            width: 60px;
+            height: 60px;
+            background: #98d8aa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #process-11: Review/Approval Process
+           ======================================== */
+        #process-11 .approval-container {
+            padding: 20px;
+        }
+
+        #process-11 .approval-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #process-11 .approval-step {
+            text-align: center;
+        }
+
+        #process-11 .approval-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 10px;
+            transition: transform 0.3s;
+        }
+
+        #process-11 .approval-icon:hover {
+            transform: scale(1.1);
+        }
+
+        #process-11 .approval-step:nth-child(1) .approval-icon { background: #87ceeb; }
+        #process-11 .approval-step:nth-child(3) .approval-icon { background: #ffd93d; }
+        #process-11 .approval-step:nth-child(5) .approval-icon { background: #ff6b9d; }
+        #process-11 .approval-step:nth-child(7) .approval-icon { background: #98d8aa; }
+
+        #process-11 .approval-label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        #process-11 .approval-arrow {
+            font-size: 1.5rem;
+            color: #ddd;
+        }
+
+        #process-11 .approval-status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.8rem;
+        }
+
+        #process-11 .status-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #process-11 .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        #process-11 .status-dot.pending { background: #ffd93d; }
+        #process-11 .status-dot.approved { background: #98d8aa; }
+        #process-11 .status-dot.rejected { background: #ff6b9d; }
+
+        /* ========================================
+           #process-12: Quality Control Process
+           ======================================== */
+        #process-12 .qc-container {
+            padding: 20px;
+        }
+
+        #process-12 .qc-flow {
+            display: flex;
+            align-items: stretch;
+            gap: 15px;
+        }
+
+        #process-12 .qc-stage {
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        #process-12 .qc-stage:nth-child(1) { border-top: 4px solid #87ceeb; }
+        #process-12 .qc-stage:nth-child(2) { border-top: 4px solid #ffd93d; }
+        #process-12 .qc-stage:nth-child(3) { border-top: 4px solid #ff6b9d; }
+        #process-12 .qc-stage:nth-child(4) { border-top: 4px solid #98d8aa; }
+
+        #process-12 .qc-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        #process-12 .qc-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        #process-12 .qc-checklist {
+            font-size: 0.75rem;
+            color: #666;
+            text-align: left;
+        }
+
+        #process-12 .qc-checklist div {
+            padding: 3px 0;
+        }
+
+        #process-12 .qc-checklist div::before {
+            content: '✓';
+            color: #98d8aa;
+            margin-right: 5px;
+        }
+
+        /* ========================================
+           #process-13: Manufacturing Flow
+           ======================================== */
+        #process-13 .mfg-container {
+            padding: 20px;
+        }
+
+        #process-13 .mfg-line {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        #process-13 .mfg-stage {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        #process-13 .mfg-machine {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: transform 0.3s;
+        }
+
+        #process-13 .mfg-machine:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        #process-13 .mfg-stage:nth-child(1) .mfg-machine { background: #87ceeb; }
+        #process-13 .mfg-stage:nth-child(2) .mfg-machine { background: #ff9a5c; }
+        #process-13 .mfg-stage:nth-child(3) .mfg-machine { background: #b19cd9; }
+        #process-13 .mfg-stage:nth-child(4) .mfg-machine { background: #98d8aa; }
+
+        #process-13 .mfg-label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        #process-13 .mfg-connector {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #eee;
+            z-index: 0;
+        }
+
+        #process-13 .mfg-product {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffd93d;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ========================================
+           #process-14: Service Delivery Process
+           ======================================== */
+        #process-14 .service-container {
+            padding: 20px;
+        }
+
+        #process-14 .service-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        #process-14 .service-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff6b9d, #87ceeb, #98d8aa, #ffd93d);
+            border-radius: 2px;
+        }
+
+        #process-14 .service-step {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        #process-14 .service-step:hover {
+            transform: translateX(10px);
+        }
+
+        #process-14 .service-step::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ff6b9d;
+            border: 3px solid white;
+        }
+
+        #process-14 .service-step:nth-child(2)::before { background: #87ceeb; }
+        #process-14 .service-step:nth-child(3)::before { background: #98d8aa; }
+        #process-14 .service-step:nth-child(4)::before { background: #ffd93d; }
+
+        #process-14 .service-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #process-14 .service-desc {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* ========================================
+           #process-15: Order Fulfillment
+           ======================================== */
+        #process-15 .order-container {
+            padding: 20px;
+        }
+
+        #process-15 .order-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        #process-15 .order-track::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            right: 30px;
+            height: 4px;
+            background: #eee;
+        }
+
+        #process-15 .order-track::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            width: 60%;
+            height: 4px;
+            background: #98d8aa;
+        }
+
+        #process-15 .order-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        #process-15 .order-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        #process-15 .order-step.completed .order-icon {
+            background: #98d8aa;
+        }
+
+        #process-15 .order-step.current .order-icon {
+            background: #ffd93d;
+            animation: orderPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes orderPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 217, 61, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 217, 61, 0); }
+        }
+
+        #process-15 .order-icon:hover {
+            transform: scale(1.1);
+        }
+
+        #process-15 .order-label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* ========================================
+           #process-16: Data Flow Process
+           ======================================== */
+        #process-16 .dataflow-container {
+            padding: 20px;
+        }
+
+        #process-16 .dataflow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #process-16 .data-node {
+            text-align: center;
+        }
+
+        #process-16 .data-shape {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+        }
+
+        #process-16 .data-shape:hover {
+            transform: scale(1.1);
+        }
+
+        #process-16 .data-source {
+            background: #87ceeb;
+            border-radius: 10px;
+        }
+
+        #process-16 .data-process {
+            background: #ff6b9d;
+            border-radius: 50%;
+        }
+
+        #process-16 .data-transform {
+            background: #ffd93d;
+            transform: rotate(45deg);
+        }
+
+        #process-16 .data-transform span {
+            transform: rotate(-45deg);
+        }
+
+        #process-16 .data-store {
+            background: #98d8aa;
+            border-radius: 0 0 40px 40px;
+        }
+
+        #process-16 .data-label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        #process-16 .data-arrow {
+            font-size: 1.5rem;
+            color: #ddd;
+        }
+
+        #process-16 .data-legend {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.75rem;
+        }
+
+        #process-16 .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #process-16 .legend-shape {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ========================================
+           #process-17: Workflow Stages
+           ======================================== */
+        #process-17 .workflow-container {
+            padding: 20px;
+        }
+
+        #process-17 .workflow-stages {
+            display: flex;
+            gap: 5px;
+        }
+
+        #process-17 .workflow-stage {
+            flex: 1;
+            position: relative;
+            padding: 20px 15px;
+            background: #f5f5f5;
+            text-align: center;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%, 15px 50%);
+            transition: transform 0.3s;
+        }
+
+        #process-17 .workflow-stage:first-child {
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+        }
+
+        #process-17 .workflow-stage:last-child {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);
+        }
+
+        #process-17 .workflow-stage:nth-child(1) { background: #ff6b9d; color: white; }
+        #process-17 .workflow-stage:nth-child(2) { background: #ff9a5c; color: white; }
+        #process-17 .workflow-stage:nth-child(3) { background: #ffd93d; color: #333; }
+        #process-17 .workflow-stage:nth-child(4) { background: #98d8aa; color: white; }
+        #process-17 .workflow-stage:nth-child(5) { background: #87ceeb; color: white; }
+
+        #process-17 .workflow-stage:hover {
+            transform: translateY(-5px);
+        }
+
+        #process-17 .workflow-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        #process-17 .workflow-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* ========================================
+           #process-18: Phase Gates
+           ======================================== */
+        #process-18 .phasegate-container {
+            padding: 20px;
+        }
+
+        #process-18 .phasegate-flow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #process-18 .phase {
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #process-18 .phase:hover {
+            transform: translateY(-5px);
+        }
+
+        #process-18 .phase:nth-child(1) { border-top: 4px solid #ff6b9d; }
+        #process-18 .phase:nth-child(3) { border-top: 4px solid #87ceeb; }
+        #process-18 .phase:nth-child(5) { border-top: 4px solid #98d8aa; }
+        #process-18 .phase:nth-child(7) { border-top: 4px solid #ffd93d; }
+
+        #process-18 .phase-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        #process-18 .phase-tasks {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        #process-18 .gate {
+            width: 50px;
+            height: 60px;
+            background: #b19cd9;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        #process-18 .gate::after {
+            content: 'Gate';
+            font-size: 0.6rem;
+            font-weight: bold;
+            position: absolute;
+            bottom: 5px;
+        }
+
+        #process-18 .gate:hover {
+            background: #9b7fc9;
+        }
+
+        /* ========================================
+           #process-19: Kanban Style
+           ======================================== */
+        #process-19 .kanban-container {
+            padding: 20px;
+        }
+
+        #process-19 .kanban-board {
+            display: flex;
+            gap: 15px;
+        }
+
+        #process-19 .kanban-column {
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 15px;
+            min-height: 200px;
+        }
+
+        #process-19 .kanban-header {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        #process-19 .kanban-column:nth-child(1) .kanban-header { background: #87ceeb; }
+        #process-19 .kanban-column:nth-child(2) .kanban-header { background: #ffd93d; color: #333; }
+        #process-19 .kanban-column:nth-child(3) .kanban-header { background: #ff6b9d; }
+        #process-19 .kanban-column:nth-child(4) .kanban-header { background: #98d8aa; }
+
+        #process-19 .kanban-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid #ddd;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        #process-19 .kanban-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #process-19 .kanban-card.high { border-left-color: #ff6b9d; }
+        #process-19 .kanban-card.medium { border-left-color: #ffd93d; }
+        #process-19 .kanban-card.low { border-left-color: #98d8aa; }
+
+        #process-19 .card-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #process-19 .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            background: #eee;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        /* ========================================
+           #process-20: Value Stream
+           ======================================== */
+        #process-20 .valuestream-container {
+            padding: 20px;
+        }
+
+        #process-20 .vs-flow {
+            position: relative;
+        }
+
+        #process-20 .vs-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        #process-20 .vs-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ddd;
+            z-index: 0;
+        }
+
+        #process-20 .vs-point {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        #process-20 .vs-dot {
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+        }
+
+        #process-20 .vs-point:nth-child(2) .vs-dot { background: #87ceeb; }
+        #process-20 .vs-point:nth-child(3) .vs-dot { background: #98d8aa; }
+        #process-20 .vs-point:nth-child(4) .vs-dot { background: #ffd93d; }
+        #process-20 .vs-point:nth-child(5) .vs-dot { background: #b19cd9; }
+
+        #process-20 .vs-label {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        #process-20 .vs-activities {
+            display: flex;
+            gap: 10px;
+        }
+
+        #process-20 .vs-activity {
+            flex: 1;
+            text-align: center;
+        }
+
+        #process-20 .vs-box {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+
+        #process-20 .vs-box:hover {
+            transform: scale(1.05);
+        }
+
+        #process-20 .vs-activity:nth-child(1) .vs-box { border-top: 4px solid #ff6b9d; }
+        #process-20 .vs-activity:nth-child(2) .vs-box { border-top: 4px solid #87ceeb; }
+        #process-20 .vs-activity:nth-child(3) .vs-box { border-top: 4px solid #98d8aa; }
+        #process-20 .vs-activity:nth-child(4) .vs-box { border-top: 4px solid #ffd93d; }
+
+        #process-20 .vs-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        #process-20 .vs-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        #process-20 .vs-metrics {
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        #process-20 .vs-metric {
+            text-align: center;
+        }
+
+        #process-20 .vs-metric-value {
+            font-weight: bold;
+            color: #555;
+        }
+
+        #process-20 .vs-summary {
+            margin-top: 15px;
+            padding: 15px;
+            background: #b19cd9;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        #process-20 .vs-summary-item {
+            font-size: 0.85rem;
+        }
+
+        #process-20 .vs-summary-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #process-1 .process-container {
+                flex-wrap: wrap;
+            }
+
+            #process-19 .kanban-board {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Process Diagram Templates</h1>
+    <p style="text-align: center; color: #888; margin-bottom: 40px;">プロセス図テンプレート 20種類</p>
+
+    <div class="template-grid">
+        <!-- #process-1: Linear Process -->
+        <div class="template-card" id="process-1">
+            <h2><span>#process-1</span> Linear Process (リニアプロセス)</h2>
+            <div class="process-container">
+                <div class="step">Step 1</div>
+                <div class="arrow">→</div>
+                <div class="step">Step 2</div>
+                <div class="arrow">→</div>
+                <div class="step">Step 3</div>
+                <div class="arrow">→</div>
+                <div class="step">Step 4</div>
+            </div>
+        </div>
+
+        <!-- #process-2: Conveyor Belt Process -->
+        <div class="template-card" id="process-2">
+            <h2><span>#process-2</span> Conveyor Belt (ベルトコンベア)</h2>
+            <div class="conveyor-container">
+                <div class="items">
+                    <div class="item">原料</div>
+                    <div class="item">加工</div>
+                    <div class="item">組立</div>
+                    <div class="item">検査</div>
+                    <div class="item">完成</div>
+                </div>
+                <div class="belt"></div>
+            </div>
+        </div>
+
+        <!-- #process-3: Pipeline Process -->
+        <div class="template-card" id="process-3">
+            <h2><span>#process-3</span> Pipeline (パイプライン)</h2>
+            <div class="pipeline-container">
+                <div class="pipe-segment">収集</div>
+                <div class="pipe-segment">解析</div>
+                <div class="pipe-segment">変換</div>
+                <div class="pipe-segment">保存</div>
+                <div class="pipe-segment">出力</div>
+            </div>
+        </div>
+
+        <!-- #process-4: Assembly Line -->
+        <div class="template-card" id="process-4">
+            <h2><span>#process-4</span> Assembly Line (組立ライン)</h2>
+            <div class="assembly-container">
+                <div class="assembly-line">
+                    <div class="station">
+                        <div class="worker"></div>
+                        <div class="workbench">Station 1</div>
+                    </div>
+                    <div class="station">
+                        <div class="worker"></div>
+                        <div class="workbench">Station 2</div>
+                    </div>
+                    <div class="station">
+                        <div class="worker"></div>
+                        <div class="workbench">Station 3</div>
+                    </div>
+                    <div class="station">
+                        <div class="worker"></div>
+                        <div class="workbench">Station 4</div>
+                    </div>
+                </div>
+                <div class="conveyor-track">
+                    <div class="moving-items">
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                        <div class="moving-item"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-5: Input → Process → Output -->
+        <div class="template-card" id="process-5">
+            <h2><span>#process-5</span> Input → Process → Output (IPO)</h2>
+            <div class="ipo-container">
+                <div class="ipo-box input-box">
+                    <div style="font-size: 2rem;">📥</div>
+                    <div class="ipo-label">INPUT</div>
+                </div>
+                <div class="ipo-arrow">➜</div>
+                <div class="ipo-box process-box">
+                    <div class="gear">⚙️</div>
+                    <div class="ipo-label">PROCESS</div>
+                </div>
+                <div class="ipo-arrow">➜</div>
+                <div class="ipo-box output-box">
+                    <div style="font-size: 2rem;">📤</div>
+                    <div class="ipo-label">OUTPUT</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-6: Multi-stage Process -->
+        <div class="template-card" id="process-6">
+            <h2><span>#process-6</span> Multi-stage Process (段階的プロセス)</h2>
+            <div class="multistage-container">
+                <div class="stage-row">
+                    <div class="stage-label">Stage 1</div>
+                    <div class="stage-bar">計画</div>
+                </div>
+                <div class="stage-row">
+                    <div class="stage-label">Stage 2</div>
+                    <div class="stage-bar">設計</div>
+                </div>
+                <div class="stage-row">
+                    <div class="stage-label">Stage 3</div>
+                    <div class="stage-bar">実装</div>
+                </div>
+                <div class="stage-row">
+                    <div class="stage-label">Stage 4</div>
+                    <div class="stage-bar">リリース</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-7: Parallel Processes -->
+        <div class="template-card" id="process-7">
+            <h2><span>#process-7</span> Parallel Processes (並列処理)</h2>
+            <div class="parallel-container">
+                <div class="parallel-start">START</div>
+                <div class="parallel-tracks">
+                    <div class="track">
+                        <div class="track-item">Task A-1</div>
+                        <div class="track-item">Task A-2</div>
+                    </div>
+                    <div class="track">
+                        <div class="track-item">Task B-1</div>
+                        <div class="track-item">Task B-2</div>
+                    </div>
+                    <div class="track">
+                        <div class="track-item">Task C-1</div>
+                        <div class="track-item">Task C-2</div>
+                    </div>
+                </div>
+                <div class="parallel-end">END</div>
+            </div>
+        </div>
+
+        <!-- #process-8: Sequential Tasks -->
+        <div class="template-card" id="process-8">
+            <h2><span>#process-8</span> Sequential Tasks (連続タスク)</h2>
+            <div class="sequential-container">
+                <div class="task-sequence">
+                    <div class="task-item">
+                        <div class="task-number">1</div>
+                        <div class="task-content">要件定義</div>
+                    </div>
+                    <div class="task-connector"></div>
+                    <div class="task-item">
+                        <div class="task-number">2</div>
+                        <div class="task-content">設計</div>
+                    </div>
+                    <div class="task-connector"></div>
+                    <div class="task-item">
+                        <div class="task-number">3</div>
+                        <div class="task-content">開発</div>
+                    </div>
+                    <div class="task-connector"></div>
+                    <div class="task-item">
+                        <div class="task-number">4</div>
+                        <div class="task-content">テスト</div>
+                    </div>
+                    <div class="task-connector"></div>
+                    <div class="task-item">
+                        <div class="task-number">5</div>
+                        <div class="task-content">デプロイ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-9: Dependency Process -->
+        <div class="template-card" id="process-9">
+            <h2><span>#process-9</span> Dependency Process (依存関係)</h2>
+            <div class="dependency-container">
+                <div class="dep-grid">
+                    <div class="dep-node">Task A</div>
+                    <div class="dep-node">Task B</div>
+                    <div class="dep-node">Task C</div>
+                    <div class="dep-node">Task D</div>
+                    <div class="dep-node">Task E</div>
+                    <div class="dep-node">Task F</div>
+                </div>
+                <div class="dep-legend">※ 矢印は依存関係を示します（A→B = BはAに依存）</div>
+            </div>
+        </div>
+
+        <!-- #process-10: Batch Process -->
+        <div class="template-card" id="process-10">
+            <h2><span>#process-10</span> Batch Process (バッチ処理)</h2>
+            <div class="batch-container">
+                <div class="batch-input">
+                    <div class="batch-item"></div>
+                    <div class="batch-item"></div>
+                    <div class="batch-item"></div>
+                    <div class="batch-item"></div>
+                    <div class="batch-item"></div>
+                    <div class="batch-item"></div>
+                </div>
+                <div class="batch-arrow">⬇️</div>
+                <div class="batch-processor">
+                    🔄 Batch Processor
+                </div>
+                <div class="batch-arrow">⬇️</div>
+                <div class="batch-output">
+                    <div class="batch-result">A</div>
+                    <div class="batch-result">B</div>
+                    <div class="batch-result">C</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-11: Review/Approval Process -->
+        <div class="template-card" id="process-11">
+            <h2><span>#process-11</span> Review/Approval (承認フロー)</h2>
+            <div class="approval-container">
+                <div class="approval-flow">
+                    <div class="approval-step">
+                        <div class="approval-icon">📝</div>
+                        <div class="approval-label">申請</div>
+                    </div>
+                    <div class="approval-arrow">→</div>
+                    <div class="approval-step">
+                        <div class="approval-icon">👀</div>
+                        <div class="approval-label">レビュー</div>
+                    </div>
+                    <div class="approval-arrow">→</div>
+                    <div class="approval-step">
+                        <div class="approval-icon">✅</div>
+                        <div class="approval-label">承認</div>
+                    </div>
+                    <div class="approval-arrow">→</div>
+                    <div class="approval-step">
+                        <div class="approval-icon">🎉</div>
+                        <div class="approval-label">完了</div>
+                    </div>
+                </div>
+                <div class="approval-status">
+                    <div class="status-item">
+                        <div class="status-dot pending"></div>
+                        <span>保留中</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot approved"></div>
+                        <span>承認済</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot rejected"></div>
+                        <span>却下</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-12: Quality Control Process -->
+        <div class="template-card" id="process-12">
+            <h2><span>#process-12</span> Quality Control (品質管理)</h2>
+            <div class="qc-container">
+                <div class="qc-flow">
+                    <div class="qc-stage">
+                        <div class="qc-icon">📋</div>
+                        <div class="qc-title">受入検査</div>
+                        <div class="qc-checklist">
+                            <div>外観チェック</div>
+                            <div>数量確認</div>
+                        </div>
+                    </div>
+                    <div class="qc-stage">
+                        <div class="qc-icon">🔬</div>
+                        <div class="qc-title">工程検査</div>
+                        <div class="qc-checklist">
+                            <div>寸法測定</div>
+                            <div>機能テスト</div>
+                        </div>
+                    </div>
+                    <div class="qc-stage">
+                        <div class="qc-icon">🎯</div>
+                        <div class="qc-title">最終検査</div>
+                        <div class="qc-checklist">
+                            <div>総合評価</div>
+                            <div>出荷判定</div>
+                        </div>
+                    </div>
+                    <div class="qc-stage">
+                        <div class="qc-icon">📦</div>
+                        <div class="qc-title">出荷</div>
+                        <div class="qc-checklist">
+                            <div>梱包確認</div>
+                            <div>配送手配</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-13: Manufacturing Flow -->
+        <div class="template-card" id="process-13">
+            <h2><span>#process-13</span> Manufacturing Flow (製造フロー)</h2>
+            <div class="mfg-container">
+                <div class="mfg-connector"></div>
+                <div class="mfg-line">
+                    <div class="mfg-stage">
+                        <div class="mfg-machine">🏭</div>
+                        <div class="mfg-label">原料投入</div>
+                    </div>
+                    <div class="mfg-stage">
+                        <div class="mfg-machine">⚙️</div>
+                        <div class="mfg-label">加工</div>
+                    </div>
+                    <div class="mfg-stage">
+                        <div class="mfg-machine">🔧</div>
+                        <div class="mfg-label">組立</div>
+                    </div>
+                    <div class="mfg-stage">
+                        <div class="mfg-machine">✅</div>
+                        <div class="mfg-label">検品</div>
+                    </div>
+                </div>
+                <div class="mfg-product">📦 完成品</div>
+            </div>
+        </div>
+
+        <!-- #process-14: Service Delivery Process -->
+        <div class="template-card" id="process-14">
+            <h2><span>#process-14</span> Service Delivery (サービス提供)</h2>
+            <div class="service-container">
+                <div class="service-timeline">
+                    <div class="service-step">
+                        <div class="service-title">1. お問い合わせ</div>
+                        <div class="service-desc">顧客からの依頼を受付</div>
+                    </div>
+                    <div class="service-step">
+                        <div class="service-title">2. ヒアリング</div>
+                        <div class="service-desc">要望の詳細を確認</div>
+                    </div>
+                    <div class="service-step">
+                        <div class="service-title">3. サービス実施</div>
+                        <div class="service-desc">実際のサービス提供</div>
+                    </div>
+                    <div class="service-step">
+                        <div class="service-title">4. フォローアップ</div>
+                        <div class="service-desc">満足度確認と改善</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-15: Order Fulfillment -->
+        <div class="template-card" id="process-15">
+            <h2><span>#process-15</span> Order Fulfillment (注文処理)</h2>
+            <div class="order-container">
+                <div class="order-track">
+                    <div class="order-step completed">
+                        <div class="order-icon">🛒</div>
+                        <div class="order-label">注文</div>
+                    </div>
+                    <div class="order-step completed">
+                        <div class="order-icon">💳</div>
+                        <div class="order-label">決済</div>
+                    </div>
+                    <div class="order-step completed">
+                        <div class="order-icon">📦</div>
+                        <div class="order-label">梱包</div>
+                    </div>
+                    <div class="order-step current">
+                        <div class="order-icon">🚚</div>
+                        <div class="order-label">配送中</div>
+                    </div>
+                    <div class="order-step">
+                        <div class="order-icon">🏠</div>
+                        <div class="order-label">到着</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-16: Data Flow Process -->
+        <div class="template-card" id="process-16">
+            <h2><span>#process-16</span> Data Flow (データフロー)</h2>
+            <div class="dataflow-container">
+                <div class="dataflow-diagram">
+                    <div class="data-node">
+                        <div class="data-shape data-source">📊</div>
+                        <div class="data-label">データソース</div>
+                    </div>
+                    <div class="data-arrow">→</div>
+                    <div class="data-node">
+                        <div class="data-shape data-process">⚡</div>
+                        <div class="data-label">処理</div>
+                    </div>
+                    <div class="data-arrow">→</div>
+                    <div class="data-node">
+                        <div class="data-shape data-transform"><span>🔄</span></div>
+                        <div class="data-label">変換</div>
+                    </div>
+                    <div class="data-arrow">→</div>
+                    <div class="data-node">
+                        <div class="data-shape data-store">💾</div>
+                        <div class="data-label">保存</div>
+                    </div>
+                </div>
+                <div class="data-legend">
+                    <div class="legend-item">
+                        <div class="legend-shape" style="background:#87ceeb;border-radius:3px;"></div>
+                        <span>外部</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-shape" style="background:#ff6b9d;border-radius:50%;"></div>
+                        <span>処理</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-shape" style="background:#ffd93d;transform:rotate(45deg);"></div>
+                        <span>判定</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-shape" style="background:#98d8aa;border-radius:0 0 10px 10px;"></div>
+                        <span>保存</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-17: Workflow Stages -->
+        <div class="template-card" id="process-17">
+            <h2><span>#process-17</span> Workflow Stages (ワークフロー)</h2>
+            <div class="workflow-container">
+                <div class="workflow-stages">
+                    <div class="workflow-stage">
+                        <div class="workflow-icon">💡</div>
+                        <div class="workflow-title">企画</div>
+                    </div>
+                    <div class="workflow-stage">
+                        <div class="workflow-icon">📐</div>
+                        <div class="workflow-title">設計</div>
+                    </div>
+                    <div class="workflow-stage">
+                        <div class="workflow-icon">🛠️</div>
+                        <div class="workflow-title">開発</div>
+                    </div>
+                    <div class="workflow-stage">
+                        <div class="workflow-icon">🧪</div>
+                        <div class="workflow-title">テスト</div>
+                    </div>
+                    <div class="workflow-stage">
+                        <div class="workflow-icon">🚀</div>
+                        <div class="workflow-title">公開</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-18: Phase Gates -->
+        <div class="template-card" id="process-18">
+            <h2><span>#process-18</span> Phase Gates (フェーズゲート)</h2>
+            <div class="phasegate-container">
+                <div class="phasegate-flow">
+                    <div class="phase">
+                        <div class="phase-title">Phase 1</div>
+                        <div class="phase-tasks">調査・分析</div>
+                    </div>
+                    <div class="gate">🚪</div>
+                    <div class="phase">
+                        <div class="phase-title">Phase 2</div>
+                        <div class="phase-tasks">計画・設計</div>
+                    </div>
+                    <div class="gate">🚪</div>
+                    <div class="phase">
+                        <div class="phase-title">Phase 3</div>
+                        <div class="phase-tasks">実装</div>
+                    </div>
+                    <div class="gate">🚪</div>
+                    <div class="phase">
+                        <div class="phase-title">Phase 4</div>
+                        <div class="phase-tasks">リリース</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-19: Kanban Style -->
+        <div class="template-card" id="process-19">
+            <h2><span>#process-19</span> Kanban Style (カンバン)</h2>
+            <div class="kanban-container">
+                <div class="kanban-board">
+                    <div class="kanban-column">
+                        <div class="kanban-header">To Do</div>
+                        <div class="kanban-card high">
+                            <div class="card-title">タスク A</div>
+                            <div class="card-tag">高優先</div>
+                        </div>
+                        <div class="kanban-card low">
+                            <div class="card-title">タスク B</div>
+                            <div class="card-tag">低優先</div>
+                        </div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="kanban-header">進行中</div>
+                        <div class="kanban-card medium">
+                            <div class="card-title">タスク C</div>
+                            <div class="card-tag">中優先</div>
+                        </div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="kanban-header">レビュー</div>
+                        <div class="kanban-card high">
+                            <div class="card-title">タスク D</div>
+                            <div class="card-tag">高優先</div>
+                        </div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="kanban-header">完了</div>
+                        <div class="kanban-card low">
+                            <div class="card-title">タスク E</div>
+                            <div class="card-tag">完了</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #process-20: Value Stream -->
+        <div class="template-card" id="process-20">
+            <h2><span>#process-20</span> Value Stream (バリューストリーム)</h2>
+            <div class="valuestream-container">
+                <div class="vs-flow">
+                    <div class="vs-timeline">
+                        <div class="vs-point">
+                            <div class="vs-dot"></div>
+                            <div class="vs-label">開始</div>
+                        </div>
+                        <div class="vs-point">
+                            <div class="vs-dot"></div>
+                            <div class="vs-label">5分</div>
+                        </div>
+                        <div class="vs-point">
+                            <div class="vs-dot"></div>
+                            <div class="vs-label">15分</div>
+                        </div>
+                        <div class="vs-point">
+                            <div class="vs-dot"></div>
+                            <div class="vs-label">30分</div>
+                        </div>
+                        <div class="vs-point">
+                            <div class="vs-dot"></div>
+                            <div class="vs-label">完了</div>
+                        </div>
+                    </div>
+                    <div class="vs-activities">
+                        <div class="vs-activity">
+                            <div class="vs-box">
+                                <div class="vs-icon">📥</div>
+                                <div class="vs-title">受注</div>
+                            </div>
+                            <div class="vs-metrics">
+                                <div class="vs-metric">
+                                    <div class="vs-metric-value">5min</div>
+                                    <div>処理時間</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vs-activity">
+                            <div class="vs-box">
+                                <div class="vs-icon">⚙️</div>
+                                <div class="vs-title">処理</div>
+                            </div>
+                            <div class="vs-metrics">
+                                <div class="vs-metric">
+                                    <div class="vs-metric-value">10min</div>
+                                    <div>処理時間</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vs-activity">
+                            <div class="vs-box">
+                                <div class="vs-icon">✅</div>
+                                <div class="vs-title">検証</div>
+                            </div>
+                            <div class="vs-metrics">
+                                <div class="vs-metric">
+                                    <div class="vs-metric-value">10min</div>
+                                    <div>処理時間</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vs-activity">
+                            <div class="vs-box">
+                                <div class="vs-icon">📤</div>
+                                <div class="vs-title">出荷</div>
+                            </div>
+                            <div class="vs-metrics">
+                                <div class="vs-metric">
+                                    <div class="vs-metric-value">5min</div>
+                                    <div>処理時間</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vs-summary">
+                        <div class="vs-summary-item">
+                            <div>リードタイム</div>
+                            <div class="vs-summary-value">30分</div>
+                        </div>
+                        <div class="vs-summary-item">
+                            <div>付加価値時間</div>
+                            <div class="vs-summary-value">25分</div>
+                        </div>
+                        <div class="vs-summary-item">
+                            <div>効率</div>
+                            <div class="vs-summary-value">83%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 60px; padding: 30px; color: #888; font-size: 0.9rem;">
+        <p>Process Diagram Templates - プロセス図テンプレート集</p>
+        <p style="margin-top: 10px;">SNSインフォグラフィック・教育コンテンツ向け</p>
+    </footer>
+</body>
+</html>

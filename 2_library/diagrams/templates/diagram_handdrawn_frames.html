@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand-drawn Frames & Borders - 手書き風フレーム・枠</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .frame-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .frame-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .frame-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .frame-preview {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frame-id {
+            font-size: 0.85em;
+            color: #bdc3c7;
+            text-align: center;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+
+        /* ===== HAND-DRAWN FRAMES ===== */
+
+        /* #1 Wobbly Rectangle Frame */
+        #handframe-1 {
+            width: 200px;
+            height: 150px;
+            border: 3px solid #e74c3c;
+            border-radius: 8% 7% 9% 8% / 9% 8% 7% 8%;
+            box-shadow: 0 0 0 8px rgba(231, 76, 60, 0.1),
+                        inset 0 0 0 3px #e74c3c;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            animation: wobble 2s ease-in-out infinite;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(0.5deg) scale(1.01); }
+            50% { transform: rotate(-0.5deg) scale(0.99); }
+            75% { transform: rotate(0.3deg) scale(1.01); }
+        }
+
+        /* #2 Hand-drawn Circle Frame */
+        #handframe-2 {
+            width: 180px;
+            height: 180px;
+            border: 3px solid #3498db;
+            border-radius: 47% 53% 52% 48% / 48% 47% 53% 52%;
+            box-shadow: 0 0 0 6px rgba(52, 152, 219, 0.1),
+                        inset 0 0 0 2px #3498db;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        #handframe-2:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        /* #3 Sketchy Cloud Frame */
+        #handframe-3 {
+            width: 220px;
+            height: 140px;
+            background: rgba(52, 152, 219, 0.05);
+            border: 2.5px dashed #3498db;
+            border-radius: 25% 15% 20% 60% / 15% 60% 30% 70%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(52, 152, 219, 0.1),
+                        0 4px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        /* #4 Doodle Star Frame */
+        #handframe-4 {
+            width: 200px;
+            height: 200px;
+            background: rgba(241, 196, 15, 0.05);
+            border: 2px solid #f1c40f;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1c40f;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 0 0 3px #f1c40f;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+
+        #handframe-4:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+
+        /* #5 Rough Banner/Ribbon */
+        #handframe-5 {
+            width: 240px;
+            height: 120px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border: 2px solid #a93226;
+            border-radius: 0 5% 0 5% / 3% 0 3% 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: -4px 4px 0 rgba(0, 0, 0, 0.2),
+                        inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #handframe-5::before,
+        #handframe-5::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background: #e74c3c;
+            border: 2px solid #a93226;
+        }
+
+        #handframe-5::before {
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-15deg);
+            clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+        }
+
+        #handframe-5::after {
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(15deg);
+            clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+        }
+
+        /* #6 Scribble Underline Box */
+        #handframe-6 {
+            width: 200px;
+            height: 160px;
+            border: none;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9b59b6;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        #handframe-6::before {
+            content: '';
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                #9b59b6 0,
+                #9b59b6 10px,
+                transparent 10px,
+                transparent 15px
+            );
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+
+        #handframe-6::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid #9b59b6;
+            border-radius: 3% 4% 5% 3% / 2% 3% 4% 5%;
+            pointer-events: none;
+        }
+
+        /* #7 Torn Paper Edge Frame */
+        #handframe-7 {
+            width: 210px;
+            height: 170px;
+            background: white;
+            border: 2px solid #16a085;
+            border-radius: 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #16a085;
+            font-weight: bold;
+            text-align: center;
+            box-shadow:
+                -3px 5px 0 -2px #16a085,
+                -6px 10px 0 -4px #16a085,
+                inset 0 0 10px rgba(22, 160, 133, 0.1);
+            position: relative;
+        }
+
+        #handframe-7::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #16a085 0,
+                #16a085 3px,
+                transparent 3px,
+                transparent 6px
+            );
+            opacity: 0.5;
+        }
+
+        /* #8 Sticky Note (Tilted) */
+        #handframe-8 {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #f39c12 0%, #e8760f 100%);
+            border: none;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.2),
+                        inset -1px -1px 3px rgba(0, 0, 0, 0.1);
+            transform: rotate(-8deg) skewY(2deg);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        #handframe-8::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #handframe-8:hover {
+            transform: rotate(-5deg) skewY(1deg) scale(1.05);
+        }
+
+        /* #9 Hand-drawn Polaroid */
+        #handframe-9 {
+            width: 200px;
+            height: 240px;
+            background: #ecf0f1;
+            border: 8px solid white;
+            border-radius: 2% 3% 2% 4% / 3% 2% 4% 2%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2),
+                        inset 0 0 15px rgba(0, 0, 0, 0.05);
+            transform: rotate(3deg);
+        }
+
+        #handframe-9 .photo-area {
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+            border-radius: 2px;
+            margin-bottom: 15px;
+        }
+
+        #handframe-9:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        /* #10 Crayon Border Box */
+        #handframe-10 {
+            width: 210px;
+            height: 160px;
+            border: 4px solid #2ecc71;
+            border-radius: 5% 6% 4% 5% / 4% 5% 6% 4%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #27ae60;
+            font-weight: bold;
+            text-align: center;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(46, 204, 113, 0.05) 2px,
+                rgba(46, 204, 113, 0.05) 4px
+            );
+            box-shadow: 2px 2px 0 #2ecc71,
+                        4px 4px 0 #27ae60,
+                        6px 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #handframe-10:hover {
+            transform: translateY(-3px);
+        }
+
+        /* #11 Marker Highlight Frame */
+        #handframe-11 {
+            width: 200px;
+            height: 150px;
+            border: none;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c0392b;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(
+                -45deg,
+                transparent 30%,
+                rgba(241, 196, 15, 0.4) 30%,
+                rgba(241, 196, 15, 0.4) 70%,
+                transparent 70%
+            );
+        }
+
+        #handframe-11::before {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            border: 3px solid #f1c40f;
+            border-radius: 2% 3% 4% 2% / 4% 2% 3% 4%;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        /* #12 Pencil Sketch Frame */
+        #handframe-12 {
+            width: 200px;
+            height: 160px;
+            border: 2px solid;
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><line x1="0" y1="0" x2="10" y2="10" stroke="%234a5568" stroke-width="1"/></svg>') 1;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(45deg, transparent 45%, rgba(74, 85, 104, 0.03) 45%, rgba(74, 85, 104, 0.03) 55%, transparent 55%);
+            border-radius: 3% 4% 3% 5% / 2% 3% 4% 2%;
+            box-shadow: inset 0 0 15px rgba(74, 85, 104, 0.08);
+        }
+
+        /* #13 Ink Splatter Border */
+        #handframe-13 {
+            width: 210px;
+            height: 170px;
+            border: 2px solid #2c3e50;
+            border-radius: 8% 7% 9% 8% / 9% 8% 7% 8%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            text-align: center;
+            background: white;
+            box-shadow:
+                0 0 0 3px #2c3e50,
+                2px 2px 8px rgba(44, 62, 80, 0.2),
+                -2px -2px 8px rgba(44, 62, 80, 0.1);
+            position: relative;
+        }
+
+        #handframe-13::before,
+        #handframe-13::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #2c3e50;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        #handframe-13::before {
+            top: -10px;
+            right: 30px;
+        }
+
+        #handframe-13::after {
+            bottom: -8px;
+            left: 20px;
+        }
+
+        /* #14 Hand-drawn Tag/Label */
+        #handframe-14 {
+            width: 200px;
+            height: 130px;
+            background: #f9e79f;
+            border: 2px solid #d68910;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8b4513;
+            font-weight: bold;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%);
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        #handframe-14::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* #15 Doodle Heart Frame */
+        #handframe-15 {
+            width: 200px;
+            height: 200px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e91e63;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            background: rgba(233, 30, 99, 0.05);
+        }
+
+        #handframe-15::before {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: white;
+            border: 3px solid #e91e63;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 0 6px rgba(233, 30, 99, 0.1);
+        }
+
+        #handframe-15::after {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: white;
+            border: 3px solid #e91e63;
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(45deg);
+            box-shadow: 0 0 0 6px rgba(233, 30, 99, 0.1);
+        }
+
+        #handframe-15:hover {
+            transform: scale(1.08);
+        }
+
+        /* #16 Rough Speech Bubble */
+        #handframe-16 {
+            width: 220px;
+            height: 140px;
+            background: #ecf0f1;
+            border: 2px solid #34495e;
+            border-radius: 15% 15% 15% 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #34495e;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 3px 3px 0 #34495e,
+                        inset -1px -1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #handframe-16::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-top: 15px solid #ecf0f1;
+            border-right: 5px solid transparent;
+            filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        /* #17 Sketchy Arrow Frame */
+        #handframe-17 {
+            width: 200px;
+            height: 150px;
+            border: 2px solid #16a085;
+            border-radius: 4% 5% 4% 5% / 5% 4% 5% 4%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #16a085;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(45deg, transparent 48%, #16a085 48%, #16a085 52%, transparent 52%);
+            position: relative;
+        }
+
+        #handframe-17::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #16a085;
+            border-radius: 4% 5% 4% 5% / 5% 4% 5% 4%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* #18 Hand-drawn Bracket Frame */
+        #handframe-18 {
+            width: 200px;
+            height: 160px;
+            border: none;
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8e44ad;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+        }
+
+        #handframe-18::before,
+        #handframe-18::after {
+            content: '';
+            position: absolute;
+            border: 3px solid #8e44ad;
+        }
+
+        #handframe-18::before {
+            left: 10px;
+            top: 10px;
+            width: 30px;
+            height: 40px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        #handframe-18::after {
+            right: 10px;
+            bottom: 10px;
+            width: 30px;
+            height: 40px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* #19 Scalloped Edge Frame */
+        #handframe-19 {
+            width: 210px;
+            height: 170px;
+            border: 3px solid #d35400;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d35400;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(211, 84, 0, 0.03);
+            clip-path: polygon(
+                5% 0%, 10% 2%, 15% 0%, 20% 2%, 25% 0%, 30% 2%, 35% 0%, 40% 2%, 45% 0%, 50% 2%, 55% 0%, 60% 2%, 65% 0%, 70% 2%, 75% 0%, 80% 2%, 85% 0%, 90% 2%, 95% 0%, 100% 5%,
+                98% 10%, 100% 15%, 98% 20%, 100% 25%, 98% 30%, 100% 35%, 98% 40%, 100% 45%, 98% 50%, 100% 55%, 98% 60%, 100% 65%, 98% 70%, 100% 75%, 98% 80%, 100% 85%, 98% 90%, 100% 95%,
+                95% 100%, 90% 98%, 85% 100%, 80% 98%, 75% 100%, 70% 98%, 65% 100%, 60% 98%, 55% 100%, 50% 98%, 45% 100%, 40% 98%, 35% 100%, 30% 98%, 25% 100%, 20% 98%, 15% 100%, 10% 98%, 5% 100%, 0% 95%,
+                2% 90%, 0% 85%, 2% 80%, 0% 75%, 2% 70%, 0% 65%, 2% 60%, 0% 55%, 2% 50%, 0% 45%, 2% 40%, 0% 35%, 2% 30%, 0% 25%, 2% 20%, 0% 15%, 2% 10%, 0% 5%
+            );
+        }
+
+        /* #20 Rough Stamp Frame */
+        #handframe-20 {
+            width: 180px;
+            height: 180px;
+            border: 3px dashed #c0392b;
+            border-radius: 15% 25% 20% 30% / 25% 15% 30% 20%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c0392b;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(192, 57, 43, 0.08);
+            transform: rotate(-15deg);
+            box-shadow: 0 0 0 2px #c0392b,
+                        inset 0 0 20px rgba(192, 57, 43, 0.15),
+                        -3px -3px 8px rgba(192, 57, 43, 0.2);
+            animation: stamp-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes stamp-pulse {
+            0%, 100% { transform: rotate(-15deg) scale(1); }
+            50% { transform: rotate(-12deg) scale(1.02); }
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+
+        .content-text {
+            position: relative;
+            z-index: 10;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .feature-item::before {
+            content: '✓';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
+
+        .code-block code {
+            color: #3498db;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin: 0 5px;
+            border: 1px solid #bdc3c7;
+            vertical-align: middle;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ Hand-drawn Frames & Borders</h1>
+        <p class="subtitle">手書き風フレーム・枠 - 20 Unique Sketchy Designs</p>
+
+        <div class="demo-section">
+            <h2 class="section-title">🎨 Frame Showcase</h2>
+            <div class="gallery">
+                <!-- Frame 1: Wobbly Rectangle -->
+                <div class="frame-card">
+                    <div class="frame-title">Wobbly Rectangle</div>
+                    <div class="frame-preview">
+                        <div id="handframe-1" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-1</div>
+                </div>
+
+                <!-- Frame 2: Hand-drawn Circle -->
+                <div class="frame-card">
+                    <div class="frame-title">Hand-drawn Circle</div>
+                    <div class="frame-preview">
+                        <div id="handframe-2" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-2</div>
+                </div>
+
+                <!-- Frame 3: Sketchy Cloud -->
+                <div class="frame-card">
+                    <div class="frame-title">Sketchy Cloud</div>
+                    <div class="frame-preview">
+                        <div id="handframe-3" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-3</div>
+                </div>
+
+                <!-- Frame 4: Doodle Star -->
+                <div class="frame-card">
+                    <div class="frame-title">Doodle Star</div>
+                    <div class="frame-preview">
+                        <div id="handframe-4" class="content-text">⭐</div>
+                    </div>
+                    <div class="frame-id">#handframe-4</div>
+                </div>
+
+                <!-- Frame 5: Rough Banner/Ribbon -->
+                <div class="frame-card">
+                    <div class="frame-title">Rough Banner</div>
+                    <div class="frame-preview">
+                        <div id="handframe-5" class="content-text">Banner</div>
+                    </div>
+                    <div class="frame-id">#handframe-5</div>
+                </div>
+
+                <!-- Frame 6: Scribble Underline -->
+                <div class="frame-card">
+                    <div class="frame-title">Scribble Underline</div>
+                    <div class="frame-preview">
+                        <div id="handframe-6" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-6</div>
+                </div>
+
+                <!-- Frame 7: Torn Paper -->
+                <div class="frame-card">
+                    <div class="frame-title">Torn Paper Edge</div>
+                    <div class="frame-preview">
+                        <div id="handframe-7" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-7</div>
+                </div>
+
+                <!-- Frame 8: Sticky Note -->
+                <div class="frame-card">
+                    <div class="frame-title">Sticky Note</div>
+                    <div class="frame-preview">
+                        <div id="handframe-8" class="content-text">Note</div>
+                    </div>
+                    <div class="frame-id">#handframe-8</div>
+                </div>
+
+                <!-- Frame 9: Polaroid -->
+                <div class="frame-card">
+                    <div class="frame-title">Hand-drawn Polaroid</div>
+                    <div class="frame-preview">
+                        <div id="handframe-9">
+                            <div class="photo-area"></div>
+                            <div class="content-text">Photo</div>
+                        </div>
+                    </div>
+                    <div class="frame-id">#handframe-9</div>
+                </div>
+
+                <!-- Frame 10: Crayon Border -->
+                <div class="frame-card">
+                    <div class="frame-title">Crayon Border</div>
+                    <div class="frame-preview">
+                        <div id="handframe-10" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-10</div>
+                </div>
+
+                <!-- Frame 11: Marker Highlight -->
+                <div class="frame-card">
+                    <div class="frame-title">Marker Highlight</div>
+                    <div class="frame-preview">
+                        <div id="handframe-11" class="content-text">Highlight</div>
+                    </div>
+                    <div class="frame-id">#handframe-11</div>
+                </div>
+
+                <!-- Frame 12: Pencil Sketch -->
+                <div class="frame-card">
+                    <div class="frame-title">Pencil Sketch</div>
+                    <div class="frame-preview">
+                        <div id="handframe-12" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-12</div>
+                </div>
+
+                <!-- Frame 13: Ink Splatter -->
+                <div class="frame-card">
+                    <div class="frame-title">Ink Splatter</div>
+                    <div class="frame-preview">
+                        <div id="handframe-13" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-13</div>
+                </div>
+
+                <!-- Frame 14: Tag/Label -->
+                <div class="frame-card">
+                    <div class="frame-title">Hand-drawn Tag</div>
+                    <div class="frame-preview">
+                        <div id="handframe-14" class="content-text">Label</div>
+                    </div>
+                    <div class="frame-id">#handframe-14</div>
+                </div>
+
+                <!-- Frame 15: Doodle Heart -->
+                <div class="frame-card">
+                    <div class="frame-title">Doodle Heart</div>
+                    <div class="frame-preview">
+                        <div id="handframe-15" class="content-text">❤️</div>
+                    </div>
+                    <div class="frame-id">#handframe-15</div>
+                </div>
+
+                <!-- Frame 16: Speech Bubble -->
+                <div class="frame-card">
+                    <div class="frame-title">Rough Speech Bubble</div>
+                    <div class="frame-preview">
+                        <div id="handframe-16" class="content-text">Message</div>
+                    </div>
+                    <div class="frame-id">#handframe-16</div>
+                </div>
+
+                <!-- Frame 17: Sketchy Arrow -->
+                <div class="frame-card">
+                    <div class="frame-title">Sketchy Arrow</div>
+                    <div class="frame-preview">
+                        <div id="handframe-17" class="content-text">→</div>
+                    </div>
+                    <div class="frame-id">#handframe-17</div>
+                </div>
+
+                <!-- Frame 18: Bracket Frame -->
+                <div class="frame-card">
+                    <div class="frame-title">Hand-drawn Bracket</div>
+                    <div class="frame-preview">
+                        <div id="handframe-18" class="content-text">Text</div>
+                    </div>
+                    <div class="frame-id">#handframe-18</div>
+                </div>
+
+                <!-- Frame 19: Scalloped Edge -->
+                <div class="frame-card">
+                    <div class="frame-title">Scalloped Edge</div>
+                    <div class="frame-preview">
+                        <div id="handframe-19" class="content-text">Content</div>
+                    </div>
+                    <div class="frame-id">#handframe-19</div>
+                </div>
+
+                <!-- Frame 20: Rough Stamp -->
+                <div class="frame-card">
+                    <div class="frame-title">Rough Stamp</div>
+                    <div class="frame-preview">
+                        <div id="handframe-20" class="content-text">STAMP</div>
+                    </div>
+                    <div class="frame-id">#handframe-20</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="section-title">✨ Design Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">Wobbly & imperfect lines for sketchy feel</div>
+                <div class="feature-item">Asymmetrical border-radius combinations</div>
+                <div class="feature-item">Rough edge animations (wobble, pulse)</div>
+                <div class="feature-item">Warm color palette (coral, teal, mustard, lavender)</div>
+                <div class="feature-item">Doodle-like aesthetic with organic shapes</div>
+                <div class="feature-item">Hover effects with subtle scale & rotation</div>
+                <div class="feature-item">100% CSS-only (no images required)</div>
+                <div class="feature-item">Responsive design for all screen sizes</div>
+                <div class="feature-item">Pseudo-elements for complex shapes</div>
+                <div class="feature-item">Box-shadow layering for depth</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="section-title">🎯 Usage Guide</h2>
+            <p style="color: #2c3e50; line-height: 1.8; margin-bottom: 15px;">
+                Each frame can be used as a unique design element in your layouts. Use the <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">#handframe-[1-20]</code>
+                ID to target individual frames in your CSS or JavaScript. Combine with custom content, text, or images for unique visual effects.
+            </p>
+            <div class="code-block">
+<code>&lt;!-- Example: Using Frame 1 --&gt;
+&lt;div id="handframe-1"&gt;
+    Your content here
+&lt;/div&gt;
+
+&lt;!-- Customize in your CSS --&gt;
+&lt;style&gt;
+    #handframe-1 {
+        /* Add your custom styles */
+        color: #2c3e50;
+        font-size: 1.2em;
+    }
+&lt;/style&gt;</code>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="section-title">🎨 Color Palette</h2>
+            <p style="color: #2c3e50; line-height: 1.8;">
+                The hand-drawn frames use a carefully selected warm color palette designed to evoke a friendly, creative aesthetic:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <div class="color-swatch" style="background: #e74c3c;"></div>
+                    <strong>Coral Red</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">#e74c3c</span>
+                </div>
+                <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <div class="color-swatch" style="background: #3498db;"></div>
+                    <strong>Sky Teal</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">#3498db</span>
+                </div>
+                <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <div class="color-swatch" style="background: #f39c12;"></div>
+                    <strong>Warm Mustard</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">#f39c12</span>
+                </div>
+                <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <div class="color-swatch" style="background: #9b59b6;"></div>
+                    <strong>Soft Lavender</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">#9b59b6</span>
+                </div>
+                <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <div class="color-swatch" style="background: #2ecc71;"></div>
+                    <strong>Fresh Green</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">#2ecc71</span>
+                </div>
+                <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <div class="color-swatch" style="background: #16a085;"></div>
+                    <strong>Deep Teal</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">#16a085</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="section-title">📋 Frame Directory</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #e74c3c;">
+                    <strong>#handframe-1</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Wobbly Rectangle</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #3498db;">
+                    <strong>#handframe-2</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Hand-drawn Circle</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #3498db;">
+                    <strong>#handframe-3</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Sketchy Cloud</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #f1c40f;">
+                    <strong>#handframe-4</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Doodle Star</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #e74c3c;">
+                    <strong>#handframe-5</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Rough Banner</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #9b59b6;">
+                    <strong>#handframe-6</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Scribble Underline</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #16a085;">
+                    <strong>#handframe-7</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Torn Paper Edge</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #f39c12;">
+                    <strong>#handframe-8</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Sticky Note</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #f39c12;">
+                    <strong>#handframe-9</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Hand-drawn Polaroid</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #2ecc71;">
+                    <strong>#handframe-10</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Crayon Border</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #f1c40f;">
+                    <strong>#handframe-11</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Marker Highlight</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #2c3e50;">
+                    <strong>#handframe-12</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Pencil Sketch</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #2c3e50;">
+                    <strong>#handframe-13</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Ink Splatter</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #d68910;">
+                    <strong>#handframe-14</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Hand-drawn Tag</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #e91e63;">
+                    <strong>#handframe-15</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Doodle Heart</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #34495e;">
+                    <strong>#handframe-16</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Rough Speech Bubble</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #16a085;">
+                    <strong>#handframe-17</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Sketchy Arrow</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #8e44ad;">
+                    <strong>#handframe-18</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Hand-drawn Bracket</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #d35400;">
+                    <strong>#handframe-19</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Scalloped Edge</span>
+                </div>
+                <div style="padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #c0392b;">
+                    <strong>#handframe-20</strong><br><span style="font-size: 0.9em; color: #7f8c8d;">Rough Stamp</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Hand-drawn Frames & Borders Template Library | Created with CSS-only techniques</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">Perfect for adding a creative, sketchy aesthetic to your web designs</p>
+    </footer>
+</body>
+</html>

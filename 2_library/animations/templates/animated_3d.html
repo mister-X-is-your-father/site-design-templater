@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Transform Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 200, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 100, 0.1) 0%, transparent 70%);
+            animation: backgroundPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 3s linear infinite, floatTitle 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            25% { transform: translateY(-20px) rotateX(5deg); }
+            75% { transform: translateY(10px) rotateX(-5deg); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+            letter-spacing: 0.5em;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating 3D Shapes in Hero */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            perspective: 1500px;
+        }
+
+        .shape {
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: float3D 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            top: 30%;
+            left: 70%;
+            animation-delay: -10s;
+        }
+
+        .shape:nth-child(4) {
+            top: 80%;
+            left: 20%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float3D {
+            0% { transform: translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            25% { transform: translateZ(100px) rotateX(90deg) rotateY(90deg) rotateZ(45deg); }
+            50% { transform: translateZ(0) rotateX(180deg) rotateY(180deg) rotateZ(90deg); }
+            75% { transform: translateZ(-100px) rotateX(270deg) rotateY(270deg) rotateZ(135deg); }
+            100% { transform: translateZ(0) rotateX(360deg) rotateY(360deg) rotateZ(180deg); }
+        }
+
+        .mini-cube {
+            width: 60px;
+            height: 60px;
+            transform-style: preserve-3d;
+        }
+
+        .mini-cube .face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .mini-cube .front { transform: translateZ(30px); }
+        .mini-cube .back { transform: rotateY(180deg) translateZ(30px); }
+        .mini-cube .right { transform: rotateY(90deg) translateZ(30px); }
+        .mini-cube .left { transform: rotateY(-90deg) translateZ(30px); }
+        .mini-cube .top { transform: rotateX(90deg) translateZ(30px); }
+        .mini-cube .bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-right: 2px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            transform: rotate(45deg);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
+            50% { box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff; }
+        }
+
+        /* 3D Card Section */
+        .card-section {
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            perspective: 1500px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card-3d {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 60px rgba(255, 255, 255, 0.05);
+        }
+
+        .card-front::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card-3d:hover .card-front::before {
+            opacity: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .card-back {
+            background: linear-gradient(145deg, #ff00ff 0%, #7b2cbf 100%);
+            transform: rotateY(180deg);
+            box-shadow: 0 25px 50px rgba(255, 0, 255, 0.3);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* 3D Cube Section */
+        .cube-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        .cube-scene {
+            width: 250px;
+            height: 250px;
+            perspective: 1000px;
+            margin: 50px auto;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+
+        .cube:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(90deg) rotateY(90deg); }
+            50% { transform: rotateX(180deg) rotateY(180deg); }
+            75% { transform: rotateX(270deg) rotateY(270deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
+        .cube-face:hover {
+            border-color: #fff;
+            box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.2);
+        }
+
+        .cube .front {
+            background: linear-gradient(145deg, rgba(255, 0, 128, 0.7), rgba(255, 0, 128, 0.3));
+            transform: translateZ(125px);
+        }
+
+        .cube .back {
+            background: linear-gradient(145deg, rgba(0, 255, 200, 0.7), rgba(0, 255, 200, 0.3));
+            transform: rotateY(180deg) translateZ(125px);
+        }
+
+        .cube .right {
+            background: linear-gradient(145deg, rgba(128, 0, 255, 0.7), rgba(128, 0, 255, 0.3));
+            transform: rotateY(90deg) translateZ(125px);
+        }
+
+        .cube .left {
+            background: linear-gradient(145deg, rgba(255, 200, 0, 0.7), rgba(255, 200, 0, 0.3));
+            transform: rotateY(-90deg) translateZ(125px);
+        }
+
+        .cube .top {
+            background: linear-gradient(145deg, rgba(0, 128, 255, 0.7), rgba(0, 128, 255, 0.3));
+            transform: rotateX(90deg) translateZ(125px);
+        }
+
+        .cube .bottom {
+            background: linear-gradient(145deg, rgba(255, 100, 50, 0.7), rgba(255, 100, 50, 0.3));
+            transform: rotateX(-90deg) translateZ(125px);
+        }
+
+        /* Cube Controls */
+        .cube-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cube-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cube-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            z-index: -1;
+        }
+
+        .cube-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cube-btn:hover {
+            border-color: transparent;
+            transform: scale(1.05);
+        }
+
+        /* Perspective Gallery */
+        .perspective-section {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        .perspective-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            perspective: 2000px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .perspective-item {
+            width: 200px;
+            height: 280px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .perspective-item:nth-child(1) { transform: rotateY(-30deg) translateZ(50px); }
+        .perspective-item:nth-child(2) { transform: rotateY(-15deg) translateZ(100px); }
+        .perspective-item:nth-child(3) { transform: rotateY(0deg) translateZ(150px); }
+        .perspective-item:nth-child(4) { transform: rotateY(15deg) translateZ(100px); }
+        .perspective-item:nth-child(5) { transform: rotateY(30deg) translateZ(50px); }
+
+        .perspective-item:hover {
+            transform: rotateY(0deg) translateZ(200px) scale(1.1) !important;
+            z-index: 10;
+        }
+
+        .perspective-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .perspective-item::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 10%;
+            width: 80%;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
+            transform: rotateX(90deg);
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Transform Showcase */
+        .transform-section {
+            padding: 100px 20px;
+        }
+
+        .transform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1500px;
+        }
+
+        .transform-box {
+            height: 200px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transform-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .transform-box:hover::before {
+            left: 100%;
+        }
+
+        .transform-box:nth-child(1):hover { transform: rotateX(20deg) translateZ(50px); }
+        .transform-box:nth-child(2):hover { transform: rotateY(20deg) translateZ(50px); }
+        .transform-box:nth-child(3):hover { transform: rotateZ(10deg) scale(1.1); }
+        .transform-box:nth-child(4):hover { transform: perspective(500px) rotateX(-20deg) rotateY(20deg); }
+        .transform-box:nth-child(5):hover { transform: skewX(-10deg) skewY(5deg) scale(1.05); }
+        .transform-box:nth-child(6):hover { transform: rotate3d(1, 1, 0, 30deg); }
+
+        .transform-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .transform-code {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #00ffff;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* Carousel Section */
+        .carousel-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .carousel-3d {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            perspective: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-container {
+            width: 250px;
+            height: 350px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: carouselRotate 30s infinite linear;
+        }
+
+        .carousel-container:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes carouselRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 250px;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(400px); }
+        .carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(400px); }
+        .carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(400px); }
+        .carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(400px); }
+        .carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(400px); }
+        .carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(400px); }
+
+        .carousel-item:hover {
+            box-shadow: 0 40px 80px rgba(255, 0, 255, 0.4);
+            border-color: rgba(255, 0, 255, 0.5);
+        }
+
+        .carousel-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .carousel-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .footer-cube {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            transform-style: preserve-3d;
+            animation: footerSpin 10s infinite linear;
+        }
+
+        @keyframes footerSpin {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .footer-cube .face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-cube .front { transform: translateZ(40px); }
+        .footer-cube .back { transform: rotateY(180deg) translateZ(40px); }
+        .footer-cube .right { transform: rotateY(90deg) translateZ(40px); }
+        .footer-cube .left { transform: rotateY(-90deg) translateZ(40px); }
+        .footer-cube .top { transform: rotateX(90deg) translateZ(40px); }
+        .footer-cube .bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-text a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-text a:hover {
+            color: #ff00ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-3d {
+                width: 280px;
+                height: 380px;
+            }
+
+            .cube-scene {
+                width: 180px;
+                height: 180px;
+            }
+
+            .cube-face {
+                width: 180px;
+                height: 180px;
+            }
+
+            .cube .front { transform: translateZ(90px); }
+            .cube .back { transform: rotateY(180deg) translateZ(90px); }
+            .cube .right { transform: rotateY(90deg) translateZ(90px); }
+            .cube .left { transform: rotateY(-90deg) translateZ(90px); }
+            .cube .top { transform: rotateX(90deg) translateZ(90px); }
+            .cube .bottom { transform: rotateX(-90deg) translateZ(90px); }
+
+            .perspective-item {
+                width: 150px;
+                height: 210px;
+            }
+
+            .carousel-item {
+                width: 200px;
+                height: 280px;
+            }
+
+            .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
+            .carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(300px); }
+            .carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(300px); }
+            .carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(300px); }
+            .carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(300px); }
+            .carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(300px); }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0c0c0c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-cube {
+            width: 60px;
+            height: 60px;
+            transform-style: preserve-3d;
+            animation: loaderSpin 1.5s infinite ease-in-out;
+        }
+
+        @keyframes loaderSpin {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            50% { transform: rotateX(180deg) rotateY(180deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .loader-cube .face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #ff00ff, #00ffff);
+            opacity: 0.8;
+        }
+
+        .loader-cube .front { transform: translateZ(30px); }
+        .loader-cube .back { transform: rotateY(180deg) translateZ(30px); }
+        .loader-cube .right { transform: rotateY(90deg) translateZ(30px); }
+        .loader-cube .left { transform: rotateY(-90deg) translateZ(30px); }
+        .loader-cube .top { transform: rotateX(90deg) translateZ(30px); }
+        .loader-cube .bottom { transform: rotateX(-90deg) translateZ(30px); }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-cube">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face right"></div>
+            <div class="face left"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+        </div>
+    </div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shapes">
+            <div class="shape">
+                <div class="mini-cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+            <div class="shape">
+                <div class="mini-cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+            <div class="shape">
+                <div class="mini-cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+            <div class="shape">
+                <div class="mini-cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+        </div>
+        <h1 class="hero-title">3D Transform</h1>
+        <p class="hero-subtitle">Experience the Dimension</p>
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- 3D Cards Section -->
+    <section class="card-section">
+        <h2 class="section-title">3D Flip Cards</h2>
+        <div class="card-container">
+            <div class="card-3d">
+                <div class="card-face card-front">
+                    <div class="card-icon">&#9733;</div>
+                    <h3 class="card-title">Rotate X</h3>
+                    <p class="card-desc">X軸を中心に回転する3D変形。上下方向の回転エフェクト。</p>
+                </div>
+                <div class="card-face card-back">
+                    <div class="card-icon">&#10024;</div>
+                    <h3 class="card-title">Flipped!</h3>
+                    <p class="card-desc">backface-visibilityで裏面を制御。</p>
+                </div>
+            </div>
+            <div class="card-3d">
+                <div class="card-face card-front">
+                    <div class="card-icon">&#9830;</div>
+                    <h3 class="card-title">Perspective</h3>
+                    <p class="card-desc">遠近感を生み出すperspectiveプロパティ。</p>
+                </div>
+                <div class="card-face card-back">
+                    <div class="card-icon">&#10004;</div>
+                    <h3 class="card-title">Depth!</h3>
+                    <p class="card-desc">奥行きを表現する3D空間の基礎。</p>
+                </div>
+            </div>
+            <div class="card-3d">
+                <div class="card-face card-front">
+                    <div class="card-icon">&#9827;</div>
+                    <h3 class="card-title">Preserve 3D</h3>
+                    <p class="card-desc">子要素の3D変形を維持するtransform-style。</p>
+                </div>
+                <div class="card-face card-back">
+                    <div class="card-icon">&#9829;</div>
+                    <h3 class="card-title">Layered!</h3>
+                    <p class="card-desc">ネストした要素も3D空間に配置。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Cube Section -->
+    <section class="cube-section">
+        <h2 class="section-title">Interactive 3D Cube</h2>
+        <div class="cube-scene">
+            <div class="cube" id="cube">
+                <div class="cube-face front">FRONT</div>
+                <div class="cube-face back">BACK</div>
+                <div class="cube-face right">RIGHT</div>
+                <div class="cube-face left">LEFT</div>
+                <div class="cube-face top">TOP</div>
+                <div class="cube-face bottom">BOTTOM</div>
+            </div>
+        </div>
+        <div class="cube-controls">
+            <button class="cube-btn" data-face="front">Front</button>
+            <button class="cube-btn" data-face="back">Back</button>
+            <button class="cube-btn" data-face="right">Right</button>
+            <button class="cube-btn" data-face="left">Left</button>
+            <button class="cube-btn" data-face="top">Top</button>
+            <button class="cube-btn" data-face="bottom">Bottom</button>
+            <button class="cube-btn" data-face="auto">Auto</button>
+        </div>
+    </section>
+
+    <!-- Perspective Gallery -->
+    <section class="perspective-section">
+        <h2 class="section-title">Perspective Gallery</h2>
+        <div class="perspective-gallery">
+            <div class="perspective-item">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 3rem;">&#127752;</div>
+            </div>
+            <div class="perspective-item">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #5f27cd, #341f97); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 3rem;">&#127756;</div>
+            </div>
+            <div class="perspective-item">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #00d2d3, #01a3a4); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 3rem;">&#127775;</div>
+            </div>
+            <div class="perspective-item">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ff9ff3, #f368e0); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 3rem;">&#127804;</div>
+            </div>
+            <div class="perspective-item">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #54a0ff, #2e86de); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 3rem;">&#127754;</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transform Showcase -->
+    <section class="transform-section">
+        <h2 class="section-title">Transform Showcase</h2>
+        <div class="transform-grid">
+            <div class="transform-box">
+                <span class="transform-label">Rotate X</span>
+                <span class="transform-code">rotateX(20deg)</span>
+            </div>
+            <div class="transform-box">
+                <span class="transform-label">Rotate Y</span>
+                <span class="transform-code">rotateY(20deg)</span>
+            </div>
+            <div class="transform-box">
+                <span class="transform-label">Rotate Z</span>
+                <span class="transform-code">rotateZ(10deg)</span>
+            </div>
+            <div class="transform-box">
+                <span class="transform-label">Perspective</span>
+                <span class="transform-code">perspective(500px)</span>
+            </div>
+            <div class="transform-box">
+                <span class="transform-label">Skew</span>
+                <span class="transform-code">skewX(-10deg)</span>
+            </div>
+            <div class="transform-box">
+                <span class="transform-label">Rotate 3D</span>
+                <span class="transform-code">rotate3d(1,1,0,30deg)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Carousel -->
+    <section class="carousel-section">
+        <h2 class="section-title">3D Carousel</h2>
+        <div class="carousel-3d">
+            <div class="carousel-container" id="carousel">
+                <div class="carousel-item">
+                    <span class="carousel-number">01</span>
+                    <span class="carousel-text">Design</span>
+                </div>
+                <div class="carousel-item">
+                    <span class="carousel-number">02</span>
+                    <span class="carousel-text">Develop</span>
+                </div>
+                <div class="carousel-item">
+                    <span class="carousel-number">03</span>
+                    <span class="carousel-text">Deploy</span>
+                </div>
+                <div class="carousel-item">
+                    <span class="carousel-number">04</span>
+                    <span class="carousel-text">Debug</span>
+                </div>
+                <div class="carousel-item">
+                    <span class="carousel-number">05</span>
+                    <span class="carousel-text">Document</span>
+                </div>
+                <div class="carousel-item">
+                    <span class="carousel-number">06</span>
+                    <span class="carousel-text">Deliver</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-cube">
+            <div class="face front">&#10024;</div>
+            <div class="face back">&#9733;</div>
+            <div class="face right">&#9830;</div>
+            <div class="face left">&#9827;</div>
+            <div class="face top">&#9829;</div>
+            <div class="face bottom">&#9824;</div>
+        </div>
+        <p class="footer-text">CSS 3D Transforms Demo</p>
+        <p class="footer-text" style="margin-top: 10px;">Built with pure HTML, CSS, and JavaScript</p>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Create Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = `hsl(${Math.random() * 60 + 280}, 100%, 70%)`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Cube Controls
+        const cube = document.getElementById('cube');
+        const cubeButtons = document.querySelectorAll('.cube-btn');
+        let isAutoRotate = true;
+
+        const faceRotations = {
+            front: 'rotateX(0deg) rotateY(0deg)',
+            back: 'rotateX(0deg) rotateY(180deg)',
+            right: 'rotateX(0deg) rotateY(-90deg)',
+            left: 'rotateX(0deg) rotateY(90deg)',
+            top: 'rotateX(-90deg) rotateY(0deg)',
+            bottom: 'rotateX(90deg) rotateY(0deg)'
+        };
+
+        cubeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const face = btn.dataset.face;
+
+                if (face === 'auto') {
+                    isAutoRotate = true;
+                    cube.style.animation = 'rotateCube 20s infinite linear';
+                    cube.style.transform = '';
+                } else {
+                    isAutoRotate = false;
+                    cube.style.animation = 'none';
+                    cube.style.transform = faceRotations[face];
+                }
+            });
+        });
+
+        // Mouse parallax effect on hero
+        const hero = document.querySelector('.hero');
+        const floatingShapes = document.querySelectorAll('.shape');
+
+        hero.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+            floatingShapes.forEach((shape, index) => {
+                const speed = (index + 1) * 20;
+                shape.style.transform = `
+                    translateX(${x * speed}px)
+                    translateY(${y * speed}px)
+                    rotateX(${y * 20}deg)
+                    rotateY(${x * 20}deg)
+                `;
+            });
+        });
+
+        // Smooth scroll indicator
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        scrollIndicator.addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Card tilt effect
+        const cards = document.querySelectorAll('.card-3d');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (card.matches(':hover')) return;
+
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Transform boxes interactive
+        const transformBoxes = document.querySelectorAll('.transform-box');
+        transformBoxes.forEach(box => {
+            box.addEventListener('click', () => {
+                box.style.transition = 'transform 0.3s';
+                setTimeout(() => {
+                    box.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                }, 300);
+            });
+        });
+
+        // Dynamic color change on scroll
+        let hue = 0;
+        window.addEventListener('scroll', () => {
+            hue = (window.scrollY / 10) % 360;
+            document.body.style.setProperty('--dynamic-hue', hue);
+        });
+
+        // Add keyboard navigation for cube
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const keyMap = {
+                'f': 'front',
+                'b': 'back',
+                'r': 'right',
+                'l': 'left',
+                't': 'top',
+                'd': 'bottom',
+                'a': 'auto'
+            };
+
+            if (keyMap[key]) {
+                const face = keyMap[key];
+                if (face === 'auto') {
+                    isAutoRotate = true;
+                    cube.style.animation = 'rotateCube 20s infinite linear';
+                    cube.style.transform = '';
+                } else {
+                    isAutoRotate = false;
+                    cube.style.animation = 'none';
+                    cube.style.transform = faceRotations[face];
+                }
+            }
+        });
+
+        // Console easter egg
+        console.log('%c 3D Transform Gallery ', 'background: linear-gradient(90deg, #ff00ff, #00ffff); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
+        console.log('%c Built with pure CSS 3D transforms ', 'color: #00ffff; font-size: 14px;');
+        console.log('%c Keyboard shortcuts: F(front), B(back), R(right), L(left), T(top), D(bottom), A(auto) ', 'color: #ff00ff; font-size: 12px;');
+    </script>
+</body>
+</html>

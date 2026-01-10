@@ -1,0 +1,3033 @@
+<!-- Communication Diagram Templates - 30 Unique Patterns -->
+<!-- コミュニケーション図テンプレート -->
+<!-- Usage: Each template has ID #comm-1 to #comm-30 -->
+
+<style>
+/* ==================== Communication Diagram Base Styles ==================== */
+.comm-diagram {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+    padding: 24px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.comm-diagram:hover {
+    transform: translateY(-4px);
+}
+
+/* ==================== #comm-1: Speech Bubble (Single) ==================== */
+#comm-1 {
+    background: #FFF5F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+#comm-1 .speech-bubble {
+    background: #FF69B4;
+    color: white;
+    padding: 20px 28px;
+    border-radius: 20px;
+    position: relative;
+    max-width: 280px;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 4px 0 #E91E8C;
+    transition: all 0.3s ease;
+}
+
+#comm-1 .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 30px;
+    border: 15px solid transparent;
+    border-top-color: #FF69B4;
+    border-bottom: 0;
+}
+
+#comm-1:hover .speech-bubble {
+    transform: scale(1.05);
+    box-shadow: 0 6px 0 #E91E8C;
+}
+
+/* ==================== #comm-2: Conversation Bubbles (Back and Forth) ==================== */
+#comm-2 {
+    background: #F0F9FF;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+}
+
+#comm-2 .bubble-left,
+#comm-2 .bubble-right {
+    max-width: 70%;
+    padding: 14px 20px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+#comm-2 .bubble-left {
+    background: #87CEEB;
+    color: #1a365d;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 3px 0 #5BA3C6;
+}
+
+#comm-2 .bubble-right {
+    background: #98FB98;
+    color: #1a4731;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 3px 0 #6BC96B;
+}
+
+#comm-2:hover .bubble-left {
+    transform: translateX(5px);
+}
+
+#comm-2:hover .bubble-right {
+    transform: translateX(-5px);
+}
+
+/* ==================== #comm-3: Group Chat Bubbles ==================== */
+#comm-3 {
+    background: #FFFBEB;
+    min-height: 320px;
+    padding: 20px;
+}
+
+#comm-3 .chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#comm-3 .chat-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+#comm-3 .chat-row.right {
+    flex-direction: row-reverse;
+}
+
+#comm-3 .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+#comm-3 .avatar.pink { background: #FF69B4; }
+#comm-3 .avatar.blue { background: #87CEEB; }
+#comm-3 .avatar.green { background: #98FB98; color: #1a4731; }
+#comm-3 .avatar.orange { background: #FFA500; }
+
+#comm-3 .chat-bubble {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 16px;
+    border: 2px solid #FFD700;
+    max-width: 200px;
+    font-size: 13px;
+}
+
+#comm-3:hover .chat-row:nth-child(odd) {
+    transform: translateX(3px);
+}
+
+#comm-3:hover .chat-row:nth-child(even) {
+    transform: translateX(-3px);
+}
+
+/* ==================== #comm-4: Thought Cloud ==================== */
+#comm-4 {
+    background: #F5F3FF;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#comm-4 .thought-cloud {
+    background: white;
+    padding: 24px 32px;
+    border-radius: 40px;
+    border: 3px solid #A78BFA;
+    position: relative;
+    max-width: 260px;
+    text-align: center;
+    font-size: 15px;
+    color: #5B21B6;
+    transition: all 0.3s ease;
+}
+
+#comm-4 .thought-dots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+#comm-4 .thought-dot {
+    background: #A78BFA;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+#comm-4 .thought-dot:nth-child(1) { width: 20px; height: 20px; }
+#comm-4 .thought-dot:nth-child(2) { width: 14px; height: 14px; }
+#comm-4 .thought-dot:nth-child(3) { width: 8px; height: 8px; }
+
+#comm-4:hover .thought-cloud {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
+}
+
+#comm-4:hover .thought-dot {
+    animation: thought-bounce 0.6s ease infinite;
+}
+
+#comm-4:hover .thought-dot:nth-child(2) { animation-delay: 0.1s; }
+#comm-4:hover .thought-dot:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes thought-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* ==================== #comm-5: Announcement Megaphone ==================== */
+#comm-5 {
+    background: #FFF7ED;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#comm-5 .megaphone {
+    width: 80px;
+    height: 60px;
+    background: #FFA500;
+    border-radius: 0 30px 30px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#comm-5 .megaphone::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    background: #FF8C00;
+    border-radius: 6px;
+}
+
+#comm-5 .megaphone::after {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 22px;
+    width: 15px;
+    height: 16px;
+    background: #CC7000;
+    border-radius: 3px;
+}
+
+#comm-5 .sound-waves {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#comm-5 .wave {
+    height: 4px;
+    background: #FFA500;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+#comm-5 .wave:nth-child(1) { width: 40px; }
+#comm-5 .wave:nth-child(2) { width: 60px; }
+#comm-5 .wave:nth-child(3) { width: 40px; }
+
+#comm-5:hover .megaphone {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+#comm-5:hover .wave {
+    animation: wave-pulse 0.5s ease infinite;
+}
+
+#comm-5:hover .wave:nth-child(2) { animation-delay: 0.1s; }
+#comm-5:hover .wave:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes wave-pulse {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    50% { transform: scaleX(1.3); opacity: 0.7; }
+}
+
+/* ==================== #comm-6: Letter/Envelope ==================== */
+#comm-6 {
+    background: #FDF2F8;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-6 .envelope {
+    width: 200px;
+    height: 140px;
+    background: white;
+    border: 3px solid #FF69B4;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#comm-6 .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: #FFB6C1;
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transition: all 0.4s ease;
+    transform-origin: top center;
+}
+
+#comm-6 .envelope-body {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+
+#comm-6 .envelope-line {
+    height: 3px;
+    background: #FFC0CB;
+    margin-bottom: 6px;
+    border-radius: 2px;
+}
+
+#comm-6 .envelope-line:nth-child(1) { width: 80%; }
+#comm-6 .envelope-line:nth-child(2) { width: 60%; }
+#comm-6 .envelope-line:nth-child(3) { width: 70%; }
+
+#comm-6 .heart {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+#comm-6:hover .envelope {
+    transform: scale(1.05);
+}
+
+#comm-6:hover .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+#comm-6:hover .heart {
+    transform: translateX(-50%) scale(1.3);
+}
+
+/* ==================== #comm-7: Email Notification ==================== */
+#comm-7 {
+    background: #ECFDF5;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-7 .email-card {
+    background: white;
+    border: 3px solid #10B981;
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    transition: all 0.3s ease;
+}
+
+#comm-7 .email-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px dashed #10B981;
+}
+
+#comm-7 .email-icon {
+    width: 40px;
+    height: 32px;
+    background: #10B981;
+    border-radius: 4px;
+    position: relative;
+}
+
+#comm-7 .email-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background: #059669;
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
+#comm-7 .email-badge {
+    background: #FF69B4;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: auto;
+    transition: all 0.3s ease;
+}
+
+#comm-7 .email-subject {
+    font-weight: bold;
+    color: #065F46;
+    margin-bottom: 8px;
+}
+
+#comm-7 .email-preview {
+    color: #6B7280;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+#comm-7:hover .email-card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+}
+
+#comm-7:hover .email-badge {
+    transform: scale(1.2);
+    animation: badge-pulse 0.5s ease infinite;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 105, 180, 0); }
+}
+
+/* ==================== #comm-8: Phone Call ==================== */
+#comm-8 {
+    background: #F0FDF4;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+#comm-8 .phone {
+    width: 70px;
+    height: 120px;
+    background: #22C55E;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 4px 0 #16A34A;
+    transition: all 0.3s ease;
+}
+
+#comm-8 .phone-screen {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    right: 8px;
+    bottom: 30px;
+    background: #DCFCE7;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-8 .caller-icon {
+    width: 36px;
+    height: 36px;
+    background: #22C55E;
+    border-radius: 50%;
+    position: relative;
+}
+
+#comm-8 .caller-icon::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+}
+
+#comm-8 .caller-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 12px;
+    background: white;
+    border-radius: 12px 12px 0 0;
+}
+
+#comm-8 .phone-button {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 14px;
+    background: #16A34A;
+    border-radius: 7px;
+}
+
+#comm-8 .call-waves {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#comm-8 .call-wave {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #22C55E;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transition: all 0.3s ease;
+}
+
+#comm-8:hover .phone {
+    animation: phone-ring 0.3s ease infinite;
+}
+
+#comm-8:hover .call-wave {
+    animation: call-wave-expand 1s ease infinite;
+}
+
+#comm-8:hover .call-wave:nth-child(2) { animation-delay: 0.2s; }
+#comm-8:hover .call-wave:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes phone-ring {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes call-wave-expand {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ==================== #comm-9: Video Call Screen ==================== */
+#comm-9 {
+    background: #EFF6FF;
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-9 .video-screen {
+    width: 300px;
+    height: 180px;
+    background: #1E3A5F;
+    border-radius: 12px;
+    border: 4px solid #3B82F6;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#comm-9 .main-video {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-9 .person-silhouette {
+    width: 60px;
+    height: 80px;
+    position: relative;
+}
+
+#comm-9 .person-head {
+    width: 30px;
+    height: 30px;
+    background: #1E40AF;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+}
+
+#comm-9 .person-body {
+    width: 50px;
+    height: 40px;
+    background: #1E40AF;
+    border-radius: 25px 25px 0 0;
+    margin: 0 auto;
+}
+
+#comm-9 .pip-video {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 70px;
+    height: 50px;
+    background: #FFA500;
+    border-radius: 6px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#comm-9 .pip-icon {
+    width: 20px;
+    height: 24px;
+    position: relative;
+}
+
+#comm-9 .pip-head {
+    width: 10px;
+    height: 10px;
+    background: #CC7000;
+    border-radius: 50%;
+    margin: 0 auto 3px;
+}
+
+#comm-9 .pip-body {
+    width: 16px;
+    height: 12px;
+    background: #CC7000;
+    border-radius: 8px 8px 0 0;
+    margin: 0 auto;
+}
+
+#comm-9 .video-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+#comm-9 .control-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#comm-9 .control-btn.mic { background: #22C55E; }
+#comm-9 .control-btn.cam { background: #22C55E; }
+#comm-9 .control-btn.end { background: #EF4444; }
+
+#comm-9 .control-icon {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 2px;
+}
+
+#comm-9:hover .video-screen {
+    transform: scale(1.03);
+    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+}
+
+#comm-9:hover .pip-video {
+    transform: scale(1.1);
+}
+
+/* ==================== #comm-10: Text Message Chain ==================== */
+#comm-10 {
+    background: #F5F5F5;
+    min-height: 300px;
+    padding: 20px;
+}
+
+#comm-10 .message-chain {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+#comm-10 .message {
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.4;
+    max-width: 80%;
+    transition: all 0.3s ease;
+}
+
+#comm-10 .message.sent {
+    background: #87CEEB;
+    color: #1a365d;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+#comm-10 .message.received {
+    background: #E5E5E5;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+#comm-10 .message-time {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin: 8px 0;
+}
+
+#comm-10 .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: #E5E5E5;
+    border-radius: 18px;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+#comm-10 .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #888;
+    border-radius: 50%;
+}
+
+#comm-10:hover .message.sent {
+    transform: translateX(-3px);
+}
+
+#comm-10:hover .message.received {
+    transform: translateX(3px);
+}
+
+#comm-10:hover .typing-dot {
+    animation: typing-bounce 1s ease infinite;
+}
+
+#comm-10:hover .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+#comm-10:hover .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ==================== #comm-11: Social Media Post ==================== */
+#comm-11 {
+    background: #FDF4FF;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-11 .social-post {
+    background: white;
+    border: 3px solid #A855F7;
+    border-radius: 16px;
+    width: 300px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#comm-11 .post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 2px solid #F3E8FF;
+}
+
+#comm-11 .post-avatar {
+    width: 40px;
+    height: 40px;
+    background: #A855F7;
+    border-radius: 50%;
+}
+
+#comm-11 .post-user {
+    flex: 1;
+}
+
+#comm-11 .post-name {
+    font-weight: bold;
+    color: #581C87;
+    font-size: 14px;
+}
+
+#comm-11 .post-handle {
+    color: #9CA3AF;
+    font-size: 12px;
+}
+
+#comm-11 .post-content {
+    padding: 16px;
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#comm-11 .post-image {
+    height: 100px;
+    background: #F3E8FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-11 .image-placeholder {
+    width: 50px;
+    height: 50px;
+    background: #A855F7;
+    border-radius: 8px;
+    opacity: 0.5;
+}
+
+#comm-11 .post-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;
+    border-top: 2px solid #F3E8FF;
+}
+
+#comm-11 .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #6B7280;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#comm-11 .action-icon {
+    width: 20px;
+    height: 20px;
+    background: #E5E7EB;
+    border-radius: 4px;
+}
+
+#comm-11 .action-btn.like:hover { color: #EF4444; }
+#comm-11 .action-btn.comment:hover { color: #3B82F6; }
+#comm-11 .action-btn.share:hover { color: #22C55E; }
+
+#comm-11:hover .social-post {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(168, 85, 247, 0.2);
+}
+
+/* ==================== #comm-12: Comment Thread ==================== */
+#comm-12 {
+    background: #FFFBEB;
+    min-height: 280px;
+    padding: 20px;
+}
+
+#comm-12 .thread-container {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+#comm-12 .thread-comment {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+#comm-12 .thread-comment.reply {
+    margin-left: 40px;
+}
+
+#comm-12 .comment-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+#comm-12 .comment-avatar.yellow { background: #FCD34D; }
+#comm-12 .comment-avatar.orange { background: #FB923C; }
+#comm-12 .comment-avatar.pink { background: #F472B6; }
+
+#comm-12 .comment-body {
+    flex: 1;
+}
+
+#comm-12 .comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+#comm-12 .comment-name {
+    font-weight: bold;
+    color: #92400E;
+    font-size: 13px;
+}
+
+#comm-12 .comment-time {
+    color: #9CA3AF;
+    font-size: 11px;
+}
+
+#comm-12 .comment-text {
+    color: #374151;
+    font-size: 13px;
+    line-height: 1.4;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 2px solid #FDE68A;
+}
+
+#comm-12 .thread-line {
+    width: 2px;
+    height: 20px;
+    background: #FDE68A;
+    margin-left: 17px;
+}
+
+#comm-12:hover .thread-comment:nth-child(odd) {
+    transform: translateX(3px);
+}
+
+/* ==================== #comm-13: Review/Feedback Box ==================== */
+#comm-13 {
+    background: #FEF3C7;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-13 .review-box {
+    background: white;
+    border: 3px solid #F59E0B;
+    border-radius: 16px;
+    padding: 24px;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+#comm-13 .review-stars {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+#comm-13 .star {
+    width: 28px;
+    height: 28px;
+    background: #FCD34D;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    transition: all 0.2s ease;
+}
+
+#comm-13 .star.empty {
+    background: #E5E7EB;
+}
+
+#comm-13 .review-text {
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+#comm-13 .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#comm-13 .reviewer-avatar {
+    width: 36px;
+    height: 36px;
+    background: #F59E0B;
+    border-radius: 50%;
+}
+
+#comm-13 .reviewer-name {
+    font-weight: bold;
+    color: #92400E;
+    font-size: 13px;
+}
+
+#comm-13 .reviewer-date {
+    color: #9CA3AF;
+    font-size: 11px;
+}
+
+#comm-13:hover .review-box {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+}
+
+#comm-13:hover .star:not(.empty) {
+    animation: star-shine 0.5s ease;
+}
+
+@keyframes star-shine {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ==================== #comm-14: Question and Answer ==================== */
+#comm-14 {
+    background: #F0F9FF;
+    min-height: 260px;
+    padding: 24px;
+}
+
+#comm-14 .qa-container {
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+#comm-14 .question-box {
+    background: #87CEEB;
+    color: #1E3A5F;
+    padding: 16px 20px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#comm-14 .question-box::before {
+    content: 'Q';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: #2563EB;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#comm-14 .answer-box {
+    background: #98FB98;
+    color: #14532D;
+    padding: 16px 20px;
+    border-radius: 16px;
+    margin-left: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#comm-14 .answer-box::before {
+    content: 'A';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: #16A34A;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#comm-14 .qa-text {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#comm-14:hover .question-box {
+    transform: translateX(5px);
+}
+
+#comm-14:hover .answer-box {
+    transform: translateX(10px);
+}
+
+/* ==================== #comm-15: FAQ Format ==================== */
+#comm-15 {
+    background: #ECFDF5;
+    min-height: 300px;
+    padding: 20px;
+}
+
+#comm-15 .faq-list {
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+#comm-15 .faq-item {
+    background: white;
+    border: 2px solid #10B981;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#comm-15 .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: #D1FAE5;
+    font-weight: bold;
+    color: #065F46;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#comm-15 .faq-icon {
+    width: 24px;
+    height: 24px;
+    background: #10B981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+#comm-15 .faq-answer {
+    padding: 14px 16px;
+    color: #374151;
+    font-size: 13px;
+    line-height: 1.5;
+    border-top: 2px dashed #10B981;
+}
+
+#comm-15:hover .faq-item:nth-child(1) {
+    transform: translateX(3px);
+}
+
+#comm-15:hover .faq-item:nth-child(2) {
+    transform: translateX(6px);
+}
+
+#comm-15:hover .faq-item:nth-child(3) {
+    transform: translateX(9px);
+}
+
+#comm-15:hover .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* ==================== #comm-16: Interview Transcript ==================== */
+#comm-16 {
+    background: #FDF2F8;
+    min-height: 300px;
+    padding: 20px;
+}
+
+#comm-16 .interview-container {
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+#comm-16 .interview-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #EC4899;
+}
+
+#comm-16 .interview-title {
+    font-weight: bold;
+    color: #831843;
+    font-size: 16px;
+}
+
+#comm-16 .interview-line {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+#comm-16 .speaker-tag {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#comm-16 .speaker-tag.interviewer {
+    background: #EC4899;
+    color: white;
+}
+
+#comm-16 .speaker-tag.guest {
+    background: #8B5CF6;
+    color: white;
+}
+
+#comm-16 .speaker-text {
+    color: #374151;
+    font-size: 13px;
+    line-height: 1.5;
+    padding-top: 4px;
+}
+
+#comm-16:hover .interview-line:nth-child(odd) {
+    transform: translateX(5px);
+}
+
+#comm-16:hover .interview-line:nth-child(even) {
+    transform: translateX(-5px);
+}
+
+/* ==================== #comm-17: Quote Box ==================== */
+#comm-17 {
+    background: #F5F3FF;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-17 .quote-box {
+    background: white;
+    border-left: 6px solid #8B5CF6;
+    padding: 24px 28px;
+    max-width: 320px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#comm-17 .quote-mark {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 60px;
+    color: #8B5CF6;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+#comm-17 .quote-text {
+    color: #374151;
+    font-size: 16px;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+#comm-17 .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#comm-17 .author-avatar {
+    width: 36px;
+    height: 36px;
+    background: #8B5CF6;
+    border-radius: 50%;
+}
+
+#comm-17 .author-info {
+    flex: 1;
+}
+
+#comm-17 .author-name {
+    font-weight: bold;
+    color: #5B21B6;
+    font-size: 14px;
+}
+
+#comm-17 .author-title {
+    color: #9CA3AF;
+    font-size: 12px;
+}
+
+#comm-17:hover .quote-box {
+    transform: translateX(10px);
+    box-shadow: -8px 8px 24px rgba(139, 92, 246, 0.15);
+}
+
+/* ==================== #comm-18: Testimonial Card ==================== */
+#comm-18 {
+    background: #FFF7ED;
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-18 .testimonial-card {
+    background: white;
+    border: 3px solid #FB923C;
+    border-radius: 20px;
+    padding: 24px;
+    width: 300px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#comm-18 .testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    background: #FB923C;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    position: relative;
+}
+
+#comm-18 .testimonial-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #FB923C;
+}
+
+#comm-18 .testimonial-text {
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+#comm-18 .testimonial-rating {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+#comm-18 .rating-star {
+    width: 20px;
+    height: 20px;
+    background: #FCD34D;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+#comm-18 .testimonial-name {
+    font-weight: bold;
+    color: #C2410C;
+    font-size: 14px;
+}
+
+#comm-18 .testimonial-role {
+    color: #9CA3AF;
+    font-size: 12px;
+}
+
+#comm-18:hover .testimonial-card {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(251, 146, 60, 0.2);
+}
+
+/* ==================== #comm-19: Feedback Form ==================== */
+#comm-19 {
+    background: #ECFDF5;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-19 .feedback-form {
+    background: white;
+    border: 3px solid #10B981;
+    border-radius: 16px;
+    padding: 24px;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+#comm-19 .form-title {
+    font-weight: bold;
+    color: #065F46;
+    font-size: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+#comm-19 .form-field {
+    margin-bottom: 14px;
+}
+
+#comm-19 .field-label {
+    display: block;
+    color: #374151;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+#comm-19 .field-input {
+    width: 100%;
+    height: 36px;
+    background: #F0FDF4;
+    border: 2px solid #A7F3D0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#comm-19 .field-textarea {
+    width: 100%;
+    height: 60px;
+    background: #F0FDF4;
+    border: 2px solid #A7F3D0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#comm-19 .submit-btn {
+    width: 100%;
+    height: 40px;
+    background: #10B981;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#comm-19:hover .feedback-form {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+}
+
+#comm-19:hover .submit-btn {
+    background: #059669;
+}
+
+/* ==================== #comm-20: Survey Questions ==================== */
+#comm-20 {
+    background: #EFF6FF;
+    min-height: 300px;
+    padding: 20px;
+}
+
+#comm-20 .survey-container {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+#comm-20 .survey-title {
+    font-weight: bold;
+    color: #1E40AF;
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#comm-20 .survey-question {
+    background: white;
+    border: 2px solid #3B82F6;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+#comm-20 .question-number {
+    display: inline-block;
+    background: #3B82F6;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+#comm-20 .question-text {
+    color: #1E3A5F;
+    font-size: 13px;
+    display: inline;
+}
+
+#comm-20 .survey-options {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+#comm-20 .option-btn {
+    flex: 1;
+    height: 32px;
+    background: #DBEAFE;
+    border: 2px solid #93C5FD;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #1E40AF;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#comm-20 .option-btn:hover {
+    background: #3B82F6;
+    color: white;
+}
+
+#comm-20:hover .survey-question {
+    transform: translateX(5px);
+}
+
+/* ==================== #comm-21: Poll Results ==================== */
+#comm-21 {
+    background: #FEF3C7;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-21 .poll-container {
+    background: white;
+    border: 3px solid #F59E0B;
+    border-radius: 16px;
+    padding: 24px;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+#comm-21 .poll-title {
+    font-weight: bold;
+    color: #92400E;
+    font-size: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#comm-21 .poll-option {
+    margin-bottom: 14px;
+}
+
+#comm-21 .option-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+#comm-21 .option-text {
+    color: #374151;
+    font-size: 13px;
+}
+
+#comm-21 .option-percent {
+    color: #92400E;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#comm-21 .option-bar {
+    height: 20px;
+    background: #FEF3C7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#comm-21 .option-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+#comm-21 .option-fill.yellow { background: #FCD34D; }
+#comm-21 .option-fill.orange { background: #FB923C; }
+#comm-21 .option-fill.pink { background: #F472B6; }
+#comm-21 .option-fill.green { background: #4ADE80; }
+
+#comm-21 .poll-total {
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+#comm-21:hover .poll-container {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+}
+
+#comm-21:hover .option-fill {
+    animation: bar-grow 0.5s ease;
+}
+
+@keyframes bar-grow {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+}
+
+/* ==================== #comm-22: Broadcast to Many ==================== */
+#comm-22 {
+    background: #F0F9FF;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-22 .broadcast-container {
+    position: relative;
+    width: 280px;
+    height: 200px;
+}
+
+#comm-22 .broadcast-source {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: #3B82F6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 0 #1D4ED8;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+#comm-22 .source-icon {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 4px;
+}
+
+#comm-22 .broadcast-lines {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#comm-22 .broadcast-line {
+    width: 3px;
+    height: 30px;
+    background: #93C5FD;
+}
+
+#comm-22 .broadcast-split {
+    display: flex;
+    gap: 60px;
+}
+
+#comm-22 .split-line {
+    width: 3px;
+    height: 30px;
+    background: #93C5FD;
+}
+
+#comm-22 .receivers {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+#comm-22 .receiver {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+#comm-22 .receiver.pink { background: #F472B6; }
+#comm-22 .receiver.green { background: #4ADE80; }
+#comm-22 .receiver.yellow { background: #FCD34D; }
+#comm-22 .receiver.orange { background: #FB923C; }
+#comm-22 .receiver.purple { background: #A78BFA; }
+
+#comm-22:hover .broadcast-source {
+    transform: translateX(-50%) scale(1.1);
+}
+
+#comm-22:hover .receiver {
+    animation: receiver-pulse 0.5s ease infinite;
+}
+
+#comm-22:hover .receiver:nth-child(2) { animation-delay: 0.1s; }
+#comm-22:hover .receiver:nth-child(3) { animation-delay: 0.2s; }
+#comm-22:hover .receiver:nth-child(4) { animation-delay: 0.3s; }
+#comm-22:hover .receiver:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes receiver-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* ==================== #comm-23: One-on-One Chat ==================== */
+#comm-23 {
+    background: #FDF4FF;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+#comm-23 .chat-person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+#comm-23 .person-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+}
+
+#comm-23 .person-avatar.pink {
+    background: #EC4899;
+    box-shadow: 0 4px 0 #BE185D;
+}
+
+#comm-23 .person-avatar.purple {
+    background: #8B5CF6;
+    box-shadow: 0 4px 0 #6D28D9;
+}
+
+#comm-23 .person-name {
+    font-size: 12px;
+    color: #6B7280;
+}
+
+#comm-23 .chat-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#comm-23 .arrow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+}
+
+#comm-23 .arrow-line {
+    width: 50px;
+    height: 4px;
+    background: #D8B4FE;
+    border-radius: 2px;
+}
+
+#comm-23 .arrow-head {
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+}
+
+#comm-23 .arrow.right .arrow-head {
+    border-left-color: #D8B4FE;
+}
+
+#comm-23 .arrow.left {
+    flex-direction: row-reverse;
+}
+
+#comm-23 .arrow.left .arrow-head {
+    border-right-color: #D8B4FE;
+}
+
+#comm-23:hover .chat-person:first-child {
+    transform: translateX(-10px);
+}
+
+#comm-23:hover .chat-person:last-child {
+    transform: translateX(10px);
+}
+
+#comm-23:hover .arrow.right {
+    transform: translateX(5px);
+}
+
+#comm-23:hover .arrow.left {
+    transform: translateX(-5px);
+}
+
+/* ==================== #comm-24: Group Announcement ==================== */
+#comm-24 {
+    background: #FEF3C7;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-24 .announcement-container {
+    position: relative;
+    width: 300px;
+}
+
+#comm-24 .announcement-banner {
+    background: #F59E0B;
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 0 #D97706;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+#comm-24 .banner-icon {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-24 .icon-bell {
+    width: 20px;
+    height: 20px;
+    background: #F59E0B;
+    border-radius: 50% 50% 0 0;
+    position: relative;
+}
+
+#comm-24 .icon-bell::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #F59E0B;
+    border-radius: 50%;
+}
+
+#comm-24 .banner-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+#comm-24 .banner-text {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+#comm-24 .audience {
+    display: flex;
+    justify-content: center;
+    gap: -12px;
+    margin-top: 20px;
+}
+
+#comm-24 .audience-member {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-left: -12px;
+    transition: all 0.3s ease;
+}
+
+#comm-24 .audience-member:first-child { margin-left: 0; }
+#comm-24 .audience-member.pink { background: #F472B6; }
+#comm-24 .audience-member.blue { background: #60A5FA; }
+#comm-24 .audience-member.green { background: #4ADE80; }
+#comm-24 .audience-member.purple { background: #A78BFA; }
+#comm-24 .audience-member.orange { background: #FB923C; }
+
+#comm-24:hover .announcement-banner {
+    transform: translateY(-5px);
+}
+
+#comm-24:hover .audience-member {
+    margin-left: 4px;
+}
+
+#comm-24:hover .audience-member:first-child { margin-left: 0; }
+
+/* ==================== #comm-25: Notification Bell ==================== */
+#comm-25 {
+    background: #FEE2E2;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-25 .notification-container {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#comm-25 .bell-body {
+    width: 80px;
+    height: 80px;
+    background: #EF4444;
+    border-radius: 50% 50% 10% 10%;
+    position: relative;
+    box-shadow: 0 6px 0 #DC2626;
+}
+
+#comm-25 .bell-top {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: #EF4444;
+    border-radius: 50%;
+}
+
+#comm-25 .bell-clapper {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #B91C1C;
+    border-radius: 50%;
+}
+
+#comm-25 .notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    background: #FF69B4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border: 3px solid white;
+    transition: all 0.3s ease;
+}
+
+#comm-25 .notification-rings {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+}
+
+#comm-25 .ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #FCA5A5;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+#comm-25:hover .notification-container {
+    animation: bell-ring 0.3s ease infinite;
+}
+
+#comm-25:hover .notification-badge {
+    transform: scale(1.2);
+}
+
+#comm-25:hover .ring {
+    animation: ring-expand 1s ease infinite;
+}
+
+#comm-25:hover .ring:nth-child(1) { width: 100px; height: 100px; }
+#comm-25:hover .ring:nth-child(2) { width: 130px; height: 130px; animation-delay: 0.3s; }
+#comm-25:hover .ring:nth-child(3) { width: 160px; height: 160px; animation-delay: 0.6s; }
+
+@keyframes bell-ring {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes ring-expand {
+    0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.8); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* ==================== #comm-26: Alert Message ==================== */
+#comm-26 {
+    background: #FEF3C7;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-26 .alert-box {
+    background: white;
+    border: 3px solid #F59E0B;
+    border-radius: 12px;
+    padding: 20px 24px;
+    width: 300px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+#comm-26 .alert-icon {
+    width: 44px;
+    height: 44px;
+    background: #FCD34D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+#comm-26 .icon-exclamation {
+    font-size: 24px;
+    font-weight: bold;
+    color: #92400E;
+}
+
+#comm-26 .alert-content {
+    flex: 1;
+}
+
+#comm-26 .alert-title {
+    font-weight: bold;
+    color: #92400E;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+#comm-26 .alert-text {
+    color: #78716C;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+#comm-26:hover .alert-box {
+    transform: translateX(5px);
+    box-shadow: -5px 5px 0 #FCD34D;
+}
+
+#comm-26:hover .alert-icon {
+    animation: icon-shake 0.3s ease infinite;
+}
+
+@keyframes icon-shake {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* ==================== #comm-27: Warning Popup ==================== */
+#comm-27 {
+    background: #FEE2E2;
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-27 .popup-container {
+    position: relative;
+}
+
+#comm-27 .popup-box {
+    background: white;
+    border: 4px solid #EF4444;
+    border-radius: 16px;
+    padding: 24px;
+    width: 280px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#comm-27 .popup-icon {
+    width: 60px;
+    height: 60px;
+    background: #EF4444;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#comm-27 .warning-triangle {
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 32px solid white;
+    position: relative;
+}
+
+#comm-27 .warning-triangle::after {
+    content: '!';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 16px;
+    color: #EF4444;
+}
+
+#comm-27 .popup-title {
+    font-weight: bold;
+    color: #991B1B;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+#comm-27 .popup-text {
+    color: #78716C;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+#comm-27 .popup-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+#comm-27 .popup-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#comm-27 .popup-btn.danger {
+    background: #EF4444;
+    color: white;
+}
+
+#comm-27 .popup-btn.cancel {
+    background: #E5E7EB;
+    color: #374151;
+}
+
+#comm-27:hover .popup-box {
+    transform: scale(1.03);
+    box-shadow: 0 12px 32px rgba(239, 68, 68, 0.2);
+}
+
+#comm-27:hover .popup-icon {
+    animation: warning-pulse 0.5s ease infinite;
+}
+
+@keyframes warning-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ==================== #comm-28: Success Message ==================== */
+#comm-28 {
+    background: #DCFCE7;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-28 .success-box {
+    background: white;
+    border: 3px solid #22C55E;
+    border-radius: 12px;
+    padding: 24px 28px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+#comm-28 .success-icon {
+    width: 50px;
+    height: 50px;
+    background: #22C55E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+#comm-28 .checkmark {
+    width: 24px;
+    height: 14px;
+    border-left: 4px solid white;
+    border-bottom: 4px solid white;
+    transform: rotate(-45deg);
+    margin-top: -4px;
+}
+
+#comm-28 .success-content {
+    flex: 1;
+}
+
+#comm-28 .success-title {
+    font-weight: bold;
+    color: #166534;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+#comm-28 .success-text {
+    color: #6B7280;
+    font-size: 13px;
+}
+
+#comm-28:hover .success-box {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.2);
+}
+
+#comm-28:hover .success-icon {
+    animation: success-bounce 0.5s ease;
+}
+
+@keyframes success-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ==================== #comm-29: Error Message ==================== */
+#comm-29 {
+    background: #FEE2E2;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-29 .error-box {
+    background: white;
+    border: 3px solid #EF4444;
+    border-radius: 12px;
+    padding: 24px 28px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+#comm-29 .error-icon {
+    width: 50px;
+    height: 50px;
+    background: #EF4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+#comm-29 .x-mark {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+#comm-29 .x-mark::before,
+#comm-29 .x-mark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+}
+
+#comm-29 .x-mark::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#comm-29 .x-mark::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+#comm-29 .error-content {
+    flex: 1;
+}
+
+#comm-29 .error-title {
+    font-weight: bold;
+    color: #991B1B;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+#comm-29 .error-text {
+    color: #6B7280;
+    font-size: 13px;
+}
+
+#comm-29:hover .error-box {
+    transform: translateX(-5px);
+    box-shadow: 5px 5px 0 #FECACA;
+}
+
+#comm-29:hover .error-icon {
+    animation: error-shake 0.3s ease;
+}
+
+@keyframes error-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ==================== #comm-30: Loading/Waiting Message ==================== */
+#comm-30 {
+    background: #F5F3FF;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#comm-30 .loading-box {
+    background: white;
+    border: 3px solid #8B5CF6;
+    border-radius: 16px;
+    padding: 32px 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#comm-30 .loading-spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+#comm-30 .spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 5px solid #E9D5FF;
+    border-top-color: #8B5CF6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+#comm-30 .spinner-dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #8B5CF6;
+    border-radius: 50%;
+}
+
+#comm-30 .loading-text {
+    color: #5B21B6;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+#comm-30 .loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+#comm-30 .dot {
+    width: 8px;
+    height: 8px;
+    background: #A78BFA;
+    border-radius: 50%;
+    animation: dot-bounce 1.4s ease-in-out infinite;
+}
+
+#comm-30 .dot:nth-child(2) { animation-delay: 0.2s; }
+#comm-30 .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes dot-bounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+#comm-30:hover .loading-box {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(139, 92, 246, 0.2);
+}
+</style>
+
+<!-- ==================== Template HTML Structures ==================== -->
+
+<!-- #comm-1: Speech Bubble (Single) -->
+<div id="comm-1" class="comm-diagram">
+    <div class="speech-bubble">
+        こんにちは！今日も元気に頑張りましょう！
+    </div>
+</div>
+
+<!-- #comm-2: Conversation Bubbles (Back and Forth) -->
+<div id="comm-2" class="comm-diagram">
+    <div class="bubble-left">お疲れ様です！</div>
+    <div class="bubble-right">こちらこそ、お疲れ様でした！</div>
+    <div class="bubble-left">明日の会議の準備はできましたか？</div>
+    <div class="bubble-right">はい、資料も完成しています！</div>
+</div>
+
+<!-- #comm-3: Group Chat Bubbles -->
+<div id="comm-3" class="comm-diagram">
+    <div class="chat-container">
+        <div class="chat-row">
+            <div class="avatar pink">A</div>
+            <div class="chat-bubble">皆さん、お疲れ様です！</div>
+        </div>
+        <div class="chat-row right">
+            <div class="avatar blue">B</div>
+            <div class="chat-bubble">お疲れ様です〜</div>
+        </div>
+        <div class="chat-row">
+            <div class="avatar green">C</div>
+            <div class="chat-bubble">今日のミーティングは何時からですか？</div>
+        </div>
+        <div class="chat-row right">
+            <div class="avatar orange">D</div>
+            <div class="chat-bubble">14時からです！</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-4: Thought Cloud -->
+<div id="comm-4" class="comm-diagram">
+    <div class="thought-cloud">
+        どうすればもっと効率的にできるかな...
+    </div>
+    <div class="thought-dots">
+        <div class="thought-dot"></div>
+        <div class="thought-dot"></div>
+        <div class="thought-dot"></div>
+    </div>
+</div>
+
+<!-- #comm-5: Announcement Megaphone -->
+<div id="comm-5" class="comm-diagram">
+    <div class="megaphone"></div>
+    <div class="sound-waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+</div>
+
+<!-- #comm-6: Letter/Envelope -->
+<div id="comm-6" class="comm-diagram">
+    <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body">
+            <div class="envelope-line"></div>
+            <div class="envelope-line"></div>
+            <div class="envelope-line"></div>
+        </div>
+        <div class="heart">💗</div>
+    </div>
+</div>
+
+<!-- #comm-7: Email Notification -->
+<div id="comm-7" class="comm-diagram">
+    <div class="email-card">
+        <div class="email-header">
+            <div class="email-icon"></div>
+            <div>新着メール</div>
+            <div class="email-badge">3</div>
+        </div>
+        <div class="email-subject">プロジェクト進捗について</div>
+        <div class="email-preview">お疲れ様です。本日の進捗状況をお知らせします...</div>
+    </div>
+</div>
+
+<!-- #comm-8: Phone Call -->
+<div id="comm-8" class="comm-diagram">
+    <div class="phone">
+        <div class="phone-screen">
+            <div class="caller-icon"></div>
+        </div>
+        <div class="phone-button"></div>
+    </div>
+    <div class="call-waves">
+        <div class="call-wave"></div>
+        <div class="call-wave"></div>
+        <div class="call-wave"></div>
+    </div>
+</div>
+
+<!-- #comm-9: Video Call Screen -->
+<div id="comm-9" class="comm-diagram">
+    <div class="video-screen">
+        <div class="main-video">
+            <div class="person-silhouette">
+                <div class="person-head"></div>
+                <div class="person-body"></div>
+            </div>
+        </div>
+        <div class="pip-video">
+            <div class="pip-icon">
+                <div class="pip-head"></div>
+                <div class="pip-body"></div>
+            </div>
+        </div>
+        <div class="video-controls">
+            <div class="control-btn mic"><div class="control-icon"></div></div>
+            <div class="control-btn cam"><div class="control-icon"></div></div>
+            <div class="control-btn end"><div class="control-icon"></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-10: Text Message Chain -->
+<div id="comm-10" class="comm-diagram">
+    <div class="message-chain">
+        <div class="message-time">今日 14:30</div>
+        <div class="message sent">資料送りました！</div>
+        <div class="message received">ありがとうございます！</div>
+        <div class="message received">確認しますね</div>
+        <div class="message sent">よろしくお願いします</div>
+        <div class="typing-indicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-11: Social Media Post -->
+<div id="comm-11" class="comm-diagram">
+    <div class="social-post">
+        <div class="post-header">
+            <div class="post-avatar"></div>
+            <div class="post-user">
+                <div class="post-name">ユーザー名</div>
+                <div class="post-handle">@username</div>
+            </div>
+        </div>
+        <div class="post-content">
+            今日は素晴らしい1日でした！新しいプロジェクトが始まりました ✨
+        </div>
+        <div class="post-image">
+            <div class="image-placeholder"></div>
+        </div>
+        <div class="post-actions">
+            <div class="action-btn like"><div class="action-icon"></div>24</div>
+            <div class="action-btn comment"><div class="action-icon"></div>8</div>
+            <div class="action-btn share"><div class="action-icon"></div>3</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-12: Comment Thread -->
+<div id="comm-12" class="comm-diagram">
+    <div class="thread-container">
+        <div class="thread-comment">
+            <div class="comment-avatar yellow"></div>
+            <div class="comment-body">
+                <div class="comment-header">
+                    <span class="comment-name">田中さん</span>
+                    <span class="comment-time">2時間前</span>
+                </div>
+                <div class="comment-text">素晴らしい提案ですね！</div>
+            </div>
+        </div>
+        <div class="thread-line"></div>
+        <div class="thread-comment reply">
+            <div class="comment-avatar orange"></div>
+            <div class="comment-body">
+                <div class="comment-header">
+                    <span class="comment-name">佐藤さん</span>
+                    <span class="comment-time">1時間前</span>
+                </div>
+                <div class="comment-text">私も同感です！</div>
+            </div>
+        </div>
+        <div class="thread-line"></div>
+        <div class="thread-comment reply">
+            <div class="comment-avatar pink"></div>
+            <div class="comment-body">
+                <div class="comment-header">
+                    <span class="comment-name">鈴木さん</span>
+                    <span class="comment-time">30分前</span>
+                </div>
+                <div class="comment-text">ぜひ進めましょう！</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-13: Review/Feedback Box -->
+<div id="comm-13" class="comm-diagram">
+    <div class="review-box">
+        <div class="review-stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star empty"></div>
+        </div>
+        <div class="review-text">
+            とても使いやすく、サポートも迅速でした。おすすめです！
+        </div>
+        <div class="reviewer">
+            <div class="reviewer-avatar"></div>
+            <div>
+                <div class="reviewer-name">山田太郎</div>
+                <div class="reviewer-date">2024年1月5日</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-14: Question and Answer -->
+<div id="comm-14" class="comm-diagram">
+    <div class="qa-container">
+        <div class="question-box">
+            <div class="qa-text">この機能はいつから使えますか？</div>
+        </div>
+        <div class="answer-box">
+            <div class="qa-text">来月のアップデートから利用可能になる予定です。</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-15: FAQ Format -->
+<div id="comm-15" class="comm-diagram">
+    <div class="faq-list">
+        <div class="faq-item">
+            <div class="faq-question">
+                返品は可能ですか？
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">はい、購入から30日以内であれば返品可能です。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                配送にかかる時間は？
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">通常2-3営業日でお届けします。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                支払い方法は？
+                <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">クレジットカード、銀行振込が可能です。</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-16: Interview Transcript -->
+<div id="comm-16" class="comm-diagram">
+    <div class="interview-container">
+        <div class="interview-header">
+            <div class="interview-title">インタビュー記録</div>
+        </div>
+        <div class="interview-line">
+            <span class="speaker-tag interviewer">司会</span>
+            <span class="speaker-text">本日はお時間いただきありがとうございます。</span>
+        </div>
+        <div class="interview-line">
+            <span class="speaker-tag guest">ゲスト</span>
+            <span class="speaker-text">こちらこそ、お招きいただきありがとうございます。</span>
+        </div>
+        <div class="interview-line">
+            <span class="speaker-tag interviewer">司会</span>
+            <span class="speaker-text">早速ですが、最近の活動について教えてください。</span>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-17: Quote Box -->
+<div id="comm-17" class="comm-diagram">
+    <div class="quote-box">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">
+            成功とは、失敗を恐れず、諦めずに挑戦し続けることです。
+        </div>
+        <div class="quote-author">
+            <div class="author-avatar"></div>
+            <div class="author-info">
+                <div class="author-name">山田 花子</div>
+                <div class="author-title">CEO / 株式会社サンプル</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-18: Testimonial Card -->
+<div id="comm-18" class="comm-diagram">
+    <div class="testimonial-card">
+        <div class="testimonial-avatar"></div>
+        <div class="testimonial-text">
+            このサービスのおかげで、業務効率が大幅に改善しました。本当に感謝しています！
+        </div>
+        <div class="testimonial-rating">
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+        </div>
+        <div class="testimonial-name">佐藤 健太</div>
+        <div class="testimonial-role">マーケティング部長</div>
+    </div>
+</div>
+
+<!-- #comm-19: Feedback Form -->
+<div id="comm-19" class="comm-diagram">
+    <div class="feedback-form">
+        <div class="form-title">フィードバックを送る</div>
+        <div class="form-field">
+            <label class="field-label">お名前</label>
+            <div class="field-input"></div>
+        </div>
+        <div class="form-field">
+            <label class="field-label">メールアドレス</label>
+            <div class="field-input"></div>
+        </div>
+        <div class="form-field">
+            <label class="field-label">ご意見・ご感想</label>
+            <div class="field-textarea"></div>
+        </div>
+        <div class="submit-btn">送信する</div>
+    </div>
+</div>
+
+<!-- #comm-20: Survey Questions -->
+<div id="comm-20" class="comm-diagram">
+    <div class="survey-container">
+        <div class="survey-title">アンケート</div>
+        <div class="survey-question">
+            <span class="question-number">1</span>
+            <span class="question-text">このサービスに満足していますか？</span>
+            <div class="survey-options">
+                <div class="option-btn">はい</div>
+                <div class="option-btn">いいえ</div>
+            </div>
+        </div>
+        <div class="survey-question">
+            <span class="question-number">2</span>
+            <span class="question-text">友人に勧めたいですか？</span>
+            <div class="survey-options">
+                <div class="option-btn">はい</div>
+                <div class="option-btn">いいえ</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-21: Poll Results -->
+<div id="comm-21" class="comm-diagram">
+    <div class="poll-container">
+        <div class="poll-title">好きな季節は？</div>
+        <div class="poll-option">
+            <div class="option-label">
+                <span class="option-text">春</span>
+                <span class="option-percent">42%</span>
+            </div>
+            <div class="option-bar">
+                <div class="option-fill yellow" style="width: 42%;"></div>
+            </div>
+        </div>
+        <div class="poll-option">
+            <div class="option-label">
+                <span class="option-text">夏</span>
+                <span class="option-percent">28%</span>
+            </div>
+            <div class="option-bar">
+                <div class="option-fill orange" style="width: 28%;"></div>
+            </div>
+        </div>
+        <div class="poll-option">
+            <div class="option-label">
+                <span class="option-text">秋</span>
+                <span class="option-percent">18%</span>
+            </div>
+            <div class="option-bar">
+                <div class="option-fill pink" style="width: 18%;"></div>
+            </div>
+        </div>
+        <div class="poll-option">
+            <div class="option-label">
+                <span class="option-text">冬</span>
+                <span class="option-percent">12%</span>
+            </div>
+            <div class="option-bar">
+                <div class="option-fill green" style="width: 12%;"></div>
+            </div>
+        </div>
+        <div class="poll-total">合計: 1,234票</div>
+    </div>
+</div>
+
+<!-- #comm-22: Broadcast to Many -->
+<div id="comm-22" class="comm-diagram">
+    <div class="broadcast-container">
+        <div class="broadcast-source">
+            <div class="source-icon"></div>
+        </div>
+        <div class="broadcast-lines">
+            <div class="broadcast-line"></div>
+            <div class="broadcast-split">
+                <div class="split-line"></div>
+                <div class="split-line"></div>
+            </div>
+        </div>
+        <div class="receivers">
+            <div class="receiver pink"></div>
+            <div class="receiver green"></div>
+            <div class="receiver yellow"></div>
+            <div class="receiver orange"></div>
+            <div class="receiver purple"></div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-23: One-on-One Chat -->
+<div id="comm-23" class="comm-diagram">
+    <div class="chat-person">
+        <div class="person-avatar pink"></div>
+        <div class="person-name">Aさん</div>
+    </div>
+    <div class="chat-arrows">
+        <div class="arrow right">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"></div>
+        </div>
+        <div class="arrow left">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"></div>
+        </div>
+    </div>
+    <div class="chat-person">
+        <div class="person-avatar purple"></div>
+        <div class="person-name">Bさん</div>
+    </div>
+</div>
+
+<!-- #comm-24: Group Announcement -->
+<div id="comm-24" class="comm-diagram">
+    <div class="announcement-container">
+        <div class="announcement-banner">
+            <div class="banner-icon">
+                <div class="icon-bell"></div>
+            </div>
+            <div class="banner-title">お知らせ</div>
+            <div class="banner-text">明日の会議は15時に変更になりました</div>
+        </div>
+        <div class="audience">
+            <div class="audience-member pink"></div>
+            <div class="audience-member blue"></div>
+            <div class="audience-member green"></div>
+            <div class="audience-member purple"></div>
+            <div class="audience-member orange"></div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-25: Notification Bell -->
+<div id="comm-25" class="comm-diagram">
+    <div class="notification-container">
+        <div class="bell-body">
+            <div class="bell-top"></div>
+            <div class="bell-clapper"></div>
+        </div>
+        <div class="notification-badge">5</div>
+        <div class="notification-rings">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-26: Alert Message -->
+<div id="comm-26" class="comm-diagram">
+    <div class="alert-box">
+        <div class="alert-icon">
+            <span class="icon-exclamation">!</span>
+        </div>
+        <div class="alert-content">
+            <div class="alert-title">注意が必要です</div>
+            <div class="alert-text">この操作を行う前に、データのバックアップを取ってください。</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-27: Warning Popup -->
+<div id="comm-27" class="comm-diagram">
+    <div class="popup-container">
+        <div class="popup-box">
+            <div class="popup-icon">
+                <div class="warning-triangle"></div>
+            </div>
+            <div class="popup-title">警告</div>
+            <div class="popup-text">この操作は取り消すことができません。本当に続行しますか？</div>
+            <div class="popup-buttons">
+                <div class="popup-btn cancel">キャンセル</div>
+                <div class="popup-btn danger">続行する</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-28: Success Message -->
+<div id="comm-28" class="comm-diagram">
+    <div class="success-box">
+        <div class="success-icon">
+            <div class="checkmark"></div>
+        </div>
+        <div class="success-content">
+            <div class="success-title">完了しました！</div>
+            <div class="success-text">データが正常に保存されました。</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-29: Error Message -->
+<div id="comm-29" class="comm-diagram">
+    <div class="error-box">
+        <div class="error-icon">
+            <div class="x-mark"></div>
+        </div>
+        <div class="error-content">
+            <div class="error-title">エラーが発生しました</div>
+            <div class="error-text">接続に失敗しました。再度お試しください。</div>
+        </div>
+    </div>
+</div>
+
+<!-- #comm-30: Loading/Waiting Message -->
+<div id="comm-30" class="comm-diagram">
+    <div class="loading-box">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-dot"></div>
+        </div>
+        <div class="loading-text">読み込み中...</div>
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+</div>

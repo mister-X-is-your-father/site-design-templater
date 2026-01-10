@@ -1,0 +1,3248 @@
+<!--
+  Diagram Goals Templates - 目標・達成カテゴリ
+  30 unique patterns for goals, achievements, and success tracking
+  Pattern IDs: #goals-1 to #goals-30
+-->
+
+<style>
+/* ============================================
+   GOALS & ACHIEVEMENT DIAGRAM TEMPLATES
+   ============================================ */
+
+/* Color Variables */
+:root {
+  --goals-pink: #FF6B9D;
+  --goals-sky: #4ECDC4;
+  --goals-mint: #7ED321;
+  --goals-yellow: #FFD93D;
+  --goals-orange: #FF8C42;
+  --goals-purple: #A855F7;
+  --goals-gold: #FFD700;
+  --goals-silver: #C0C0C0;
+  --goals-bronze: #CD7F32;
+  --goals-white: #FFFFFF;
+  --goals-dark: #2D3748;
+  --goals-light: #F7FAFC;
+}
+
+/* ============================================
+   #goals-1: Target Bullseye
+   ============================================ */
+#goals-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-light);
+}
+
+.bullseye-target {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.bullseye-ring {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.bullseye-ring.outer {
+  width: 200px;
+  height: 200px;
+  background: var(--goals-sky);
+  top: 0;
+  left: 0;
+}
+
+.bullseye-ring.middle {
+  width: 140px;
+  height: 140px;
+  background: var(--goals-yellow);
+  top: 30px;
+  left: 30px;
+}
+
+.bullseye-ring.inner {
+  width: 80px;
+  height: 80px;
+  background: var(--goals-orange);
+  top: 60px;
+  left: 60px;
+}
+
+.bullseye-ring.center {
+  width: 30px;
+  height: 30px;
+  background: var(--goals-pink);
+  top: 85px;
+  left: 85px;
+}
+
+.bullseye-target:hover .bullseye-ring {
+  transform: scale(1.05);
+}
+
+.bullseye-arrow {
+  position: absolute;
+  width: 60px;
+  height: 8px;
+  background: var(--goals-dark);
+  top: 96px;
+  right: -30px;
+  transform: rotate(-15deg);
+  animation: arrowShake 0.5s ease infinite;
+}
+
+.bullseye-arrow::before {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: -6px;
+  border-left: 20px solid var(--goals-dark);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+@keyframes arrowShake {
+  0%, 100% { transform: rotate(-15deg) translateX(0); }
+  50% { transform: rotate(-15deg) translateX(3px); }
+}
+
+.bullseye-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  text-align: center;
+}
+
+/* ============================================
+   #goals-2: Goal Post (Soccer)
+   ============================================ */
+#goals-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-mint);
+}
+
+.goalpost-container {
+  position: relative;
+  width: 240px;
+  height: 160px;
+}
+
+.goalpost-frame {
+  position: absolute;
+  width: 200px;
+  height: 140px;
+  border: 12px solid var(--goals-white);
+  border-bottom: none;
+  top: 0;
+  left: 20px;
+}
+
+.goalpost-net {
+  position: absolute;
+  width: 176px;
+  height: 116px;
+  top: 12px;
+  left: 32px;
+  background:
+    repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,0.5) 10px, rgba(255,255,255,0.5) 12px),
+    repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(255,255,255,0.5) 10px, rgba(255,255,255,0.5) 12px);
+}
+
+.goalpost-ball {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--goals-white);
+  border-radius: 50%;
+  bottom: 30px;
+  left: 100px;
+  box-shadow: inset -5px -5px 0 var(--goals-dark);
+  animation: ballBounce 1s ease infinite;
+}
+
+@keyframes ballBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.goalpost-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--goals-white);
+  text-shadow: 2px 2px 0 var(--goals-dark);
+}
+
+/* ============================================
+   #goals-3: Finish Line
+   ============================================ */
+#goals-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-light);
+}
+
+.finishline-track {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  background: var(--goals-orange);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.finishline-lanes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 18px,
+    var(--goals-white) 18px,
+    var(--goals-white) 20px
+  );
+}
+
+.finishline-checker {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  background: repeating-conic-gradient(
+    var(--goals-dark) 0deg 90deg,
+    var(--goals-white) 90deg 180deg
+  );
+  background-size: 20px 20px;
+}
+
+.finishline-runner {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background: var(--goals-pink);
+  border-radius: 15px 15px 5px 5px;
+  bottom: 15px;
+  left: 20px;
+  animation: runnerMove 3s ease-in-out infinite;
+}
+
+.finishline-runner::before {
+  content: '🏃';
+  font-size: 24px;
+  position: absolute;
+  top: 5px;
+  left: 3px;
+}
+
+@keyframes runnerMove {
+  0% { left: 20px; }
+  100% { left: 230px; }
+}
+
+.finishline-banner {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  padding: 10px 30px;
+  background: var(--goals-yellow);
+  border-radius: 5px;
+}
+
+/* ============================================
+   #goals-4: Mountain Peak Goal
+   ============================================ */
+#goals-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-sky);
+}
+
+.mountain-container {
+  position: relative;
+  width: 280px;
+  height: 200px;
+}
+
+.mountain-peak {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-bottom: 180px solid var(--goals-purple);
+}
+
+.mountain-snow {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 45px solid var(--goals-white);
+}
+
+.mountain-flag {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 40px;
+  background: var(--goals-dark);
+}
+
+.mountain-flag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 4px;
+  width: 30px;
+  height: 20px;
+  background: var(--goals-pink);
+  animation: flagWave 1s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+@keyframes flagWave {
+  0%, 100% { transform: skewY(0deg); }
+  50% { transform: skewY(-5deg); }
+}
+
+.mountain-climber {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--goals-yellow);
+  border-radius: 50%;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-30px);
+  animation: climberMove 4s ease-in-out infinite;
+}
+
+@keyframes climberMove {
+  0% { bottom: 60px; transform: translateX(-30px); }
+  50% { bottom: 120px; transform: translateX(-15px); }
+  100% { bottom: 60px; transform: translateX(-30px); }
+}
+
+.mountain-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+/* ============================================
+   #goals-5: Star Collection
+   ============================================ */
+#goals-5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-purple);
+}
+
+.stars-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+}
+
+.star-item {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.star-item:hover {
+  transform: scale(1.2) rotate(15deg);
+}
+
+.star-item.earned {
+  animation: starEarned 0.5s ease;
+}
+
+@keyframes starEarned {
+  0% { transform: scale(0) rotate(-180deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.star-shape {
+  width: 100%;
+  height: 100%;
+  background: var(--goals-gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.star-item.empty .star-shape {
+  background: rgba(255,255,255,0.3);
+}
+
+.star-count {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--goals-gold);
+  text-shadow: 2px 2px 0 var(--goals-dark);
+}
+
+/* ============================================
+   #goals-6: Badge Collection
+   ============================================ */
+#goals-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.badge-item {
+  width: 70px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.badge-item:hover {
+  transform: translateY(-5px);
+}
+
+.badge-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  position: relative;
+}
+
+.badge-icon.gold { background: var(--goals-gold); }
+.badge-icon.silver { background: var(--goals-silver); }
+.badge-icon.bronze { background: var(--goals-bronze); }
+.badge-icon.locked {
+  background: #4A5568;
+  opacity: 0.5;
+}
+
+.badge-icon::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.badge-label {
+  font-size: 10px;
+  color: var(--goals-white);
+  text-align: center;
+}
+
+/* ============================================
+   #goals-7: Trophy Cabinet
+   ============================================ */
+#goals-7 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: #8B4513;
+}
+
+.trophy-cabinet {
+  width: 280px;
+  background: #DEB887;
+  border: 8px solid #654321;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.trophy-shelf {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 15px 0;
+  border-bottom: 6px solid #654321;
+}
+
+.trophy-shelf:last-child {
+  border-bottom: none;
+}
+
+.trophy-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.trophy-item:hover {
+  transform: scale(1.1);
+}
+
+.trophy-cup {
+  font-size: 36px;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+}
+
+.trophy-cup.gold { color: var(--goals-gold); }
+.trophy-cup.silver { color: var(--goals-silver); }
+.trophy-cup.bronze { color: var(--goals-bronze); }
+
+.trophy-year {
+  font-size: 10px;
+  color: var(--goals-dark);
+  font-weight: bold;
+}
+
+/* ============================================
+   #goals-8: Medal Display
+   ============================================ */
+#goals-8 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-light);
+}
+
+.medal-rack {
+  display: flex;
+  gap: 30px;
+}
+
+.medal-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.medal-item:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.medal-ribbon {
+  width: 30px;
+  height: 40px;
+  position: relative;
+}
+
+.medal-ribbon::before,
+.medal-ribbon::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 40px;
+  top: 0;
+}
+
+.medal-ribbon::before {
+  left: 0;
+  background: var(--goals-pink);
+  transform: skewY(-10deg);
+}
+
+.medal-ribbon::after {
+  right: 0;
+  background: var(--goals-purple);
+  transform: skewY(10deg);
+}
+
+.medal-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  border: 4px solid var(--goals-dark);
+  margin-top: -10px;
+  z-index: 1;
+}
+
+.medal-circle.gold { background: var(--goals-gold); }
+.medal-circle.silver { background: var(--goals-silver); }
+.medal-circle.bronze { background: var(--goals-bronze); }
+
+.medal-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  margin-top: 5px;
+}
+
+/* ============================================
+   #goals-9: Certificate Frame
+   ============================================ */
+#goals-9 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-sky);
+}
+
+.certificate-frame {
+  width: 280px;
+  padding: 20px;
+  background: var(--goals-white);
+  border: 8px solid var(--goals-gold);
+  position: relative;
+}
+
+.certificate-frame::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px solid var(--goals-gold);
+}
+
+.certificate-header {
+  text-align: center;
+  font-size: 12px;
+  color: var(--goals-dark);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.certificate-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--goals-gold);
+  margin: 15px 0;
+  font-family: serif;
+}
+
+.certificate-name {
+  text-align: center;
+  font-size: 18px;
+  color: var(--goals-dark);
+  border-bottom: 2px solid var(--goals-dark);
+  padding-bottom: 5px;
+  margin: 0 20px;
+}
+
+.certificate-text {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  margin: 15px 0;
+}
+
+.certificate-seal {
+  width: 50px;
+  height: 50px;
+  background: var(--goals-gold);
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 0 0 3px var(--goals-dark);
+}
+
+/* ============================================
+   #goals-10: Level Unlock
+   ============================================ */
+#goals-10 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.level-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.level-item.unlocked {
+  background: var(--goals-mint);
+  color: var(--goals-dark);
+}
+
+.level-item.current {
+  background: var(--goals-gold);
+  color: var(--goals-dark);
+  animation: levelPulse 1s ease infinite;
+}
+
+.level-item.locked {
+  background: #4A5568;
+  color: #718096;
+}
+
+.level-item.locked::after {
+  content: '🔒';
+  font-size: 14px;
+  position: absolute;
+}
+
+.level-item:hover.unlocked {
+  transform: scale(1.1);
+}
+
+@keyframes levelPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+}
+
+.level-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--goals-white);
+}
+
+.level-bar {
+  width: 150px;
+  height: 10px;
+  background: #4A5568;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.level-fill {
+  height: 100%;
+  background: var(--goals-gold);
+  width: 60%;
+  transition: width 0.5s ease;
+}
+
+/* ============================================
+   #goals-11: Progress Path to Goal
+   ============================================ */
+#goals-11 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-mint);
+}
+
+.path-container {
+  position: relative;
+  width: 280px;
+  height: 200px;
+}
+
+.path-line {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.path-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.path-track {
+  fill: none;
+  stroke: var(--goals-white);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.path-progress {
+  fill: none;
+  stroke: var(--goals-pink);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 100;
+  animation: pathDraw 3s ease forwards;
+}
+
+@keyframes pathDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.path-marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: var(--goals-yellow);
+  border-radius: 50%;
+  border: 4px solid var(--goals-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.path-marker.start { top: 160px; left: 20px; }
+.path-marker.mid { top: 80px; left: 125px; }
+.path-marker.end {
+  top: 10px;
+  left: 230px;
+  background: var(--goals-gold);
+}
+
+.path-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+/* ============================================
+   #goals-12: Milestone Markers
+   ============================================ */
+#goals-12 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-light);
+}
+
+.milestone-road {
+  position: relative;
+  width: 300px;
+  height: 60px;
+  background: #4A5568;
+  border-radius: 30px;
+}
+
+.milestone-dashes {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--goals-yellow) 0,
+    var(--goals-yellow) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+}
+
+.milestone-markers {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+  top: -30px;
+}
+
+.milestone-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.milestone-sign {
+  width: 6px;
+  height: 50px;
+  background: var(--goals-dark);
+  position: relative;
+}
+
+.milestone-sign::before {
+  content: attr(data-km);
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--goals-white);
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  border: 2px solid var(--goals-dark);
+}
+
+.milestone-item.reached .milestone-sign::before {
+  background: var(--goals-gold);
+}
+
+.milestone-car {
+  position: absolute;
+  font-size: 24px;
+  top: 15px;
+  left: 50%;
+  animation: carDrive 5s linear infinite;
+}
+
+@keyframes carDrive {
+  0% { left: 10%; }
+  100% { left: 80%; }
+}
+
+/* ============================================
+   #goals-13: Checkpoint Flags
+   ============================================ */
+#goals-13 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-orange);
+}
+
+.checkpoint-track {
+  position: relative;
+  width: 300px;
+  height: 150px;
+  background: var(--goals-white);
+  border-radius: 75px;
+  border: 8px solid var(--goals-dark);
+}
+
+.checkpoint-inner {
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  width: 180px;
+  height: 90px;
+  background: var(--goals-orange);
+  border-radius: 45px;
+  border: 8px solid var(--goals-dark);
+}
+
+.checkpoint-flag {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkpoint-flag .pole {
+  width: 4px;
+  height: 30px;
+  background: var(--goals-dark);
+}
+
+.checkpoint-flag .banner {
+  width: 20px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+.checkpoint-flag.cp1 { top: -10px; left: 50px; }
+.checkpoint-flag.cp2 { top: -10px; right: 50px; }
+.checkpoint-flag.cp3 { bottom: 0; left: 50%; transform: translateX(-50%); }
+
+.checkpoint-flag.cp1 .banner { background: var(--goals-pink); }
+.checkpoint-flag.cp2 .banner { background: var(--goals-yellow); }
+.checkpoint-flag.cp3 .banner { background: var(--goals-mint); }
+
+.checkpoint-racer {
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  left: 10%;
+  animation: racerMove 4s linear infinite;
+}
+
+@keyframes racerMove {
+  0% { top: 50%; left: 10%; }
+  25% { top: 0%; left: 40%; }
+  50% { top: 50%; left: 80%; }
+  75% { top: 100%; left: 40%; transform: translateY(-100%); }
+  100% { top: 50%; left: 10%; }
+}
+
+/* ============================================
+   #goals-14: Quest Completion
+   ============================================ */
+#goals-14 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-purple);
+}
+
+.quest-board {
+  width: 280px;
+  background: #2D1B4E;
+  border: 4px solid var(--goals-gold);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.quest-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--goals-gold);
+}
+
+.quest-icon {
+  font-size: 24px;
+}
+
+.quest-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--goals-gold);
+}
+
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quest-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quest-item:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.quest-check {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--goals-white);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quest-item.complete .quest-check {
+  background: var(--goals-mint);
+  border-color: var(--goals-mint);
+}
+
+.quest-item.complete .quest-check::after {
+  content: '✓';
+  color: var(--goals-dark);
+  font-weight: bold;
+}
+
+.quest-text {
+  font-size: 14px;
+  color: var(--goals-white);
+}
+
+.quest-item.complete .quest-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.quest-reward {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--goals-gold);
+}
+
+/* ============================================
+   #goals-15: Mission Accomplished
+   ============================================ */
+#goals-15 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+}
+
+.mission-stamp {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 8px solid var(--goals-gold);
+  border-radius: 50%;
+  animation: stampRotate 20s linear infinite;
+}
+
+.mission-outer::before {
+  content: 'MISSION ★ ACCOMPLISHED ★';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--goals-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes stampRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.mission-inner {
+  width: 120px;
+  height: 120px;
+  background: var(--goals-gold);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: stampPop 0.5s ease;
+}
+
+@keyframes stampPop {
+  0% { transform: scale(0) rotate(-180deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.mission-check {
+  font-size: 48px;
+  color: var(--goals-dark);
+}
+
+.mission-text {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+/* ============================================
+   #goals-16: Dream → Reality Bridge
+   ============================================ */
+#goals-16 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: linear-gradient(90deg, var(--goals-purple) 0%, var(--goals-purple) 50%, var(--goals-mint) 50%, var(--goals-mint) 100%);
+}
+
+.bridge-container {
+  position: relative;
+  width: 300px;
+  height: 150px;
+}
+
+.bridge-cloud {
+  position: absolute;
+  padding: 20px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.bridge-cloud.dream {
+  top: 0;
+  left: 0;
+  background: var(--goals-white);
+  color: var(--goals-purple);
+}
+
+.bridge-cloud.reality {
+  bottom: 0;
+  right: 0;
+  background: var(--goals-yellow);
+  color: var(--goals-dark);
+}
+
+.bridge-path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 8px;
+  background: var(--goals-gold);
+  border-radius: 4px;
+}
+
+.bridge-path::before,
+.bridge-path::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--goals-gold);
+  border-radius: 50%;
+  top: -6px;
+}
+
+.bridge-path::before { left: -10px; }
+.bridge-path::after { right: -10px; }
+
+.bridge-walker {
+  position: absolute;
+  font-size: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: walkerCross 4s ease-in-out infinite;
+}
+
+@keyframes walkerCross {
+  0% { left: 60px; }
+  50% { left: 220px; }
+  100% { left: 60px; }
+}
+
+/* ============================================
+   #goals-17: Wish List to Done List
+   ============================================ */
+#goals-17 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-pink);
+}
+
+.wishlist-container {
+  display: flex;
+  gap: 20px;
+}
+
+.list-paper {
+  width: 130px;
+  padding: 15px;
+  background: var(--goals-white);
+  border-radius: 5px;
+  box-shadow: 3px 3px 0 var(--goals-dark);
+  position: relative;
+}
+
+.list-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 50%, #DDD 50%);
+}
+
+.list-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px dashed var(--goals-dark);
+}
+
+.list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--goals-dark);
+}
+
+.list-item .bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.wish-list .bullet { background: var(--goals-pink); }
+.done-list .bullet { background: var(--goals-mint); }
+.done-list .list-item { text-decoration: line-through; opacity: 0.7; }
+
+.list-arrow {
+  font-size: 30px;
+  color: var(--goals-white);
+  align-self: center;
+  animation: arrowPulse 1s ease infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* ============================================
+   #goals-18: Bucket List Checkoff
+   ============================================ */
+#goals-18 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-sky);
+}
+
+.bucket-container {
+  position: relative;
+  width: 200px;
+  height: 180px;
+}
+
+.bucket-shape {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 120px;
+  background: var(--goals-orange);
+  border-radius: 0 0 20px 20px;
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+}
+
+.bucket-handle {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 40px;
+  border: 8px solid var(--goals-dark);
+  border-bottom: none;
+  border-radius: 50px 50px 0 0;
+}
+
+.bucket-items {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100px;
+  justify-content: center;
+}
+
+.bucket-item {
+  width: 25px;
+  height: 25px;
+  background: var(--goals-white);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bucket-item:hover {
+  transform: scale(1.2);
+}
+
+.bucket-item.checked {
+  background: var(--goals-gold);
+}
+
+.bucket-item.checked::after {
+  content: '✓';
+  color: var(--goals-dark);
+}
+
+.bucket-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+/* ============================================
+   #goals-19: New Year Resolutions
+   ============================================ */
+#goals-19 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+}
+
+.newyear-card {
+  width: 260px;
+  background: var(--goals-white);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.newyear-header {
+  background: var(--goals-gold);
+  padding: 15px;
+  text-align: center;
+}
+
+.newyear-year {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+.newyear-subtitle {
+  font-size: 12px;
+  color: var(--goals-dark);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.newyear-list {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.newyear-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: var(--goals-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newyear-item:hover {
+  background: var(--goals-yellow);
+}
+
+.newyear-num {
+  width: 25px;
+  height: 25px;
+  background: var(--goals-pink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+.newyear-text {
+  font-size: 14px;
+  color: var(--goals-dark);
+}
+
+.newyear-item.done .newyear-num {
+  background: var(--goals-mint);
+}
+
+.newyear-item.done .newyear-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* ============================================
+   #goals-20: SMART Goal Template
+   ============================================ */
+#goals-20 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-light);
+}
+
+.smart-container {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.smart-item {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  padding: 10px;
+  background: var(--goals-white);
+  border-radius: 10px;
+  border-left: 5px solid;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.smart-item:hover {
+  transform: translateX(5px);
+}
+
+.smart-item.s { border-color: var(--goals-pink); }
+.smart-item.m { border-color: var(--goals-orange); }
+.smart-item.a { border-color: var(--goals-yellow); }
+.smart-item.r { border-color: var(--goals-mint); }
+.smart-item.t { border-color: var(--goals-sky); }
+
+.smart-letter {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 8px;
+  color: var(--goals-white);
+}
+
+.smart-item.s .smart-letter { background: var(--goals-pink); }
+.smart-item.m .smart-letter { background: var(--goals-orange); }
+.smart-item.a .smart-letter { background: var(--goals-yellow); color: var(--goals-dark); }
+.smart-item.r .smart-letter { background: var(--goals-mint); }
+.smart-item.t .smart-letter { background: var(--goals-sky); }
+
+.smart-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.smart-word {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+.smart-desc {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ============================================
+   #goals-21: OKR (Objectives Key Results)
+   ============================================ */
+#goals-21 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-purple);
+}
+
+.okr-container {
+  width: 280px;
+  background: var(--goals-white);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.okr-objective {
+  background: var(--goals-dark);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.okr-o {
+  width: 35px;
+  height: 35px;
+  background: var(--goals-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+.okr-obj-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+.okr-results {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.okr-kr {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.okr-kr-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.okr-kr-num {
+  width: 24px;
+  height: 24px;
+  background: var(--goals-sky);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+.okr-kr-text {
+  font-size: 13px;
+  color: var(--goals-dark);
+}
+
+.okr-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 34px;
+}
+
+.okr-bar {
+  flex: 1;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.okr-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.okr-fill.high { background: var(--goals-mint); }
+.okr-fill.mid { background: var(--goals-yellow); }
+.okr-fill.low { background: var(--goals-pink); }
+
+.okr-percent {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  width: 35px;
+}
+
+/* ============================================
+   #goals-22: KPI Dashboard
+   ============================================ */
+#goals-22 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 280px;
+}
+
+.kpi-card {
+  background: #2D3748;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.kpi-label {
+  font-size: 11px;
+  color: #A0AEC0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.kpi-card.green .kpi-value { color: var(--goals-mint); }
+.kpi-card.yellow .kpi-value { color: var(--goals-yellow); }
+.kpi-card.pink .kpi-value { color: var(--goals-pink); }
+.kpi-card.sky .kpi-value { color: var(--goals-sky); }
+
+.kpi-change {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.kpi-change.up { color: var(--goals-mint); }
+.kpi-change.down { color: var(--goals-pink); }
+
+.kpi-arrow {
+  font-size: 10px;
+}
+
+/* ============================================
+   #goals-23: Score Tracker
+   ============================================ */
+#goals-23 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-orange);
+}
+
+.score-board {
+  width: 260px;
+  background: var(--goals-dark);
+  border-radius: 15px;
+  padding: 20px;
+  border: 4px solid var(--goals-gold);
+}
+
+.score-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.score-label {
+  font-size: 12px;
+  color: #A0AEC0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.score-value {
+  font-size: 56px;
+  font-weight: bold;
+  color: var(--goals-gold);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.score-breakdown {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 15px;
+  border-top: 2px solid #4A5568;
+}
+
+.score-stat {
+  text-align: center;
+}
+
+.score-stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+.score-stat-label {
+  font-size: 10px;
+  color: #A0AEC0;
+}
+
+.score-multiplier {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--goals-pink);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+/* ============================================
+   #goals-24: Personal Best Record
+   ============================================ */
+#goals-24 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-mint);
+}
+
+.pb-container {
+  width: 280px;
+  background: var(--goals-white);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.pb-header {
+  background: var(--goals-gold);
+  padding: 15px;
+  text-align: center;
+}
+
+.pb-crown {
+  font-size: 32px;
+}
+
+.pb-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+.pb-records {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pb-record {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--goals-light);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pb-record:hover {
+  background: var(--goals-yellow);
+}
+
+.pb-record.current {
+  background: var(--goals-gold);
+  border: 2px solid var(--goals-dark);
+}
+
+.pb-icon {
+  font-size: 24px;
+}
+
+.pb-info {
+  flex: 1;
+}
+
+.pb-category {
+  font-size: 12px;
+  color: #666;
+}
+
+.pb-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+.pb-badge {
+  font-size: 20px;
+}
+
+.pb-record.current .pb-badge::after {
+  content: 'NEW!';
+  font-size: 10px;
+  background: var(--goals-pink);
+  color: var(--goals-white);
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
+/* ============================================
+   #goals-25: Streak Counter (Daily Streak)
+   ============================================ */
+#goals-25 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-pink);
+}
+
+.streak-container {
+  text-align: center;
+}
+
+.streak-flame {
+  font-size: 80px;
+  animation: flameFlicker 0.5s ease infinite alternate;
+}
+
+@keyframes flameFlicker {
+  0% { transform: scale(1) rotate(-2deg); }
+  100% { transform: scale(1.05) rotate(2deg); }
+}
+
+.streak-count {
+  font-size: 64px;
+  font-weight: bold;
+  color: var(--goals-white);
+  text-shadow: 3px 3px 0 var(--goals-dark);
+}
+
+.streak-label {
+  font-size: 18px;
+  color: var(--goals-white);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.streak-calendar {
+  display: flex;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.streak-day {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.streak-day.done {
+  background: var(--goals-gold);
+  color: var(--goals-dark);
+}
+
+.streak-day.today {
+  background: var(--goals-white);
+  color: var(--goals-pink);
+  border: 3px solid var(--goals-gold);
+  animation: todayPulse 1s ease infinite;
+}
+
+.streak-day.future {
+  background: rgba(255,255,255,0.3);
+  color: var(--goals-white);
+}
+
+@keyframes todayPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ============================================
+   #goals-26: Habit Tracker Grid
+   ============================================ */
+#goals-26 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-light);
+}
+
+.habit-container {
+  width: 300px;
+}
+
+.habit-header {
+  display: flex;
+  margin-bottom: 10px;
+  padding-left: 80px;
+}
+
+.habit-day-label {
+  width: 28px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--goals-dark);
+}
+
+.habit-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.habit-name {
+  width: 75px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.habit-cells {
+  display: flex;
+  gap: 3px;
+}
+
+.habit-cell {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.habit-cell:hover {
+  transform: scale(1.1);
+}
+
+.habit-cell.empty { background: #E2E8F0; }
+.habit-cell.done { background: var(--goals-mint); }
+.habit-cell.partial { background: var(--goals-yellow); }
+.habit-cell.missed { background: var(--goals-pink); }
+
+.habit-cell.done::after { content: '✓'; color: var(--goals-white); font-size: 14px; display: flex; align-items: center; justify-content: center; height: 100%; }
+
+.habit-streak {
+  width: 40px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--goals-orange);
+}
+
+/* ============================================
+   #goals-27: Challenge Accepted/Completed
+   ============================================ */
+#goals-27 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+}
+
+.challenge-card {
+  width: 260px;
+  background: linear-gradient(135deg, var(--goals-purple) 0%, var(--goals-pink) 100%);
+  border-radius: 20px;
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+.challenge-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.challenge-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.challenge-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--goals-gold);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.challenge-status {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.challenge-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--goals-white);
+}
+
+.challenge-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  margin: 15px 0;
+}
+
+.challenge-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.challenge-bar-bg {
+  height: 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.challenge-bar-fill {
+  height: 100%;
+  background: var(--goals-gold);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+.challenge-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--goals-white);
+}
+
+.challenge-complete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--goals-gold);
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  display: none;
+  animation: challengePop 0.5s ease;
+}
+
+.challenge-card.completed .challenge-complete {
+  display: block;
+}
+
+@keyframes challengePop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-10deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+/* ============================================
+   #goals-28: Level Up Celebration
+   ============================================ */
+#goals-28 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-dark);
+  overflow: hidden;
+}
+
+.levelup-container {
+  position: relative;
+  text-align: center;
+}
+
+.levelup-particles {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.levelup-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: particleBurst 1.5s ease-out infinite;
+}
+
+.levelup-particle:nth-child(1) { background: var(--goals-gold); animation-delay: 0s; }
+.levelup-particle:nth-child(2) { background: var(--goals-pink); animation-delay: 0.1s; }
+.levelup-particle:nth-child(3) { background: var(--goals-mint); animation-delay: 0.2s; }
+.levelup-particle:nth-child(4) { background: var(--goals-yellow); animation-delay: 0.3s; }
+.levelup-particle:nth-child(5) { background: var(--goals-sky); animation-delay: 0.4s; }
+.levelup-particle:nth-child(6) { background: var(--goals-purple); animation-delay: 0.5s; }
+
+@keyframes particleBurst {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--x, 50px), var(--y, -50px)) scale(0); opacity: 0; }
+}
+
+.levelup-particle:nth-child(1) { --x: -60px; --y: -80px; }
+.levelup-particle:nth-child(2) { --x: 60px; --y: -70px; }
+.levelup-particle:nth-child(3) { --x: -80px; --y: 20px; }
+.levelup-particle:nth-child(4) { --x: 80px; --y: 30px; }
+.levelup-particle:nth-child(5) { --x: -30px; --y: 80px; }
+.levelup-particle:nth-child(6) { --x: 40px; --y: 70px; }
+
+.levelup-badge {
+  position: relative;
+  z-index: 1;
+}
+
+.levelup-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--goals-gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: levelupGlow 1s ease infinite alternate;
+}
+
+@keyframes levelupGlow {
+  0% { text-shadow: 0 0 10px var(--goals-gold); }
+  100% { text-shadow: 0 0 30px var(--goals-gold), 0 0 60px var(--goals-gold); }
+}
+
+.levelup-number {
+  font-size: 80px;
+  font-weight: bold;
+  color: var(--goals-white);
+  text-shadow: 0 0 20px var(--goals-gold);
+  animation: levelupBounce 0.5s ease infinite alternate;
+}
+
+@keyframes levelupBounce {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.levelup-stars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.levelup-star {
+  font-size: 24px;
+  animation: starSpin 2s linear infinite;
+}
+
+@keyframes starSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   #goals-29: Unlock Achievement Animation
+   ============================================ */
+#goals-29 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-purple);
+}
+
+.unlock-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.unlock-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border: 8px solid var(--goals-gold);
+  border-radius: 50%;
+  animation: unlockRing 2s ease infinite;
+}
+
+@keyframes unlockRing {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+}
+
+.unlock-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: var(--goals-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  animation: unlockBadge 0.5s ease forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+@keyframes unlockBadge {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+.unlock-sparkles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.unlock-sparkle {
+  position: absolute;
+  font-size: 20px;
+  animation: sparkleFloat 1s ease infinite;
+}
+
+.unlock-sparkle:nth-child(1) { top: -50px; left: 0; animation-delay: 0s; }
+.unlock-sparkle:nth-child(2) { top: 0; left: 50px; animation-delay: 0.2s; }
+.unlock-sparkle:nth-child(3) { top: 50px; left: 0; animation-delay: 0.4s; }
+.unlock-sparkle:nth-child(4) { top: 0; left: -50px; animation-delay: 0.6s; }
+
+@keyframes sparkleFloat {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+.unlock-text {
+  text-align: center;
+}
+
+.unlock-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--goals-gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.unlock-name {
+  font-size: 16px;
+  color: var(--goals-white);
+  margin-top: 5px;
+}
+
+/* ============================================
+   #goals-30: Victory Podium
+   ============================================ */
+#goals-30 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--goals-sky);
+}
+
+.podium-container {
+  position: relative;
+  width: 280px;
+  height: 180px;
+}
+
+.podium-stands {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  gap: 5px;
+}
+
+.podium-stand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.podium-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border: 3px solid var(--goals-white);
+}
+
+.podium-block {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--goals-white);
+  text-shadow: 2px 2px 0 var(--goals-dark);
+}
+
+.podium-stand.first .podium-block {
+  height: 100px;
+  background: var(--goals-gold);
+}
+
+.podium-stand.second .podium-block {
+  height: 70px;
+  background: var(--goals-silver);
+}
+
+.podium-stand.third .podium-block {
+  height: 50px;
+  background: var(--goals-bronze);
+}
+
+.podium-stand.first .podium-avatar {
+  background: var(--goals-gold);
+  animation: winnerBounce 0.5s ease infinite alternate;
+}
+
+@keyframes winnerBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+.podium-stand.second .podium-avatar { background: var(--goals-silver); }
+.podium-stand.third .podium-avatar { background: var(--goals-bronze); }
+
+.podium-confetti {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.confetti-piece {
+  width: 10px;
+  height: 10px;
+  animation: confettiFall 2s ease-in infinite;
+}
+
+.confetti-piece:nth-child(1) { background: var(--goals-pink); animation-delay: 0s; }
+.confetti-piece:nth-child(2) { background: var(--goals-yellow); animation-delay: 0.3s; }
+.confetti-piece:nth-child(3) { background: var(--goals-mint); animation-delay: 0.6s; }
+.confetti-piece:nth-child(4) { background: var(--goals-purple); animation-delay: 0.9s; }
+.confetti-piece:nth-child(5) { background: var(--goals-orange); animation-delay: 1.2s; }
+
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(150px) rotate(360deg); opacity: 0; }
+}
+
+.podium-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--goals-dark);
+  text-shadow: 2px 2px 0 var(--goals-white);
+}
+</style>
+
+<!-- ============================================
+     HTML TEMPLATES
+     ============================================ -->
+
+<!-- #goals-1: Target Bullseye -->
+<div id="goals-1">
+  <div class="bullseye-target">
+    <div class="bullseye-ring outer"></div>
+    <div class="bullseye-ring middle"></div>
+    <div class="bullseye-ring inner"></div>
+    <div class="bullseye-ring center"></div>
+    <div class="bullseye-arrow"></div>
+  </div>
+  <div class="bullseye-label">Hit Your Target!</div>
+</div>
+
+<!-- #goals-2: Goal Post (Soccer) -->
+<div id="goals-2">
+  <div class="goalpost-container">
+    <div class="goalpost-frame"></div>
+    <div class="goalpost-net"></div>
+    <div class="goalpost-ball"></div>
+  </div>
+  <div class="goalpost-text">GOAL!</div>
+</div>
+
+<!-- #goals-3: Finish Line -->
+<div id="goals-3">
+  <div class="finishline-track">
+    <div class="finishline-lanes"></div>
+    <div class="finishline-checker"></div>
+    <div class="finishline-runner"></div>
+  </div>
+  <div class="finishline-banner">FINISH LINE</div>
+</div>
+
+<!-- #goals-4: Mountain Peak Goal -->
+<div id="goals-4">
+  <div class="mountain-container">
+    <div class="mountain-peak"></div>
+    <div class="mountain-snow"></div>
+    <div class="mountain-flag"></div>
+    <div class="mountain-climber"></div>
+  </div>
+  <div class="mountain-label">Reach the Summit</div>
+</div>
+
+<!-- #goals-5: Star Collection -->
+<div id="goals-5">
+  <div class="stars-container">
+    <div class="star-item earned"><div class="star-shape"></div></div>
+    <div class="star-item earned"><div class="star-shape"></div></div>
+    <div class="star-item earned"><div class="star-shape"></div></div>
+    <div class="star-item empty"><div class="star-shape"></div></div>
+    <div class="star-item empty"><div class="star-shape"></div></div>
+  </div>
+  <div class="star-count">3 / 5 Stars</div>
+</div>
+
+<!-- #goals-6: Badge Collection -->
+<div id="goals-6">
+  <div class="badges-grid">
+    <div class="badge-item">
+      <div class="badge-icon gold">🏆</div>
+      <div class="badge-label">Champion</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon silver">⚡</div>
+      <div class="badge-label">Fast</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon bronze">🎯</div>
+      <div class="badge-label">Accurate</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon locked">🔒</div>
+      <div class="badge-label">???</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon locked">🔒</div>
+      <div class="badge-label">???</div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon locked">🔒</div>
+      <div class="badge-label">???</div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-7: Trophy Cabinet -->
+<div id="goals-7">
+  <div class="trophy-cabinet">
+    <div class="trophy-shelf">
+      <div class="trophy-item">
+        <div class="trophy-cup gold">🏆</div>
+        <div class="trophy-year">2024</div>
+      </div>
+      <div class="trophy-item">
+        <div class="trophy-cup gold">🏆</div>
+        <div class="trophy-year">2023</div>
+      </div>
+    </div>
+    <div class="trophy-shelf">
+      <div class="trophy-item">
+        <div class="trophy-cup silver">🏆</div>
+        <div class="trophy-year">2022</div>
+      </div>
+      <div class="trophy-item">
+        <div class="trophy-cup bronze">🏆</div>
+        <div class="trophy-year">2021</div>
+      </div>
+      <div class="trophy-item">
+        <div class="trophy-cup silver">🏆</div>
+        <div class="trophy-year">2020</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-8: Medal Display -->
+<div id="goals-8">
+  <div class="medal-rack">
+    <div class="medal-item">
+      <div class="medal-ribbon"></div>
+      <div class="medal-circle gold">1</div>
+      <div class="medal-label">Gold</div>
+    </div>
+    <div class="medal-item">
+      <div class="medal-ribbon"></div>
+      <div class="medal-circle silver">2</div>
+      <div class="medal-label">Silver</div>
+    </div>
+    <div class="medal-item">
+      <div class="medal-ribbon"></div>
+      <div class="medal-circle bronze">3</div>
+      <div class="medal-label">Bronze</div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-9: Certificate Frame -->
+<div id="goals-9">
+  <div class="certificate-frame">
+    <div class="certificate-header">Certificate of Achievement</div>
+    <div class="certificate-title">Excellence Award</div>
+    <div class="certificate-name">Your Name Here</div>
+    <div class="certificate-text">For outstanding performance and dedication</div>
+    <div class="certificate-seal">⭐</div>
+  </div>
+</div>
+
+<!-- #goals-10: Level Unlock -->
+<div id="goals-10">
+  <div class="level-grid">
+    <div class="level-item unlocked">1</div>
+    <div class="level-item unlocked">2</div>
+    <div class="level-item unlocked">3</div>
+    <div class="level-item unlocked">4</div>
+    <div class="level-item unlocked">5</div>
+    <div class="level-item unlocked">6</div>
+    <div class="level-item current">7</div>
+    <div class="level-item locked"></div>
+    <div class="level-item locked"></div>
+    <div class="level-item locked"></div>
+  </div>
+  <div class="level-progress">
+    <span>Level 7</span>
+    <div class="level-bar">
+      <div class="level-fill"></div>
+    </div>
+    <span>60%</span>
+  </div>
+</div>
+
+<!-- #goals-11: Progress Path to Goal -->
+<div id="goals-11">
+  <div class="path-container">
+    <svg class="path-svg" viewBox="0 0 280 200">
+      <path class="path-track" d="M 30 170 Q 80 100 140 100 Q 200 100 250 30" />
+      <path class="path-progress" d="M 30 170 Q 80 100 140 100 Q 200 100 250 30" />
+    </svg>
+    <div class="path-marker start">🚀</div>
+    <div class="path-marker mid">📍</div>
+    <div class="path-marker end">🏁</div>
+  </div>
+  <div class="path-label">Journey to Success</div>
+</div>
+
+<!-- #goals-12: Milestone Markers -->
+<div id="goals-12">
+  <div class="milestone-road">
+    <div class="milestone-dashes"></div>
+    <div class="milestone-car">🚗</div>
+  </div>
+  <div class="milestone-markers">
+    <div class="milestone-item reached">
+      <div class="milestone-sign" data-km="0km"></div>
+    </div>
+    <div class="milestone-item reached">
+      <div class="milestone-sign" data-km="25km"></div>
+    </div>
+    <div class="milestone-item">
+      <div class="milestone-sign" data-km="50km"></div>
+    </div>
+    <div class="milestone-item">
+      <div class="milestone-sign" data-km="75km"></div>
+    </div>
+    <div class="milestone-item">
+      <div class="milestone-sign" data-km="100km"></div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-13: Checkpoint Flags -->
+<div id="goals-13">
+  <div class="checkpoint-track">
+    <div class="checkpoint-inner"></div>
+    <div class="checkpoint-flag cp1">
+      <div class="banner"></div>
+      <div class="pole"></div>
+    </div>
+    <div class="checkpoint-flag cp2">
+      <div class="banner"></div>
+      <div class="pole"></div>
+    </div>
+    <div class="checkpoint-flag cp3">
+      <div class="banner"></div>
+      <div class="pole"></div>
+    </div>
+    <div class="checkpoint-racer">🏎️</div>
+  </div>
+</div>
+
+<!-- #goals-14: Quest Completion -->
+<div id="goals-14">
+  <div class="quest-board">
+    <div class="quest-header">
+      <div class="quest-icon">📜</div>
+      <div class="quest-title">Daily Quests</div>
+    </div>
+    <div class="quest-list">
+      <div class="quest-item complete">
+        <div class="quest-check"></div>
+        <div class="quest-text">Complete 3 tasks</div>
+        <div class="quest-reward">+50 ⭐</div>
+      </div>
+      <div class="quest-item complete">
+        <div class="quest-check"></div>
+        <div class="quest-text">Exercise 30 min</div>
+        <div class="quest-reward">+30 ⭐</div>
+      </div>
+      <div class="quest-item">
+        <div class="quest-check"></div>
+        <div class="quest-text">Read 20 pages</div>
+        <div class="quest-reward">+40 ⭐</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-15: Mission Accomplished -->
+<div id="goals-15">
+  <div class="mission-stamp">
+    <div class="mission-outer"></div>
+    <div class="mission-inner">
+      <div class="mission-check">✓</div>
+      <div class="mission-text">COMPLETE</div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-16: Dream → Reality Bridge -->
+<div id="goals-16">
+  <div class="bridge-container">
+    <div class="bridge-cloud dream">💭 Dream</div>
+    <div class="bridge-path"></div>
+    <div class="bridge-walker">🚶</div>
+    <div class="bridge-cloud reality">✨ Reality</div>
+  </div>
+</div>
+
+<!-- #goals-17: Wish List to Done List -->
+<div id="goals-17">
+  <div class="wishlist-container">
+    <div class="list-paper wish-list">
+      <div class="list-title">Wish List</div>
+      <div class="list-items">
+        <div class="list-item"><span class="bullet"></span>Learn coding</div>
+        <div class="list-item"><span class="bullet"></span>Travel Japan</div>
+        <div class="list-item"><span class="bullet"></span>Run marathon</div>
+      </div>
+    </div>
+    <div class="list-arrow">→</div>
+    <div class="list-paper done-list">
+      <div class="list-title">Done!</div>
+      <div class="list-items">
+        <div class="list-item"><span class="bullet"></span>Learn coding</div>
+        <div class="list-item"><span class="bullet"></span>Travel Japan</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-18: Bucket List Checkoff -->
+<div id="goals-18">
+  <div class="bucket-container">
+    <div class="bucket-handle"></div>
+    <div class="bucket-shape"></div>
+    <div class="bucket-items">
+      <div class="bucket-item checked"></div>
+      <div class="bucket-item checked"></div>
+      <div class="bucket-item checked"></div>
+      <div class="bucket-item"></div>
+      <div class="bucket-item"></div>
+      <div class="bucket-item"></div>
+    </div>
+  </div>
+  <div class="bucket-label">Bucket List: 3/6</div>
+</div>
+
+<!-- #goals-19: New Year Resolutions -->
+<div id="goals-19">
+  <div class="newyear-card">
+    <div class="newyear-header">
+      <div class="newyear-year">2025</div>
+      <div class="newyear-subtitle">Resolutions</div>
+    </div>
+    <div class="newyear-list">
+      <div class="newyear-item done">
+        <div class="newyear-num">1</div>
+        <div class="newyear-text">Exercise regularly</div>
+      </div>
+      <div class="newyear-item">
+        <div class="newyear-num">2</div>
+        <div class="newyear-text">Save more money</div>
+      </div>
+      <div class="newyear-item">
+        <div class="newyear-num">3</div>
+        <div class="newyear-text">Learn new skill</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-20: SMART Goal Template -->
+<div id="goals-20">
+  <div class="smart-container">
+    <div class="smart-item s">
+      <div class="smart-letter">S</div>
+      <div class="smart-content">
+        <div class="smart-word">Specific</div>
+        <div class="smart-desc">Clear and well-defined</div>
+      </div>
+    </div>
+    <div class="smart-item m">
+      <div class="smart-letter">M</div>
+      <div class="smart-content">
+        <div class="smart-word">Measurable</div>
+        <div class="smart-desc">Track your progress</div>
+      </div>
+    </div>
+    <div class="smart-item a">
+      <div class="smart-letter">A</div>
+      <div class="smart-content">
+        <div class="smart-word">Achievable</div>
+        <div class="smart-desc">Realistic and attainable</div>
+      </div>
+    </div>
+    <div class="smart-item r">
+      <div class="smart-letter">R</div>
+      <div class="smart-content">
+        <div class="smart-word">Relevant</div>
+        <div class="smart-desc">Aligned with your values</div>
+      </div>
+    </div>
+    <div class="smart-item t">
+      <div class="smart-letter">T</div>
+      <div class="smart-content">
+        <div class="smart-word">Time-bound</div>
+        <div class="smart-desc">Set a deadline</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-21: OKR (Objectives Key Results) -->
+<div id="goals-21">
+  <div class="okr-container">
+    <div class="okr-objective">
+      <div class="okr-o">O</div>
+      <div class="okr-obj-text">Increase User Engagement</div>
+    </div>
+    <div class="okr-results">
+      <div class="okr-kr">
+        <div class="okr-kr-header">
+          <div class="okr-kr-num">KR1</div>
+          <div class="okr-kr-text">Daily active users +30%</div>
+        </div>
+        <div class="okr-progress">
+          <div class="okr-bar"><div class="okr-fill high" style="width: 85%"></div></div>
+          <div class="okr-percent">85%</div>
+        </div>
+      </div>
+      <div class="okr-kr">
+        <div class="okr-kr-header">
+          <div class="okr-kr-num">KR2</div>
+          <div class="okr-kr-text">Session time +20%</div>
+        </div>
+        <div class="okr-progress">
+          <div class="okr-bar"><div class="okr-fill mid" style="width: 60%"></div></div>
+          <div class="okr-percent">60%</div>
+        </div>
+      </div>
+      <div class="okr-kr">
+        <div class="okr-kr-header">
+          <div class="okr-kr-num">KR3</div>
+          <div class="okr-kr-text">NPS score 50+</div>
+        </div>
+        <div class="okr-progress">
+          <div class="okr-bar"><div class="okr-fill low" style="width: 35%"></div></div>
+          <div class="okr-percent">35%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-22: KPI Dashboard -->
+<div id="goals-22">
+  <div class="kpi-grid">
+    <div class="kpi-card green">
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-value">$12.4K</div>
+      <div class="kpi-change up">
+        <span class="kpi-arrow">▲</span> 12%
+      </div>
+    </div>
+    <div class="kpi-card yellow">
+      <div class="kpi-label">Users</div>
+      <div class="kpi-value">2,847</div>
+      <div class="kpi-change up">
+        <span class="kpi-arrow">▲</span> 8%
+      </div>
+    </div>
+    <div class="kpi-card pink">
+      <div class="kpi-label">Churn</div>
+      <div class="kpi-value">3.2%</div>
+      <div class="kpi-change down">
+        <span class="kpi-arrow">▼</span> 2%
+      </div>
+    </div>
+    <div class="kpi-card sky">
+      <div class="kpi-label">NPS</div>
+      <div class="kpi-value">72</div>
+      <div class="kpi-change up">
+        <span class="kpi-arrow">▲</span> 5
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-23: Score Tracker -->
+<div id="goals-23">
+  <div class="score-board">
+    <div class="score-header">
+      <div class="score-label">Total Score</div>
+      <div class="score-value">8,750</div>
+    </div>
+    <div class="score-breakdown">
+      <div class="score-stat">
+        <div class="score-stat-value">42</div>
+        <div class="score-stat-label">Tasks</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-value">7</div>
+        <div class="score-stat-label">Streaks</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-value">15</div>
+        <div class="score-stat-label">Badges</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-24: Personal Best Record -->
+<div id="goals-24">
+  <div class="pb-container">
+    <div class="pb-header">
+      <div class="pb-crown">👑</div>
+      <div class="pb-title">Personal Best</div>
+    </div>
+    <div class="pb-records">
+      <div class="pb-record current">
+        <div class="pb-icon">🏃</div>
+        <div class="pb-info">
+          <div class="pb-category">5K Run</div>
+          <div class="pb-value">22:45</div>
+        </div>
+        <div class="pb-badge">🥇</div>
+      </div>
+      <div class="pb-record">
+        <div class="pb-icon">💪</div>
+        <div class="pb-info">
+          <div class="pb-category">Push-ups</div>
+          <div class="pb-value">50 reps</div>
+        </div>
+        <div class="pb-badge">🥈</div>
+      </div>
+      <div class="pb-record">
+        <div class="pb-icon">📚</div>
+        <div class="pb-info">
+          <div class="pb-category">Books Read</div>
+          <div class="pb-value">24/year</div>
+        </div>
+        <div class="pb-badge">🥉</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-25: Streak Counter (Daily Streak) -->
+<div id="goals-25">
+  <div class="streak-container">
+    <div class="streak-flame">🔥</div>
+    <div class="streak-count">7</div>
+    <div class="streak-label">Day Streak</div>
+    <div class="streak-calendar">
+      <div class="streak-day done">M</div>
+      <div class="streak-day done">T</div>
+      <div class="streak-day done">W</div>
+      <div class="streak-day done">T</div>
+      <div class="streak-day done">F</div>
+      <div class="streak-day done">S</div>
+      <div class="streak-day today">S</div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-26: Habit Tracker Grid -->
+<div id="goals-26">
+  <div class="habit-container">
+    <div class="habit-header">
+      <div class="habit-day-label">M</div>
+      <div class="habit-day-label">T</div>
+      <div class="habit-day-label">W</div>
+      <div class="habit-day-label">T</div>
+      <div class="habit-day-label">F</div>
+      <div class="habit-day-label">S</div>
+      <div class="habit-day-label">S</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">Exercise</div>
+      <div class="habit-cells">
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell missed"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell partial"></div>
+        <div class="habit-cell empty"></div>
+      </div>
+      <div class="habit-streak">🔥5</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">Reading</div>
+      <div class="habit-cells">
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell empty"></div>
+      </div>
+      <div class="habit-streak">🔥6</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">Meditate</div>
+      <div class="habit-cells">
+        <div class="habit-cell done"></div>
+        <div class="habit-cell missed"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell missed"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell done"></div>
+        <div class="habit-cell empty"></div>
+      </div>
+      <div class="habit-streak">🔥2</div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-27: Challenge Accepted/Completed -->
+<div id="goals-27">
+  <div class="challenge-card">
+    <div class="challenge-badge">
+      <div class="challenge-icon">💪</div>
+      <div>
+        <div class="challenge-status">Challenge</div>
+        <div class="challenge-title">30-Day Fitness</div>
+      </div>
+    </div>
+    <div class="challenge-desc">Complete 30 minutes of exercise every day for 30 days.</div>
+    <div class="challenge-progress">
+      <div class="challenge-bar-bg">
+        <div class="challenge-bar-fill" style="width: 73%"></div>
+      </div>
+      <div class="challenge-stats">
+        <span>Day 22 of 30</span>
+        <span>73%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-28: Level Up Celebration -->
+<div id="goals-28">
+  <div class="levelup-container">
+    <div class="levelup-particles">
+      <div class="levelup-particle"></div>
+      <div class="levelup-particle"></div>
+      <div class="levelup-particle"></div>
+      <div class="levelup-particle"></div>
+      <div class="levelup-particle"></div>
+      <div class="levelup-particle"></div>
+    </div>
+    <div class="levelup-badge">
+      <div class="levelup-text">LEVEL UP!</div>
+      <div class="levelup-number">10</div>
+      <div class="levelup-stars">
+        <div class="levelup-star">⭐</div>
+        <div class="levelup-star">⭐</div>
+        <div class="levelup-star">⭐</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #goals-29: Unlock Achievement Animation -->
+<div id="goals-29">
+  <div class="unlock-container">
+    <div class="unlock-ring"></div>
+    <div class="unlock-sparkles">
+      <div class="unlock-sparkle">✨</div>
+      <div class="unlock-sparkle">✨</div>
+      <div class="unlock-sparkle">✨</div>
+      <div class="unlock-sparkle">✨</div>
+    </div>
+    <div class="unlock-badge">🎖️</div>
+  </div>
+  <div class="unlock-text">
+    <div class="unlock-title">Achievement Unlocked!</div>
+    <div class="unlock-name">Master of Goals</div>
+  </div>
+</div>
+
+<!-- #goals-30: Victory Podium -->
+<div id="goals-30">
+  <div class="podium-container">
+    <div class="podium-confetti">
+      <div class="confetti-piece"></div>
+      <div class="confetti-piece"></div>
+      <div class="confetti-piece"></div>
+      <div class="confetti-piece"></div>
+      <div class="confetti-piece"></div>
+    </div>
+    <div class="podium-stands">
+      <div class="podium-stand second">
+        <div class="podium-avatar">🥈</div>
+        <div class="podium-block">2</div>
+      </div>
+      <div class="podium-stand first">
+        <div class="podium-avatar">🏆</div>
+        <div class="podium-block">1</div>
+      </div>
+      <div class="podium-stand third">
+        <div class="podium-avatar">🥉</div>
+        <div class="podium-block">3</div>
+      </div>
+    </div>
+  </div>
+  <div class="podium-title">Victory!</div>
+</div>

@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical/Healthcare LP Components [Q01-Q10]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* メディカルカラーパレット */
+            --primary-blue: #0066CC;
+            --primary-blue-light: #3399FF;
+            --primary-blue-dark: #004C99;
+            --secondary-teal: #00A5A5;
+            --accent-green: #00C49A;
+            --white: #FFFFFF;
+            --off-white: #F8FBFF;
+            --light-gray: #E8F4FF;
+            --medium-gray: #B8D4E8;
+            --text-primary: #1A3A5C;
+            --text-secondary: #5A7A9A;
+            --text-light: #8BA4BC;
+            --border-color: #D0E4F5;
+            --success-green: #00B894;
+            --shadow-soft: 0 4px 20px rgba(0, 102, 204, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 102, 204, 0.12);
+            --shadow-strong: 0 12px 40px rgba(0, 102, 204, 0.16);
+            --gradient-primary: linear-gradient(135deg, #0066CC 0%, #00A5A5 100%);
+            --gradient-light: linear-gradient(135deg, #E8F4FF 0%, #F0FAFF 100%);
+            --gradient-hero: linear-gradient(180deg, #F8FBFF 0%, #E8F4FF 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--off-white);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== Q08: NAVIGATION ===== */
+        .med-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .med-nav.scrolled {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .med-nav__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .med-nav__logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .med-nav__logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        }
+
+        .med-nav__logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .med-nav__logo-text span {
+            color: var(--primary-blue);
+        }
+
+        .med-nav__links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .med-nav__link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .med-nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .med-nav__link:hover {
+            color: var(--primary-blue);
+        }
+
+        .med-nav__link:hover::after {
+            width: 100%;
+        }
+
+        .med-nav__cta {
+            padding: 10px 24px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        }
+
+        .med-nav__cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        .med-nav__mobile-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .med-nav__mobile-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== Q01: HERO SECTION ===== */
+        .med-hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .med-hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 165, 165, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .med-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .med-hero__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .med-hero__content {
+            animation: heroFadeIn 1s ease-out;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .med-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 102, 204, 0.08);
+            border: 1px solid rgba(0, 102, 204, 0.15);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .med-hero__badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        .med-hero__title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .med-hero__title span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .med-hero__description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .med-hero__cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .med-hero__stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .med-hero__stat {
+            text-align: left;
+        }
+
+        .med-hero__stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .med-hero__stat-value span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .med-hero__stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .med-hero__visual {
+            position: relative;
+            animation: heroVisualFadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes heroVisualFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .med-hero__image-wrapper {
+            position: relative;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .med-hero__image {
+            width: 100%;
+            height: 400px;
+            background: var(--gradient-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: var(--primary-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .med-hero__floating-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .med-hero__floating-card--top {
+            top: -20px;
+            right: -20px;
+        }
+
+        .med-hero__floating-card--bottom {
+            bottom: 40px;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .med-hero__floating-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .med-hero__floating-text {
+            font-size: 0.85rem;
+        }
+
+        .med-hero__floating-text strong {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .med-hero__floating-text span {
+            color: var(--text-secondary);
+        }
+
+        /* ===== Q04: CTA BUTTONS ===== */
+        .med-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .med-btn--primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.35);
+        }
+
+        .med-btn--primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.45);
+        }
+
+        .med-btn--secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--border-color);
+        }
+
+        .med-btn--secondary:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-gray);
+        }
+
+        .med-btn--outline {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .med-btn--outline:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .med-btn--large {
+            padding: 18px 40px;
+            font-size: 1.05rem;
+        }
+
+        .med-btn--small {
+            padding: 12px 24px;
+            font-size: 0.9rem;
+        }
+
+        .med-btn--icon {
+            width: 52px;
+            height: 52px;
+            padding: 0;
+            border-radius: 16px;
+        }
+
+        .med-btn__arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .med-btn:hover .med-btn__arrow {
+            transform: translateX(4px);
+        }
+
+        /* ===== Q02: FEATURE CARDS ===== */
+        .med-features {
+            padding: 100px 24px;
+            background: var(--white);
+        }
+
+        .med-features__container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .med-section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .med-section-header__label {
+            display: inline-block;
+            background: var(--light-gray);
+            color: var(--primary-blue);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .med-section-header__title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .med-section-header__description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .med-features__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .med-feature-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .med-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .med-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+            border-color: transparent;
+        }
+
+        .med-feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .med-feature-card__icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .med-feature-card:hover .med-feature-card__icon {
+            background: var(--gradient-primary);
+            transform: scale(1.1);
+        }
+
+        .med-feature-card:hover .med-feature-card__icon span {
+            filter: brightness(0) invert(1);
+        }
+
+        .med-feature-card__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .med-feature-card__description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .med-feature-card__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .med-feature-card:hover .med-feature-card__link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Q03: PRICING TABLE ===== */
+        .med-pricing {
+            padding: 100px 24px;
+            background: var(--gradient-hero);
+        }
+
+        .med-pricing__container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .med-pricing__toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .med-pricing__toggle-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .med-pricing__toggle-label.active {
+            color: var(--primary-blue);
+        }
+
+        .med-pricing__toggle-switch {
+            width: 56px;
+            height: 32px;
+            background: var(--border-color);
+            border-radius: 100px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .med-pricing__toggle-switch.active {
+            background: var(--primary-blue);
+        }
+
+        .med-pricing__toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--white);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .med-pricing__toggle-switch.active::after {
+            transform: translateX(24px);
+        }
+
+        .med-pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .med-pricing-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s ease;
+        }
+
+        .med-pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .med-pricing-card--featured {
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .med-pricing-card__badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .med-pricing-card__header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .med-pricing-card__name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .med-pricing-card__price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .med-pricing-card__currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .med-pricing-card__amount {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .med-pricing-card__period {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .med-pricing-card__description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .med-pricing-card__features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .med-pricing-card__feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .med-pricing-card__feature-icon {
+            width: 22px;
+            height: 22px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--success-green);
+            flex-shrink: 0;
+        }
+
+        .med-pricing-card--featured .med-pricing-card__feature-icon {
+            background: rgba(0, 184, 148, 0.15);
+        }
+
+        .med-pricing-card__cta {
+            width: 100%;
+        }
+
+        /* ===== Q05: TESTIMONIALS ===== */
+        .med-testimonials {
+            padding: 100px 24px;
+            background: var(--white);
+        }
+
+        .med-testimonials__container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .med-testimonials__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .med-testimonial-card {
+            background: var(--off-white);
+            border-radius: 20px;
+            padding: 36px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .med-testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .med-testimonial-card__quote-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 3rem;
+            color: var(--primary-blue);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .med-testimonial-card__rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .med-testimonial-card__star {
+            color: #FFB800;
+            font-size: 1.1rem;
+        }
+
+        .med-testimonial-card__content {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .med-testimonial-card__author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .med-testimonial-card__avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .med-testimonial-card__author-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .med-testimonial-card__author-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ===== Q06: FAQ ACCORDION ===== */
+        .med-faq {
+            padding: 100px 24px;
+            background: var(--gradient-hero);
+        }
+
+        .med-faq__container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .med-faq__list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .med-faq-item {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .med-faq-item:hover {
+            border-color: var(--primary-blue-light);
+        }
+
+        .med-faq-item.active {
+            box-shadow: var(--shadow-soft);
+            border-color: var(--primary-blue);
+        }
+
+        .med-faq-item__question {
+            width: 100%;
+            padding: 24px 28px;
+            background: transparent;
+            border: none;
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .med-faq-item__question:hover {
+            color: var(--primary-blue);
+        }
+
+        .med-faq-item__toggle {
+            width: 32px;
+            height: 32px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .med-faq-item.active .med-faq-item__toggle {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: rotate(45deg);
+        }
+
+        .med-faq-item__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .med-faq-item.active .med-faq-item__answer {
+            max-height: 300px;
+        }
+
+        .med-faq-item__answer-content {
+            padding: 0 28px 24px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== Q09: STEP GUIDE ===== */
+        .med-steps {
+            padding: 100px 24px;
+            background: var(--white);
+        }
+
+        .med-steps__container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .med-steps__list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .med-steps__list::before {
+            content: '';
+            position: absolute;
+            left: 39px;
+            top: 60px;
+            bottom: 60px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            opacity: 0.2;
+        }
+
+        .med-step-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 40px;
+            padding: 32px 0;
+            position: relative;
+        }
+
+        .med-step-item__number {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-light);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .med-step-item:hover .med-step-item__number {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border-color: transparent;
+            transform: scale(1.1);
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.35);
+        }
+
+        .med-step-item__content {
+            padding-top: 16px;
+        }
+
+        .med-step-item__title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .med-step-item__description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .med-step-item__icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* ===== Q10: REGISTRATION FORM ===== */
+        .med-form-section {
+            padding: 100px 24px;
+            background: var(--gradient-hero);
+        }
+
+        .med-form-section__container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .med-form {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .med-form__header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .med-form__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .med-form__subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .med-form__group {
+            margin-bottom: 24px;
+        }
+
+        .med-form__label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .med-form__label span {
+            color: #FF6B6B;
+            margin-left: 4px;
+        }
+
+        .med-form__input-wrapper {
+            position: relative;
+        }
+
+        .med-form__input,
+        .med-form__select,
+        .med-form__textarea {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--off-white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .med-form__input::placeholder,
+        .med-form__textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        .med-form__input:focus,
+        .med-form__select:focus,
+        .med-form__textarea:focus {
+            border-color: var(--primary-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+        }
+
+        .med-form__input--icon {
+            padding-left: 52px;
+        }
+
+        .med-form__input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .med-form__select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235A7A9A' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 18px;
+            padding-right: 48px;
+            cursor: pointer;
+        }
+
+        .med-form__textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .med-form__checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .med-form__checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary-blue);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .med-form__checkbox-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .med-form__checkbox-label a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .med-form__checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .med-form__submit {
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .med-form__divider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 28px 0;
+        }
+
+        .med-form__divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .med-form__divider-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .med-form__social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .med-form__social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .med-form__social-btn:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-gray);
+        }
+
+        /* ===== Q07: FOOTER ===== */
+        .med-footer {
+            background: var(--text-primary);
+            color: var(--white);
+            padding: 80px 24px 30px;
+        }
+
+        .med-footer__container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .med-footer__main {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .med-footer__brand {
+            max-width: 300px;
+        }
+
+        .med-footer__logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .med-footer__logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .med-footer__logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .med-footer__description {
+            font-size: 0.95rem;
+            color: var(--medium-gray);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .med-footer__social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .med-footer__social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .med-footer__social-link:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .med-footer__column h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .med-footer__links {
+            list-style: none;
+        }
+
+        .med-footer__links li {
+            margin-bottom: 14px;
+        }
+
+        .med-footer__links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .med-footer__links a:hover {
+            color: var(--white);
+            transform: translateX(4px);
+        }
+
+        .med-footer__bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .med-footer__copyright {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+
+        .med-footer__legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .med-footer__legal a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .med-footer__legal a:hover {
+            color: var(--white);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .med-hero__container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .med-hero__visual {
+                order: -1;
+            }
+
+            .med-hero__image {
+                height: 300px;
+            }
+
+            .med-features__grid,
+            .med-pricing__grid,
+            .med-testimonials__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .med-footer__main {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .med-footer__brand {
+                grid-column: 1 / -1;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .med-nav__links {
+                display: none;
+            }
+
+            .med-nav__mobile-toggle {
+                display: flex;
+            }
+
+            .med-hero {
+                padding: 100px 20px 60px;
+                min-height: auto;
+            }
+
+            .med-hero__title {
+                font-size: 2.2rem;
+            }
+
+            .med-hero__stats {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+
+            .med-hero__floating-card {
+                display: none;
+            }
+
+            .med-features__grid,
+            .med-pricing__grid,
+            .med-testimonials__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .med-section-header__title {
+                font-size: 1.8rem;
+            }
+
+            .med-pricing-card--featured {
+                order: -1;
+            }
+
+            .med-step-item {
+                grid-template-columns: 60px 1fr;
+                gap: 24px;
+            }
+
+            .med-step-item__number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .med-steps__list::before {
+                left: 29px;
+            }
+
+            .med-form {
+                padding: 32px 24px;
+            }
+
+            .med-footer__main {
+                grid-template-columns: 1fr;
+            }
+
+            .med-footer__bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .med-hero__title {
+                font-size: 1.8rem;
+            }
+
+            .med-hero__description {
+                font-size: 1rem;
+            }
+
+            .med-hero__cta-group {
+                flex-direction: column;
+            }
+
+            .med-hero__cta-group .med-btn {
+                width: 100%;
+            }
+
+            .med-btn {
+                padding: 14px 28px;
+            }
+
+            .med-pricing-card__amount {
+                font-size: 2.8rem;
+            }
+
+            .med-form__social {
+                flex-direction: column;
+            }
+        }
+
+        /* ===== COMPONENT DEMOS ===== */
+        .demo-section {
+            padding: 40px 24px;
+            background: #F0F4F8;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .demo-section__title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-section__title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Q08: NAVIGATION ===== -->
+    <nav class="med-nav">
+        <div class="med-nav__container">
+            <a href="#" class="med-nav__logo">
+                <div class="med-nav__logo-icon">+</div>
+                <span class="med-nav__logo-text">Medi<span>Care</span></span>
+            </a>
+            <ul class="med-nav__links">
+                <li><a href="#features" class="med-nav__link">サービス</a></li>
+                <li><a href="#pricing" class="med-nav__link">料金プラン</a></li>
+                <li><a href="#testimonials" class="med-nav__link">利用者の声</a></li>
+                <li><a href="#faq" class="med-nav__link">よくある質問</a></li>
+            </ul>
+            <a href="#contact" class="med-nav__cta">無料相談</a>
+            <button class="med-nav__mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== Q01: HERO SECTION ===== -->
+    <section class="med-hero">
+        <div class="med-hero__container">
+            <div class="med-hero__content">
+                <div class="med-hero__badge">
+                    <span class="med-hero__badge-dot"></span>
+                    オンライン診療対応
+                </div>
+                <h1 class="med-hero__title">
+                    あなたの健康を<br>
+                    <span>24時間サポート</span>
+                </h1>
+                <p class="med-hero__description">
+                    いつでもどこでも、スマートフォンひとつで専門医に相談できます。予約から診療、お薬の受け取りまで、すべてがオンラインで完結。
+                </p>
+                <div class="med-hero__cta-group">
+                    <a href="#contact" class="med-btn med-btn--primary med-btn--large">
+                        無料で始める
+                        <span class="med-btn__arrow">→</span>
+                    </a>
+                    <a href="#features" class="med-btn med-btn--secondary med-btn--large">
+                        サービスを見る
+                    </a>
+                </div>
+                <div class="med-hero__stats">
+                    <div class="med-hero__stat">
+                        <div class="med-hero__stat-value">50,000<span>+</span></div>
+                        <div class="med-hero__stat-label">利用者数</div>
+                    </div>
+                    <div class="med-hero__stat">
+                        <div class="med-hero__stat-value">98<span>%</span></div>
+                        <div class="med-hero__stat-label">満足度</div>
+                    </div>
+                    <div class="med-hero__stat">
+                        <div class="med-hero__stat-value">24<span>/7</span></div>
+                        <div class="med-hero__stat-label">サポート体制</div>
+                    </div>
+                </div>
+            </div>
+            <div class="med-hero__visual">
+                <div class="med-hero__image-wrapper">
+                    <div class="med-hero__image">
+                        <span style="filter: grayscale(20%);">🩺</span>
+                    </div>
+                    <div class="med-hero__floating-card med-hero__floating-card--top">
+                        <div class="med-hero__floating-icon">✓</div>
+                        <div class="med-hero__floating-text">
+                            <strong>予約完了</strong>
+                            <span>本日 14:00〜</span>
+                        </div>
+                    </div>
+                    <div class="med-hero__floating-card med-hero__floating-card--bottom">
+                        <div class="med-hero__floating-icon">👨‍⚕️</div>
+                        <div class="med-hero__floating-text">
+                            <strong>専門医在籍</strong>
+                            <span>100名以上</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q02: FEATURE CARDS ===== -->
+    <section id="features" class="med-features">
+        <div class="med-features__container">
+            <div class="med-section-header">
+                <span class="med-section-header__label">Services</span>
+                <h2 class="med-section-header__title">充実のサービス内容</h2>
+                <p class="med-section-header__description">
+                    医療のプロフェッショナルが、あなたの健康をトータルサポート。安心・安全なオンライン医療を提供します。
+                </p>
+            </div>
+            <div class="med-features__grid">
+                <div class="med-feature-card">
+                    <div class="med-feature-card__icon">
+                        <span>📱</span>
+                    </div>
+                    <h3 class="med-feature-card__title">オンライン診療</h3>
+                    <p class="med-feature-card__description">
+                        スマートフォンやPCから、自宅にいながら専門医の診察を受けられます。待ち時間なく、プライバシーも守られます。
+                    </p>
+                    <a href="#" class="med-feature-card__link">
+                        詳しく見る <span>→</span>
+                    </a>
+                </div>
+                <div class="med-feature-card">
+                    <div class="med-feature-card__icon">
+                        <span>💊</span>
+                    </div>
+                    <h3 class="med-feature-card__title">処方薬配送</h3>
+                    <p class="med-feature-card__description">
+                        診察後に処方された薬は、最短翌日にご自宅へお届け。薬局に行く手間がなく、体調が悪い時も安心です。
+                    </p>
+                    <a href="#" class="med-feature-card__link">
+                        詳しく見る <span>→</span>
+                    </a>
+                </div>
+                <div class="med-feature-card">
+                    <div class="med-feature-card__icon">
+                        <span>📋</span>
+                    </div>
+                    <h3 class="med-feature-card__title">健康管理</h3>
+                    <p class="med-feature-card__description">
+                        日々の健康データを記録・管理。AIが傾向を分析し、健康維持のためのアドバイスを提供します。
+                    </p>
+                    <a href="#" class="med-feature-card__link">
+                        詳しく見る <span>→</span>
+                    </a>
+                </div>
+                <div class="med-feature-card">
+                    <div class="med-feature-card__icon">
+                        <span>🏥</span>
+                    </div>
+                    <h3 class="med-feature-card__title">専門医紹介</h3>
+                    <p class="med-feature-card__description">
+                        症状に合わせて最適な専門医をご紹介。100名以上の医師が在籍し、様々な症状に対応可能です。
+                    </p>
+                    <a href="#" class="med-feature-card__link">
+                        詳しく見る <span>→</span>
+                    </a>
+                </div>
+                <div class="med-feature-card">
+                    <div class="med-feature-card__icon">
+                        <span>🔒</span>
+                    </div>
+                    <h3 class="med-feature-card__title">セキュリティ</h3>
+                    <p class="med-feature-card__description">
+                        医療情報は厳重に暗号化して管理。個人情報保護法に完全準拠し、プライバシーを徹底的に保護します。
+                    </p>
+                    <a href="#" class="med-feature-card__link">
+                        詳しく見る <span>→</span>
+                    </a>
+                </div>
+                <div class="med-feature-card">
+                    <div class="med-feature-card__icon">
+                        <span>💬</span>
+                    </div>
+                    <h3 class="med-feature-card__title">チャット相談</h3>
+                    <p class="med-feature-card__description">
+                        ちょっとした健康の不安も、いつでもチャットで医療スタッフに相談できます。24時間対応で安心。
+                    </p>
+                    <a href="#" class="med-feature-card__link">
+                        詳しく見る <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q03: PRICING TABLE ===== -->
+    <section id="pricing" class="med-pricing">
+        <div class="med-pricing__container">
+            <div class="med-section-header">
+                <span class="med-section-header__label">Pricing</span>
+                <h2 class="med-section-header__title">シンプルな料金プラン</h2>
+                <p class="med-section-header__description">
+                    あなたのニーズに合わせて選べる3つのプラン。まずは無料プランからお試しください。
+                </p>
+            </div>
+            <div class="med-pricing__toggle">
+                <span class="med-pricing__toggle-label active">月額</span>
+                <div class="med-pricing__toggle-switch"></div>
+                <span class="med-pricing__toggle-label">年額 <small style="color: var(--success-green);">2ヶ月無料</small></span>
+            </div>
+            <div class="med-pricing__grid">
+                <div class="med-pricing-card">
+                    <div class="med-pricing-card__header">
+                        <h3 class="med-pricing-card__name">フリー</h3>
+                        <div class="med-pricing-card__price">
+                            <span class="med-pricing-card__currency">¥</span>
+                            <span class="med-pricing-card__amount">0</span>
+                        </div>
+                        <p class="med-pricing-card__description">まずはお試しで始めたい方に</p>
+                    </div>
+                    <ul class="med-pricing-card__features">
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            月1回のオンライン診療
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            健康記録の基本機能
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            AIヘルスチェック
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            メールサポート
+                        </li>
+                    </ul>
+                    <button class="med-btn med-btn--outline med-pricing-card__cta">
+                        無料で始める
+                    </button>
+                </div>
+                <div class="med-pricing-card med-pricing-card--featured">
+                    <div class="med-pricing-card__badge">人気No.1</div>
+                    <div class="med-pricing-card__header">
+                        <h3 class="med-pricing-card__name">スタンダード</h3>
+                        <div class="med-pricing-card__price">
+                            <span class="med-pricing-card__currency">¥</span>
+                            <span class="med-pricing-card__amount">1,980</span>
+                            <span class="med-pricing-card__period">/月</span>
+                        </div>
+                        <p class="med-pricing-card__description">定期的に診療を受けたい方に</p>
+                    </div>
+                    <ul class="med-pricing-card__features">
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            月5回までのオンライン診療
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            処方薬の送料無料
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            専門医の優先予約
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            チャットサポート（24時間）
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            健康レポート（月次）
+                        </li>
+                    </ul>
+                    <button class="med-btn med-btn--primary med-pricing-card__cta">
+                        今すぐ申し込む
+                    </button>
+                </div>
+                <div class="med-pricing-card">
+                    <div class="med-pricing-card__header">
+                        <h3 class="med-pricing-card__name">プレミアム</h3>
+                        <div class="med-pricing-card__price">
+                            <span class="med-pricing-card__currency">¥</span>
+                            <span class="med-pricing-card__amount">4,980</span>
+                            <span class="med-pricing-card__period">/月</span>
+                        </div>
+                        <p class="med-pricing-card__description">家族みんなで使いたい方に</p>
+                    </div>
+                    <ul class="med-pricing-card__features">
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            無制限のオンライン診療
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            家族5名まで登録可能
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            専任のヘルスコンサルタント
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            人間ドック割引（20%OFF）
+                        </li>
+                        <li class="med-pricing-card__feature">
+                            <span class="med-pricing-card__feature-icon">✓</span>
+                            セカンドオピニオン対応
+                        </li>
+                    </ul>
+                    <button class="med-btn med-btn--outline med-pricing-card__cta">
+                        プランを選択
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q05: TESTIMONIALS ===== -->
+    <section id="testimonials" class="med-testimonials">
+        <div class="med-testimonials__container">
+            <div class="med-section-header">
+                <span class="med-section-header__label">Testimonials</span>
+                <h2 class="med-section-header__title">利用者の声</h2>
+                <p class="med-section-header__description">
+                    実際にサービスをご利用いただいた方々からの、貴重なフィードバックをご紹介します。
+                </p>
+            </div>
+            <div class="med-testimonials__grid">
+                <div class="med-testimonial-card">
+                    <span class="med-testimonial-card__quote-icon">"</span>
+                    <div class="med-testimonial-card__rating">
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                    </div>
+                    <p class="med-testimonial-card__content">
+                        子育て中で病院に行く時間がなかなか取れなかったのですが、このサービスのおかげで自宅から診療を受けられるようになりました。先生も親身に相談に乗ってくださいます。
+                    </p>
+                    <div class="med-testimonial-card__author">
+                        <div class="med-testimonial-card__avatar">TY</div>
+                        <div class="med-testimonial-card__author-info">
+                            <h4>田中 優子さん</h4>
+                            <p>30代・主婦</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="med-testimonial-card">
+                    <span class="med-testimonial-card__quote-icon">"</span>
+                    <div class="med-testimonial-card__rating">
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                    </div>
+                    <p class="med-testimonial-card__content">
+                        仕事が忙しくて通院できていなかったのですが、昼休みにサクッと診療を受けられるようになりました。薬も届けてもらえるので本当に便利です。
+                    </p>
+                    <div class="med-testimonial-card__author">
+                        <div class="med-testimonial-card__avatar">SK</div>
+                        <div class="med-testimonial-card__author-info">
+                            <h4>鈴木 健一さん</h4>
+                            <p>40代・会社員</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="med-testimonial-card">
+                    <span class="med-testimonial-card__quote-icon">"</span>
+                    <div class="med-testimonial-card__rating">
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                        <span class="med-testimonial-card__star">★</span>
+                    </div>
+                    <p class="med-testimonial-card__content">
+                        高齢の母の健康管理に利用しています。定期的な診察とAIによる健康チェックのおかげで、遠く離れていても安心できます。
+                    </p>
+                    <div class="med-testimonial-card__author">
+                        <div class="med-testimonial-card__avatar">YM</div>
+                        <div class="med-testimonial-card__author-info">
+                            <h4>山田 美咲さん</h4>
+                            <p>50代・自営業</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q06: FAQ ACCORDION ===== -->
+    <section id="faq" class="med-faq">
+        <div class="med-faq__container">
+            <div class="med-section-header">
+                <span class="med-section-header__label">FAQ</span>
+                <h2 class="med-section-header__title">よくある質問</h2>
+                <p class="med-section-header__description">
+                    サービスに関するよくある質問をまとめました。
+                </p>
+            </div>
+            <div class="med-faq__list">
+                <div class="med-faq-item active">
+                    <button class="med-faq-item__question">
+                        オンライン診療はどのように受けられますか？
+                        <span class="med-faq-item__toggle">+</span>
+                    </button>
+                    <div class="med-faq-item__answer">
+                        <div class="med-faq-item__answer-content">
+                            アプリまたはWebブラウザから予約後、ビデオ通話で診療を受けられます。スマートフォン、タブレット、PCいずれからでもご利用可能です。初めての方には、スタッフが使い方をサポートいたします。
+                        </div>
+                    </div>
+                </div>
+                <div class="med-faq-item">
+                    <button class="med-faq-item__question">
+                        保険は適用されますか？
+                        <span class="med-faq-item__toggle">+</span>
+                    </button>
+                    <div class="med-faq-item__answer">
+                        <div class="med-faq-item__answer-content">
+                            はい、当サービスのオンライン診療は保険診療に対応しています。通常の病院と同様に、健康保険証をご提示いただくことで保険適用の診療を受けられます。自費診療のメニューも一部ございます。
+                        </div>
+                    </div>
+                </div>
+                <div class="med-faq-item">
+                    <button class="med-faq-item__question">
+                        処方箋はどのように受け取れますか？
+                        <span class="med-faq-item__toggle">+</span>
+                    </button>
+                    <div class="med-faq-item__answer">
+                        <div class="med-faq-item__answer-content">
+                            診療後、処方箋はお近くの薬局への送付、またはご自宅への配送をお選びいただけます。スタンダード・プレミアムプランの方は、お薬の配送料が無料となります。
+                        </div>
+                    </div>
+                </div>
+                <div class="med-faq-item">
+                    <button class="med-faq-item__question">
+                        どのような症状でも診てもらえますか？
+                        <span class="med-faq-item__toggle">+</span>
+                    </button>
+                    <div class="med-faq-item__answer">
+                        <div class="med-faq-item__answer-content">
+                            風邪や頭痛、アレルギーなどの一般的な症状から、生活習慣病の管理まで幅広く対応しています。ただし、緊急性の高い症状や検査が必要な場合は、対面での診療をお勧めすることがあります。
+                        </div>
+                    </div>
+                </div>
+                <div class="med-faq-item">
+                    <button class="med-faq-item__question">
+                        解約はいつでもできますか？
+                        <span class="med-faq-item__toggle">+</span>
+                    </button>
+                    <div class="med-faq-item__answer">
+                        <div class="med-faq-item__answer-content">
+                            はい、いつでも解約可能です。解約手続きはアプリまたはWebサイトから簡単に行えます。解約後も、それまでの健康記録データはダウンロードしてお持ちいただけます。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q09: STEP GUIDE ===== -->
+    <section class="med-steps">
+        <div class="med-steps__container">
+            <div class="med-section-header">
+                <span class="med-section-header__label">How It Works</span>
+                <h2 class="med-section-header__title">ご利用の流れ</h2>
+                <p class="med-section-header__description">
+                    簡単3ステップで、すぐにオンライン診療を始められます。
+                </p>
+            </div>
+            <div class="med-steps__list">
+                <div class="med-step-item">
+                    <div class="med-step-item__number">1</div>
+                    <div class="med-step-item__content">
+                        <h3 class="med-step-item__title">無料アカウント登録</h3>
+                        <p class="med-step-item__description">
+                            メールアドレスとお名前を入力するだけで、すぐにアカウント作成完了。本人確認書類の提出も、スマートフォンで撮影するだけで簡単です。
+                        </p>
+                        <div class="med-step-item__icon">
+                            ⏱️ 約3分で完了
+                        </div>
+                    </div>
+                </div>
+                <div class="med-step-item">
+                    <div class="med-step-item__number">2</div>
+                    <div class="med-step-item__content">
+                        <h3 class="med-step-item__title">診療予約</h3>
+                        <p class="med-step-item__description">
+                            症状を選択して、ご都合の良い日時を予約。専門医の空き状況をリアルタイムで確認でき、最短当日の診療も可能です。
+                        </p>
+                        <div class="med-step-item__icon">
+                            📅 24時間予約受付
+                        </div>
+                    </div>
+                </div>
+                <div class="med-step-item">
+                    <div class="med-step-item__number">3</div>
+                    <div class="med-step-item__content">
+                        <h3 class="med-step-item__title">オンライン診療</h3>
+                        <p class="med-step-item__description">
+                            予約時間になったら、アプリからビデオ通話で診療開始。処方箋が必要な場合は、診療後すぐに発行され、お薬はご自宅にお届けします。
+                        </p>
+                        <div class="med-step-item__icon">
+                            💊 最短翌日配送
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q10: REGISTRATION FORM ===== -->
+    <section id="contact" class="med-form-section">
+        <div class="med-form-section__container">
+            <form class="med-form">
+                <div class="med-form__header">
+                    <h2 class="med-form__title">無料アカウント登録</h2>
+                    <p class="med-form__subtitle">まずは無料プランでお試しください</p>
+                </div>
+                <div class="med-form__group">
+                    <label class="med-form__label">
+                        お名前<span>*</span>
+                    </label>
+                    <div class="med-form__input-wrapper">
+                        <span class="med-form__input-icon">👤</span>
+                        <input type="text" class="med-form__input med-form__input--icon" placeholder="山田 太郎" required>
+                    </div>
+                </div>
+                <div class="med-form__group">
+                    <label class="med-form__label">
+                        メールアドレス<span>*</span>
+                    </label>
+                    <div class="med-form__input-wrapper">
+                        <span class="med-form__input-icon">✉️</span>
+                        <input type="email" class="med-form__input med-form__input--icon" placeholder="email@example.com" required>
+                    </div>
+                </div>
+                <div class="med-form__group">
+                    <label class="med-form__label">
+                        電話番号<span>*</span>
+                    </label>
+                    <div class="med-form__input-wrapper">
+                        <span class="med-form__input-icon">📞</span>
+                        <input type="tel" class="med-form__input med-form__input--icon" placeholder="090-1234-5678" required>
+                    </div>
+                </div>
+                <div class="med-form__group">
+                    <label class="med-form__label">
+                        ご利用目的
+                    </label>
+                    <select class="med-form__select">
+                        <option value="">選択してください</option>
+                        <option value="general">一般的な診療</option>
+                        <option value="chronic">慢性疾患の管理</option>
+                        <option value="checkup">健康相談・予防</option>
+                        <option value="family">家族の健康管理</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                <div class="med-form__group">
+                    <div class="med-form__checkbox-group">
+                        <input type="checkbox" class="med-form__checkbox" id="terms" required>
+                        <label for="terms" class="med-form__checkbox-label">
+                            <a href="#">利用規約</a>および<a href="#">プライバシーポリシー</a>に同意します
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="med-btn med-btn--primary med-btn--large med-form__submit">
+                    無料で登録する
+                </button>
+                <div class="med-form__divider">
+                    <span class="med-form__divider-line"></span>
+                    <span class="med-form__divider-text">または</span>
+                    <span class="med-form__divider-line"></span>
+                </div>
+                <div class="med-form__social">
+                    <button type="button" class="med-form__social-btn">
+                        <span>G</span>
+                        Googleで登録
+                    </button>
+                    <button type="button" class="med-form__social-btn">
+                        <span>L</span>
+                        LINEで登録
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== Q07: FOOTER ===== -->
+    <footer class="med-footer">
+        <div class="med-footer__container">
+            <div class="med-footer__main">
+                <div class="med-footer__brand">
+                    <div class="med-footer__logo">
+                        <div class="med-footer__logo-icon">+</div>
+                        <span class="med-footer__logo-text">MediCare</span>
+                    </div>
+                    <p class="med-footer__description">
+                        いつでもどこでも、あなたの健康をサポート。専門医によるオンライン診療で、安心・安全な医療をお届けします。
+                    </p>
+                    <div class="med-footer__social">
+                        <a href="#" class="med-footer__social-link">𝕏</a>
+                        <a href="#" class="med-footer__social-link">f</a>
+                        <a href="#" class="med-footer__social-link">in</a>
+                        <a href="#" class="med-footer__social-link">L</a>
+                    </div>
+                </div>
+                <div class="med-footer__column">
+                    <h4>サービス</h4>
+                    <ul class="med-footer__links">
+                        <li><a href="#">オンライン診療</a></li>
+                        <li><a href="#">処方薬配送</a></li>
+                        <li><a href="#">健康管理</a></li>
+                        <li><a href="#">専門医紹介</a></li>
+                    </ul>
+                </div>
+                <div class="med-footer__column">
+                    <h4>会社情報</h4>
+                    <ul class="med-footer__links">
+                        <li><a href="#">会社概要</a></li>
+                        <li><a href="#">採用情報</a></li>
+                        <li><a href="#">プレスリリース</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="med-footer__column">
+                    <h4>サポート</h4>
+                    <ul class="med-footer__links">
+                        <li><a href="#">ヘルプセンター</a></li>
+                        <li><a href="#">使い方ガイド</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">医療機関の方へ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="med-footer__bottom">
+                <p class="med-footer__copyright">
+                    &copy; 2026 MediCare Inc. All rights reserved.
+                </p>
+                <div class="med-footer__legal">
+                    <a href="#">利用規約</a>
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">特定商取引法</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== Q04: CTA BUTTONS DEMO ===== -->
+    <div class="demo-section">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="demo-section__title">Q04: CTA Buttons</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+                <button class="med-btn med-btn--primary">Primary Button</button>
+                <button class="med-btn med-btn--secondary">Secondary</button>
+                <button class="med-btn med-btn--outline">Outline</button>
+                <button class="med-btn med-btn--primary med-btn--small">Small</button>
+                <button class="med-btn med-btn--primary med-btn--large">Large Button</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.med-faq-item__question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.med-faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Pricing Toggle
+        const pricingToggle = document.querySelector('.med-pricing__toggle-switch');
+        const toggleLabels = document.querySelectorAll('.med-pricing__toggle-label');
+
+        if (pricingToggle) {
+            pricingToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                toggleLabels.forEach(label => label.classList.toggle('active'));
+            });
+        }
+
+        // Navbar scroll effect
+        const nav = document.querySelector('.med-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        const form = document.querySelector('.med-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('登録フォームが送信されました（デモ）');
+            });
+        }
+    </script>
+</body>
+</html>

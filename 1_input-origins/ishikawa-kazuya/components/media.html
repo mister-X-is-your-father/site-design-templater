@@ -1,0 +1,85 @@
+<!-- ========================================
+     Component: Media Section
+     Ishikawa Design System
+     ======================================== -->
+{% macro media_section(appearances=None) %}
+{% set default_appearances = [
+    {'date': '2022年1月', 'title': 'スッキリ', 'note': 'THEグレートアンサー'},
+    {'date': '2022年3月', 'title': 'ABEMA NEWS', 'note': ''},
+    {'date': '2022年11月', 'title': 'ゴゴスマ', 'note': ''},
+    {'date': '2024年3月', 'title': 'DayDay.', 'note': ''},
+    {'date': '2025年4月', 'title': 'ZIP!', 'note': ''}
+] %}
+{% set items = appearances or default_appearances %}
+
+<style>
+.ik-media-timeline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.ik-media-item {
+    background: var(--ik-white);
+    border-radius: var(--ik-radius-md);
+    padding: 24px 32px;
+    box-shadow: var(--ik-shadow-sm);
+    min-width: 180px;
+    text-align: center;
+    transition: transform 0.3s var(--ik-ease), box-shadow 0.3s var(--ik-ease);
+}
+
+.ik-media-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ik-shadow-md);
+}
+
+.ik-media-item__date {
+    font-size: 12px;
+    color: var(--ik-text-muted);
+    margin-bottom: 8px;
+}
+
+.ik-media-item__title {
+    font-family: var(--ik-font-display);
+    font-size: 18px;
+    color: var(--ik-text);
+}
+
+.ik-media-item__note {
+    font-size: 12px;
+    color: var(--ik-text-light);
+    margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+    .ik-media-item {
+        min-width: 140px;
+        padding: 16px 20px;
+    }
+}
+</style>
+
+<section class="ik-section">
+    <div class="ik-container">
+        <div class="ik-section__header">
+            <div class="ik-section__label">MEDIA</div>
+            <h2 class="ik-section__title">メディア出演</h2>
+        </div>
+        <div class="ik-media-timeline">
+            {% for item in items %}
+            <div class="ik-media-item ik-fade-in">
+                <div class="ik-media-item__date">{{ item.date }}</div>
+                <div class="ik-media-item__content">
+                    <div class="ik-media-item__title">{{ item.title }}</div>
+                    {% if item.note %}
+                    <div class="ik-media-item__note">{{ item.note }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endmacro %}

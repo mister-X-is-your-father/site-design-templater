@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Retro LP Components - Batch 15</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Special+Elite&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Vintage Color Palette */
+            --sepia-dark: #3d2914;
+            --sepia-medium: #5c4033;
+            --sepia-light: #8b7355;
+            --cream: #f5f0e1;
+            --cream-dark: #e8dcc8;
+            --parchment: #fdf6e3;
+            --aged-paper: #f4e9d8;
+            --ink-brown: #4a3728;
+            --rust: #8b4513;
+            --gold-vintage: #c9a227;
+            --gold-dark: #9a7b0a;
+            --burgundy: #722f37;
+            --forest-green: #2d5a27;
+            --navy-vintage: #1e3a5f;
+
+            /* Typography */
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-typewriter: 'Special Elite', 'Courier New', monospace;
+            --font-body: 'Crimson Text', Georgia, serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--sepia-dark);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Aged Paper Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
+                linear-gradient(to bottom, rgba(139, 115, 85, 0.03) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Section Wrapper */
+        .section-wrapper {
+            padding: var(--space-lg) var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Decorative Elements */
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin: var(--space-md) 0;
+        }
+
+        .ornament::before,
+        .ornament::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sepia-light), transparent);
+        }
+
+        .ornament-symbol {
+            font-size: 1.2rem;
+            color: var(--gold-vintage);
+        }
+
+        /* Vintage Border */
+        .vintage-border {
+            border: 2px solid var(--sepia-light);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .vintage-border::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid var(--sepia-light);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        /* ===== [R01] HERO SECTION ===== */
+        .r01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(rgba(245, 240, 225, 0.85), rgba(245, 240, 225, 0.9)),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 25H55L40 35L45 55L30 45L15 55L20 35L5 25H25L30 5Z' fill='none' stroke='%238b7355' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+            position: relative;
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r01-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(61, 41, 20, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .r01-hero__content {
+            text-align: center;
+            max-width: 800px;
+            padding: var(--space-lg);
+            background: var(--parchment);
+            border: 3px double var(--sepia-light);
+            position: relative;
+            box-shadow:
+                0 10px 40px rgba(61, 41, 20, 0.15),
+                inset 0 0 80px rgba(139, 115, 85, 0.05);
+        }
+
+        .r01-hero__content::before,
+        .r01-hero__content::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--gold-vintage);
+        }
+
+        .r01-hero__content::before {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .r01-hero__content::after {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .r01-hero__badge {
+            display: inline-block;
+            font-family: var(--font-typewriter);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sepia-medium);
+            padding: var(--space-xs) var(--space-md);
+            border: 1px solid var(--sepia-light);
+            margin-bottom: var(--space-md);
+        }
+
+        .r01-hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: var(--sepia-dark);
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+            text-shadow: 2px 2px 0 rgba(201, 162, 39, 0.2);
+        }
+
+        .r01-hero__title span {
+            display: block;
+            font-size: 0.5em;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--sepia-medium);
+            margin-top: var(--space-xs);
+        }
+
+        .r01-hero__desc {
+            font-size: 1.2rem;
+            color: var(--sepia-medium);
+            max-width: 600px;
+            margin: 0 auto var(--space-lg);
+            font-style: italic;
+        }
+
+        .r01-hero__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-typewriter);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--sepia-dark);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .r01-hero__cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .r01-hero__cta:hover {
+            background: var(--ink-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(61, 41, 20, 0.3);
+        }
+
+        .r01-hero__cta:hover::before {
+            left: 100%;
+        }
+
+        /* ===== [R02] FEATURE CARDS ===== */
+        .r02-features {
+            background: var(--aged-paper);
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r02-features__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r02-features__title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--sepia-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .r02-features__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-md);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .r02-feature-card {
+            background: var(--parchment);
+            padding: var(--space-lg);
+            border: 1px solid var(--sepia-light);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .r02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .r02-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(61, 41, 20, 0.15);
+        }
+
+        .r02-feature-card__number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold-vintage);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .r02-feature-card__icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream-dark);
+            border: 2px solid var(--sepia-light);
+            border-radius: 50%;
+            margin-bottom: var(--space-md);
+            font-size: 1.5rem;
+        }
+
+        .r02-feature-card__title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--sepia-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .r02-feature-card__desc {
+            color: var(--sepia-medium);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* ===== [R03] PRICING TABLE ===== */
+        .r03-pricing {
+            background: linear-gradient(var(--cream) 0%, var(--cream-dark) 100%);
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r03-pricing__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r03-pricing__title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--sepia-dark);
+        }
+
+        .r03-pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .r03-pricing-card {
+            background: var(--parchment);
+            border: 2px solid var(--sepia-light);
+            padding: var(--space-lg);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .r03-pricing-card--featured {
+            border-color: var(--gold-vintage);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(61, 41, 20, 0.2);
+        }
+
+        .r03-pricing-card--featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-typewriter);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            padding: 4px 16px;
+            background: var(--gold-vintage);
+            color: var(--parchment);
+        }
+
+        .r03-pricing-card__name {
+            font-family: var(--font-typewriter);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sepia-medium);
+            margin-bottom: var(--space-md);
+        }
+
+        .r03-pricing-card__price {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--sepia-dark);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .r03-pricing-card__price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--sepia-light);
+        }
+
+        .r03-pricing-card__period {
+            font-size: 0.9rem;
+            color: var(--sepia-light);
+            margin-bottom: var(--space-md);
+        }
+
+        .r03-pricing-card__divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--sepia-light), transparent);
+            margin: var(--space-md) auto;
+        }
+
+        .r03-pricing-card__features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r03-pricing-card__features li {
+            padding: var(--space-xs) 0;
+            color: var(--sepia-medium);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .r03-pricing-card__features li::before {
+            content: '';
+            font-size: 0.8rem;
+        }
+
+        .r03-pricing-card__btn {
+            width: 100%;
+            font-family: var(--font-typewriter);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: var(--space-sm) var(--space-md);
+            background: transparent;
+            color: var(--sepia-dark);
+            border: 2px solid var(--sepia-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .r03-pricing-card__btn:hover {
+            background: var(--sepia-dark);
+            color: var(--parchment);
+        }
+
+        .r03-pricing-card--featured .r03-pricing-card__btn {
+            background: var(--gold-vintage);
+            border-color: var(--gold-vintage);
+            color: var(--parchment);
+        }
+
+        .r03-pricing-card--featured .r03-pricing-card__btn:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+        }
+
+        /* ===== [R04] CTA BUTTONS ===== */
+        .r04-cta-section {
+            background: var(--sepia-dark);
+            padding: var(--space-xl) var(--space-sm);
+            text-align: center;
+        }
+
+        .r04-cta-section__title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--cream);
+            margin-bottom: var(--space-lg);
+        }
+
+        .r04-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r04-btn {
+            font-family: var(--font-typewriter);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: var(--space-sm) var(--space-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .r04-btn--primary {
+            background: var(--gold-vintage);
+            color: var(--sepia-dark);
+            border: 2px solid var(--gold-vintage);
+        }
+
+        .r04-btn--primary:hover {
+            background: var(--cream);
+            color: var(--sepia-dark);
+            border-color: var(--cream);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4);
+        }
+
+        .r04-btn--secondary {
+            background: transparent;
+            color: var(--cream);
+            border: 2px solid var(--cream);
+        }
+
+        .r04-btn--secondary:hover {
+            background: var(--cream);
+            color: var(--sepia-dark);
+            transform: translateY(-3px);
+        }
+
+        .r04-btn--outline {
+            background: transparent;
+            color: var(--gold-vintage);
+            border: 2px solid var(--gold-vintage);
+        }
+
+        .r04-btn--outline:hover {
+            background: var(--gold-vintage);
+            color: var(--sepia-dark);
+        }
+
+        .r04-btn--stamp {
+            background: var(--burgundy);
+            color: var(--cream);
+            border: none;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            transform: rotate(-10deg);
+            box-shadow:
+                inset 0 0 0 3px var(--cream),
+                inset 0 0 0 6px var(--burgundy),
+                inset 0 0 0 9px var(--cream);
+        }
+
+        .r04-btn--stamp:hover {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        .r04-btn--stamp span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* ===== [R05] TESTIMONIALS ===== */
+        .r05-testimonials {
+            background: var(--cream-dark);
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r05-testimonials__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r05-testimonials__title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--sepia-dark);
+        }
+
+        .r05-testimonials__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-md);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .r05-testimonial {
+            background: var(--parchment);
+            padding: var(--space-lg);
+            border: 1px solid var(--sepia-light);
+            position: relative;
+        }
+
+        .r05-testimonial::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-family: var(--font-display);
+            font-size: 6rem;
+            color: var(--gold-vintage);
+            opacity: 0.15;
+            line-height: 1;
+        }
+
+        .r05-testimonial__quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--sepia-medium);
+            margin-bottom: var(--space-md);
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+
+        .r05-testimonial__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .r05-testimonial__avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--sepia-light);
+            object-fit: cover;
+            filter: sepia(30%);
+        }
+
+        .r05-testimonial__info {
+            flex: 1;
+        }
+
+        .r05-testimonial__name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--sepia-dark);
+        }
+
+        .r05-testimonial__role {
+            font-family: var(--font-typewriter);
+            font-size: 0.75rem;
+            color: var(--sepia-light);
+        }
+
+        .r05-testimonial__stars {
+            color: var(--gold-vintage);
+            letter-spacing: 2px;
+        }
+
+        /* ===== [R06] FAQ ACCORDION ===== */
+        .r06-faq {
+            background: var(--aged-paper);
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r06-faq__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r06-faq__title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--sepia-dark);
+        }
+
+        .r06-faq__list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .r06-faq-item {
+            background: var(--parchment);
+            border: 1px solid var(--sepia-light);
+            margin-bottom: var(--space-sm);
+            transition: all 0.3s ease;
+        }
+
+        .r06-faq-item:hover {
+            border-color: var(--gold-vintage);
+        }
+
+        .r06-faq-item__question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--sepia-dark);
+            transition: all 0.3s ease;
+        }
+
+        .r06-faq-item__question:hover {
+            color: var(--gold-dark);
+        }
+
+        .r06-faq-item__icon {
+            font-family: var(--font-typewriter);
+            font-size: 1.5rem;
+            color: var(--gold-vintage);
+            transition: transform 0.3s ease;
+        }
+
+        .r06-faq-item.active .r06-faq-item__icon {
+            transform: rotate(45deg);
+        }
+
+        .r06-faq-item__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .r06-faq-item.active .r06-faq-item__answer {
+            max-height: 300px;
+            padding: 0 var(--space-md) var(--space-md);
+        }
+
+        .r06-faq-item__answer p {
+            color: var(--sepia-medium);
+            line-height: 1.8;
+            padding-top: var(--space-sm);
+            border-top: 1px dashed var(--cream-dark);
+        }
+
+        /* ===== [R07] FOOTER ===== */
+        .r07-footer {
+            background: var(--sepia-dark);
+            color: var(--cream);
+            padding: var(--space-xl) var(--space-sm) var(--space-md);
+        }
+
+        .r07-footer__inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .r07-footer__top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid rgba(245, 240, 225, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .r07-footer__top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .r07-footer__brand {
+            max-width: 280px;
+        }
+
+        .r07-footer__logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-vintage);
+            margin-bottom: var(--space-sm);
+        }
+
+        .r07-footer__desc {
+            font-size: 0.9rem;
+            color: rgba(245, 240, 225, 0.7);
+            line-height: 1.8;
+        }
+
+        .r07-footer__nav-title {
+            font-family: var(--font-typewriter);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-vintage);
+            margin-bottom: var(--space-md);
+        }
+
+        .r07-footer__nav-list {
+            list-style: none;
+        }
+
+        .r07-footer__nav-list li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .r07-footer__nav-list a {
+            color: rgba(245, 240, 225, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .r07-footer__nav-list a:hover {
+            color: var(--gold-vintage);
+        }
+
+        .r07-footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .r07-footer__copyright {
+            font-family: var(--font-typewriter);
+            font-size: 0.75rem;
+            color: rgba(245, 240, 225, 0.5);
+        }
+
+        .r07-footer__social {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .r07-footer__social a {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(245, 240, 225, 0.3);
+            color: var(--cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .r07-footer__social a:hover {
+            background: var(--gold-vintage);
+            border-color: var(--gold-vintage);
+            color: var(--sepia-dark);
+        }
+
+        /* ===== [R08] NAVIGATION BAR ===== */
+        .r08-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--parchment);
+            border-bottom: 2px solid var(--sepia-light);
+            transition: all 0.3s ease;
+        }
+
+        .r08-navbar--scrolled {
+            background: rgba(253, 246, 227, 0.98);
+            box-shadow: 0 4px 20px rgba(61, 41, 20, 0.1);
+        }
+
+        .r08-navbar__inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) var(--space-md);
+        }
+
+        .r08-navbar__logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sepia-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .r08-navbar__logo-icon {
+            color: var(--gold-vintage);
+        }
+
+        .r08-navbar__menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .r08-navbar__link {
+            font-family: var(--font-typewriter);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: var(--sepia-medium);
+            text-decoration: none;
+            padding: var(--space-xs) 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .r08-navbar__link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-vintage);
+            transition: width 0.3s ease;
+        }
+
+        .r08-navbar__link:hover {
+            color: var(--sepia-dark);
+        }
+
+        .r08-navbar__link:hover::after {
+            width: 100%;
+        }
+
+        .r08-navbar__cta {
+            font-family: var(--font-typewriter);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: var(--space-xs) var(--space-md);
+            background: var(--sepia-dark);
+            color: var(--cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .r08-navbar__cta:hover {
+            background: var(--gold-vintage);
+            color: var(--sepia-dark);
+        }
+
+        .r08-navbar__toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        .r08-navbar__toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--sepia-dark);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .r08-navbar__menu {
+                display: none;
+            }
+
+            .r08-navbar__toggle {
+                display: flex;
+            }
+        }
+
+        /* ===== [R09] STEP GUIDE ===== */
+        .r09-steps {
+            background: var(--cream);
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r09-steps__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .r09-steps__title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--sepia-dark);
+        }
+
+        .r09-steps__list {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .r09-steps__list::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--sepia-light) 0px,
+                var(--sepia-light) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+        }
+
+        .r09-step {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+
+        .r09-step__number {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--parchment);
+            border: 3px solid var(--sepia-dark);
+            border-radius: 50%;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--sepia-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .r09-step__content {
+            flex: 1;
+            background: var(--parchment);
+            padding: var(--space-md);
+            border: 1px solid var(--sepia-light);
+            position: relative;
+        }
+
+        .r09-step__content::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--parchment);
+            border-left: 1px solid var(--sepia-light);
+            border-bottom: 1px solid var(--sepia-light);
+            transform: rotate(45deg);
+        }
+
+        .r09-step__title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--sepia-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .r09-step__desc {
+            color: var(--sepia-medium);
+            line-height: 1.8;
+        }
+
+        .r09-step__image {
+            margin-top: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--cream-dark);
+            border: 1px dashed var(--sepia-light);
+            text-align: center;
+            font-family: var(--font-typewriter);
+            font-size: 0.8rem;
+            color: var(--sepia-light);
+        }
+
+        /* ===== [R10] NEWSLETTER FORM ===== */
+        .r10-newsletter {
+            background:
+                linear-gradient(rgba(61, 41, 20, 0.95), rgba(61, 41, 20, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%23c9a227' stroke-width='0.5' opacity='0.1'/%3E%3Cpath d='M30 30h40v40H30z' fill='none' stroke='%23c9a227' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        .r10-newsletter__inner {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .r10-newsletter__icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+            opacity: 0.8;
+        }
+
+        .r10-newsletter__title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--cream);
+            margin-bottom: var(--space-sm);
+        }
+
+        .r10-newsletter__desc {
+            color: rgba(245, 240, 225, 0.7);
+            font-size: 1rem;
+            margin-bottom: var(--space-lg);
+            line-height: 1.8;
+        }
+
+        .r10-newsletter__form {
+            background: var(--parchment);
+            padding: var(--space-lg);
+            border: 2px solid var(--gold-vintage);
+            position: relative;
+        }
+
+        .r10-newsletter__form::before,
+        .r10-newsletter__form::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+
+        .r10-newsletter__form::before {
+            top: -2px;
+            left: -2px;
+            border-top: 4px solid var(--gold-vintage);
+            border-left: 4px solid var(--gold-vintage);
+        }
+
+        .r10-newsletter__form::after {
+            bottom: -2px;
+            right: -2px;
+            border-bottom: 4px solid var(--gold-vintage);
+            border-right: 4px solid var(--gold-vintage);
+        }
+
+        .r10-newsletter__input-group {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        @media (max-width: 480px) {
+            .r10-newsletter__input-group {
+                flex-direction: column;
+            }
+        }
+
+        .r10-newsletter__input {
+            flex: 1;
+            font-family: var(--font-typewriter);
+            font-size: 0.9rem;
+            padding: var(--space-sm);
+            background: var(--cream);
+            border: 1px solid var(--sepia-light);
+            color: var(--sepia-dark);
+            transition: all 0.3s ease;
+        }
+
+        .r10-newsletter__input:focus {
+            outline: none;
+            border-color: var(--gold-vintage);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
+        }
+
+        .r10-newsletter__input::placeholder {
+            color: var(--sepia-light);
+        }
+
+        .r10-newsletter__btn {
+            font-family: var(--font-typewriter);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--sepia-dark);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .r10-newsletter__btn:hover {
+            background: var(--gold-vintage);
+            color: var(--sepia-dark);
+        }
+
+        .r10-newsletter__note {
+            font-family: var(--font-typewriter);
+            font-size: 0.7rem;
+            color: var(--sepia-light);
+            margin-top: var(--space-sm);
+        }
+
+        /* ===== COMPONENT PREVIEW WRAPPER ===== */
+        .preview-section {
+            padding: var(--space-lg) 0;
+            border-bottom: 3px double var(--sepia-light);
+        }
+
+        .preview-label {
+            font-family: var(--font-typewriter);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sepia-light);
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========================================== -->
+<!-- [R01] Hero Section - Retro                 -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R01 - Hero Section</div>
+
+    <section class="r01-hero">
+        <div class="r01-hero__content">
+            <span class="r01-hero__badge">Est. 2024</span>
+            <h1 class="r01-hero__title">
+                Classic Elegance
+                <span>Timeless Design for Modern Times</span>
+            </h1>
+            <p class="r01-hero__desc">
+                Experience the charm of yesteryear with our carefully crafted vintage-inspired solutions.
+                Where tradition meets innovation.
+            </p>
+            <button class="r01-hero__cta">
+                Begin Your Journey
+            </button>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R02] Feature Cards - Retro               -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R02 - Feature Cards</div>
+
+    <section class="r02-features">
+        <div class="container">
+            <div class="r02-features__header">
+                <h2 class="r02-features__title">Our Distinguished Services</h2>
+                <div class="ornament">
+                    <span class="ornament-symbol">&#10047;</span>
+                </div>
+            </div>
+
+            <div class="r02-features__grid">
+                <div class="r02-feature-card">
+                    <span class="r02-feature-card__number">01</span>
+                    <div class="r02-feature-card__icon">&#9998;</div>
+                    <h3 class="r02-feature-card__title">Artisan Craftsmanship</h3>
+                    <p class="r02-feature-card__desc">
+                        Each piece is meticulously handcrafted with the finest attention to detail,
+                        honoring centuries-old traditions.
+                    </p>
+                </div>
+
+                <div class="r02-feature-card">
+                    <span class="r02-feature-card__number">02</span>
+                    <div class="r02-feature-card__icon">&#9878;</div>
+                    <h3 class="r02-feature-card__title">Timeless Quality</h3>
+                    <p class="r02-feature-card__desc">
+                        Built to last generations, our products embody the durability and
+                        excellence of a bygone era.
+                    </p>
+                </div>
+
+                <div class="r02-feature-card">
+                    <span class="r02-feature-card__number">03</span>
+                    <div class="r02-feature-card__icon">&#9733;</div>
+                    <h3 class="r02-feature-card__title">Heritage Design</h3>
+                    <p class="r02-feature-card__desc">
+                        Drawing inspiration from the golden age of design, every creation
+                        tells a story of elegance and sophistication.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R03] Pricing Table - Retro               -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R03 - Pricing Table</div>
+
+    <section class="r03-pricing">
+        <div class="container">
+            <div class="r03-pricing__header">
+                <h2 class="r03-pricing__title">Investment Plans</h2>
+                <div class="ornament">
+                    <span class="ornament-symbol">&#10038;</span>
+                </div>
+            </div>
+
+            <div class="r03-pricing__grid">
+                <div class="r03-pricing-card">
+                    <div class="r03-pricing-card__name">Apprentice</div>
+                    <div class="r03-pricing-card__price"><span>$</span>29</div>
+                    <div class="r03-pricing-card__period">per month</div>
+                    <div class="r03-pricing-card__divider"></div>
+                    <ul class="r03-pricing-card__features">
+                        <li>&#10003; 5 Projects</li>
+                        <li>&#10003; Basic Templates</li>
+                        <li>&#10003; Email Support</li>
+                        <li>&#10003; 1GB Storage</li>
+                    </ul>
+                    <button class="r03-pricing-card__btn">Select Plan</button>
+                </div>
+
+                <div class="r03-pricing-card r03-pricing-card--featured">
+                    <div class="r03-pricing-card__name">Craftsman</div>
+                    <div class="r03-pricing-card__price"><span>$</span>79</div>
+                    <div class="r03-pricing-card__period">per month</div>
+                    <div class="r03-pricing-card__divider"></div>
+                    <ul class="r03-pricing-card__features">
+                        <li>&#10003; Unlimited Projects</li>
+                        <li>&#10003; Premium Templates</li>
+                        <li>&#10003; Priority Support</li>
+                        <li>&#10003; 50GB Storage</li>
+                        <li>&#10003; Custom Branding</li>
+                    </ul>
+                    <button class="r03-pricing-card__btn">Select Plan</button>
+                </div>
+
+                <div class="r03-pricing-card">
+                    <div class="r03-pricing-card__name">Master</div>
+                    <div class="r03-pricing-card__price"><span>$</span>199</div>
+                    <div class="r03-pricing-card__period">per month</div>
+                    <div class="r03-pricing-card__divider"></div>
+                    <ul class="r03-pricing-card__features">
+                        <li>&#10003; Everything in Craftsman</li>
+                        <li>&#10003; Dedicated Account Manager</li>
+                        <li>&#10003; API Access</li>
+                        <li>&#10003; Unlimited Storage</li>
+                        <li>&#10003; White Label</li>
+                    </ul>
+                    <button class="r03-pricing-card__btn">Select Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R04] CTA Buttons - Retro                 -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R04 - CTA Buttons</div>
+
+    <section class="r04-cta-section">
+        <div class="container">
+            <h2 class="r04-cta-section__title">Take Action Today</h2>
+
+            <div class="r04-buttons">
+                <a href="#" class="r04-btn r04-btn--primary">Get Started</a>
+                <a href="#" class="r04-btn r04-btn--secondary">Learn More</a>
+                <a href="#" class="r04-btn r04-btn--outline">Contact Us</a>
+            </div>
+
+            <div class="r04-buttons">
+                <button class="r04-btn r04-btn--stamp">
+                    <span>50%</span>
+                    OFF
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R05] Testimonials - Retro                -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R05 - Testimonials</div>
+
+    <section class="r05-testimonials">
+        <div class="container">
+            <div class="r05-testimonials__header">
+                <h2 class="r05-testimonials__title">Words from Our Patrons</h2>
+                <div class="ornament">
+                    <span class="ornament-symbol">&#10047;</span>
+                </div>
+            </div>
+
+            <div class="r05-testimonials__grid">
+                <div class="r05-testimonial">
+                    <p class="r05-testimonial__quote">
+                        "Their attention to detail reminds me of the craftsmen my grandfather
+                        used to speak of. Truly exceptional work that stands the test of time."
+                    </p>
+                    <div class="r05-testimonial__author">
+                        <img src="https://i.pravatar.cc/100?img=1" alt="Eleanor" class="r05-testimonial__avatar">
+                        <div class="r05-testimonial__info">
+                            <div class="r05-testimonial__name">Eleanor Whitmore</div>
+                            <div class="r05-testimonial__role">Antique Collector</div>
+                        </div>
+                        <div class="r05-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </div>
+                </div>
+
+                <div class="r05-testimonial">
+                    <p class="r05-testimonial__quote">
+                        "In an age of mass production, finding artisans who value quality
+                        over quantity is a rare treasure. Highly recommended."
+                    </p>
+                    <div class="r05-testimonial__author">
+                        <img src="https://i.pravatar.cc/100?img=3" alt="Theodore" class="r05-testimonial__avatar">
+                        <div class="r05-testimonial__info">
+                            <div class="r05-testimonial__name">Theodore Hayes</div>
+                            <div class="r05-testimonial__role">Heritage Architect</div>
+                        </div>
+                        <div class="r05-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R06] FAQ Accordion - Retro               -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R06 - FAQ Accordion</div>
+
+    <section class="r06-faq">
+        <div class="container">
+            <div class="r06-faq__header">
+                <h2 class="r06-faq__title">Frequently Asked Questions</h2>
+                <div class="ornament">
+                    <span class="ornament-symbol">&#10038;</span>
+                </div>
+            </div>
+
+            <div class="r06-faq__list">
+                <div class="r06-faq-item active">
+                    <button class="r06-faq-item__question">
+                        <span>What makes your craftsmanship unique?</span>
+                        <span class="r06-faq-item__icon">+</span>
+                    </button>
+                    <div class="r06-faq-item__answer">
+                        <p>
+                            Our artisans employ time-honored techniques passed down through generations,
+                            combined with the finest materials sourced from around the world. Each piece
+                            undergoes rigorous quality inspection to ensure it meets our exacting standards.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="r06-faq-item">
+                    <button class="r06-faq-item__question">
+                        <span>How long does delivery take?</span>
+                        <span class="r06-faq-item__icon">+</span>
+                    </button>
+                    <div class="r06-faq-item__answer">
+                        <p>
+                            As each piece is crafted with meticulous care, delivery typically takes
+                            2-4 weeks depending on the complexity of your order. Rush orders may be
+                            accommodated upon request.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="r06-faq-item">
+                    <button class="r06-faq-item__question">
+                        <span>Do you offer custom orders?</span>
+                        <span class="r06-faq-item__icon">+</span>
+                    </button>
+                    <div class="r06-faq-item__answer">
+                        <p>
+                            Absolutely! We specialize in bespoke creations tailored to your specific
+                            requirements. Contact our design team to discuss your vision and receive
+                            a personalized quote.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="r06-faq-item">
+                    <button class="r06-faq-item__question">
+                        <span>What is your return policy?</span>
+                        <span class="r06-faq-item__icon">+</span>
+                    </button>
+                    <div class="r06-faq-item__answer">
+                        <p>
+                            We stand behind the quality of our work. If you are not completely satisfied,
+                            you may return your purchase within 30 days for a full refund or exchange.
+                            Custom orders are final sale.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R07] Footer - Retro                      -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R07 - Footer</div>
+
+    <footer class="r07-footer">
+        <div class="r07-footer__inner">
+            <div class="r07-footer__top">
+                <div class="r07-footer__brand">
+                    <div class="r07-footer__logo">&#9733; Heritage Co.</div>
+                    <p class="r07-footer__desc">
+                        Preserving the art of fine craftsmanship since 1924.
+                        Where every piece tells a story of dedication and excellence.
+                    </p>
+                </div>
+
+                <div class="r07-footer__nav">
+                    <h4 class="r07-footer__nav-title">Company</h4>
+                    <ul class="r07-footer__nav-list">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+
+                <div class="r07-footer__nav">
+                    <h4 class="r07-footer__nav-title">Services</h4>
+                    <ul class="r07-footer__nav-list">
+                        <li><a href="#">Custom Orders</a></li>
+                        <li><a href="#">Restoration</a></li>
+                        <li><a href="#">Consultation</a></li>
+                        <li><a href="#">Workshops</a></li>
+                    </ul>
+                </div>
+
+                <div class="r07-footer__nav">
+                    <h4 class="r07-footer__nav-title">Support</h4>
+                    <ul class="r07-footer__nav-list">
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="r07-footer__bottom">
+                <p class="r07-footer__copyright">
+                    &copy; 2024 Heritage Co. All Rights Reserved.
+                </p>
+                <div class="r07-footer__social">
+                    <a href="#" title="Twitter">&#120143;</a>
+                    <a href="#" title="Facebook">&#402;</a>
+                    <a href="#" title="Instagram">&#9632;</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- ========================================== -->
+<!-- [R08] Navigation Bar - Retro              -->
+<!-- ========================================== -->
+<div class="preview-section" style="padding-top: 100px;">
+    <div class="preview-label">R08 - Navigation Bar (See top of page)</div>
+
+    <nav class="r08-navbar" style="position: relative;">
+        <div class="r08-navbar__inner">
+            <a href="#" class="r08-navbar__logo">
+                <span class="r08-navbar__logo-icon">&#9733;</span>
+                Heritage Co.
+            </a>
+
+            <ul class="r08-navbar__menu">
+                <li><a href="#" class="r08-navbar__link">Home</a></li>
+                <li><a href="#" class="r08-navbar__link">About</a></li>
+                <li><a href="#" class="r08-navbar__link">Services</a></li>
+                <li><a href="#" class="r08-navbar__link">Portfolio</a></li>
+                <li><a href="#" class="r08-navbar__link">Contact</a></li>
+                <li><a href="#" class="r08-navbar__cta">Get Started</a></li>
+            </ul>
+
+            <button class="r08-navbar__toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+</div>
+
+<!-- ========================================== -->
+<!-- [R09] Step Guide - Retro                  -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R09 - Step Guide</div>
+
+    <section class="r09-steps">
+        <div class="container">
+            <div class="r09-steps__header">
+                <h2 class="r09-steps__title">How It Works</h2>
+                <div class="ornament">
+                    <span class="ornament-symbol">&#10047;</span>
+                </div>
+            </div>
+
+            <div class="r09-steps__list">
+                <div class="r09-step">
+                    <div class="r09-step__number">1</div>
+                    <div class="r09-step__content">
+                        <h3 class="r09-step__title">Consultation</h3>
+                        <p class="r09-step__desc">
+                            Schedule a meeting with our master craftsmen to discuss your vision.
+                            We'll explore materials, styles, and create a detailed plan tailored
+                            to your needs.
+                        </p>
+                        <div class="r09-step__image">[Illustration: Consultation Meeting]</div>
+                    </div>
+                </div>
+
+                <div class="r09-step">
+                    <div class="r09-step__number">2</div>
+                    <div class="r09-step__content">
+                        <h3 class="r09-step__title">Design & Approval</h3>
+                        <p class="r09-step__desc">
+                            Our designers create detailed sketches and prototypes. You'll have
+                            the opportunity to review and refine every detail before production begins.
+                        </p>
+                        <div class="r09-step__image">[Illustration: Design Sketches]</div>
+                    </div>
+                </div>
+
+                <div class="r09-step">
+                    <div class="r09-step__number">3</div>
+                    <div class="r09-step__content">
+                        <h3 class="r09-step__title">Crafting</h3>
+                        <p class="r09-step__desc">
+                            Using time-honored techniques and premium materials, our artisans
+                            bring your vision to life with meticulous attention to every detail.
+                        </p>
+                        <div class="r09-step__image">[Illustration: Craftsman at Work]</div>
+                    </div>
+                </div>
+
+                <div class="r09-step">
+                    <div class="r09-step__number">4</div>
+                    <div class="r09-step__content">
+                        <h3 class="r09-step__title">Delivery</h3>
+                        <p class="r09-step__desc">
+                            Your finished piece is carefully packaged and delivered to your door,
+                            accompanied by a certificate of authenticity and care instructions.
+                        </p>
+                        <div class="r09-step__image">[Illustration: Gift Package]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- [R10] Newsletter Form - Retro             -->
+<!-- ========================================== -->
+<div class="preview-section">
+    <div class="preview-label">R10 - Newsletter Form</div>
+
+    <section class="r10-newsletter">
+        <div class="r10-newsletter__inner">
+            <div class="r10-newsletter__icon">&#9993;</div>
+            <h2 class="r10-newsletter__title">Subscribe to Our Gazette</h2>
+            <p class="r10-newsletter__desc">
+                Join our distinguished mailing list to receive exclusive updates,
+                artisan insights, and special offers delivered directly to your inbox.
+            </p>
+
+            <div class="r10-newsletter__form">
+                <div class="r10-newsletter__input-group">
+                    <input
+                        type="text"
+                        class="r10-newsletter__input"
+                        placeholder="Your Name"
+                    >
+                    <input
+                        type="email"
+                        class="r10-newsletter__input"
+                        placeholder="Your Email Address"
+                    >
+                    <button class="r10-newsletter__btn">Subscribe</button>
+                </div>
+                <p class="r10-newsletter__note">
+                    * We respect your privacy. Unsubscribe at any time.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // FAQ Accordion functionality
+    document.querySelectorAll('.r06-faq-item__question').forEach(button => {
+        button.addEventListener('click', () => {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close all items
+            document.querySelectorAll('.r06-faq-item').forEach(i => {
+                i.classList.remove('active');
+            });
+
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.r08-navbar');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('r08-navbar--scrolled');
+            } else {
+                navbar.classList.remove('r08-navbar--scrolled');
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

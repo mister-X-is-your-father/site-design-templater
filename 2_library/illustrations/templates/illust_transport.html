@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Illustrations - CSS Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .illust-container {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .illust-container:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        /* ========================================
+           TRANSPORT-01: CAR
+           ======================================== */
+        .car {
+            width: 70px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .car:hover {
+            transform: translateX(5px);
+        }
+
+        .car-body {
+            width: 70px;
+            height: 25px;
+            background: #FF6B6B;
+            border-radius: 8px 20px 5px 5px;
+            position: absolute;
+            bottom: 8px;
+        }
+
+        .car-top {
+            width: 40px;
+            height: 18px;
+            background: #FF6B6B;
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            bottom: 28px;
+            left: 12px;
+        }
+
+        .car-window {
+            width: 32px;
+            height: 12px;
+            background: #87CEEB;
+            border-radius: 6px 6px 0 0;
+            position: absolute;
+            bottom: 30px;
+            left: 16px;
+        }
+
+        .car-wheel {
+            width: 14px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .car-wheel-front {
+            left: 10px;
+        }
+
+        .car-wheel-back {
+            right: 10px;
+        }
+
+        /* ========================================
+           TRANSPORT-02: BUS
+           ======================================== */
+        .bus {
+            width: 80px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bus:hover {
+            transform: translateX(5px);
+        }
+
+        .bus-body {
+            width: 80px;
+            height: 38px;
+            background: #FFB347;
+            border-radius: 5px 5px 3px 3px;
+            position: absolute;
+            bottom: 8px;
+        }
+
+        .bus-window {
+            width: 12px;
+            height: 14px;
+            background: #87CEEB;
+            border-radius: 3px;
+            position: absolute;
+            top: 6px;
+        }
+
+        .bus-window-1 { left: 6px; }
+        .bus-window-2 { left: 22px; }
+        .bus-window-3 { left: 38px; }
+        .bus-window-4 { left: 54px; width: 18px; border-radius: 3px 8px 3px 3px; }
+
+        .bus-stripe {
+            width: 80px;
+            height: 6px;
+            background: #FF8C00;
+            position: absolute;
+            bottom: 14px;
+        }
+
+        .bus-wheel {
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .bus-wheel-front { left: 12px; }
+        .bus-wheel-back { right: 12px; }
+
+        /* ========================================
+           TRANSPORT-03: TRAIN
+           ======================================== */
+        .train {
+            width: 75px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .train:hover {
+            transform: translateX(8px);
+        }
+
+        .train-body {
+            width: 75px;
+            height: 32px;
+            background: #5DADE2;
+            border-radius: 5px 15px 3px 3px;
+            position: absolute;
+            bottom: 8px;
+        }
+
+        .train-front {
+            width: 8px;
+            height: 32px;
+            background: #3498DB;
+            border-radius: 0 15px 3px 0;
+            position: absolute;
+            bottom: 8px;
+            right: 0;
+        }
+
+        .train-window {
+            width: 14px;
+            height: 12px;
+            background: #E8F6FF;
+            border-radius: 3px;
+            position: absolute;
+            top: 6px;
+        }
+
+        .train-window-1 { left: 8px; }
+        .train-window-2 { left: 26px; }
+        .train-window-3 { left: 44px; }
+
+        .train-stripe {
+            width: 75px;
+            height: 4px;
+            background: #2980B9;
+            position: absolute;
+            bottom: 12px;
+        }
+
+        .train-wheel {
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .train-wheel-1 { left: 10px; }
+        .train-wheel-2 { left: 30px; }
+        .train-wheel-3 { right: 10px; }
+
+        /* ========================================
+           TRANSPORT-04: AIRPLANE
+           ======================================== */
+        .airplane {
+            width: 80px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .airplane:hover {
+            transform: translateY(-5px) rotate(-5deg);
+        }
+
+        .airplane-body {
+            width: 60px;
+            height: 16px;
+            background: #ECF0F1;
+            border-radius: 8px 20px 20px 8px;
+            position: absolute;
+            top: 17px;
+            left: 10px;
+        }
+
+        .airplane-nose {
+            width: 12px;
+            height: 10px;
+            background: #BDC3C7;
+            border-radius: 0 10px 10px 0;
+            position: absolute;
+            top: 20px;
+            right: 8px;
+        }
+
+        .airplane-tail {
+            width: 12px;
+            height: 20px;
+            background: #3498DB;
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+        }
+
+        .airplane-wing {
+            width: 35px;
+            height: 8px;
+            background: #3498DB;
+            border-radius: 3px;
+            position: absolute;
+            top: 22px;
+            left: 20px;
+        }
+
+        .airplane-window {
+            width: 6px;
+            height: 6px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: absolute;
+            top: 22px;
+        }
+
+        .airplane-window-1 { left: 30px; }
+        .airplane-window-2 { left: 40px; }
+        .airplane-window-3 { left: 50px; }
+
+        /* ========================================
+           TRANSPORT-05: BICYCLE
+           ======================================== */
+        .bicycle {
+            width: 65px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .bicycle:hover {
+            transform: translateX(5px);
+        }
+
+        .bicycle-wheel {
+            width: 22px;
+            height: 22px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .bicycle-wheel-front { right: 0; }
+        .bicycle-wheel-back { left: 0; }
+
+        .bicycle-frame {
+            width: 25px;
+            height: 4px;
+            background: #E74C3C;
+            position: absolute;
+            bottom: 18px;
+            left: 10px;
+            transform: rotate(-20deg);
+        }
+
+        .bicycle-frame-2 {
+            width: 20px;
+            height: 4px;
+            background: #E74C3C;
+            position: absolute;
+            bottom: 14px;
+            left: 28px;
+            transform: rotate(30deg);
+        }
+
+        .bicycle-handlebar {
+            width: 16px;
+            height: 4px;
+            background: #333;
+            position: absolute;
+            bottom: 35px;
+            right: 8px;
+            border-radius: 2px;
+        }
+
+        .bicycle-seat {
+            width: 12px;
+            height: 5px;
+            background: #8B4513;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 32px;
+            left: 12px;
+        }
+
+        /* ========================================
+           TRANSPORT-06: MOTORCYCLE
+           ======================================== */
+        .motorcycle {
+            width: 70px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .motorcycle:hover {
+            transform: translateX(5px) rotate(-2deg);
+        }
+
+        .motorcycle-wheel {
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .motorcycle-wheel-front { right: 2px; }
+        .motorcycle-wheel-back { left: 2px; }
+
+        .motorcycle-body {
+            width: 35px;
+            height: 14px;
+            background: #9B59B6;
+            border-radius: 5px 12px 3px 3px;
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+        }
+
+        .motorcycle-tank {
+            width: 18px;
+            height: 12px;
+            background: #8E44AD;
+            border-radius: 6px;
+            position: absolute;
+            bottom: 18px;
+            left: 20px;
+        }
+
+        .motorcycle-handlebar {
+            width: 14px;
+            height: 3px;
+            background: #333;
+            position: absolute;
+            bottom: 32px;
+            right: 10px;
+        }
+
+        .motorcycle-seat {
+            width: 16px;
+            height: 6px;
+            background: #2C3E50;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 24px;
+            left: 14px;
+        }
+
+        /* ========================================
+           TRANSPORT-07: BOAT
+           ======================================== */
+        .boat {
+            width: 70px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .boat:hover {
+            transform: translateY(-3px) rotate(-3deg);
+        }
+
+        .boat-hull {
+            width: 70px;
+            height: 20px;
+            background: #E74C3C;
+            border-radius: 5px 5px 15px 15px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .boat-cabin {
+            width: 30px;
+            height: 18px;
+            background: #ECF0F1;
+            border-radius: 3px 3px 0 0;
+            position: absolute;
+            bottom: 18px;
+            left: 20px;
+        }
+
+        .boat-window {
+            width: 8px;
+            height: 8px;
+            background: #87CEEB;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 23px;
+            left: 31px;
+        }
+
+        .boat-chimney {
+            width: 8px;
+            height: 12px;
+            background: #F39C12;
+            position: absolute;
+            bottom: 36px;
+            left: 38px;
+        }
+
+        /* ========================================
+           TRANSPORT-08: HELICOPTER
+           ======================================== */
+        .helicopter {
+            width: 75px;
+            height: 50px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .helicopter:hover {
+            transform: translateY(-5px);
+        }
+
+        .helicopter:hover .helicopter-rotor {
+            animation: rotor-spin 0.1s linear infinite;
+        }
+
+        @keyframes rotor-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .helicopter-body {
+            width: 40px;
+            height: 22px;
+            background: #27AE60;
+            border-radius: 10px 15px 8px 8px;
+            position: absolute;
+            bottom: 8px;
+            left: 5px;
+        }
+
+        .helicopter-window {
+            width: 14px;
+            height: 12px;
+            background: #87CEEB;
+            border-radius: 6px 10px 4px 4px;
+            position: absolute;
+            bottom: 14px;
+            left: 28px;
+        }
+
+        .helicopter-tail {
+            width: 25px;
+            height: 8px;
+            background: #27AE60;
+            border-radius: 0 0 0 3px;
+            position: absolute;
+            bottom: 18px;
+            left: 45px;
+        }
+
+        .helicopter-tail-rotor {
+            width: 4px;
+            height: 14px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 16px;
+            right: 2px;
+        }
+
+        .helicopter-rotor {
+            width: 60px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            top: 2px;
+            left: 5px;
+        }
+
+        .helicopter-skid {
+            width: 35px;
+            height: 3px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 0;
+            left: 8px;
+        }
+
+        /* ========================================
+           TRANSPORT-09: ROCKET
+           ======================================== */
+        .rocket {
+            width: 40px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .rocket:hover {
+            transform: translateY(-8px);
+        }
+
+        .rocket:hover .rocket-flame {
+            animation: flame-flicker 0.15s ease-in-out infinite;
+        }
+
+        @keyframes flame-flicker {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.2); }
+        }
+
+        .rocket-body {
+            width: 24px;
+            height: 45px;
+            background: #ECF0F1;
+            border-radius: 12px 12px 4px 4px;
+            position: absolute;
+            top: 0;
+            left: 8px;
+        }
+
+        .rocket-nose {
+            width: 24px;
+            height: 15px;
+            background: #E74C3C;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: 0;
+            left: 8px;
+        }
+
+        .rocket-window {
+            width: 10px;
+            height: 10px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 15px;
+        }
+
+        .rocket-fin-left {
+            width: 10px;
+            height: 16px;
+            background: #E74C3C;
+            border-radius: 0 0 0 8px;
+            position: absolute;
+            bottom: 12px;
+            left: 2px;
+        }
+
+        .rocket-fin-right {
+            width: 10px;
+            height: 16px;
+            background: #E74C3C;
+            border-radius: 0 0 8px 0;
+            position: absolute;
+            bottom: 12px;
+            right: 2px;
+        }
+
+        .rocket-flame {
+            width: 14px;
+            height: 18px;
+            background: #F39C12;
+            border-radius: 0 0 50% 50%;
+            position: absolute;
+            bottom: 0;
+            left: 13px;
+        }
+
+        /* ========================================
+           TRANSPORT-10: TRUCK
+           ======================================== */
+        .truck {
+            width: 80px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .truck:hover {
+            transform: translateX(5px);
+        }
+
+        .truck-cabin {
+            width: 25px;
+            height: 25px;
+            background: #3498DB;
+            border-radius: 5px 8px 3px 3px;
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+        }
+
+        .truck-cabin-window {
+            width: 16px;
+            height: 12px;
+            background: #87CEEB;
+            border-radius: 3px 6px 2px 2px;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+        }
+
+        .truck-cargo {
+            width: 50px;
+            height: 30px;
+            background: #2ECC71;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+        }
+
+        .truck-wheel {
+            width: 14px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .truck-wheel-1 { left: 8px; }
+        .truck-wheel-2 { left: 28px; }
+        .truck-wheel-3 { right: 6px; }
+
+        /* ========================================
+           TRANSPORT-11: TAXI
+           ======================================== */
+        .taxi {
+            width: 70px;
+            height: 42px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .taxi:hover {
+            transform: translateX(5px);
+        }
+
+        .taxi-body {
+            width: 70px;
+            height: 22px;
+            background: #F1C40F;
+            border-radius: 8px 15px 5px 5px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .taxi-top {
+            width: 38px;
+            height: 16px;
+            background: #F1C40F;
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            bottom: 28px;
+            left: 14px;
+        }
+
+        .taxi-window {
+            width: 30px;
+            height: 10px;
+            background: #87CEEB;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            bottom: 30px;
+            left: 18px;
+        }
+
+        .taxi-sign {
+            width: 16px;
+            height: 8px;
+            background: #ECF0F1;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 44px;
+            left: 25px;
+        }
+
+        .taxi-wheel {
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .taxi-wheel-front { left: 10px; }
+        .taxi-wheel-back { right: 10px; }
+
+        /* ========================================
+           TRANSPORT-12: AMBULANCE
+           ======================================== */
+        .ambulance {
+            width: 75px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .ambulance:hover {
+            transform: translateX(5px);
+        }
+
+        .ambulance:hover .ambulance-light {
+            animation: light-flash 0.3s ease-in-out infinite;
+        }
+
+        @keyframes light-flash {
+            0%, 100% { background: #E74C3C; }
+            50% { background: #FF6B6B; }
+        }
+
+        .ambulance-body {
+            width: 75px;
+            height: 30px;
+            background: #ECF0F1;
+            border-radius: 5px 10px 3px 3px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .ambulance-window {
+            width: 18px;
+            height: 14px;
+            background: #87CEEB;
+            border-radius: 3px 8px 2px 2px;
+            position: absolute;
+            top: 4px;
+            right: 5px;
+        }
+
+        .ambulance-cross-h {
+            width: 14px;
+            height: 4px;
+            background: #E74C3C;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        .ambulance-cross-v {
+            width: 4px;
+            height: 14px;
+            background: #E74C3C;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .ambulance-stripe {
+            width: 75px;
+            height: 5px;
+            background: #E74C3C;
+            position: absolute;
+            bottom: 14px;
+        }
+
+        .ambulance-light {
+            width: 10px;
+            height: 6px;
+            background: #E74C3C;
+            border-radius: 3px 3px 0 0;
+            position: absolute;
+            bottom: 40px;
+            right: 10px;
+        }
+
+        .ambulance-wheel {
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .ambulance-wheel-front { left: 10px; }
+        .ambulance-wheel-back { right: 10px; }
+
+        /* ========================================
+           TRANSPORT-13: FIRE TRUCK
+           ======================================== */
+        .firetruck {
+            width: 80px;
+            height: 48px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .firetruck:hover {
+            transform: translateX(5px);
+        }
+
+        .firetruck:hover .firetruck-light {
+            animation: light-flash 0.3s ease-in-out infinite;
+        }
+
+        .firetruck-body {
+            width: 80px;
+            height: 28px;
+            background: #E74C3C;
+            border-radius: 5px 8px 3px 3px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .firetruck-cabin {
+            width: 25px;
+            height: 22px;
+            background: #C0392B;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            bottom: 16px;
+            right: 2px;
+        }
+
+        .firetruck-window {
+            width: 16px;
+            height: 10px;
+            background: #87CEEB;
+            border-radius: 3px 3px 0 0;
+            position: absolute;
+            top: 4px;
+            right: 6px;
+        }
+
+        .firetruck-ladder {
+            width: 45px;
+            height: 6px;
+            background: #BDC3C7;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 32px;
+            left: 5px;
+        }
+
+        .firetruck-light {
+            width: 8px;
+            height: 5px;
+            background: #3498DB;
+            border-radius: 2px 2px 0 0;
+            position: absolute;
+            bottom: 38px;
+            right: 10px;
+        }
+
+        .firetruck-stripe {
+            width: 50px;
+            height: 4px;
+            background: #F1C40F;
+            position: absolute;
+            bottom: 18px;
+            left: 5px;
+        }
+
+        .firetruck-wheel {
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .firetruck-wheel-1 { left: 8px; }
+        .firetruck-wheel-2 { left: 26px; }
+        .firetruck-wheel-3 { right: 8px; }
+
+        /* ========================================
+           TRANSPORT-14: POLICE CAR
+           ======================================== */
+        .policecar {
+            width: 70px;
+            height: 44px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .policecar:hover {
+            transform: translateX(5px);
+        }
+
+        .policecar:hover .policecar-light-red,
+        .policecar:hover .policecar-light-blue {
+            animation: police-flash 0.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes police-flash {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .policecar-body {
+            width: 70px;
+            height: 22px;
+            background: #ECF0F1;
+            border-radius: 8px 15px 5px 5px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .policecar-top {
+            width: 36px;
+            height: 14px;
+            background: #2C3E50;
+            border-radius: 7px 7px 0 0;
+            position: absolute;
+            bottom: 28px;
+            left: 15px;
+        }
+
+        .policecar-window {
+            width: 28px;
+            height: 9px;
+            background: #87CEEB;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            bottom: 30px;
+            left: 19px;
+        }
+
+        .policecar-stripe {
+            width: 70px;
+            height: 6px;
+            background: #3498DB;
+            position: absolute;
+            bottom: 16px;
+        }
+
+        .policecar-light-red {
+            width: 8px;
+            height: 5px;
+            background: #E74C3C;
+            border-radius: 2px 2px 0 0;
+            position: absolute;
+            bottom: 42px;
+            left: 18px;
+        }
+
+        .policecar-light-blue {
+            width: 8px;
+            height: 5px;
+            background: #3498DB;
+            border-radius: 2px 2px 0 0;
+            position: absolute;
+            bottom: 42px;
+            right: 18px;
+        }
+
+        .policecar-wheel {
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .policecar-wheel-front { left: 10px; }
+        .policecar-wheel-back { right: 10px; }
+
+        /* ========================================
+           TRANSPORT-15: SHIP
+           ======================================== */
+        .ship {
+            width: 80px;
+            height: 55px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .ship:hover {
+            transform: translateY(-3px) rotate(-2deg);
+        }
+
+        .ship-hull {
+            width: 80px;
+            height: 22px;
+            background: #2C3E50;
+            border-radius: 5px 5px 20px 20px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .ship-deck {
+            width: 60px;
+            height: 12px;
+            background: #E74C3C;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+        }
+
+        .ship-cabin {
+            width: 25px;
+            height: 18px;
+            background: #ECF0F1;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 32px;
+            left: 28px;
+        }
+
+        .ship-window {
+            width: 6px;
+            height: 6px;
+            background: #87CEEB;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 38px;
+        }
+
+        .ship-window-1 { left: 32px; }
+        .ship-window-2 { left: 42px; }
+
+        .ship-chimney {
+            width: 10px;
+            height: 14px;
+            background: #F39C12;
+            position: absolute;
+            bottom: 50px;
+            left: 35px;
+        }
+
+        .ship-chimney-top {
+            width: 14px;
+            height: 4px;
+            background: #333;
+            position: absolute;
+            bottom: 60px;
+            left: 33px;
+        }
+
+        /* ========================================
+           TRANSPORT-16: SUBMARINE
+           ======================================== */
+        .submarine {
+            width: 75px;
+            height: 40px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .submarine:hover {
+            transform: translateX(5px) translateY(2px);
+        }
+
+        .submarine-body {
+            width: 65px;
+            height: 25px;
+            background: #F39C12;
+            border-radius: 12px 20px 20px 12px;
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+        }
+
+        .submarine-tower {
+            width: 18px;
+            height: 14px;
+            background: #E67E22;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            bottom: 25px;
+            left: 30px;
+        }
+
+        .submarine-window {
+            width: 10px;
+            height: 10px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 12px;
+            left: 50px;
+        }
+
+        .submarine-window-2 {
+            width: 8px;
+            height: 8px;
+            background: #87CEEB;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 13px;
+            left: 15px;
+        }
+
+        .submarine-propeller {
+            width: 8px;
+            height: 16px;
+            background: #BDC3C7;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+        }
+
+        .submarine-periscope {
+            width: 4px;
+            height: 10px;
+            background: #7F8C8D;
+            position: absolute;
+            bottom: 39px;
+            left: 37px;
+        }
+
+        /* ========================================
+           TRANSPORT-17: HOT AIR BALLOON
+           ======================================== */
+        .balloon {
+            width: 50px;
+            height: 70px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .balloon:hover {
+            transform: translateY(-8px);
+        }
+
+        .balloon-envelope {
+            width: 50px;
+            height: 50px;
+            background: #E74C3C;
+            border-radius: 50% 50% 40% 40%;
+            position: absolute;
+            top: 0;
+        }
+
+        .balloon-stripe-1 {
+            width: 12px;
+            height: 45px;
+            background: #F39C12;
+            border-radius: 50% 50% 30% 30%;
+            position: absolute;
+            top: 2px;
+            left: 8px;
+        }
+
+        .balloon-stripe-2 {
+            width: 12px;
+            height: 45px;
+            background: #F39C12;
+            border-radius: 50% 50% 30% 30%;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+        .balloon-rope-1 {
+            width: 2px;
+            height: 12px;
+            background: #8B4513;
+            position: absolute;
+            top: 48px;
+            left: 15px;
+        }
+
+        .balloon-rope-2 {
+            width: 2px;
+            height: 12px;
+            background: #8B4513;
+            position: absolute;
+            top: 48px;
+            right: 15px;
+        }
+
+        .balloon-basket {
+            width: 24px;
+            height: 14px;
+            background: #8B4513;
+            border-radius: 0 0 4px 4px;
+            position: absolute;
+            bottom: 0;
+            left: 13px;
+        }
+
+        /* ========================================
+           TRANSPORT-18: SCOOTER
+           ======================================== */
+        .scooter {
+            width: 60px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .scooter:hover {
+            transform: translateX(5px);
+        }
+
+        .scooter-wheel {
+            width: 16px;
+            height: 16px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .scooter-wheel-front { right: 2px; }
+        .scooter-wheel-back { left: 2px; }
+
+        .scooter-body {
+            width: 35px;
+            height: 18px;
+            background: #1ABC9C;
+            border-radius: 8px 15px 5px 5px;
+            position: absolute;
+            bottom: 10px;
+            left: 8px;
+        }
+
+        .scooter-seat {
+            width: 18px;
+            height: 6px;
+            background: #2C3E50;
+            border-radius: 3px;
+            position: absolute;
+            bottom: 26px;
+            left: 10px;
+        }
+
+        .scooter-handlebar {
+            width: 12px;
+            height: 16px;
+            background: #16A085;
+            border-radius: 3px 8px 0 0;
+            position: absolute;
+            bottom: 20px;
+            right: 8px;
+        }
+
+        .scooter-handlebar-top {
+            width: 16px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 36px;
+            right: 4px;
+        }
+
+        /* ========================================
+           TRANSPORT-19: SKATEBOARD
+           ======================================== */
+        .skateboard {
+            width: 70px;
+            height: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .skateboard:hover {
+            transform: rotate(-5deg) translateX(5px);
+        }
+
+        .skateboard-deck {
+            width: 70px;
+            height: 10px;
+            background: #9B59B6;
+            border-radius: 15px;
+            position: absolute;
+            top: 5px;
+        }
+
+        .skateboard-stripe {
+            width: 60px;
+            height: 4px;
+            background: #8E44AD;
+            border-radius: 10px;
+            position: absolute;
+            top: 8px;
+            left: 5px;
+        }
+
+        .skateboard-truck-front {
+            width: 14px;
+            height: 5px;
+            background: #7F8C8D;
+            border-radius: 2px;
+            position: absolute;
+            top: 14px;
+            right: 10px;
+        }
+
+        .skateboard-truck-back {
+            width: 14px;
+            height: 5px;
+            background: #7F8C8D;
+            border-radius: 2px;
+            position: absolute;
+            top: 14px;
+            left: 10px;
+        }
+
+        .skateboard-wheel {
+            width: 8px;
+            height: 8px;
+            background: #E74C3C;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .skateboard-wheel-1 { left: 8px; }
+        .skateboard-wheel-2 { left: 18px; }
+        .skateboard-wheel-3 { right: 18px; }
+        .skateboard-wheel-4 { right: 8px; }
+
+        /* ========================================
+           TRANSPORT-20: UFO
+           ======================================== */
+        .ufo {
+            width: 70px;
+            height: 45px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .ufo:hover {
+            transform: translateY(-5px);
+        }
+
+        .ufo:hover .ufo-light {
+            animation: ufo-glow 0.3s ease-in-out infinite alternate;
+        }
+
+        @keyframes ufo-glow {
+            0% { background: #2ECC71; }
+            100% { background: #58D68D; }
+        }
+
+        .ufo-dome {
+            width: 30px;
+            height: 20px;
+            background: #87CEEB;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: 0;
+            left: 20px;
+        }
+
+        .ufo-body {
+            width: 70px;
+            height: 16px;
+            background: #BDC3C7;
+            border-radius: 50%;
+            position: absolute;
+            top: 16px;
+        }
+
+        .ufo-ring {
+            width: 60px;
+            height: 10px;
+            background: #7F8C8D;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 5px;
+        }
+
+        .ufo-light {
+            width: 8px;
+            height: 8px;
+            background: #2ECC71;
+            border-radius: 50%;
+            position: absolute;
+            top: 22px;
+        }
+
+        .ufo-light-1 { left: 12px; }
+        .ufo-light-2 { left: 31px; }
+        .ufo-light-3 { right: 12px; }
+
+        .ufo-beam {
+            width: 40px;
+            height: 15px;
+            background: rgba(46, 204, 113, 0.3);
+            border-radius: 0 0 50% 50%;
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transportation CSS Illustrations</h1>
+
+    <div class="grid">
+        <!-- TRANSPORT-01: CAR -->
+        <div class="item">
+            <span class="item-label">transport-01</span>
+            <div class="illust-container">
+                <div class="car" id="transport-01">
+                    <div class="car-body"></div>
+                    <div class="car-top"></div>
+                    <div class="car-window"></div>
+                    <div class="car-wheel car-wheel-front"></div>
+                    <div class="car-wheel car-wheel-back"></div>
+                </div>
+            </div>
+            <span class="item-name">Car</span>
+        </div>
+
+        <!-- TRANSPORT-02: BUS -->
+        <div class="item">
+            <span class="item-label">transport-02</span>
+            <div class="illust-container">
+                <div class="bus" id="transport-02">
+                    <div class="bus-body">
+                        <div class="bus-window bus-window-1"></div>
+                        <div class="bus-window bus-window-2"></div>
+                        <div class="bus-window bus-window-3"></div>
+                        <div class="bus-window bus-window-4"></div>
+                    </div>
+                    <div class="bus-stripe"></div>
+                    <div class="bus-wheel bus-wheel-front"></div>
+                    <div class="bus-wheel bus-wheel-back"></div>
+                </div>
+            </div>
+            <span class="item-name">Bus</span>
+        </div>
+
+        <!-- TRANSPORT-03: TRAIN -->
+        <div class="item">
+            <span class="item-label">transport-03</span>
+            <div class="illust-container">
+                <div class="train" id="transport-03">
+                    <div class="train-body">
+                        <div class="train-window train-window-1"></div>
+                        <div class="train-window train-window-2"></div>
+                        <div class="train-window train-window-3"></div>
+                    </div>
+                    <div class="train-front"></div>
+                    <div class="train-stripe"></div>
+                    <div class="train-wheel train-wheel-1"></div>
+                    <div class="train-wheel train-wheel-2"></div>
+                    <div class="train-wheel train-wheel-3"></div>
+                </div>
+            </div>
+            <span class="item-name">Train</span>
+        </div>
+
+        <!-- TRANSPORT-04: AIRPLANE -->
+        <div class="item">
+            <span class="item-label">transport-04</span>
+            <div class="illust-container">
+                <div class="airplane" id="transport-04">
+                    <div class="airplane-body"></div>
+                    <div class="airplane-nose"></div>
+                    <div class="airplane-tail"></div>
+                    <div class="airplane-wing"></div>
+                    <div class="airplane-window airplane-window-1"></div>
+                    <div class="airplane-window airplane-window-2"></div>
+                    <div class="airplane-window airplane-window-3"></div>
+                </div>
+            </div>
+            <span class="item-name">Airplane</span>
+        </div>
+
+        <!-- TRANSPORT-05: BICYCLE -->
+        <div class="item">
+            <span class="item-label">transport-05</span>
+            <div class="illust-container">
+                <div class="bicycle" id="transport-05">
+                    <div class="bicycle-wheel bicycle-wheel-front"></div>
+                    <div class="bicycle-wheel bicycle-wheel-back"></div>
+                    <div class="bicycle-frame"></div>
+                    <div class="bicycle-frame-2"></div>
+                    <div class="bicycle-handlebar"></div>
+                    <div class="bicycle-seat"></div>
+                </div>
+            </div>
+            <span class="item-name">Bicycle</span>
+        </div>
+
+        <!-- TRANSPORT-06: MOTORCYCLE -->
+        <div class="item">
+            <span class="item-label">transport-06</span>
+            <div class="illust-container">
+                <div class="motorcycle" id="transport-06">
+                    <div class="motorcycle-wheel motorcycle-wheel-front"></div>
+                    <div class="motorcycle-wheel motorcycle-wheel-back"></div>
+                    <div class="motorcycle-body"></div>
+                    <div class="motorcycle-tank"></div>
+                    <div class="motorcycle-handlebar"></div>
+                    <div class="motorcycle-seat"></div>
+                </div>
+            </div>
+            <span class="item-name">Motorcycle</span>
+        </div>
+
+        <!-- TRANSPORT-07: BOAT -->
+        <div class="item">
+            <span class="item-label">transport-07</span>
+            <div class="illust-container">
+                <div class="boat" id="transport-07">
+                    <div class="boat-hull"></div>
+                    <div class="boat-cabin"></div>
+                    <div class="boat-window"></div>
+                    <div class="boat-chimney"></div>
+                </div>
+            </div>
+            <span class="item-name">Boat</span>
+        </div>
+
+        <!-- TRANSPORT-08: HELICOPTER -->
+        <div class="item">
+            <span class="item-label">transport-08</span>
+            <div class="illust-container">
+                <div class="helicopter" id="transport-08">
+                    <div class="helicopter-rotor"></div>
+                    <div class="helicopter-body"></div>
+                    <div class="helicopter-window"></div>
+                    <div class="helicopter-tail"></div>
+                    <div class="helicopter-tail-rotor"></div>
+                    <div class="helicopter-skid"></div>
+                </div>
+            </div>
+            <span class="item-name">Helicopter</span>
+        </div>
+
+        <!-- TRANSPORT-09: ROCKET -->
+        <div class="item">
+            <span class="item-label">transport-09</span>
+            <div class="illust-container">
+                <div class="rocket" id="transport-09">
+                    <div class="rocket-body"></div>
+                    <div class="rocket-nose"></div>
+                    <div class="rocket-window"></div>
+                    <div class="rocket-fin-left"></div>
+                    <div class="rocket-fin-right"></div>
+                    <div class="rocket-flame"></div>
+                </div>
+            </div>
+            <span class="item-name">Rocket</span>
+        </div>
+
+        <!-- TRANSPORT-10: TRUCK -->
+        <div class="item">
+            <span class="item-label">transport-10</span>
+            <div class="illust-container">
+                <div class="truck" id="transport-10">
+                    <div class="truck-cargo"></div>
+                    <div class="truck-cabin">
+                        <div class="truck-cabin-window"></div>
+                    </div>
+                    <div class="truck-wheel truck-wheel-1"></div>
+                    <div class="truck-wheel truck-wheel-2"></div>
+                    <div class="truck-wheel truck-wheel-3"></div>
+                </div>
+            </div>
+            <span class="item-name">Truck</span>
+        </div>
+
+        <!-- TRANSPORT-11: TAXI -->
+        <div class="item">
+            <span class="item-label">transport-11</span>
+            <div class="illust-container">
+                <div class="taxi" id="transport-11">
+                    <div class="taxi-body"></div>
+                    <div class="taxi-top"></div>
+                    <div class="taxi-window"></div>
+                    <div class="taxi-sign"></div>
+                    <div class="taxi-wheel taxi-wheel-front"></div>
+                    <div class="taxi-wheel taxi-wheel-back"></div>
+                </div>
+            </div>
+            <span class="item-name">Taxi</span>
+        </div>
+
+        <!-- TRANSPORT-12: AMBULANCE -->
+        <div class="item">
+            <span class="item-label">transport-12</span>
+            <div class="illust-container">
+                <div class="ambulance" id="transport-12">
+                    <div class="ambulance-body">
+                        <div class="ambulance-window"></div>
+                        <div class="ambulance-cross-h"></div>
+                        <div class="ambulance-cross-v"></div>
+                    </div>
+                    <div class="ambulance-stripe"></div>
+                    <div class="ambulance-light"></div>
+                    <div class="ambulance-wheel ambulance-wheel-front"></div>
+                    <div class="ambulance-wheel ambulance-wheel-back"></div>
+                </div>
+            </div>
+            <span class="item-name">Ambulance</span>
+        </div>
+
+        <!-- TRANSPORT-13: FIRE TRUCK -->
+        <div class="item">
+            <span class="item-label">transport-13</span>
+            <div class="illust-container">
+                <div class="firetruck" id="transport-13">
+                    <div class="firetruck-body"></div>
+                    <div class="firetruck-cabin">
+                        <div class="firetruck-window"></div>
+                    </div>
+                    <div class="firetruck-ladder"></div>
+                    <div class="firetruck-light"></div>
+                    <div class="firetruck-stripe"></div>
+                    <div class="firetruck-wheel firetruck-wheel-1"></div>
+                    <div class="firetruck-wheel firetruck-wheel-2"></div>
+                    <div class="firetruck-wheel firetruck-wheel-3"></div>
+                </div>
+            </div>
+            <span class="item-name">Fire Truck</span>
+        </div>
+
+        <!-- TRANSPORT-14: POLICE CAR -->
+        <div class="item">
+            <span class="item-label">transport-14</span>
+            <div class="illust-container">
+                <div class="policecar" id="transport-14">
+                    <div class="policecar-body"></div>
+                    <div class="policecar-top"></div>
+                    <div class="policecar-window"></div>
+                    <div class="policecar-stripe"></div>
+                    <div class="policecar-light-red"></div>
+                    <div class="policecar-light-blue"></div>
+                    <div class="policecar-wheel policecar-wheel-front"></div>
+                    <div class="policecar-wheel policecar-wheel-back"></div>
+                </div>
+            </div>
+            <span class="item-name">Police Car</span>
+        </div>
+
+        <!-- TRANSPORT-15: SHIP -->
+        <div class="item">
+            <span class="item-label">transport-15</span>
+            <div class="illust-container">
+                <div class="ship" id="transport-15">
+                    <div class="ship-hull"></div>
+                    <div class="ship-deck"></div>
+                    <div class="ship-cabin">
+                        <div class="ship-window ship-window-1"></div>
+                        <div class="ship-window ship-window-2"></div>
+                    </div>
+                    <div class="ship-chimney"></div>
+                    <div class="ship-chimney-top"></div>
+                </div>
+            </div>
+            <span class="item-name">Ship</span>
+        </div>
+
+        <!-- TRANSPORT-16: SUBMARINE -->
+        <div class="item">
+            <span class="item-label">transport-16</span>
+            <div class="illust-container">
+                <div class="submarine" id="transport-16">
+                    <div class="submarine-body"></div>
+                    <div class="submarine-tower"></div>
+                    <div class="submarine-window"></div>
+                    <div class="submarine-window-2"></div>
+                    <div class="submarine-propeller"></div>
+                    <div class="submarine-periscope"></div>
+                </div>
+            </div>
+            <span class="item-name">Submarine</span>
+        </div>
+
+        <!-- TRANSPORT-17: HOT AIR BALLOON -->
+        <div class="item">
+            <span class="item-label">transport-17</span>
+            <div class="illust-container">
+                <div class="balloon" id="transport-17">
+                    <div class="balloon-envelope"></div>
+                    <div class="balloon-stripe-1"></div>
+                    <div class="balloon-stripe-2"></div>
+                    <div class="balloon-rope-1"></div>
+                    <div class="balloon-rope-2"></div>
+                    <div class="balloon-basket"></div>
+                </div>
+            </div>
+            <span class="item-name">Hot Air Balloon</span>
+        </div>
+
+        <!-- TRANSPORT-18: SCOOTER -->
+        <div class="item">
+            <span class="item-label">transport-18</span>
+            <div class="illust-container">
+                <div class="scooter" id="transport-18">
+                    <div class="scooter-wheel scooter-wheel-front"></div>
+                    <div class="scooter-wheel scooter-wheel-back"></div>
+                    <div class="scooter-body"></div>
+                    <div class="scooter-seat"></div>
+                    <div class="scooter-handlebar"></div>
+                    <div class="scooter-handlebar-top"></div>
+                </div>
+            </div>
+            <span class="item-name">Scooter</span>
+        </div>
+
+        <!-- TRANSPORT-19: SKATEBOARD -->
+        <div class="item">
+            <span class="item-label">transport-19</span>
+            <div class="illust-container">
+                <div class="skateboard" id="transport-19">
+                    <div class="skateboard-deck"></div>
+                    <div class="skateboard-stripe"></div>
+                    <div class="skateboard-truck-front"></div>
+                    <div class="skateboard-truck-back"></div>
+                    <div class="skateboard-wheel skateboard-wheel-1"></div>
+                    <div class="skateboard-wheel skateboard-wheel-2"></div>
+                    <div class="skateboard-wheel skateboard-wheel-3"></div>
+                    <div class="skateboard-wheel skateboard-wheel-4"></div>
+                </div>
+            </div>
+            <span class="item-name">Skateboard</span>
+        </div>
+
+        <!-- TRANSPORT-20: UFO -->
+        <div class="item">
+            <span class="item-label">transport-20</span>
+            <div class="illust-container">
+                <div class="ufo" id="transport-20">
+                    <div class="ufo-dome"></div>
+                    <div class="ufo-body"></div>
+                    <div class="ufo-ring"></div>
+                    <div class="ufo-light ufo-light-1"></div>
+                    <div class="ufo-light ufo-light-2"></div>
+                    <div class="ufo-light ufo-light-3"></div>
+                    <div class="ufo-beam"></div>
+                </div>
+            </div>
+            <span class="item-name">UFO</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Minimalist Components</title>
+    <style>
+        /* ===== DESIGN SYSTEM ===== */
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-dark: #B8860B;
+            --gold-light: #F4E4C1;
+            --text-dark: #1a1a1a;
+            --text-light: #6b6b6b;
+            --bg-white: #FAFAFA;
+            --bg-cream: #F5F3F0;
+            --border-color: #E8E6E1;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        p, span, button {
+            font-family: 'Lora', 'Georgia', serif;
+        }
+
+        /* ===== UTILITIES ===== */
+        .separator {
+            width: 40px;
+            height: 2px;
+            background: var(--gold-primary);
+            margin: 24px 0;
+        }
+
+        .text-gold {
+            color: var(--gold-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        /* ============================================
+           [L01] HERO SECTION - Luxury Minimalist
+           ============================================ */
+        .l01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-white) 100%);
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .l01-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .l01-hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .l01-hero h1 {
+            font-size: clamp(48px, 8vw, 72px);
+            margin-bottom: 24px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .l01-hero-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 48px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .l01-hero-cta {
+            display: inline-block;
+            padding: 16px 48px;
+            background: var(--gold-primary);
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--gold-primary);
+            cursor: pointer;
+        }
+
+        .l01-hero-cta:hover {
+            background: transparent;
+            color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .l01-hero {
+                min-height: auto;
+                padding: 60px 24px;
+            }
+
+            .l01-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+
+        /* ============================================
+           [L02] NAVIGATION BAR - Elegant & Minimal
+           ============================================ */
+        .l02-navbar {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(250, 250, 250, 0.95);
+        }
+
+        .l02-navbar-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .l02-logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+
+        .l02-logo span {
+            color: var(--gold-primary);
+        }
+
+        .l02-nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .l02-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .l02-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s ease;
+        }
+
+        .l02-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .l02-navbar {
+                padding: 16px 24px;
+            }
+
+            .l02-nav-links {
+                display: none;
+            }
+        }
+
+
+        /* ============================================
+           [L03] FEATURE CARDS - Minimalist Design
+           ============================================ */
+        .l03-features {
+            padding: 120px 48px;
+            background: var(--bg-white);
+        }
+
+        .l03-section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .l03-section-header h2 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .l03-section-header .separator {
+            margin: 24px auto;
+        }
+
+        .l03-section-header p {
+            font-size: 16px;
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .l03-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .l03-feature-card {
+            padding: 48px 32px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .l03-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .l03-feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .l03-feature-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-8px);
+        }
+
+        .l03-card-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+            color: var(--gold-primary);
+        }
+
+        .l03-feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .l03-feature-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .l03-features {
+                padding: 60px 24px;
+            }
+
+            .l03-cards-grid {
+                gap: 32px;
+            }
+        }
+
+
+        /* ============================================
+           [L04] CTA BUTTON - Luxury Style
+           ============================================ */
+        .l04-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: var(--gold-primary);
+            color: var(--text-dark);
+            border: 2px solid var(--gold-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .l04-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-dark);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .l04-cta-button:hover::before {
+            left: 0;
+        }
+
+        .l04-cta-button:hover {
+            color: var(--gold-primary);
+        }
+
+        .l04-cta-button-secondary {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+        }
+
+        .l04-cta-button-secondary:hover {
+            background: var(--text-dark);
+            color: var(--bg-white);
+        }
+
+        .l04-button-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .l04-cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .l04-button-group {
+                flex-direction: column;
+            }
+        }
+
+
+        /* ============================================
+           [L05] PRICING TABLE - Elegant Layout
+           ============================================ */
+        .l05-pricing {
+            padding: 120px 48px;
+            background: var(--bg-white);
+        }
+
+        .l05-pricing-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .l05-pricing-header h2 {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .l05-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .l05-plan-card {
+            background: var(--bg-cream);
+            border: 1px solid var(--border-color);
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .l05-plan-card.featured {
+            border: 2px solid var(--gold-primary);
+            transform: scale(1.05);
+        }
+
+        .l05-plan-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .l05-plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-primary);
+            color: var(--text-dark);
+            padding: 6px 16px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .l05-plan-name {
+            font-size: 24px;
+            margin: 24px 0 16px 0;
+            font-weight: 700;
+        }
+
+        .l05-plan-price {
+            font-size: 42px;
+            margin: 24px 0;
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        .l05-plan-price span {
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        .l05-plan-features {
+            list-style: none;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .l05-plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .l05-plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .l05-plan-features li::before {
+            content: '✓';
+            color: var(--gold-primary);
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .l05-pricing {
+                padding: 60px 24px;
+            }
+
+            .l05-plan-card.featured {
+                transform: scale(1);
+            }
+        }
+
+
+        /* ============================================
+           [L06] TESTIMONIALS - Refined Layout
+           ============================================ */
+        .l06-testimonials {
+            padding: 120px 48px;
+            background: var(--bg-cream);
+        }
+
+        .l06-section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .l06-section-header h2 {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .l06-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .l06-testimonial-card {
+            background: var(--bg-white);
+            padding: 48px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .l06-testimonial-quote {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        .l06-testimonial-quote::before {
+            content: '"';
+            font-size: 64px;
+            color: var(--gold-primary);
+            position: absolute;
+            top: 0;
+            left: 24px;
+            opacity: 0.3;
+        }
+
+        .l06-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .l06-author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .l06-author-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .l06-author-info p {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .l06-rating {
+            color: var(--gold-primary);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .l06-testimonials {
+                padding: 60px 24px;
+            }
+        }
+
+
+        /* ============================================
+           [L07] FAQ ACCORDION - Interactive Minimal
+           ============================================ */
+        .l07-faq {
+            padding: 120px 48px;
+            background: var(--bg-white);
+        }
+
+        .l07-faq-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .l07-faq-header h2 {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .l07-faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .l07-faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 32px 0;
+        }
+
+        .l07-faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .l07-faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .l07-faq-question:hover {
+            color: var(--gold-primary);
+        }
+
+        .l07-faq-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .l07-faq-toggle::after {
+            content: '+';
+            font-size: 24px;
+            color: var(--gold-primary);
+            font-weight: 300;
+        }
+
+        .l07-faq-item.active .l07-faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .l07-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 0;
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .l07-faq-item.active .l07-faq-answer {
+            max-height: 300px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .l07-faq {
+                padding: 60px 24px;
+            }
+
+            .l07-faq-question {
+                font-size: 16px;
+            }
+        }
+
+
+        /* ============================================
+           [L08] STEP GUIDE - Process Visualization
+           ============================================ */
+        .l08-steps {
+            padding: 120px 48px;
+            background: var(--bg-cream);
+        }
+
+        .l08-steps-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .l08-steps-header h2 {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .l08-steps-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+
+        .l08-step-card {
+            text-align: center;
+            position: relative;
+            padding: 40px 24px;
+        }
+
+        .l08-step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .l08-step-title {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .l08-step-description {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .l08-step-connector {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: -20px;
+            width: 40px;
+            height: 2px;
+            background: var(--gold-primary);
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .l08-step-connector {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .l08-steps {
+                padding: 60px 24px;
+            }
+        }
+
+
+        /* ============================================
+           [L09] NEWSLETTER FORM - Elegant Subscribe
+           ============================================ */
+        .l09-newsletter {
+            padding: 120px 48px;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-white) 100%);
+            text-align: center;
+        }
+
+        .l09-newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .l09-newsletter h2 {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .l09-newsletter-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .l09-newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .l09-form-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .l09-form-input {
+            flex: 1;
+            padding: 16px 24px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            font-family: 'Lora', serif;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .l09-form-input:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .l09-form-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .l09-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 12px;
+        }
+
+        .l09-form-checkbox input {
+            margin-top: 3px;
+            accent-color: var(--gold-primary);
+        }
+
+        @media (max-width: 768px) {
+            .l09-newsletter {
+                padding: 60px 24px;
+            }
+
+            .l09-form-group {
+                flex-direction: column;
+            }
+
+            .l09-newsletter h2 {
+                font-size: 32px;
+            }
+        }
+
+
+        /* ============================================
+           [L10] FOOTER - Minimal & Elegant
+           ============================================ */
+        .l10-footer {
+            background: var(--text-dark);
+            color: var(--bg-white);
+            padding: 80px 48px 40px;
+        }
+
+        .l10-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .l10-footer-section h3 {
+            font-size: 16px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .l10-footer-section ul {
+            list-style: none;
+        }
+
+        .l10-footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .l10-footer-section a {
+            color: rgba(250, 250, 250, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .l10-footer-section a:hover {
+            color: var(--gold-primary);
+        }
+
+        .l10-footer-logo {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .l10-footer-logo span {
+            color: var(--gold-primary);
+        }
+
+        .l10-footer-description {
+            font-size: 14px;
+            color: rgba(250, 250, 250, 0.6);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .l10-footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: rgba(250, 250, 250, 0.5);
+        }
+
+        .l10-footer-socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .l10-footer-socials a {
+            color: rgba(250, 250, 250, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .l10-footer-socials a:hover {
+            color: var(--gold-primary);
+        }
+
+        @media (max-width: 768px) {
+            .l10-footer {
+                padding: 60px 24px 32px;
+            }
+
+            .l10-footer-content {
+                gap: 40px;
+            }
+
+            .l10-footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     [L01] HERO SECTION - Luxury Minimalist
+     ============================================ -->
+<section class="l01-hero">
+    <div class="l01-hero-content">
+        <h1>Elegance Refined</h1>
+        <p class="l01-hero-subtitle">Premium Experience Awaits</p>
+        <button class="l01-hero-cta">Explore Collection</button>
+    </div>
+</section>
+
+<!-- ============================================
+     [L02] NAVIGATION BAR - Elegant & Minimal
+     ============================================ -->
+<nav class="l02-navbar">
+    <div class="l02-navbar-wrapper">
+        <div class="l02-logo">Luxe<span>.</span></div>
+        <ul class="l02-nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ============================================
+     [L03] FEATURE CARDS - Minimalist Design
+     ============================================ -->
+<section class="l03-features" id="features">
+    <div class="container">
+        <div class="l03-section-header">
+            <h2>Why Choose Us</h2>
+            <div class="separator"></div>
+            <p>Experience luxury with meticulous attention to detail. We deliver excellence in every aspect.</p>
+        </div>
+
+        <div class="l03-cards-grid">
+            <div class="l03-feature-card">
+                <div class="l03-card-icon">✨</div>
+                <h3>Premium Quality</h3>
+                <p>Meticulously crafted with the finest materials and uncompromising standards.</p>
+            </div>
+
+            <div class="l03-feature-card">
+                <div class="l03-card-icon">🎯</div>
+                <h3>Precision Design</h3>
+                <p>Every detail carefully considered for a seamless, elegant experience.</p>
+            </div>
+
+            <div class="l03-feature-card">
+                <div class="l03-card-icon">🛡️</div>
+                <h3>Trusted Service</h3>
+                <p>Dedicated support and reliable service backed by our commitment to excellence.</p>
+            </div>
+
+            <div class="l03-feature-card">
+                <div class="l03-card-icon">⚡</div>
+                <h3>Exceptional Speed</h3>
+                <p>Performance optimized for your convenience without compromising quality.</p>
+            </div>
+
+            <div class="l03-feature-card">
+                <div class="l03-card-icon">🌟</div>
+                <h3>Exclusive Access</h3>
+                <p>Premium features and priority support for our valued members.</p>
+            </div>
+
+            <div class="l03-feature-card">
+                <div class="l03-card-icon">💎</div>
+                <h3>Timeless Elegance</h3>
+                <p>Sophisticated design that stands the test of time and trends.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     [L04] CTA BUTTONS - Luxury Style
+     ============================================ -->
+<section style="padding: 60px 48px; background: var(--bg-cream); text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 32px; margin-bottom: 32px;">Ready to Begin?</h2>
+        <div class="l04-button-group" style="justify-content: center;">
+            <button class="l04-cta-button">Get Started Now</button>
+            <button class="l04-cta-button l04-cta-button-secondary">Learn More</button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     [L05] PRICING TABLE - Elegant Layout
+     ============================================ -->
+<section class="l05-pricing" id="pricing">
+    <div class="l05-pricing-header">
+        <h2>Simple, Transparent Pricing</h2>
+        <p style="font-size: 16px; color: var(--text-light); margin-top: 16px;">Choose the plan that perfectly fits your needs</p>
+    </div>
+
+    <div class="l05-pricing-grid">
+        <div class="l05-plan-card">
+            <h3 class="l05-plan-name">Essential</h3>
+            <div class="l05-plan-price">$29<span>/month</span></div>
+            <ul class="l05-plan-features">
+                <li>Core Features</li>
+                <li>Up to 1,000 Users</li>
+                <li>Basic Analytics</li>
+                <li>Email Support</li>
+                <li>API Access</li>
+            </ul>
+            <button class="l04-cta-button">Choose Plan</button>
+        </div>
+
+        <div class="l05-plan-card featured">
+            <div class="l05-plan-badge">Most Popular</div>
+            <h3 class="l05-plan-name">Premium</h3>
+            <div class="l05-plan-price">$79<span>/month</span></div>
+            <ul class="l05-plan-features">
+                <li>All Essential Features</li>
+                <li>Up to 10,000 Users</li>
+                <li>Advanced Analytics</li>
+                <li>Priority Support</li>
+                <li>Custom Integrations</li>
+            </ul>
+            <button class="l04-cta-button">Choose Plan</button>
+        </div>
+
+        <div class="l05-plan-card">
+            <h3 class="l05-plan-name">Enterprise</h3>
+            <div class="l05-plan-price">Custom<span>/month</span></div>
+            <ul class="l05-plan-features">
+                <li>Unlimited Features</li>
+                <li>Unlimited Users</li>
+                <li>Custom Analytics</li>
+                <li>24/7 Phone Support</li>
+                <li>Dedicated Account Manager</li>
+            </ul>
+            <button class="l04-cta-button l04-cta-button-secondary">Contact Sales</button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     [L06] TESTIMONIALS - Refined Layout
+     ============================================ -->
+<section class="l06-testimonials" id="testimonials">
+    <div class="container">
+        <div class="l06-section-header">
+            <h2>Loved by Customers</h2>
+            <div class="separator" style="margin-left: auto; margin-right: auto;"></div>
+        </div>
+
+        <div class="l06-testimonials-grid">
+            <div class="l06-testimonial-card">
+                <div class="l06-rating">★★★★★</div>
+                <p class="l06-testimonial-quote">An exceptional experience from start to finish. The attention to detail is unmatched. Highly recommended for anyone seeking true luxury.</p>
+                <div class="l06-testimonial-author">
+                    <div class="l06-author-avatar">SJ</div>
+                    <div class="l06-author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Design Director</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l06-testimonial-card">
+                <div class="l06-rating">★★★★★</div>
+                <p class="l06-testimonial-quote">Sophisticated, elegant, and remarkably intuitive. This is how premium service should feel. A true game-changer in the industry.</p>
+                <div class="l06-testimonial-author">
+                    <div class="l06-author-avatar">MC</div>
+                    <div class="l06-author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Creative Executive</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l06-testimonial-card">
+                <div class="l06-rating">★★★★★</div>
+                <p class="l06-testimonial-quote">Impeccable quality and service. Every interaction reflects their commitment to excellence. Worth every penny and then some.</p>
+                <div class="l06-testimonial-author">
+                    <div class="l06-author-avatar">EL</div>
+                    <div class="l06-author-info">
+                        <h4>Emma Laurent</h4>
+                        <p>Brand Strategist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     [L07] FAQ ACCORDION - Interactive Minimal
+     ============================================ -->
+<section class="l07-faq" id="faq">
+    <div class="container">
+        <div class="l07-faq-header">
+            <h2>Frequently Asked Questions</h2>
+            <div class="separator" style="margin-left: auto; margin-right: auto;"></div>
+        </div>
+
+        <ul class="l07-faq-list">
+            <li class="l07-faq-item">
+                <div class="l07-faq-question">
+                    <span>What makes your service different?</span>
+                    <div class="l07-faq-toggle"></div>
+                </div>
+                <p class="l07-faq-answer">Our commitment to quality, attention to detail, and customer-centric approach sets us apart. We believe in delivering excellence in every aspect of our service.</p>
+            </li>
+
+            <li class="l07-faq-item">
+                <div class="l07-faq-question">
+                    <span>How long does implementation take?</span>
+                    <div class="l07-faq-toggle"></div>
+                </div>
+                <p class="l07-faq-answer">Implementation timelines vary based on your specific needs and complexity. Our team typically completes standard implementations within 2-4 weeks.</p>
+            </li>
+
+            <li class="l07-faq-item">
+                <div class="l07-faq-question">
+                    <span>What support options are available?</span>
+                    <div class="l07-faq-toggle"></div>
+                </div>
+                <p class="l07-faq-answer">We offer email, phone, and dedicated account management support depending on your plan. Our Premium and Enterprise customers receive priority support.</p>
+            </li>
+
+            <li class="l07-faq-item">
+                <div class="l07-faq-question">
+                    <span>Can I upgrade or downgrade my plan?</span>
+                    <div class="l07-faq-toggle"></div>
+                </div>
+                <p class="l07-faq-answer">Yes, absolutely. You can upgrade, downgrade, or cancel your plan at any time with no penalties. Changes take effect on your next billing cycle.</p>
+            </li>
+
+            <li class="l07-faq-item">
+                <div class="l07-faq-question">
+                    <span>Is there a free trial available?</span>
+                    <div class="l07-faq-toggle"></div>
+                </div>
+                <p class="l07-faq-answer">We offer a 14-day free trial for all new customers. No credit card required. Experience our full suite of features risk-free.</p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================
+     [L08] STEP GUIDE - Process Visualization
+     ============================================ -->
+<section class="l08-steps" id="steps">
+    <div class="l08-steps-header">
+        <h2>How It Works</h2>
+        <p style="font-size: 16px; color: var(--text-light); margin-top: 16px;">Simple, elegant process designed for your success</p>
+    </div>
+
+    <div class="l08-steps-grid">
+        <div class="l08-step-card">
+            <div class="l08-step-number">1</div>
+            <h3 class="l08-step-title">Discover</h3>
+            <p class="l08-step-description">Explore our curated collection of premium offerings tailored to your unique needs.</p>
+            <div class="l08-step-connector"></div>
+        </div>
+
+        <div class="l08-step-card">
+            <div class="l08-step-number">2</div>
+            <h3 class="l08-step-title">Connect</h3>
+            <p class="l08-step-description">Our experts guide you through personalized recommendations matched to your goals.</p>
+            <div class="l08-step-connector"></div>
+        </div>
+
+        <div class="l08-step-card">
+            <div class="l08-step-number">3</div>
+            <h3 class="l08-step-title">Implement</h3>
+            <p class="l08-step-description">Seamless onboarding and integration with dedicated support throughout the process.</p>
+            <div class="l08-step-connector"></div>
+        </div>
+
+        <div class="l08-step-card">
+            <div class="l08-step-number">4</div>
+            <h3 class="l08-step-title">Thrive</h3>
+            <p class="l08-step-description">Enjoy continuous optimization and support to maximize your investment and success.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     [L09] NEWSLETTER FORM - Elegant Subscribe
+     ============================================ -->
+<section class="l09-newsletter">
+    <div class="l09-newsletter-content">
+        <h2>Stay Informed</h2>
+        <p class="l09-newsletter-subtitle">Receive curated insights, exclusive offers, and industry wisdom directly to your inbox.</p>
+
+        <form class="l09-newsletter-form">
+            <div class="l09-form-group">
+                <input type="email" class="l09-form-input" placeholder="Enter your email address" required>
+                <button type="submit" class="l04-cta-button">Subscribe</button>
+            </div>
+            <div class="l09-form-checkbox">
+                <input type="checkbox" id="newsletter-consent" required>
+                <label for="newsletter-consent">I agree to receive communications and understand I can unsubscribe anytime.</label>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ============================================
+     [L10] FOOTER - Minimal & Elegant
+     ============================================ -->
+<footer class="l10-footer">
+    <div class="l10-footer-content">
+        <div>
+            <div class="l10-footer-logo">Luxe<span>.</span></div>
+            <p class="l10-footer-description">Delivering timeless elegance and exceptional service to discerning customers worldwide.</p>
+        </div>
+
+        <div class="l10-footer-section">
+            <h3>Product</h3>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+        </div>
+
+        <div class="l10-footer-section">
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="l10-footer-section">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms of Service</a></li>
+                <li><a href="#cookies">Cookie Policy</a></li>
+                <li><a href="#gdpr">GDPR</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="l10-footer-bottom">
+        <p>&copy; 2026 Luxe Collective. All rights reserved. | Designed with elegance</p>
+        <div class="l10-footer-socials">
+            <a href="#twitter" title="Twitter">𝕏</a>
+            <a href="#linkedin" title="LinkedIn">in</a>
+            <a href="#instagram" title="Instagram">📷</a>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript for Interactivity -->
+<script>
+    // FAQ Accordion
+    document.querySelectorAll('.l07-faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.closest('.l07-faq-item');
+            const isActive = item.classList.contains('active');
+
+            // Close all other items
+            document.querySelectorAll('.l07-faq-item.active').forEach(activeItem => {
+                if (activeItem !== item) {
+                    activeItem.classList.remove('active');
+                }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
+
+    // Newsletter Form
+    document.querySelector('.l09-newsletter-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = e.target.querySelector('input[type="email"]').value;
+        alert(`Thank you for subscribing with: ${email}`);
+        e.target.reset();
+    });
+
+    // Navigation Links Smooth Scroll
+    document.querySelectorAll('.l02-nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports & Fitness LP Components [J01-J10]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #FF6B35;
+            --primary-red: #E63946;
+            --accent-yellow: #FFD166;
+            --dark-bg: #1A1A1A;
+            --darker-bg: #0D0D0D;
+            --card-bg: #242424;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #707070;
+            --gradient-fire: linear-gradient(135deg, #FF6B35 0%, #E63946 50%, #C9184A 100%);
+            --gradient-energy: linear-gradient(135deg, #FFD166 0%, #FF6B35 100%);
+            --shadow-glow: 0 0 40px rgba(255, 107, 53, 0.4);
+            --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== [J08] NAVBAR ===== */
+
+        .j08-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 0 40px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .j08-nav.scrolled {
+            background: rgba(13, 13, 13, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .j08-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .j08-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .j08-logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-fire);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transform: rotate(-5deg);
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .j08-logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .j08-logo-text span {
+            color: var(--primary-orange);
+        }
+
+        .j08-nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .j08-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .j08-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-fire);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .j08-nav-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .j08-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .j08-nav-cta {
+            padding: 12px 28px;
+            background: var(--gradient-fire);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .j08-nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .j08-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .j08-mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-orange);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== [J01] HERO SECTION ===== */
+
+        .j01-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--darker-bg);
+            padding: 120px 40px 80px;
+        }
+
+        .j01-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .j01-hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 50px, var(--primary-orange) 50px, var(--primary-orange) 51px),
+                repeating-linear-gradient(-45deg, transparent, transparent 50px, var(--primary-orange) 50px, var(--primary-orange) 51px);
+            pointer-events: none;
+        }
+
+        .j01-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .j01-hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .j01-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-orange);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .j01-hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .j01-hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            line-height: 0.95;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .j01-hero-title span {
+            display: block;
+            background: var(--gradient-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .j01-hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .j01-hero-stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .j01-stat {
+            text-align: left;
+        }
+
+        .j01-stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-orange);
+            line-height: 1;
+        }
+
+        .j01-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .j01-hero-visual {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .j01-hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .j01-hero-image {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--dark-bg) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .j01-hero-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary-orange), transparent 30%);
+            animation: rotate 4s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .j01-floating-card {
+            position: absolute;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-strong);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .j01-floating-card.card-1 {
+            top: 10%;
+            right: -20%;
+            animation-delay: 0s;
+        }
+
+        .j01-floating-card.card-2 {
+            bottom: 20%;
+            left: -15%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .j01-floating-card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .j01-floating-card-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+        }
+
+        .j01-floating-card-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* ===== [J02] FEATURE CARDS ===== */
+
+        .j02-features {
+            padding: 120px 40px;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        .j02-features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--primary-orange), transparent);
+        }
+
+        .j02-section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .j02-section-tag {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary-orange);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .j02-section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .j02-section-title span {
+            color: var(--primary-orange);
+        }
+
+        .j02-section-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .j02-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .j02-feature-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
+        }
+
+        .j02-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-fire);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .j02-feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .j02-feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .j02-feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-fire);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .j02-feature-card:hover .j02-feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .j02-feature-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .j02-feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .j02-feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: gap 0.3s ease;
+        }
+
+        .j02-feature-link:hover {
+            gap: 12px;
+        }
+
+        /* ===== [J03] PRICING TABLE ===== */
+
+        .j03-pricing {
+            padding: 120px 40px;
+            background: var(--darker-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .j03-pricing::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .j03-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .j03-pricing-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 50px 40px;
+            position: relative;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .j03-pricing-card.popular {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 107, 53, 0.1) 100%);
+            border-color: var(--primary-orange);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .j03-pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .j03-pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .j03-popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-fire);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .j03-pricing-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .j03-pricing-card.popular .j03-pricing-icon {
+            background: var(--gradient-fire);
+        }
+
+        .j03-pricing-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .j03-pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .j03-pricing-amount {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 30px;
+        }
+
+        .j03-currency {
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .j03-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4.5rem;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .j03-period {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .j03-pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .j03-pricing-features li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .j03-pricing-features li::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-fire);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .j03-pricing-features li.disabled {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .j03-pricing-features li.disabled::before {
+            background: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .j03-pricing-btn {
+            width: 100%;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-orange);
+            background: transparent;
+            color: var(--primary-orange);
+        }
+
+        .j03-pricing-btn:hover {
+            background: var(--primary-orange);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .j03-pricing-card.popular .j03-pricing-btn {
+            background: var(--gradient-fire);
+            border: none;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .j03-pricing-card.popular .j03-pricing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        /* ===== [J04] CTA BUTTON ===== */
+
+        .j04-cta-section {
+            padding: 80px 40px;
+            background: var(--dark-bg);
+        }
+
+        .j04-cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .j04-btn-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .j04-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: var(--gradient-fire);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .j04-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .j04-btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.5);
+        }
+
+        .j04-btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .j04-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: transparent;
+            border: 2px solid var(--primary-orange);
+            border-radius: 50px;
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .j04-btn-secondary:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .j04-btn-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-fire);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .j04-btn-icon:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        .j04-btn-pulse {
+            animation: btnPulse 2s infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 60px rgba(255, 107, 53, 0.7);
+            }
+        }
+
+        /* ===== [J05] TESTIMONIALS ===== */
+
+        .j05-testimonials {
+            padding: 120px 40px;
+            background: var(--darker-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .j05-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .j05-testimonial-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+        }
+
+        .j05-testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .j05-quote-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 4rem;
+            color: var(--primary-orange);
+            opacity: 0.15;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .j05-rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .j05-rating span {
+            color: var(--accent-yellow);
+            font-size: 1.2rem;
+        }
+
+        .j05-testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .j05-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .j05-author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-fire);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .j05-author-info h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .j05-author-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .j05-achievement {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary-orange);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* ===== [J06] FAQ ===== */
+
+        .j06-faq {
+            padding: 120px 40px;
+            background: var(--dark-bg);
+        }
+
+        .j06-faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .j06-faq-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .j06-faq-item:hover {
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+
+        .j06-faq-item.active {
+            border-color: var(--primary-orange);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.15);
+        }
+
+        .j06-faq-question {
+            width: 100%;
+            padding: 24px 30px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .j06-faq-question:hover {
+            color: var(--primary-orange);
+        }
+
+        .j06-faq-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-orange);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .j06-faq-item.active .j06-faq-toggle {
+            background: var(--gradient-fire);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .j06-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+        }
+
+        .j06-faq-item.active .j06-faq-answer {
+            max-height: 300px;
+            padding: 0 30px 24px;
+        }
+
+        .j06-faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* ===== [J07] FOOTER ===== */
+
+        .j07-footer {
+            background: var(--darker-bg);
+            padding: 80px 40px 30px;
+            border-top: 1px solid rgba(255, 107, 53, 0.1);
+        }
+
+        .j07-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .j07-footer-top {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .j07-footer-brand {
+            max-width: 300px;
+        }
+
+        .j07-footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .j07-footer-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-fire);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .j07-footer-logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .j07-footer-logo-text span {
+            color: var(--primary-orange);
+        }
+
+        .j07-footer-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .j07-social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .j07-social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .j07-social-link:hover {
+            background: var(--gradient-fire);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .j07-footer-section h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .j07-footer-links {
+            list-style: none;
+        }
+
+        .j07-footer-links li {
+            margin-bottom: 14px;
+        }
+
+        .j07-footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .j07-footer-links a:hover {
+            color: var(--primary-orange);
+            transform: translateX(5px);
+        }
+
+        .j07-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .j07-copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .j07-legal-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .j07-legal-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .j07-legal-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* ===== [J09] STEP GUIDE ===== */
+
+        .j09-steps {
+            padding: 120px 40px;
+            background: var(--darker-bg);
+            position: relative;
+        }
+
+        .j09-steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .j09-step {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            position: relative;
+            align-items: start;
+        }
+
+        .j09-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 60px;
+            top: 120px;
+            width: 4px;
+            height: calc(100% - 40px);
+            background: linear-gradient(to bottom, var(--primary-orange), transparent);
+            border-radius: 2px;
+        }
+
+        .j09-step-number-wrapper {
+            position: relative;
+        }
+
+        .j09-step-number {
+            width: 120px;
+            height: 120px;
+            background: var(--card-bg);
+            border: 4px solid var(--primary-orange);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-orange);
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .j09-step:hover .j09-step-number {
+            background: var(--gradient-fire);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .j09-step-pulse {
+            position: absolute;
+            inset: -10px;
+            border: 2px solid var(--primary-orange);
+            border-radius: 35px;
+            animation: stepPulse 2s infinite;
+            opacity: 0;
+        }
+
+        @keyframes stepPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.3); }
+        }
+
+        .j09-step-content {
+            padding-top: 20px;
+        }
+
+        .j09-step-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .j09-step-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .j09-step-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .j09-step-feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary-orange);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* ===== [J10] REGISTRATION FORM ===== */
+
+        .j10-form-section {
+            padding: 120px 40px;
+            background: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .j10-form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .j10-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .j10-form-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 50px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .j10-form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .j10-form-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-fire);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 24px;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .j10-form-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .j10-form-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .j10-form-group {
+            margin-bottom: 24px;
+        }
+
+        .j10-form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .j10-form-input {
+            width: 100%;
+            padding: 18px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .j10-form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .j10-form-input:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .j10-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .j10-form-select {
+            width: 100%;
+            padding: 18px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 20px;
+        }
+
+        .j10-form-select:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+        }
+
+        .j10-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .j10-checkbox-input {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--primary-orange);
+            border-radius: 6px;
+            appearance: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .j10-checkbox-input:checked {
+            background: var(--gradient-fire);
+            border-color: var(--primary-orange);
+        }
+
+        .j10-checkbox-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .j10-checkbox-label a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+
+        .j10-form-submit {
+            width: 100%;
+            padding: 20px 40px;
+            background: var(--gradient-fire);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .j10-form-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.5);
+        }
+
+        .j10-form-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .j10-form-footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .j10-form-footer a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 1024px) {
+            .j01-hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .j01-hero-visual {
+                order: -1;
+            }
+
+            .j01-hero-image {
+                height: 400px;
+                max-width: 400px;
+            }
+
+            .j07-footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .j08-nav {
+                padding: 0 20px;
+            }
+
+            .j08-nav-links {
+                display: none;
+            }
+
+            .j08-mobile-toggle {
+                display: flex;
+            }
+
+            .j01-hero {
+                padding: 100px 20px 60px;
+            }
+
+            .j01-hero-title {
+                font-size: 3rem;
+            }
+
+            .j01-hero-stats {
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+
+            .j01-floating-card {
+                display: none;
+            }
+
+            .j02-features,
+            .j03-pricing,
+            .j05-testimonials,
+            .j06-faq,
+            .j09-steps,
+            .j10-form-section {
+                padding: 80px 20px;
+            }
+
+            .j02-section-title,
+            .j03-pricing .j02-section-title {
+                font-size: 2.5rem;
+            }
+
+            .j03-pricing-card.popular {
+                transform: none;
+            }
+
+            .j04-btn-showcase {
+                flex-direction: column;
+            }
+
+            .j04-btn-primary,
+            .j04-btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .j05-testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .j07-footer-top {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .j07-footer-brand {
+                max-width: 100%;
+            }
+
+            .j07-footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .j09-step {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .j09-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .j09-step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+                border-radius: 20px;
+            }
+
+            .j10-form-card {
+                padding: 30px 20px;
+            }
+
+            .j10-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .j01-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .j01-hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .j02-feature-card,
+            .j03-pricing-card,
+            .j05-testimonial-card {
+                padding: 30px 20px;
+            }
+
+            .j03-price {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== [J08] NAVBAR ===== -->
+    <nav class="j08-nav">
+        <div class="j08-nav-inner">
+            <a href="#" class="j08-logo">
+                <div class="j08-logo-icon">&#9889;</div>
+                <span class="j08-logo-text">FIT<span>ZONE</span></span>
+            </a>
+            <ul class="j08-nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <button class="j08-nav-cta">Start Free</button>
+            <div class="j08-mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== [J01] HERO SECTION ===== -->
+    <section class="j01-hero">
+        <div class="j01-hero-bg-pattern"></div>
+        <div class="j01-hero-content">
+            <div class="j01-hero-text">
+                <div class="j01-hero-badge">New Season Training</div>
+                <h1 class="j01-hero-title">
+                    TRANSFORM<br>
+                    <span>YOUR BODY</span><br>
+                    TRANSFORM YOUR LIFE
+                </h1>
+                <p class="j01-hero-subtitle">
+                    Join thousands of athletes achieving their peak performance.
+                    Personalized workouts, expert coaching, and a community that pushes you beyond limits.
+                </p>
+                <div class="j04-btn-showcase" style="justify-content: flex-start;">
+                    <button class="j04-btn-primary j04-btn-pulse">
+                        Start Free Trial
+                        <span>&#10140;</span>
+                    </button>
+                    <button class="j04-btn-secondary">
+                        <span>&#9654;</span>
+                        Watch Demo
+                    </button>
+                </div>
+                <div class="j01-hero-stats">
+                    <div class="j01-stat">
+                        <div class="j01-stat-number">50K+</div>
+                        <div class="j01-stat-label">Active Members</div>
+                    </div>
+                    <div class="j01-stat">
+                        <div class="j01-stat-number">1000+</div>
+                        <div class="j01-stat-label">Workout Plans</div>
+                    </div>
+                    <div class="j01-stat">
+                        <div class="j01-stat-number">98%</div>
+                        <div class="j01-stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="j01-hero-visual">
+                <div class="j01-hero-image-wrapper">
+                    <div class="j01-hero-image">&#127947;</div>
+                    <div class="j01-floating-card card-1">
+                        <div class="j01-floating-card-icon">&#128293;</div>
+                        <div class="j01-floating-card-value">2,450</div>
+                        <div class="j01-floating-card-label">Calories Burned</div>
+                    </div>
+                    <div class="j01-floating-card card-2">
+                        <div class="j01-floating-card-icon">&#128170;</div>
+                        <div class="j01-floating-card-value">Level 12</div>
+                        <div class="j01-floating-card-label">Strength Progress</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J02] FEATURE CARDS ===== -->
+    <section id="features" class="j02-features">
+        <div class="j02-section-header">
+            <span class="j02-section-tag">Why Choose Us</span>
+            <h2 class="j02-section-title">EVERYTHING YOU NEED TO <span>SUCCEED</span></h2>
+            <p class="j02-section-desc">Our platform combines cutting-edge technology with proven training methods to deliver results that last.</p>
+        </div>
+        <div class="j02-features-grid">
+            <div class="j02-feature-card">
+                <div class="j02-feature-icon">&#127919;</div>
+                <h3 class="j02-feature-title">PERSONALIZED PLANS</h3>
+                <p class="j02-feature-desc">AI-powered workout plans that adapt to your goals, fitness level, and schedule. No cookie-cutter approaches here.</p>
+                <a href="#" class="j02-feature-link">Learn More <span>&#10140;</span></a>
+            </div>
+            <div class="j02-feature-card">
+                <div class="j02-feature-icon">&#128187;</div>
+                <h3 class="j02-feature-title">LIVE COACHING</h3>
+                <p class="j02-feature-desc">Connect with certified trainers for real-time guidance, form corrections, and motivation when you need it most.</p>
+                <a href="#" class="j02-feature-link">Learn More <span>&#10140;</span></a>
+            </div>
+            <div class="j02-feature-card">
+                <div class="j02-feature-icon">&#128200;</div>
+                <h3 class="j02-feature-title">PROGRESS TRACKING</h3>
+                <p class="j02-feature-desc">Advanced analytics track every rep, set, and calorie. Visualize your journey with detailed progress reports.</p>
+                <a href="#" class="j02-feature-link">Learn More <span>&#10140;</span></a>
+            </div>
+            <div class="j02-feature-card">
+                <div class="j02-feature-icon">&#127860;</div>
+                <h3 class="j02-feature-title">NUTRITION GUIDANCE</h3>
+                <p class="j02-feature-desc">Custom meal plans and macro tracking to fuel your workouts. Eat smarter, train harder, recover faster.</p>
+                <a href="#" class="j02-feature-link">Learn More <span>&#10140;</span></a>
+            </div>
+            <div class="j02-feature-card">
+                <div class="j02-feature-icon">&#128101;</div>
+                <h3 class="j02-feature-title">COMMUNITY SUPPORT</h3>
+                <p class="j02-feature-desc">Join challenges, share achievements, and connect with like-minded athletes pushing towards greatness.</p>
+                <a href="#" class="j02-feature-link">Learn More <span>&#10140;</span></a>
+            </div>
+            <div class="j02-feature-card">
+                <div class="j02-feature-icon">&#128241;</div>
+                <h3 class="j02-feature-title">MOBILE FIRST</h3>
+                <p class="j02-feature-desc">Train anywhere with our fully-featured mobile app. Offline workouts, video guides, and seamless syncing.</p>
+                <a href="#" class="j02-feature-link">Learn More <span>&#10140;</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J03] PRICING TABLE ===== -->
+    <section id="pricing" class="j03-pricing">
+        <div class="j02-section-header">
+            <span class="j02-section-tag">Pricing</span>
+            <h2 class="j02-section-title">CHOOSE YOUR <span>PLAN</span></h2>
+            <p class="j02-section-desc">Flexible plans designed for every fitness journey. Start free and upgrade anytime.</p>
+        </div>
+        <div class="j03-pricing-grid">
+            <div class="j03-pricing-card">
+                <div class="j03-pricing-icon">&#127939;</div>
+                <h3 class="j03-pricing-name">STARTER</h3>
+                <p class="j03-pricing-desc">Perfect for beginners</p>
+                <div class="j03-pricing-amount">
+                    <span class="j03-currency">$</span>
+                    <span class="j03-price">0</span>
+                    <span class="j03-period">/month</span>
+                </div>
+                <ul class="j03-pricing-features">
+                    <li>Basic workout library</li>
+                    <li>Progress tracking</li>
+                    <li>Community access</li>
+                    <li class="disabled">Personal coaching</li>
+                    <li class="disabled">Nutrition plans</li>
+                </ul>
+                <button class="j03-pricing-btn">Get Started Free</button>
+            </div>
+            <div class="j03-pricing-card popular">
+                <span class="j03-popular-badge">Most Popular</span>
+                <div class="j03-pricing-icon">&#128170;</div>
+                <h3 class="j03-pricing-name">PRO ATHLETE</h3>
+                <p class="j03-pricing-desc">For serious fitness enthusiasts</p>
+                <div class="j03-pricing-amount">
+                    <span class="j03-currency">$</span>
+                    <span class="j03-price">29</span>
+                    <span class="j03-period">/month</span>
+                </div>
+                <ul class="j03-pricing-features">
+                    <li>Full workout library</li>
+                    <li>Advanced analytics</li>
+                    <li>Live group classes</li>
+                    <li>Custom meal plans</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="j03-pricing-btn">Start 7-Day Trial</button>
+            </div>
+            <div class="j03-pricing-card">
+                <div class="j03-pricing-icon">&#127942;</div>
+                <h3 class="j03-pricing-name">ELITE</h3>
+                <p class="j03-pricing-desc">Maximum results, zero limits</p>
+                <div class="j03-pricing-amount">
+                    <span class="j03-currency">$</span>
+                    <span class="j03-price">79</span>
+                    <span class="j03-period">/month</span>
+                </div>
+                <ul class="j03-pricing-features">
+                    <li>Everything in Pro</li>
+                    <li>1-on-1 coaching sessions</li>
+                    <li>Personalized programs</li>
+                    <li>VIP community access</li>
+                    <li>Monthly consultations</li>
+                </ul>
+                <button class="j03-pricing-btn">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J04] CTA BUTTON SHOWCASE ===== -->
+    <section class="j04-cta-section">
+        <div class="j04-cta-container">
+            <div class="j02-section-header">
+                <span class="j02-section-tag">Take Action</span>
+                <h2 class="j02-section-title">READY TO <span>BEGIN?</span></h2>
+            </div>
+            <div class="j04-btn-showcase">
+                <button class="j04-btn-primary j04-btn-pulse">
+                    Start Your Journey
+                    <span>&#128293;</span>
+                </button>
+                <button class="j04-btn-secondary">
+                    <span>&#128214;</span>
+                    View Programs
+                </button>
+                <button class="j04-btn-icon">&#9654;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J05] TESTIMONIALS ===== -->
+    <section id="testimonials" class="j05-testimonials">
+        <div class="j02-section-header">
+            <span class="j02-section-tag">Success Stories</span>
+            <h2 class="j02-section-title">REAL RESULTS FROM <span>REAL PEOPLE</span></h2>
+            <p class="j02-section-desc">Join thousands who have transformed their lives with our platform.</p>
+        </div>
+        <div class="j05-testimonials-grid">
+            <div class="j05-testimonial-card">
+                <span class="j05-quote-icon">"</span>
+                <div class="j05-rating">
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                </div>
+                <p class="j05-testimonial-text">
+                    "Lost 30 pounds in 4 months. The personalized plans and coaching made all the difference.
+                    I've never felt stronger or more confident in my life."
+                </p>
+                <div class="j05-testimonial-author">
+                    <div class="j05-author-avatar">MK</div>
+                    <div class="j05-author-info">
+                        <h4>MIKE JOHNSON</h4>
+                        <p>Lost 30 lbs in 4 months</p>
+                        <span class="j05-achievement">&#127942; Top Performer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="j05-testimonial-card">
+                <span class="j05-quote-icon">"</span>
+                <div class="j05-rating">
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                </div>
+                <p class="j05-testimonial-text">
+                    "As a busy mom, I needed something flexible. The mobile app is incredible -
+                    I can squeeze in workouts anytime. Best investment I've made for myself."
+                </p>
+                <div class="j05-testimonial-author">
+                    <div class="j05-author-avatar">SR</div>
+                    <div class="j05-author-info">
+                        <h4>SARAH RODRIGUEZ</h4>
+                        <p>Fitness Journey 8 months</p>
+                        <span class="j05-achievement">&#128293; Streak Champion</span>
+                    </div>
+                </div>
+            </div>
+            <div class="j05-testimonial-card">
+                <span class="j05-quote-icon">"</span>
+                <div class="j05-rating">
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                </div>
+                <p class="j05-testimonial-text">
+                    "The community here is unmatched. Found workout partners, got motivated daily,
+                    and even competed in my first fitness competition. Life-changing experience."
+                </p>
+                <div class="j05-testimonial-author">
+                    <div class="j05-author-avatar">DL</div>
+                    <div class="j05-author-info">
+                        <h4>DAVID LEE</h4>
+                        <p>Competed in 3 events</p>
+                        <span class="j05-achievement">&#128170; Competition Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J09] STEP GUIDE ===== -->
+    <section class="j09-steps">
+        <div class="j02-section-header">
+            <span class="j02-section-tag">How It Works</span>
+            <h2 class="j02-section-title">YOUR PATH TO <span>SUCCESS</span></h2>
+            <p class="j02-section-desc">Getting started is easy. Follow these simple steps to begin your transformation.</p>
+        </div>
+        <div class="j09-steps-container">
+            <div class="j09-step">
+                <div class="j09-step-number-wrapper">
+                    <div class="j09-step-number">01</div>
+                    <div class="j09-step-pulse"></div>
+                </div>
+                <div class="j09-step-content">
+                    <h3 class="j09-step-title">CREATE YOUR ACCOUNT</h3>
+                    <p class="j09-step-desc">Sign up in under 60 seconds. No credit card required for the free trial. Set up your profile and fitness goals to get personalized recommendations.</p>
+                    <div class="j09-step-features">
+                        <span class="j09-step-feature">&#9989; Free to start</span>
+                        <span class="j09-step-feature">&#128274; Secure signup</span>
+                    </div>
+                </div>
+            </div>
+            <div class="j09-step">
+                <div class="j09-step-number-wrapper">
+                    <div class="j09-step-number">02</div>
+                    <div class="j09-step-pulse"></div>
+                </div>
+                <div class="j09-step-content">
+                    <h3 class="j09-step-title">COMPLETE YOUR ASSESSMENT</h3>
+                    <p class="j09-step-desc">Take our comprehensive fitness assessment. We'll analyze your current level, identify strengths, and create a roadmap for improvement.</p>
+                    <div class="j09-step-features">
+                        <span class="j09-step-feature">&#128202; AI-powered analysis</span>
+                        <span class="j09-step-feature">&#127919; Goal setting</span>
+                    </div>
+                </div>
+            </div>
+            <div class="j09-step">
+                <div class="j09-step-number-wrapper">
+                    <div class="j09-step-number">03</div>
+                    <div class="j09-step-pulse"></div>
+                </div>
+                <div class="j09-step-content">
+                    <h3 class="j09-step-title">GET YOUR CUSTOM PLAN</h3>
+                    <p class="j09-step-desc">Receive your personalized workout and nutrition plan. Every exercise, every meal, optimized for your goals and schedule.</p>
+                    <div class="j09-step-features">
+                        <span class="j09-step-feature">&#127860; Meal plans included</span>
+                        <span class="j09-step-feature">&#128247; Video guides</span>
+                    </div>
+                </div>
+            </div>
+            <div class="j09-step">
+                <div class="j09-step-number-wrapper">
+                    <div class="j09-step-number">04</div>
+                    <div class="j09-step-pulse"></div>
+                </div>
+                <div class="j09-step-content">
+                    <h3 class="j09-step-title">START TRAINING & TRACK PROGRESS</h3>
+                    <p class="j09-step-desc">Begin your journey with guided workouts. Track every session, celebrate milestones, and watch your transformation unfold.</p>
+                    <div class="j09-step-features">
+                        <span class="j09-step-feature">&#128200; Real-time tracking</span>
+                        <span class="j09-step-feature">&#127942; Achievement badges</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J06] FAQ ===== -->
+    <section id="faq" class="j06-faq">
+        <div class="j02-section-header">
+            <span class="j02-section-tag">FAQ</span>
+            <h2 class="j02-section-title">FREQUENTLY ASKED <span>QUESTIONS</span></h2>
+            <p class="j02-section-desc">Got questions? We've got answers. Can't find what you're looking for? Contact our support team.</p>
+        </div>
+        <div class="j06-faq-container">
+            <div class="j06-faq-item active">
+                <button class="j06-faq-question">
+                    Is there a free trial available?
+                    <span class="j06-faq-toggle">&#9660;</span>
+                </button>
+                <div class="j06-faq-answer">
+                    <p>Yes! We offer a completely free Starter plan that never expires. You can also try our Pro Athlete plan with a 7-day free trial - no credit card required. Experience all premium features before committing.</p>
+                </div>
+            </div>
+            <div class="j06-faq-item">
+                <button class="j06-faq-question">
+                    What equipment do I need?
+                    <span class="j06-faq-toggle">&#9660;</span>
+                </button>
+                <div class="j06-faq-answer">
+                    <p>Our platform offers workouts for every situation - from no-equipment bodyweight sessions to fully-equipped gym routines. During setup, tell us what equipment you have access to, and we'll customize your plans accordingly.</p>
+                </div>
+            </div>
+            <div class="j06-faq-item">
+                <button class="j06-faq-question">
+                    Can I cancel my subscription anytime?
+                    <span class="j06-faq-toggle">&#9660;</span>
+                </button>
+                <div class="j06-faq-answer">
+                    <p>Absolutely. There are no long-term contracts or cancellation fees. You can cancel your subscription at any time from your account settings. You'll continue to have access until the end of your billing period.</p>
+                </div>
+            </div>
+            <div class="j06-faq-item">
+                <button class="j06-faq-question">
+                    How personalized are the workout plans?
+                    <span class="j06-faq-toggle">&#9660;</span>
+                </button>
+                <div class="j06-faq-answer">
+                    <p>Extremely personalized. Our AI considers your fitness level, goals, available time, equipment, injuries, and preferences. Plans automatically adjust based on your progress and feedback. No two members receive the same program.</p>
+                </div>
+            </div>
+            <div class="j06-faq-item">
+                <button class="j06-faq-question">
+                    Is the app available offline?
+                    <span class="j06-faq-toggle">&#9660;</span>
+                </button>
+                <div class="j06-faq-answer">
+                    <p>Yes! Download workouts and video guides for offline access. Perfect for gym sessions without WiFi or outdoor training. Your progress syncs automatically when you're back online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J10] REGISTRATION FORM ===== -->
+    <section class="j10-form-section">
+        <div class="j02-section-header">
+            <span class="j02-section-tag">Join Now</span>
+            <h2 class="j02-section-title">START YOUR <span>TRANSFORMATION</span></h2>
+            <p class="j02-section-desc">Create your free account and begin your fitness journey today.</p>
+        </div>
+        <div class="j10-form-container">
+            <div class="j10-form-card">
+                <div class="j10-form-header">
+                    <div class="j10-form-icon">&#127947;</div>
+                    <h3 class="j10-form-title">CREATE ACCOUNT</h3>
+                    <p class="j10-form-subtitle">Free forever. No credit card needed.</p>
+                </div>
+                <form>
+                    <div class="j10-form-row">
+                        <div class="j10-form-group">
+                            <label class="j10-form-label">First Name</label>
+                            <input type="text" class="j10-form-input" placeholder="John">
+                        </div>
+                        <div class="j10-form-group">
+                            <label class="j10-form-label">Last Name</label>
+                            <input type="text" class="j10-form-input" placeholder="Doe">
+                        </div>
+                    </div>
+                    <div class="j10-form-group">
+                        <label class="j10-form-label">Email Address</label>
+                        <input type="email" class="j10-form-input" placeholder="john@example.com">
+                    </div>
+                    <div class="j10-form-group">
+                        <label class="j10-form-label">Password</label>
+                        <input type="password" class="j10-form-input" placeholder="Create a strong password">
+                    </div>
+                    <div class="j10-form-group">
+                        <label class="j10-form-label">Primary Goal</label>
+                        <select class="j10-form-select">
+                            <option value="">Select your main goal</option>
+                            <option value="lose-weight">Lose Weight</option>
+                            <option value="build-muscle">Build Muscle</option>
+                            <option value="improve-endurance">Improve Endurance</option>
+                            <option value="stay-active">Stay Active & Healthy</option>
+                            <option value="competition">Train for Competition</option>
+                        </select>
+                    </div>
+                    <div class="j10-form-checkbox">
+                        <input type="checkbox" class="j10-checkbox-input" id="terms">
+                        <label class="j10-checkbox-label" for="terms">
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                            I understand I can cancel anytime.
+                        </label>
+                    </div>
+                    <button type="submit" class="j10-form-submit">
+                        Create Free Account
+                        <span>&#10140;</span>
+                    </button>
+                </form>
+                <div class="j10-form-footer">
+                    <p>Already have an account? <a href="#">Sign in here</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== [J07] FOOTER ===== -->
+    <footer class="j07-footer">
+        <div class="j07-footer-content">
+            <div class="j07-footer-top">
+                <div class="j07-footer-brand">
+                    <div class="j07-footer-logo">
+                        <div class="j07-footer-logo-icon">&#9889;</div>
+                        <span class="j07-footer-logo-text">FIT<span>ZONE</span></span>
+                    </div>
+                    <p class="j07-footer-desc">
+                        Transforming lives through fitness since 2020. Join our community of 50,000+ athletes achieving their peak performance.
+                    </p>
+                    <div class="j07-social-links">
+                        <a href="#" class="j07-social-link">&#127760;</a>
+                        <a href="#" class="j07-social-link">&#128247;</a>
+                        <a href="#" class="j07-social-link">&#127909;</a>
+                        <a href="#" class="j07-social-link">&#128172;</a>
+                    </div>
+                </div>
+                <div class="j07-footer-section">
+                    <h4>PRODUCT</h4>
+                    <ul class="j07-footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="j07-footer-section">
+                    <h4>COMPANY</h4>
+                    <ul class="j07-footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                <div class="j07-footer-section">
+                    <h4>SUPPORT</h4>
+                    <ul class="j07-footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="j07-footer-bottom">
+                <p class="j07-copyright">&copy; 2026 FitZone. All rights reserved.</p>
+                <div class="j07-legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.j06-faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.j06-faq-item').forEach(i => i.classList.remove('active'));
+
+                // Open clicked if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.j08-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.j08-nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.j10-form-card form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Account created successfully! Welcome to FitZone!');
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for fade-in effect
+        document.querySelectorAll('.j02-feature-card, .j03-pricing-card, .j05-testimonial-card, .j09-step').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

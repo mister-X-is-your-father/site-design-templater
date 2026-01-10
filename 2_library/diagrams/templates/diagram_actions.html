@@ -1,0 +1,742 @@
+<!-- Action & Activity Diagram Templates -->
+<!-- 30 unique patterns for actions, movements, and activities -->
+<!-- Style: Simple, pop, colorful, flat design, CSS-only with hover effects -->
+
+<style>
+/* Action Diagram Base Styles */
+.action-diagram {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.action-diagram:hover {
+    transform: scale(1.05);
+}
+
+/* Color Palette */
+.action-pink { background-color: #FF6B9D; }
+.action-sky { background-color: #4ECDC4; }
+.action-mint { background-color: #7ED9A6; }
+.action-yellow { background-color: #FFE66D; }
+.action-orange { background-color: #FF9F43; }
+.action-purple { background-color: #A66CFF; }
+
+/* Person Base */
+.person {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.person-head {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #333;
+    border-radius: 50%;
+}
+
+.person-body {
+    position: absolute;
+    width: 6px;
+    background: #333;
+    border-radius: 3px;
+}
+
+.person-arm {
+    position: absolute;
+    width: 6px;
+    background: #333;
+    border-radius: 3px;
+    transform-origin: top center;
+}
+
+.person-leg {
+    position: absolute;
+    width: 6px;
+    background: #333;
+    border-radius: 3px;
+    transform-origin: top center;
+}
+
+/* Animation keyframes */
+@keyframes run-legs {
+    0%, 100% { transform: rotate(-30deg); }
+    50% { transform: rotate(30deg); }
+}
+
+@keyframes run-arms {
+    0%, 100% { transform: rotate(30deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes walk-motion {
+    0%, 100% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+}
+
+@keyframes jump-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes swim-stroke {
+    0%, 100% { transform: rotate(-45deg); }
+    50% { transform: rotate(45deg); }
+}
+
+@keyframes wave-hand {
+    0%, 100% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+}
+
+@keyframes clap-hands {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+@keyframes dance-move {
+    0%, 100% { transform: rotate(-10deg) translateY(0); }
+    25% { transform: rotate(10deg) translateY(-5px); }
+    50% { transform: rotate(-10deg) translateY(0); }
+    75% { transform: rotate(10deg) translateY(-5px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes float-up {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-20px); opacity: 0; }
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+
+<!-- Pattern 1: Running Person -->
+<div id="action-1" class="action-diagram action-orange">
+    <div class="person">
+        <!-- Head -->
+        <div class="person-head" style="left: 50%; top: 35%; transform: translateX(-50%);"></div>
+        <!-- Body -->
+        <div class="person-body" style="left: 50%; top: 50%; height: 35px; transform: translateX(-50%) rotate(15deg);"></div>
+        <!-- Arms -->
+        <div class="person-arm" style="left: 45%; top: 52%; height: 25px; animation: run-arms 0.4s infinite;"></div>
+        <div class="person-arm" style="left: 55%; top: 52%; height: 25px; animation: run-arms 0.4s infinite reverse;"></div>
+        <!-- Legs -->
+        <div class="person-leg" style="left: 47%; top: 70%; height: 30px; animation: run-legs 0.4s infinite;"></div>
+        <div class="person-leg" style="left: 53%; top: 70%; height: 30px; animation: run-legs 0.4s infinite reverse;"></div>
+        <!-- Motion lines -->
+        <div style="position: absolute; left: 25%; top: 50%; width: 20px; height: 3px; background: rgba(255,255,255,0.7); border-radius: 2px;"></div>
+        <div style="position: absolute; left: 20%; top: 55%; width: 15px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 2px;"></div>
+        <div style="position: absolute; left: 22%; top: 60%; width: 18px; height: 3px; background: rgba(255,255,255,0.6); border-radius: 2px;"></div>
+    </div>
+</div>
+
+<!-- Pattern 2: Walking Person -->
+<div id="action-2" class="action-diagram action-mint">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 30%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 45%; height: 40px; transform: translateX(-50%);"></div>
+        <div class="person-arm" style="left: 43%; top: 47%; height: 28px; animation: walk-motion 0.8s infinite;"></div>
+        <div class="person-arm" style="left: 54%; top: 47%; height: 28px; animation: walk-motion 0.8s infinite reverse;"></div>
+        <div class="person-leg" style="left: 46%; top: 68%; height: 35px; animation: walk-motion 0.8s infinite;"></div>
+        <div class="person-leg" style="left: 52%; top: 68%; height: 35px; animation: walk-motion 0.8s infinite reverse;"></div>
+        <!-- Ground -->
+        <div style="position: absolute; bottom: 15%; left: 20%; width: 60%; height: 4px; background: rgba(0,0,0,0.2); border-radius: 2px;"></div>
+    </div>
+</div>
+
+<!-- Pattern 3: Jumping Person -->
+<div id="action-3" class="action-diagram action-yellow">
+    <div class="person" style="animation: jump-bounce 0.6s infinite;">
+        <div class="person-head" style="left: 50%; top: 25%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 40%; height: 35px; transform: translateX(-50%);"></div>
+        <!-- Arms up -->
+        <div class="person-arm" style="left: 40%; top: 38%; height: 30px; transform: rotate(-45deg);"></div>
+        <div class="person-arm" style="left: 57%; top: 38%; height: 30px; transform: rotate(45deg);"></div>
+        <!-- Legs spread -->
+        <div class="person-leg" style="left: 42%; top: 60%; height: 30px; transform: rotate(-25deg);"></div>
+        <div class="person-leg" style="left: 55%; top: 60%; height: 30px; transform: rotate(25deg);"></div>
+        <!-- Joy stars -->
+        <div style="position: absolute; left: 25%; top: 20%; font-size: 16px;">*</div>
+        <div style="position: absolute; right: 25%; top: 25%; font-size: 12px;">*</div>
+        <div style="position: absolute; left: 30%; top: 35%; font-size: 10px;">*</div>
+    </div>
+</div>
+
+<!-- Pattern 4: Swimming Person -->
+<div id="action-4" class="action-diagram action-sky">
+    <div class="person" style="transform: rotate(-15deg);">
+        <div class="person-head" style="left: 65%; top: 40%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 45%; height: 50px; transform: translateX(-50%) rotate(90deg);"></div>
+        <div class="person-arm" style="left: 55%; top: 35%; height: 30px; animation: swim-stroke 0.8s infinite; transform-origin: bottom;"></div>
+        <div class="person-arm" style="left: 40%; top: 50%; height: 30px; animation: swim-stroke 0.8s infinite reverse; transform-origin: bottom;"></div>
+        <div class="person-leg" style="left: 25%; top: 55%; height: 25px; transform: rotate(15deg);"></div>
+        <div class="person-leg" style="left: 30%; top: 60%; height: 25px; transform: rotate(-15deg);"></div>
+        <!-- Water waves -->
+        <div style="position: absolute; bottom: 20%; left: 10%; width: 80%; height: 30px; border-top: 4px dotted rgba(255,255,255,0.6);"></div>
+    </div>
+</div>
+
+<!-- Pattern 5: Reading Person -->
+<div id="action-5" class="action-diagram action-purple">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 30%; transform: translateX(-50%) rotate(-10deg);"></div>
+        <div class="person-body" style="left: 50%; top: 45%; height: 45px; transform: translateX(-50%);"></div>
+        <!-- Arms holding book -->
+        <div class="person-arm" style="left: 40%; top: 50%; height: 25px; transform: rotate(-60deg);"></div>
+        <div class="person-arm" style="left: 56%; top: 50%; height: 25px; transform: rotate(60deg);"></div>
+        <!-- Legs sitting -->
+        <div class="person-leg" style="left: 42%; top: 73%; height: 25px; transform: rotate(90deg);"></div>
+        <div class="person-leg" style="left: 55%; top: 73%; height: 25px; transform: rotate(90deg);"></div>
+        <!-- Book -->
+        <div style="position: absolute; left: 38%; top: 52%; width: 24px; height: 30px; background: #fff; border-radius: 2px; border: 2px solid #333;"></div>
+        <!-- Book pages -->
+        <div style="position: absolute; left: 49%; top: 55%; width: 1px; height: 24px; background: #333;"></div>
+    </div>
+</div>
+
+<!-- Pattern 6: Writing/Drawing Person -->
+<div id="action-6" class="action-diagram action-pink">
+    <div class="person">
+        <div class="person-head" style="left: 45%; top: 28%; transform: translateX(-50%) rotate(-15deg);"></div>
+        <div class="person-body" style="left: 48%; top: 42%; height: 40px; transform: translateX(-50%) rotate(-5deg);"></div>
+        <!-- Writing arm -->
+        <div class="person-arm" style="left: 50%; top: 48%; height: 30px; transform: rotate(45deg);"></div>
+        <!-- Other arm -->
+        <div class="person-arm" style="left: 38%; top: 50%; height: 20px; transform: rotate(-30deg);"></div>
+        <!-- Legs -->
+        <div class="person-leg" style="left: 42%; top: 68%; height: 30px; transform: rotate(-10deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 68%; height: 30px; transform: rotate(10deg);"></div>
+        <!-- Desk -->
+        <div style="position: absolute; left: 45%; top: 60%; width: 50px; height: 6px; background: #333; border-radius: 2px;"></div>
+        <!-- Paper -->
+        <div style="position: absolute; left: 50%; top: 52%; width: 30px; height: 25px; background: #fff; border-radius: 2px;"></div>
+        <!-- Pencil -->
+        <div style="position: absolute; left: 65%; top: 50%; width: 4px; height: 20px; background: #FFE66D; transform: rotate(45deg); border-radius: 1px;"></div>
+    </div>
+</div>
+
+<!-- Pattern 7: Thinking Person -->
+<div id="action-7" class="action-diagram action-sky">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 35%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 50%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Hand on chin -->
+        <div class="person-arm" style="left: 52%; top: 52%; height: 22px; transform: rotate(-80deg);"></div>
+        <div class="person-arm" style="left: 42%; top: 55%; height: 25px; transform: rotate(20deg);"></div>
+        <div class="person-leg" style="left: 46%; top: 73%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 73%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Thought bubbles -->
+        <div style="position: absolute; right: 25%; top: 15%; width: 35px; height: 25px; background: #fff; border-radius: 50%; animation: pulse-glow 2s infinite;"></div>
+        <div style="position: absolute; right: 32%; top: 28%; width: 12px; height: 12px; background: #fff; border-radius: 50%;"></div>
+        <div style="position: absolute; right: 36%; top: 36%; width: 8px; height: 8px; background: #fff; border-radius: 50%;"></div>
+    </div>
+</div>
+
+<!-- Pattern 8: Sleeping Person -->
+<div id="action-8" class="action-diagram action-purple">
+    <div class="person" style="transform: rotate(90deg);">
+        <div class="person-head" style="left: 70%; top: 45%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 45%; top: 47%; height: 45px; transform: translateX(-50%) rotate(90deg);"></div>
+        <div class="person-arm" style="left: 58%; top: 40%; height: 20px; transform: rotate(-30deg);"></div>
+        <div class="person-arm" style="left: 55%; top: 52%; height: 20px; transform: rotate(30deg);"></div>
+        <div class="person-leg" style="left: 22%; top: 42%; height: 25px; transform: rotate(-10deg);"></div>
+        <div class="person-leg" style="left: 22%; top: 52%; height: 25px; transform: rotate(10deg);"></div>
+    </div>
+    <!-- ZZZ -->
+    <div style="position: absolute; right: 20%; top: 15%; font-size: 24px; font-weight: bold; color: #fff; animation: float-up 2s infinite;">Z</div>
+    <div style="position: absolute; right: 28%; top: 22%; font-size: 18px; font-weight: bold; color: #fff; animation: float-up 2s infinite 0.3s;">Z</div>
+    <div style="position: absolute; right: 35%; top: 28%; font-size: 14px; font-weight: bold; color: #fff; animation: float-up 2s infinite 0.6s;">Z</div>
+    <!-- Pillow -->
+    <div style="position: absolute; right: 15%; top: 55%; width: 40px; height: 25px; background: #fff; border-radius: 8px; transform: rotate(-10deg);"></div>
+</div>
+
+<!-- Pattern 9: Eating Person -->
+<div id="action-9" class="action-diagram action-orange">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 28%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 43%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Arm with utensil -->
+        <div class="person-arm" style="left: 55%; top: 45%; height: 25px; transform: rotate(-70deg);"></div>
+        <div class="person-arm" style="left: 40%; top: 50%; height: 20px; transform: rotate(30deg);"></div>
+        <div class="person-leg" style="left: 45%; top: 68%; height: 30px; transform: rotate(80deg);"></div>
+        <div class="person-leg" style="left: 55%; top: 68%; height: 30px; transform: rotate(80deg);"></div>
+        <!-- Table -->
+        <div style="position: absolute; left: 25%; top: 62%; width: 50%; height: 6px; background: #333; border-radius: 2px;"></div>
+        <!-- Plate -->
+        <div style="position: absolute; left: 35%; top: 52%; width: 30px; height: 10px; background: #fff; border-radius: 50%; border: 2px solid #333;"></div>
+        <!-- Fork -->
+        <div style="position: absolute; left: 58%; top: 35%; width: 3px; height: 18px; background: #ccc; transform: rotate(-20deg);"></div>
+    </div>
+</div>
+
+<!-- Pattern 10: Drinking Person -->
+<div id="action-10" class="action-diagram action-mint">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 30%; transform: translateX(-50%) rotate(-15deg);"></div>
+        <div class="person-body" style="left: 50%; top: 45%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Arm holding cup -->
+        <div class="person-arm" style="left: 52%; top: 45%; height: 25px; transform: rotate(-80deg);"></div>
+        <div class="person-arm" style="left: 42%; top: 52%; height: 22px; transform: rotate(15deg);"></div>
+        <div class="person-leg" style="left: 46%; top: 70%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 70%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Cup -->
+        <div style="position: absolute; left: 52%; top: 30%; width: 18px; height: 25px; background: #fff; border-radius: 0 0 4px 4px; border: 3px solid #333; border-top: none;"></div>
+        <!-- Liquid -->
+        <div style="position: absolute; left: 55%; top: 38%; width: 12px; height: 12px; background: #FF9F43; border-radius: 0 0 2px 2px;"></div>
+    </div>
+</div>
+
+<!-- Pattern 11: Talking Person -->
+<div id="action-11" class="action-diagram action-yellow">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 32%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 47%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Gesturing arms -->
+        <div class="person-arm" style="left: 40%; top: 50%; height: 25px; transform: rotate(-40deg); animation: wave-hand 0.5s infinite;"></div>
+        <div class="person-arm" style="left: 56%; top: 50%; height: 25px; transform: rotate(40deg); animation: wave-hand 0.5s infinite reverse;"></div>
+        <div class="person-leg" style="left: 46%; top: 70%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 70%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Speech bubble -->
+        <div style="position: absolute; right: 18%; top: 18%; width: 45px; height: 30px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 10px; color: #333;">...</span>
+        </div>
+        <div style="position: absolute; right: 35%; top: 42%; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid #fff;"></div>
+    </div>
+</div>
+
+<!-- Pattern 12: Listening Person -->
+<div id="action-12" class="action-diagram action-pink">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 32%; transform: translateX(-50%) rotate(10deg);"></div>
+        <div class="person-body" style="left: 50%; top: 47%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Hand to ear -->
+        <div class="person-arm" style="left: 55%; top: 42%; height: 20px; transform: rotate(-100deg);"></div>
+        <div class="person-arm" style="left: 42%; top: 52%; height: 22px; transform: rotate(15deg);"></div>
+        <div class="person-leg" style="left: 46%; top: 70%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 70%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Sound waves -->
+        <div style="position: absolute; left: 18%; top: 30%; width: 20px; height: 20px; border: 3px solid #fff; border-radius: 50%; border-right-color: transparent; border-bottom-color: transparent; animation: pulse-glow 1s infinite;"></div>
+        <div style="position: absolute; left: 12%; top: 25%; width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.6); border-radius: 50%; border-right-color: transparent; border-bottom-color: transparent; animation: pulse-glow 1s infinite 0.3s;"></div>
+    </div>
+</div>
+
+<!-- Pattern 13: Looking/Watching Person -->
+<div id="action-13" class="action-diagram action-sky">
+    <div class="person">
+        <div class="person-head" style="left: 45%; top: 32%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 48%; top: 47%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Hand shading eyes -->
+        <div class="person-arm" style="left: 42%; top: 38%; height: 22px; transform: rotate(-70deg);"></div>
+        <div class="person-arm" style="left: 42%; top: 52%; height: 22px; transform: rotate(15deg);"></div>
+        <div class="person-leg" style="left: 44%; top: 70%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 50%; top: 70%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Vision lines -->
+        <div style="position: absolute; left: 55%; top: 32%; width: 40px; height: 2px; background: rgba(255,255,255,0.8); transform: rotate(-10deg);"></div>
+        <div style="position: absolute; left: 55%; top: 38%; width: 45px; height: 2px; background: rgba(255,255,255,0.6);"></div>
+        <div style="position: absolute; left: 55%; top: 44%; width: 40px; height: 2px; background: rgba(255,255,255,0.8); transform: rotate(10deg);"></div>
+        <!-- Eye icon -->
+        <div style="position: absolute; right: 15%; top: 35%; width: 20px; height: 12px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 8px; height: 8px; background: #333; border-radius: 50%;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Pattern 14: Pointing Person -->
+<div id="action-14" class="action-diagram action-purple">
+    <div class="person">
+        <div class="person-head" style="left: 45%; top: 32%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 48%; top: 47%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Pointing arm -->
+        <div class="person-arm" style="left: 52%; top: 48%; height: 35px; transform: rotate(75deg);"></div>
+        <!-- Other arm -->
+        <div class="person-arm" style="left: 38%; top: 52%; height: 22px; transform: rotate(-20deg);"></div>
+        <div class="person-leg" style="left: 44%; top: 70%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 50%; top: 70%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Pointing finger -->
+        <div style="position: absolute; left: 72%; top: 42%; width: 15px; height: 6px; background: #333; border-radius: 3px;"></div>
+        <!-- Arrow indicator -->
+        <div style="position: absolute; right: 12%; top: 40%; width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 12px solid #fff;"></div>
+    </div>
+</div>
+
+<!-- Pattern 15: Waving Person -->
+<div id="action-15" class="action-diagram action-orange">
+    <div class="person">
+        <div class="person-head" style="left: 50%; top: 32%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 47%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Waving arm -->
+        <div class="person-arm" style="left: 56%; top: 45%; height: 30px; transform: rotate(-60deg); animation: wave-hand 0.4s infinite; transform-origin: bottom;"></div>
+        <!-- Other arm -->
+        <div class="person-arm" style="left: 40%; top: 52%; height: 22px; transform: rotate(15deg);"></div>
+        <div class="person-leg" style="left: 46%; top: 70%; height: 28px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 70%; height: 28px; transform: rotate(5deg);"></div>
+        <!-- Wave lines -->
+        <div style="position: absolute; right: 22%; top: 22%; font-size: 12px; color: #fff; animation: pulse-glow 0.5s infinite;">~</div>
+        <div style="position: absolute; right: 18%; top: 28%; font-size: 14px; color: #fff; animation: pulse-glow 0.5s infinite 0.1s;">~</div>
+        <div style="position: absolute; right: 14%; top: 34%; font-size: 12px; color: #fff; animation: pulse-glow 0.5s infinite 0.2s;">~</div>
+    </div>
+</div>
+
+<!-- Pattern 16: Clapping Hands -->
+<div id="action-16" class="action-diagram action-mint">
+    <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <!-- Left hand -->
+        <div style="position: absolute; left: 30%; top: 40%; animation: clap-hands 0.3s infinite;">
+            <div style="width: 25px; height: 35px; background: #333; border-radius: 8px 8px 5px 5px;"></div>
+            <div style="position: absolute; top: -8px; left: 3px; width: 6px; height: 15px; background: #333; border-radius: 3px; transform: rotate(-10deg);"></div>
+            <div style="position: absolute; top: -12px; left: 8px; width: 6px; height: 18px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -10px; left: 13px; width: 6px; height: 16px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -6px; left: 18px; width: 5px; height: 12px; background: #333; border-radius: 3px; transform: rotate(10deg);"></div>
+        </div>
+        <!-- Right hand -->
+        <div style="position: absolute; right: 30%; top: 40%; animation: clap-hands 0.3s infinite reverse;">
+            <div style="width: 25px; height: 35px; background: #333; border-radius: 8px 8px 5px 5px;"></div>
+            <div style="position: absolute; top: -8px; right: 3px; width: 6px; height: 15px; background: #333; border-radius: 3px; transform: rotate(10deg);"></div>
+            <div style="position: absolute; top: -12px; right: 8px; width: 6px; height: 18px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -10px; right: 13px; width: 6px; height: 16px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -6px; right: 18px; width: 5px; height: 12px; background: #333; border-radius: 3px; transform: rotate(-10deg);"></div>
+        </div>
+        <!-- Impact stars -->
+        <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); font-size: 20px; color: #fff; animation: pulse-glow 0.3s infinite;">*</div>
+        <div style="position: absolute; top: 25%; left: 45%; font-size: 12px; color: #fff; animation: pulse-glow 0.3s infinite 0.1s;">*</div>
+        <div style="position: absolute; top: 25%; right: 45%; font-size: 12px; color: #fff; animation: pulse-glow 0.3s infinite 0.15s;">*</div>
+    </div>
+</div>
+
+<!-- Pattern 17: Thumbs Up Gesture -->
+<div id="action-17" class="action-diagram action-yellow">
+    <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <!-- Hand base -->
+        <div style="position: absolute; width: 40px; height: 50px; background: #333; border-radius: 10px; top: 45%; left: 50%; transform: translateX(-50%);">
+            <!-- Fingers curled -->
+            <div style="position: absolute; bottom: 5px; left: 5px; width: 30px; height: 8px; background: #444; border-radius: 4px;"></div>
+            <div style="position: absolute; bottom: 15px; left: 5px; width: 30px; height: 8px; background: #444; border-radius: 4px;"></div>
+            <div style="position: absolute; bottom: 25px; left: 5px; width: 30px; height: 8px; background: #444; border-radius: 4px;"></div>
+        </div>
+        <!-- Thumb up -->
+        <div style="position: absolute; width: 15px; height: 40px; background: #333; border-radius: 8px; top: 25%; left: 52%; transform: translateX(-50%);"></div>
+        <!-- Sparkles -->
+        <div style="position: absolute; top: 20%; left: 35%; font-size: 16px; color: #fff;">*</div>
+        <div style="position: absolute; top: 15%; right: 35%; font-size: 12px; color: #fff;">*</div>
+        <div style="position: absolute; top: 30%; left: 30%; font-size: 10px; color: #fff;">*</div>
+        <div style="position: absolute; top: 25%; right: 30%; font-size: 14px; color: #fff;">*</div>
+    </div>
+</div>
+
+<!-- Pattern 18: Peace Sign -->
+<div id="action-18" class="action-diagram action-pink">
+    <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <!-- Hand base -->
+        <div style="position: absolute; width: 35px; height: 45px; background: #333; border-radius: 10px; top: 50%; left: 50%; transform: translateX(-50%);">
+            <!-- Curled fingers -->
+            <div style="position: absolute; bottom: 5px; left: 3px; width: 12px; height: 20px; background: #444; border-radius: 6px; transform: rotate(-20deg);"></div>
+            <div style="position: absolute; bottom: 5px; right: 3px; width: 10px; height: 15px; background: #444; border-radius: 5px; transform: rotate(20deg);"></div>
+        </div>
+        <!-- V fingers -->
+        <div style="position: absolute; width: 10px; height: 45px; background: #333; border-radius: 5px; top: 22%; left: 43%; transform: rotate(-15deg);"></div>
+        <div style="position: absolute; width: 10px; height: 45px; background: #333; border-radius: 5px; top: 22%; right: 43%; transform: rotate(15deg);"></div>
+        <!-- Peace vibes -->
+        <div style="position: absolute; top: 15%; left: 25%; width: 15px; height: 15px; border: 3px solid #fff; border-radius: 50%;"></div>
+        <div style="position: absolute; top: 15%; right: 25%; width: 15px; height: 15px; border: 3px solid #fff; border-radius: 50%;"></div>
+    </div>
+</div>
+
+<!-- Pattern 19: Handshake -->
+<div id="action-19" class="action-diagram action-sky">
+    <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <!-- Left arm -->
+        <div style="position: absolute; left: 10%; top: 45%; width: 50px; height: 12px; background: #333; border-radius: 6px;"></div>
+        <!-- Right arm -->
+        <div style="position: absolute; right: 10%; top: 45%; width: 50px; height: 12px; background: #555; border-radius: 6px;"></div>
+        <!-- Clasped hands -->
+        <div style="position: absolute; left: 50%; top: 40%; transform: translateX(-50%); width: 40px; height: 35px; background: #333; border-radius: 10px;">
+            <div style="position: absolute; top: 5px; left: 5px; width: 30px; height: 6px; background: #555; border-radius: 3px;"></div>
+            <div style="position: absolute; top: 13px; left: 5px; width: 30px; height: 6px; background: #444; border-radius: 3px;"></div>
+            <div style="position: absolute; top: 21px; left: 5px; width: 30px; height: 6px; background: #555; border-radius: 3px;"></div>
+        </div>
+        <!-- Trust sparkles -->
+        <div style="position: absolute; top: 25%; left: 50%; transform: translateX(-50%); font-size: 18px; color: #fff; animation: pulse-glow 1s infinite;">*</div>
+        <div style="position: absolute; top: 30%; left: 35%; font-size: 12px; color: #fff;">*</div>
+        <div style="position: absolute; top: 30%; right: 35%; font-size: 12px; color: #fff;">*</div>
+    </div>
+</div>
+
+<!-- Pattern 20: High Five -->
+<div id="action-20" class="action-diagram action-purple">
+    <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <!-- Left hand open -->
+        <div style="position: absolute; left: 25%; top: 35%; transform: rotate(15deg);">
+            <div style="width: 30px; height: 35px; background: #333; border-radius: 8px;"></div>
+            <div style="position: absolute; top: -15px; left: 2px; width: 6px; height: 18px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -18px; left: 8px; width: 6px; height: 22px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -16px; left: 14px; width: 6px; height: 20px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -12px; left: 20px; width: 6px; height: 16px; background: #333; border-radius: 3px;"></div>
+            <div style="position: absolute; top: 5px; left: -8px; width: 12px; height: 6px; background: #333; border-radius: 3px; transform: rotate(-30deg);"></div>
+        </div>
+        <!-- Right hand open -->
+        <div style="position: absolute; right: 25%; top: 35%; transform: rotate(-15deg);">
+            <div style="width: 30px; height: 35px; background: #555; border-radius: 8px;"></div>
+            <div style="position: absolute; top: -15px; right: 2px; width: 6px; height: 18px; background: #555; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -18px; right: 8px; width: 6px; height: 22px; background: #555; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -16px; right: 14px; width: 6px; height: 20px; background: #555; border-radius: 3px;"></div>
+            <div style="position: absolute; top: -12px; right: 20px; width: 6px; height: 16px; background: #555; border-radius: 3px;"></div>
+            <div style="position: absolute; top: 5px; right: -8px; width: 12px; height: 6px; background: #555; border-radius: 3px; transform: rotate(30deg);"></div>
+        </div>
+        <!-- Impact -->
+        <div style="position: absolute; top: 25%; left: 50%; transform: translateX(-50%); font-size: 24px; font-weight: bold; color: #fff; animation: pulse-glow 0.3s infinite;">!</div>
+        <!-- Rays -->
+        <div style="position: absolute; top: 20%; left: 40%; width: 15px; height: 3px; background: #fff; transform: rotate(-30deg);"></div>
+        <div style="position: absolute; top: 20%; right: 40%; width: 15px; height: 3px; background: #fff; transform: rotate(30deg);"></div>
+        <div style="position: absolute; top: 15%; left: 50%; width: 3px; height: 15px; background: #fff; transform: translateX(-50%);"></div>
+    </div>
+</div>
+
+<!-- Pattern 21: Hug -->
+<div id="action-21" class="action-diagram action-pink">
+    <div style="position: relative; width: 100%; height: 100%;">
+        <!-- Person 1 -->
+        <div style="position: absolute; left: 35%;">
+            <div class="person-head" style="top: 30%; left: 0; transform: none;"></div>
+            <div class="person-body" style="top: 45%; left: 12px; height: 40px; transform: none;"></div>
+        </div>
+        <!-- Person 2 -->
+        <div style="position: absolute; right: 35%;">
+            <div class="person-head" style="top: 30%; right: 0; left: auto; transform: none; background: #555;"></div>
+            <div class="person-body" style="top: 45%; right: 12px; left: auto; height: 40px; transform: none; background: #555;"></div>
+        </div>
+        <!-- Hugging arms -->
+        <div style="position: absolute; left: 38%; top: 48%; width: 35px; height: 6px; background: #333; border-radius: 3px; transform: rotate(-10deg);"></div>
+        <div style="position: absolute; right: 38%; top: 48%; width: 35px; height: 6px; background: #555; border-radius: 3px; transform: rotate(10deg);"></div>
+        <div style="position: absolute; left: 38%; top: 55%; width: 35px; height: 6px; background: #333; border-radius: 3px; transform: rotate(10deg);"></div>
+        <div style="position: absolute; right: 38%; top: 55%; width: 35px; height: 6px; background: #555; border-radius: 3px; transform: rotate(-10deg);"></div>
+        <!-- Hearts -->
+        <div style="position: absolute; top: 18%; left: 50%; transform: translateX(-50%); font-size: 20px; animation: pulse-glow 1s infinite;">&#9829;</div>
+        <div style="position: absolute; top: 25%; left: 35%; font-size: 12px; animation: pulse-glow 1s infinite 0.2s;">&#9829;</div>
+        <div style="position: absolute; top: 25%; right: 35%; font-size: 12px; animation: pulse-glow 1s infinite 0.4s;">&#9829;</div>
+    </div>
+</div>
+
+<!-- Pattern 22: Dancing -->
+<div id="action-22" class="action-diagram action-yellow">
+    <div class="person" style="animation: dance-move 0.5s infinite;">
+        <div class="person-head" style="left: 50%; top: 28%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 43%; height: 35px; transform: translateX(-50%);"></div>
+        <!-- Dancing arms -->
+        <div class="person-arm" style="left: 40%; top: 45%; height: 28px; transform: rotate(-60deg);"></div>
+        <div class="person-arm" style="left: 56%; top: 45%; height: 28px; transform: rotate(60deg);"></div>
+        <!-- Dancing legs -->
+        <div class="person-leg" style="left: 42%; top: 65%; height: 32px; transform: rotate(-30deg);"></div>
+        <div class="person-leg" style="left: 55%; top: 65%; height: 32px; transform: rotate(20deg);"></div>
+    </div>
+    <!-- Music notes -->
+    <div style="position: absolute; top: 15%; left: 20%; font-size: 18px; color: #333; animation: float-up 2s infinite;">&#9835;</div>
+    <div style="position: absolute; top: 20%; right: 20%; font-size: 14px; color: #333; animation: float-up 2s infinite 0.5s;">&#9834;</div>
+    <div style="position: absolute; top: 25%; left: 25%; font-size: 12px; color: #333; animation: float-up 2s infinite 1s;">&#9833;</div>
+    <!-- Dance floor -->
+    <div style="position: absolute; bottom: 10%; left: 15%; width: 70%; height: 8px; background: rgba(0,0,0,0.2); border-radius: 4px;"></div>
+</div>
+
+<!-- Pattern 23: Singing -->
+<div id="action-23" class="action-diagram action-orange">
+    <div class="person">
+        <div class="person-head" style="left: 45%; top: 30%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 48%; top: 45%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Arm holding mic -->
+        <div class="person-arm" style="left: 50%; top: 48%; height: 25px; transform: rotate(-70deg);"></div>
+        <div class="person-arm" style="left: 38%; top: 52%; height: 22px; transform: rotate(20deg);"></div>
+        <div class="person-leg" style="left: 44%; top: 70%; height: 28px; transform: rotate(-10deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 70%; height: 28px; transform: rotate(10deg);"></div>
+        <!-- Microphone -->
+        <div style="position: absolute; left: 55%; top: 32%; width: 12px; height: 20px; background: #333; border-radius: 6px 6px 3px 3px;"></div>
+        <div style="position: absolute; left: 57%; top: 50%; width: 4px; height: 15px; background: #555;"></div>
+    </div>
+    <!-- Music notes -->
+    <div style="position: absolute; top: 15%; right: 25%; font-size: 20px; color: #fff; animation: float-up 1.5s infinite;">&#9835;</div>
+    <div style="position: absolute; top: 22%; right: 18%; font-size: 16px; color: #fff; animation: float-up 1.5s infinite 0.3s;">&#9834;</div>
+    <div style="position: absolute; top: 28%; right: 30%; font-size: 14px; color: #fff; animation: float-up 1.5s infinite 0.6s;">&#9833;</div>
+</div>
+
+<!-- Pattern 24: Playing Instrument (Guitar) -->
+<div id="action-24" class="action-diagram action-mint">
+    <div class="person">
+        <div class="person-head" style="left: 42%; top: 28%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 45%; top: 43%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Arms on guitar -->
+        <div class="person-arm" style="left: 48%; top: 48%; height: 25px; transform: rotate(60deg);"></div>
+        <div class="person-arm" style="left: 35%; top: 50%; height: 28px; transform: rotate(-45deg);"></div>
+        <div class="person-leg" style="left: 40%; top: 68%; height: 30px; transform: rotate(-10deg);"></div>
+        <div class="person-leg" style="left: 50%; top: 68%; height: 30px; transform: rotate(10deg);"></div>
+    </div>
+    <!-- Guitar -->
+    <div style="position: absolute; left: 50%; top: 45%; width: 35px; height: 45px; background: #8B4513; border-radius: 50%; border: 3px solid #333;"></div>
+    <div style="position: absolute; left: 63%; top: 35%; width: 8px; height: 40px; background: #8B4513; border-radius: 2px; transform: rotate(15deg);"></div>
+    <!-- Sound hole -->
+    <div style="position: absolute; left: 55%; top: 55%; width: 12px; height: 12px; background: #333; border-radius: 50%;"></div>
+    <!-- Music -->
+    <div style="position: absolute; top: 20%; right: 22%; font-size: 16px; color: #333; animation: pulse-glow 0.8s infinite;">&#9835;</div>
+</div>
+
+<!-- Pattern 25: Playing Sports (Soccer) -->
+<div id="action-25" class="action-diagram action-sky">
+    <div class="person" style="transform: rotate(-5deg);">
+        <div class="person-head" style="left: 40%; top: 25%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 43%; top: 40%; height: 35px; transform: translateX(-50%) rotate(10deg);"></div>
+        <!-- Arms for balance -->
+        <div class="person-arm" style="left: 35%; top: 42%; height: 25px; transform: rotate(-50deg);"></div>
+        <div class="person-arm" style="left: 48%; top: 45%; height: 25px; transform: rotate(40deg);"></div>
+        <!-- Kicking leg -->
+        <div class="person-leg" style="left: 50%; top: 60%; height: 35px; transform: rotate(60deg);"></div>
+        <div class="person-leg" style="left: 38%; top: 62%; height: 30px; transform: rotate(-20deg);"></div>
+    </div>
+    <!-- Soccer ball -->
+    <div style="position: absolute; right: 20%; top: 55%; width: 25px; height: 25px; background: #fff; border-radius: 50%; border: 2px solid #333;">
+        <!-- Pentagon pattern -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: #333; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);"></div>
+    </div>
+    <!-- Motion arc -->
+    <div style="position: absolute; right: 28%; top: 50%; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.5); border-radius: 50%; border-left-color: transparent; border-bottom-color: transparent;"></div>
+</div>
+
+<!-- Pattern 26: Cooking -->
+<div id="action-26" class="action-diagram action-orange">
+    <div class="person">
+        <div class="person-head" style="left: 40%; top: 25%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 43%; top: 40%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Arm stirring -->
+        <div class="person-arm" style="left: 48%; top: 45%; height: 28px; transform: rotate(50deg);"></div>
+        <div class="person-arm" style="left: 32%; top: 48%; height: 22px; transform: rotate(-30deg);"></div>
+        <div class="person-leg" style="left: 38%; top: 65%; height: 30px; transform: rotate(-5deg);"></div>
+        <div class="person-leg" style="left: 46%; top: 65%; height: 30px; transform: rotate(5deg);"></div>
+    </div>
+    <!-- Pan -->
+    <div style="position: absolute; left: 50%; top: 55%; width: 45px; height: 12px; background: #333; border-radius: 6px;"></div>
+    <div style="position: absolute; left: 88%; top: 53%; width: 20px; height: 6px; background: #555; border-radius: 3px;"></div>
+    <!-- Stove -->
+    <div style="position: absolute; left: 45%; top: 68%; width: 55px; height: 25px; background: #444; border-radius: 4px;">
+        <!-- Burner -->
+        <div style="position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 30px; height: 8px; background: #FF6B6B; border-radius: 4px;"></div>
+    </div>
+    <!-- Steam -->
+    <div style="position: absolute; left: 55%; top: 42%; font-size: 14px; color: rgba(255,255,255,0.7); animation: float-up 1.5s infinite;">~</div>
+    <div style="position: absolute; left: 62%; top: 45%; font-size: 12px; color: rgba(255,255,255,0.5); animation: float-up 1.5s infinite 0.3s;">~</div>
+    <div style="position: absolute; left: 58%; top: 48%; font-size: 10px; color: rgba(255,255,255,0.6); animation: float-up 1.5s infinite 0.6s;">~</div>
+</div>
+
+<!-- Pattern 27: Cleaning -->
+<div id="action-27" class="action-diagram action-mint">
+    <div class="person" style="transform: rotate(-10deg);">
+        <div class="person-head" style="left: 45%; top: 30%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 48%; top: 45%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Arms holding mop -->
+        <div class="person-arm" style="left: 52%; top: 48%; height: 25px; transform: rotate(30deg);"></div>
+        <div class="person-arm" style="left: 38%; top: 52%; height: 25px; transform: rotate(-20deg);"></div>
+        <div class="person-leg" style="left: 42%; top: 68%; height: 28px; transform: rotate(-15deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 68%; height: 28px; transform: rotate(10deg);"></div>
+    </div>
+    <!-- Mop handle -->
+    <div style="position: absolute; left: 58%; top: 35%; width: 5px; height: 55px; background: #8B4513; border-radius: 2px; transform: rotate(20deg);"></div>
+    <!-- Mop head -->
+    <div style="position: absolute; left: 65%; top: 75%; width: 25px; height: 15px; background: #ddd; border-radius: 3px;">
+        <div style="position: absolute; bottom: -8px; left: 2px; width: 4px; height: 10px; background: #ccc; border-radius: 2px;"></div>
+        <div style="position: absolute; bottom: -10px; left: 8px; width: 4px; height: 12px; background: #bbb; border-radius: 2px;"></div>
+        <div style="position: absolute; bottom: -8px; left: 14px; width: 4px; height: 10px; background: #ccc; border-radius: 2px;"></div>
+        <div style="position: absolute; bottom: -9px; left: 20px; width: 4px; height: 11px; background: #bbb; border-radius: 2px;"></div>
+    </div>
+    <!-- Clean sparkles -->
+    <div style="position: absolute; top: 70%; left: 55%; font-size: 14px; color: #fff; animation: pulse-glow 0.8s infinite;">*</div>
+    <div style="position: absolute; top: 75%; left: 48%; font-size: 10px; color: #fff; animation: pulse-glow 0.8s infinite 0.2s;">*</div>
+</div>
+
+<!-- Pattern 28: Building/Constructing -->
+<div id="action-28" class="action-diagram action-yellow">
+    <div class="person">
+        <div class="person-head" style="left: 35%; top: 28%; transform: translateX(-50%);"></div>
+        <!-- Hard hat -->
+        <div style="position: absolute; left: 23%; top: 23%; width: 35px; height: 12px; background: #FFE66D; border-radius: 6px 6px 0 0; border: 2px solid #333;"></div>
+        <div class="person-body" style="left: 38%; top: 43%; height: 38px; transform: translateX(-50%);"></div>
+        <!-- Arm with hammer -->
+        <div class="person-arm" style="left: 42%; top: 45%; height: 28px; transform: rotate(-60deg); animation: wave-hand 0.4s infinite;"></div>
+        <div class="person-arm" style="left: 28%; top: 50%; height: 22px; transform: rotate(20deg);"></div>
+        <div class="person-leg" style="left: 32%; top: 68%; height: 28px; transform: rotate(-10deg);"></div>
+        <div class="person-leg" style="left: 42%; top: 68%; height: 28px; transform: rotate(10deg);"></div>
+    </div>
+    <!-- Hammer -->
+    <div style="position: absolute; left: 48%; top: 28%; width: 6px; height: 25px; background: #8B4513; border-radius: 2px; transform: rotate(-30deg);"></div>
+    <div style="position: absolute; left: 52%; top: 22%; width: 18px; height: 12px; background: #555; border-radius: 2px; transform: rotate(-30deg);"></div>
+    <!-- Building blocks -->
+    <div style="position: absolute; right: 18%; top: 55%; width: 30px; height: 20px; background: #FF6B6B; border: 2px solid #333;"></div>
+    <div style="position: absolute; right: 25%; top: 55%; width: 30px; height: 20px; background: #4ECDC4; border: 2px solid #333;"></div>
+    <div style="position: absolute; right: 20%; top: 38%; width: 30px; height: 20px; background: #FFE66D; border: 2px solid #333;"></div>
+    <!-- Impact -->
+    <div style="position: absolute; left: 55%; top: 35%; font-size: 12px; color: #333; animation: pulse-glow 0.4s infinite;">*</div>
+</div>
+
+<!-- Pattern 29: Planting/Gardening -->
+<div id="action-29" class="action-diagram action-mint">
+    <div class="person" style="transform: rotate(15deg);">
+        <div class="person-head" style="left: 45%; top: 35%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 48%; top: 50%; height: 35px; transform: translateX(-50%) rotate(-20deg);"></div>
+        <!-- Bending arms -->
+        <div class="person-arm" style="left: 50%; top: 55%; height: 25px; transform: rotate(70deg);"></div>
+        <div class="person-arm" style="left: 38%; top: 55%; height: 25px; transform: rotate(50deg);"></div>
+        <!-- Kneeling legs -->
+        <div class="person-leg" style="left: 42%; top: 68%; height: 22px; transform: rotate(80deg);"></div>
+        <div class="person-leg" style="left: 52%; top: 70%; height: 25px; transform: rotate(30deg);"></div>
+    </div>
+    <!-- Ground/soil -->
+    <div style="position: absolute; bottom: 15%; left: 15%; width: 70%; height: 20px; background: #8B4513; border-radius: 4px;"></div>
+    <!-- Plants -->
+    <div style="position: absolute; bottom: 30%; left: 25%;">
+        <div style="width: 4px; height: 20px; background: #2ECC71; border-radius: 2px;"></div>
+        <div style="position: absolute; top: 0; left: -6px; width: 10px; height: 8px; background: #2ECC71; border-radius: 50% 50% 0 0; transform: rotate(-30deg);"></div>
+        <div style="position: absolute; top: 0; right: -6px; width: 10px; height: 8px; background: #2ECC71; border-radius: 50% 50% 0 0; transform: rotate(30deg);"></div>
+    </div>
+    <div style="position: absolute; bottom: 32%; right: 30%;">
+        <div style="width: 4px; height: 15px; background: #27AE60; border-radius: 2px;"></div>
+        <div style="position: absolute; top: 0; left: -5px; width: 8px; height: 6px; background: #27AE60; border-radius: 50% 50% 0 0; transform: rotate(-30deg);"></div>
+    </div>
+    <!-- Watering can -->
+    <div style="position: absolute; right: 15%; top: 45%; width: 25px; height: 18px; background: #3498DB; border-radius: 4px;">
+        <div style="position: absolute; top: -5px; left: 8px; width: 8px; height: 8px; background: #3498DB; border-radius: 50%;"></div>
+        <div style="position: absolute; top: 5px; right: -12px; width: 15px; height: 4px; background: #3498DB; border-radius: 2px;"></div>
+    </div>
+</div>
+
+<!-- Pattern 30: Shopping/Carrying Bags -->
+<div id="action-30" class="action-diagram action-pink">
+    <div class="person" style="animation: walk-motion 0.8s infinite;">
+        <div class="person-head" style="left: 50%; top: 25%; transform: translateX(-50%);"></div>
+        <div class="person-body" style="left: 50%; top: 40%; height: 40px; transform: translateX(-50%);"></div>
+        <!-- Arms holding bags -->
+        <div class="person-arm" style="left: 40%; top: 45%; height: 35px; transform: rotate(10deg);"></div>
+        <div class="person-arm" style="left: 56%; top: 45%; height: 35px; transform: rotate(-10deg);"></div>
+        <div class="person-leg" style="left: 45%; top: 65%; height: 32px; animation: walk-motion 0.8s infinite;"></div>
+        <div class="person-leg" style="left: 53%; top: 65%; height: 32px; animation: walk-motion 0.8s infinite reverse;"></div>
+    </div>
+    <!-- Shopping bags -->
+    <div style="position: absolute; left: 22%; top: 55%; width: 22px; height: 28px; background: #FF9F43; border-radius: 0 0 4px 4px; border: 2px solid #333;">
+        <div style="position: absolute; top: -8px; left: 3px; width: 14px; height: 10px; border: 3px solid #333; border-bottom: none; border-radius: 8px 8px 0 0;"></div>
+    </div>
+    <div style="position: absolute; right: 22%; top: 52%; width: 25px; height: 32px; background: #4ECDC4; border-radius: 0 0 4px 4px; border: 2px solid #333;">
+        <div style="position: absolute; top: -8px; left: 4px; width: 15px; height: 10px; border: 3px solid #333; border-bottom: none; border-radius: 8px 8px 0 0;"></div>
+    </div>
+    <!-- Small bag -->
+    <div style="position: absolute; left: 30%; top: 60%; width: 15px; height: 18px; background: #A66CFF; border-radius: 0 0 3px 3px; border: 2px solid #333;">
+        <div style="position: absolute; top: -6px; left: 2px; width: 9px; height: 7px; border: 2px solid #333; border-bottom: none; border-radius: 5px 5px 0 0;"></div>
+    </div>
+</div>

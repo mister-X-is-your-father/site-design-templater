@@ -1,0 +1,82 @@
+{#
+    Ishikawa Contact Section Component
+
+    Parameters:
+    - contact_icon: str (default: "✉️") - Contact icon emoji
+    - contact_title: str (default: "お気軽にご連絡ください")
+    - contact_text: str - Contact description (supports HTML)
+    - contact_buttons: list of dicts with 'text', 'href', 'icon', 'style' keys
+      - style can be: 'primary', 'secondary', 'outline'
+
+    Usage:
+    {% set contact_buttons = [
+        {"text": "メールを送る", "href": "mailto:...", "icon": "📧", "style": "primary"},
+        {"text": "SNSでつながる", "href": "#", "icon": "🔗", "style": "secondary"}
+    ] %}
+    {% include "components/ishikawa/contact.html" %}
+#}
+{% set contact_icon = contact_icon|default("✉️") %}
+{% set contact_title = contact_title|default("お気軽にご連絡ください") %}
+{% set contact_text = contact_text|default("新しいプロジェクトやコラボレーションについて、<br>お気軽にお問い合わせください。") %}
+{% set contact_buttons = contact_buttons|default([
+    {"text": "メールを送る", "href": "mailto:hello@example.com", "icon": "📧", "style": "primary"},
+    {"text": "SNSでつながる", "href": "#", "icon": "🔗", "style": "secondary"}
+]) %}
+
+<style>
+.ik-contact {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ik-contact__icon {
+    width: 80px;
+    height: 80px;
+    background: var(--ik-primary-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 36px;
+}
+
+.ik-contact__title {
+    font-family: var(--ik-font-display);
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.ik-contact__text {
+    font-size: 16px;
+    color: var(--ik-text-light);
+    margin-bottom: 32px;
+    line-height: 1.8;
+}
+
+.ik-contact__buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+</style>
+
+<section class="ik-section" id="contact">
+    <div class="ik-container">
+        <div class="ik-contact ik-fade-in">
+            <div class="ik-contact__icon">{{ contact_icon }}</div>
+            <h2 class="ik-contact__title">{{ contact_title }}</h2>
+            <p class="ik-contact__text">{{ contact_text|safe }}</p>
+            <div class="ik-contact__buttons">
+                {% for btn in contact_buttons %}
+                <a href="{{ btn.href }}" class="ik-btn ik-btn--{{ btn.style }} ik-btn--lg ik-btn--pill">
+                    {{ btn.text }}
+                    {% if btn.icon %}<span>{{ btn.icon }}</span>{% endif %}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

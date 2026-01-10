@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature & Plants - Minimal Pop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-fresh: #7CB342;
+            --green-light: #AED581;
+            --green-pale: #E8F5E9;
+            --green-dark: #558B2F;
+            --white-soft: #FAFAFA;
+            --cream: #FFF8E1;
+            --earth-brown: #8D6E63;
+            --earth-light: #D7CCC8;
+            --sky-blue: #81D4FA;
+            --sun-yellow: #FFD54F;
+            --pink-soft: #F8BBD9;
+            --coral: #FFAB91;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: linear-gradient(180deg, var(--sky-blue) 0%, var(--white-soft) 30%, var(--green-pale) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sun */
+        .sun {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background: var(--sun-yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 40px var(--sun-yellow), 0 0 80px rgba(255, 213, 79, 0.5);
+            animation: pulse 4s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: fixed;
+            background: var(--white-soft);
+            border-radius: 50px;
+            opacity: 0.9;
+            z-index: 0;
+        }
+
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: var(--white-soft);
+            border-radius: 50%;
+        }
+
+        .cloud-1 {
+            width: 100px;
+            height: 40px;
+            top: 60px;
+            left: 10%;
+            animation: float-cloud 20s linear infinite;
+        }
+
+        .cloud-1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 15px;
+        }
+
+        .cloud-1::after {
+            width: 35px;
+            height: 35px;
+            top: -15px;
+            right: 15px;
+        }
+
+        .cloud-2 {
+            width: 80px;
+            height: 32px;
+            top: 100px;
+            left: 50%;
+            animation: float-cloud 25s linear infinite reverse;
+        }
+
+        .cloud-2::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 10px;
+        }
+
+        .cloud-2::after {
+            width: 28px;
+            height: 28px;
+            top: -12px;
+            right: 10px;
+        }
+
+        @keyframes float-cloud {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(calc(100vw + 100px)); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--earth-brown);
+            font-size: 1.1rem;
+        }
+
+        /* Decorative Leaves around header */
+        .leaf-deco {
+            display: inline-block;
+            font-size: 2rem;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .leaf-deco:nth-child(odd) {
+            animation-delay: -1.5s;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Speech Bubbles */
+        .bubble-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .bubble {
+            background: var(--white-soft);
+            border-radius: 30px;
+            padding: 25px 30px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 85%;
+            animation: float-up 0.6s ease-out;
+        }
+
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            width: 30px;
+            height: 30px;
+            background: var(--white-soft);
+            border-radius: 50%;
+        }
+
+        .bubble.left {
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+
+        .bubble.left::after {
+            left: 30px;
+        }
+
+        .bubble.right {
+            align-self: flex-end;
+            margin-right: 20px;
+        }
+
+        .bubble.right::after {
+            right: 30px;
+        }
+
+        .bubble p {
+            color: var(--green-dark);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .bubble .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        @keyframes float-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Plant Cards */
+        .plant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .plant-card {
+            background: var(--white-soft);
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .plant-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            animation: grow 2s ease-in-out infinite;
+        }
+
+        .plant-card:nth-child(2) .plant-icon {
+            animation-delay: -0.5s;
+        }
+
+        .plant-card:nth-child(3) .plant-icon {
+            animation-delay: -1s;
+        }
+
+        @keyframes grow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(-2deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+        }
+
+        .plant-card h3 {
+            color: var(--green-dark);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .plant-card p {
+            color: var(--earth-brown);
+            font-size: 0.95rem;
+        }
+
+        /* Succulent Garden */
+        .garden {
+            background: var(--cream);
+            border-radius: 40px;
+            padding: 40px 30px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .garden h2 {
+            text-align: center;
+            color: var(--green-dark);
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+        }
+
+        .succulents {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .succulent {
+            font-size: 3rem;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .pot:nth-child(2) .succulent {
+            animation-delay: -1s;
+        }
+
+        .pot:nth-child(3) .succulent {
+            animation-delay: -2s;
+        }
+
+        .pot:nth-child(4) .succulent {
+            animation-delay: -3s;
+        }
+
+        .pot-base {
+            width: 50px;
+            height: 35px;
+            background: var(--earth-light);
+            border-radius: 0 0 15px 15px;
+            margin-top: -10px;
+            position: relative;
+        }
+
+        .pot-base::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -5px;
+            width: 60px;
+            height: 12px;
+            background: var(--earth-brown);
+            border-radius: 5px;
+        }
+
+        /* Message Box */
+        .message-box {
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--green-fresh) 100%);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .message-box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .message-box p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Floating Decorations */
+        .floating-leaf {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: float-around 15s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-leaf:nth-child(1) {
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-leaf:nth-child(2) {
+            left: 15%;
+            animation-delay: -5s;
+        }
+
+        .floating-leaf:nth-child(3) {
+            left: 85%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float-around {
+            0% {
+                top: -50px;
+                transform: rotate(0deg) translateX(0);
+            }
+            25% {
+                transform: rotate(90deg) translateX(30px);
+            }
+            50% {
+                transform: rotate(180deg) translateX(-30px);
+            }
+            75% {
+                transform: rotate(270deg) translateX(30px);
+            }
+            100% {
+                top: 110vh;
+                transform: rotate(360deg) translateX(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--earth-brown);
+        }
+
+        .footer-plants {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .footer-plants span {
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .footer-plants span:nth-child(2) {
+            animation-delay: -1s;
+        }
+
+        .footer-plants span:nth-child(3) {
+            animation-delay: -2s;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 100px 15px 40px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .bubble {
+                max-width: 95%;
+                padding: 20px;
+            }
+
+            .bubble p {
+                font-size: 1rem;
+            }
+
+            .sun {
+                width: 60px;
+                height: 60px;
+                top: 15px;
+                right: 20px;
+            }
+
+            .plant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .garden {
+                padding: 30px 20px;
+            }
+
+            .message-box {
+                padding: 30px 20px;
+            }
+
+            .message-box h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sky Elements -->
+    <div class="sun"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+
+    <!-- Floating Leaves -->
+    <div class="floating-leaf">🍃</div>
+    <div class="floating-leaf">🌿</div>
+    <div class="floating-leaf">🍂</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <span class="leaf-deco">🌱</span>
+                <span class="leaf-deco">🌿</span>
+                <span class="leaf-deco">🍀</span>
+            </div>
+            <h1>Nature & Plants</h1>
+            <p>自然と一緒に、心地よい毎日を</p>
+        </header>
+
+        <!-- Speech Bubbles -->
+        <section class="bubble-section">
+            <div class="bubble left">
+                <p><span class="emoji">🌸</span>今日も植物たちが元気に育っています。小さな芽が出る瞬間って、とても幸せな気持ちになりますよね。</p>
+            </div>
+
+            <div class="bubble right">
+                <p><span class="emoji">🌻</span>朝の光を浴びて、葉っぱがキラキラ輝いています。自然のエネルギーを感じる素敵な朝！</p>
+            </div>
+
+            <div class="bubble left">
+                <p><span class="emoji">🌳</span>緑に囲まれると、心が穏やかになります。深呼吸して、リラックスしましょう。</p>
+            </div>
+        </section>
+
+        <!-- Plant Cards -->
+        <section class="plant-grid">
+            <div class="plant-card">
+                <span class="plant-icon">🪴</span>
+                <h3>観葉植物</h3>
+                <p>お部屋に緑を添えて、リフレッシュ</p>
+            </div>
+
+            <div class="plant-card">
+                <span class="plant-icon">🌷</span>
+                <h3>お花</h3>
+                <p>色とりどりの花で心も華やかに</p>
+            </div>
+
+            <div class="plant-card">
+                <span class="plant-icon">🌵</span>
+                <h3>サボテン</h3>
+                <p>手軽に育てられる、かわいい仲間</p>
+            </div>
+        </section>
+
+        <!-- Succulent Garden -->
+        <section class="garden">
+            <h2>🏡 ミニガーデン</h2>
+            <div class="succulents">
+                <div class="pot">
+                    <span class="succulent">🌱</span>
+                    <div class="pot-base"></div>
+                </div>
+                <div class="pot">
+                    <span class="succulent">🪻</span>
+                    <div class="pot-base"></div>
+                </div>
+                <div class="pot">
+                    <span class="succulent">🌿</span>
+                    <div class="pot-base"></div>
+                </div>
+                <div class="pot">
+                    <span class="succulent">🍀</span>
+                    <div class="pot-base"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Message Box -->
+        <section class="message-box">
+            <h2>🌈 自然からの贈り物</h2>
+            <p>植物は私たちに癒しと活力を与えてくれます。<br>毎日少しずつ成長する姿を見守りながら、<br>一緒にゆっくり過ごしましょう。</p>
+        </section>
+
+        <!-- Another Bubble -->
+        <section class="bubble-section">
+            <div class="bubble right">
+                <p><span class="emoji">☀️</span>太陽の光と水があれば、植物は元気に育ちます。シンプルだけど、大切なこと。</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-plants">
+                <span>🌺</span>
+                <span>🌸</span>
+                <span>🌼</span>
+            </div>
+            <p>自然を愛する心で、毎日を彩ろう</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+{#
+    Ishikawa About Section Component
+
+    Parameters:
+    - about_label: str (default: "About Me")
+    - about_title: str (default: "私について")
+    - about_desc: str - Section description
+    - about_heading: str - Content heading
+    - about_text: str - Main content text (supports HTML)
+    - about_image: str (optional) - Image URL
+    - about_image_placeholder: str (default: "🧑‍🎨") - Placeholder emoji
+    - about_stats: list of dicts with 'number' and 'label' keys
+
+    Usage:
+    {% set about_stats = [
+        {"number": "50+", "label": "プロジェクト"},
+        {"number": "5+", "label": "年の経験"}
+    ] %}
+    {% include "components/ishikawa/about.html" %}
+#}
+{% set about_label = about_label|default("About Me") %}
+{% set about_title = about_title|default("私について") %}
+{% set about_desc = about_desc|default("クリエイティブなソリューションで、ビジネスの課題を解決します。") %}
+{% set about_heading = about_heading|default("デザインと開発の架け橋") %}
+{% set about_text = about_text|default("私はデザイナーとデベロッパーの両方の視点を持つクリエイターです。美しいだけでなく、実装可能で保守しやすいデザインを心がけています。<br><br>ユーザーの課題を深く理解し、最適なソリューションを提供することで、ビジネスの成長に貢献します。") %}
+{% set about_image_placeholder = about_image_placeholder|default("🧑‍🎨") %}
+{% set about_stats = about_stats|default([
+    {"number": "50+", "label": "プロジェクト"},
+    {"number": "5+", "label": "年の経験"},
+    {"number": "30+", "label": "クライアント"}
+]) %}
+
+<style>
+.ik-about {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.ik-about__image {
+    position: relative;
+}
+
+.ik-about__avatar {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--ik-radius-xl);
+    box-shadow: var(--ik-shadow-lg);
+}
+
+.ik-about__avatar-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--ik-bg), var(--ik-border));
+    border-radius: var(--ik-radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+}
+
+.ik-about__content h3 {
+    font-family: var(--ik-font-display);
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.ik-about__text {
+    font-size: 16px;
+    color: var(--ik-text-light);
+    line-height: 2;
+    margin-bottom: 32px;
+}
+
+.ik-about__stats {
+    display: flex;
+    gap: 48px;
+}
+
+.ik-about__stat {
+    text-align: center;
+}
+
+.ik-about__stat-number {
+    font-family: var(--ik-font-latin);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--ik-primary);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.ik-about__stat-label {
+    font-size: 14px;
+    color: var(--ik-text-muted);
+}
+
+@media (max-width: 1024px) {
+    .ik-about {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+    }
+
+    .ik-about__image {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .ik-about__stats {
+        justify-content: center;
+    }
+}
+</style>
+
+<section class="ik-section ik-section--alt" id="about">
+    <div class="ik-container">
+        <div class="ik-section__header">
+            <span class="ik-section__label">{{ about_label }}</span>
+            <h2 class="ik-section__title">{{ about_title }}</h2>
+            <p class="ik-section__desc">{{ about_desc }}</p>
+        </div>
+        <div class="ik-about">
+            <div class="ik-about__image ik-fade-in">
+                {% if about_image %}
+                <img src="{{ about_image }}" alt="About" class="ik-about__avatar">
+                {% else %}
+                <div class="ik-about__avatar-placeholder">{{ about_image_placeholder }}</div>
+                {% endif %}
+            </div>
+            <div class="ik-about__content ik-fade-in ik-delay-2">
+                <h3>{{ about_heading }}</h3>
+                <p class="ik-about__text">{{ about_text|safe }}</p>
+                <div class="ik-about__stats">
+                    {% for stat in about_stats %}
+                    <div class="ik-about__stat">
+                        <div class="ik-about__stat-number">{{ stat.number }}</div>
+                        <div class="ik-about__stat-label">{{ stat.label }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

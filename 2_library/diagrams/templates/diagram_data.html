@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>データ・情報テンプレート集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .template-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================================
+           #data-1: Single Number Highlight
+           ======================================== */
+        #data-1 .number-highlight {
+            text-align: center;
+            padding: 30px;
+            background: #ffe5f0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-1 .number-highlight:hover {
+            background: #ffd6e8;
+        }
+
+        #data-1 .big-number {
+            font-size: 72px;
+            font-weight: 800;
+            color: #ff6b9d;
+            line-height: 1;
+        }
+
+        #data-1 .number-label {
+            font-size: 16px;
+            color: #ff6b9d;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           #data-2: Number with Trend Arrow
+           ======================================== */
+        #data-2 .trend-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 24px;
+            background: #e8fff5;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-2 .trend-display:hover {
+            background: #d4ffec;
+        }
+
+        #data-2 .trend-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00c9a7;
+        }
+
+        #data-2 .trend-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #data-2 .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 30px solid #00c9a7;
+            transition: transform 0.3s ease;
+        }
+
+        #data-2 .trend-display:hover .arrow-up {
+            transform: translateY(-5px);
+        }
+
+        #data-2 .trend-percent {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00c9a7;
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           #data-3: Percentage with Icon
+           ======================================== */
+        #data-3 .percentage-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: #fff3e0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-3 .percentage-card:hover {
+            background: #ffe8cc;
+        }
+
+        #data-3 .percentage-icon {
+            width: 70px;
+            height: 70px;
+            background: #ff9800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: transform 0.3s ease;
+        }
+
+        #data-3 .percentage-card:hover .percentage-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        #data-3 .percentage-content {
+            flex: 1;
+        }
+
+        #data-3 .percentage-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: #e65100;
+        }
+
+        #data-3 .percentage-label {
+            font-size: 14px;
+            color: #ff9800;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           #data-4: Count Display
+           ======================================== */
+        #data-4 .count-display {
+            text-align: center;
+            padding: 24px;
+            background: #e3f2fd;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-4 .count-display:hover {
+            background: #bbdefb;
+        }
+
+        #data-4 .count-items {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        #data-4 .count-dot {
+            width: 24px;
+            height: 24px;
+            background: #2196f3;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+
+        #data-4 .count-display:hover .count-dot {
+            transform: scale(1.2);
+        }
+
+        #data-4 .count-dot:nth-child(odd) {
+            background: #64b5f6;
+        }
+
+        #data-4 .count-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1565c0;
+        }
+
+        #data-4 .count-label {
+            font-size: 14px;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           #data-5: Score Display
+           ======================================== */
+        #data-5 .score-display {
+            text-align: center;
+            padding: 24px;
+            background: #fce4ec;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-5 .score-display:hover {
+            background: #f8bbd9;
+        }
+
+        #data-5 .score-circle {
+            width: 120px;
+            height: 120px;
+            border: 8px solid #e91e63;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            transition: all 0.3s ease;
+        }
+
+        #data-5 .score-display:hover .score-circle {
+            transform: scale(1.05);
+            border-color: #c2185b;
+        }
+
+        #data-5 .score-value {
+            font-size: 40px;
+            font-weight: 800;
+            color: #c2185b;
+            line-height: 1;
+        }
+
+        #data-5 .score-max {
+            font-size: 14px;
+            color: #e91e63;
+        }
+
+        #data-5 .score-label {
+            font-size: 14px;
+            color: #ad1457;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           #data-6: Rating Display (Out of 5)
+           ======================================== */
+        #data-6 .rating-display {
+            text-align: center;
+            padding: 24px;
+            background: #fff8e1;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-6 .rating-display:hover {
+            background: #ffecb3;
+        }
+
+        #data-6 .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        #data-6 .star {
+            width: 36px;
+            height: 36px;
+            background: #ffc107;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            transition: transform 0.2s ease;
+        }
+
+        #data-6 .rating-display:hover .star {
+            transform: scale(1.15);
+        }
+
+        #data-6 .star.empty {
+            background: #e0e0e0;
+        }
+
+        #data-6 .rating-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff8f00;
+        }
+
+        #data-6 .rating-count {
+            font-size: 13px;
+            color: #ffa000;
+        }
+
+        /* ========================================
+           #data-7: Progress Percentage
+           ======================================== */
+        #data-7 .progress-display {
+            padding: 24px;
+            background: #f3e5f5;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-7 .progress-display:hover {
+            background: #e1bee7;
+        }
+
+        #data-7 .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        #data-7 .progress-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7b1fa2;
+        }
+
+        #data-7 .progress-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #9c27b0;
+        }
+
+        #data-7 .progress-bar {
+            height: 24px;
+            background: #e1bee7;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #data-7 .progress-fill {
+            height: 100%;
+            width: 75%;
+            background: #9c27b0;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+
+        #data-7 .progress-display:hover .progress-fill {
+            background: #7b1fa2;
+        }
+
+        /* ========================================
+           #data-8: Completion Status
+           ======================================== */
+        #data-8 .completion-status {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            background: #e8f5e9;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-8 .completion-status:hover {
+            background: #c8e6c9;
+        }
+
+        #data-8 .completion-check {
+            width: 60px;
+            height: 60px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        #data-8 .completion-status:hover .completion-check {
+            transform: scale(1.1);
+        }
+
+        #data-8 .check-icon {
+            width: 30px;
+            height: 20px;
+            border-left: 5px solid white;
+            border-bottom: 5px solid white;
+            transform: rotate(-45deg);
+            margin-top: -5px;
+        }
+
+        #data-8 .completion-info {
+            flex: 1;
+        }
+
+        #data-8 .completion-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+
+        #data-8 .completion-detail {
+            font-size: 13px;
+            color: #43a047;
+        }
+
+        /* ========================================
+           #data-9: Status Indicator (Online/Offline)
+           ======================================== */
+        #data-9 .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 24px;
+            background: #e0f7fa;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-9 .status-indicator:hover {
+            background: #b2ebf2;
+        }
+
+        #data-9 .status-dot {
+            width: 20px;
+            height: 20px;
+            background: #00bcd4;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        #data-9 .status-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00838f;
+        }
+
+        #data-9 .status-time {
+            font-size: 12px;
+            color: #0097a7;
+            padding: 4px 12px;
+            background: white;
+            border-radius: 20px;
+        }
+
+        /* ========================================
+           #data-10: Availability Display
+           ======================================== */
+        #data-10 .availability-display {
+            padding: 24px;
+            background: #ede7f6;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-10 .availability-display:hover {
+            background: #d1c4e9;
+        }
+
+        #data-10 .availability-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #512da8;
+            margin-bottom: 16px;
+        }
+
+        #data-10 .availability-slots {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        #data-10 .slot {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        #data-10 .slot:hover {
+            transform: scale(1.15);
+        }
+
+        #data-10 .slot.available {
+            background: #7c4dff;
+            color: white;
+        }
+
+        #data-10 .slot.unavailable {
+            background: #e0e0e0;
+            color: #9e9e9e;
+        }
+
+        #data-10 .availability-legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            font-size: 12px;
+            color: #673ab7;
+        }
+
+        /* ========================================
+           #data-11: Stock Level Indicator
+           ======================================== */
+        #data-11 .stock-indicator {
+            padding: 24px;
+            background: #fff3e0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-11 .stock-indicator:hover {
+            background: #ffe0b2;
+        }
+
+        #data-11 .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        #data-11 .stock-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e65100;
+        }
+
+        #data-11 .stock-count {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ff6d00;
+        }
+
+        #data-11 .stock-boxes {
+            display: flex;
+            gap: 6px;
+        }
+
+        #data-11 .stock-box {
+            flex: 1;
+            height: 32px;
+            background: #ffcc80;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        #data-11 .stock-box.filled {
+            background: #ff9800;
+        }
+
+        #data-11 .stock-indicator:hover .stock-box.filled {
+            background: #f57c00;
+        }
+
+        #data-11 .stock-status {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ef6c00;
+        }
+
+        /* ========================================
+           #data-12: Capacity Gauge
+           ======================================== */
+        #data-12 .capacity-gauge {
+            text-align: center;
+            padding: 24px;
+            background: #e8eaf6;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-12 .capacity-gauge:hover {
+            background: #c5cae9;
+        }
+
+        #data-12 .gauge-container {
+            width: 140px;
+            height: 70px;
+            margin: 0 auto 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #data-12 .gauge-bg {
+            width: 140px;
+            height: 140px;
+            border: 16px solid #c5cae9;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+        }
+
+        #data-12 .gauge-fill {
+            width: 140px;
+            height: 140px;
+            border: 16px solid transparent;
+            border-top-color: #3f51b5;
+            border-left-color: #3f51b5;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            transform: rotate(-45deg);
+            transition: all 0.5s ease;
+        }
+
+        #data-12 .gauge-value {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: 800;
+            color: #303f9f;
+        }
+
+        #data-12 .gauge-label {
+            font-size: 14px;
+            color: #3f51b5;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           #data-13: Usage Meter
+           ======================================== */
+        #data-13 .usage-meter {
+            padding: 24px;
+            background: #fce4ec;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-13 .usage-meter:hover {
+            background: #f8bbd9;
+        }
+
+        #data-13 .usage-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        #data-13 .usage-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ad1457;
+        }
+
+        #data-13 .usage-value {
+            font-size: 14px;
+            color: #c2185b;
+        }
+
+        #data-13 .meter-container {
+            height: 50px;
+            background: #f8bbd9;
+            border-radius: 8px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #data-13 .meter-segment {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        #data-13 .meter-segment:hover {
+            filter: brightness(1.1);
+        }
+
+        #data-13 .meter-segment.used {
+            background: #e91e63;
+            width: 60%;
+        }
+
+        #data-13 .meter-segment.reserved {
+            background: #f48fb1;
+            width: 20%;
+        }
+
+        #data-13 .meter-segment.free {
+            background: #fce4ec;
+            color: #c2185b;
+            width: 20%;
+        }
+
+        /* ========================================
+           #data-14: Speed Indicator
+           ======================================== */
+        #data-14 .speed-indicator {
+            text-align: center;
+            padding: 24px;
+            background: #e0f2f1;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-14 .speed-indicator:hover {
+            background: #b2dfdb;
+        }
+
+        #data-14 .speed-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 12px;
+            position: relative;
+        }
+
+        #data-14 .speed-arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 50px solid #009688;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.3s ease;
+        }
+
+        #data-14 .speed-indicator:hover .speed-arrow {
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        #data-14 .speed-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00695c;
+        }
+
+        #data-14 .speed-unit {
+            font-size: 16px;
+            color: #009688;
+        }
+
+        #data-14 .speed-label {
+            font-size: 13px;
+            color: #00796b;
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           #data-15: Distance Display
+           ======================================== */
+        #data-15 .distance-display {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            background: #e1f5fe;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-15 .distance-display:hover {
+            background: #b3e5fc;
+        }
+
+        #data-15 .distance-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        #data-15 .pin-head {
+            width: 30px;
+            height: 30px;
+            background: #03a9f4;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 0;
+            left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        #data-15 .distance-display:hover .pin-head {
+            transform: rotate(-45deg) scale(1.1);
+        }
+
+        #data-15 .pin-dot {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 9px;
+            left: 19px;
+        }
+
+        #data-15 .distance-info {
+            flex: 1;
+        }
+
+        #data-15 .distance-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #0277bd;
+        }
+
+        #data-15 .distance-unit {
+            font-size: 16px;
+            color: #0288d1;
+        }
+
+        #data-15 .distance-from {
+            font-size: 13px;
+            color: #039be5;
+        }
+
+        /* ========================================
+           #data-16: Duration Display
+           ======================================== */
+        #data-16 .duration-display {
+            text-align: center;
+            padding: 24px;
+            background: #fff8e1;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-16 .duration-display:hover {
+            background: #ffecb3;
+        }
+
+        #data-16 .duration-clock {
+            width: 80px;
+            height: 80px;
+            border: 6px solid #ffc107;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        #data-16 .duration-display:hover .duration-clock {
+            transform: rotate(10deg);
+        }
+
+        #data-16 .clock-hand-hour {
+            width: 4px;
+            height: 20px;
+            background: #ff8f00;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%) rotate(60deg);
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+
+        #data-16 .clock-hand-min {
+            width: 3px;
+            height: 28px;
+            background: #ffa000;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%) rotate(-30deg);
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+
+        #data-16 .clock-center {
+            width: 10px;
+            height: 10px;
+            background: #ff8f00;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #data-16 .duration-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #f57f17;
+        }
+
+        #data-16 .duration-label {
+            font-size: 13px;
+            color: #ff8f00;
+        }
+
+        /* ========================================
+           #data-17: Size Display
+           ======================================== */
+        #data-17 .size-display {
+            padding: 24px;
+            background: #f3e5f5;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-17 .size-display:hover {
+            background: #e1bee7;
+        }
+
+        #data-17 .size-visual {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            height: 80px;
+        }
+
+        #data-17 .size-bar {
+            width: 30px;
+            background: #9c27b0;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        #data-17 .size-bar:nth-child(1) { height: 30px; background: #ce93d8; }
+        #data-17 .size-bar:nth-child(2) { height: 50px; background: #ab47bc; }
+        #data-17 .size-bar:nth-child(3) { height: 80px; background: #7b1fa2; }
+
+        #data-17 .size-display:hover .size-bar {
+            transform: scaleY(1.1);
+        }
+
+        #data-17 .size-info {
+            text-align: center;
+        }
+
+        #data-17 .size-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #6a1b9a;
+        }
+
+        #data-17 .size-unit {
+            font-size: 14px;
+            color: #8e24aa;
+        }
+
+        /* ========================================
+           #data-18: Weight Display
+           ======================================== */
+        #data-18 .weight-display {
+            text-align: center;
+            padding: 24px;
+            background: #e8f5e9;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-18 .weight-display:hover {
+            background: #c8e6c9;
+        }
+
+        #data-18 .scale-visual {
+            width: 100px;
+            height: 60px;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+
+        #data-18 .scale-base {
+            width: 100px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        #data-18 .scale-pillar {
+            width: 8px;
+            height: 40px;
+            background: #66bb6a;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #data-18 .scale-plate {
+            width: 80px;
+            height: 8px;
+            background: #43a047;
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.3s ease;
+        }
+
+        #data-18 .weight-display:hover .scale-plate {
+            transform: translateX(-50%) rotate(-3deg);
+        }
+
+        #data-18 .weight-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: #2e7d32;
+        }
+
+        #data-18 .weight-unit {
+            font-size: 16px;
+            color: #388e3c;
+        }
+
+        /* ========================================
+           #data-19: Temperature Display
+           ======================================== */
+        #data-19 .temperature-display {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: #ffebee;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-19 .temperature-display:hover {
+            background: #ffcdd2;
+        }
+
+        #data-19 .thermometer {
+            width: 30px;
+            height: 80px;
+            position: relative;
+        }
+
+        #data-19 .thermo-tube {
+            width: 16px;
+            height: 60px;
+            background: #ffcdd2;
+            border: 3px solid #e57373;
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+
+        #data-19 .thermo-fill {
+            width: 100%;
+            height: 70%;
+            background: #f44336;
+            position: absolute;
+            bottom: 0;
+            transition: height 0.3s ease;
+        }
+
+        #data-19 .temperature-display:hover .thermo-fill {
+            height: 80%;
+        }
+
+        #data-19 .thermo-bulb {
+            width: 30px;
+            height: 30px;
+            background: #f44336;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        #data-19 .temp-info {
+            flex: 1;
+        }
+
+        #data-19 .temp-value {
+            font-size: 48px;
+            font-weight: 800;
+            color: #c62828;
+        }
+
+        #data-19 .temp-label {
+            font-size: 13px;
+            color: #e53935;
+        }
+
+        /* ========================================
+           #data-20: Price Display
+           ======================================== */
+        #data-20 .price-display {
+            text-align: center;
+            padding: 24px;
+            background: #e8f5e9;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-20 .price-display:hover {
+            background: #c8e6c9;
+        }
+
+        #data-20 .price-tag {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #4caf50;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        #data-20 .price-display:hover .price-tag {
+            transform: scale(1.05);
+        }
+
+        #data-20 .price-hole {
+            width: 12px;
+            height: 12px;
+            background: #e8f5e9;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        #data-20 .price-currency {
+            font-size: 20px;
+            color: white;
+            vertical-align: top;
+        }
+
+        #data-20 .price-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: white;
+        }
+
+        #data-20 .price-period {
+            font-size: 14px;
+            color: #a5d6a7;
+        }
+
+        #data-20 .price-note {
+            font-size: 12px;
+            color: #66bb6a;
+            margin-top: 12px;
+        }
+
+        /* ========================================
+           #data-21: Date Display
+           ======================================== */
+        #data-21 .date-display {
+            text-align: center;
+            padding: 24px;
+            background: #e3f2fd;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-21 .date-display:hover {
+            background: #bbdefb;
+        }
+
+        #data-21 .calendar-card {
+            display: inline-block;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        #data-21 .date-display:hover .calendar-card {
+            transform: scale(1.05);
+        }
+
+        #data-21 .calendar-header {
+            background: #2196f3;
+            color: white;
+            padding: 8px 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        #data-21 .calendar-day {
+            padding: 16px 32px;
+            font-size: 48px;
+            font-weight: 800;
+            color: #1565c0;
+        }
+
+        #data-21 .calendar-weekday {
+            padding: 8px 24px;
+            font-size: 14px;
+            color: #1976d2;
+            background: #e3f2fd;
+        }
+
+        /* ========================================
+           #data-22: Time Display
+           ======================================== */
+        #data-22 .time-display {
+            text-align: center;
+            padding: 24px;
+            background: #1a1a2e;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-22 .time-display:hover {
+            background: #16213e;
+        }
+
+        #data-22 .digital-time {
+            font-family: 'Courier New', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+            letter-spacing: 4px;
+            transition: text-shadow 0.3s ease;
+        }
+
+        #data-22 .time-display:hover .digital-time {
+            text-shadow: 0 0 20px #00ff88;
+        }
+
+        #data-22 .time-separator {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        #data-22 .time-zone {
+            font-size: 14px;
+            color: #4ecca3;
+            margin-top: 8px;
+        }
+
+        /* ========================================
+           #data-23: Location Display
+           ======================================== */
+        #data-23 .location-display {
+            padding: 24px;
+            background: #fce4ec;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-23 .location-display:hover {
+            background: #f8bbd9;
+        }
+
+        #data-23 .location-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        #data-23 .location-pin {
+            width: 40px;
+            height: 40px;
+            background: #e91e63;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        #data-23 .location-display:hover .location-pin {
+            transform: rotate(-45deg) scale(1.1);
+        }
+
+        #data-23 .pin-inner {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        #data-23 .location-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ad1457;
+        }
+
+        #data-23 .location-address {
+            font-size: 14px;
+            color: #c2185b;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        #data-23 .location-coords {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #d81b60;
+        }
+
+        /* ========================================
+           #data-24: Contact Info Card
+           ======================================== */
+        #data-24 .contact-card {
+            padding: 24px;
+            background: #e0f7fa;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-24 .contact-card:hover {
+            background: #b2ebf2;
+        }
+
+        #data-24 .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 2px dashed #80deea;
+            transition: transform 0.2s ease;
+        }
+
+        #data-24 .contact-row:last-child {
+            border-bottom: none;
+        }
+
+        #data-24 .contact-row:hover {
+            transform: translateX(5px);
+        }
+
+        #data-24 .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #00bcd4;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        #data-24 .contact-info {
+            flex: 1;
+        }
+
+        #data-24 .contact-label {
+            font-size: 11px;
+            color: #00838f;
+            text-transform: uppercase;
+        }
+
+        #data-24 .contact-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #006064;
+        }
+
+        /* ========================================
+           #data-25: Profile Summary
+           ======================================== */
+        #data-25 .profile-summary {
+            text-align: center;
+            padding: 24px;
+            background: #fff3e0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-25 .profile-summary:hover {
+            background: #ffe0b2;
+        }
+
+        #data-25 .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #ff9800;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        #data-25 .profile-summary:hover .profile-avatar {
+            transform: scale(1.1);
+        }
+
+        #data-25 .profile-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e65100;
+        }
+
+        #data-25 .profile-role {
+            font-size: 13px;
+            color: #f57c00;
+            margin-bottom: 16px;
+        }
+
+        #data-25 .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        #data-25 .stat-item {
+            text-align: center;
+        }
+
+        #data-25 .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ef6c00;
+        }
+
+        #data-25 .stat-label {
+            font-size: 11px;
+            color: #ff9800;
+        }
+
+        /* ========================================
+           #data-26: Quick Stats Row
+           ======================================== */
+        #data-26 .quick-stats {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            background: #ede7f6;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-26 .quick-stats:hover {
+            background: #d1c4e9;
+        }
+
+        #data-26 .stat-box {
+            flex: 1;
+            text-align: center;
+            padding: 16px 8px;
+            background: white;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        #data-26 .stat-box:hover {
+            transform: translateY(-3px);
+        }
+
+        #data-26 .stat-box:nth-child(1) .stat-number { color: #7c4dff; }
+        #data-26 .stat-box:nth-child(2) .stat-number { color: #e040fb; }
+        #data-26 .stat-box:nth-child(3) .stat-number { color: #536dfe; }
+        #data-26 .stat-box:nth-child(4) .stat-number { color: #b388ff; }
+
+        #data-26 .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        #data-26 .stat-desc {
+            font-size: 11px;
+            color: #673ab7;
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           #data-27: Metric Comparison
+           ======================================== */
+        #data-27 .metric-comparison {
+            padding: 24px;
+            background: #e8f5e9;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-27 .metric-comparison:hover {
+            background: #c8e6c9;
+        }
+
+        #data-27 .comparison-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        #data-27 .comparison-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        #data-27 .comparison-label {
+            width: 60px;
+            font-size: 12px;
+            color: #388e3c;
+            font-weight: 600;
+        }
+
+        #data-27 .comparison-bar-container {
+            flex: 1;
+            height: 24px;
+            background: #c8e6c9;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #data-27 .comparison-bar {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+
+        #data-27 .comparison-bar.current {
+            background: #4caf50;
+            width: 75%;
+        }
+
+        #data-27 .comparison-bar.previous {
+            background: #81c784;
+            width: 55%;
+        }
+
+        #data-27 .comparison-value {
+            width: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2e7d32;
+            text-align: right;
+        }
+
+        /* ========================================
+           #data-28: Benchmark Indicator
+           ======================================== */
+        #data-28 .benchmark-indicator {
+            padding: 24px;
+            background: #fff8e1;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-28 .benchmark-indicator:hover {
+            background: #ffecb3;
+        }
+
+        #data-28 .benchmark-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        #data-28 .benchmark-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff8f00;
+        }
+
+        #data-28 .benchmark-score {
+            font-size: 24px;
+            font-weight: 800;
+            color: #e65100;
+        }
+
+        #data-28 .benchmark-scale {
+            height: 16px;
+            background: #ffe082;
+            border-radius: 8px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        #data-28 .benchmark-marker {
+            width: 24px;
+            height: 24px;
+            background: #ff9800;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+            left: 72%;
+            transform: translateX(-50%);
+            transition: left 0.5s ease;
+            box-shadow: 0 2px 8px rgba(255,152,0,0.4);
+        }
+
+        #data-28 .benchmark-indicator:hover .benchmark-marker {
+            transform: translateX(-50%) scale(1.2);
+        }
+
+        #data-28 .benchmark-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #ffa000;
+        }
+
+        /* ========================================
+           #data-29: Performance Score
+           ======================================== */
+        #data-29 .performance-score {
+            text-align: center;
+            padding: 24px;
+            background: #e3f2fd;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-29 .performance-score:hover {
+            background: #bbdefb;
+        }
+
+        #data-29 .score-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #2196f3 0deg 270deg,
+                #e3f2fd 270deg 360deg
+            );
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        #data-29 .performance-score:hover .score-ring {
+            transform: rotate(10deg);
+        }
+
+        #data-29 .score-inner {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #data-29 .score-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1565c0;
+        }
+
+        #data-29 .score-max {
+            font-size: 12px;
+            color: #42a5f5;
+        }
+
+        #data-29 .score-grade {
+            display: inline-block;
+            padding: 6px 20px;
+            background: #2196f3;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ========================================
+           #data-30: Health Check Status
+           ======================================== */
+        #data-30 .health-check {
+            padding: 24px;
+            background: #f1f8e9;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #data-30 .health-check:hover {
+            background: #dcedc8;
+        }
+
+        #data-30 .health-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        #data-30 .health-icon {
+            width: 40px;
+            height: 40px;
+            background: #8bc34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #data-30 .heart {
+            width: 18px;
+            height: 16px;
+            background: white;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        #data-30 .heart::before,
+        #data-30 .heart::after {
+            content: '';
+            width: 18px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        #data-30 .heart::before {
+            top: -8px;
+            left: 0;
+        }
+
+        #data-30 .heart::after {
+            top: 0;
+            left: 8px;
+        }
+
+        #data-30 .health-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #558b2f;
+        }
+
+        #data-30 .health-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #data-30 .health-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        #data-30 .health-item:hover {
+            transform: translateX(5px);
+        }
+
+        #data-30 .health-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        #data-30 .health-dot.ok { background: #8bc34a; }
+        #data-30 .health-dot.warning { background: #ffc107; }
+        #data-30 .health-dot.error { background: #f44336; }
+
+        #data-30 .health-name {
+            flex: 1;
+            font-size: 13px;
+            color: #33691e;
+        }
+
+        #data-30 .health-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        #data-30 .health-status.ok {
+            background: #c5e1a5;
+            color: #33691e;
+        }
+
+        #data-30 .health-status.warning {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+
+        #data-30 .health-status.error {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <h1>データ・情報テンプレート集</h1>
+    <p class="category-description">Data & Information - 30 Unique Display Patterns</p>
+
+    <div class="template-grid">
+
+        <!-- #data-1: Single Number Highlight -->
+        <div class="template-card" id="data-1">
+            <div class="template-label">#data-1: Single Number Highlight</div>
+            <div class="number-highlight">
+                <div class="big-number">247</div>
+                <div class="number-label">新規登録者数</div>
+            </div>
+        </div>
+
+        <!-- #data-2: Number with Trend Arrow -->
+        <div class="template-card" id="data-2">
+            <div class="template-label">#data-2: Number with Trend Arrow</div>
+            <div class="trend-display">
+                <div class="trend-number">1,284</div>
+                <div class="trend-arrow">
+                    <div class="arrow-up"></div>
+                    <div class="trend-percent">+23%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-3: Percentage with Icon -->
+        <div class="template-card" id="data-3">
+            <div class="template-label">#data-3: Percentage with Icon</div>
+            <div class="percentage-card">
+                <div class="percentage-icon">📊</div>
+                <div class="percentage-content">
+                    <div class="percentage-value">87%</div>
+                    <div class="percentage-label">達成率</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-4: Count Display -->
+        <div class="template-card" id="data-4">
+            <div class="template-label">#data-4: Count Display</div>
+            <div class="count-display">
+                <div class="count-items">
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                    <div class="count-dot"></div>
+                </div>
+                <div class="count-number">8個</div>
+                <div class="count-label">アイテム数</div>
+            </div>
+        </div>
+
+        <!-- #data-5: Score Display -->
+        <div class="template-card" id="data-5">
+            <div class="template-label">#data-5: Score Display</div>
+            <div class="score-display">
+                <div class="score-circle">
+                    <div class="score-value">85</div>
+                    <div class="score-max">/ 100点</div>
+                </div>
+                <div class="score-label">総合スコア</div>
+            </div>
+        </div>
+
+        <!-- #data-6: Rating Display -->
+        <div class="template-card" id="data-6">
+            <div class="template-label">#data-6: Rating Display (Out of 5)</div>
+            <div class="rating-display">
+                <div class="rating-stars">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star empty"></div>
+                </div>
+                <div class="rating-value">4.0 / 5.0</div>
+                <div class="rating-count">1,234件の評価</div>
+            </div>
+        </div>
+
+        <!-- #data-7: Progress Percentage -->
+        <div class="template-card" id="data-7">
+            <div class="template-label">#data-7: Progress Percentage</div>
+            <div class="progress-display">
+                <div class="progress-header">
+                    <div class="progress-label">プロジェクト進捗</div>
+                    <div class="progress-value">75%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-8: Completion Status -->
+        <div class="template-card" id="data-8">
+            <div class="template-label">#data-8: Completion Status</div>
+            <div class="completion-status">
+                <div class="completion-check">
+                    <div class="check-icon"></div>
+                </div>
+                <div class="completion-info">
+                    <div class="completion-text">完了しました</div>
+                    <div class="completion-detail">すべてのタスクが正常に処理されました</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-9: Status Indicator -->
+        <div class="template-card" id="data-9">
+            <div class="template-label">#data-9: Status Indicator (Online/Offline)</div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <div class="status-text">オンライン</div>
+                <div class="status-time">3分前に更新</div>
+            </div>
+        </div>
+
+        <!-- #data-10: Availability Display -->
+        <div class="template-card" id="data-10">
+            <div class="template-label">#data-10: Availability Display</div>
+            <div class="availability-display">
+                <div class="availability-header">今週の空き状況</div>
+                <div class="availability-slots">
+                    <div class="slot available">月</div>
+                    <div class="slot unavailable">火</div>
+                    <div class="slot available">水</div>
+                    <div class="slot available">木</div>
+                    <div class="slot unavailable">金</div>
+                    <div class="slot available">土</div>
+                    <div class="slot unavailable">日</div>
+                </div>
+                <div class="availability-legend">
+                    <span>● 空き</span>
+                    <span>○ 予約済み</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-11: Stock Level Indicator -->
+        <div class="template-card" id="data-11">
+            <div class="template-label">#data-11: Stock Level Indicator</div>
+            <div class="stock-indicator">
+                <div class="stock-header">
+                    <div class="stock-label">在庫状況</div>
+                    <div class="stock-count">残り 6個</div>
+                </div>
+                <div class="stock-boxes">
+                    <div class="stock-box filled"></div>
+                    <div class="stock-box filled"></div>
+                    <div class="stock-box filled"></div>
+                    <div class="stock-box filled"></div>
+                    <div class="stock-box filled"></div>
+                    <div class="stock-box filled"></div>
+                    <div class="stock-box"></div>
+                    <div class="stock-box"></div>
+                    <div class="stock-box"></div>
+                    <div class="stock-box"></div>
+                </div>
+                <div class="stock-status">在庫わずか</div>
+            </div>
+        </div>
+
+        <!-- #data-12: Capacity Gauge -->
+        <div class="template-card" id="data-12">
+            <div class="template-label">#data-12: Capacity Gauge</div>
+            <div class="capacity-gauge">
+                <div class="gauge-container">
+                    <div class="gauge-bg"></div>
+                    <div class="gauge-fill"></div>
+                    <div class="gauge-value">68%</div>
+                </div>
+                <div class="gauge-label">ストレージ容量</div>
+            </div>
+        </div>
+
+        <!-- #data-13: Usage Meter -->
+        <div class="template-card" id="data-13">
+            <div class="template-label">#data-13: Usage Meter</div>
+            <div class="usage-meter">
+                <div class="usage-header">
+                    <div class="usage-label">メモリ使用状況</div>
+                    <div class="usage-value">12.5 GB / 16 GB</div>
+                </div>
+                <div class="meter-container">
+                    <div class="meter-segment used">使用中</div>
+                    <div class="meter-segment reserved">予約</div>
+                    <div class="meter-segment free">空き</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-14: Speed Indicator -->
+        <div class="template-card" id="data-14">
+            <div class="template-label">#data-14: Speed Indicator</div>
+            <div class="speed-indicator">
+                <div class="speed-icon">
+                    <div class="speed-arrow"></div>
+                </div>
+                <div class="speed-value">125</div>
+                <div class="speed-unit">Mbps</div>
+                <div class="speed-label">ダウンロード速度</div>
+            </div>
+        </div>
+
+        <!-- #data-15: Distance Display -->
+        <div class="template-card" id="data-15">
+            <div class="template-label">#data-15: Distance Display</div>
+            <div class="distance-display">
+                <div class="distance-icon">
+                    <div class="pin-head"></div>
+                    <div class="pin-dot"></div>
+                </div>
+                <div class="distance-info">
+                    <div class="distance-value">2.5 <span class="distance-unit">km</span></div>
+                    <div class="distance-from">現在地から</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-16: Duration Display -->
+        <div class="template-card" id="data-16">
+            <div class="template-label">#data-16: Duration Display</div>
+            <div class="duration-display">
+                <div class="duration-clock">
+                    <div class="clock-hand-hour"></div>
+                    <div class="clock-hand-min"></div>
+                    <div class="clock-center"></div>
+                </div>
+                <div class="duration-value">2時間 30分</div>
+                <div class="duration-label">所要時間</div>
+            </div>
+        </div>
+
+        <!-- #data-17: Size Display -->
+        <div class="template-card" id="data-17">
+            <div class="template-label">#data-17: Size Display</div>
+            <div class="size-display">
+                <div class="size-visual">
+                    <div class="size-bar"></div>
+                    <div class="size-bar"></div>
+                    <div class="size-bar"></div>
+                </div>
+                <div class="size-info">
+                    <div class="size-value">256 <span class="size-unit">MB</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-18: Weight Display -->
+        <div class="template-card" id="data-18">
+            <div class="template-label">#data-18: Weight Display</div>
+            <div class="weight-display">
+                <div class="scale-visual">
+                    <div class="scale-plate"></div>
+                    <div class="scale-pillar"></div>
+                    <div class="scale-base"></div>
+                </div>
+                <div class="weight-value">1.5 <span class="weight-unit">kg</span></div>
+            </div>
+        </div>
+
+        <!-- #data-19: Temperature Display -->
+        <div class="template-card" id="data-19">
+            <div class="template-label">#data-19: Temperature Display</div>
+            <div class="temperature-display">
+                <div class="thermometer">
+                    <div class="thermo-tube">
+                        <div class="thermo-fill"></div>
+                    </div>
+                    <div class="thermo-bulb"></div>
+                </div>
+                <div class="temp-info">
+                    <div class="temp-value">24°C</div>
+                    <div class="temp-label">室内温度</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-20: Price Display -->
+        <div class="template-card" id="data-20">
+            <div class="template-label">#data-20: Price Display</div>
+            <div class="price-display">
+                <div class="price-tag">
+                    <div class="price-hole"></div>
+                    <span class="price-currency">¥</span>
+                    <span class="price-value">2,980</span>
+                    <div class="price-period">/月</div>
+                </div>
+                <div class="price-note">税込み・送料無料</div>
+            </div>
+        </div>
+
+        <!-- #data-21: Date Display -->
+        <div class="template-card" id="data-21">
+            <div class="template-label">#data-21: Date Display</div>
+            <div class="date-display">
+                <div class="calendar-card">
+                    <div class="calendar-header">2024年 12月</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-weekday">水曜日</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-22: Time Display -->
+        <div class="template-card" id="data-22">
+            <div class="template-label">#data-22: Time Display</div>
+            <div class="time-display">
+                <div class="digital-time">
+                    14<span class="time-separator">:</span>30<span class="time-separator">:</span>45
+                </div>
+                <div class="time-zone">JST (UTC+9)</div>
+            </div>
+        </div>
+
+        <!-- #data-23: Location Display -->
+        <div class="template-card" id="data-23">
+            <div class="template-label">#data-23: Location Display</div>
+            <div class="location-display">
+                <div class="location-header">
+                    <div class="location-pin">
+                        <div class="pin-inner"></div>
+                    </div>
+                    <div class="location-name">渋谷オフィス</div>
+                </div>
+                <div class="location-address">
+                    〒150-0001<br>
+                    東京都渋谷区神宮前1-2-3
+                </div>
+                <div class="location-coords">
+                    <span>緯度: 35.6595</span>
+                    <span>経度: 139.7004</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-24: Contact Info Card -->
+        <div class="template-card" id="data-24">
+            <div class="template-label">#data-24: Contact Info Card</div>
+            <div class="contact-card">
+                <div class="contact-row">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <div class="contact-label">メール</div>
+                        <div class="contact-value">info@example.com</div>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <div class="contact-label">電話</div>
+                        <div class="contact-value">03-1234-5678</div>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-info">
+                        <div class="contact-label">ウェブ</div>
+                        <div class="contact-value">www.example.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-25: Profile Summary -->
+        <div class="template-card" id="data-25">
+            <div class="template-label">#data-25: Profile Summary</div>
+            <div class="profile-summary">
+                <div class="profile-avatar">T</div>
+                <div class="profile-name">田中 太郎</div>
+                <div class="profile-role">プロダクトマネージャー</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">128</div>
+                        <div class="stat-label">投稿</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1.2K</div>
+                        <div class="stat-label">フォロワー</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">89</div>
+                        <div class="stat-label">フォロー</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-26: Quick Stats Row -->
+        <div class="template-card" id="data-26">
+            <div class="template-label">#data-26: Quick Stats Row</div>
+            <div class="quick-stats">
+                <div class="stat-box">
+                    <div class="stat-number">42</div>
+                    <div class="stat-desc">タスク</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">18</div>
+                    <div class="stat-desc">完了</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">7</div>
+                    <div class="stat-desc">進行中</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">17</div>
+                    <div class="stat-desc">未着手</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-27: Metric Comparison -->
+        <div class="template-card" id="data-27">
+            <div class="template-label">#data-27: Metric Comparison</div>
+            <div class="metric-comparison">
+                <div class="comparison-header">前月比較</div>
+                <div class="comparison-row">
+                    <div class="comparison-label">今月</div>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar current"></div>
+                    </div>
+                    <div class="comparison-value">¥75K</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-label">前月</div>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar previous"></div>
+                    </div>
+                    <div class="comparison-value">¥55K</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-28: Benchmark Indicator -->
+        <div class="template-card" id="data-28">
+            <div class="template-label">#data-28: Benchmark Indicator</div>
+            <div class="benchmark-indicator">
+                <div class="benchmark-header">
+                    <div class="benchmark-title">業界ベンチマーク</div>
+                    <div class="benchmark-score">72点</div>
+                </div>
+                <div class="benchmark-scale">
+                    <div class="benchmark-marker"></div>
+                </div>
+                <div class="benchmark-labels">
+                    <span>0</span>
+                    <span>平均</span>
+                    <span>100</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- #data-29: Performance Score -->
+        <div class="template-card" id="data-29">
+            <div class="template-label">#data-29: Performance Score</div>
+            <div class="performance-score">
+                <div class="score-ring">
+                    <div class="score-inner">
+                        <div class="score-number">75</div>
+                        <div class="score-max">/ 100</div>
+                    </div>
+                </div>
+                <div class="score-grade">Good</div>
+            </div>
+        </div>
+
+        <!-- #data-30: Health Check Status -->
+        <div class="template-card" id="data-30">
+            <div class="template-label">#data-30: Health Check Status</div>
+            <div class="health-check">
+                <div class="health-header">
+                    <div class="health-icon">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="health-title">システムヘルスチェック</div>
+                </div>
+                <div class="health-items">
+                    <div class="health-item">
+                        <div class="health-dot ok"></div>
+                        <div class="health-name">APIサーバー</div>
+                        <div class="health-status ok">正常</div>
+                    </div>
+                    <div class="health-item">
+                        <div class="health-dot ok"></div>
+                        <div class="health-name">データベース</div>
+                        <div class="health-status ok">正常</div>
+                    </div>
+                    <div class="health-item">
+                        <div class="health-dot warning"></div>
+                        <div class="health-name">キャッシュ</div>
+                        <div class="health-status warning">警告</div>
+                    </div>
+                    <div class="health-item">
+                        <div class="health-dot ok"></div>
+                        <div class="health-name">CDN</div>
+                        <div class="health-status ok">正常</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
