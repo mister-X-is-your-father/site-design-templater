@@ -1,0 +1,724 @@
+/**
+ * Ishikawa Design System
+ *
+ * ishikawakazuya.net のデザインシステムに基づく再利用可能なCSSコンポーネント
+ *
+ * 特徴:
+ * - ミニマリスト・洗練されたスタイル
+ * - ニュートラルな配色（白/グレーベース、ブルーアクセント）
+ * - 丸みのある日本語フォント
+ * - スムーズなトランジション
+ */
+
+/* ==========================================================================
+   1. CSS Variables (Design Tokens)
+   ========================================================================== */
+
+:root {
+    /* --- Colors --- */
+    /* Base colors */
+    --ik-white: #ffffff;
+    --ik-bg-light: #f5f5f5;
+    --ik-bg-hover: #ebebeb;
+
+    /* Text colors */
+    --ik-text-primary: #333333;
+    --ik-text-secondary: #666666;
+    --ik-text-muted: #999999;
+    --ik-text-light: #cccccc;
+
+    /* Accent colors */
+    --ik-accent-blue: #4b9cfb;
+    --ik-accent-blue-hover: #3a8de8;
+    --ik-accent-blue-light: #e8f2ff;
+    --ik-accent-pink: #f84f65;
+    --ik-accent-pink-light: #fff0f2;
+
+    /* Border & Shadow */
+    --ik-border-color: #e0e0e0;
+    --ik-border-light: #f0f0f0;
+    --ik-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --ik-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --ik-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --ik-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.15);
+
+    /* --- Typography --- */
+    /* Japanese rounded fonts (matching ishikawakazuya.net) */
+    --ik-font-display: 'Mochiy Pop One', 'Zen Maru Gothic', sans-serif;
+    --ik-font-body: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+    --ik-font-accent: 'Zen Maru Gothic', sans-serif;
+
+    /* Latin fonts */
+    --ik-font-latin: 'Poppins', 'Lato', sans-serif;
+    --ik-font-mono: 'Rubik', monospace;
+
+    /* Font sizes */
+    --ik-text-xs: 0.75rem;    /* 12px */
+    --ik-text-sm: 0.875rem;   /* 14px */
+    --ik-text-base: 1rem;     /* 16px */
+    --ik-text-lg: 1.125rem;   /* 18px */
+    --ik-text-xl: 1.25rem;    /* 20px */
+    --ik-text-2xl: 1.5rem;    /* 24px */
+    --ik-text-3xl: 2rem;      /* 32px */
+    --ik-text-4xl: 2.5rem;    /* 40px */
+
+    /* Font weights */
+    --ik-font-normal: 400;
+    --ik-font-medium: 500;
+    --ik-font-semibold: 600;
+    --ik-font-bold: 700;
+
+    /* --- Spacing --- */
+    --ik-space-1: 4px;
+    --ik-space-2: 8px;
+    --ik-space-3: 12px;
+    --ik-space-4: 16px;
+    --ik-space-5: 20px;
+    --ik-space-6: 24px;
+    --ik-space-8: 32px;
+    --ik-space-10: 40px;
+    --ik-space-12: 48px;
+    --ik-space-16: 64px;
+
+    /* --- Border Radius --- */
+    --ik-radius-sm: 4px;
+    --ik-radius-md: 8px;
+    --ik-radius-lg: 12px;
+    --ik-radius-xl: 16px;
+    --ik-radius-2xl: 24px;
+    --ik-radius-full: 9999px;
+
+    /* --- Transitions --- */
+    /* ishikawakazuya.net のカスタムイージング */
+    --ik-ease: cubic-bezier(0.4, 0.4, 0, 1);
+    --ik-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ik-duration-fast: 0.2s;
+    --ik-duration-normal: 0.3s;
+    --ik-duration-slow: 0.4s;
+    --ik-duration-page: 0.6s;
+
+    /* --- Layout --- */
+    --ik-container-sm: 640px;
+    --ik-container-md: 768px;
+    --ik-container-lg: 1024px;
+    --ik-container-xl: 1280px;
+    --ik-header-height: 64px;
+    --ik-sidebar-width: 260px;
+}
+
+/* ==========================================================================
+   2. Reset & Base Styles
+   ========================================================================== */
+
+.ik-reset *,
+.ik-reset *::before,
+.ik-reset *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.ik-base {
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-base);
+    color: var(--ik-text-primary);
+    line-height: 1.6;
+    background-color: var(--ik-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   3. Typography Components
+   ========================================================================== */
+
+/* Headings */
+.ik-heading-1 {
+    font-family: var(--ik-font-display);
+    font-size: var(--ik-text-4xl);
+    font-weight: var(--ik-font-bold);
+    color: var(--ik-text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.ik-heading-2 {
+    font-family: var(--ik-font-display);
+    font-size: var(--ik-text-3xl);
+    font-weight: var(--ik-font-bold);
+    color: var(--ik-text-primary);
+    line-height: 1.3;
+}
+
+.ik-heading-3 {
+    font-family: var(--ik-font-accent);
+    font-size: var(--ik-text-2xl);
+    font-weight: var(--ik-font-semibold);
+    color: var(--ik-text-primary);
+    line-height: 1.4;
+}
+
+.ik-heading-4 {
+    font-family: var(--ik-font-accent);
+    font-size: var(--ik-text-xl);
+    font-weight: var(--ik-font-semibold);
+    color: var(--ik-text-primary);
+    line-height: 1.4;
+}
+
+/* Body text */
+.ik-text {
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-base);
+    color: var(--ik-text-primary);
+    line-height: 1.7;
+}
+
+.ik-text-sm {
+    font-size: var(--ik-text-sm);
+}
+
+.ik-text-lg {
+    font-size: var(--ik-text-lg);
+}
+
+.ik-text-muted {
+    color: var(--ik-text-muted);
+}
+
+.ik-text-secondary {
+    color: var(--ik-text-secondary);
+}
+
+/* Labels */
+.ik-label {
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-xs);
+    font-weight: var(--ik-font-semibold);
+    color: var(--ik-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   4. Button Components
+   ========================================================================== */
+
+.ik-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ik-space-2);
+    padding: var(--ik-space-3) var(--ik-space-5);
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-sm);
+    font-weight: var(--ik-font-medium);
+    text-decoration: none;
+    border: none;
+    border-radius: var(--ik-radius-md);
+    cursor: pointer;
+    transition: all var(--ik-duration-normal) var(--ik-ease);
+    white-space: nowrap;
+}
+
+/* Primary button */
+.ik-btn-primary {
+    background-color: var(--ik-accent-blue);
+    color: var(--ik-white);
+}
+
+.ik-btn-primary:hover {
+    background-color: var(--ik-accent-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--ik-shadow-md);
+}
+
+/* Secondary button */
+.ik-btn-secondary {
+    background-color: var(--ik-bg-light);
+    color: var(--ik-text-primary);
+}
+
+.ik-btn-secondary:hover {
+    background-color: var(--ik-bg-hover);
+}
+
+/* Ghost button */
+.ik-btn-ghost {
+    background-color: transparent;
+    color: var(--ik-text-primary);
+}
+
+.ik-btn-ghost:hover {
+    background-color: var(--ik-bg-light);
+}
+
+/* Outline button */
+.ik-btn-outline {
+    background-color: transparent;
+    color: var(--ik-accent-blue);
+    border: 2px solid var(--ik-accent-blue);
+}
+
+.ik-btn-outline:hover {
+    background-color: var(--ik-accent-blue);
+    color: var(--ik-white);
+}
+
+/* Button sizes */
+.ik-btn-sm {
+    padding: var(--ik-space-2) var(--ik-space-3);
+    font-size: var(--ik-text-xs);
+}
+
+.ik-btn-lg {
+    padding: var(--ik-space-4) var(--ik-space-8);
+    font-size: var(--ik-text-base);
+}
+
+/* Pill button */
+.ik-btn-pill {
+    border-radius: var(--ik-radius-full);
+}
+
+/* ==========================================================================
+   5. Card Components
+   ========================================================================== */
+
+.ik-card {
+    background-color: var(--ik-white);
+    border-radius: var(--ik-radius-lg);
+    box-shadow: var(--ik-shadow-sm);
+    overflow: hidden;
+    transition: all var(--ik-duration-normal) var(--ik-ease);
+}
+
+.ik-card:hover {
+    box-shadow: var(--ik-shadow-hover);
+    transform: translateY(-4px);
+}
+
+.ik-card-bordered {
+    border: 1px solid var(--ik-border-color);
+    box-shadow: none;
+}
+
+.ik-card-bordered:hover {
+    border-color: var(--ik-accent-blue);
+    box-shadow: var(--ik-shadow-md);
+}
+
+.ik-card-header {
+    padding: var(--ik-space-5);
+    border-bottom: 1px solid var(--ik-border-light);
+}
+
+.ik-card-body {
+    padding: var(--ik-space-5);
+}
+
+.ik-card-footer {
+    padding: var(--ik-space-4) var(--ik-space-5);
+    border-top: 1px solid var(--ik-border-light);
+    background-color: var(--ik-bg-light);
+}
+
+/* Card with image */
+.ik-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: var(--ik-bg-light);
+}
+
+.ik-card-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: var(--ik-bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+/* ==========================================================================
+   6. Input Components
+   ========================================================================== */
+
+.ik-input {
+    width: 100%;
+    padding: var(--ik-space-3) var(--ik-space-4);
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-sm);
+    color: var(--ik-text-primary);
+    background-color: var(--ik-white);
+    border: 2px solid var(--ik-border-color);
+    border-radius: var(--ik-radius-md);
+    transition: all var(--ik-duration-fast) var(--ik-ease);
+}
+
+.ik-input:focus {
+    outline: none;
+    border-color: var(--ik-accent-blue);
+    box-shadow: 0 0 0 3px var(--ik-accent-blue-light);
+}
+
+.ik-input::placeholder {
+    color: var(--ik-text-light);
+}
+
+/* Search input */
+.ik-input-search {
+    padding-left: var(--ik-space-10);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: var(--ik-space-3) center;
+}
+
+/* Rounded input */
+.ik-input-rounded {
+    border-radius: var(--ik-radius-full);
+}
+
+/* ==========================================================================
+   7. Badge & Tag Components
+   ========================================================================== */
+
+.ik-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ik-space-1);
+    padding: var(--ik-space-1) var(--ik-space-3);
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-xs);
+    font-weight: var(--ik-font-medium);
+    border-radius: var(--ik-radius-full);
+    background-color: var(--ik-bg-light);
+    color: var(--ik-text-secondary);
+}
+
+.ik-badge-blue {
+    background-color: var(--ik-accent-blue-light);
+    color: var(--ik-accent-blue);
+}
+
+.ik-badge-pink {
+    background-color: var(--ik-accent-pink-light);
+    color: var(--ik-accent-pink);
+}
+
+/* Tag (clickable) */
+.ik-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--ik-space-2) var(--ik-space-4);
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-sm);
+    font-weight: var(--ik-font-medium);
+    color: var(--ik-text-secondary);
+    background-color: var(--ik-white);
+    border: 1px solid var(--ik-border-color);
+    border-radius: var(--ik-radius-full);
+    cursor: pointer;
+    transition: all var(--ik-duration-fast) var(--ik-ease);
+}
+
+.ik-tag:hover {
+    border-color: var(--ik-accent-blue);
+    color: var(--ik-accent-blue);
+}
+
+.ik-tag-active {
+    background-color: var(--ik-accent-blue);
+    border-color: var(--ik-accent-blue);
+    color: var(--ik-white);
+}
+
+/* ==========================================================================
+   8. Navigation Components
+   ========================================================================== */
+
+/* Header */
+.ik-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--ik-header-height);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--ik-border-light);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--ik-space-6);
+}
+
+/* Sidebar */
+.ik-sidebar {
+    position: fixed;
+    top: var(--ik-header-height);
+    left: 0;
+    width: var(--ik-sidebar-width);
+    height: calc(100vh - var(--ik-header-height));
+    background-color: var(--ik-white);
+    border-right: 1px solid var(--ik-border-light);
+    padding: var(--ik-space-6);
+    overflow-y: auto;
+}
+
+/* Nav item */
+.ik-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--ik-space-3);
+    padding: var(--ik-space-3) var(--ik-space-4);
+    font-family: var(--ik-font-body);
+    font-size: var(--ik-text-sm);
+    font-weight: var(--ik-font-medium);
+    color: var(--ik-text-secondary);
+    text-decoration: none;
+    border-radius: var(--ik-radius-md);
+    cursor: pointer;
+    transition: all var(--ik-duration-fast) var(--ik-ease);
+}
+
+.ik-nav-item:hover {
+    background-color: var(--ik-bg-light);
+    color: var(--ik-text-primary);
+}
+
+.ik-nav-item-active {
+    background-color: var(--ik-accent-blue-light);
+    color: var(--ik-accent-blue);
+    font-weight: var(--ik-font-semibold);
+}
+
+/* Nav icon */
+.ik-nav-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--ik-bg-light);
+    border-radius: var(--ik-radius-md);
+    font-size: 1rem;
+}
+
+.ik-nav-item-active .ik-nav-icon {
+    background-color: var(--ik-accent-blue);
+    color: var(--ik-white);
+}
+
+/* Nav count */
+.ik-nav-count {
+    margin-left: auto;
+    font-family: var(--ik-font-mono);
+    font-size: var(--ik-text-xs);
+    color: var(--ik-text-muted);
+}
+
+/* ==========================================================================
+   9. Grid & Layout Components
+   ========================================================================== */
+
+.ik-container {
+    width: 100%;
+    max-width: var(--ik-container-xl);
+    margin: 0 auto;
+    padding: 0 var(--ik-space-6);
+}
+
+.ik-grid {
+    display: grid;
+    gap: var(--ik-space-6);
+}
+
+.ik-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ik-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.ik-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.ik-grid-auto {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Flex utilities */
+.ik-flex {
+    display: flex;
+}
+
+.ik-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ik-flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ik-flex-col {
+    flex-direction: column;
+}
+
+.ik-gap-2 { gap: var(--ik-space-2); }
+.ik-gap-3 { gap: var(--ik-space-3); }
+.ik-gap-4 { gap: var(--ik-space-4); }
+.ik-gap-6 { gap: var(--ik-space-6); }
+
+/* ==========================================================================
+   10. Animation & Effects
+   ========================================================================== */
+
+/* Fade in up animation */
+@keyframes ik-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ik-animate-fadeInUp {
+    animation: ik-fadeInUp var(--ik-duration-page) var(--ik-ease) backwards;
+}
+
+/* Staggered delays */
+.ik-delay-1 { animation-delay: 0.05s; }
+.ik-delay-2 { animation-delay: 0.1s; }
+.ik-delay-3 { animation-delay: 0.15s; }
+.ik-delay-4 { animation-delay: 0.2s; }
+.ik-delay-5 { animation-delay: 0.25s; }
+.ik-delay-6 { animation-delay: 0.3s; }
+
+/* Hover lift effect */
+.ik-hover-lift {
+    transition: transform var(--ik-duration-normal) var(--ik-ease),
+                box-shadow var(--ik-duration-normal) var(--ik-ease);
+}
+
+.ik-hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ik-shadow-lg);
+}
+
+/* Loading spinner */
+@keyframes ik-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.ik-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--ik-border-color);
+    border-top-color: var(--ik-accent-blue);
+    border-radius: 50%;
+    animation: ik-spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   11. Responsive Breakpoints
+   ========================================================================== */
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+    :root {
+        --ik-header-height: 56px;
+        --ik-sidebar-width: 0px;
+    }
+
+    .ik-sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+        transition: transform var(--ik-duration-normal) var(--ik-ease);
+        z-index: 150;
+    }
+
+    .ik-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .ik-grid-3,
+    .ik-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ik-heading-1 {
+        font-size: var(--ik-text-3xl);
+    }
+
+    .ik-heading-2 {
+        font-size: var(--ik-text-2xl);
+    }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+    .ik-grid-2,
+    .ik-grid-3,
+    .ik-grid-4,
+    .ik-grid-auto {
+        grid-template-columns: 1fr;
+    }
+
+    .ik-container {
+        padding: 0 var(--ik-space-4);
+    }
+
+    .ik-heading-1 {
+        font-size: var(--ik-text-2xl);
+    }
+}
+
+/* ==========================================================================
+   12. Utility Classes
+   ========================================================================== */
+
+/* Spacing */
+.ik-mt-4 { margin-top: var(--ik-space-4); }
+.ik-mt-6 { margin-top: var(--ik-space-6); }
+.ik-mt-8 { margin-top: var(--ik-space-8); }
+.ik-mb-4 { margin-bottom: var(--ik-space-4); }
+.ik-mb-6 { margin-bottom: var(--ik-space-6); }
+.ik-p-4 { padding: var(--ik-space-4); }
+.ik-p-6 { padding: var(--ik-space-6); }
+
+/* Text alignment */
+.ik-text-center { text-align: center; }
+.ik-text-left { text-align: left; }
+.ik-text-right { text-align: right; }
+
+/* Display */
+.ik-hidden { display: none; }
+.ik-block { display: block; }
+
+/* Background */
+.ik-bg-white { background-color: var(--ik-white); }
+.ik-bg-light { background-color: var(--ik-bg-light); }
+
+/* Border */
+.ik-border { border: 1px solid var(--ik-border-color); }
+.ik-border-b { border-bottom: 1px solid var(--ik-border-color); }
+
+/* Cursor */
+.ik-cursor-pointer { cursor: pointer; }
+
+/* Overflow */
+.ik-overflow-hidden { overflow: hidden; }
+.ik-overflow-auto { overflow: auto; }

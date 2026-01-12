@@ -5,22 +5,22 @@
     Each section can be customized by setting variables before including the component.
 
     Components available:
-    - components/ishikawa/header.html
-    - components/ishikawa/hero.html
-    - components/ishikawa/about.html (Products & Collaborations)
-    - components/ishikawa/skills.html (Awards)
-    - components/ishikawa/books.html
-    - components/ishikawa/community.html
-    - components/ishikawa/media.html
-    - components/ishikawa/works.html (SNS)
-    - components/ishikawa/contact.html (Services)
-    - components/ishikawa/footer.html
+    - components/header.html
+    - components/hero.html
+    - components/about.html (Products & Collaborations)
+    - components/skills.html (Awards)
+    - components/books.html
+    - components/community.html
+    - components/media.html
+    - components/works.html (SNS)
+    - components/contact.html (Services)
+    - components/footer.html
 
     Base files (for custom pages):
-    - components/ishikawa/_base.html (extend this for custom layouts)
-    - components/ishikawa/_variables.css (CSS custom properties)
-    - components/ishikawa/_base.css (base styles and utilities)
-    - components/ishikawa/_scripts.js (core JavaScript)
+    - components/_base.html (extend this for custom layouts)
+    - components/_variables.css (CSS custom properties)
+    - components/_base.css (base styles and utilities)
+    - components/_scripts.js (core JavaScript)
 #}
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,9 +34,9 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Mochiy+Pop+One&family=Poppins:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         {# Include CSS Variables #}
-        {% include "components/ishikawa/_variables.css" %}
+        {% include "components/_variables.css" %}
         {# Include Base Styles #}
-        {% include "components/ishikawa/_base.css" %}
+        {% include "components/_base.css" %}
     </style>
 </head>
 <body>
@@ -53,7 +53,7 @@
     ] %}
     {% set cta_text = "お問い合わせ" %}
     {% set cta_href = "#contact" %}
-    {% include "components/ishikawa/header.html" %}
+    {% include "components/header.html" %}
 
     {# ========================================
        Hero Component - アイデアクリエイター
@@ -71,7 +71,7 @@
         {"icon": "👑", "title": "コンペ受賞率", "subtitle": "90%+"},
         {"icon": "📚", "title": "著書", "subtitle": "2冊出版"}
     ] %}
-    {% include "components/ishikawa/hero.html" %}
+    {% include "components/hero.html" %}
 
     {# ========================================
        About Component - Products
@@ -87,7 +87,7 @@
         {"number": "90%+", "label": "受賞率"},
         {"number": "2冊", "label": "著書"}
     ] %}
-    {% include "components/ishikawa/about.html" %}
+    {% include "components/about.html" %}
 
     {# ========================================
        Skills Component - Awards
@@ -101,24 +101,24 @@
         {"icon": "👑", "title": "KOKUYO DESIGN AWARD 2020", "desc": "ファイナリスト - 貼るほど炎上する付箋"},
         {"icon": "👑", "title": "SHACHIHATA 12th", "desc": "準グランプリ - 手書きサインの印鑑が作れるアイデア"}
     ] %}
-    {% include "components/ishikawa/skills.html" %}
+    {% include "components/skills.html" %}
 
     {# ========================================
        Books Component - 著書
        ======================================== #}
-    {% from "components/ishikawa/books.html" import books_section %}
+    {% from "components/books.html" import books_section %}
     {{ books_section() }}
 
     {# ========================================
        Community Component - IDEA CREATORS CLUB
        ======================================== #}
-    {% from "components/ishikawa/community.html" import community_section %}
+    {% from "components/community.html" import community_section %}
     {{ community_section() }}
 
     {# ========================================
        Media Component - メディア出演
        ======================================== #}
-    {% from "components/ishikawa/media.html" import media_section %}
+    {% from "components/media.html" import media_section %}
     {{ media_section() }}
 
     {# ========================================
@@ -153,7 +153,7 @@
             "link_href": "#"
         }
     ] %}
-    {% include "components/ishikawa/works.html" %}
+    {% include "components/works.html" %}
 
     {# ========================================
        Contact Component - Services
@@ -165,7 +165,7 @@
         {"text": "メールを送る", "href": "mailto:issikazu20design@gmail.com", "icon": "📧", "style": "primary"},
         {"text": "Xでメッセージ", "href": "https://twitter.com/issikazu20", "icon": "𝕏", "style": "secondary"}
     ] %}
-    {% include "components/ishikawa/contact.html" %}
+    {% include "components/contact.html" %}
 
     {# ========================================
        Footer Component
@@ -208,10 +208,10 @@
         {"icon": "📸", "href": "#", "label": "Instagram"},
         {"icon": "▶️", "href": "#", "label": "YouTube"}
     ] %}
-    {% include "components/ishikawa/footer.html" %}
+    {% include "components/footer.html" %}
 
     <script>
-        {% include "components/ishikawa/_scripts.js" %}
+        {% include "components/_scripts.js" %}
     </script>
 </body>
 </html>

@@ -558,43 +558,64 @@
            ======================================== */
         .ik-awards-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
         }
 
         .ik-award-card {
             background: var(--ik-white);
             border-radius: var(--ik-radius-lg);
-            padding: 28px;
-            display: flex;
-            gap: 20px;
+            overflow: hidden;
             box-shadow: var(--ik-shadow-sm);
             transition: all 0.3s var(--ik-ease);
         }
 
         .ik-award-card:hover {
+            transform: translateY(-4px);
             box-shadow: var(--ik-shadow-md);
         }
 
-        .ik-award-card__trophy {
-            font-size: 40px;
-            flex-shrink: 0;
+        .ik-award-card__image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--ik-bg);
+        }
+
+        .ik-award-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .ik-award-card__content {
-            flex: 1;
+            padding: 24px;
+            text-align: center;
         }
 
         .ik-award-card__title {
             font-family: var(--ik-font-display);
-            font-size: 16px;
-            color: var(--ik-primary);
-            margin-bottom: 8px;
+            font-size: 15px;
+            color: var(--ik-text);
+            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
-        .ik-award-card__desc {
+        .ik-award-card__link {
+            display: inline-block;
+            padding: 12px 24px;
             font-size: 14px;
-            color: var(--ik-text-light);
+            font-weight: 600;
+            color: var(--ik-text);
+            background: var(--ik-primary);
+            border-radius: var(--ik-radius-xl);
+            text-decoration: none;
+            transition: all 0.3s var(--ik-ease);
+        }
+
+        .ik-award-card__link:hover {
+            background: var(--ik-primary-dark);
+            transform: translateY(-2px);
         }
 
         /* ========================================
@@ -988,7 +1009,7 @@
             .ik-hero__avatar { width: 280px; height: 280px; font-size: 140px; }
             .ik-products-grid { grid-template-columns: repeat(2, 1fr); }
             .ik-collabs-grid { grid-template-columns: repeat(2, 1fr); }
-            .ik-awards-grid { grid-template-columns: 1fr; }
+            .ik-awards-grid { grid-template-columns: repeat(2, 1fr); }
             .ik-sns-grid { grid-template-columns: repeat(2, 1fr); }
             .ik-services-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -1001,6 +1022,7 @@
             .ik-section__title { font-size: 28px; }
             .ik-products-grid { grid-template-columns: 1fr; }
             .ik-collabs-grid { grid-template-columns: 1fr; }
+            .ik-awards-grid { grid-template-columns: 1fr; }
             .ik-sns-grid { grid-template-columns: 1fr; }
             .ik-services-grid { grid-template-columns: 1fr; }
             .ik-book-card { flex: 0 0 300px; padding: 24px; flex-direction: column; align-items: center; text-align: center; }
@@ -1236,104 +1258,110 @@
                     <div class="ik-collab-card__image">
                         <img src="/design-assets/ishikawa/images/collab1.webp" alt="文明堂×カステラスポンジ" loading="lazy">
                     </div>
-                    <h3 class="ik-collab-card__title">文明堂×カステラスポンジ</h3>
-                    <p class="ik-collab-card__desc">文明堂東京様とカステラスポンジのコラボが実現！全国のロフトや文明堂カフェで発売</p>
-                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                    <h3 class="ik-collab-card__title">文明堂×カステラスポンジ<br>のコラボが実現！</h3>
+                    <a href="#" class="ik-collab-card__link">商品ページ</a>
                 </div>
                 <div class="ik-collab-card ik-fade-in">
                     <div class="ik-collab-card__image">
                         <img src="/design-assets/ishikawa/images/collab2.webp" alt="クライナーグッズ" loading="lazy">
                     </div>
-                    <h3 class="ik-collab-card__title">クライナーグッズ</h3>
-                    <p class="ik-collab-card__desc">クライナーの雑貨アイデアを提案しポーチを制作。制作物をXに投稿し話題に</p>
-                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                    <h3 class="ik-collab-card__title">クライナーグッズ<br>提案&制作</h3>
+                    <a href="#" class="ik-collab-card__link">詳細について</a>
                 </div>
                 <div class="ik-collab-card ik-fade-in">
                     <div class="ik-collab-card__image">
-                        <img src="/design-assets/ishikawa/images/collab3.webp" alt="ハッピーターングッズ" loading="lazy">
+                        <img src="/design-assets/ishikawa/images/collab3.webp" alt="ハッピーターン" loading="lazy">
                     </div>
-                    <h3 class="ik-collab-card__title">ハッピーターングッズ</h3>
-                    <p class="ik-collab-card__desc">ハッピーターングッズを提案し実際に制作。東京駅で行われたイベントで実際に展示</p>
-                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                    <h3 class="ik-collab-card__title">ハッピーターン<br>グッズ提案&制作</h3>
+                    <a href="#" class="ik-collab-card__link">イベントの詳細</a>
                 </div>
                 <div class="ik-collab-card ik-fade-in">
                     <div class="ik-collab-card__image">
                         <img src="/design-assets/ishikawa/images/collab4.webp" alt="クイックペイ促進" loading="lazy">
                     </div>
-                    <h3 class="ik-collab-card__title">クイックペイ促進</h3>
-                    <p class="ik-collab-card__desc">9のつく日にクイックペイを使いたくなるアイデアを提案しSNSでの盛り上がりを演出</p>
-                    <a href="#" class="ik-collab-card__link">詳細を見る →</a>
+                    <h3 class="ik-collab-card__title">クイックペイ促進<br>アイデア提案&制作</h3>
+                    <a href="#" class="ik-collab-card__link">アイデア投稿例</a>
                 </div>
                 <div class="ik-collab-card ik-fade-in">
                     <div class="ik-collab-card__image">
-                        <img src="/design-assets/ishikawa/images/collab5.webp" alt="クイックペイとPR" loading="lazy">
+                        <img src="/design-assets/ishikawa/images/collab5.webp" alt="「自動車ほけん」" loading="lazy">
                     </div>
-                    <h3 class="ik-collab-card__title">クイックペイとPR</h3>
-                    <p class="ik-collab-card__desc">アイデア提供&制作</p>
-                    <a href="#" class="ik-collab-card__link">アイデア提供内容 →</a>
+                    <h3 class="ik-collab-card__title">「自動車ほけん」<br>プロモーション</h3>
+                    <a href="#" class="ik-collab-card__link">詳細について</a>
                 </div>
                 <div class="ik-collab-card ik-fade-in">
                     <div class="ik-collab-card__image">
-                        <img src="/design-assets/ishikawa/images/collab6.webp" alt="「自動車ほけん」のプロモーション" loading="lazy">
+                        <img src="/design-assets/ishikawa/images/collab6.webp" alt="東ラアートマンションと10人の住人展" loading="lazy">
                     </div>
-                    <h3 class="ik-collab-card__title">「自動車ほけん」のプロモーション</h3>
-                    <p class="ik-collab-card__desc">×</p>
-                    <a href="#" class="ik-collab-card__link">詳細について →</a>
+                    <h3 class="ik-collab-card__title">東ラアートマンションと<br>10人の住人展</h3>
+                    <a href="#" class="ik-collab-card__link">イベントHP</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ========================================
-         Component: Awards Section
+         Component: Awards Section (ABOUT)
          ======================================== -->
-    <section class="ik-section ik-section--alt" id="about">
+    <section class="ik-section" id="about">
         <div class="ik-container">
             <div class="ik-section__header">
-                <div class="ik-section__label">AWARDS</div>
+                <div class="ik-section__label">ABOUT</div>
                 <h2 class="ik-section__title">デザインコンペ受賞実績</h2>
             </div>
             <div class="ik-awards-grid">
                 <div class="ik-award-card ik-fade-in">
-                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__image">
+                        <img src="/design-assets/ishikawa/images/idea1.webp" alt="第24回 サンスター文具アイデアコンテスト" loading="lazy">
+                    </div>
                     <div class="ik-award-card__content">
-                        <h3 class="ik-award-card__title">第24回 サンスター文具アイデアコンテスト 審査員特別賞</h3>
-                        <p class="ik-award-card__desc">指に貼り付けるお米の両面テープ。指１本で本をめくることができるスマート文具。</p>
+                        <h3 class="ik-award-card__title">第24回 サンスター<br>文具アイデアコンテスト<br>審査員特別賞</h3>
+                        <a href="#" class="ik-award-card__link">作品詳細ページ</a>
                     </div>
                 </div>
                 <div class="ik-award-card ik-fade-in">
-                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__image">
+                        <img src="/design-assets/ishikawa/images/idea2.webp" alt="第25回 サンスター文具アイデアコンテスト" loading="lazy">
+                    </div>
                     <div class="ik-award-card__content">
-                        <h3 class="ik-award-card__title">第25回 サンスター文具アイデアコンテスト グランプリ受賞</h3>
-                        <p class="ik-award-card__desc">梱包テープに挟むしおり紐。切れ目の位置をわかりやすくし剥がしやすくした。</p>
+                        <h3 class="ik-award-card__title">第25回 サンスター<br>文具アイデアコンテスト<br>グランプリ受賞</h3>
+                        <a href="#" class="ik-award-card__link">作品詳細ページ</a>
                     </div>
                 </div>
                 <div class="ik-award-card ik-fade-in">
-                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__image">
+                        <img src="/design-assets/ishikawa/images/idea3.webp" alt="KOKUYO DESIGN AWARD 2020" loading="lazy">
+                    </div>
                     <div class="ik-award-card__content">
-                        <h3 class="ik-award-card__title">KOKUYO DESIGN AWARD 2020 ファイナリスト</h3>
-                        <p class="ik-award-card__desc">貼るほど炎上する付箋。勉強すべきページに貼ることで焦らせて勉強させる。</p>
+                        <h3 class="ik-award-card__title">KOKUYO DESIGN<br>AWARD 2020<br>ファイナリスト</h3>
+                        <a href="#" class="ik-award-card__link">作品詳細ページ</a>
                     </div>
                 </div>
                 <div class="ik-award-card ik-fade-in">
-                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__image">
+                        <img src="/design-assets/ishikawa/images/idea4.webp" alt="12th SHACHIHATA" loading="lazy">
+                    </div>
                     <div class="ik-award-card__content">
-                        <h3 class="ik-award-card__title">12th SHACHIHATA New Product Design Competition 準グランプリ</h3>
-                        <p class="ik-award-card__desc">手書きサインの印鑑が作れるアイデア。佐藤や鈴木でも自分だけの印鑑が作れる。</p>
+                        <h3 class="ik-award-card__title">12th SHACHIHATA<br>New Product Design<br>Competition<br>準グランプリ受賞</h3>
+                        <a href="#" class="ik-award-card__link">作品詳細ページ</a>
                     </div>
                 </div>
                 <div class="ik-award-card ik-fade-in">
-                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__image">
+                        <img src="/design-assets/ishikawa/images/idea5.webp" alt="13th SHACHIHATA" loading="lazy">
+                    </div>
                     <div class="ik-award-card__content">
-                        <h3 class="ik-award-card__title">13th SHACHIHATA New Product Design Competition</h3>
-                        <p class="ik-award-card__desc">名前を模様にするアイデア。自分の名前を柄にすることで様々なアイテムが作れる。</p>
+                        <h3 class="ik-award-card__title">13th SHACHIHATA<br>New Product Design<br>Competition<br>準グランプリ受賞</h3>
+                        <a href="#" class="ik-award-card__link">作品詳細ページ</a>
                     </div>
                 </div>
                 <div class="ik-award-card ik-fade-in">
-                    <div class="ik-award-card__trophy">👑</div>
+                    <div class="ik-award-card__image">
+                        <img src="/design-assets/ishikawa/images/idea6.webp" alt="16th SHACHIHATA" loading="lazy">
+                    </div>
                     <div class="ik-award-card__content">
-                        <h3 class="ik-award-card__title">16th SHACHIHATA New Product Design Competition</h3>
-                        <p class="ik-award-card__desc">卒業証書入れのデザインシャチハタ。卒業式の記念品として贈ることで思い出になる。</p>
+                        <h3 class="ik-award-card__title">16th SHACHIHATA<br>New Product Design<br>Competition<br>準グランプリ受賞</h3>
+                        <a href="#" class="ik-award-card__link">作品詳細ページ</a>
                     </div>
                 </div>
             </div>
